@@ -1,0 +1,114 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [ydf-users] Query regarding extending class
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/ydframework-users/2006-April/index.html" >
+   <LINK REL="made" HREF="mailto:ydframework-users%40lists.berlios.de?Subject=Re%3A%20%5Bydf-users%5D%20Query%20regarding%20extending%20class&In-Reply-To=%3C443623E6.5040002%40fusemail.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000201.html">
+   <LINK REL="Next"  HREF="000203.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[ydf-users] Query regarding extending class</H1>
+    <B>Francisco Azevedo</B> 
+    <A HREF="mailto:ydframework-users%40lists.berlios.de?Subject=Re%3A%20%5Bydf-users%5D%20Query%20regarding%20extending%20class&In-Reply-To=%3C443623E6.5040002%40fusemail.com%3E"
+       TITLE="[ydf-users] Query regarding extending class">francisco at fusemail.com
+       </A><BR>
+    <I>Fri Apr  7 10:33:42 CEST 2006</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000201.html">[ydf-users] Query regarding extending class
+</A></li>
+        <LI>Next message: <A HREF="000203.html">[ydf-users] Query Regarding Default Values in form
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#202">[ date ]</a>
+              <a href="thread.html#202">[ thread ]</a>
+              <a href="subject.html#202">[ subject ]</a>
+              <a href="author.html#202">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Hi moses
+
+The difference between those declarations is that you will get &quot;special&quot; 
+methods related to installations in the second declaration.
+Extending YDInstaller is only usefull when you need that methods 
+otherwise we will get the same as the first declaration but with poor 
+performance..
+
+
+Francisco A
+
+&gt;<i>  
+</I>&gt;<i>             What is the difference between the following two declaration
+</I>&gt;<i>  
+</I>&gt;<i>              class test extends YDRequest
+</I>&gt;<i>             {
+</I>&gt;<i>  
+</I>&gt;<i>             }
+</I>&gt;<i>  
+</I>&gt;<i>             class test extends YDInstaller
+</I>&gt;<i>             {
+</I>&gt;<i>        
+</I>&gt;<i>              }
+</I>&gt;<i>  
+</I>&gt;<i>         
+</I>&gt;<i>             To my knowledge I found out that that the common includes 
+</I>&gt;<i> such as
+</I>&gt;<i>             
+</I>&gt;<i>             YDInclude('YDRequest.php');
+</I>&gt;<i>             YDInclude('YDForm.php');
+</I>&gt;<i>             YDInclude('YDTempelate.php');  are included in the 
+</I>&gt;<i> YDInstaller.php file and some more functions are added in that file so 
+</I>&gt;<i> that we can make use of it.
+</I>&gt;<i>  
+</I>&gt;<i>  
+</I>&gt;<i>            Is There any other reason othe than what I have known.
+</I>&gt;<i>  
+</I>&gt;<i>  
+</I>&gt;<i>  
+</I>&gt;<i> regards
+</I>&gt;<i> moses
+</I>&gt;<i>       
+</I>&gt;<i>  
+</I>&gt;<i>  
+</I>&gt;<i>            
+</I>&gt;<i>  
+</I>&gt;<i>  
+</I>&gt;<i> regards
+</I>&gt;<i> moses
+</I>&gt;<i> _______________________________________________ YDFramework-users 
+</I>&gt;<i> mailing list <A HREF="https://lists.berlios.de/mailman/listinfo/ydframework-users">YDFramework-users at lists.berlios.de</A> 
+</I>&gt;<i> <A HREF="http://lists.berlios.de/mailman/listinfo/ydframework-users">http://lists.berlios.de/mailman/listinfo/ydframework-users</A>
+</I>
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000201.html">[ydf-users] Query regarding extending class
+</A></li>
+	<LI>Next message: <A HREF="000203.html">[ydf-users] Query Regarding Default Values in form
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#202">[ date ]</a>
+              <a href="thread.html#202">[ thread ]</a>
+              <a href="subject.html#202">[ subject ]</a>
+              <a href="author.html#202">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/ydframework-users">More information about the YDFramework-users
+mailing list</a><br>
+</body></html>

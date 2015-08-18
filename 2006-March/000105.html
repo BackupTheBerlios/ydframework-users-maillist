@@ -1,0 +1,463 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [ydf-users] YDAjax autocompleter
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/ydframework-users/2006-March/index.html" >
+   <LINK REL="made" HREF="mailto:ydframework-users%40lists.berlios.de?Subject=Re%3A%20%5Bydf-users%5D%20YDAjax%20autocompleter&In-Reply-To=%3C4415E047.3060602%40fusemail.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000103.html">
+   <LINK REL="Next"  HREF="000117.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[ydf-users] YDAjax autocompleter</H1>
+    <B>Francisco Azevedo</B> 
+    <A HREF="mailto:ydframework-users%40lists.berlios.de?Subject=Re%3A%20%5Bydf-users%5D%20YDAjax%20autocompleter&In-Reply-To=%3C4415E047.3060602%40fusemail.com%3E"
+       TITLE="[ydf-users] YDAjax autocompleter">francisco at fusemail.com
+       </A><BR>
+    <I>Mon Mar 13 22:12:39 CET 2006</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000103.html">[ydf-users] YDAjax autocompleter
+</A></li>
+        <LI>Next message: <A HREF="000117.html">[ydf-users] YDAjax autocompleter
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#105">[ date ]</a>
+              <a href="thread.html#105">[ thread ]</a>
+              <a href="subject.html#105">[ subject ]</a>
+              <a href="author.html#105">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>hi dab
+
+ &gt; i had 1778 too and reversed it to 1775 and it works
+ &gt; now. i have PHP Version 5.1.1.
+
+
+Sorry to disapoint you again but i don't have any problems with 1778 
+(using php 5.1.2).
+
+Is there someone, like dab, that cannot see the examples?
+
+&gt;<i> and maybe i can't do what i'm trying to do, none of
+</I>&gt;<i> the examples does what i want to do :(
+</I>&gt;<i> i use the autocompleter a lot across the site so it
+</I>&gt;<i> would be good to use the same function for all
+</I>&gt;<i> autocompleter elements (by passing arguments on each
+</I>&gt;<i> element instead of writing a function for each
+</I>&gt;<i> element).
+</I>
+dab, each autocompleter has its own ajax call and you must define what 
+do you want in that call. By default the autocompleter sends its content 
+but you can define other arguments.
+If you want to use 1 php server function for all autocompleters (like 
+the autocompleter example where you have 2 autocompleters that send 
+their contents to a shared php function) and you want to know (inside 
+the php function) what autocompleter made the ajax call you can, eg, 
+define in each autocompleter call some static values that define the 
+field and table.
+
+$form-&gt;addElement('autocompleter_1', 'a1', 'label', '', array( &amp;$this, 
+'getElement', array( 'a1', '1, 'firstname1', 'user1' ) );
+
+$form-&gt;addElement('autocompleter_2', 'a2', 'label', '', array( &amp;$this, 
+'getElement', array( 'a2', '2', 'firstnameX', 'userX' ) );
+
+$form-&gt;addElement('autocompleter_3', 'a3', 'label', '', array( &amp;$this, 
+'getElement', array( 'a3', '3', 'firstnameZ', 'userZ' ) );
+
+then you only need to define the php function like:
+
+function getElement( $autocompleterContent, $id, $field, $table ){
+
+      $dbo = YDDatabaseObject::getInstance ( $table );
+      $dbo-&gt;select ( 'id', $field );
+      $dbo-&gt;find();
+      $db = $dbo-&gt;getResultsAsAssocArray( 'id', $field );
+
+      // initialize result array
+      $result = array();
+  	
+      // check db for text matches and store them in result
+      foreach( $db as $el )
+         if (eregi(&quot;^&quot;. $text .&quot;+&quot;, $el)) $result[] = $el;
+
+      // assign result to current completer
+      $this-&gt;ajax-&gt;addCompleterResult( $result );
+
+      // return response to client browser
+      return $this-&gt;ajax-&gt;processResults();
+}
+
+as you will see getElement will get:
+- autocompleter content + '1' string + 'firstname1' string + 'user1' 
+string.. when call is made from 'a1'
+
+- autocompleter content + '1' string + 'firstnameX' string + 'userX' 
+string.. when call is made from 'a2'
+
+- autocompleter content + '1' string + 'firstnameZ' string + 'userZ' 
+string.. when call is made from 'a3'
+
+
+.. and if you inspect the code, YDAjax will try to reuse functions.
+
+Francisco A
+
+&gt;<i> the below code works, but i want set the field and
+</I>&gt;<i> table variables with values passed as arguments.
+</I>&gt;<i> 
+</I>&gt;<i> do you think this is possible with current ydajax
+</I>&gt;<i> functionality?
+</I>&gt;<i> 
+</I>&gt;<i> function getElement( $text ){
+</I>&gt;<i> 
+</I>&gt;<i>     $field = 'firstname';
+</I>&gt;<i>     $table = 'user';
+</I>&gt;<i> 
+</I>&gt;<i>     $dbo = YDDatabaseObject::getInstance ( $table );
+</I>&gt;<i>     $dbo-&gt;select ( 'id', $field );
+</I>&gt;<i>     $dbo-&gt;find();
+</I>&gt;<i>     $db = $dbo-&gt;getResultsAsAssocArray( 'id', $field
+</I>&gt;<i> );
+</I>&gt;<i> 
+</I>&gt;<i> 	// initialize result array
+</I>&gt;<i> 	$result = array();
+</I>&gt;<i> 	
+</I>&gt;<i> 	// check db for text matches and store them in result
+</I>&gt;<i> array
+</I>&gt;<i> 	foreach( $db as $el )
+</I>&gt;<i> 		if (eregi(&quot;^&quot;. $text .&quot;+&quot;, $el)) $result[] = $el;
+</I>&gt;<i> 
+</I>&gt;<i> 	// assign result to current completer (YDAjax
+</I>&gt;<i> automagically detects the autocompleter that made this
+</I>&gt;<i> call)
+</I>&gt;<i> 	$this-&gt;ajax-&gt;addCompleterResult( $result );
+</I>&gt;<i> 
+</I>&gt;<i> 	// return response to client browser
+</I>&gt;<i> 	return $this-&gt;ajax-&gt;processResults();
+</I>&gt;<i> }
+</I>&gt;<i> 
+</I>&gt;<i> 
+</I>&gt;<i> 
+</I>&gt;<i> --- Francisco Azevedo &lt;<A HREF="https://lists.berlios.de/mailman/listinfo/ydframework-users">francisco at fusemail.com</A>&gt; wrote:
+</I>&gt;<i> 
+</I>&gt;<i> 
+</I>&gt;&gt;<i>dab
+</I>&gt;&gt;<i>
+</I>&gt;&gt;<i>If you want functions you cannot add events to form
+</I>&gt;&gt;<i>elements. You must 
+</I>&gt;&gt;<i>create the js function.
+</I>&gt;&gt;<i>
+</I>&gt;&gt;<i>Second, you have 3 types of arguments that you can
+</I>&gt;&gt;<i>pass on addEvent:
+</I>&gt;&gt;<i>- form element names
+</I>&gt;&gt;<i>- static string/int/float values
+</I>&gt;&gt;<i>- dynamic js arguments from the function
+</I>&gt;&gt;<i>
+</I>&gt;&gt;<i>Remember that dynamic arguments can only be used on
+</I>&gt;&gt;<i>events added as 
+</I>&gt;&gt;<i>functions.
+</I>&gt;&gt;<i>
+</I>&gt;&gt;<i>So, if you want to make _one_ js function that sends
+</I>&gt;&gt;<i>in the ajax call 1 
+</I>&gt;&gt;<i>dynamic js variable you must add an event like:
+</I>&gt;&gt;<i>
+</I>&gt;&gt;<i>$this-&gt;ajax-&gt;addEvent( 'customJSFunction(x)', array(
+</I>&gt;&gt;<i>&amp; $this, 
+</I>&gt;&gt;<i>'phpFunction' ), 'var x' );
+</I>&gt;&gt;<i>
+</I>&gt;&gt;<i>'var x' is a terminology for js variables defined in
+</I>&gt;&gt;<i>the function name.
+</I>&gt;&gt;<i>Take a look to the YDAjax example &quot;Without a
+</I>&gt;&gt;<i>YDForm&quot;.
+</I>&gt;&gt;<i>
+</I>&gt;&gt;<i>
+</I>&gt;&gt;<i>
+</I>&gt;&gt;&gt;<i>i want to pass two variables so i can have 1 ajax
+</I>&gt;&gt;&gt;<i>function for all elements instead of having 1 ajax
+</I>&gt;&gt;&gt;<i>function for each element.
+</I>&gt;&gt;&gt;<i>but i did an update yesterday and now nothing
+</I>&gt;&gt;<i>
+</I>&gt;&gt;<i>seems to
+</I>&gt;&gt;<i>
+</I>&gt;&gt;&gt;<i>work. none of the example works and
+</I>&gt;&gt;<i>
+</I>&gt;&gt;<i>autocompleter.php
+</I>&gt;&gt;<i>
+</I>&gt;&gt;&gt;<i>gives me:
+</I>&gt;&gt;&gt;<i>Fatal error: Call to a member function
+</I>&gt;&gt;<i>
+</I>&gt;&gt;<i>getElement() on
+</I>&gt;&gt;<i>
+</I>&gt;&gt;&gt;<i>a non-object in
+</I>&gt;&gt;&gt;<i>D:\htdocs\YDFramework2\addons\YDAjax\YDAjax.php on
+</I>&gt;&gt;&gt;<i>line 750
+</I>&gt;&gt;&gt;<i>
+</I>&gt;&gt;&gt;<i>maybe there has been a change of syntax and the
+</I>&gt;&gt;&gt;<i>manual/code examples are not updated?
+</I>&gt;&gt;<i>
+</I>&gt;&gt;<i>The syntax is the same. I'm not getting any problems
+</I>&gt;&gt;<i>using the latest 
+</I>&gt;&gt;<i>build (1778) in php4/5.
+</I>&gt;&gt;<i>
+</I>&gt;&gt;<i>Francisco A
+</I>&gt;&gt;<i>
+</I>&gt;&gt;<i>
+</I>&gt;&gt;<i>
+</I>&gt;&gt;&gt;<i>--- Francisco Azevedo &lt;<A HREF="https://lists.berlios.de/mailman/listinfo/ydframework-users">francisco at fusemail.com</A>&gt;
+</I>&gt;&gt;<i>
+</I>&gt;&gt;<i>wrote:
+</I>&gt;&gt;<i>
+</I>&gt;&gt;&gt;&gt;<i>dab, what do you want to do?
+</I>&gt;&gt;&gt;&gt;<i>
+</I>&gt;&gt;&gt;&gt;<i>
+</I>&gt;&gt;&gt;&gt;<i>
+</I>&gt;&gt;&gt;&gt;&gt;<i>Well the $text variable i don't pass and it's
+</I>&gt;&gt;&gt;&gt;<i>
+</I>&gt;&gt;&gt;&gt;<i>there. I
+</I>&gt;&gt;&gt;&gt;<i>
+</I>&gt;&gt;&gt;&gt;&gt;<i>can't do:
+</I>&gt;&gt;&gt;&gt;&gt;<i>function getAjaxElement ( $affiliate, $firstname
+</I>&gt;&gt;<i>
+</I>&gt;&gt;<i>)
+</I>&gt;&gt;<i>
+</I>&gt;&gt;&gt;&gt;<i>{
+</I>&gt;&gt;&gt;&gt;<i>
+</I>&gt;&gt;&gt;&gt;&gt;<i>i need the $text var as:
+</I>&gt;&gt;&gt;&gt;&gt;<i>function getAjaxElement ( $text ) {
+</I>&gt;&gt;&gt;&gt;&gt;<i>
+</I>&gt;&gt;&gt;&gt;&gt;<i>and your code didn't work, tried it :(
+</I>&gt;&gt;&gt;&gt;&gt;<i>
+</I>&gt;&gt;&gt;&gt;&gt;<i>i thought that there might have been changes
+</I>&gt;&gt;<i>
+</I>&gt;&gt;<i>made
+</I>&gt;&gt;<i>
+</I>&gt;&gt;&gt;&gt;<i>to
+</I>&gt;&gt;&gt;&gt;<i>
+</I>&gt;&gt;&gt;&gt;&gt;<i>the code so i updated it and now it doesn't work
+</I>&gt;&gt;&gt;&gt;<i>
+</I>&gt;&gt;&gt;&gt;<i>at
+</I>&gt;&gt;&gt;&gt;<i>
+</I>&gt;&gt;&gt;&gt;&gt;<i>all :|
+</I>&gt;&gt;&gt;&gt;&gt;<i>even the example autocompleter.php gives me this
+</I>&gt;&gt;&gt;&gt;&gt;<i>error:
+</I>&gt;&gt;&gt;&gt;&gt;<i>Fatal error: Call to a member function
+</I>&gt;&gt;&gt;&gt;<i>
+</I>&gt;&gt;&gt;&gt;<i>getElement() on
+</I>&gt;&gt;&gt;&gt;<i>
+</I>&gt;&gt;&gt;&gt;&gt;<i>a non-object in
+</I>&gt;&gt;&gt;&gt;&gt;<i>D:\htdocs\YDFramework2\addons\YDAjax\YDAjax.php
+</I>&gt;&gt;<i>
+</I>&gt;&gt;<i>on
+</I>&gt;&gt;<i>
+</I>&gt;&gt;&gt;&gt;&gt;<i>line 750
+</I>&gt;&gt;&gt;&gt;&gt;<i>
+</I>&gt;&gt;&gt;&gt;&gt;<i>
+</I>&gt;&gt;&gt;&gt;&gt;<i>/dan
+</I>&gt;&gt;&gt;&gt;&gt;<i>
+</I>&gt;&gt;&gt;&gt;&gt;<i>--- Francisco Azevedo &lt;<A HREF="https://lists.berlios.de/mailman/listinfo/ydframework-users">francisco at fusemail.com</A>&gt;
+</I>&gt;&gt;&gt;&gt;<i>
+</I>&gt;&gt;&gt;&gt;<i>wrote:
+</I>&gt;&gt;&gt;&gt;<i>
+</I>&gt;&gt;&gt;&gt;&gt;&gt;<i>Hi dab
+</I>&gt;&gt;&gt;&gt;&gt;&gt;<i>
+</I>&gt;&gt;&gt;&gt;&gt;&gt;<i>The solution for your problem is exactly what i
+</I>&gt;&gt;&gt;&gt;<i>
+</I>&gt;&gt;&gt;&gt;<i>said
+</I>&gt;&gt;&gt;&gt;<i>
+</I>&gt;&gt;&gt;&gt;&gt;&gt;<i>on my last email.
+</I>&gt;&gt;&gt;&gt;&gt;&gt;<i>Please not that:
+</I>&gt;&gt;&gt;&gt;&gt;&gt;<i>
+</I>&gt;&gt;&gt;&gt;&gt;&gt;<i>1 - You should define all arguments in a array
+</I>&gt;&gt;&gt;&gt;<i>
+</I>&gt;&gt;&gt;&gt;<i>(when
+</I>&gt;&gt;&gt;&gt;<i>
+</I>&gt;&gt;&gt;&gt;&gt;&gt;<i>adding a 
+</I>&gt;&gt;&gt;&gt;&gt;&gt;<i>autocompleter to a form)
+</I>&gt;&gt;&gt;&gt;&gt;&gt;<i>
+</I>&gt;&gt;&gt;&gt;&gt;&gt;<i>2 - You should define the same quantity of
+</I>&gt;&gt;&gt;&gt;<i>
+</I>&gt;&gt;&gt;&gt;<i>arguments
+</I>&gt;&gt;&gt;&gt;<i>
+</I>&gt;&gt;&gt;&gt;&gt;&gt;<i>in the server function.
+</I>&gt;&gt;&gt;&gt;&gt;&gt;<i>
+</I>&gt;&gt;&gt;&gt;&gt;&gt;<i>3 - You should NOT use any of the
+</I>&gt;&gt;&gt;&gt;&gt;&gt;<i>YDFormElement_Autocompleter methods
+</I>&gt;&gt;&gt;&gt;&gt;&gt;<i>
+</I>&gt;&gt;&gt;&gt;&gt;&gt;<i>So..
+</I>&gt;&gt;&gt;&gt;&gt;&gt;<i>
+</I>&gt;&gt;&gt;&gt;&gt;&gt;<i>1:
+</I>&gt;&gt;&gt;&gt;&gt;&gt;<i>$this-&gt;form-&gt;addElement( 'autocompleter',
+</I>&gt;&gt;&gt;&gt;&gt;&gt;<i>'firstname', 'First Name:', 
+</I>&gt;&gt;&gt;&gt;&gt;&gt;<i>$this-&gt;attributes, array( &amp;$this,
+</I>&gt;&gt;&gt;&gt;<i>
+</I>&gt;&gt;&gt;&gt;<i>'getAjaxElement',
+</I>&gt;&gt;&gt;&gt;<i>
+</I>&gt;&gt;&gt;&gt;&gt;&gt;<i>array( 'affiliate', 
+</I>&gt;&gt;&gt;&gt;&gt;&gt;<i>'firstname' ) ) );
+</I>&gt;&gt;&gt;&gt;&gt;&gt;<i>
+</I>&gt;&gt;&gt;&gt;&gt;&gt;<i>2:
+</I>&gt;&gt;&gt;&gt;&gt;&gt;<i>function getAjaxElement ( $affiliate,
+</I>&gt;&gt;<i>
+</I>&gt;&gt;<i>$firstname
+</I>&gt;&gt;<i>
+</I>&gt;&gt;&gt;&gt;<i>) {
+</I>&gt;&gt;&gt;&gt;<i>
+</I>&gt;&gt;&gt;&gt;&gt;&gt;<i>      ...
+</I>&gt;&gt;&gt;&gt;&gt;&gt;<i>}
+</I>&gt;&gt;&gt;&gt;&gt;&gt;<i>
+</I>&gt;&gt;&gt;&gt;&gt;&gt;<i>
+</I>&gt;&gt;&gt;&gt;&gt;&gt;<i>Francisco A
+</I>&gt;&gt;&gt;&gt;&gt;&gt;<i>
+</I>&gt;&gt;&gt;&gt;&gt;&gt;<i>
+</I>&gt;&gt;&gt;&gt;&gt;&gt;<i>
+</I>&gt;&gt;&gt;&gt;&gt;&gt;&gt;<i>thanks for your reply. i can't get it to work
+</I>&gt;&gt;&gt;&gt;&gt;&gt;<i>
+</I>&gt;&gt;&gt;&gt;&gt;&gt;<i>though
+</I>&gt;&gt;&gt;&gt;&gt;&gt;<i>
+</I>&gt;&gt;&gt;&gt;&gt;&gt;&gt;<i>=(
+</I>&gt;&gt;&gt;&gt;&gt;&gt;&gt;<i>
+</I>&gt;&gt;&gt;&gt;&gt;&gt;&gt;<i>you mean i have to do this?
+</I>&gt;&gt;&gt;&gt;&gt;&gt;&gt;<i>$this-&gt;form-&gt;addElement ( 'autocompleter',
+</I>&gt;&gt;&gt;&gt;&gt;&gt;&gt;<i>'firstname', 'First Name:', $this-&gt;attributes,
+</I>&gt;&gt;&gt;&gt;&gt;&gt;<i>
+</I>&gt;&gt;&gt;&gt;&gt;&gt;<i>array(
+</I>&gt;&gt;&gt;&gt;&gt;&gt;<i>
+</I>&gt;&gt;&gt;&gt;&gt;&gt;&gt;<i>&amp;$this, 'getAjaxElement', 'affiliate',
+</I>&gt;&gt;&gt;&gt;<i>
+</I>&gt;&gt;&gt;&gt;<i>'firstname'
+</I>&gt;&gt;&gt;&gt;<i>
+</I>&gt;&gt;&gt;&gt;&gt;&gt;<i>)
+</I>&gt;&gt;&gt;&gt;&gt;&gt;<i>
+</I>&gt;&gt;&gt;&gt;&gt;&gt;&gt;<i>);
+</I>&gt;&gt;&gt;&gt;&gt;&gt;&gt;<i>
+</I>&gt;&gt;&gt;&gt;&gt;&gt;&gt;<i>function getAjaxElement ( $text, $field,
+</I>&gt;&gt;<i>
+</I>&gt;&gt;<i>$table
+</I>&gt;&gt;<i>
+</I>&gt;&gt;&gt;&gt;<i>)
+</I>&gt;&gt;&gt;&gt;<i>
+</I>&gt;&gt;&gt;&gt;&gt;&gt;<i>{
+</I>&gt;&gt;&gt;&gt;&gt;&gt;<i>
+</I>&gt;&gt;&gt;&gt;&gt;&gt;&gt;<i>    ...     
+</I>&gt;&gt;&gt;&gt;&gt;&gt;&gt;<i>}
+</I>&gt;&gt;&gt;&gt;&gt;&gt;&gt;<i>
+</I>&gt;&gt;&gt;&gt;&gt;&gt;&gt;<i>
+</I>&gt;&gt;&gt;&gt;&gt;&gt;&gt;<i>
+</I>&gt;&gt;<i>
+</I>&gt;&gt;<i>YDFormElement_Autocompleter::getAjaxArguments()
+</I>&gt;&gt;<i>
+</I>&gt;&gt;&gt;&gt;&gt;&gt;&gt;<i>returns $this-&gt;_options[2]. So if the the
+</I>&gt;&gt;<i>
+</I>&gt;&gt;<i>third
+</I>&gt;&gt;<i>
+</I>&gt;&gt;&gt;&gt;&gt;&gt;<i>value
+</I>&gt;&gt;&gt;&gt;&gt;&gt;<i>
+</I>&gt;&gt;&gt;&gt;&gt;&gt;&gt;<i>in the options array is:
+</I>&gt;&gt;&gt;&gt;&gt;&gt;&gt;<i>array ( 'tablename', 'fieldname' )
+</I>&gt;&gt;&gt;&gt;&gt;&gt;&gt;<i>
+</I>&gt;&gt;&gt;&gt;&gt;&gt;&gt;<i>and in getAjaxElement() you do:
+</I>&gt;&gt;&gt;&gt;&gt;&gt;&gt;<i>function getAjaxElement ( $text ) {
+</I>&gt;&gt;&gt;&gt;&gt;&gt;&gt;<i>    $info = $this-&gt;getAjaxArguments();
+</I>&gt;&gt;&gt;&gt;&gt;&gt;&gt;<i>    $table = $info[0];
+</I>&gt;&gt;&gt;&gt;&gt;&gt;&gt;<i>    $field = $info[1];
+</I>&gt;&gt;&gt;&gt;&gt;&gt;&gt;<i>    ...
+</I>&gt;&gt;&gt;&gt;&gt;&gt;&gt;<i>}
+</I>&gt;&gt;&gt;&gt;&gt;&gt;&gt;<i>
+</I>&gt;&gt;&gt;&gt;&gt;&gt;&gt;<i>why doesn't that work? i need to pass
+</I>&gt;&gt;<i>
+</I>&gt;&gt;<i>arguments
+</I>&gt;&gt;<i>
+</I>&gt;&gt;&gt;&gt;<i>=)
+</I>&gt;&gt;&gt;&gt;<i>
+</I>&gt;&gt;&gt;&gt;&gt;&gt;&gt;<i>thanks.
+</I>&gt;&gt;&gt;&gt;&gt;&gt;&gt;<i>
+</I>&gt;&gt;&gt;&gt;&gt;&gt;&gt;<i>/dab
+</I>&gt;&gt;&gt;&gt;&gt;&gt;&gt;<i>
+</I>&gt;&gt;&gt;&gt;&gt;&gt;&gt;<i>
+</I>&gt;&gt;&gt;&gt;&gt;&gt;&gt;<i>
+</I>&gt;&gt;&gt;&gt;&gt;&gt;&gt;<i>--- Francisco Azevedo &lt;<A HREF="https://lists.berlios.de/mailman/listinfo/ydframework-users">francisco at fusemail.com</A>&gt;
+</I>&gt;&gt;&gt;&gt;&gt;&gt;<i>
+</I>&gt;&gt;&gt;&gt;&gt;&gt;<i>wrote:
+</I>&gt;&gt;&gt;&gt;&gt;&gt;<i>
+</I>&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;<i>dab wrote:
+</I>&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;<i>
+</I>&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;<i>
+</I>&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;<i>hi all,
+</I>&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;<i>i use the autocomplete function on quite a
+</I>&gt;&gt;<i>
+</I>&gt;&gt;<i>lot
+</I>&gt;&gt;<i>
+</I>&gt;&gt;&gt;&gt;<i>of
+</I>&gt;&gt;&gt;&gt;<i>
+</I>&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;<i>fields so it would be better if i could pass
+</I>&gt;&gt;&gt;&gt;<i>
+</I>&gt;&gt;&gt;&gt;<i>the
+</I>&gt;&gt;&gt;&gt;<i>
+</I>&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;<i>table
+</I>&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;<i>
+</I>&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;<i>
+</I>&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;<i>and field name to the ajax method so i don't
+</I>&gt;&gt;&gt;&gt;<i>
+</I>&gt;&gt;&gt;&gt;<i>have
+</I>&gt;&gt;&gt;&gt;<i>
+</I>&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;<i>to
+</I>&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;<i>
+</I>&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;<i>
+</I>&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;<i>write one extra method for each element.
+</I>&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;<i>by looking at the
+</I>&gt;&gt;<i>
+</I>&gt;&gt;<i>YDFormElement_Autocompleter
+</I>&gt;&gt;<i>
+</I>&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;<i>below
+</I>&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;<i>
+</I>&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;<i>
+</I>&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;<i>code should work, but it doesn't :(
+</I>&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;<i>
+</I>&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;<i>$this-&gt;form-&gt;addElement ( 'autocompleter',
+</I>&gt;&gt;<i>
+</I>&gt;<i> === message truncated ===
+</I>&gt;<i> 
+</I>&gt;<i> 
+</I>&gt;<i> __________________________________________________
+</I>&gt;<i> Do You Yahoo!?
+</I>&gt;<i> Tired of spam?  Yahoo! Mail has the best spam protection around 
+</I>&gt;<i> <A HREF="http://mail.yahoo.com">http://mail.yahoo.com</A> 
+</I>&gt;<i> _______________________________________________
+</I>&gt;<i> YDFramework-users mailing list
+</I>&gt;<i> <A HREF="https://lists.berlios.de/mailman/listinfo/ydframework-users">YDFramework-users at lists.berlios.de</A>
+</I>&gt;<i> <A HREF="http://lists.berlios.de/mailman/listinfo/ydframework-users">http://lists.berlios.de/mailman/listinfo/ydframework-users</A>
+</I>&gt;<i> 
+</I>
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000103.html">[ydf-users] YDAjax autocompleter
+</A></li>
+	<LI>Next message: <A HREF="000117.html">[ydf-users] YDAjax autocompleter
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#105">[ date ]</a>
+              <a href="thread.html#105">[ thread ]</a>
+              <a href="subject.html#105">[ subject ]</a>
+              <a href="author.html#105">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/ydframework-users">More information about the YDFramework-users
+mailing list</a><br>
+</body></html>

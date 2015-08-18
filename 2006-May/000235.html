@@ -1,0 +1,350 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [ydf-users] Query Regarding Dynamic textbox
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/ydframework-users/2006-May/index.html" >
+   <LINK REL="made" HREF="mailto:ydframework-users%40lists.berlios.de?Subject=Re%3A%20%5Bydf-users%5D%20Query%20Regarding%20Dynamic%20textbox&In-Reply-To=%3C20060508152619.55050.qmail%40web50215.mail.yahoo.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000234.html">
+   <LINK REL="Next"  HREF="000236.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[ydf-users] Query Regarding Dynamic textbox</H1>
+    <B>dab</B> 
+    <A HREF="mailto:ydframework-users%40lists.berlios.de?Subject=Re%3A%20%5Bydf-users%5D%20Query%20Regarding%20Dynamic%20textbox&In-Reply-To=%3C20060508152619.55050.qmail%40web50215.mail.yahoo.com%3E"
+       TITLE="[ydf-users] Query Regarding Dynamic textbox">dab214 at yahoo.com
+       </A><BR>
+    <I>Mon May  8 17:26:19 CEST 2006</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000234.html">[ydf-users] Query Regarding Dynamic textbox
+</A></li>
+        <LI>Next message: <A HREF="000236.html">[ydf-users] YDDatabaseObject
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#235">[ date ]</a>
+              <a href="thread.html#235">[ thread ]</a>
+              <a href="subject.html#235">[ subject ]</a>
+              <a href="author.html#235">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>hi all,
+ok i wrote this not very good hack to this problem. it
+basically gives back just the html output of the
+element that later is being inserted into the array
+that you assign to the template. 
+in case anyone wants to use it:
+
+$dbo = YDDatabaseObject::getInstance( 'event' );
+$dbo-&gt;where( 'event_cat_id = '.$this-&gt;id );
+$dbo-&gt;find();
+$result = $dbo-&gt;getResults();
+
+foreach ( $result as $key =&gt; $value ) {
+    $type = 'type_'.$value[ 'id' ];
+    $bet = 'bet_'.$value[ 'id' ];
+    
+    $this-&gt;form-&gt;addElement( 'radio', $type, '',
+$attribs, array( 1 =&gt; 'one', 2=&gt;'two' ) ); 
+    $this-&gt;form-&gt;addElement( 'text', $bet, '',
+$attribs ); 
+    
+    $result[$key]['type'] =
+$this-&gt;form-&gt;getElementHtml( $type );
+    $result[$key]['bet'] =
+$this-&gt;form-&gt;getElementHtml( $bet );
+} 
+
+then this method has to be in subclass of the YDForm
+class:
+
+function getElementHtml( $name, $attribs = array() ) {
+    $element = $this-&gt;getElement( $name );
+    
+    $html = '&lt;input type=&quot;'.$element-&gt;_type.'&quot;
+name=&quot;'.$element-&gt;_form.'_'.$element-&gt;_name.'&quot; ';
+    
+    foreach ( $element as $key =&gt; $val) { 
+        
+        if ( is_array( $val ) ) {
+            
+            foreach ($val as $assoc_key =&gt; $assoc_val
+) {
+                
+                if ( $key == '_options' &amp;&amp;
+$element-&gt;_type == 'radio') {
+                    
+                    $radio .=
+$html.'value=&quot;'.$assoc_val.'&quot; ';
+                    $radio .= $assoc_val ==
+$this-&gt;getValue($element-&gt;_name) ? 'checked' : '';
+                    $radio .= ' /&gt;';
+                    
+	            } else {
+	                
+	                if ( $attrib_val == 'id' )
+	                   $html .=
+$assoc_key.'=&quot;'.$element-&gt;_form.'_'.$assoc_val.'&quot; ';
+	                else 
+	                   $html .=
+$assoc_key.'=&quot;'.$assoc_val.'&quot; ';
+                }
+            }
+        }
+    }
+    
+    if ( $element-&gt;_type == 'radio' ) {
+        return $radio;
+    }
+    
+    $html .= 'value=&quot;'.$element-&gt;_value.'&quot;/&gt;';
+    
+    return $html;
+}
+
+
+
+--- dab &lt;<A HREF="https://lists.berlios.de/mailman/listinfo/ydframework-users">dab214 at yahoo.com</A>&gt; wrote:
+
+&gt;<i> hi pieter,
+</I>&gt;<i> that check that you describe below has to been done
+</I>&gt;<i> in
+</I>&gt;<i> the template code right? could you please advise on
+</I>&gt;<i> a
+</I>&gt;<i> solution how this could be done without using php
+</I>&gt;<i> functions from the template code?
+</I>&gt;<i> 
+</I>&gt;<i> thanks.
+</I>&gt;<i> 
+</I>&gt;<i> /daniel
+</I>&gt;<i> 
+</I>&gt;<i> 
+</I>&gt;<i> --- Pieter Claerhout &lt;<A HREF="https://lists.berlios.de/mailman/listinfo/ydframework-users">pieter at yellowduck.be</A>&gt; wrote:
+</I>&gt;<i> 
+</I>&gt;<i> &gt; There's a mistake in your logic of looping over
+</I>&gt;<i> the
+</I>&gt;<i> &gt; fields. You basically
+</I>&gt;<i> &gt; loop over all the form elements and properties,
+</I>&gt;<i> &gt; which is not what you wanted
+</I>&gt;<i> &gt; to do. You need to add an extra check that checks
+</I>&gt;<i> &gt; either the prefix of the
+</I>&gt;<i> &gt; field or the name or the type of the field.
+</I>&gt;<i> &gt; 
+</I>&gt;<i> &gt; pieter
+</I>&gt;<i> &gt; 
+</I>&gt;<i> &gt; On 4/25/06, <A HREF="https://lists.berlios.de/mailman/listinfo/ydframework-users">moses at softwaysolutions.com</A>
+</I>&gt;<i> &gt; &lt;<A HREF="https://lists.berlios.de/mailman/listinfo/ydframework-users">moses at softwaysolutions.com</A>&gt; wrote:
+</I>&gt;<i> &gt; &gt;
+</I>&gt;<i> &gt; &gt;  Dear Sir
+</I>&gt;<i> &gt; &gt;
+</I>&gt;<i> &gt; &gt;         Than you  for your reply.
+</I>&gt;<i> &gt; &gt;
+</I>&gt;<i> &gt; &gt;         I tried with what u said.... but still 
+</I>&gt;<i> I
+</I>&gt;<i> &gt; cant solve my problem
+</I>&gt;<i> &gt; &gt;
+</I>&gt;<i> &gt; &gt;         when using the following coding
+</I>&gt;<i> &gt; &gt;
+</I>&gt;<i> &gt; &gt;                     
+</I>&gt;<i> &gt; $this-&gt;template-&gt;assign('form',$this-&gt;form) the
+</I>&gt;<i> HTML
+</I>&gt;<i> &gt; &gt; tag for the form array is empty
+</I>&gt;<i> &gt; &gt;
+</I>&gt;<i> &gt; &gt;         So I tested with
+</I>&gt;<i> &gt; &gt;
+</I>&gt;<i> &gt; &gt;                 
+</I>&gt;<i> &gt; $this-&gt;template-&gt;assignForm('form',$this-&gt;form)
+</I>&gt;<i> &gt; &gt;
+</I>&gt;<i> &gt; &gt;         Here it works but still have some
+</I>&gt;<i> problem.
+</I>&gt;<i> &gt; &gt;
+</I>&gt;<i> &gt; &gt;                  1)Some Unwanted characters like
+</I>&gt;<i> (
+</I>&gt;<i> &gt; &lt;, &gt;, r) are displayed
+</I>&gt;<i> &gt; &gt;                  2)Again It does not saticifies
+</I>&gt;<i> &gt; what actually I need
+</I>&gt;<i> &gt; &gt;
+</I>&gt;<i> &gt; &gt;
+</I>&gt;<i> &gt; &gt;
+</I>&gt;<i> &gt; &gt;  The Following is the coding
+</I>&gt;<i> &gt; &gt;
+</I>&gt;<i> &gt; &gt;         (.php)
+</I>&gt;<i> &gt; &gt;                              $i+=0;
+</I>&gt;<i> &gt; &gt;                             while ($record =
+</I>&gt;<i> &gt; mysql_fetch_array($result))
+</I>&gt;<i> &gt; &gt;                             {
+</I>&gt;<i> &gt; &gt;                                     $depName =
+</I>&gt;<i> &gt; $record[&quot;department_Name&quot;];
+</I>&gt;<i> &gt; &gt;                                    
+</I>&gt;<i> &gt; $this-&gt;form-&gt;addElement( 'text',
+</I>&gt;<i> &gt; &gt; &quot;txtName[$i]&quot; , '');
+</I>&gt;<i> &gt; &gt;
+</I>&gt;<i> &gt; &gt;
+</I>&gt;<i> $this-&gt;form-&gt;setDefault(&quot;txtName[$i]&quot;,&quot;$depName&quot;);
+</I>&gt;<i> &gt; &gt;                                     $i+=1;
+</I>&gt;<i> &gt; &gt;
+</I>&gt;<i> &gt; &gt;                             }
+</I>&gt;<i> &gt; &gt;
+</I>&gt;<i> &gt; &gt;
+</I>&gt;<i> &gt; &gt; $this-&gt;template-&gt;assignForm('form',$this-&gt;form);
+</I>&gt;<i> &gt; &gt;                            
+</I>&gt;<i> &gt; $this-&gt;template-&gt;display();
+</I>&gt;<i> &gt; &gt;       (.tpl)
+</I>&gt;<i> &gt; &gt;
+</I>&gt;<i> &gt; &gt;
+</I>&gt;<i> &gt; &gt;                          {foreach from = $form
+</I>&gt;<i> &gt; item = formElement}
+</I>&gt;<i> &gt; &gt;                                   
+</I>&gt;<i> &gt; {$formElement.html} -----------&gt;  (This
+</I>&gt;<i> &gt; &gt; coding I tried by myself if it is wrong please
+</I>&gt;<i> &gt; note
+</I>&gt;<i> &gt; &gt; me)
+</I>&gt;<i> &gt; &gt;                            {/foreach}
+</I>&gt;<i> &gt; &gt;
+</I>&gt;<i> &gt; &gt;
+</I>&gt;<i> &gt; &gt;      The HTML OutPut is
+</I>&gt;<i> &gt; &gt; 
+</I>&gt;<i> &gt;
+</I>&gt;<i>
+</I>------------------------------------------------------------------------------------------------------
+&gt;<i> &gt; &gt;
+</I>&gt;<i> &gt; &gt;        &lt;
+</I>&gt;<i> &gt; &gt;
+</I>&gt;<i> &gt; &gt;
+</I>&gt;<i> &gt; &gt;
+</I>&gt;<i> &gt; &gt;        &lt;
+</I>&gt;<i> &gt; &gt;
+</I>&gt;<i> &gt; &gt;        f
+</I>&gt;<i> &gt; &gt;
+</I>&gt;<i> &gt; &gt;
+</I>&gt;<i> &gt; &gt;
+</I>&gt;<i> &gt; &gt;
+</I>&gt;<i> &gt; &gt;
+</I>&gt;<i> &gt; &gt;  &lt;input id=&quot;form_txtName[0]&quot; type=&quot;text&quot;
+</I>&gt;<i> &gt; name=&quot;form_txtName[0]&quot;
+</I>&gt;<i> &gt; &gt; value=&quot;PHP&quot; /&gt;
+</I>&gt;<i> &gt; &gt;
+</I>&gt;<i> &gt; &gt;  &lt;input id=&quot;form_txtName[1]&quot; type=&quot;text&quot;
+</I>&gt;<i> &gt; name=&quot;form_txtName[1]&quot;
+</I>&gt;<i> &gt; &gt; value=&quot;Desigining&quot; /&gt;
+</I>&gt;<i> &gt; &gt;
+</I>&gt;<i> &gt; &gt;  &lt;input id=&quot;form_txtName[2]&quot; type=&quot;text&quot;
+</I>&gt;<i> &gt; name=&quot;form_txtName[2]&quot; value=&quot;DOT
+</I>&gt;<i> &gt; &gt; NET&quot; /&gt;
+</I>&gt;<i> &gt; &gt;
+</I>&gt;<i> &gt; &gt;
+</I>&gt;<i> &gt; &gt;
+</I>&gt;<i> &gt; &gt;
+</I>&gt;<i> &gt; &gt;
+</I>&gt;<i> &gt; &gt;
+</I>&gt;<i> &gt;
+</I>&gt;<i>
+</I>---------------------------------------------------------------------------------------------------------
+&gt;<i> &gt; &gt;    In the above tags to get the value of the
+</I>&gt;<i> &gt; textboxes in the clientside
+</I>&gt;<i> &gt; &gt; through javascript like this
+</I>&gt;<i> &gt; &gt;
+</I>&gt;<i> &gt; &gt;    document.formName.form_txtName[0].value  
+</I>&gt;<i> &gt; -----------&gt; gives error
+</I>&gt;<i> &gt; &gt;
+</I>&gt;<i> &gt; &gt;
+</I>&gt;<i> &gt; &gt;
+</I>&gt;<i> &gt; &gt;
+</I>&gt;<i> &gt; &gt; If the above HTML is like the following
+</I>&gt;<i> &gt; &gt;
+</I>&gt;<i> &gt; &gt;  &lt;input id=&quot;form_txtName&quot; type=&quot;text&quot;
+</I>&gt;<i> &gt; name=&quot;form_txtName&quot; value=&quot;PHP&quot; /&gt;
+</I>&gt;<i> &gt; &gt;
+</I>&gt;<i> &gt; &gt;  &lt;input id=&quot;form_txtName&quot; type=&quot;text&quot;
+</I>&gt;<i> &gt; name=&quot;form_txtName&quot;
+</I>&gt;<i> &gt; &gt; value=&quot;Desigining&quot; /&gt;
+</I>&gt;<i> &gt; &gt;
+</I>&gt;<i> &gt; &gt;  &lt;input id=&quot;form_txtName&quot; type=&quot;text&quot;
+</I>&gt;<i> &gt; name=&quot;form_txtName&quot; value=&quot;DOT NET&quot;
+</I>&gt;<i> &gt; &gt; /&gt;
+</I>&gt;<i> &gt; &gt;
+</I>&gt;<i> &gt; &gt; so that i can use this coding
+</I>&gt;<i> &gt; &gt;
+</I>&gt;<i> &gt; &gt;                                   
+</I>&gt;<i> &gt; document.formName.form_txtName
+</I>&gt;<i> &gt; &gt; [0].value
+</I>&gt;<i> &gt; &gt;                                   
+</I>&gt;<i> &gt; document.formName.form_txtName[1].value
+</I>&gt;<i> &gt; ...............so
+</I>&gt;<i> &gt; &gt; on
+</I>&gt;<i> &gt; &gt;
+</I>&gt;<i> &gt; &gt;
+</I>&gt;<i> &gt; &gt;
+</I>&gt;<i> &gt; &gt; To solve my problem I need to create more than
+</I>&gt;<i> one
+</I>&gt;<i> &gt; text boxes with the
+</I>&gt;<i> &gt; &gt; same name(there should not be any index)
+</I>&gt;<i> &gt; &gt;
+</I>&gt;<i> &gt; &gt;
+</I>&gt;<i> &gt; &gt; I tried the following
+</I>&gt;<i> &gt; &gt;
+</I>&gt;<i> &gt; &gt;                       for($i=0;$&lt;10;$i++)
+</I>&gt;<i> &gt; &gt;                      {
+</I>&gt;<i> &gt; &gt;
+</I>&gt;<i> &gt; &gt; $this-&gt;form-&gt;addElement('test','txtName','');
+</I>&gt;<i> &gt; &gt;                      }
+</I>&gt;<i> &gt; &gt;
+</I>&gt;<i> &gt; &gt; Here what happens is only one textbox is created
+</I>&gt;<i> &gt; not 10 ;
+</I>&gt;<i> &gt; &gt;
+</I>&gt;<i> &gt; &gt;
+</I>&gt;<i> &gt; &gt;            1)Is it possible to create more the
+</I>&gt;<i> ont
+</I>&gt;<i> &gt; textboxes with the same
+</I>&gt;<i> &gt; &gt; name
+</I>&gt;<i> &gt; &gt;            2)If so how to identify each
+</I>&gt;<i> textboxes
+</I>&gt;<i> &gt; in the tpl
+</I>&gt;<i> &gt; &gt;
+</I>&gt;<i> &gt; &gt;
+</I>&gt;<i> &gt; &gt;
+</I>&gt;<i> &gt; &gt; regards
+</I>&gt;<i> &gt; &gt; moses
+</I>&gt;<i> &gt; &gt;
+</I>&gt;<i> &gt; &gt;
+</I>&gt;<i> &gt; &gt;
+</I>&gt;<i> &gt; &gt;
+</I>&gt;<i> 
+</I>=== message truncated ===
+
+
+__________________________________________________
+Do You Yahoo!?
+Tired of spam?  Yahoo! Mail has the best spam protection around 
+<A HREF="http://mail.yahoo.com">http://mail.yahoo.com</A> 
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000234.html">[ydf-users] Query Regarding Dynamic textbox
+</A></li>
+	<LI>Next message: <A HREF="000236.html">[ydf-users] YDDatabaseObject
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#235">[ date ]</a>
+              <a href="thread.html#235">[ thread ]</a>
+              <a href="subject.html#235">[ subject ]</a>
+              <a href="author.html#235">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/ydframework-users">More information about the YDFramework-users
+mailing list</a><br>
+</body></html>

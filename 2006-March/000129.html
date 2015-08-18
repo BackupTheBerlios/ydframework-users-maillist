@@ -1,0 +1,118 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [ydf-users] Regarding YD AddElements
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/ydframework-users/2006-March/index.html" >
+   <LINK REL="made" HREF="mailto:ydframework-users%40lists.berlios.de?Subject=Re%3A%20%5Bydf-users%5D%20Regarding%20YD%20AddElements&In-Reply-To=%3C4aef63030603230051q4fe0acb6x74a16fa412eb71bf%40mail.gmail.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000123.html">
+   <LINK REL="Next"  HREF="000124.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[ydf-users] Regarding YD AddElements</H1>
+    <B>Pieter Claerhout</B> 
+    <A HREF="mailto:ydframework-users%40lists.berlios.de?Subject=Re%3A%20%5Bydf-users%5D%20Regarding%20YD%20AddElements&In-Reply-To=%3C4aef63030603230051q4fe0acb6x74a16fa412eb71bf%40mail.gmail.com%3E"
+       TITLE="[ydf-users] Regarding YD AddElements">pieter at yellowduck.be
+       </A><BR>
+    <I>Thu Mar 23 09:51:00 CET 2006</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000123.html">[ydf-users] Regarding YD AddElements
+</A></li>
+        <LI>Next message: <A HREF="000124.html">[ydf-users] Query Regarding Text Box
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#129">[ date ]</a>
+              <a href="thread.html#129">[ thread ]</a>
+              <a href="subject.html#129">[ subject ]</a>
+              <a href="author.html#129">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Moses,
+
+the attributes array translates directly to the HTML attributes of the HTML
+that is generated for the element. Any HTML attribute can be specified in
+this array. You should however avoid to specify special attributes such as
+&quot;id&quot;, &quot;name&quot; and &quot;value&quot; as they are handled internally by the YDForm class.
+
+For the options array, it depends on which form element we are talking
+about. Some require options, some don't. The example &quot;form2.php&quot; should give
+you an idea of which elements require options and which ones don't.
+
+I will try to add this information to the user guide one day.
+
+Cheers,
+
+
+pieter
+
+On 3/23/06, <A HREF="https://lists.berlios.de/mailman/listinfo/ydframework-users">moses at softwaysolutions.com</A> &lt;<A HREF="https://lists.berlios.de/mailman/listinfo/ydframework-users">moses at softwaysolutions.com</A>&gt; wrote:
+&gt;<i>
+</I>&gt;<i>  Dear Sir
+</I>&gt;<i>
+</I>&gt;<i> function &amp; addElement
+</I>&gt;<i> (
+</I>&gt;<i>
+</I>&gt;<i>            $type,
+</I>&gt;<i>
+</I>&gt;<i>            $name,
+</I>&gt;<i>
+</I>&gt;<i>            $label='',
+</I>&gt;<i>
+</I>&gt;<i>            $attributes=array(),
+</I>&gt;<i>
+</I>&gt;<i>            $options=array()
+</I>&gt;<i>
+</I>&gt;<i> )
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i>               Can i get the details 0f what are all the possible
+</I>&gt;<i> attributes and options that i can specify in the array with examples
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i> regards
+</I>&gt;<i> moses
+</I>&gt;<i> _______________________________________________ YDFramework-users mailing
+</I>&gt;<i> list <A HREF="https://lists.berlios.de/mailman/listinfo/ydframework-users">YDFramework-users at lists.berlios.de</A>
+</I>&gt;<i> <A HREF="http://lists.berlios.de/mailman/listinfo/ydframework-users">http://lists.berlios.de/mailman/listinfo/ydframework-users</A>
+</I>&gt;<i>
+</I>
+
+
+--
+pieter claerhout . <A HREF="https://lists.berlios.de/mailman/listinfo/ydframework-users">pieter at yellowduck.be</A> . <A HREF="http://www.yellowduck.be/">http://www.yellowduck.be/</A>
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: &lt;<A HREF="https://lists.berlios.de/pipermail/ydframework-users/attachments/20060323/73dcf017/attachment.html">https://lists.berlios.de/pipermail/ydframework-users/attachments/20060323/73dcf017/attachment.html</A>&gt;
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000123.html">[ydf-users] Regarding YD AddElements
+</A></li>
+	<LI>Next message: <A HREF="000124.html">[ydf-users] Query Regarding Text Box
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#129">[ date ]</a>
+              <a href="thread.html#129">[ thread ]</a>
+              <a href="subject.html#129">[ subject ]</a>
+              <a href="author.html#129">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/ydframework-users">More information about the YDFramework-users
+mailing list</a><br>
+</body></html>

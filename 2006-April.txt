@@ -1,0 +1,2266 @@
+From francisco at fusemail.com  Sat Apr  1 17:23:10 2006
+From: francisco at fusemail.com (Francisco Azevedo)
+Date: Sat, 01 Apr 2006 16:23:10 +0100
+Subject: [ydf-users] Ignore blocks in Smarty
+Message-ID: <442E9ADE.7070001@fusemail.com>
+
+Hi all
+
+I'm looking to Smarty manual but i can't find what i want.
+
+Is it possible to define a block that Smarty must _not_ parse?
+
+Eg, something like:
+
+<html>
+<head>
+{ignore}
+  <xpto>
+{/ignore}
+  <title>hi</title>
+...
+
+that would output:
+
+<html>
+<head>
+  <title>hi</title>
+...
+
+Francisco A
+
+
+From ydfpoi at gmail.com  Sat Apr  1 17:21:04 2006
+From: ydfpoi at gmail.com (ydf poi)
+Date: Sat, 1 Apr 2006 17:21:04 +0200
+Subject: [ydf-users] Ignore blocks in Smarty
+In-Reply-To: <442E9ADE.7070001@fusemail.com>
+References: <442E9ADE.7070001@fusemail.com>
+Message-ID: <306340e00604010721j76824e48o4ea9d20291cb8f79@mail.gmail.com>
+
+Hi Francisco, you just have to use {* <what you want to be ignored> *}
+
+kind regards
+
+2006/4/1, Francisco Azevedo <francisco at fusemail.com>:
+> Hi all
+>
+> I'm looking to Smarty manual but i can't find what i want.
+>
+> Is it possible to define a block that Smarty must _not_ parse?
+>
+> Eg, something like:
+>
+> <html>
+> <head>
+> {ignore}
+>   <xpto>
+> {/ignore}
+>   <title>hi</title>
+> ...
+>
+> that would output:
+>
+> <html>
+> <head>
+>   <title>hi</title>
+> ...
+>
+> Francisco A
+> _______________________________________________
+> YDFramework-users mailing list
+> YDFramework-users at lists.berlios.de
+> http://lists.berlios.de/mailman/listinfo/ydframework-users
+>
+
+
+--
+po?
+
+
+From francisco at fusemail.com  Sat Apr  1 17:30:21 2006
+From: francisco at fusemail.com (Francisco Azevedo)
+Date: Sat, 01 Apr 2006 16:30:21 +0100
+Subject: [ydf-users] Ignore blocks in Smarty
+In-Reply-To: <306340e00604010721j76824e48o4ea9d20291cb8f79@mail.gmail.com>
+References: <442E9ADE.7070001@fusemail.com> <306340e00604010721j76824e48o4ea9d20291cb8f79@mail.gmail.com>
+Message-ID: <442E9C8D.7030004@fusemail.com>
+
+Hi Poi
+
+Thanks!
+
+Francisco A
+
+
+> Hi Francisco, you just have to use {* <what you want to be ignored> *}
+> 
+> kind regards
+> 
+> 2006/4/1, Francisco Azevedo <francisco at fusemail.com>:
+>> Hi all
+>>
+>> I'm looking to Smarty manual but i can't find what i want.
+>>
+>> Is it possible to define a block that Smarty must _not_ parse?
+>>
+>> Eg, something like:
+>>
+>> <html>
+>> <head>
+>> {ignore}
+>>   <xpto>
+>> {/ignore}
+>>   <title>hi</title>
+>> ...
+>>
+>> that would output:
+>>
+>> <html>
+>> <head>
+>>   <title>hi</title>
+>> ...
+>>
+>> Francisco A
+>> _______________________________________________
+>> YDFramework-users mailing list
+>> YDFramework-users at lists.berlios.de
+>> http://lists.berlios.de/mailman/listinfo/ydframework-users
+>>
+> 
+> 
+> --
+> po?
+> _______________________________________________
+> YDFramework-users mailing list
+> YDFramework-users at lists.berlios.de
+> http://lists.berlios.de/mailman/listinfo/ydframework-users
+> 
+
+
+
+From francisco at fusemail.com  Tue Apr  4 18:23:37 2006
+From: francisco at fusemail.com (Francisco Azevedo)
+Date: Tue, 04 Apr 2006 17:23:37 +0100
+Subject: [ydf-users] 2 ideas for checkboxgroup form element
+In-Reply-To: <442A548E.1070008@fusemail.com>
+References: <442A53E7.3000204@fusemail.com> <442A548E.1070008@fusemail.com>
+Message-ID: <44329D89.7070802@fusemail.com>
+
+>>
+>> 1- defining the html separator as a special attribute? This attribute 
+>> would be only understand internally by checkboxgroup and not rendered 
+>> in html. Then we could define a checkgroup like:
+>>
+>> $form->addElement( 'checkboxgroup', 'name', 'label', array('separator' 
+>> => '<br />'), array( 0 => 'choice 1', 1 => 'choice 2' ) );
+
+Btw, maybe we could define some "special" separators like: 'v' and 'h' 
+(for vertical and horizontal).
+This means that:
+
+$form->addElement( 'checkboxgroup', 'name', 'label', array('separator' 
+=> 'v'), array( 0 => 'choice 1', 1 => 'choice 2' ) );
+
+.. will be the same as:
+
+$form->addElement( 'checkboxgroup', 'name', 'label', array('separator' 
+=> '<br />'), array( 0 => 'choice 1', 1 => 'choice 2' ) );
+
+
+_AND_
+
+
+
+$form->addElement( 'checkboxgroup', 'name', 'label', array('separator' 
+=> 'h'), array( 0 => 'choice 1', 1 => 'choice 2' ) );
+
+.. will be the same as:
+
+$form->addElement( 'checkboxgroup', 'name', 'label', array('separator' 
+=> '&nbsp;&nbsp;'), array( 0 => 'choice 1', 1 => 'choice 2' ) );
+
+
+Cool hein? ;)
+
+
+>> 2- defining another special attribute for place where labels are 
+>> placed. Currently all labels are placed on the right side but 
+>> sometimes is useful on left.
+> 
+
+
+
+From moses at softwaysolutions.com  Wed Apr  5 12:07:48 2006
+From: moses at softwaysolutions.com (moses at softwaysolutions.com)
+Date: Wed, 05 Apr 2006 03:07:48 -0700
+Subject: [ydf-users] Query Regarding Validation
+Message-ID: <20060405030748.fe477b357a56c857c15a39baa2ae95d5.85da36ed8e.wbe@email.secureserver.net>
+
+An HTML attachment was scrubbed...
+URL: <https://lists.berlios.de/pipermail/ydframework-users/attachments/20060405/c796684f/attachment.html>
+
+From phmassa at gmail.com  Wed Apr  5 13:54:01 2006
+From: phmassa at gmail.com (ph-m)
+Date: Wed, 5 Apr 2006 13:54:01 +0200
+Subject: [ydf-users] ajax
+Message-ID: <829084a60604050454k5260522ah4fa31a3e5e3b6cfd@mail.gmail.com>
+
+hi,
+
+I change the line 64 in examples/ajax/waiting.php with :
+
+$this->ajax->addResult('myspanresult', 'test<p class="aaa">test with
+class</p>');
+
+And when I see result with FireFox / Web Developper AddOn and show Id
+& Class Details, it's look like this name class is .\"aaa\" instead of
+.aaa
+
+How to fix this, use template ?
+
+thx
+ph-m
+
+
+From dab214 at yahoo.com  Wed Apr  5 16:16:32 2006
+From: dab214 at yahoo.com (dab)
+Date: Wed, 5 Apr 2006 07:16:32 -0700 (PDT)
+Subject: [ydf-users] Query Regarding Validation
+In-Reply-To: <20060405030748.fe477b357a56c857c15a39baa2ae95d5.85da36ed8e.wbe@email.secureserver.net>
+Message-ID: <20060405141632.80578.qmail@web50205.mail.yahoo.com>
+
+hi moses,
+
+i think this should work:
+
+if ($this->form->getValue( 'myCheckbox' ) == 'on')
+   $this->form->addRule( ...
+
+
+
+--- moses at softwaysolutions.com wrote:
+
+
+---------------------------------
+ 
+Dear Sir
+ 
+ 
+            Inmy form i have two elements
+ 
+            1)Check box
+            2)Text
+ 
+ 
+           Thecondition is only when the checkbox is
+checked i should add rule to thetext box else
+     there should not be any rule tothe text Box
+ 
+ 
+     Can You explain througn an example.
+ 
+ 
+regards
+moses
+  
+_______________________________________________YDFramework-users
+mailing
+listYDFramework-users at lists.berlios.dehttp://lists.berlios.de/mailman/listinfo/ydframework-users
+
+
+__________________________________________________
+Do You Yahoo!?
+Tired of spam?  Yahoo! Mail has the best spam protection around 
+http://mail.yahoo.com 
+
+
+From francisco at fusemail.com  Wed Apr  5 16:18:55 2006
+From: francisco at fusemail.com (Francisco Azevedo)
+Date: Wed, 05 Apr 2006 15:18:55 +0100
+Subject: [ydf-users] ajax
+In-Reply-To: <829084a60604050454k5260522ah4fa31a3e5e3b6cfd@mail.gmail.com>
+References: <829084a60604050454k5260522ah4fa31a3e5e3b6cfd@mail.gmail.com>
+Message-ID: <4433D1CF.6020305@fusemail.com>
+
+hi ph-m
+
+> I change the line 64 in examples/ajax/waiting.php with :
+> 
+> $this->ajax->addResult('myspanresult', 'test<p class="aaa">test with
+> class</p>');
+> 
+> And when I see result with FireFox / Web Developper AddOn and show Id
+> & Class Details, it's look like this name class is .\"aaa\" instead of
+> .aaa
+
+Sure. But.. afaik FF will render that with no problem at all.
+
+How much important is that?
+
+> How to fix this, use template ?
+> 
+> thx
+> ph-m
+> _______________________________________________
+> YDFramework-users mailing list
+> YDFramework-users at lists.berlios.de
+> http://lists.berlios.de/mailman/listinfo/ydframework-users
+> 
+
+
+
+From phmassa at gmail.com  Wed Apr  5 18:37:01 2006
+From: phmassa at gmail.com (ph-m)
+Date: Wed, 5 Apr 2006 18:37:01 +0200
+Subject: [ydf-users] ajax
+In-Reply-To: <4433D1CF.6020305@fusemail.com>
+References: <829084a60604050454k5260522ah4fa31a3e5e3b6cfd@mail.gmail.com>
+	 <4433D1CF.6020305@fusemail.com>
+Message-ID: <829084a60604050937w2a59dcf5he72c08302a842714@mail.gmail.com>
+
+2006/4/5, Francisco Azevedo <francisco at fusemail.com>:
+> hi ph-m
+>
+> > I change the line 64 in examples/ajax/waiting.php with :
+> >
+> > $this->ajax->addResult('myspanresult', 'test<p class="aaa">test with
+> > class</p>');
+> >
+> > And when I see result with FireFox / Web Developper AddOn and show Id
+> > & Class Details, it's look like this name class is .\"aaa\" instead of
+> > .aaa
+>
+> Sure. But.. afaik FF will render that with no problem at all.
+>
+> How much important is that?
+>
+
+so, I can't use CSS/Javascript with Ajax in myspanresult, and I don't
+remember the release how broke this, cause this problem appear since
+last release.
+
+Where can I get an old release ?
+
+ph-m
+
+
+From francisco at fusemail.com  Wed Apr  5 18:48:59 2006
+From: francisco at fusemail.com (Francisco Azevedo)
+Date: Wed, 05 Apr 2006 17:48:59 +0100
+Subject: [ydf-users] ajax
+In-Reply-To: <829084a60604050937w2a59dcf5he72c08302a842714@mail.gmail.com>
+References: <829084a60604050454k5260522ah4fa31a3e5e3b6cfd@mail.gmail.com>	 <4433D1CF.6020305@fusemail.com> <829084a60604050937w2a59dcf5he72c08302a842714@mail.gmail.com>
+Message-ID: <4433F4FB.3030806@fusemail.com>
+
+ph-m
+
+I didn't get any problems with your example using the latest YDAjax release.
+
+What's your FF version?
+
+Your example is working in IE?
+
+>>> I change the line 64 in examples/ajax/waiting.php with :
+>>>
+>>> $this->ajax->addResult('myspanresult', 'test<p class="aaa">test with
+>>> class</p>');
+>>>
+>>> And when I see result with FireFox / Web Developper AddOn and show Id
+>>> & Class Details, it's look like this name class is .\"aaa\" instead of
+>>> .aaa
+>> Sure. But.. afaik FF will render that with no problem at all.
+>>
+>> How much important is that?
+>>
+> 
+> so, I can't use CSS/Javascript with Ajax in myspanresult, and I don't
+> remember the release how broke this, cause this problem appear since
+> last release.
+> 
+> Where can I get an old release ?
+> 
+> ph-m
+> _______________________________________________
+> YDFramework-users mailing list
+> YDFramework-users at lists.berlios.de
+> http://lists.berlios.de/mailman/listinfo/ydframework-users
+> 
+
+
+
+From francisco at fusemail.com  Wed Apr  5 18:53:25 2006
+From: francisco at fusemail.com (Francisco Azevedo)
+Date: Wed, 05 Apr 2006 17:53:25 +0100
+Subject: [ydf-users] ajax
+In-Reply-To: <4433F4FB.3030806@fusemail.com>
+References: <829084a60604050454k5260522ah4fa31a3e5e3b6cfd@mail.gmail.com>	 <4433D1CF.6020305@fusemail.com> <829084a60604050937w2a59dcf5he72c08302a842714@mail.gmail.com> <4433F4FB.3030806@fusemail.com>
+Message-ID: <4433F605.5080808@fusemail.com>
+
+Can you test the _new_ YDAjax waiting message example (build 1836)?
+
+On FF and IE please.
+
+Francisco A
+
+
+From phmassa at gmail.com  Wed Apr  5 19:00:56 2006
+From: phmassa at gmail.com (ph-m)
+Date: Wed, 5 Apr 2006 19:00:56 +0200
+Subject: [ydf-users] ajax
+In-Reply-To: <4433F605.5080808@fusemail.com>
+References: <829084a60604050454k5260522ah4fa31a3e5e3b6cfd@mail.gmail.com>
+	 <4433D1CF.6020305@fusemail.com>
+	 <829084a60604050937w2a59dcf5he72c08302a842714@mail.gmail.com>
+	 <4433F4FB.3030806@fusemail.com> <4433F605.5080808@fusemail.com>
+Message-ID: <829084a60604051000x5b86859h9e1750eb3224e95d@mail.gmail.com>
+
+2006/4/5, Francisco Azevedo <francisco at fusemail.com>:
+> Can you test the _new_ YDAjax waiting message example (build 1836)?
+>
+> On FF and IE please.
+>
+
+another sample :
+
+$this->ajax->addResult('myspanresult', '<table><tr
+bgcolor="#ffcccc"><td>' . YD_FW_NAMEVERS . '</td></tr></table>');
+
+don't work, but :
+
+$this->ajax->addResult('myspanresult', '<table><tr
+bgcolor=#ffcccc><td>' . YD_FW_NAMEVERS . '</td></tr></table>');
+
+work fine.
+It's a problem with quotes, no ?
+
+ph-m
+
+
+From phmassa at gmail.com  Wed Apr  5 19:08:36 2006
+From: phmassa at gmail.com (ph-m)
+Date: Wed, 5 Apr 2006 19:08:36 +0200
+Subject: [ydf-users] ajax
+In-Reply-To: <4433F605.5080808@fusemail.com>
+References: <829084a60604050454k5260522ah4fa31a3e5e3b6cfd@mail.gmail.com>
+	 <4433D1CF.6020305@fusemail.com>
+	 <829084a60604050937w2a59dcf5he72c08302a842714@mail.gmail.com>
+	 <4433F4FB.3030806@fusemail.com> <4433F605.5080808@fusemail.com>
+Message-ID: <829084a60604051008q191bf64at1257bf4126ffcea7@mail.gmail.com>
+
+2006/4/5, Francisco Azevedo <francisco at fusemail.com>:
+> Can you test the _new_ YDAjax waiting message example (build 1836)?
+>
+> On FF and IE please.
+>
+
+FF 1.5.0.1 on Windows XP
+I'm using PHP4
+but I take the waiting script to test, it's a problem in myspanresult
+and not with waiting message (waiting message work fine).
+
+sorry if I'm not clear
+
+phm, who must progress with english :)
+
+
+From francisco at fusemail.com  Thu Apr  6 10:27:18 2006
+From: francisco at fusemail.com (Francisco Azevedo)
+Date: Thu, 06 Apr 2006 09:27:18 +0100
+Subject: [ydf-users] ajax
+In-Reply-To: <829084a60604051000x5b86859h9e1750eb3224e95d@mail.gmail.com>
+References: <829084a60604050454k5260522ah4fa31a3e5e3b6cfd@mail.gmail.com>	 <4433D1CF.6020305@fusemail.com>	 <829084a60604050937w2a59dcf5he72c08302a842714@mail.gmail.com>	 <4433F4FB.3030806@fusemail.com> <4433F605.5080808@fusemail.com> <829084a60604051000x5b86859h9e1750eb3224e95d@mail.gmail.com>
+Message-ID: <4434D0E6.8000002@fusemail.com>
+
+hi ph-m
+
+> another sample :
+> 
+> $this->ajax->addResult('myspanresult', '<table><tr
+> bgcolor="#ffcccc"><td>' . YD_FW_NAMEVERS . '</td></tr></table>');
+> 
+> don't work, but :
+> 
+> $this->ajax->addResult('myspanresult', '<table><tr
+> bgcolor=#ffcccc><td>' . YD_FW_NAMEVERS . '</td></tr></table>');
+> 
+> work fine.
+> It's a problem with quotes, no ?
+
+
+Yes, it seems so. Can you try with latest build _1841_ ?
+
+Francisco A
+
+
+From phmassa at gmail.com  Thu Apr  6 11:01:14 2006
+From: phmassa at gmail.com (ph-m)
+Date: Thu, 6 Apr 2006 11:01:14 +0200
+Subject: [ydf-users] ajax
+In-Reply-To: <4434D0E6.8000002@fusemail.com>
+References: <829084a60604050454k5260522ah4fa31a3e5e3b6cfd@mail.gmail.com>
+	 <4433D1CF.6020305@fusemail.com>
+	 <829084a60604050937w2a59dcf5he72c08302a842714@mail.gmail.com>
+	 <4433F4FB.3030806@fusemail.com> <4433F605.5080808@fusemail.com>
+	 <829084a60604051000x5b86859h9e1750eb3224e95d@mail.gmail.com>
+	 <4434D0E6.8000002@fusemail.com>
+Message-ID: <829084a60604060201p3dc8b34dwd1bd70fa44cd4eff@mail.gmail.com>
+
+hi,
+
+2006/4/6, Francisco Azevedo <francisco at fusemail.com>:
+> hi ph-m
+>
+> > another sample :
+> >
+> > $this->ajax->addResult('myspanresult', '<table><tr
+> > bgcolor="#ffcccc"><td>' . YD_FW_NAMEVERS . '</td></tr></table>');
+> >
+> > don't work, but :
+> >
+> > $this->ajax->addResult('myspanresult', '<table><tr
+> > bgcolor=#ffcccc><td>' . YD_FW_NAMEVERS . '</td></tr></table>');
+> >
+> > work fine.
+> > It's a problem with quotes, no ?
+>
+>
+> Yes, it seems so. Can you try with latest build _1841_ ?
+>
+
+It's work fine now, thx
+
+++
+ph-m
+
+
+From francisco at fusemail.com  Thu Apr  6 16:07:57 2006
+From: francisco at fusemail.com (Francisco Azevedo)
+Date: Thu, 06 Apr 2006 15:07:57 +0100
+Subject: [ydf-users] ajax
+In-Reply-To: <829084a60604060201p3dc8b34dwd1bd70fa44cd4eff@mail.gmail.com>
+References: <829084a60604050454k5260522ah4fa31a3e5e3b6cfd@mail.gmail.com>	 <4433D1CF.6020305@fusemail.com>	 <829084a60604050937w2a59dcf5he72c08302a842714@mail.gmail.com>	 <4433F4FB.3030806@fusemail.com> <4433F605.5080808@fusemail.com>	 <829084a60604051000x5b86859h9e1750eb3224e95d@mail.gmail.com>	 <4434D0E6.8000002@fusemail.com> <829084a60604060201p3dc8b34dwd1bd70fa44cd4eff@mail.gmail.com>
+Message-ID: <443520BD.1040906@fusemail.com>
+
+hi ph-m
+
+>>> another sample :
+>>>
+>>> $this->ajax->addResult('myspanresult', '<table><tr
+>>> bgcolor="#ffcccc"><td>' . YD_FW_NAMEVERS . '</td></tr></table>');
+>>>
+>>> don't work, but :
+>>>
+>>> $this->ajax->addResult('myspanresult', '<table><tr
+>>> bgcolor=#ffcccc><td>' . YD_FW_NAMEVERS . '</td></tr></table>');
+>>>
+>>> work fine.
+>>> It's a problem with quotes, no ?
+>>
+>> Yes, it seems so. Can you try with latest build _1841_ ?
+>>
+> 
+> It's work fine now, thx
+
+No problem. It's fixed. The problem was on the span js function that had 
+the addslashes primitive too.
+
+Francisco A
+
+
+From moses at softwaysolutions.com  Fri Apr  7 09:14:39 2006
+From: moses at softwaysolutions.com (moses at softwaysolutions.com)
+Date: Fri, 07 Apr 2006 00:14:39 -0700
+Subject: [ydf-users] Query regarding extending class
+Message-ID: <20060407001439.fe477b357a56c857c15a39baa2ae95d5.b9278976ae.wbe@email.secureserver.net>
+
+An HTML attachment was scrubbed...
+URL: <https://lists.berlios.de/pipermail/ydframework-users/attachments/20060407/5406ef9d/attachment.html>
+
+From francisco at fusemail.com  Fri Apr  7 10:33:42 2006
+From: francisco at fusemail.com (Francisco Azevedo)
+Date: Fri, 07 Apr 2006 09:33:42 +0100
+Subject: [ydf-users] Query regarding extending class
+In-Reply-To: <20060407001439.fe477b357a56c857c15a39baa2ae95d5.b9278976ae.wbe@email.secureserver.net>
+References: <20060407001439.fe477b357a56c857c15a39baa2ae95d5.b9278976ae.wbe@email.secureserver.net>
+Message-ID: <443623E6.5040002@fusemail.com>
+
+Hi moses
+
+The difference between those declarations is that you will get "special" 
+methods related to installations in the second declaration.
+Extending YDInstaller is only usefull when you need that methods 
+otherwise we will get the same as the first declaration but with poor 
+performance..
+
+
+Francisco A
+
+>  
+>             What is the difference between the following two declaration
+>  
+>              class test extends YDRequest
+>             {
+>  
+>             }
+>  
+>             class test extends YDInstaller
+>             {
+>        
+>              }
+>  
+>         
+>             To my knowledge I found out that that the common includes 
+> such as
+>             
+>             YDInclude('YDRequest.php');
+>             YDInclude('YDForm.php');
+>             YDInclude('YDTempelate.php');  are included in the 
+> YDInstaller.php file and some more functions are added in that file so 
+> that we can make use of it.
+>  
+>  
+>            Is There any other reason othe than what I have known.
+>  
+>  
+>  
+> regards
+> moses
+>       
+>  
+>  
+>            
+>  
+>  
+> regards
+> moses
+> _______________________________________________ YDFramework-users 
+> mailing list YDFramework-users at lists.berlios.de 
+> http://lists.berlios.de/mailman/listinfo/ydframework-users
+
+
+
+From moses at softwaysolutions.com  Fri Apr 14 07:37:13 2006
+From: moses at softwaysolutions.com (moses at softwaysolutions.com)
+Date: Thu, 13 Apr 2006 22:37:13 -0700
+Subject: [ydf-users] Query Regarding Default Values in form
+Message-ID: <20060413223713.fe477b357a56c857c15a39baa2ae95d5.1376db1c8a.wbe@email.secureserver.net>
+
+An HTML attachment was scrubbed...
+URL: <https://lists.berlios.de/pipermail/ydframework-users/attachments/20060413/fa0a89e4/attachment.html>
+
+From moses at softwaysolutions.com  Fri Apr 14 09:02:44 2006
+From: moses at softwaysolutions.com (moses at softwaysolutions.com)
+Date: Fri, 14 Apr 2006 00:02:44 -0700
+Subject: [ydf-users] Query Regarding YDConfig text box
+Message-ID: <20060414000244.fe477b357a56c857c15a39baa2ae95d5.13304ca9ac.wbe@email.secureserver.net>
+
+An HTML attachment was scrubbed...
+URL: <https://lists.berlios.de/pipermail/ydframework-users/attachments/20060414/e7aac2b9/attachment.html>
+
+From moses at softwaysolutions.com  Mon Apr 17 06:19:22 2006
+From: moses at softwaysolutions.com (moses at softwaysolutions.com)
+Date: Sun, 16 Apr 2006 21:19:22 -0700
+Subject: [ydf-users] Query Regarding array of text box
+Message-ID: <20060416211922.fe477b357a56c857c15a39baa2ae95d5.da83a4375f.wbe@email.secureserver.net>
+
+An HTML attachment was scrubbed...
+URL: <https://lists.berlios.de/pipermail/ydframework-users/attachments/20060416/1d45a222/attachment.html>
+
+From pieter at yellowduck.be  Tue Apr 18 10:23:12 2006
+From: pieter at yellowduck.be (Pieter Claerhout)
+Date: Tue, 18 Apr 2006 10:23:12 +0200
+Subject: [ydf-users] Query Regarding array of text box
+In-Reply-To: <20060416211922.fe477b357a56c857c15a39baa2ae95d5.da83a4375f.wbe@email.secureserver.net>
+References: <20060416211922.fe477b357a56c857c15a39baa2ae95d5.da83a4375f.wbe@email.secureserver.net>
+Message-ID: <4aef63030604180123g532650f8w583373dbac4dbc72@mail.gmail.com>
+
+Hi Moses,
+
+unfortunately, this will not work with Smarty templates. The problem has to
+do with the fact that Smarty is getting confused with the syntax of
+"field[x]".
+
+cheers,
+
+
+pieter
+
+On 4/17/06, moses at softwaysolutions.com <moses at softwaysolutions.com> wrote:
+>
+>
+> Dear Sir
+>
+>         How to create an array of text box..... and how  to display them
+> in the template
+>
+>
+>
+> I tried the following
+>
+> (.php)
+>
+>     for($i=0;$i<10;$i++)
+>      {
+>         $this->form->addElement('text',"txtNames[$i]",'');
+>
+>      }
+>      $this->template->assignForm('form',$this->form);
+>      $this->template->display();
+>
+>
+> (.tpl)
+>
+>  {$form.txtNames[0].html}
+>  {$form.txtNames[1].html}
+>  {$form.txtNames[2].html}.....................{$form.txtNames[10].html}
+>
+> But not displaying...... what to do.
+>
+>
+>
+>
+> regards
+> moses
+>
+> _______________________________________________ YDFramework-users mailing
+> list YDFramework-users at lists.berlios.de
+> http://lists.berlios.de/mailman/listinfo/ydframework-users
+>
+
+
+
+--
+pieter claerhout . pieter at yellowduck.be . http://www.yellowduck.be/
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <https://lists.berlios.de/pipermail/ydframework-users/attachments/20060418/ff1afac8/attachment.html>
+
+From moses at softwaysolutions.com  Thu Apr 20 08:13:42 2006
+From: moses at softwaysolutions.com (moses at softwaysolutions.com)
+Date: Wed, 19 Apr 2006 23:13:42 -0700
+Subject: [ydf-users] Query Regarding Dynamic Text Box
+Message-ID: <20060419231342.fe477b357a56c857c15a39baa2ae95d5.70daa461b4.wbe@email.secureserver.net>
+
+An HTML attachment was scrubbed...
+URL: <https://lists.berlios.de/pipermail/ydframework-users/attachments/20060419/c6728cd2/attachment.html>
+
+From dab214 at yahoo.com  Thu Apr 20 15:17:56 2006
+From: dab214 at yahoo.com (dab)
+Date: Thu, 20 Apr 2006 06:17:56 -0700 (PDT)
+Subject: [ydf-users] YDForm::toHtml
+In-Reply-To: <20060419231342.fe477b357a56c857c15a39baa2ae95d5.70daa461b4.wbe@email.secureserver.net>
+Message-ID: <20060420131756.5518.qmail@web50204.mail.yahoo.com>
+
+hi all,
+i was wondering if it's possible to create your
+"templates" that controls the html output in above
+method? I would like to have the label in one <td> and
+the textfield in another. Is that possible? Or is the
+best way to use toArray and then loop it out in the
+template?
+
+
+
+__________________________________________________
+Do You Yahoo!?
+Tired of spam?  Yahoo! Mail has the best spam protection around 
+http://mail.yahoo.com 
+
+
+From pieter at yellowduck.be  Thu Apr 20 16:53:58 2006
+From: pieter at yellowduck.be (Pieter Claerhout)
+Date: Thu, 20 Apr 2006 16:53:58 +0200
+Subject: [ydf-users] YDForm::toHtml
+In-Reply-To: <20060420131756.5518.qmail@web50204.mail.yahoo.com>
+References: <20060419231342.fe477b357a56c857c15a39baa2ae95d5.70daa461b4.wbe@email.secureserver.net>
+	 <20060420131756.5518.qmail@web50204.mail.yahoo.com>
+Message-ID: <4aef63030604200753r3703c47yc319acdf0f366747@mail.gmail.com>
+
+You can customize this by subclassing the YDFormRenderer_html class (in
+YDFramework2/YDClasses/YDFormRenderers).
+
+Once you have a custom version, you need to register it using
+YDForm::registerRenderer to let the YDForm class know that there is an
+additional renderer.
+
+To render the form then to a string, you can use YDForm::render(
+<name_of_renderer> );
+
+cheers,
+
+
+pieter
+
+On 4/20/06, dab <dab214 at yahoo.com> wrote:
+>
+> hi all,
+> i was wondering if it's possible to create your
+> "templates" that controls the html output in above
+> method? I would like to have the label in one <td> and
+> the textfield in another. Is that possible? Or is the
+> best way to use toArray and then loop it out in the
+> template?
+>
+>
+>
+> __________________________________________________
+> Do You Yahoo!?
+> Tired of spam?  Yahoo! Mail has the best spam protection around
+> http://mail.yahoo.com
+> _______________________________________________
+> YDFramework-users mailing list
+> YDFramework-users at lists.berlios.de
+> http://lists.berlios.de/mailman/listinfo/ydframework-users
+>
+
+
+
+--
+pieter claerhout . pieter at yellowduck.be . http://www.yellowduck.be/
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <https://lists.berlios.de/pipermail/ydframework-users/attachments/20060420/755a6ff1/attachment.html>
+
+From pieter at yellowduck.be  Thu Apr 20 16:56:46 2006
+From: pieter at yellowduck.be (Pieter Claerhout)
+Date: Thu, 20 Apr 2006 16:56:46 +0200
+Subject: [ydf-users] Query Regarding Default Values in form
+In-Reply-To: <20060413223713.fe477b357a56c857c15a39baa2ae95d5.1376db1c8a.wbe@email.secureserver.net>
+References: <20060413223713.fe477b357a56c857c15a39baa2ae95d5.1376db1c8a.wbe@email.secureserver.net>
+Message-ID: <4aef63030604200756k65ff8cf6ld498780f9d0ae426@mail.gmail.com>
+
+Hi Moses,
+
+the difference is not that difficult:
+
+1. setDefault: sets the value of a specific element
+
+2. setDefaults: sets the value of multiple elements in one go using an
+associative array
+
+3. setRawDefaults: I'm not really sure what the meaning of this one is.
+Maybe Francisco or db can enlighten you on this one.
+
+regards,
+
+
+pieter
+
+On 4/14/06, moses at softwaysolutions.com <moses at softwaysolutions.com> wrote:
+>
+>
+>
+> Dear Sir
+>
+>
+>            What is the difference between
+>
+>                         1)function setRawDefaults()
+>                         2)function setDefault()
+>                         3)function setDefaults()
+>
+>          By the following coding
+>
+>                        $this->form->setDefaults(array("txtName"=>"Moses"));
+>
+>          I assign a default value to the element in the form but I am very
+> confused at some time the value is displayed some time the value is not
+> displayed I could not find the solution. How should I  assign default value
+> to the elements in the form that shoul work every time
+>
+>
+> regards
+> moses
+> _______________________________________________ YDFramework-users mailing
+> list YDFramework-users at lists.berlios.de
+> http://lists.berlios.de/mailman/listinfo/ydframework-users
+>
+
+
+
+--
+pieter claerhout . pieter at yellowduck.be . http://www.yellowduck.be/
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <https://lists.berlios.de/pipermail/ydframework-users/attachments/20060420/29d8893a/attachment.html>
+
+From pieter at yellowduck.be  Thu Apr 20 16:58:36 2006
+From: pieter at yellowduck.be (Pieter Claerhout)
+Date: Thu, 20 Apr 2006 16:58:36 +0200
+Subject: [ydf-users] Query Regarding Dynamic Text Box
+In-Reply-To: <20060419231342.fe477b357a56c857c15a39baa2ae95d5.70daa461b4.wbe@email.secureserver.net>
+References: <20060419231342.fe477b357a56c857c15a39baa2ae95d5.70daa461b4.wbe@email.secureserver.net>
+Message-ID: <4aef63030604200758q4b628aa2yd960d07196c705d3@mail.gmail.com>
+
+So, if I understand it correctly, you want each record to show up in a
+different form field, right?
+
+If yes, then there are some things you need to change in the logic:
+
+1. Get all the records from the database
+
+2. Create a new form object
+
+3. Create a new element for each record in the database, giving each one of
+them a unique name
+
+4. Assign the form to the template
+
+5. Loop over the elements in the template to make them visible.
+
+Regards,
+
+
+pieter
+
+On 4/20/06, moses at softwaysolutions.com <moses at softwaysolutions.com> wrote:
+>
+>
+>
+> Dear Sir
+>
+>
+>                How to create dynamic text boxes......
+>
+>
+>
+> I tried the following
+>
+> (.php)
+>
+>                       $this->form->addElement('text','txtName','');
+>                       $records =
+> $this->mySql->getAllRecords('department','');  ( "Contains all the records
+> from databse" )
+>                       $this->template->assign('records',$records);
+>
+>                       $this->form->setDefaults(array("txtName"=>'{$record.department_name}')); ->
+> ( i understand this coding is wrong but i dont know the other way)
+>
+>
+>
+>
+> (.tpl)  (it works but i dont want to use these type of coding)
+>
+>                      {foreach from = $records item = record  }
+>                                   {$record.department_name} <input
+> type="text" value="{$record.department_name}">
+>                       {/foreach}
+>
+>
+>  (.tpl)  (I want this type of coding. but does not works  )
+>
+>                      {foreach from = $records item = record  }
+>                                   {$record.department_name}
+> {$form.txtName.html}
+>                       {/foreach}
+>
+>
+>
+>
+> regards
+> moses
+>
+> _______________________________________________ YDFramework-users mailing
+> list YDFramework-users at lists.berlios.de
+> http://lists.berlios.de/mailman/listinfo/ydframework-users
+>
+
+
+
+--
+pieter claerhout . pieter at yellowduck.be . http://www.yellowduck.be/
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <https://lists.berlios.de/pipermail/ydframework-users/attachments/20060420/c638caed/attachment.html>
+
+From muitocomplicado at gmail.com  Fri Apr 21 00:07:19 2006
+From: muitocomplicado at gmail.com (David Bittencourt)
+Date: Thu, 20 Apr 2006 19:07:19 -0300
+Subject: [ydf-users] Query Regarding Default Values in form
+In-Reply-To: <4aef63030604200756k65ff8cf6ld498780f9d0ae426@mail.gmail.com>
+References: <20060413223713.fe477b357a56c857c15a39baa2ae95d5.1376db1c8a.wbe@email.secureserver.net>
+	 <4aef63030604200756k65ff8cf6ld498780f9d0ae426@mail.gmail.com>
+Message-ID: <12260be20604201507g28136becl8bd977478d65b4e9@mail.gmail.com>
+
+setRawDefaults was an idea of setting and getting a form element value in a
+different way, but is actually not being used.
+
+An example: suppose there is a form element called 'comma'.
+
+class comma extends YDFormElement {
+
+  ...
+
+ function setRawValue( $value='' ) {
+   $arr = explode( ',', $value );
+   $this->setValue( $arr );
+ }
+
+ function setValue( $value=array() ) {
+   $this->_value = $value;
+ }
+
+ function getRawValue() {
+   return implode( ',', $this->getValue() );
+ }
+
+}
+
+The idea is to receive a value directly from a database, for example, that
+is a comma separatted string an use setRawValue to transform it into an
+array to be used in the class. The good thing is getting it back as a raw
+value using getRawValue so you don't have to transform it into an array in
+your code.
+
+This is the main usage. Another example, if you get the value from a date
+element you receive an array with the value for year, month, day, etc. But
+we could create a getRawValue function that would directly transform it to a
+DATETIME sql type YYYYMMDDHHMMSS, for example.
+
+It's a nice idea, but I think complicates the form usage and is not being
+used by the framework or by myself. Maybe we could think of taking it out.
+
+-db
+
+On 4/20/06, Pieter Claerhout <pieter at yellowduck.be> wrote:
+>
+> Hi Moses,
+>
+> the difference is not that difficult:
+>
+> 1. setDefault: sets the value of a specific element
+>
+> 2. setDefaults: sets the value of multiple elements in one go using an
+> associative array
+>
+> 3. setRawDefaults: I'm not really sure what the meaning of this one is.
+> Maybe Francisco or db can enlighten you on this one.
+>
+> regards,
+>
+>
+> pieter
+>
+> On 4/14/06, moses at softwaysolutions.com <moses at softwaysolutions.com >
+> wrote:
+> >
+> >
+> >
+> > Dear Sir
+> >
+> >
+> >            What is the difference between
+> >
+> >                         1)function setRawDefaults()
+> >                         2)function setDefault()
+> >                         3)function setDefaults()
+> >
+> >          By the following coding
+> >
+> >                        $this->form->setDefaults(array("txtName"=>"Moses"));
+> >
+> >          I assign a default value to the element in the form but I am
+> > very confused at some time the value is displayed some time the value is not
+> > displayed I could not find the solution. How should I  assign default value
+> > to the elements in the form that shoul work every time
+> >
+> >
+> > regards
+> > moses
+> > _______________________________________________ YDFramework-users
+> > mailing list YDFramework-users at lists.berlios.de
+> > http://lists.berlios.de/mailman/listinfo/ydframework-users
+> >
+>
+>
+>
+> --
+> pieter claerhout . pieter at yellowduck.be . http://www.yellowduck.be/
+>
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <https://lists.berlios.de/pipermail/ydframework-users/attachments/20060420/b96b977c/attachment.html>
+
+From moses at softwaysolutions.com  Fri Apr 21 07:00:45 2006
+From: moses at softwaysolutions.com (moses at softwaysolutions.com)
+Date: Thu, 20 Apr 2006 22:00:45 -0700
+Subject: [ydf-users] Query Regarding Dynamic Text Box (again)
+Message-ID: <20060420220045.fe477b357a56c857c15a39baa2ae95d5.dbd04adbc1.wbe@email.secureserver.net>
+
+An HTML attachment was scrubbed...
+URL: <https://lists.berlios.de/pipermail/ydframework-users/attachments/20060420/c8da5e4b/attachment.html>
+
+From pieter at yellowduck.be  Fri Apr 21 08:19:19 2006
+From: pieter at yellowduck.be (Pieter Claerhout)
+Date: Fri, 21 Apr 2006 08:19:19 +0200
+Subject: [ydf-users] Query Regarding Default Values in form
+In-Reply-To: <12260be20604201507g28136becl8bd977478d65b4e9@mail.gmail.com>
+References: <20060413223713.fe477b357a56c857c15a39baa2ae95d5.1376db1c8a.wbe@email.secureserver.net>
+	 <4aef63030604200756k65ff8cf6ld498780f9d0ae426@mail.gmail.com>
+	 <12260be20604201507g28136becl8bd977478d65b4e9@mail.gmail.com>
+Message-ID: <4aef63030604202319u57a6e387v5adab0a43fb37328@mail.gmail.com>
+
+If we don't use it, we should take it out. Having it there not being used is
+only going to make it more confusing.
+
+pieter
+
+On 4/21/06, David Bittencourt <muitocomplicado at gmail.com> wrote:
+>
+> setRawDefaults was an idea of setting and getting a form element value in
+> a different way, but is actually not being used.
+>
+> An example: suppose there is a form element called 'comma'.
+>
+> class comma extends YDFormElement {
+>
+>   ...
+>
+>  function setRawValue( $value='' ) {
+>    $arr = explode( ',', $value );
+>    $this->setValue( $arr );
+>  }
+>
+>  function setValue( $value=array() ) {
+>    $this->_value = $value;
+>  }
+>
+>  function getRawValue() {
+>    return implode( ',', $this->getValue() );
+>  }
+>
+> }
+>
+> The idea is to receive a value directly from a database, for example, that
+> is a comma separatted string an use setRawValue to transform it into an
+> array to be used in the class. The good thing is getting it back as a raw
+> value using getRawValue so you don't have to transform it into an array in
+> your code.
+>
+> This is the main usage. Another example, if you get the value from a date
+> element you receive an array with the value for year, month, day, etc. But
+> we could create a getRawValue function that would directly transform it to a
+> DATETIME sql type YYYYMMDDHHMMSS, for example.
+>
+> It's a nice idea, but I think complicates the form usage and is not being
+> used by the framework or by myself. Maybe we could think of taking it out.
+>
+>
+> -db
+>
+>
+> On 4/20/06, Pieter Claerhout <pieter at yellowduck.be> wrote:
+> >
+> >  Hi Moses,
+> >
+> > the difference is not that difficult:
+> >
+> > 1. setDefault: sets the value of a specific element
+> >
+> > 2. setDefaults: sets the value of multiple elements in one go using an
+> > associative array
+> >
+> > 3. setRawDefaults: I'm not really sure what the meaning of this one is.
+> > Maybe Francisco or db can enlighten you on this one.
+> >
+> > regards,
+> >
+> >
+> > pieter
+> >
+> >  On 4/14/06, moses at softwaysolutions.com <moses at softwaysolutions.com >
+> > wrote:
+> > >
+> > >
+> > >
+> > > Dear Sir
+> > >
+> > >
+> > >            What is the difference between
+> > >
+> > >                         1)function setRawDefaults()
+> > >                         2)function setDefault()
+> > >                         3)function setDefaults()
+> > >
+> > >          By the following coding
+> > >
+> > >                        $this->form->setDefaults(array("txtName"=>"Moses"));
+> > >
+> > >          I assign a default value to the element in the form but I am
+> > > very confused at some time the value is displayed some time the value is not
+> > > displayed I could not find the solution. How should I  assign default value
+> > > to the elements in the form that shoul work every time
+> > >
+> > >
+> > > regards
+> > > moses
+> > > _______________________________________________ YDFramework-users
+> > > mailing list YDFramework-users at lists.berlios.de
+> > > http://lists.berlios.de/mailman/listinfo/ydframework-users
+> > >
+> >
+> >
+> >
+> > --
+> > pieter claerhout . pieter at yellowduck.be . http://www.yellowduck.be/
+> >
+>
+>
+
+
+--
+pieter claerhout . pieter at yellowduck.be . http://www.yellowduck.be/
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <https://lists.berlios.de/pipermail/ydframework-users/attachments/20060421/66de92b5/attachment.html>
+
+From francisco at fusemail.com  Fri Apr 21 11:27:52 2006
+From: francisco at fusemail.com (Francisco Azevedo)
+Date: Fri, 21 Apr 2006 10:27:52 +0100
+Subject: [ydf-users] Query Regarding Dynamic Text Box (again)
+In-Reply-To: <20060420220045.fe477b357a56c857c15a39baa2ae95d5.dbd04adbc1.wbe@email.secureserver.net>
+References: <20060420220045.fe477b357a56c857c15a39baa2ae95d5.dbd04adbc1.wbe@email.secureserver.net>
+Message-ID: <4448A598.6070309@fusemail.com>
+
+Hi moses
+
+What you want is possible with YDF. Btw, there's more than one way to do 
+it.. it only depends on your structure. Just use your imagination ;)
+
+There is _not_ a method to do such thing but.. i'm thinking about a way 
+that can work.
+
+- Create a form for those text boxes only.
+
+- add text elements (with different name) to that form
+   foreach (  ...  ){ $form2->addElement( 'text', 'name_' . $i , ... ) }
+
+- assign the form Object with YDTemplate::assign and _not_ 
+YDTemplate::assignForm  (to use form methods on the template side)
+
+- on the template side, get form elements, cycle them and render each one.
+
+
+I didn't tryed that .. but seems to work .. Pieter, David ?
+
+Btw, don't use "document.all" on javascript because that's IE specific 
+code and will not work well on other browsers.
+
+Francisco A
+
+>  
+>  
+>     I want do display each record in seperate text box with the same 
+> name.....
+>  
+>  
+>     What is the reason is
+>  
+>     1)I want get the value of the text box through client side coding 
+> through javascript
+>     2)If  I use different name it will become a tedious process for me 
+> to identify the particuler name of the text box since i am getting the 
+> values from the database
+>     3)So If I create a unique name with different Indexes it will be 
+> easy to write the java script coding such as
+>  
+>                    document.all.txtName[1].value
+>                    document.all.txtName[2].value      
+>                    document.all.txtName[n].value  ....... and so on    
+> 
+>  
+>      
+>  
+>  
+> regards
+> moses
+> 
+>     -------- Original Message --------
+>     Subject: Re: [ydf-users] Query Regarding Dynamic Text Box
+>     From: "Pieter Claerhout" <pieter at yellowduck.be>
+>     Date: Thu, April 20, 2006 7:58 am
+>     To: ydframework-users at berlios.de
+> 
+>     So, if I understand it correctly, you want each record to show up in
+>     a different form field, right?
+>      
+>     If yes, then there are some things you need to change in the logic:
+>      
+>     1. Get all the records from the database
+>      
+>     2. Create a new form object
+>      
+>     3. Create a new element for each record in the database, giving each
+>     one of them a unique name
+>      
+>     4. Assign the form to the template
+>      
+>     5. Loop over the elements in the template to make them visible.
+>      
+>     Regards,
+>      
+>      
+>     pieter
+>      
+>     On 4/20/06, *moses at softwaysolutions.com
+>     <mailto:moses at softwaysolutions.com>* <moses at softwaysolutions.com
+>     <mailto:moses at softwaysolutions.com>> wrote:
+> 
+>          
+>          
+>         Dear Sir
+>          
+>          
+>                        How to create dynamic text boxes......
+>          
+>          
+>          
+>         I tried the following
+>          
+>         (.php)
+>                              
+>                               $this->form->addElement('text','txtName','');
+>                               $records =
+>         $this->mySql->getAllRecords('department','');  ( "Contains all
+>         the records from databse" )
+>                               $this->template->assign('records',$records);
+> 
+>                               $this->form->setDefaults(array("txtName"=>'{$record.department_name}')); ->
+>         ( i understand this coding is wrong but i dont know the other way)
+>          
+>          
+>          
+>          
+>         (.tpl)  (it works but i dont want to use these type of coding)
+>               
+>                              {foreach from = $records item = record  } 
+>                                           {$record.department_name}
+>         <input type="text" value="{$record.department_name}">     
+>                               {/foreach}
+>          
+>          
+>         (.tpl)  (I want this type of coding. but does not works  )
+>               
+>                              {foreach from = $records item = record  } 
+>                                           {$record.department_name} 
+>         {$form.txtName.html}  
+>                               {/foreach}
+>          
+>          
+>          
+>          
+>         regards
+>         moses
+>          
+>         _______________________________________________
+>         YDFramework-users mailing list
+>         YDFramework-users at lists.berlios.de
+>         <mailto:YDFramework-users at lists.berlios.de>
+>         http://lists.berlios.de/mailman/listinfo/ydframework-users
+>         <http://lists.berlios.de/mailman/listinfo/ydframework-users>
+> 
+> 
+> 
+> 
+>     -- 
+>     pieter claerhout . pieter at yellowduck.be
+>     <mailto:pieter at yellowduck.be> . http://www.yellowduck.be/ 
+> 
+> _______________________________________________ YDFramework-users 
+> mailing list YDFramework-users at lists.berlios.de 
+> http://lists.berlios.de/mailman/listinfo/ydframework-users
+
+
+
+From dab214 at yahoo.com  Fri Apr 21 18:22:24 2006
+From: dab214 at yahoo.com (dab)
+Date: Fri, 21 Apr 2006 09:22:24 -0700 (PDT)
+Subject: [ydf-users] YDForm::toHtml
+In-Reply-To: <4aef63030604200753r3703c47yc319acdf0f366747@mail.gmail.com>
+Message-ID: <20060421162225.33083.qmail@web50201.mail.yahoo.com>
+
+hi pieter,
+thanks for your reply. however i can't seem to get it
+to work completely. i've subclassed the
+YDFormRenderer_html class and added it with
+$this->form->registerRenderer('test',
+'MyFormRenderer_html', 'MyFormRenderer_html.php')
+(YDForm::registerRenderer doesnt work). It seems to
+load the renderer alright but when i do
+$this->form->render('test') it doesnt select my
+renderer but the default one (YDForm::render() doesnt
+work either).
+
+am i missing something?
+thanks.
+
+/dab
+
+ 
+
+--- Pieter Claerhout <pieter at yellowduck.be> wrote:
+
+> You can customize this by subclassing the
+> YDFormRenderer_html class (in
+> YDFramework2/YDClasses/YDFormRenderers).
+> 
+> Once you have a custom version, you need to register
+> it using
+> YDForm::registerRenderer to let the YDForm class
+> know that there is an
+> additional renderer.
+> 
+> To render the form then to a string, you can use
+> YDForm::render(
+> <name_of_renderer> );
+> 
+> cheers,
+> 
+> 
+> pieter
+> 
+> On 4/20/06, dab <dab214 at yahoo.com> wrote:
+> >
+> > hi all,
+> > i was wondering if it's possible to create your
+> > "templates" that controls the html output in above
+> > method? I would like to have the label in one <td>
+> and
+> > the textfield in another. Is that possible? Or is
+> the
+> > best way to use toArray and then loop it out in
+> the
+> > template?
+> >
+> >
+> >
+> > __________________________________________________
+> > Do You Yahoo!?
+> > Tired of spam?  Yahoo! Mail has the best spam
+> protection around
+> > http://mail.yahoo.com
+> > _______________________________________________
+> > YDFramework-users mailing list
+> > YDFramework-users at lists.berlios.de
+> >
+>
+http://lists.berlios.de/mailman/listinfo/ydframework-users
+> >
+> 
+> 
+> 
+> --
+> pieter claerhout . pieter at yellowduck.be .
+> http://www.yellowduck.be/
+> 
+
+
+__________________________________________________
+Do You Yahoo!?
+Tired of spam?  Yahoo! Mail has the best spam protection around 
+http://mail.yahoo.com 
+
+
+From ydfpoi at gmail.com  Sun Apr 23 17:22:48 2006
+From: ydfpoi at gmail.com (ydf poi)
+Date: Sun, 23 Apr 2006 17:22:48 +0200
+Subject: [ydf-users] Installing the CMS Framework
+Message-ID: <306340e00604230822m3e90035ep170c203e985d034c@mail.gmail.com>
+
+Hi all!
+
+When i load the cms example (example/cms/index.php) my server says :
+
+Fatal error: Unknown database 'ydcms' in
+[...]\YDFramework2\YDClasses\YDDatabase.php on line 1466
+
+in order to try this example, can you please tell me the way i have to
+do things?
+
+kind regards
+--
+po?
+
+
+From pieter at yellowduck.be  Mon Apr 24 07:47:52 2006
+From: pieter at yellowduck.be (Pieter Claerhout)
+Date: Mon, 24 Apr 2006 07:47:52 +0200
+Subject: [ydf-users] Installing the CMS Framework
+In-Reply-To: <306340e00604230822m3e90035ep170c203e985d034c@mail.gmail.com>
+References: <306340e00604230822m3e90035ep170c203e985d034c@mail.gmail.com>
+Message-ID: <4aef63030604232247t502c4c82w6ae56023f231db22@mail.gmail.com>
+
+Poi,
+
+the cms directory in the examples folder is not the new CMS framework
+Francisco is adding as we speak. It's my own attempt to a CMS application,
+but it's not really working good and will eventually be replaced with what
+Francisco is building now.
+
+I will actually take it out again to remove the confusion.
+
+pieter
+
+On 4/23/06, ydf poi <ydfpoi at gmail.com> wrote:
+>
+> Hi all!
+>
+> When i load the cms example (example/cms/index.php) my server says :
+>
+> Fatal error: Unknown database 'ydcms' in
+> [...]\YDFramework2\YDClasses\YDDatabase.php on line 1466
+>
+> in order to try this example, can you please tell me the way i have to
+> do things?
+>
+> kind regards
+> --
+> po?
+> _______________________________________________
+> YDFramework-users mailing list
+> YDFramework-users at lists.berlios.de
+> http://lists.berlios.de/mailman/listinfo/ydframework-users
+>
+
+
+
+--
+pieter claerhout . pieter at yellowduck.be . http://www.yellowduck.be/
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <https://lists.berlios.de/pipermail/ydframework-users/attachments/20060424/a6cf4859/attachment.html>
+
+From ydfpoi at gmail.com  Mon Apr 24 17:25:09 2006
+From: ydfpoi at gmail.com (ydf poi)
+Date: Mon, 24 Apr 2006 17:25:09 +0200
+Subject: [ydf-users] Installing the CMS Framework
+In-Reply-To: <4aef63030604232247t502c4c82w6ae56023f231db22@mail.gmail.com>
+References: <306340e00604230822m3e90035ep170c203e985d034c@mail.gmail.com>
+	 <4aef63030604232247t502c4c82w6ae56023f231db22@mail.gmail.com>
+Message-ID: <306340e00604240825xbca69bata75f3bbfeebc818b@mail.gmail.com>
+
+ok, thanks for this explanation... i will be patient ;-)
+
+2006/4/24, Pieter Claerhout <pieter at yellowduck.be>:
+>
+> Poi,
+>
+> the cms directory in the examples folder is not the new CMS framework
+> Francisco is adding as we speak. It's my own attempt to a CMS application,
+> but it's not really working good and will eventually be replaced with what
+> Francisco is building now.
+>
+> I will actually take it out again to remove the confusion.
+>
+> pieter
+>
+> On 4/23/06, ydf poi <ydfpoi at gmail.com> wrote:
+> >
+> Hi all!
+>
+> When i load the cms example (example/cms/index.php) my server says :
+>
+> Fatal error: Unknown database 'ydcms' in
+> [...]\YDFramework2\YDClasses\YDDatabase.php on line 1466
+>
+> in order to try this example, can you please tell me the way i have to
+> do things?
+>
+> kind regards
+> --
+> po?
+> _______________________________________________
+> YDFramework-users mailing list
+> YDFramework-users at lists.berlios.de
+> http://lists.berlios.de/mailman/listinfo/ydframework-users
+>
+>
+>
+> --
+> pieter claerhout . pieter at yellowduck.be . http://www.yellowduck.be/
+
+
+--
+po?
+
+
+From francisco at fusemail.com  Mon Apr 24 18:21:49 2006
+From: francisco at fusemail.com (Francisco Azevedo)
+Date: Mon, 24 Apr 2006 17:21:49 +0100
+Subject: [ydf-users] YDCM Error handling
+Message-ID: <444CFB1D.4060102@fusemail.com>
+
+Hi all
+
+We have already discussed error handling in YDF. The YDCM structure is 
+not easy and we really need some error handling stuff because some 
+methods can return lots of different error types and not only the 
+correct value.
+
+Because this structure is in the begging, i propose to add error 
+handling.. and YDError seems a valid choice.
+
+What do you think?
+
+Francisco A
+
+
+From pieter at yellowduck.be  Mon Apr 24 19:31:26 2006
+From: pieter at yellowduck.be (Pieter Claerhout)
+Date: Mon, 24 Apr 2006 19:31:26 +0200
+Subject: [ydf-users] YDCM Error handling
+In-Reply-To: <444CFB1D.4060102@fusemail.com>
+References: <444CFB1D.4060102@fusemail.com>
+Message-ID: <4aef63030604241031x93e0b05pc1c15c25213c9622@mail.gmail.com>
+
+I agree that this would indeed be the best way of working. We have the
+YDError class already, so we better start using it.
+
+pieter
+
+On 4/24/06, Francisco Azevedo <francisco at fusemail.com> wrote:
+>
+> Hi all
+>
+> We have already discussed error handling in YDF. The YDCM structure is
+> not easy and we really need some error handling stuff because some
+> methods can return lots of different error types and not only the
+> correct value.
+>
+> Because this structure is in the begging, i propose to add error
+> handling.. and YDError seems a valid choice.
+>
+> What do you think?
+>
+> Francisco A
+> _______________________________________________
+> YDFramework-users mailing list
+> YDFramework-users at lists.berlios.de
+> http://lists.berlios.de/mailman/listinfo/ydframework-users
+>
+
+
+
+--
+pieter claerhout . pieter at yellowduck.be . http://www.yellowduck.be/
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <https://lists.berlios.de/pipermail/ydframework-users/attachments/20060424/3537fe58/attachment.html>
+
+From moses at softwaysolutions.com  Tue Apr 25 08:28:22 2006
+From: moses at softwaysolutions.com (moses at softwaysolutions.com)
+Date: Mon, 24 Apr 2006 23:28:22 -0700
+Subject: [ydf-users] Query Regarding Dynamic textbox
+Message-ID: <20060424232822.fe477b357a56c857c15a39baa2ae95d5.b0832e6a87.wbe@email.secureserver.net>
+
+An HTML attachment was scrubbed...
+URL: <https://lists.berlios.de/pipermail/ydframework-users/attachments/20060424/f9172cd5/attachment.html>
+
+From pieter at yellowduck.be  Wed Apr 26 13:19:23 2006
+From: pieter at yellowduck.be (Pieter Claerhout)
+Date: Wed, 26 Apr 2006 13:19:23 +0200
+Subject: [ydf-users] Query Regarding Dynamic textbox
+In-Reply-To: <20060424232822.fe477b357a56c857c15a39baa2ae95d5.b0832e6a87.wbe@email.secureserver.net>
+References: <20060424232822.fe477b357a56c857c15a39baa2ae95d5.b0832e6a87.wbe@email.secureserver.net>
+Message-ID: <4aef63030604260419k2968e129mb561bd80af782c3f@mail.gmail.com>
+
+There's a mistake in your logic of looping over the fields. You basically
+loop over all the form elements and properties, which is not what you wanted
+to do. You need to add an extra check that checks either the prefix of the
+field or the name or the type of the field.
+
+pieter
+
+On 4/25/06, moses at softwaysolutions.com <moses at softwaysolutions.com> wrote:
+>
+>  Dear Sir
+>
+>         Than you  for your reply.
+>
+>         I tried with what u said.... but still  I cant solve my problem
+>
+>         when using the following coding
+>
+>                      $this->template->assign('form',$this->form) the HTML
+> tag for the form array is empty
+>
+>         So I tested with
+>
+>                  $this->template->assignForm('form',$this->form)
+>
+>         Here it works but still have some problem.
+>
+>                  1)Some Unwanted characters like ( <, >, r) are displayed
+>                  2)Again It does not saticifies what actually I need
+>
+>
+>
+>  The Following is the coding
+>
+>         (.php)
+>                              $i+=0;
+>                             while ($record = mysql_fetch_array($result))
+>                             {
+>                                     $depName = $record["department_Name"];
+>                                     $this->form->addElement( 'text',
+> "txtName[$i]" , '');
+>
+> $this->form->setDefault("txtName[$i]","$depName");
+>                                     $i+=1;
+>
+>                             }
+>
+>
+> $this->template->assignForm('form',$this->form);
+>                             $this->template->display();
+>       (.tpl)
+>
+>
+>                          {foreach from = $form item = formElement}
+>                                    {$formElement.html} ----------->  (This
+> coding I tried by myself if it is wrong please note
+> me)
+>                            {/foreach}
+>
+>
+>      The HTML OutPut is
+>  ------------------------------------------------------------------------------------------------------
+>
+>        <
+>
+>
+>
+>        <
+>
+>        f
+>
+>
+>
+>
+>
+>  <input id="form_txtName[0]" type="text" name="form_txtName[0]"
+> value="PHP" />
+>
+>  <input id="form_txtName[1]" type="text" name="form_txtName[1]"
+> value="Desigining" />
+>
+>  <input id="form_txtName[2]" type="text" name="form_txtName[2]" value="DOT
+> NET" />
+>
+>
+>
+>
+>
+> ---------------------------------------------------------------------------------------------------------
+>    In the above tags to get the value of the textboxes in the clientside
+> through javascript like this
+>
+>    document.formName.form_txtName[0].value   -----------> gives error
+>
+>
+>
+>
+> If the above HTML is like the following
+>
+>  <input id="form_txtName" type="text" name="form_txtName" value="PHP" />
+>
+>  <input id="form_txtName" type="text" name="form_txtName"
+> value="Desigining" />
+>
+>  <input id="form_txtName" type="text" name="form_txtName" value="DOT NET"
+> />
+>
+> so that i can use this coding
+>
+>                                    document.formName.form_txtName
+> [0].value
+>                                    document.formName.form_txtName[1].value ...............so
+> on
+>
+>
+>
+> To solve my problem I need to create more than one text boxes with the
+> same name(there should not be any index)
+>
+>
+> I tried the following
+>
+>                       for($i=0;$<10;$i++)
+>                      {
+>
+> $this->form->addElement('test','txtName','');
+>                      }
+>
+> Here what happens is only one textbox is created not 10 ;
+>
+>
+>            1)Is it possible to create more the ont textboxes with the same
+> name
+>            2)If so how to identify each textboxes in the tpl
+>
+>
+>
+> regards
+> moses
+>
+>
+>
+>
+>
+> regards
+> moses
+>
+>
+>
+> -------- Original Message --------
+> Subject: Re: [ydf-users] Query Regarding Dynamic Text Box (again)
+> From: Francisco Azevedo <francisco at fusemail.com>
+> Date: Fri, April 21, 2006 2:27 am
+> To: ydframework-users at berlios.de
+> Hi moses
+> What you want is possible with YDF. Btw, there's more than one way to do
+> it.. it only depends on your structure. Just use your imagination ;)
+> There is _not_ a method to do such thing but.. i'm thinking about a way
+> that can work.
+> - Create a form for those text boxes only.
+> - add text elements (with different name) to that form
+>   foreach (  ...  ){ $form2->addElement( 'text', 'name_' . $i , ... ) }
+> - assign the form Object with YDTemplate::assign and _not_
+> YDTemplate::assignForm  (to use form methods on the template side)
+> - on the template side, get form elements, cycle them and render each one.
+>
+> I didn't tryed that .. but seems to work .. Pieter, David ?
+> Btw, don't use "document.all" on javascript because that's IE specific
+> code and will not work well on other browsers.
+> Francisco A
+> >
+> >
+> >     I want do display each record in seperate text box with the same
+> > name.....
+> >
+> >
+> >     What is the reason is
+> >
+> >     1)I want get the value of the text box through client side coding
+> > through javascript
+> >     2)If  I use different name it will become a tedious process for me
+> > to identify the particuler name of the text box since i am getting the
+> > values from the database
+> >     3)So If I create a unique name with different Indexes it will be
+> > easy to write the java script coding such as
+> >
+> >                    document.all.txtName[1].value
+> >                    document.all.txtName[2].value
+> >                    document.all.txtName[n].value  ....... and so on
+> >
+> >
+> >
+> >
+> >
+> > regards
+> > moses
+> >
+> >     -------- Original Message --------
+> >     Subject: Re: [ydf-users] Query Regarding Dynamic Text Box
+> >     From: "Pieter Claerhout" <pieter at yellowduck.be>
+> >     Date: Thu, April 20, 2006 7:58 am
+> >     To: ydframework-users at berlios.de
+> >
+> >     So, if I understand it correctly, you want each record to show up in
+> >     a different form field, right?
+> >
+> >     If yes, then there are some things you need to change in the logic:
+> >
+> >     1. Get all the records from the database
+> >
+> >     2. Create a new form object
+> >
+> >     3. Create a new element for each record in the database, giving each
+> >     one of them a unique name
+> >
+> >     4. Assign the form to the template
+> >
+> >     5. Loop over the elements in the template to make them visible.
+> >
+> >     Regards,
+> >
+> >
+> >     pieter
+> >
+> >     On 4/20/06, *moses at softwaysolutions.com
+> >     <mailto:moses at softwaysolutions.com <moses at softwaysolutions.com>>* <
+> moses at softwaysolutions.com
+> >     <mailto:moses at softwaysolutions.com <moses at softwaysolutions.com>>>
+> wrote:
+> >
+> >
+> >
+> >         Dear Sir
+> >
+> >
+> >                        How to create dynamic text boxes......
+> >
+> >
+> >
+> >         I tried the following
+> >
+> >         (.php)
+> >
+> >
+> $this->form->addElement('text','txtName','');
+> >                               $records =
+> >         $this->mySql->getAllRecords('department','');  ( "Contains all
+> >         the records from databse" )
+> >
+> $this->template->assign('records',$records);
+> >
+> >
+> $this->form->setDefaults(array("txtName"=>'{$record.department_name}')); ->
+> >         ( i understand this coding is wrong but i dont know the other
+> way)
+> >
+> >
+> >
+> >
+> >         (.tpl)  (it works but i dont want to use these type of coding)
+> >
+> >                              {foreach from = $records item = record  }
+> >                                           {$record.department_name}
+> >         <input type="text" value="{$record.department_name}">
+> >                               {/foreach}
+> >
+> >
+> >         (.tpl)  (I want this type of coding. but does not works  )
+> >
+> >                              {foreach from = $records item = record  }
+> >                                           {$record.department_name}
+> >         {$form.txtName.html}
+> >                               {/foreach}
+> >
+> >
+> >
+> >          mail.softwaysolutions.com smtp.starfieldtech.com
+> >         regards
+> >         moses
+> >
+> >         _______________________________________________
+> >         YDFramework-users mailing list
+> >         YDFramework-users at lists.berlios.de
+> >         <mailto:YDFramework-users at lists.berlios.de<YDFramework-users at lists.berlios.de>
+> >
+> >         http://lists.berlios.de/mailman/listinfo/ydfram
+> _______________________________________________ YDFramework-users mailing
+> list YDFramework-users at lists.berlios.de
+> http://lists.berlios.de/mailman/listinfo/ydframework-users
+>
+
+
+
+--
+pieter claerhout . pieter at yellowduck.be . http://www.yellowduck.be/
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <https://lists.berlios.de/pipermail/ydframework-users/attachments/20060426/5c7d049e/attachment.html>
+
+From pieter at yellowduck.be  Wed Apr 26 13:19:48 2006
+From: pieter at yellowduck.be (Pieter Claerhout)
+Date: Wed, 26 Apr 2006 13:19:48 +0200
+Subject: [ydf-users] YDForm::toHtml
+In-Reply-To: <20060421162225.33083.qmail@web50201.mail.yahoo.com>
+References: <4aef63030604200753r3703c47yc319acdf0f366747@mail.gmail.com>
+	 <20060421162225.33083.qmail@web50201.mail.yahoo.com>
+Message-ID: <4aef63030604260419r13d016a6k324c4507475bebf@mail.gmail.com>
+
+Can you send me a small example so that I can test?
+
+pieter
+
+On 4/21/06, dab <dab214 at yahoo.com> wrote:
+>
+> hi pieter,
+> thanks for your reply. however i can't seem to get it
+> to work completely. i've subclassed the
+> YDFormRenderer_html class and added it with
+> $this->form->registerRenderer('test',
+> 'MyFormRenderer_html', 'MyFormRenderer_html.php')
+> (YDForm::registerRenderer doesnt work). It seems to
+> load the renderer alright but when i do
+> $this->form->render('test') it doesnt select my
+> renderer but the default one (YDForm::render() doesnt
+> work either).
+>
+> am i missing something?
+> thanks.
+>
+> /dab
+>
+>
+>
+> --- Pieter Claerhout <pieter at yellowduck.be> wrote:
+>
+> > You can customize this by subclassing the
+> > YDFormRenderer_html class (in
+> > YDFramework2/YDClasses/YDFormRenderers).
+> >
+> > Once you have a custom version, you need to register
+> > it using
+> > YDForm::registerRenderer to let the YDForm class
+> > know that there is an
+> > additional renderer.
+> >
+> > To render the form then to a string, you can use
+> > YDForm::render(
+> > <name_of_renderer> );
+> >
+> > cheers,
+> >
+> >
+> > pieter
+> >
+> > On 4/20/06, dab <dab214 at yahoo.com> wrote:
+> > >
+> > > hi all,
+> > > i was wondering if it's possible to create your
+> > > "templates" that controls the html output in above
+> > > method? I would like to have the label in one <td>
+> > and
+> > > the textfield in another. Is that possible? Or is
+> > the
+> > > best way to use toArray and then loop it out in
+> > the
+> > > template?
+> > >
+> > >
+> > >
+> > > __________________________________________________
+> > > Do You Yahoo!?
+> > > Tired of spam?  Yahoo! Mail has the best spam
+> > protection around
+> > > http://mail.yahoo.com
+> > > _______________________________________________
+> > > YDFramework-users mailing list
+> > > YDFramework-users at lists.berlios.de
+> > >
+> >
+> http://lists.berlios.de/mailman/listinfo/ydframework-users
+> > >
+> >
+> >
+> >
+> > --
+> > pieter claerhout . pieter at yellowduck.be .
+> > http://www.yellowduck.be/
+> >
+>
+>
+> __________________________________________________
+> Do You Yahoo!?
+> Tired of spam?  Yahoo! Mail has the best spam protection around
+> http://mail.yahoo.com
+> _______________________________________________
+> YDFramework-users mailing list
+> YDFramework-users at lists.berlios.de
+> http://lists.berlios.de/mailman/listinfo/ydframework-users
+>
+
+
+
+--
+pieter claerhout . pieter at yellowduck.be . http://www.yellowduck.be/
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <https://lists.berlios.de/pipermail/ydframework-users/attachments/20060426/3823a09d/attachment.html>
+
+From dab214 at yahoo.com  Sat Apr 29 17:49:47 2006
+From: dab214 at yahoo.com (dab)
+Date: Sat, 29 Apr 2006 08:49:47 -0700 (PDT)
+Subject: [ydf-users] YDForm::toHtml
+In-Reply-To: <4aef63030604260419r13d016a6k324c4507475bebf@mail.gmail.com>
+Message-ID: <20060429154947.30641.qmail@web50208.mail.yahoo.com>
+
+hi pieter,
+i got it to work eventually. although in the end i
+decided to write my own renderer with template
+support.
+thanks anyways.
+
+/dab
+
+--- Pieter Claerhout <pieter at yellowduck.be> wrote:
+
+> Can you send me a small example so that I can test?
+> 
+> pieter
+> 
+> On 4/21/06, dab <dab214 at yahoo.com> wrote:
+> >
+> > hi pieter,
+> > thanks for your reply. however i can't seem to get
+> it
+> > to work completely. i've subclassed the
+> > YDFormRenderer_html class and added it with
+> > $this->form->registerRenderer('test',
+> > 'MyFormRenderer_html', 'MyFormRenderer_html.php')
+> > (YDForm::registerRenderer doesnt work). It seems
+> to
+> > load the renderer alright but when i do
+> > $this->form->render('test') it doesnt select my
+> > renderer but the default one (YDForm::render()
+> doesnt
+> > work either).
+> >
+> > am i missing something?
+> > thanks.
+> >
+> > /dab
+> >
+> >
+> >
+> > --- Pieter Claerhout <pieter at yellowduck.be> wrote:
+> >
+> > > You can customize this by subclassing the
+> > > YDFormRenderer_html class (in
+> > > YDFramework2/YDClasses/YDFormRenderers).
+> > >
+> > > Once you have a custom version, you need to
+> register
+> > > it using
+> > > YDForm::registerRenderer to let the YDForm class
+> > > know that there is an
+> > > additional renderer.
+> > >
+> > > To render the form then to a string, you can use
+> > > YDForm::render(
+> > > <name_of_renderer> );
+> > >
+> > > cheers,
+> > >
+> > >
+> > > pieter
+> > >
+> > > On 4/20/06, dab <dab214 at yahoo.com> wrote:
+> > > >
+> > > > hi all,
+> > > > i was wondering if it's possible to create
+> your
+> > > > "templates" that controls the html output in
+> above
+> > > > method? I would like to have the label in one
+> <td>
+> > > and
+> > > > the textfield in another. Is that possible? Or
+> is
+> > > the
+> > > > best way to use toArray and then loop it out
+> in
+> > > the
+> > > > template?
+> > > >
+> > > >
+> > > >
+> > > >
+> __________________________________________________
+> > > > Do You Yahoo!?
+> > > > Tired of spam?  Yahoo! Mail has the best spam
+> > > protection around
+> > > > http://mail.yahoo.com
+> > > >
+> _______________________________________________
+> > > > YDFramework-users mailing list
+> > > > YDFramework-users at lists.berlios.de
+> > > >
+> > >
+> >
+>
+http://lists.berlios.de/mailman/listinfo/ydframework-users
+> > > >
+> > >
+> > >
+> > >
+> > > --
+> > > pieter claerhout . pieter at yellowduck.be .
+> > > http://www.yellowduck.be/
+> > >
+> >
+> >
+> > __________________________________________________
+> > Do You Yahoo!?
+> > Tired of spam?  Yahoo! Mail has the best spam
+> protection around
+> > http://mail.yahoo.com
+> > _______________________________________________
+> > YDFramework-users mailing list
+> > YDFramework-users at lists.berlios.de
+> >
+>
+http://lists.berlios.de/mailman/listinfo/ydframework-users
+> >
+> 
+> 
+> 
+> --
+> pieter claerhout . pieter at yellowduck.be .
+> http://www.yellowduck.be/
+> 
+
+
+__________________________________________________
+Do You Yahoo!?
+Tired of spam?  Yahoo! Mail has the best spam protection around 
+http://mail.yahoo.com 
+
+
+From dab214 at yahoo.com  Sun Apr 30 18:56:58 2006
+From: dab214 at yahoo.com (dab)
+Date: Sun, 30 Apr 2006 09:56:58 -0700 (PDT)
+Subject: [ydf-users] YDDatabaseObject code generator
+In-Reply-To: <44004E1B.3000508@fusemail.com>
+Message-ID: <20060430165658.20423.qmail@web50207.mail.yahoo.com>
+
+hi all,
+how is below integration with YDDatabaseObject coming
+along? 
+
+/dab
+
+--- Francisco Azevedo <francisco at fusemail.com> wrote:
+
+> > i'm not sure i understand what the functionality
+> of
+> > readTable() would be. just to clarify: i didn't
+> want
+> > to change the YDFramework but i was merely asking
+> if
+> > anyone had written a script that automatically
+> creates
+> > the class and templates for you.
+> 
+> And don't know what you mean by creating templates
+> but i think that you 
+> point a nice idea for YDDatabaseObject. We have
+> already a class that can 
+> read the db scheme.. so an integration of that class
+> with 
+> YDDatabaseObject could be excellent.. and that was
+> what 'readTable()' 
+> could do internally.. a method that would read the
+> table configuration 
+> and add fields and keys automatically.
+> 
+> Francisco
+> _______________________________________________
+> YDFramework-users mailing list
+> YDFramework-users at lists.berlios.de
+>
+http://lists.berlios.de/mailman/listinfo/ydframework-users
+> 
+
+
+__________________________________________________
+Do You Yahoo!?
+Tired of spam?  Yahoo! Mail has the best spam protection around 
+http://mail.yahoo.com 
+
+

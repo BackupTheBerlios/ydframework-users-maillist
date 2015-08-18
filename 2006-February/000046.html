@@ -1,0 +1,89 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [ydf-users] SQL Question
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/ydframework-users/2006-February/index.html" >
+   <LINK REL="made" HREF="mailto:ydframework-users%40lists.berlios.de?Subject=Re%3A%20%5Bydf-users%5D%20SQL%20Question&In-Reply-To=%3C47433.71.39.100.121.1140617967.squirrel%40www.jocosoft.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000044.html">
+   <LINK REL="Next"  HREF="000047.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[ydf-users] SQL Question</H1>
+    <B>Peter</B> 
+    <A HREF="mailto:ydframework-users%40lists.berlios.de?Subject=Re%3A%20%5Bydf-users%5D%20SQL%20Question&In-Reply-To=%3C47433.71.39.100.121.1140617967.squirrel%40www.jocosoft.com%3E"
+       TITLE="[ydf-users] SQL Question">ydf at jocosoft.com
+       </A><BR>
+    <I>Wed Feb 22 15:19:27 CET 2006</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000044.html">[ydf-users] SQL Question
+</A></li>
+        <LI>Next message: <A HREF="000047.html">[ydf-users] SQL Question
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#46">[ date ]</a>
+              <a href="thread.html#46">[ thread ]</a>
+              <a href="subject.html#46">[ subject ]</a>
+              <a href="author.html#46">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Hi Poi,
+
+&gt;<i> If i understand your question well, i would state the following MySQL
+</I>&gt;<i> command:
+</I>&gt;<i>
+</I>&gt;<i> SELECT item, pallet, location, user, MAX(movedate) AS movedate
+</I>&gt;<i> FROM `yourtable`
+</I>&gt;<i> GROUP BY item
+</I>
+Well, you can't retrieve any fields that are not part of the group by or
+aggregate field(s), so this doesn't work.
+Following your theory this would work:
+
+SELECT item, MAX(movedate) AS movedate
+FROM `yourtable`
+GROUP BY item
+
+But that only gives me when it was last moved, not by whom or where it
+went...
+
+It is an interesting challenge, that looks simple at first, but really
+isn't when you start playing with it :)
+
+Thanks for thinking with me though!
+
+Peter
+
+
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000044.html">[ydf-users] SQL Question
+</A></li>
+	<LI>Next message: <A HREF="000047.html">[ydf-users] SQL Question
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#46">[ date ]</a>
+              <a href="thread.html#46">[ thread ]</a>
+              <a href="subject.html#46">[ subject ]</a>
+              <a href="author.html#46">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/ydframework-users">More information about the YDFramework-users
+mailing list</a><br>
+</body></html>

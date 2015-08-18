@@ -1,0 +1,284 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [ydf-users] Query Regarding checkboxgroup
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/ydframework-users/2006-March/index.html" >
+   <LINK REL="made" HREF="mailto:ydframework-users%40lists.berlios.de?Subject=Re%3A%20%5Bydf-users%5D%20Query%20Regarding%20checkboxgroup&In-Reply-To=%3C4aef63030603240040i5120a736r70d076b958c977a2%40mail.gmail.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000156.html">
+   <LINK REL="Next"  HREF="000157.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[ydf-users] Query Regarding checkboxgroup</H1>
+    <B>Pieter Claerhout</B> 
+    <A HREF="mailto:ydframework-users%40lists.berlios.de?Subject=Re%3A%20%5Bydf-users%5D%20Query%20Regarding%20checkboxgroup&In-Reply-To=%3C4aef63030603240040i5120a736r70d076b958c977a2%40mail.gmail.com%3E"
+       TITLE="[ydf-users] Query Regarding checkboxgroup">pieter at yellowduck.be
+       </A><BR>
+    <I>Fri Mar 24 09:40:34 CET 2006</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000156.html">[ydf-users] Query Regarding checkboxgroup
+</A></li>
+        <LI>Next message: <A HREF="000157.html">[ydf-users] Query Regarding error in checkboxgroup
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#158">[ date ]</a>
+              <a href="thread.html#158">[ thread ]</a>
+              <a href="subject.html#158">[ subject ]</a>
+              <a href="author.html#158">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>This is generally caused by the fact that you don't have the correct version
+of the source files.
+
+Can you doublecheck that:
+
+- YDForm.php line 104 is:             $this-&gt;registerElement(
+'checkboxgroup', 'YDFormElement_CheckboxGroup',
+'YDFormElement_CheckboxGroup.php' );
+- YDFormElements/YDFormElement_CheckboxGroup.php exists?
+
+Cheers,
+
+
+pieter
+
+On 3/24/06, <A HREF="https://lists.berlios.de/mailman/listinfo/ydframework-users">moses at softwaysolutions.com</A> &lt;<A HREF="https://lists.berlios.de/mailman/listinfo/ydframework-users">moses at softwaysolutions.com</A>&gt; wrote:
+&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i> Dear Sir
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i>        While using *checkboxgroup *it gives the following error
+</I>&gt;<i>
+</I>&gt;<i> *Fatal error*: Unknown form element type &quot;checkboxgroup&quot; for element
+</I>&gt;<i> &quot;choose_multiple&quot;. in *D:\web\Moses\YDFramework2\YDClasses\YDForm.php* on
+</I>&gt;<i> line *329*
+</I>&gt;<i>
+</I>&gt;<i>       what is the solution.....
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i> regards
+</I>&gt;<i> moses
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i> Take a look at this example:
+</I>&gt;<i>
+</I>&gt;<i> The PHP code:
+</I>&gt;<i>
+</I>&gt;<i> &lt;?php
+</I>&gt;<i>     // Standard include
+</I>&gt;<i>     include_once( dirname( __FILE__ ) . '/../YDFramework2/YDF2_init.php'
+</I>&gt;<i> );
+</I>&gt;<i>     // Includes
+</I>&gt;<i>     YDInclude( 'YDForm.php' );
+</I>&gt;<i>     YDInclude( 'YDTemplate.php' );
+</I>&gt;<i>     // Class definition
+</I>&gt;<i>     class form_checkboxgroup extends YDRequest {
+</I>&gt;<i>         // Class constructor
+</I>&gt;<i>         function form_checkboxgroup() {
+</I>&gt;<i>             $this-&gt;YDRequest();
+</I>&gt;<i>         }
+</I>&gt;<i>         // Default action
+</I>&gt;<i>         function actionDefault() {
+</I>&gt;<i>             // Create the form
+</I>&gt;<i>             $form = new YDForm( 'form1' );
+</I>&gt;<i>             // Add the radiobutton
+</I>&gt;<i>             $form-&gt;addElement( 'checkboxgroup', 'choose_multiple', 'Choose
+</I>&gt;<i> multiple', array(), array( 0 =&gt; 'choice 1', 1 =&gt; 'choice 2' ) );
+</I>&gt;<i>             // Add the submit button
+</I>&gt;<i>             $form-&gt;addElement( 'submit', 'btnSubmit', 'submit' );
+</I>&gt;<i>             // Set the defaults
+</I>&gt;<i>             $form-&gt;setDefaults( array( 'choose_multiple' =&gt; array( 0=&gt;0,
+</I>&gt;<i> 1=&gt;1 ) ) );
+</I>&gt;<i>             // Process the form
+</I>&gt;<i>             if ( $form-&gt;validate() === true ) {
+</I>&gt;<i>                 YDDebugUtil::dump( $form-&gt;getValues() );
+</I>&gt;<i>             }
+</I>&gt;<i>             // Add the template
+</I>&gt;<i>             $tpl = new YDTemplate();
+</I>&gt;<i>             // Add the form to the template
+</I>&gt;<i>             $tpl-&gt;assignForm ( 'form',$form );
+</I>&gt;<i>             // Display the template
+</I>&gt;<i>             $tpl-&gt;display();
+</I>&gt;<i>         }
+</I>&gt;<i>     }
+</I>&gt;<i>     // Process the request
+</I>&gt;<i>     YDInclude( 'YDF2_process.php' );
+</I>&gt;<i> ?&gt;
+</I>&gt;<i> The template:
+</I>&gt;<i>
+</I>&gt;<i> {$form.tag}
+</I>&gt;<i>     {$form.choose_multiple.html|@replace:'##ITEMSEP##':'&lt;br/&gt;'&lt;%7B$form.choose_multiple.html%<A HREF="https://lists.berlios.de/mailman/listinfo/ydframework-users">7C at replace</A>:'#%23ITEMSEP%23%23':'%3Cbr/%3E'&gt;
+</I>&gt;<i> }
+</I>&gt;<i>     &lt;br/&gt;
+</I>&gt;<i>     {$form.btnSubmit.html}
+</I>&gt;<i> {$form.endtag}
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i> Cheers,
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i> pieter
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i> On 3/23/06, <A HREF="https://lists.berlios.de/mailman/listinfo/ydframework-users">moses at softwaysolutions.com</A> &lt;<A HREF="https://lists.berlios.de/mailman/listinfo/ydframework-users">moses at softwaysolutions.com</A> &gt;
+</I>&gt;<i> wrote:
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt; Dear Sir
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt;               What is checkboxgroup i didnt understood and no such word
+</I>&gt;<i> &gt; in help manual also....
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt; regards
+</I>&gt;<i> &gt; moses
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt; -------- Original Message --------
+</I>&gt;<i> &gt; Subject: [ydf-users] Re: Query Regarding menu
+</I>&gt;<i> &gt; From: &quot;Pieter Claerhout&quot; &lt; <A HREF="https://lists.berlios.de/mailman/listinfo/ydframework-users">pieter at yellowduck.be</A>&gt;
+</I>&gt;<i> &gt; Date: Thu, March 23, 2006 4:11 am
+</I>&gt;<i> &gt; To: &quot;<A HREF="https://lists.berlios.de/mailman/listinfo/ydframework-users">moses at softwaysolutions.com</A> &quot; &lt;<A HREF="https://lists.berlios.de/mailman/listinfo/ydframework-users">moses at softwaysolutions.com</A>&gt;
+</I>&gt;<i> &gt; Cc: <A HREF="https://lists.berlios.de/mailman/listinfo/ydframework-users">ydframework-users at berlios.de</A>
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt; I didn't build in support for that (yet). The easiest solution is
+</I>&gt;<i> &gt; probably to replace the select element with a bunch of checkboxes that
+</I>&gt;<i> &gt; simulate the same behaviour. The &quot;checkboxgroup&quot; element is specifically
+</I>&gt;<i> &gt; designed for this.
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt; Regards,
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt; pieter
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt; On 3/23/06, <A HREF="https://lists.berlios.de/mailman/listinfo/ydframework-users">moses at softwaysolutions.com</A> &lt;<A HREF="https://lists.berlios.de/mailman/listinfo/ydframework-users">moses at softwaysolutions.com</A> &gt;
+</I>&gt;<i> &gt; wrote:
+</I>&gt;<i> &gt; &gt;
+</I>&gt;<i> &gt; &gt;  Dear Sir
+</I>&gt;<i> &gt; &gt;
+</I>&gt;<i> &gt; &gt;
+</I>&gt;<i> &gt; &gt;          How to get the all the values that ar selected in a
+</I>&gt;<i> &gt; &gt; List/Menu(when multiple is enabled)
+</I>&gt;<i> &gt; &gt;
+</I>&gt;<i> &gt; &gt;         $this-&gt;form-&gt;addElement('select','cboMarks','',array('size'=&gt;5,'multiple'=&gt;''),array('1'=&gt;'Maths','2'=&gt;'English','3'=&gt;'Tamil','4'=&gt;'Hindi'));
+</I>&gt;<i> &gt; &gt;
+</I>&gt;<i> &gt; &gt;         This statement displayes a menu with fourfields
+</I>&gt;<i> &gt; &gt;
+</I>&gt;<i> &gt; &gt;
+</I>&gt;<i> &gt; &gt;        Now i am selecting English,Tamil. and getting the result like
+</I>&gt;<i> &gt; &gt; this
+</I>&gt;<i> &gt; &gt;
+</I>&gt;<i> &gt; &gt;        $data = $this-&gt;form-&gt;getValues();
+</I>&gt;<i> &gt; &gt;         print_r($data);
+</I>&gt;<i> &gt; &gt;
+</I>&gt;<i> &gt; &gt;
+</I>&gt;<i> &gt; &gt;
+</I>&gt;<i> &gt; &gt; *Array
+</I>&gt;<i> &gt; &gt; (
+</I>&gt;<i> &gt; &gt;     [cboMarks] =&gt; 3
+</I>&gt;<i> &gt; &gt; )*
+</I>&gt;<i> &gt; &gt;
+</I>&gt;<i> &gt; &gt;          It is only displaying the last selected value.What to do to
+</I>&gt;<i> &gt; &gt; get all the selected value
+</I>&gt;<i> &gt; &gt;
+</I>&gt;<i> &gt; &gt;
+</I>&gt;<i> &gt; &gt;
+</I>&gt;<i> &gt; &gt; regards
+</I>&gt;<i> &gt; &gt; moses
+</I>&gt;<i> &gt; &gt;
+</I>&gt;<i> &gt; &gt;
+</I>&gt;<i> &gt; &gt;
+</I>&gt;<i> &gt; &gt;
+</I>&gt;<i> &gt; &gt;
+</I>&gt;<i> &gt; &gt;
+</I>&gt;<i> &gt; &gt;
+</I>&gt;<i> &gt; &gt;
+</I>&gt;<i> &gt; &gt;
+</I>&gt;<i> &gt; &gt;
+</I>&gt;<i> &gt; &gt;
+</I>&gt;<i> &gt; &gt;
+</I>&gt;<i> &gt; &gt;
+</I>&gt;<i> &gt; &gt;
+</I>&gt;<i> &gt; &gt;
+</I>&gt;<i> &gt; &gt;
+</I>&gt;<i> &gt; &gt;
+</I>&gt;<i> &gt; &gt;
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt; --
+</I>&gt;<i> &gt; pieter claerhout . <A HREF="https://lists.berlios.de/mailman/listinfo/ydframework-users">pieter at yellowduck.be</A> . <A HREF="http://www.yellowduck.be/">http://www.yellowduck.be/</A>
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt; _______________________________________________ YDFramework-users
+</I>&gt;<i> &gt; mailing list <A HREF="https://lists.berlios.de/mailman/listinfo/ydframework-users">YDFramework-users at lists.berlios.de</A> <A HREF="http://lists.berlios.de/mailman/listinfo/ydframework-users">http://lists.berlios.de/mailman/listinfo/ydframework-users</A>
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt;
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i> --
+</I>&gt;<i> pieter claerhout . <A HREF="https://lists.berlios.de/mailman/listinfo/ydframework-users">pieter at yellowduck.be</A> . <A HREF="http://www.yellowduck.be/">http://www.yellowduck.be/</A>
+</I>&gt;<i>
+</I>&gt;<i> _______________________________________________ YDFramework-users mailing
+</I>&gt;<i> list <A HREF="https://lists.berlios.de/mailman/listinfo/ydframework-users">YDFramework-users at lists.berlios.de</A>
+</I>&gt;<i> <A HREF="http://lists.berlios.de/mailman/listinfo/ydframework-users">http://lists.berlios.de/mailman/listinfo/ydframework-users</A>
+</I>&gt;<i>
+</I>
+
+
+--
+pieter claerhout . <A HREF="https://lists.berlios.de/mailman/listinfo/ydframework-users">pieter at yellowduck.be</A> . <A HREF="http://www.yellowduck.be/">http://www.yellowduck.be/</A>
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: &lt;<A HREF="https://lists.berlios.de/pipermail/ydframework-users/attachments/20060324/e23d5d0d/attachment.html">https://lists.berlios.de/pipermail/ydframework-users/attachments/20060324/e23d5d0d/attachment.html</A>&gt;
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000156.html">[ydf-users] Query Regarding checkboxgroup
+</A></li>
+	<LI>Next message: <A HREF="000157.html">[ydf-users] Query Regarding error in checkboxgroup
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#158">[ date ]</a>
+              <a href="thread.html#158">[ thread ]</a>
+              <a href="subject.html#158">[ subject ]</a>
+              <a href="author.html#158">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/ydframework-users">More information about the YDFramework-users
+mailing list</a><br>
+</body></html>

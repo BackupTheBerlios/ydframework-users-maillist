@@ -1,0 +1,81 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [ydf-users] YDDatabaseObject, GroupBy and aggreate functions ?
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/ydframework-users/2006-August/index.html" >
+   <LINK REL="made" HREF="mailto:ydframework-users%40lists.berlios.de?Subject=Re%3A%20%5Bydf-users%5D%20YDDatabaseObject%2C%20GroupBy%20and%20aggreate%20functions%20%3F&In-Reply-To=%3C1154434417.44cf4571c6d29%40imp2-g19.free.fr%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   
+   <LINK REL="Next"  HREF="000313.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[ydf-users] YDDatabaseObject, GroupBy and aggreate functions ?</H1>
+    <B>araviski at free.fr</B> 
+    <A HREF="mailto:ydframework-users%40lists.berlios.de?Subject=Re%3A%20%5Bydf-users%5D%20YDDatabaseObject%2C%20GroupBy%20and%20aggreate%20functions%20%3F&In-Reply-To=%3C1154434417.44cf4571c6d29%40imp2-g19.free.fr%3E"
+       TITLE="[ydf-users] YDDatabaseObject, GroupBy and aggreate functions ?">araviski at free.fr
+       </A><BR>
+    <I>Tue Aug  1 14:13:37 CEST 2006</I>
+    <P><UL>
+        
+        <LI>Next message: <A HREF="000313.html">[ydf-users] YDDatabaseObject, GroupBy and aggreate functions ?
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#303">[ date ]</a>
+              <a href="thread.html#303">[ thread ]</a>
+              <a href="subject.html#303">[ subject ]</a>
+              <a href="author.html#303">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Hi all !
+
+I'm currently trying to make some little stats about my application, and I
+wonder if I can use the YDDatabaseObject to retrieve the results of Count, avg,
+sum, etc.. expressions in a query. I successfully used the groupby() function,
+but only without any aggregate function.
+I tried the findSql() method to make my whole query, but the fact that the
+aggregate expressions are not registred in the object trigger some errors.
+I also tried to register the expressions using registerSelect in the definition
+of the objects on the off-chance but it doesn't work (and I understand that I
+cannot have permanently aggregate functions in the select queries).
+
+So my question is, is it possible to use aggregate functions using the
+YDDatabaseObject or have I to use a YDDatabaseQuery ?
+
+BTW, the findSql() function trigger &quot;Notice: Undefined offset:&quot; errors in
+YDDatabaseObject.php on line 1475 when the select fields are not precised using
+the select() function just before using the findSql() one.
+
+Thanks for any help,
+
+Erwan.
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	
+	<LI>Next message: <A HREF="000313.html">[ydf-users] YDDatabaseObject, GroupBy and aggreate functions ?
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#303">[ date ]</a>
+              <a href="thread.html#303">[ thread ]</a>
+              <a href="subject.html#303">[ subject ]</a>
+              <a href="author.html#303">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/ydframework-users">More information about the YDFramework-users
+mailing list</a><br>
+</body></html>

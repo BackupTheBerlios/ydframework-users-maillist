@@ -1,0 +1,81 @@
+From bogus@does.not.exist.com  Wed Mar 14 16:43:27 2012
+From: bogus@does.not.exist.com ()
+Date: Wed, 14 Mar 2012 15:43:27 -0000
+Subject: No subject
+Message-ID: <mailman.0.1331739811.15786.ydframework-users@lists.berlios.de>
+
+be Windows only...
+
+pieter
+
+2006/11/15, Francisco Azevedo <francisco at fusemail.com>:
+>
+> Hi all
+>
+> After so much searching the web for a GOOD help authoring tool for a
+> project, i found THE documentor  :)  ... Help & Manual 4.
+>
+> This tool (www.helpandmanual.com) is amazing as you can see by its
+> features.. wysiwyg, create in one place&export to lots of formats.. pdf,
+> chm, web, word .. styles, keyword search in web, syntax highlighting ..
+> but not free of course.
+>
+>
+> I have ported our user-guide to help&manual4. Here goes my first draft:
+>
+> Windows Help format: http://precabo.com/ydf/YDFdoc.chm
+>
+> PDF format: http://precabo.com/ydf/YDFdoc.pdf
+>
+>
+> What do you think?
+>
+> regards
+> Francisco A
+>
+> _______________________________________________
+> YDFramework-users mailing list
+> YDFramework-users at lists.berlios.de
+> https://lists.berlios.de/mailman/listinfo/ydframework-users
+>
+
+
+
+-- 
+pieter claerhout . pieter at yellowduck.be . http://www.yellowduck.be/
+
+------=_Part_60053_29475643.1163575395540
+Content-Type: text/html; charset=ISO-8859-1
+Content-Transfer-Encoding: 7bit
+Content-Disposition: inline
+
+<div>Very nice, but I see a problem with it. Right now, we are able to automatically build the documentation which is by far the easiest way of working. Everytime we generate a new build, the documentation gets generated automatically.
+</div>
+<div>&nbsp;</div>
+<div>From what I could see, that's not possible with this tool. Also, it seems to be Windows only...</div>
+<div>&nbsp;</div>
+<div>pieter<br>&nbsp;</div>
+<div><span class="gmail_quote">2006/11/15, Francisco Azevedo &lt;<a href="mailto:francisco at fusemail.com">francisco at fusemail.com</a>&gt;:</span>
+<blockquote class="gmail_quote" style="PADDING-LEFT: 1ex; MARGIN: 0px 0px 0px 0.8ex; BORDER-LEFT: #ccc 1px solid">Hi all<br><br>After so much searching the web for a GOOD help authoring tool for a<br>project, i found THE documentor&nbsp;&nbsp;:)&nbsp;&nbsp;... Help &amp; Manual 4.
+<br><br>This tool (<a href="http://www.helpandmanual.com">www.helpandmanual.com</a>) is amazing as you can see by its<br>features.. wysiwyg, create in one place&amp;export to lots of formats.. pdf,<br>chm, web, word .. styles, keyword search in web, syntax highlighting ..
+<br>but not free of course.<br><br><br>I have ported our user-guide to help&amp;manual4. Here goes my first draft:<br><br>Windows Help format: <a href="http://precabo.com/ydf/YDFdoc.chm">http://precabo.com/ydf/YDFdoc.chm</a>
+<br><br>PDF format: <a href="http://precabo.com/ydf/YDFdoc.pdf">http://precabo.com/ydf/YDFdoc.pdf</a><br><br><br>What do you think?<br><br>regards<br>Francisco A<br><br>_______________________________________________<br>YDFramework-users mailing list
+<br><a href="mailto:YDFramework-users at lists.berlios.de">YDFramework-users at lists.berlios.de</a><br><a href="https://lists.berlios.de/mailman/listinfo/ydframework-users">https://lists.berlios.de/mailman/listinfo/ydframework-users
+</a><br></blockquote></div><br><br clear="all"><br>-- <br>pieter claerhout . <a href="mailto:pieter at yellowduck.be">pieter at yellowduck.be</a> . <a href="http://www.yellowduck.be/">http://www.yellowduck.be/</a> 
+
+------=_Part_60053_29475643.1163575395540--
+
+
+From bogus@does.not.exist.com  Wed Mar 14 16:43:27 2012
+From: bogus@does.not.exist.com ()
+Date: Wed, 14 Mar 2012 15:43:27 -0000
+Subject: No subject
+Message-ID: <mailman.1.1331739812.15786.ydframework-users@lists.berlios.de>
+
+have no rules set...
+
+/Roland/
+
+
+
+

@@ -1,0 +1,90 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [ydf-users] Query Regarding getRecordsAsSet
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/ydframework-users/2006-September/index.html" >
+   <LINK REL="made" HREF="mailto:ydframework-users%40lists.berlios.de?Subject=Re%3A%20%5Bydf-users%5D%20Query%20Regarding%20getRecordsAsSet&In-Reply-To=%3C20060930015736.2b7eeeb4c62f4bb8603cfb01b826e9ec.a3710d54ed.wbe%40email.secureserver.net%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000390.html">
+   <LINK REL="Next"  HREF="000392.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[ydf-users] Query Regarding getRecordsAsSet</H1>
+    <B>moses at hysistechnologies.com</B> 
+    <A HREF="mailto:ydframework-users%40lists.berlios.de?Subject=Re%3A%20%5Bydf-users%5D%20Query%20Regarding%20getRecordsAsSet&In-Reply-To=%3C20060930015736.2b7eeeb4c62f4bb8603cfb01b826e9ec.a3710d54ed.wbe%40email.secureserver.net%3E"
+       TITLE="[ydf-users] Query Regarding getRecordsAsSet">moses at hysistechnologies.com
+       </A><BR>
+    <I>Sat Sep 30 10:57:36 CEST 2006</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000390.html">[ydf-users] YDAJax::addEvent( &quot;*&quot;,	... ) and adding events in a response
+</A></li>
+        <LI>Next message: <A HREF="000392.html">[ydf-users] Query Regarding getRecordsAsSet
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#391">[ date ]</a>
+              <a href="thread.html#391">[ thread ]</a>
+              <a href="subject.html#391">[ subject ]</a>
+              <a href="author.html#391">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>
+
+ Hello,
+
+     Can an array be a parameter to getRecordsAsSet insteed of a sql
+query ?
+
+     $records =  The list of records as an array (ie generated from
+getRecords())
+
+     Now
+    
+     $recordSet =
+$this-&gt;db-&gt;getRecordsAsSet($records,$this-&gt;page,$this-&gt;size);
+
+     gives the following error
+   
+    Fatal error:  [1064] You have an error in your SQL syntax.  Check
+the manual that corresponds to your MySQL server version for the right
+syntax to use near 'Array' at line 1 in
+D:\phpwork\vortex\YDFramework2\YDClasses\YDDatabase.php on line 1364
+
+    but if I use the sql query insteed of $records it works fine. 
+
+
+regards
+moses     
+    
+
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000390.html">[ydf-users] YDAJax::addEvent( &quot;*&quot;,	... ) and adding events in a response
+</A></li>
+	<LI>Next message: <A HREF="000392.html">[ydf-users] Query Regarding getRecordsAsSet
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#391">[ date ]</a>
+              <a href="thread.html#391">[ thread ]</a>
+              <a href="subject.html#391">[ subject ]</a>
+              <a href="author.html#391">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/ydframework-users">More information about the YDFramework-users
+mailing list</a><br>
+</body></html>

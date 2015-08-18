@@ -1,0 +1,291 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [ydf-users] class structure question
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/ydframework-users/2006-March/index.html" >
+   <LINK REL="made" HREF="mailto:ydframework-users%40lists.berlios.de?Subject=Re%3A%20%5Bydf-users%5D%20class%20structure%20question&In-Reply-To=%3C20060323134057.61450.qmail%40web50213.mail.yahoo.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000137.html">
+   <LINK REL="Next"  HREF="000143.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[ydf-users] class structure question</H1>
+    <B>dab</B> 
+    <A HREF="mailto:ydframework-users%40lists.berlios.de?Subject=Re%3A%20%5Bydf-users%5D%20class%20structure%20question&In-Reply-To=%3C20060323134057.61450.qmail%40web50213.mail.yahoo.com%3E"
+       TITLE="[ydf-users] class structure question">dab214 at yahoo.com
+       </A><BR>
+    <I>Thu Mar 23 14:40:57 CET 2006</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000137.html">[ydf-users] Re: Query Regarding menu
+</A></li>
+        <LI>Next message: <A HREF="000143.html">[ydf-users] class structure question
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#139">[ date ]</a>
+              <a href="thread.html#139">[ thread ]</a>
+              <a href="subject.html#139">[ subject ]</a>
+              <a href="author.html#139">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>hi all,
+what is the best way to make sure certain methods that
+are used across the site are accesable from the main
+class?
+i'd like to access the methods without having to
+initiating a new object, accessing it like it was a
+method in the parent class.
+the way i have it now is one class called Core that
+inherits from YDRequest and all my classes inherits
+from Core. Not a very good setup so i was hoping there
+are better options.
+thanks.
+
+/dan
+
+
+--- Pieter Claerhout &lt;<A HREF="https://lists.berlios.de/mailman/listinfo/ydframework-users">pieter at yellowduck.be</A>&gt; wrote:
+
+&gt;<i> Take a look at this example:
+</I>&gt;<i> 
+</I>&gt;<i> The PHP code:
+</I>&gt;<i> 
+</I>&gt;<i> 
+</I>&gt;<i> &lt;?php
+</I>&gt;<i> 
+</I>&gt;<i>     // Standard include
+</I>&gt;<i>     include_once( dirname( __FILE__ ) .
+</I>&gt;<i> '/../YDFramework2/YDF2_init.php' );
+</I>&gt;<i> 
+</I>&gt;<i>     // Includes
+</I>&gt;<i>     YDInclude( 'YDForm.php' );
+</I>&gt;<i>     YDInclude( 'YDTemplate.php' );
+</I>&gt;<i> 
+</I>&gt;<i>     // Class definition
+</I>&gt;<i>     class form_checkboxgroup extends YDRequest {
+</I>&gt;<i> 
+</I>&gt;<i>         // Class constructor
+</I>&gt;<i>         function form_checkboxgroup() {
+</I>&gt;<i>             $this-&gt;YDRequest();
+</I>&gt;<i>         }
+</I>&gt;<i> 
+</I>&gt;<i>         // Default action
+</I>&gt;<i>         function actionDefault() {
+</I>&gt;<i> 
+</I>&gt;<i>             // Create the form
+</I>&gt;<i>             $form = new YDForm( 'form1' );
+</I>&gt;<i> 
+</I>&gt;<i>             // Add the radiobutton
+</I>&gt;<i>             $form-&gt;addElement( 'checkboxgroup',
+</I>&gt;<i> 'choose_multiple', 'Choose
+</I>&gt;<i> multiple', array(), array( 0 =&gt; 'choice 1', 1 =&gt;
+</I>&gt;<i> 'choice 2' ) );
+</I>&gt;<i> 
+</I>&gt;<i>             // Add the submit button
+</I>&gt;<i>             $form-&gt;addElement( 'submit',
+</I>&gt;<i> 'btnSubmit', 'submit' );
+</I>&gt;<i> 
+</I>&gt;<i>             // Set the defaults
+</I>&gt;<i>             $form-&gt;setDefaults( array(
+</I>&gt;<i> 'choose_multiple' =&gt; array( 0=&gt;0,
+</I>&gt;<i> 1=&gt;1 ) ) );
+</I>&gt;<i> 
+</I>&gt;<i>             // Process the form
+</I>&gt;<i>             if ( $form-&gt;validate() === true ) {
+</I>&gt;<i>                 YDDebugUtil::dump(
+</I>&gt;<i> $form-&gt;getValues() );
+</I>&gt;<i>             }
+</I>&gt;<i> 
+</I>&gt;<i>             // Add the template
+</I>&gt;<i>             $tpl = new YDTemplate();
+</I>&gt;<i> 
+</I>&gt;<i>             // Add the form to the template
+</I>&gt;<i>             $tpl-&gt;assignForm ( 'form',$form );
+</I>&gt;<i> 
+</I>&gt;<i>             // Display the template
+</I>&gt;<i>             $tpl-&gt;display();
+</I>&gt;<i> 
+</I>&gt;<i>         }
+</I>&gt;<i> 
+</I>&gt;<i>     }
+</I>&gt;<i> 
+</I>&gt;<i>     // Process the request
+</I>&gt;<i>     YDInclude( 'YDF2_process.php' );
+</I>&gt;<i> 
+</I>&gt;<i> ?&gt;
+</I>&gt;<i> The template:
+</I>&gt;<i> 
+</I>&gt;<i> {$form.tag}
+</I>&gt;<i>    
+</I>&gt;<i>
+</I>{$form.choose_multiple.html|@replace:'##ITEMSEP##':'&lt;br/&gt;'}
+&gt;<i>     &lt;br/&gt;
+</I>&gt;<i>     {$form.btnSubmit.html}
+</I>&gt;<i> {$form.endtag}
+</I>&gt;<i> 
+</I>&gt;<i> 
+</I>&gt;<i> Cheers,
+</I>&gt;<i> 
+</I>&gt;<i> 
+</I>&gt;<i> pieter
+</I>&gt;<i> 
+</I>&gt;<i> 
+</I>&gt;<i> On 3/23/06, <A HREF="https://lists.berlios.de/mailman/listinfo/ydframework-users">moses at softwaysolutions.com</A>
+</I>&gt;<i> &lt;<A HREF="https://lists.berlios.de/mailman/listinfo/ydframework-users">moses at softwaysolutions.com</A>&gt; wrote:
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt; Dear Sir
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt;               What is checkboxgroup i didnt
+</I>&gt;<i> understood and no such word in
+</I>&gt;<i> &gt; help manual also....
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt; regards
+</I>&gt;<i> &gt; moses
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt; -------- Original Message --------
+</I>&gt;<i> &gt; Subject: [ydf-users] Re: Query Regarding menu
+</I>&gt;<i> &gt; From: &quot;Pieter Claerhout&quot; &lt;<A HREF="https://lists.berlios.de/mailman/listinfo/ydframework-users">pieter at yellowduck.be</A>&gt;
+</I>&gt;<i> &gt; Date: Thu, March 23, 2006 4:11 am
+</I>&gt;<i> &gt; To: &quot;<A HREF="https://lists.berlios.de/mailman/listinfo/ydframework-users">moses at softwaysolutions.com</A>&quot;
+</I>&gt;<i> &lt;<A HREF="https://lists.berlios.de/mailman/listinfo/ydframework-users">moses at softwaysolutions.com</A>&gt;
+</I>&gt;<i> &gt; Cc: <A HREF="https://lists.berlios.de/mailman/listinfo/ydframework-users">ydframework-users at berlios.de</A>
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt; I didn't build in support for that (yet). The
+</I>&gt;<i> easiest solution is probably
+</I>&gt;<i> &gt; to replace the select element with a bunch of
+</I>&gt;<i> checkboxes that simulate the
+</I>&gt;<i> &gt; same behaviour. The &quot;checkboxgroup&quot; element is
+</I>&gt;<i> specifically designed for
+</I>&gt;<i> &gt; this.
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt; Regards,
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt; pieter
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt; On 3/23/06, <A HREF="https://lists.berlios.de/mailman/listinfo/ydframework-users">moses at softwaysolutions.com</A>
+</I>&gt;<i> &lt;<A HREF="https://lists.berlios.de/mailman/listinfo/ydframework-users">moses at softwaysolutions.com</A> &gt;
+</I>&gt;<i> &gt; wrote:
+</I>&gt;<i> &gt; &gt;
+</I>&gt;<i> &gt; &gt;  Dear Sir
+</I>&gt;<i> &gt; &gt;
+</I>&gt;<i> &gt; &gt;
+</I>&gt;<i> &gt; &gt;          How to get the all the values that ar
+</I>&gt;<i> selected in a
+</I>&gt;<i> &gt; &gt; List/Menu(when multiple is enabled)
+</I>&gt;<i> &gt; &gt;
+</I>&gt;<i> &gt; &gt;        
+</I>&gt;<i>
+</I>$this-&gt;form-&gt;addElement('select','cboMarks','',array('size'=&gt;5,'multiple'=&gt;''),array('1'=&gt;'Maths','2'=&gt;'English','3'=&gt;'Tamil','4'=&gt;'Hindi'));
+&gt;<i> &gt; &gt;
+</I>&gt;<i> &gt; &gt;         This statement displayes a menu with
+</I>&gt;<i> fourfields
+</I>&gt;<i> &gt; &gt;
+</I>&gt;<i> &gt; &gt;
+</I>&gt;<i> &gt; &gt;        Now i am selecting English,Tamil. and
+</I>&gt;<i> getting the result like
+</I>&gt;<i> &gt; &gt; this
+</I>&gt;<i> &gt; &gt;
+</I>&gt;<i> &gt; &gt;        $data = $this-&gt;form-&gt;getValues();
+</I>&gt;<i> &gt; &gt;         print_r($data);
+</I>&gt;<i> &gt; &gt;
+</I>&gt;<i> &gt; &gt;
+</I>&gt;<i> &gt; &gt;
+</I>&gt;<i> &gt; &gt; *Array
+</I>&gt;<i> &gt; &gt; (
+</I>&gt;<i> &gt; &gt;     [cboMarks] =&gt; 3
+</I>&gt;<i> &gt; &gt; )*
+</I>&gt;<i> &gt; &gt;
+</I>&gt;<i> &gt; &gt;          It is only displaying the last selected
+</I>&gt;<i> value.What to do to get
+</I>&gt;<i> &gt; &gt; all the selected value
+</I>&gt;<i> &gt; &gt;
+</I>&gt;<i> &gt; &gt;
+</I>&gt;<i> &gt; &gt;
+</I>&gt;<i> &gt; &gt; regards
+</I>&gt;<i> &gt; &gt; moses
+</I>&gt;<i> &gt; &gt;
+</I>&gt;<i> &gt; &gt;
+</I>&gt;<i> &gt; &gt;
+</I>&gt;<i> &gt; &gt;
+</I>&gt;<i> &gt; &gt;
+</I>&gt;<i> &gt; &gt;
+</I>&gt;<i> &gt; &gt;
+</I>&gt;<i> &gt; &gt;
+</I>&gt;<i> &gt; &gt;
+</I>&gt;<i> &gt; &gt;
+</I>&gt;<i> &gt; &gt;
+</I>&gt;<i> &gt; &gt;
+</I>&gt;<i> &gt; &gt;
+</I>&gt;<i> &gt; &gt;
+</I>&gt;<i> &gt; &gt;
+</I>&gt;<i> &gt; &gt;
+</I>&gt;<i> &gt; &gt;
+</I>&gt;<i> &gt; &gt;
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt; --
+</I>&gt;<i> &gt; pieter claerhout . <A HREF="https://lists.berlios.de/mailman/listinfo/ydframework-users">pieter at yellowduck.be</A> .
+</I>&gt;<i> <A HREF="http://www.yellowduck.be/">http://www.yellowduck.be/</A>
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt; _______________________________________________
+</I>&gt;<i> YDFramework-users mailing
+</I>&gt;<i> &gt; list <A HREF="https://lists.berlios.de/mailman/listinfo/ydframework-users">YDFramework-users at lists.berlios.de</A>
+</I>&gt;<i> &gt;
+</I>&gt;<i>
+</I><A HREF="http://lists.berlios.de/mailman/listinfo/ydframework-users">http://lists.berlios.de/mailman/listinfo/ydframework-users</A>
+&gt;<i> &gt;
+</I>&gt;<i> 
+</I>&gt;<i> 
+</I>=== message truncated ===
+
+
+__________________________________________________
+Do You Yahoo!?
+Tired of spam?  Yahoo! Mail has the best spam protection around 
+<A HREF="http://mail.yahoo.com">http://mail.yahoo.com</A> 
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000137.html">[ydf-users] Re: Query Regarding menu
+</A></li>
+	<LI>Next message: <A HREF="000143.html">[ydf-users] class structure question
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#139">[ date ]</a>
+              <a href="thread.html#139">[ thread ]</a>
+              <a href="subject.html#139">[ subject ]</a>
+              <a href="author.html#139">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/ydframework-users">More information about the YDFramework-users
+mailing list</a><br>
+</body></html>

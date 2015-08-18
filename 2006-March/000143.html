@@ -1,0 +1,318 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [ydf-users] class structure question
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/ydframework-users/2006-March/index.html" >
+   <LINK REL="made" HREF="mailto:ydframework-users%40lists.berlios.de?Subject=Re%3A%20%5Bydf-users%5D%20class%20structure%20question&In-Reply-To=%3C4aef63030603230558l319d0793ibed89761f19acd6b%40mail.gmail.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000139.html">
+   <LINK REL="Next"  HREF="000147.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[ydf-users] class structure question</H1>
+    <B>Pieter Claerhout</B> 
+    <A HREF="mailto:ydframework-users%40lists.berlios.de?Subject=Re%3A%20%5Bydf-users%5D%20class%20structure%20question&In-Reply-To=%3C4aef63030603230558l319d0793ibed89761f19acd6b%40mail.gmail.com%3E"
+       TITLE="[ydf-users] class structure question">pieter at yellowduck.be
+       </A><BR>
+    <I>Thu Mar 23 14:58:57 CET 2006</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000139.html">[ydf-users] class structure question
+</A></li>
+        <LI>Next message: <A HREF="000147.html">[ydf-users] class structure question
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#143">[ date ]</a>
+              <a href="thread.html#143">[ thread ]</a>
+              <a href="subject.html#143">[ subject ]</a>
+              <a href="author.html#143">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Inheritance is the way to go. If you want to have common functionality
+between the different requests, you extends YDRequest and implement it in
+there.
+
+Why do you dislike about this approach? I think it's a good programming
+practice to use inheritence for this.
+
+cheers,
+
+
+pieter
+
+On 3/23/06, dab &lt;<A HREF="https://lists.berlios.de/mailman/listinfo/ydframework-users">dab214 at yahoo.com</A>&gt; wrote:
+&gt;<i>
+</I>&gt;<i> hi all,
+</I>&gt;<i> what is the best way to make sure certain methods that
+</I>&gt;<i> are used across the site are accesable from the main
+</I>&gt;<i> class?
+</I>&gt;<i> i'd like to access the methods without having to
+</I>&gt;<i> initiating a new object, accessing it like it was a
+</I>&gt;<i> method in the parent class.
+</I>&gt;<i> the way i have it now is one class called Core that
+</I>&gt;<i> inherits from YDRequest and all my classes inherits
+</I>&gt;<i> from Core. Not a very good setup so i was hoping there
+</I>&gt;<i> are better options.
+</I>&gt;<i> thanks.
+</I>&gt;<i>
+</I>&gt;<i> /dan
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i> --- Pieter Claerhout &lt;<A HREF="https://lists.berlios.de/mailman/listinfo/ydframework-users">pieter at yellowduck.be</A>&gt; wrote:
+</I>&gt;<i>
+</I>&gt;<i> &gt; Take a look at this example:
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt; The PHP code:
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt; &lt;?php
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt;     // Standard include
+</I>&gt;<i> &gt;     include_once( dirname( __FILE__ ) .
+</I>&gt;<i> &gt; '/../YDFramework2/YDF2_init.php' );
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt;     // Includes
+</I>&gt;<i> &gt;     YDInclude( 'YDForm.php' );
+</I>&gt;<i> &gt;     YDInclude( 'YDTemplate.php' );
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt;     // Class definition
+</I>&gt;<i> &gt;     class form_checkboxgroup extends YDRequest {
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt;         // Class constructor
+</I>&gt;<i> &gt;         function form_checkboxgroup() {
+</I>&gt;<i> &gt;             $this-&gt;YDRequest();
+</I>&gt;<i> &gt;         }
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt;         // Default action
+</I>&gt;<i> &gt;         function actionDefault() {
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt;             // Create the form
+</I>&gt;<i> &gt;             $form = new YDForm( 'form1' );
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt;             // Add the radiobutton
+</I>&gt;<i> &gt;             $form-&gt;addElement( 'checkboxgroup',
+</I>&gt;<i> &gt; 'choose_multiple', 'Choose
+</I>&gt;<i> &gt; multiple', array(), array( 0 =&gt; 'choice 1', 1 =&gt;
+</I>&gt;<i> &gt; 'choice 2' ) );
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt;             // Add the submit button
+</I>&gt;<i> &gt;             $form-&gt;addElement( 'submit',
+</I>&gt;<i> &gt; 'btnSubmit', 'submit' );
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt;             // Set the defaults
+</I>&gt;<i> &gt;             $form-&gt;setDefaults( array(
+</I>&gt;<i> &gt; 'choose_multiple' =&gt; array( 0=&gt;0,
+</I>&gt;<i> &gt; 1=&gt;1 ) ) );
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt;             // Process the form
+</I>&gt;<i> &gt;             if ( $form-&gt;validate() === true ) {
+</I>&gt;<i> &gt;                 YDDebugUtil::dump(
+</I>&gt;<i> &gt; $form-&gt;getValues() );
+</I>&gt;<i> &gt;             }
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt;             // Add the template
+</I>&gt;<i> &gt;             $tpl = new YDTemplate();
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt;             // Add the form to the template
+</I>&gt;<i> &gt;             $tpl-&gt;assignForm ( 'form',$form );
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt;             // Display the template
+</I>&gt;<i> &gt;             $tpl-&gt;display();
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt;         }
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt;     }
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt;     // Process the request
+</I>&gt;<i> &gt;     YDInclude( 'YDF2_process.php' );
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt; ?&gt;
+</I>&gt;<i> &gt; The template:
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt; {$form.tag}
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt;
+</I>&gt;<i> {$form.choose_multiple.html|@replace:'##ITEMSEP##':'&lt;br/&gt;'}
+</I>&gt;<i> &gt;     &lt;br/&gt;
+</I>&gt;<i> &gt;     {$form.btnSubmit.html}
+</I>&gt;<i> &gt; {$form.endtag}
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt; Cheers,
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt; pieter
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt; On 3/23/06, <A HREF="https://lists.berlios.de/mailman/listinfo/ydframework-users">moses at softwaysolutions.com</A>
+</I>&gt;<i> &gt; &lt;<A HREF="https://lists.berlios.de/mailman/listinfo/ydframework-users">moses at softwaysolutions.com</A>&gt; wrote:
+</I>&gt;<i> &gt; &gt;
+</I>&gt;<i> &gt; &gt;
+</I>&gt;<i> &gt; &gt;
+</I>&gt;<i> &gt; &gt; Dear Sir
+</I>&gt;<i> &gt; &gt;
+</I>&gt;<i> &gt; &gt;
+</I>&gt;<i> &gt; &gt;               What is checkboxgroup i didnt
+</I>&gt;<i> &gt; understood and no such word in
+</I>&gt;<i> &gt; &gt; help manual also....
+</I>&gt;<i> &gt; &gt;
+</I>&gt;<i> &gt; &gt;
+</I>&gt;<i> &gt; &gt; regards
+</I>&gt;<i> &gt; &gt; moses
+</I>&gt;<i> &gt; &gt;
+</I>&gt;<i> &gt; &gt;
+</I>&gt;<i> &gt; &gt;
+</I>&gt;<i> &gt; &gt;
+</I>&gt;<i> &gt; &gt;
+</I>&gt;<i> &gt; &gt;
+</I>&gt;<i> &gt; &gt;
+</I>&gt;<i> &gt; &gt;
+</I>&gt;<i> &gt; &gt;
+</I>&gt;<i> &gt; &gt;
+</I>&gt;<i> &gt; &gt; -------- Original Message --------
+</I>&gt;<i> &gt; &gt; Subject: [ydf-users] Re: Query Regarding menu
+</I>&gt;<i> &gt; &gt; From: &quot;Pieter Claerhout&quot; &lt;<A HREF="https://lists.berlios.de/mailman/listinfo/ydframework-users">pieter at yellowduck.be</A>&gt;
+</I>&gt;<i> &gt; &gt; Date: Thu, March 23, 2006 4:11 am
+</I>&gt;<i> &gt; &gt; To: &quot;<A HREF="https://lists.berlios.de/mailman/listinfo/ydframework-users">moses at softwaysolutions.com</A>&quot;
+</I>&gt;<i> &gt; &lt;<A HREF="https://lists.berlios.de/mailman/listinfo/ydframework-users">moses at softwaysolutions.com</A>&gt;
+</I>&gt;<i> &gt; &gt; Cc: <A HREF="https://lists.berlios.de/mailman/listinfo/ydframework-users">ydframework-users at berlios.de</A>
+</I>&gt;<i> &gt; &gt;
+</I>&gt;<i> &gt; &gt; I didn't build in support for that (yet). The
+</I>&gt;<i> &gt; easiest solution is probably
+</I>&gt;<i> &gt; &gt; to replace the select element with a bunch of
+</I>&gt;<i> &gt; checkboxes that simulate the
+</I>&gt;<i> &gt; &gt; same behaviour. The &quot;checkboxgroup&quot; element is
+</I>&gt;<i> &gt; specifically designed for
+</I>&gt;<i> &gt; &gt; this.
+</I>&gt;<i> &gt; &gt;
+</I>&gt;<i> &gt; &gt; Regards,
+</I>&gt;<i> &gt; &gt;
+</I>&gt;<i> &gt; &gt;
+</I>&gt;<i> &gt; &gt; pieter
+</I>&gt;<i> &gt; &gt;
+</I>&gt;<i> &gt; &gt; On 3/23/06, <A HREF="https://lists.berlios.de/mailman/listinfo/ydframework-users">moses at softwaysolutions.com</A>
+</I>&gt;<i> &gt; &lt;<A HREF="https://lists.berlios.de/mailman/listinfo/ydframework-users">moses at softwaysolutions.com</A> &gt;
+</I>&gt;<i> &gt; &gt; wrote:
+</I>&gt;<i> &gt; &gt; &gt;
+</I>&gt;<i> &gt; &gt; &gt;  Dear Sir
+</I>&gt;<i> &gt; &gt; &gt;
+</I>&gt;<i> &gt; &gt; &gt;
+</I>&gt;<i> &gt; &gt; &gt;          How to get the all the values that ar
+</I>&gt;<i> &gt; selected in a
+</I>&gt;<i> &gt; &gt; &gt; List/Menu(when multiple is enabled)
+</I>&gt;<i> &gt; &gt; &gt;
+</I>&gt;<i> &gt; &gt; &gt;
+</I>&gt;<i> &gt;
+</I>&gt;<i>
+</I>&gt;<i> $this-&gt;form-&gt;addElement('select','cboMarks','',array('size'=&gt;5,'multiple'=&gt;''),array('1'=&gt;'Maths','2'=&gt;'English','3'=&gt;'Tamil','4'=&gt;'Hindi'));
+</I>&gt;<i> &gt; &gt; &gt;
+</I>&gt;<i> &gt; &gt; &gt;         This statement displayes a menu with
+</I>&gt;<i> &gt; fourfields
+</I>&gt;<i> &gt; &gt; &gt;
+</I>&gt;<i> &gt; &gt; &gt;
+</I>&gt;<i> &gt; &gt; &gt;        Now i am selecting English,Tamil. and
+</I>&gt;<i> &gt; getting the result like
+</I>&gt;<i> &gt; &gt; &gt; this
+</I>&gt;<i> &gt; &gt; &gt;
+</I>&gt;<i> &gt; &gt; &gt;        $data = $this-&gt;form-&gt;getValues();
+</I>&gt;<i> &gt; &gt; &gt;         print_r($data);
+</I>&gt;<i> &gt; &gt; &gt;
+</I>&gt;<i> &gt; &gt; &gt;
+</I>&gt;<i> &gt; &gt; &gt;
+</I>&gt;<i> &gt; &gt; &gt; *Array
+</I>&gt;<i> &gt; &gt; &gt; (
+</I>&gt;<i> &gt; &gt; &gt;     [cboMarks] =&gt; 3
+</I>&gt;<i> &gt; &gt; &gt; )*
+</I>&gt;<i> &gt; &gt; &gt;
+</I>&gt;<i> &gt; &gt; &gt;          It is only displaying the last selected
+</I>&gt;<i> &gt; value.What to do to get
+</I>&gt;<i> &gt; &gt; &gt; all the selected value
+</I>&gt;<i> &gt; &gt; &gt;
+</I>&gt;<i> &gt; &gt; &gt;
+</I>&gt;<i> &gt; &gt; &gt;
+</I>&gt;<i> &gt; &gt; &gt; regards
+</I>&gt;<i> &gt; &gt; &gt; moses
+</I>&gt;<i> &gt; &gt; &gt;
+</I>&gt;<i> &gt; &gt; &gt;
+</I>&gt;<i> &gt; &gt; &gt;
+</I>&gt;<i> &gt; &gt; &gt;
+</I>&gt;<i> &gt; &gt; &gt;
+</I>&gt;<i> &gt; &gt; &gt;
+</I>&gt;<i> &gt; &gt; &gt;
+</I>&gt;<i> &gt; &gt; &gt;
+</I>&gt;<i> &gt; &gt; &gt;
+</I>&gt;<i> &gt; &gt; &gt;
+</I>&gt;<i> &gt; &gt; &gt;
+</I>&gt;<i> &gt; &gt; &gt;
+</I>&gt;<i> &gt; &gt; &gt;
+</I>&gt;<i> &gt; &gt; &gt;
+</I>&gt;<i> &gt; &gt; &gt;
+</I>&gt;<i> &gt; &gt; &gt;
+</I>&gt;<i> &gt; &gt; &gt;
+</I>&gt;<i> &gt; &gt; &gt;
+</I>&gt;<i> &gt; &gt;
+</I>&gt;<i> &gt; &gt;
+</I>&gt;<i> &gt; &gt;
+</I>&gt;<i> &gt; &gt; --
+</I>&gt;<i> &gt; &gt; pieter claerhout . <A HREF="https://lists.berlios.de/mailman/listinfo/ydframework-users">pieter at yellowduck.be</A> .
+</I>&gt;<i> &gt; <A HREF="http://www.yellowduck.be/">http://www.yellowduck.be/</A>
+</I>&gt;<i> &gt; &gt;
+</I>&gt;<i> &gt; &gt; _______________________________________________
+</I>&gt;<i> &gt; YDFramework-users mailing
+</I>&gt;<i> &gt; &gt; list <A HREF="https://lists.berlios.de/mailman/listinfo/ydframework-users">YDFramework-users at lists.berlios.de</A>
+</I>&gt;<i> &gt; &gt;
+</I>&gt;<i> &gt;
+</I>&gt;<i> <A HREF="http://lists.berlios.de/mailman/listinfo/ydframework-users">http://lists.berlios.de/mailman/listinfo/ydframework-users</A>
+</I>&gt;<i> &gt; &gt;
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt;
+</I>&gt;<i> === message truncated ===
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i> __________________________________________________
+</I>&gt;<i> Do You Yahoo!?
+</I>&gt;<i> Tired of spam?  Yahoo! Mail has the best spam protection around
+</I>&gt;<i> <A HREF="http://mail.yahoo.com">http://mail.yahoo.com</A>
+</I>&gt;<i> _______________________________________________
+</I>&gt;<i> YDFramework-users mailing list
+</I>&gt;<i> <A HREF="https://lists.berlios.de/mailman/listinfo/ydframework-users">YDFramework-users at lists.berlios.de</A>
+</I>&gt;<i> <A HREF="http://lists.berlios.de/mailman/listinfo/ydframework-users">http://lists.berlios.de/mailman/listinfo/ydframework-users</A>
+</I>&gt;<i>
+</I>
+
+
+--
+pieter claerhout . <A HREF="https://lists.berlios.de/mailman/listinfo/ydframework-users">pieter at yellowduck.be</A> . <A HREF="http://www.yellowduck.be/">http://www.yellowduck.be/</A>
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: &lt;<A HREF="https://lists.berlios.de/pipermail/ydframework-users/attachments/20060323/6701d7a8/attachment.html">https://lists.berlios.de/pipermail/ydframework-users/attachments/20060323/6701d7a8/attachment.html</A>&gt;
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000139.html">[ydf-users] class structure question
+</A></li>
+	<LI>Next message: <A HREF="000147.html">[ydf-users] class structure question
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#143">[ date ]</a>
+              <a href="thread.html#143">[ thread ]</a>
+              <a href="subject.html#143">[ subject ]</a>
+              <a href="author.html#143">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/ydframework-users">More information about the YDFramework-users
+mailing list</a><br>
+</body></html>

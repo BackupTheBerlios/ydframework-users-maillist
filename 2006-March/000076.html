@@ -1,0 +1,103 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [ydf-users] Ajax Error
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/ydframework-users/2006-March/index.html" >
+   <LINK REL="made" HREF="mailto:ydframework-users%40lists.berlios.de?Subject=Re%3A%20%5Bydf-users%5D%20Ajax%20Error&In-Reply-To=%3C306340e00603010924o1cc39243w%40mail.gmail.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000075.html">
+   <LINK REL="Next"  HREF="000077.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[ydf-users] Ajax Error</H1>
+    <B>ydf poi</B> 
+    <A HREF="mailto:ydframework-users%40lists.berlios.de?Subject=Re%3A%20%5Bydf-users%5D%20Ajax%20Error&In-Reply-To=%3C306340e00603010924o1cc39243w%40mail.gmail.com%3E"
+       TITLE="[ydf-users] Ajax Error">ydfpoi at gmail.com
+       </A><BR>
+    <I>Wed Mar  1 18:24:51 CET 2006</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000075.html">[ydf-users] Ajax Error
+</A></li>
+        <LI>Next message: <A HREF="000077.html">[ydf-users] Ajax Error
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#76">[ date ]</a>
+              <a href="thread.html#76">[ thread ]</a>
+              <a href="subject.html#76">[ subject ]</a>
+              <a href="author.html#76">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Salut ph-m,
+
+it seems that you can't assign a default value to reference parameters
+(cf. <A HREF="http://fr2.php.net/manual/fr/language.references.pass.php#56644">http://fr2.php.net/manual/fr/language.references.pass.php#56644</A>)
+this is why you got your error when calling YDAjax constructor
+function in line 68 of YDAjax.php...
+
+Amicalement
+po&#239;
+
+PS: En clair, dans une d&#233;finition, tu ne peux pas initialiser un
+argument pass&#233; par r&#233;f&#233;rence ;-)
+
+
+2006/3/1, ph-m &lt;<A HREF="https://lists.berlios.de/mailman/listinfo/ydframework-users">phmassa at gmail.com</A>&gt;:
+&gt;<i> hi,
+</I>&gt;<i>
+</I>&gt;<i> I got this error :
+</I>&gt;<i>
+</I>&gt;<i> [Wed Mar 01 14:12:23 2006] [error] [client 55.121.6.1] PHP Parse
+</I>&gt;<i> error:  parse error, unexpected '=', expecting ')' in
+</I>&gt;<i> e:\\wamp\\phpshare\\includes\\YDFramework2\\addons\\YDAjax\\YDAjax.php
+</I>&gt;<i> on line 68, referer: <A HREF="http://localhost/test/">http://localhost/test/</A>
+</I>&gt;<i>
+</I>&gt;<i> this line :
+</I>&gt;<i>
+</I>&gt;<i>         function YDAjax( &amp; $template, &amp; $form = null){
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i> Since YDF2 Release 1752, I think
+</I>&gt;<i>
+</I>&gt;<i> ph-m
+</I>&gt;<i> (Windows, Apache, PHP 4.4.0, YDF2 rel 1755)
+</I>&gt;<i> _______________________________________________
+</I>&gt;<i> YDFramework-users mailing list
+</I>&gt;<i> <A HREF="https://lists.berlios.de/mailman/listinfo/ydframework-users">YDFramework-users at lists.berlios.de</A>
+</I>&gt;<i> <A HREF="http://lists.berlios.de/mailman/listinfo/ydframework-users">http://lists.berlios.de/mailman/listinfo/ydframework-users</A>
+</I>&gt;<i>
+</I>
+
+--
+po&#239;
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000075.html">[ydf-users] Ajax Error
+</A></li>
+	<LI>Next message: <A HREF="000077.html">[ydf-users] Ajax Error
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#76">[ date ]</a>
+              <a href="thread.html#76">[ thread ]</a>
+              <a href="subject.html#76">[ subject ]</a>
+              <a href="author.html#76">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/ydframework-users">More information about the YDFramework-users
+mailing list</a><br>
+</body></html>

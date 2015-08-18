@@ -1,0 +1,144 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [ydf-users] Anyone has some CRUD functionality available?
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/ydframework-users/2006-February/index.html" >
+   <LINK REL="made" HREF="mailto:ydframework-users%40lists.berlios.de?Subject=Re%3A%20%5Bydf-users%5D%20Anyone%20has%20some%20CRUD%20functionality%20available%3F&In-Reply-To=%3C4aef63030602080003kc245351rc934745fcf6d07cb%40mail.gmail.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000005.html">
+   <LINK REL="Next"  HREF="000001.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[ydf-users] Anyone has some CRUD functionality available?</H1>
+    <B>Pieter Claerhout</B> 
+    <A HREF="mailto:ydframework-users%40lists.berlios.de?Subject=Re%3A%20%5Bydf-users%5D%20Anyone%20has%20some%20CRUD%20functionality%20available%3F&In-Reply-To=%3C4aef63030602080003kc245351rc934745fcf6d07cb%40mail.gmail.com%3E"
+       TITLE="[ydf-users] Anyone has some CRUD functionality available?">pieter at yellowduck.be
+       </A><BR>
+    <I>Wed Feb  8 09:03:23 CET 2006</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000005.html">[ydf-users] Anyone has some CRUD functionality available?
+</A></li>
+        <LI>Next message: <A HREF="000001.html">[ydf-users] Interesting DB abstraction layer
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#7">[ date ]</a>
+              <a href="thread.html#7">[ thread ]</a>
+              <a href="subject.html#7">[ subject ]</a>
+              <a href="author.html#7">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>I was actually thinking along the lines of something like RIFE/Crud (
+<A HREF="https://rife-crud.dev.java.net/">https://rife-crud.dev.java.net/</A>).
+
+The basic idea is that you define objects for the different tables you have
+and the system automatically generates a user interface for it that allows
+you to add/update/delete/view the contents. RIFE/Crud adds some really nice
+features to that such as:
+
+- It allows you to easily override the way the interface is rendered
+- Everything is controlled by means of CSS stylesheets
+
+It unfortunately lacks some features such as:
+
+- many to many links
+- sorting
+- searching
+- filtering
+- grouping
+
+The reason I'm looking for something like this is because I been doing a lot
+of quite simple websites lately that basically contain database information.
+One of them was a really simple feature request database.
+
+Here at my workplace, people use a lot of Excel sheets to keep tabular data,
+but that's really not the way to do it. If you would be able to define the
+objects that should be kept as a list and then have the system generating
+the database schema and the user interface, one can save hours of time for
+these type of application.
+
+The key of course here is that we keep a system like this as flexible and
+customizable as possible.
+
+Regards,
+
+
+pieter
+
+On 2/8/06, David Bittencourt &lt;<A HREF="https://lists.berlios.de/mailman/listinfo/ydframework-users">muitocomplicado at gmail.com</A>&gt; wrote:
+&gt;<i>
+</I>&gt;<i> When I started YDDatabaseObject I had the idea of adding YDForm
+</I>&gt;<i> functionality to it.
+</I>&gt;<i>
+</I>&gt;<i> That was complicating the class with not database related stuff, so I
+</I>&gt;<i> didn't.
+</I>&gt;<i>
+</I>&gt;<i> Now that the class is more stable, I think is fairly easy to implement
+</I>&gt;<i> this kind of functionality, but I'm not sure if it's the best thing to add
+</I>&gt;<i> it into the YDDatabaseObject class.
+</I>&gt;<i>
+</I>&gt;<i> Perhaps creating a YDFormObject class (or something like this) to handle
+</I>&gt;<i> forms in conjunction with YDDatabaseObject classes.
+</I>&gt;<i>
+</I>&gt;<i> -db
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i> On 2/7/06, Francisco Azevedo &lt;<A HREF="https://lists.berlios.de/mailman/listinfo/ydframework-users">francisco at fusemail.com</A>&gt; wrote:
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt; Hi
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt; Now, i'm ready for the ydf mailinglist.
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt; &gt; As we have YDDatabaseObject available, I'm wondering if someone is
+</I>&gt;<i> &gt; &gt; perhaps working on some CRUD like functionality that can generate a
+</I>&gt;<i> &gt; &gt; user interface based on the model definition. For a lot of web
+</I>&gt;<i> &gt; &gt; applications, I guess this could save some really valuable time.
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt; I'm not. Do you mean something like what's implemented in ruby?
+</I>&gt;<i> &gt; Something like an auto-form creator based on a table scheme?
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt; Francisco Azevedo
+</I>&gt;<i> &gt; _______________________________________________
+</I>&gt;<i> &gt; YDFramework-users mailing list
+</I>&gt;<i> &gt; <A HREF="https://lists.berlios.de/mailman/listinfo/ydframework-users">YDFramework-users at lists.berlios.de</A>
+</I>&gt;<i> &gt; <A HREF="http://lists.berlios.de/mailman/listinfo/ydframework-users">http://lists.berlios.de/mailman/listinfo/ydframework-users</A>
+</I>&gt;<i> &gt;
+</I>&gt;<i>
+</I>&gt;<i>
+</I>
+
+--
+pieter claerhout . <A HREF="https://lists.berlios.de/mailman/listinfo/ydframework-users">pieter at yellowduck.be</A> . <A HREF="http://www.yellowduck.be/">http://www.yellowduck.be/</A>
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: &lt;<A HREF="https://lists.berlios.de/pipermail/ydframework-users/attachments/20060208/bcde4d22/attachment.html">https://lists.berlios.de/pipermail/ydframework-users/attachments/20060208/bcde4d22/attachment.html</A>&gt;
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000005.html">[ydf-users] Anyone has some CRUD functionality available?
+</A></li>
+	<LI>Next message: <A HREF="000001.html">[ydf-users] Interesting DB abstraction layer
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#7">[ date ]</a>
+              <a href="thread.html#7">[ thread ]</a>
+              <a href="subject.html#7">[ subject ]</a>
+              <a href="author.html#7">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/ydframework-users">More information about the YDFramework-users
+mailing list</a><br>
+</body></html>

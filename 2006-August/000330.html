@@ -1,0 +1,89 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [ydf-users] multiple ajax forms
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/ydframework-users/2006-August/index.html" >
+   <LINK REL="made" HREF="mailto:ydframework-users%40lists.berlios.de?Subject=Re%3A%20%5Bydf-users%5D%20multiple%20ajax%20forms&In-Reply-To=%3C44EA52E8.9020204%40fusemail.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000328.html">
+   <LINK REL="Next"  HREF="000333.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[ydf-users] multiple ajax forms</H1>
+    <B>Francisco Azevedo</B> 
+    <A HREF="mailto:ydframework-users%40lists.berlios.de?Subject=Re%3A%20%5Bydf-users%5D%20multiple%20ajax%20forms&In-Reply-To=%3C44EA52E8.9020204%40fusemail.com%3E"
+       TITLE="[ydf-users] multiple ajax forms">francisco at fusemail.com
+       </A><BR>
+    <I>Tue Aug 22 02:42:16 CEST 2006</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000328.html">[ydf-users] multiple ajax forms
+</A></li>
+        <LI>Next message: <A HREF="000333.html">[ydf-users] multiple ajax forms
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#330">[ date ]</a>
+              <a href="thread.html#330">[ thread ]</a>
+              <a href="subject.html#330">[ subject ]</a>
+              <a href="author.html#330">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Hi Matthias
+
+&gt;<i> I recently tried to use multiple forms on one page with some ajax events 
+</I>&gt;<i> attached - unfortunately the javascript code of the first form will be 
+</I>&gt;<i> overwritten when calling the processEvents method of the 2nd ajax object 
+</I>&gt;<i> attached to the 2nd form.
+</I>&gt;<i> 
+</I>&gt;<i> Is there a way to use ajax with multiple forms on the same page? do I have to 
+</I>&gt;<i> use a specific order to not overwrite the events of each other form?
+</I>
+YDAjax was created with that feature (more than one form) in mind. The 
+process should be transparent like if you are using just one form. Note 
+that you should:
+
+- create form elements with different names (even if they belong to 
+different forms)
+
+- add all object forms to YDAjax (using YDAjax::addForm( $YDFormObject ))
+
+
+Anyway, i added a new YDAjax example on how to use more than one YDForm 
+with YDAjax.
+
+I hope this can solve your problem.
+
+
+regards
+Francisco A
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000328.html">[ydf-users] multiple ajax forms
+</A></li>
+	<LI>Next message: <A HREF="000333.html">[ydf-users] multiple ajax forms
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#330">[ date ]</a>
+              <a href="thread.html#330">[ thread ]</a>
+              <a href="subject.html#330">[ subject ]</a>
+              <a href="author.html#330">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/ydframework-users">More information about the YDFramework-users
+mailing list</a><br>
+</body></html>

@@ -1,0 +1,189 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [ydf-users] YDDatabaseObject - What's the right way to do ?
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/ydframework-users/2006-July/index.html" >
+   <LINK REL="made" HREF="mailto:ydframework-users%40lists.berlios.de?Subject=Re%3A%20%5Bydf-users%5D%20YDDatabaseObject%20-%20What%27s%20the%20right%20way%20to%20do%20%3F&In-Reply-To=%3C12260be20607021704g2fe01356u6f9b792a03a2ec30%40mail.gmail.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000259.html">
+   <LINK REL="Next"  HREF="000278.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[ydf-users] YDDatabaseObject - What's the right way to do ?</H1>
+    <B>David Bittencourt</B> 
+    <A HREF="mailto:ydframework-users%40lists.berlios.de?Subject=Re%3A%20%5Bydf-users%5D%20YDDatabaseObject%20-%20What%27s%20the%20right%20way%20to%20do%20%3F&In-Reply-To=%3C12260be20607021704g2fe01356u6f9b792a03a2ec30%40mail.gmail.com%3E"
+       TITLE="[ydf-users] YDDatabaseObject - What's the right way to do ?">muitocomplicado at gmail.com
+       </A><BR>
+    <I>Mon Jul  3 02:04:38 CEST 2006</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000259.html">[ydf-users] YDDatabaseObject - What's the right way to do ?
+</A></li>
+        <LI>Next message: <A HREF="000278.html">[ydf-users] YDDatabaseObject - What's the right way to do ?
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#262">[ date ]</a>
+              <a href="thread.html#262">[ thread ]</a>
+              <a href="subject.html#262">[ subject ]</a>
+              <a href="author.html#262">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>What you are doing looks right. Be sure to register the relation correctly.
+
+    class object extends YDDatabaseObject {
+        function object() {
+            $this-&gt;YDDatabaseObject();
+
+            $this-&gt;registerKey( 'id' );
+            $this-&gt;registerField( 'name' );
+            $this-&gt;registerField( 'idstate' );
+            $this-&gt;registerField( 'idplace' );
+
+            $rel = &amp; $this-&gt;registerRelation( 'state', false, 'state' );
+            $rel-&gt;setForeignJoin( 'INNER' );
+            $rel-&gt;setLocalKey( 'idstate' ); // it's not the primary key of
+object
+            $rel-&gt;setForeignKey( 'id' );
+
+            $rel = &amp; $this-&gt;registerRelation( 'place', false, 'place' );
+            $rel-&gt;setForeignJoin( 'INNER' );
+            $rel-&gt;setLocalKey( 'idplace' ); // it's not the primary key of
+object
+            $rel-&gt;setForeignKey( 'id' );
+        }
+    }
+
+So if you have:
+
+$obj = YDDatabaseObject::getInstance( 'object' );
+$obj-&gt;id = 1;
+$obj-&gt;find( 'state', 'place' );
+
+After this you will have:
+
+$obj-&gt;id = 1;
+$obj-&gt;name = 'one hammer';
+$obj-&gt;idstate = 1;
+$obj-&gt;idplace = 2;
+$obj-&gt;state-&gt;id = 1;
+$obj-&gt;state-&gt;label = 'new';
+$obj-&gt;place-&gt;id = 2;
+$obj-&gt;place-&gt;label = 'cellar';
+
+If you use getValues to retrieve an array you'll have:
+
+array(
+  'id' =&gt; 1,
+  'name' =&gt; 'one hammer';
+  'idstate' =&gt; 1,
+  'idplace' =&gt; 2,
+  'state_id' =&gt; 1,
+  'state_label' =&gt; 'new',
+  'place_id' =&gt; 2,
+  'place_label' =&gt; 'cellar'
+);
+
+Check the user guide for more help:
+<A HREF="http://ydframework.berlios.de/doc/yddatabaseobject.html">http://ydframework.berlios.de/doc/yddatabaseobject.html</A>
+
+Cheers,
+
+David - db
+
+On 7/2/06, Erwan &lt;<A HREF="https://lists.berlios.de/mailman/listinfo/ydframework-users">araviski at free.fr</A>&gt; wrote:
+&gt;<i>
+</I>&gt;<i> Hi all,
+</I>&gt;<i> Here is something I'd like to do with the YDDatabaseObject but I cannot
+</I>&gt;<i> find the right way to do.
+</I>&gt;<i> In the YDDO examples provided with the framework, there's always
+</I>&gt;<i> multiple rows associated to one object. I mean, a user can have multiple
+</I>&gt;<i> phone numbers and can be associated with multiple groups. I know that in
+</I>&gt;<i> this case the phone number row is associated to one and only one user,
+</I>&gt;<i> but how should I consider a row that can be associated to &quot;one&quot; other
+</I>&gt;<i> row, many times. I mean for example an object which can be in one place
+</I>&gt;<i> and associated with one state, of which labels and other valuable
+</I>&gt;<i> information would be in other tables ? I hope it'll be more
+</I>&gt;<i> understandable with the detailled example, if not let me know :
+</I>&gt;<i>
+</I>&gt;<i> Objects table :
+</I>&gt;<i> idobject-name-idstate-idplace
+</I>&gt;<i> 1-one hammer-1-2
+</I>&gt;<i> 2-Swiss knive-1-1
+</I>&gt;<i> 3-one other hammer-2-2
+</I>&gt;<i>
+</I>&gt;<i> States table :
+</I>&gt;<i> idstate-label-and other valuable attributes...
+</I>&gt;<i> ---------------------
+</I>&gt;<i> 1-new-...
+</I>&gt;<i> 2-in good condition-...
+</I>&gt;<i> 3-word-...
+</I>&gt;<i>
+</I>&gt;<i> Places table :
+</I>&gt;<i> idplace- label-and other valuable attributes...
+</I>&gt;<i> ---------------------
+</I>&gt;<i> 1-kitchen-...
+</I>&gt;<i> 2-cellar-...
+</I>&gt;<i>
+</I>&gt;<i> I'd like to be able to write something like :
+</I>&gt;<i> $object-&gt;id = 1;
+</I>&gt;<i> $object-&gt;find('state', 'place');
+</I>&gt;<i> in order to retrieve :
+</I>&gt;<i> $object-&gt;id = 1
+</I>&gt;<i> $object-&gt;label-&gt;one hammer
+</I>&gt;<i> $object-&gt;state_id =1
+</I>&gt;<i> $object-&gt;state_label =new
+</I>&gt;<i> $object-&gt;place_id = 2
+</I>&gt;<i> $object-&gt;place_label = cellar
+</I>&gt;<i>
+</I>&gt;<i> I thought first I could reuse the phone relationship example, with an
+</I>&gt;<i> INNER join association, but I don't succeed and it breaks my head since
+</I>&gt;<i> two days. The best I'have made is to retrieve the object with a
+</I>&gt;<i> $object-&gt;find('state', 'place'), but the inner joins are not made on the
+</I>&gt;<i> proper key.
+</I>&gt;<i> I can handle it with a multiple relationship and an intermediate table
+</I>&gt;<i> of mapping like the user_group provided example, with a single
+</I>&gt;<i> association row, but before using this way I'd like to know if I miss
+</I>&gt;<i> something.
+</I>&gt;<i> Any pieces of information would be appreciated,
+</I>&gt;<i> Many thanks,
+</I>&gt;<i>
+</I>&gt;<i> Erwan.
+</I>&gt;<i>
+</I>&gt;<i> _______________________________________________
+</I>&gt;<i> YDFramework-users mailing list
+</I>&gt;<i> <A HREF="https://lists.berlios.de/mailman/listinfo/ydframework-users">YDFramework-users at lists.berlios.de</A>
+</I>&gt;<i> <A HREF="http://lists.berlios.de/mailman/listinfo/ydframework-users">http://lists.berlios.de/mailman/listinfo/ydframework-users</A>
+</I>&gt;<i>
+</I>-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: &lt;<A HREF="https://lists.berlios.de/pipermail/ydframework-users/attachments/20060702/c1d1c892/attachment.html">https://lists.berlios.de/pipermail/ydframework-users/attachments/20060702/c1d1c892/attachment.html</A>&gt;
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000259.html">[ydf-users] YDDatabaseObject - What's the right way to do ?
+</A></li>
+	<LI>Next message: <A HREF="000278.html">[ydf-users] YDDatabaseObject - What's the right way to do ?
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#262">[ date ]</a>
+              <a href="thread.html#262">[ thread ]</a>
+              <a href="subject.html#262">[ subject ]</a>
+              <a href="author.html#262">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/ydframework-users">More information about the YDFramework-users
+mailing list</a><br>
+</body></html>

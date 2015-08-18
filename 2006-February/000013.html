@@ -1,0 +1,160 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [ydf-users] UPDATE with YDDatabaseObject
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/ydframework-users/2006-February/index.html" >
+   <LINK REL="made" HREF="mailto:ydframework-users%40lists.berlios.de?Subject=Re%3A%20%5Bydf-users%5D%20UPDATE%20with%20YDDatabaseObject&In-Reply-To=%3C36215.71.39.100.121.1139581422.squirrel%40www.jocosoft.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000012.html">
+   <LINK REL="Next"  HREF="000014.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[ydf-users] UPDATE with YDDatabaseObject</H1>
+    <B>peter at jocosoft.com</B> 
+    <A HREF="mailto:ydframework-users%40lists.berlios.de?Subject=Re%3A%20%5Bydf-users%5D%20UPDATE%20with%20YDDatabaseObject&In-Reply-To=%3C36215.71.39.100.121.1139581422.squirrel%40www.jocosoft.com%3E"
+       TITLE="[ydf-users] UPDATE with YDDatabaseObject">peter at jocosoft.com
+       </A><BR>
+    <I>Fri Feb 10 15:23:42 CET 2006</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000012.html">[ydf-users] UPDATE with YDDatabaseObject
+</A></li>
+        <LI>Next message: <A HREF="000014.html">[ydf-users] UPDATE with YDDatabaseObject
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#13">[ date ]</a>
+              <a href="thread.html#13">[ thread ]</a>
+              <a href="subject.html#13">[ subject ]</a>
+              <a href="author.html#13">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>And you did remove the &quot;$user-&gt;where&quot; line?
+This is what I'm doing all the time, and it works like a charm.
+
+Peter
+
+
+&gt;<i> hi peter,
+</I>&gt;<i> thanks for replying.
+</I>&gt;<i> my id in the table users is set as a key already:
+</I>&gt;<i>
+</I>&gt;<i> $this-&gt;registerKey( 'id', true );
+</I>&gt;<i> $this-&gt;registerField( 'username' );
+</I>&gt;<i>
+</I>&gt;<i> sorry i should have posted the code in the database
+</I>&gt;<i> file already.
+</I>&gt;<i> but below code gives me the same sql result as with
+</I>&gt;<i> setValues()
+</I>&gt;<i> $user-&gt;id = 1;
+</I>&gt;<i> $user-&gt;username = 'dab';
+</I>&gt;<i>
+</I>&gt;<i> thanks.
+</I>&gt;<i>
+</I>&gt;<i> /dani
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i> --- Peter &lt;<A HREF="https://lists.berlios.de/mailman/listinfo/ydframework-users">ydf at jocosoft.com</A>&gt; wrote:
+</I>&gt;<i>
+</I>&gt;&gt;<i> Hi dab,
+</I>&gt;&gt;<i>
+</I>&gt;&gt;<i> I'm not sure why that happens, or if it is as
+</I>&gt;&gt;<i> intended, but what you're
+</I>&gt;&gt;<i> trying to do can be done with:
+</I>&gt;&gt;<i>
+</I>&gt;&gt;<i> $user = YDDatabaseObject::getInstance( 'users' );
+</I>&gt;&gt;<i> $user-&gt;id = 1;
+</I>&gt;&gt;<i> $user-&gt;username = 'dab';
+</I>&gt;&gt;<i> $user-&gt;update();
+</I>&gt;&gt;<i>
+</I>&gt;&gt;<i> Provided that 'id' is the key field.
+</I>&gt;&gt;<i>
+</I>&gt;&gt;<i> Good luck!
+</I>&gt;&gt;<i> Peter
+</I>&gt;&gt;<i>
+</I>&gt;&gt;<i> dab wrote:
+</I>&gt;&gt;<i>
+</I>&gt;&gt;<i> &gt;hi,
+</I>&gt;&gt;<i> &gt;this code:
+</I>&gt;&gt;<i> &gt;$user = YDDatabaseObject::getInstance( 'users' );
+</I>&gt;&gt;<i> &gt;$user-&gt;setValues ( array ( 'username' =&gt;  'dab' )
+</I>&gt;&gt;<i> );
+</I>&gt;&gt;<i> &gt;$user-&gt;where (&quot;id = &quot;.$this-&gt;id);
+</I>&gt;&gt;<i> &gt;$user-&gt;update();
+</I>&gt;&gt;<i> &gt;
+</I>&gt;&gt;<i> &gt;produces this sql query:
+</I>&gt;&gt;<i> &gt;UPDATE `users` SET `username` = 'dab' WHERE id = 1
+</I>&gt;&gt;<i> AND
+</I>&gt;&gt;<i> &gt;`users`.`username` = 'dab'
+</I>&gt;&gt;<i> &gt;
+</I>&gt;&gt;<i> &gt;when it should produce:
+</I>&gt;&gt;<i> &gt;UPDATE `users` SET `username` = 'dab' WHERE id = 1
+</I>&gt;&gt;<i> &gt;
+</I>&gt;&gt;<i> &gt;Please tell me why the username is being added to
+</I>&gt;&gt;<i> the
+</I>&gt;&gt;<i> &gt;where clause and how i can stop it.
+</I>&gt;&gt;<i> &gt;thanks.
+</I>&gt;&gt;<i> &gt;
+</I>&gt;&gt;<i> &gt;
+</I>&gt;&gt;<i> &gt;
+</I>&gt;&gt;<i> &gt;
+</I>&gt;&gt;<i> &gt;__________________________________________________
+</I>&gt;&gt;<i> &gt;Do You Yahoo!?
+</I>&gt;&gt;<i> &gt;Tired of spam?  Yahoo! Mail has the best spam
+</I>&gt;&gt;<i> protection around
+</I>&gt;&gt;<i> &gt;<A HREF="http://mail.yahoo.com">http://mail.yahoo.com</A>
+</I>&gt;&gt;<i> &gt;_______________________________________________
+</I>&gt;&gt;<i> &gt;YDFramework-users mailing list
+</I>&gt;&gt;<i> &gt;<A HREF="https://lists.berlios.de/mailman/listinfo/ydframework-users">YDFramework-users at lists.berlios.de</A>
+</I>&gt;&gt;<i>
+</I>&gt;&gt;<i><A HREF="http://lists.berlios.de/mailman/listinfo/ydframework-users">http://lists.berlios.de/mailman/listinfo/ydframework-users</A>
+</I>&gt;&gt;<i> &gt;
+</I>&gt;&gt;<i> &gt;
+</I>&gt;&gt;<i> _______________________________________________
+</I>&gt;&gt;<i> YDFramework-users mailing list
+</I>&gt;&gt;<i> <A HREF="https://lists.berlios.de/mailman/listinfo/ydframework-users">YDFramework-users at lists.berlios.de</A>
+</I>&gt;&gt;<i>
+</I>&gt;<i> <A HREF="http://lists.berlios.de/mailman/listinfo/ydframework-users">http://lists.berlios.de/mailman/listinfo/ydframework-users</A>
+</I>&gt;&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i> __________________________________________________
+</I>&gt;<i> Do You Yahoo!?
+</I>&gt;<i> Tired of spam?  Yahoo! Mail has the best spam protection around
+</I>&gt;<i> <A HREF="http://mail.yahoo.com">http://mail.yahoo.com</A>
+</I>&gt;<i> _______________________________________________
+</I>&gt;<i> YDFramework-users mailing list
+</I>&gt;<i> <A HREF="https://lists.berlios.de/mailman/listinfo/ydframework-users">YDFramework-users at lists.berlios.de</A>
+</I>&gt;<i> <A HREF="http://lists.berlios.de/mailman/listinfo/ydframework-users">http://lists.berlios.de/mailman/listinfo/ydframework-users</A>
+</I>&gt;<i>
+</I>
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000012.html">[ydf-users] UPDATE with YDDatabaseObject
+</A></li>
+	<LI>Next message: <A HREF="000014.html">[ydf-users] UPDATE with YDDatabaseObject
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#13">[ date ]</a>
+              <a href="thread.html#13">[ thread ]</a>
+              <a href="subject.html#13">[ subject ]</a>
+              <a href="author.html#13">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/ydframework-users">More information about the YDFramework-users
+mailing list</a><br>
+</body></html>

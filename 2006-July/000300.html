@@ -1,0 +1,107 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [ydf-users] Query Regarding Variable scope
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/ydframework-users/2006-July/index.html" >
+   <LINK REL="made" HREF="mailto:ydframework-users%40lists.berlios.de?Subject=Re%3A%20%5Bydf-users%5D%20Query%20Regarding%20Variable%20scope&In-Reply-To=%3C44CB9BC3.6090307%40fusemail.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000299.html">
+   <LINK REL="Next"  HREF="000301.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[ydf-users] Query Regarding Variable scope</H1>
+    <B>Francisco Azevedo</B> 
+    <A HREF="mailto:ydframework-users%40lists.berlios.de?Subject=Re%3A%20%5Bydf-users%5D%20Query%20Regarding%20Variable%20scope&In-Reply-To=%3C44CB9BC3.6090307%40fusemail.com%3E"
+       TITLE="[ydf-users] Query Regarding Variable scope">francisco at fusemail.com
+       </A><BR>
+    <I>Sat Jul 29 19:32:51 CEST 2006</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000299.html">[ydf-users] Query Regarding Variable scope
+</A></li>
+        <LI>Next message: <A HREF="000301.html">[ydf-users] Query Regarding Variable scope
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#300">[ date ]</a>
+              <a href="thread.html#300">[ thread ]</a>
+              <a href="subject.html#300">[ subject ]</a>
+              <a href="author.html#300">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Moses Dinakaran wrote:
+&gt;<i>  
+</I>&gt;<i> Hi all
+</I>&gt;<i>  
+</I>&gt;<i>        Is it possible to return values from a forms addRule function()
+</I>&gt;<i>    
+</I>&gt;<i>   (ie)
+</I>&gt;<i>    I have Created a function to check the values of the form after it 
+</I>&gt;<i> has been submitted.
+</I>&gt;<i>   
+</I>&gt;<i>            $this-&gt;form-&gt;addFormRule(array($this,'validateTimings'));
+</I>&gt;<i>  
+</I>&gt;<i>    in that function i have a variable called name
+</I>&gt;<i>  
+</I>&gt;<i>   function validateTimings($fields)
+</I>&gt;<i> {
+</I>&gt;<i>         
+</I>&gt;<i>       $this-&gt;name = &quot;Moses&quot;;
+</I>&gt;<i>       return true; 
+</I>&gt;<i>  }
+</I>&gt;<i>  
+</I>&gt;<i>   I
+</I>&gt;<i>  
+</I>&gt;<i>  function actionDefault()
+</I>&gt;<i> {
+</I>&gt;<i>      
+</I>&gt;<i>       if($this-&gt;form-&gt;validate())
+</I>&gt;<i>      {
+</I>&gt;<i>         echo &quot;Name:=&quot;.$this-&gt;name;
+</I>&gt;<i>     
+</I>&gt;<i>      }
+</I>&gt;<i> }  
+</I>&gt;<i>  
+</I>&gt;<i>   When I try to print the variable I get the error Undefined Variable
+</I>&gt;<i>  
+</I>&gt;<i>    
+</I>&gt;<i>    How to solve the problem 
+</I>
+
+Afaik, addFormRule must return:
+- boolean true, if rule is passed
+- array( $errorMessage ), if rule do not pass
+
+
+regards
+Francisco A
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000299.html">[ydf-users] Query Regarding Variable scope
+</A></li>
+	<LI>Next message: <A HREF="000301.html">[ydf-users] Query Regarding Variable scope
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#300">[ date ]</a>
+              <a href="thread.html#300">[ thread ]</a>
+              <a href="subject.html#300">[ subject ]</a>
+              <a href="author.html#300">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/ydframework-users">More information about the YDFramework-users
+mailing list</a><br>
+</body></html>

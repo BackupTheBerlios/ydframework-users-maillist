@@ -1,0 +1,100 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [ydf-users] One Minor issue with header
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/ydframework-users/2006-July/index.html" >
+   <LINK REL="made" HREF="mailto:ydframework-users%40lists.berlios.de?Subject=Re%3A%20%5Bydf-users%5D%20One%20Minor%20issue%20with%20header&In-Reply-To=%3C20060704032159.fe477b357a56c857c15a39baa2ae95d5.a380d2dc3e.wbe%40email.secureserver.net%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000271.html">
+   <LINK REL="Next"  HREF="000273.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[ydf-users] One Minor issue with header</H1>
+    <B>moses at softwaysolutions.com</B> 
+    <A HREF="mailto:ydframework-users%40lists.berlios.de?Subject=Re%3A%20%5Bydf-users%5D%20One%20Minor%20issue%20with%20header&In-Reply-To=%3C20060704032159.fe477b357a56c857c15a39baa2ae95d5.a380d2dc3e.wbe%40email.secureserver.net%3E"
+       TITLE="[ydf-users] One Minor issue with header">moses at softwaysolutions.com
+       </A><BR>
+    <I>Tue Jul  4 12:22:00 CEST 2006</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000271.html">[ydf-users] Query Regarding Submit button
+</A></li>
+        <LI>Next message: <A HREF="000273.html">[ydf-users] One Minor issue with header
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#272">[ date ]</a>
+              <a href="thread.html#272">[ thread ]</a>
+              <a href="subject.html#272">[ subject ]</a>
+              <a href="author.html#272">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Hello Sir
+
+    On submiting the form the   action is page.php?do=submit 
+  
+   and in the function 
+
+   function actionSubmit()    
+   {
+         1)I insert the values to the database 
+         2)$this-&gt;forward('default');  
+
+   }
+
+   Every Thing works fine but
+
+   Now I refreshes the form again the value is being again inserted to
+the database 
+
+   To avoid this I recode it   
+
+  function actionSubmit()    
+   {
+         1)I insert the values to the database 
+         2)header(&quot;Location: page.php&quot;);
+
+   }  
+
+   Now Works Fine
+
+   Is there any other way Insteed of using header 
+   $this-&gt;forward('--Some thing else --');
+
+
+regards
+moses 
+
+  
+         
+
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000271.html">[ydf-users] Query Regarding Submit button
+</A></li>
+	<LI>Next message: <A HREF="000273.html">[ydf-users] One Minor issue with header
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#272">[ date ]</a>
+              <a href="thread.html#272">[ thread ]</a>
+              <a href="subject.html#272">[ subject ]</a>
+              <a href="author.html#272">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/ydframework-users">More information about the YDFramework-users
+mailing list</a><br>
+</body></html>

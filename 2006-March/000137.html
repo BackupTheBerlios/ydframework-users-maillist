@@ -1,0 +1,246 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [ydf-users] Re: Query Regarding menu
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/ydframework-users/2006-March/index.html" >
+   <LINK REL="made" HREF="mailto:ydframework-users%40lists.berlios.de?Subject=Re%3A%20%5Bydf-users%5D%20Re%3A%20Query%20Regarding%20menu&In-Reply-To=%3C4aef63030603230523j6ea29c77kccd1e51ca8d80af2%40mail.gmail.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000133.html">
+   <LINK REL="Next"  HREF="000139.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[ydf-users] Re: Query Regarding menu</H1>
+    <B>Pieter Claerhout</B> 
+    <A HREF="mailto:ydframework-users%40lists.berlios.de?Subject=Re%3A%20%5Bydf-users%5D%20Re%3A%20Query%20Regarding%20menu&In-Reply-To=%3C4aef63030603230523j6ea29c77kccd1e51ca8d80af2%40mail.gmail.com%3E"
+       TITLE="[ydf-users] Re: Query Regarding menu">pieter at yellowduck.be
+       </A><BR>
+    <I>Thu Mar 23 14:23:21 CET 2006</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000133.html">[ydf-users] Re: Query Regarding menu
+</A></li>
+        <LI>Next message: <A HREF="000139.html">[ydf-users] class structure question
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#137">[ date ]</a>
+              <a href="thread.html#137">[ thread ]</a>
+              <a href="subject.html#137">[ subject ]</a>
+              <a href="author.html#137">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Take a look at this example:
+
+The PHP code:
+
+
+&lt;?php
+
+    // Standard include
+    include_once( dirname( __FILE__ ) . '/../YDFramework2/YDF2_init.php' );
+
+    // Includes
+    YDInclude( 'YDForm.php' );
+    YDInclude( 'YDTemplate.php' );
+
+    // Class definition
+    class form_checkboxgroup extends YDRequest {
+
+        // Class constructor
+        function form_checkboxgroup() {
+            $this-&gt;YDRequest();
+        }
+
+        // Default action
+        function actionDefault() {
+
+            // Create the form
+            $form = new YDForm( 'form1' );
+
+            // Add the radiobutton
+            $form-&gt;addElement( 'checkboxgroup', 'choose_multiple', 'Choose
+multiple', array(), array( 0 =&gt; 'choice 1', 1 =&gt; 'choice 2' ) );
+
+            // Add the submit button
+            $form-&gt;addElement( 'submit', 'btnSubmit', 'submit' );
+
+            // Set the defaults
+            $form-&gt;setDefaults( array( 'choose_multiple' =&gt; array( 0=&gt;0,
+1=&gt;1 ) ) );
+
+            // Process the form
+            if ( $form-&gt;validate() === true ) {
+                YDDebugUtil::dump( $form-&gt;getValues() );
+            }
+
+            // Add the template
+            $tpl = new YDTemplate();
+
+            // Add the form to the template
+            $tpl-&gt;assignForm ( 'form',$form );
+
+            // Display the template
+            $tpl-&gt;display();
+
+        }
+
+    }
+
+    // Process the request
+    YDInclude( 'YDF2_process.php' );
+
+?&gt;
+The template:
+
+{$form.tag}
+    {$form.choose_multiple.html|@replace:'##ITEMSEP##':'&lt;br/&gt;'}
+    &lt;br/&gt;
+    {$form.btnSubmit.html}
+{$form.endtag}
+
+
+Cheers,
+
+
+pieter
+
+
+On 3/23/06, <A HREF="https://lists.berlios.de/mailman/listinfo/ydframework-users">moses at softwaysolutions.com</A> &lt;<A HREF="https://lists.berlios.de/mailman/listinfo/ydframework-users">moses at softwaysolutions.com</A>&gt; wrote:
+&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i> Dear Sir
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i>               What is checkboxgroup i didnt understood and no such word in
+</I>&gt;<i> help manual also....
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i> regards
+</I>&gt;<i> moses
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i> -------- Original Message --------
+</I>&gt;<i> Subject: [ydf-users] Re: Query Regarding menu
+</I>&gt;<i> From: &quot;Pieter Claerhout&quot; &lt;<A HREF="https://lists.berlios.de/mailman/listinfo/ydframework-users">pieter at yellowduck.be</A>&gt;
+</I>&gt;<i> Date: Thu, March 23, 2006 4:11 am
+</I>&gt;<i> To: &quot;<A HREF="https://lists.berlios.de/mailman/listinfo/ydframework-users">moses at softwaysolutions.com</A>&quot; &lt;<A HREF="https://lists.berlios.de/mailman/listinfo/ydframework-users">moses at softwaysolutions.com</A>&gt;
+</I>&gt;<i> Cc: <A HREF="https://lists.berlios.de/mailman/listinfo/ydframework-users">ydframework-users at berlios.de</A>
+</I>&gt;<i>
+</I>&gt;<i> I didn't build in support for that (yet). The easiest solution is probably
+</I>&gt;<i> to replace the select element with a bunch of checkboxes that simulate the
+</I>&gt;<i> same behaviour. The &quot;checkboxgroup&quot; element is specifically designed for
+</I>&gt;<i> this.
+</I>&gt;<i>
+</I>&gt;<i> Regards,
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i> pieter
+</I>&gt;<i>
+</I>&gt;<i> On 3/23/06, <A HREF="https://lists.berlios.de/mailman/listinfo/ydframework-users">moses at softwaysolutions.com</A> &lt;<A HREF="https://lists.berlios.de/mailman/listinfo/ydframework-users">moses at softwaysolutions.com</A> &gt;
+</I>&gt;<i> wrote:
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt;  Dear Sir
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt;          How to get the all the values that ar selected in a
+</I>&gt;<i> &gt; List/Menu(when multiple is enabled)
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt;         $this-&gt;form-&gt;addElement('select','cboMarks','',array('size'=&gt;5,'multiple'=&gt;''),array('1'=&gt;'Maths','2'=&gt;'English','3'=&gt;'Tamil','4'=&gt;'Hindi'));
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt;         This statement displayes a menu with fourfields
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt;        Now i am selecting English,Tamil. and getting the result like
+</I>&gt;<i> &gt; this
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt;        $data = $this-&gt;form-&gt;getValues();
+</I>&gt;<i> &gt;         print_r($data);
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt; *Array
+</I>&gt;<i> &gt; (
+</I>&gt;<i> &gt;     [cboMarks] =&gt; 3
+</I>&gt;<i> &gt; )*
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt;          It is only displaying the last selected value.What to do to get
+</I>&gt;<i> &gt; all the selected value
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt; regards
+</I>&gt;<i> &gt; moses
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt;
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i> --
+</I>&gt;<i> pieter claerhout . <A HREF="https://lists.berlios.de/mailman/listinfo/ydframework-users">pieter at yellowduck.be</A> . <A HREF="http://www.yellowduck.be/">http://www.yellowduck.be/</A>
+</I>&gt;<i>
+</I>&gt;<i> _______________________________________________ YDFramework-users mailing
+</I>&gt;<i> list <A HREF="https://lists.berlios.de/mailman/listinfo/ydframework-users">YDFramework-users at lists.berlios.de</A>
+</I>&gt;<i> <A HREF="http://lists.berlios.de/mailman/listinfo/ydframework-users">http://lists.berlios.de/mailman/listinfo/ydframework-users</A>
+</I>&gt;<i>
+</I>
+
+
+--
+pieter claerhout . <A HREF="https://lists.berlios.de/mailman/listinfo/ydframework-users">pieter at yellowduck.be</A> . <A HREF="http://www.yellowduck.be/">http://www.yellowduck.be/</A>
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: &lt;<A HREF="https://lists.berlios.de/pipermail/ydframework-users/attachments/20060323/eeca0dc8/attachment.html">https://lists.berlios.de/pipermail/ydframework-users/attachments/20060323/eeca0dc8/attachment.html</A>&gt;
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000133.html">[ydf-users] Re: Query Regarding menu
+</A></li>
+	<LI>Next message: <A HREF="000139.html">[ydf-users] class structure question
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#137">[ date ]</a>
+              <a href="thread.html#137">[ thread ]</a>
+              <a href="subject.html#137">[ subject ]</a>
+              <a href="author.html#137">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/ydframework-users">More information about the YDFramework-users
+mailing list</a><br>
+</body></html>

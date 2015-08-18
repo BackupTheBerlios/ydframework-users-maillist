@@ -1,0 +1,116 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [ydf-users] Query Regarding Variable scope
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/ydframework-users/2006-August/index.html" >
+   <LINK REL="made" HREF="mailto:ydframework-users%40lists.berlios.de?Subject=Re%3A%20%5Bydf-users%5D%20Query%20Regarding%20Variable%20scope&In-Reply-To=%3Cfbd383e30608010535j36ae25bfvdc0b71146f6d3d17%40mail.gmail.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000316.html">
+   <LINK REL="Next"  HREF="000305.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[ydf-users] Query Regarding Variable scope</H1>
+    <B>Moses Dinakaran</B> 
+    <A HREF="mailto:ydframework-users%40lists.berlios.de?Subject=Re%3A%20%5Bydf-users%5D%20Query%20Regarding%20Variable%20scope&In-Reply-To=%3Cfbd383e30608010535j36ae25bfvdc0b71146f6d3d17%40mail.gmail.com%3E"
+       TITLE="[ydf-users] Query Regarding Variable scope">mosesdinakaran at gmail.com
+       </A><BR>
+    <I>Tue Aug  1 14:35:57 CEST 2006</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000316.html">[ydf-users] YDDatabaseObject, GroupBy and aggreate functions ?
+</A></li>
+        <LI>Next message: <A HREF="000305.html">[ydf-users] How to make the label of radio buttons invisible.
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#304">[ date ]</a>
+              <a href="thread.html#304">[ thread ]</a>
+              <a href="subject.html#304">[ subject ]</a>
+              <a href="author.html#304">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Hi Francisco
+
+      I tried with $this-&gt;form-&gt;addFormRule(array( &amp;
+$this,'validateTimings'));
+
+     Now I could access the variable.
+
+     Thanks for your help
+
+regards
+moses
+
+
+
+
+
+
+
+On 7/31/06, Francisco Azevedo &lt;<A HREF="https://lists.berlios.de/mailman/listinfo/ydframework-users">francisco at fusemail.com</A>&gt; wrote:
+&gt;<i>
+</I>&gt;<i> Hi Moses
+</I>&gt;<i>
+</I>&gt;<i> &gt; *          *Thanks for ur reply, still my doubt is not cleared.
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt;           In a function if we declare a variable as $this it becoms
+</I>&gt;<i> &gt; global so that we can access it from any functions.
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt; *           *But in the addFormRule function() Though  I decalre a
+</I>&gt;<i> &gt; variable as $this I could not access the variable outside the function.
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt;            Is there any restriction that the  addFormRule function()
+</I>&gt;<i> &gt; will only return either true nor
+</I>&gt;<i> &gt; array( $errorMessage ) and we cannot access its variables.
+</I>&gt;<i> &gt;
+</I>&gt;<i>
+</I>&gt;<i> Afaik no.. but it seems you are not trying to access variables inside
+</I>&gt;<i> the class because it seems you are cloning the object.
+</I>&gt;<i> Can you try:
+</I>&gt;<i>
+</I>&gt;<i> $this-&gt;form-&gt;addFormRule(array( &amp; $this,'validateTimings'));
+</I>&gt;<i>
+</I>&gt;<i> instead of:
+</I>&gt;<i>
+</I>&gt;<i> $this-&gt;form-&gt;addFormRule(array($this,'validateTimings'));
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i> regards
+</I>&gt;<i> Francisco A
+</I>&gt;<i> _______________________________________________
+</I>&gt;<i> YDFramework-users mailing list
+</I>&gt;<i> <A HREF="https://lists.berlios.de/mailman/listinfo/ydframework-users">YDFramework-users at lists.berlios.de</A>
+</I>&gt;<i> <A HREF="http://bat.berlios.de/mailman/listinfo/ydframework-users">http://bat.berlios.de/mailman/listinfo/ydframework-users</A>
+</I>&gt;<i>
+</I>-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: &lt;<A HREF="https://lists.berlios.de/pipermail/ydframework-users/attachments/20060801/5a710d68/attachment.html">https://lists.berlios.de/pipermail/ydframework-users/attachments/20060801/5a710d68/attachment.html</A>&gt;
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000316.html">[ydf-users] YDDatabaseObject, GroupBy and aggreate functions ?
+</A></li>
+	<LI>Next message: <A HREF="000305.html">[ydf-users] How to make the label of radio buttons invisible.
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#304">[ date ]</a>
+              <a href="thread.html#304">[ thread ]</a>
+              <a href="subject.html#304">[ subject ]</a>
+              <a href="author.html#304">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/ydframework-users">More information about the YDFramework-users
+mailing list</a><br>
+</body></html>

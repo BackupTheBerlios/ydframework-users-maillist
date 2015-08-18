@@ -1,0 +1,90 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [ydf-users] conditional ajax request
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/ydframework-users/2006-September/index.html" >
+   <LINK REL="made" HREF="mailto:ydframework-users%40lists.berlios.de?Subject=Re%3A%20%5Bydf-users%5D%20conditional%20ajax%20request&In-Reply-To=%3C20060921125351.23580.qmail%40web54004.mail.yahoo.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000385.html">
+   <LINK REL="Next"  HREF="000387.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[ydf-users] conditional ajax request</H1>
+    <B>maximus meridius</B> 
+    <A HREF="mailto:ydframework-users%40lists.berlios.de?Subject=Re%3A%20%5Bydf-users%5D%20conditional%20ajax%20request&In-Reply-To=%3C20060921125351.23580.qmail%40web54004.mail.yahoo.com%3E"
+       TITLE="[ydf-users] conditional ajax request">maximus_meridius79 at yahoo.com
+       </A><BR>
+    <I>Thu Sep 21 14:53:50 CEST 2006</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000385.html">[ydf-users] conditional ajax request
+</A></li>
+        <LI>Next message: <A HREF="000387.html">[ydf-users] conditional ajax request
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#386">[ date ]</a>
+              <a href="thread.html#386">[ thread ]</a>
+              <a href="subject.html#386">[ subject ]</a>
+              <a href="author.html#386">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>  Hi,
+
+I just found that you can do this by assigning the event attribute whenthe form element is created. Such as in this example:
+
+            // add a button to the form
+            $this-&gt;form-&gt;addElement('button', 'mybutton','Process the Form', array( 'onclick' =&gt; 'var x= false; if(!x) { alert(1); return false; }' ) );
+
+            // add an event for 'mybutton'
+            $this-&gt;ajax-&gt;addEvent( 'mybutton', array( &amp;$this, 'processform' ), 'myform' );            
+
+This has the effect of including javascript of the form:
+
+	onclick=&quot;var x = false; if(!x) { alert(1); return false; };__ydfprocessform(xajax.getFormValues('myform'));&quot;
+This is basically what you are looking for. You can see how this worksif you look at the last 10 lines of the code for YDAjax::addEvent. Thismethod basically checks if there is some JS already assigned to theevent of the form element and adds its magic afterwards.
+
+Regards,
+
+Graeme
+
+
+Matthias Blaser wrote:  
+Hi,Is there a possibility to add a condition to an event _before_ the ajax function will be called? Something like an effect, but before. instead of (event after):onkeyup=&quot;__ydfsearchOnrp(__ydfgetonrp_search());document.getElementById(&quot;_main_onrp_search&quot;).focus();&quot;something like this (event before);onkeyup=&quot;if(foo) { return false; }; __ydfsearchOnrp(__ydfgetonrp_search());&quot;For example, I have a search field, but to not overload server I only want the event to be executed when the length of the value is below 3 characters.Thanks,Matthias_______________________________________________YDFramework-users mailing <A HREF="https://lists.berlios.de/mailman/listinfo/ydframework-users">listYDFramework-users at lists.berlios.dehttps</A>://lists.berlios.de/mailman/listinfo/ydframework-users  
+
+
+ 		
+---------------------------------
+Yahoo! Messenger with Voice. Make PC-to-Phone Calls to the US (and 30+ countries) for 2&#162;/min or less.
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: &lt;<A HREF="https://lists.berlios.de/pipermail/ydframework-users/attachments/20060921/2e5a9036/attachment.html">https://lists.berlios.de/pipermail/ydframework-users/attachments/20060921/2e5a9036/attachment.html</A>&gt;
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000385.html">[ydf-users] conditional ajax request
+</A></li>
+	<LI>Next message: <A HREF="000387.html">[ydf-users] conditional ajax request
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#386">[ date ]</a>
+              <a href="thread.html#386">[ thread ]</a>
+              <a href="subject.html#386">[ subject ]</a>
+              <a href="author.html#386">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/ydframework-users">More information about the YDFramework-users
+mailing list</a><br>
+</body></html>

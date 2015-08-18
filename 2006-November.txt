@@ -1,0 +1,1362 @@
+From dab214 at yahoo.com  Mon Nov  6 00:01:04 2006
+From: dab214 at yahoo.com (dab)
+Date: Sun, 5 Nov 2006 15:01:04 -0800 (PST)
+Subject: [ydf-users] YDTemplate, smarty and caching
+In-Reply-To: <93778d790610281327x78839c4mb899e14ce0739d46@mail.gmail.com>
+Message-ID: <20061105230104.74521.qmail@web50209.mail.yahoo.com>
+
+hi all,
+i've been using YDTemplate without any problems up
+till now :(
+For some reason YDTemplate seems to add some digits in
+the cache filename:
+
+it creates this file:
+d:\work\YDFramework2/temp/cache/\2459960022^%%6D^6D7^6D7C5625%%test.tpl
+
+but it looks for this one:
+d:\work\YDFramework2/temp/cache/\%%6D^6D7^6D7C5625%%test.tpl
+
+Therefore the is_cached() returns nothing.
+It seems to add a number like this: "2459960022^"
+
+Do anyone know why it does this?
+
+
+My ydf test code:
+
+class test extends YDRequest {
+
+    function test() {
+        $this->YDRequest();
+
+        // Indicate we require login
+        $this->setRequiresAuthentication( false );
+    }
+
+    function actionDefault() {
+    	
+       $this->template = new YDTemplate();
+
+		$this->template->caching = true;
+		
+		if ( ! $this->template->is_cached('test.tpl')) {
+			echo "not cached!";
+		}
+		$this->template->display('test.tpl');
+    }
+}
+
+
+and when using this standard smarty code it works as
+it should:
+
+
+$smarty->caching = true;
+
+if ( ! $smarty->is_cached('test.tpl')) {
+	echo "not cached!";
+}
+$smarty->display($tpl_path.'test.tpl');
+
+
+Any help is much apreciated. I've been pulling my hair
+with this one all night :(
+thanks!
+
+
+
+
+
+
+ 
+____________________________________________________________________________________
+Low, Low, Low Rates! Check out Yahoo! Messenger's cheap PC-to-Phone call rates 
+(http://voice.yahoo.com)
+
+
+
+From dab214 at yahoo.com  Mon Nov  6 00:06:30 2006
+From: dab214 at yahoo.com (dab)
+Date: Sun, 5 Nov 2006 15:06:30 -0800 (PST)
+Subject: [ydf-users] YDTemplate, smarty and caching
+Message-ID: <20061105230630.52827.qmail@web50205.mail.yahoo.com>
+
+hi again,
+for some reason it works when i add a compile id like:
+$this->template->display('test.tpl', 1, 1);
+
+but only then :(
+anyone has any idea why?
+thanks again..
+
+
+ 
+__________________________________________________________________________________________
+Check out the New Yahoo! Mail - Fire up a more powerful email and get things done faster. 
+(http://advision.webevents.yahoo.com/mailbeta) 
+-------------- next part --------------
+An embedded message was scrubbed...
+From: dab <dab214 at yahoo.com>
+Subject: [ydf-users] YDTemplate, smarty and caching
+Date: Sun, 5 Nov 2006 15:01:04 -0800 (PST)
+Size: 3743
+URL: <https://lists.berlios.de/pipermail/ydframework-users/attachments/20061105/780b61ab/attachment.mht>
+
+From pieter at yellowduck.be  Mon Nov  6 20:34:54 2006
+From: pieter at yellowduck.be (Pieter Claerhout)
+Date: Mon, 6 Nov 2006 20:34:54 +0100
+Subject: [ydf-users] YDTemplate, smarty and caching
+In-Reply-To: <20061105230630.52827.qmail@web50205.mail.yahoo.com>
+References: <20061105230630.52827.qmail@web50205.mail.yahoo.com>
+Message-ID: <4aef63030611061134q63e2fbfw391a8560db7ffccf@mail.gmail.com>
+
+Yes, I know why.
+
+I you don't specify a compile ID, the framework will generate one which is
+basically the crc32 of the full path to the template. The reason why the
+framework does it that way is to allow you to save all compiled templates in
+one folder instead of having to create one temp folder for each folder
+containing templates.
+
+If you want to use caching, adding a cache ID (second argument) should do
+the trick.
+
+cheers,
+
+
+pieter
+
+PS: if you are looking for a very straightforward way of caching, have a
+look at the weblog application. It does do caching, but without using any of
+the features of smarty.
+
+
+2006/11/6, dab <dab214 at yahoo.com>:
+>
+> hi again,
+> for some reason it works when i add a compile id like:
+> $this->template->display('test.tpl', 1, 1);
+>
+> but only then :(
+> anyone has any idea why?
+> thanks again..
+>
+>
+>
+>
+> __________________________________________________________________________________________
+> Check out the New Yahoo! Mail - Fire up a more powerful email and get
+> things done faster.
+> (http://advision.webevents.yahoo.com/mailbeta)
+>
+>
+>
+> ---------- Doorgestuurd bericht ----------
+> From: dab <dab214 at yahoo.com>
+> To: ydframework-users at lists.berlios.de
+> Date: Sun, 5 Nov 2006 15:01:04 -0800 (PST)
+> Subject: [ydf-users] YDTemplate, smarty and caching
+> hi all,
+> i've been using YDTemplate without any problems up
+> till now :(
+> For some reason YDTemplate seems to add some digits in
+> the cache filename:
+>
+> it creates this file:
+> d:\work\YDFramework2/temp/cache/\2459960022^%%6D^6D7^6D7C5625%%test.tpl
+>
+> but it looks for this one:
+> d:\work\YDFramework2/temp/cache/\%%6D^6D7^6D7C5625%%test.tpl
+>
+> Therefore the is_cached() returns nothing.
+> It seems to add a number like this: "2459960022^"
+>
+> Do anyone know why it does this?
+>
+>
+> My ydf test code:
+>
+> class test extends YDRequest {
+>
+>    function test() {
+>        $this->YDRequest();
+>
+>        // Indicate we require login
+>        $this->setRequiresAuthentication( false );
+>    }
+>
+>    function actionDefault() {
+>
+>       $this->template = new YDTemplate();
+>
+>                $this->template->caching = true;
+>
+>                if ( ! $this->template->is_cached('test.tpl')) {
+>                        echo "not cached!";
+>                }
+>                $this->template->display('test.tpl');
+>    }
+> }
+>
+>
+> and when using this standard smarty code it works as
+> it should:
+>
+>
+> $smarty->caching = true;
+>
+> if ( ! $smarty->is_cached('test.tpl')) {
+>        echo "not cached!";
+> }
+> $smarty->display($tpl_path.'test.tpl');
+>
+>
+> Any help is much apreciated. I've been pulling my hair
+> with this one all night :(
+> thanks!
+>
+>
+>
+>
+>
+>
+>
+>
+> ____________________________________________________________________________________
+> Low, Low, Low Rates! Check out Yahoo! Messenger's cheap PC-to-Phone call
+> rates
+> (http://voice.yahoo.com)
+>
+> _______________________________________________
+> YDFramework-users mailing list
+> YDFramework-users at lists.berlios.de
+> https://lists.berlios.de/mailman/listinfo/ydframework-users
+>
+>
+> _______________________________________________
+> YDFramework-users mailing list
+> YDFramework-users at lists.berlios.de
+> https://lists.berlios.de/mailman/listinfo/ydframework-users
+>
+>
+>
+
+
+-- 
+pieter claerhout . pieter at yellowduck.be . http://www.yellowduck.be/
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <https://lists.berlios.de/pipermail/ydframework-users/attachments/20061106/9afad897/attachment.html>
+
+From dab214 at yahoo.com  Mon Nov  6 22:07:48 2006
+From: dab214 at yahoo.com (dab)
+Date: Mon, 6 Nov 2006 13:07:48 -0800 (PST)
+Subject: [ydf-users] YDTemplate, smarty and caching
+In-Reply-To: <4aef63030611061134q63e2fbfw391a8560db7ffccf@mail.gmail.com>
+Message-ID: <20061106210748.38671.qmail@web50215.mail.yahoo.com>
+
+thanks pieter for clearing up that mystery for me and
+thanks for the tips on the other caching ability.
+
+
+--- Pieter Claerhout <pieter at yellowduck.be> wrote:
+
+> Yes, I know why.
+> 
+> I you don't specify a compile ID, the framework will
+> generate one which is
+> basically the crc32 of the full path to the
+> template. The reason why the
+> framework does it that way is to allow you to save
+> all compiled templates in
+> one folder instead of having to create one temp
+> folder for each folder
+> containing templates.
+> 
+> If you want to use caching, adding a cache ID
+> (second argument) should do
+> the trick.
+> 
+> cheers,
+> 
+> 
+> pieter
+> 
+> PS: if you are looking for a very straightforward
+> way of caching, have a
+> look at the weblog application. It does do caching,
+> but without using any of
+> the features of smarty.
+> 
+> 
+> 2006/11/6, dab <dab214 at yahoo.com>:
+> >
+> > hi again,
+> > for some reason it works when i add a compile id
+> like:
+> > $this->template->display('test.tpl', 1, 1);
+> >
+> > but only then :(
+> > anyone has any idea why?
+> > thanks again..
+> >
+> >
+> >
+> >
+> >
+>
+__________________________________________________________________________________________
+> > Check out the New Yahoo! Mail - Fire up a more
+> powerful email and get
+> > things done faster.
+> > (http://advision.webevents.yahoo.com/mailbeta)
+> >
+> >
+> >
+> > ---------- Doorgestuurd bericht ----------
+> > From: dab <dab214 at yahoo.com>
+> > To: ydframework-users at lists.berlios.de
+> > Date: Sun, 5 Nov 2006 15:01:04 -0800 (PST)
+> > Subject: [ydf-users] YDTemplate, smarty and
+> caching
+> > hi all,
+> > i've been using YDTemplate without any problems up
+> > till now :(
+> > For some reason YDTemplate seems to add some
+> digits in
+> > the cache filename:
+> >
+> > it creates this file:
+> >
+>
+d:\work\YDFramework2/temp/cache/\2459960022^%%6D^6D7^6D7C5625%%test.tpl
+> >
+> > but it looks for this one:
+> >
+>
+d:\work\YDFramework2/temp/cache/\%%6D^6D7^6D7C5625%%test.tpl
+> >
+> > Therefore the is_cached() returns nothing.
+> > It seems to add a number like this: "2459960022^"
+> >
+> > Do anyone know why it does this?
+> >
+> >
+> > My ydf test code:
+> >
+> > class test extends YDRequest {
+> >
+> >    function test() {
+> >        $this->YDRequest();
+> >
+> >        // Indicate we require login
+> >        $this->setRequiresAuthentication( false );
+> >    }
+> >
+> >    function actionDefault() {
+> >
+> >       $this->template = new YDTemplate();
+> >
+> >                $this->template->caching = true;
+> >
+> >                if ( !
+> $this->template->is_cached('test.tpl')) {
+> >                        echo "not cached!";
+> >                }
+> >               
+> $this->template->display('test.tpl');
+> >    }
+> > }
+> >
+> >
+> > and when using this standard smarty code it works
+> as
+> > it should:
+> >
+> >
+> > $smarty->caching = true;
+> >
+> > if ( ! $smarty->is_cached('test.tpl')) {
+> >        echo "not cached!";
+> > }
+> > $smarty->display($tpl_path.'test.tpl');
+> >
+> >
+> > Any help is much apreciated. I've been pulling my
+> hair
+> > with this one all night :(
+> > thanks!
+> >
+> >
+> >
+> >
+> >
+> >
+> >
+> >
+> >
+>
+____________________________________________________________________________________
+> > Low, Low, Low Rates! Check out Yahoo! Messenger's
+> cheap PC-to-Phone call
+> > rates
+> > (http://voice.yahoo.com)
+> >
+> > _______________________________________________
+> > YDFramework-users mailing list
+> > YDFramework-users at lists.berlios.de
+> >
+>
+https://lists.berlios.de/mailman/listinfo/ydframework-users
+> >
+> >
+> > _______________________________________________
+> > YDFramework-users mailing list
+> > YDFramework-users at lists.berlios.de
+> >
+>
+https://lists.berlios.de/mailman/listinfo/ydframework-users
+> >
+> >
+> >
+> 
+> 
+> -- 
+> pieter claerhout . pieter at yellowduck.be .
+> http://www.yellowduck.be/
+> > _______________________________________________
+> YDFramework-users mailing list
+> YDFramework-users at lists.berlios.de
+>
+https://lists.berlios.de/mailman/listinfo/ydframework-users
+> 
+
+
+__________________________________________________
+Do You Yahoo!?
+Tired of spam?  Yahoo! Mail has the best spam protection around 
+http://mail.yahoo.com 
+
+
+From francisco at fusemail.com  Tue Nov 14 23:05:51 2006
+From: francisco at fusemail.com (Francisco Azevedo)
+Date: Tue, 14 Nov 2006 16:05:51 -0600 (CST)
+Subject: [ydf-users] (no subject)
+Message-ID: <1163541951.v2.fusewebmail-15630@f>
+
+Hi all
+
+After so much searching the web for a GOOD help authoring tool for a
+project, i found THE documentor :) ... Help & Manual 4.
+
+This tool (www.helpandmanual.com) is amazing as you can see by its
+features.. wysiwyg, create in one place&export to lots of formats.. pdf,
+chm, web, word .. styles, keyword search in web, syntax highlighting ..
+but not free of course.
+
+
+I have ported our user-guide to help&manual4. Here goes my first draft:
+
+Windows Help format: http://precabo.com/ydf/YDFdoc.chm
+
+PDF format: http://precabo.com/ydf/YDFdoc.pdf
+
+
+What do you think?
+
+regards
+Francisco A
+
+
+
+From francisco at fusemail.com  Wed Nov 15 00:25:00 2006
+From: francisco at fusemail.com (Francisco Azevedo)
+Date: Tue, 14 Nov 2006 23:25:00 +0000
+Subject: [ydf-users] Documentation experiences
+Message-ID: <455A504C.2000405@fusemail.com>
+
+Hi all
+
+After so much searching the web for a GOOD help authoring tool for a
+project, i found THE documentor  :)  ... Help & Manual 4.
+
+This tool (www.helpandmanual.com) is amazing as you can see by its
+features.. wysiwyg, create in one place&export to lots of formats.. pdf,
+chm, web, word .. styles, keyword search in web, syntax highlighting ..
+but not free of course.
+
+
+I have ported our user-guide to help&manual4. Here goes my first draft:
+
+Windows Help format: http://precabo.com/ydf/YDFdoc.chm
+
+PDF format: http://precabo.com/ydf/YDFdoc.pdf
+
+
+What do you think?
+
+regards
+Francisco A
+
+
+
+From pieter at yellowduck.be  Wed Nov 15 08:23:15 2006
+From: pieter at yellowduck.be (Pieter Claerhout)
+Date: Wed, 15 Nov 2006 08:23:15 +0100
+Subject: [ydf-users] Documentation experiences
+In-Reply-To: <455A504C.2000405@fusemail.com>
+References: <455A504C.2000405@fusemail.com>
+Message-ID: <4aef63030611142323y26747395xb910e9436d2ee96d@mail.gmail.com>
+
+Very nice, but I see a problem with it. Right now, we are able to
+automatically build the documentation which is by far the easiest way of
+working. Everytime we generate a new build, the documentation gets generated
+automatically.
+
+From francisco at fusemail.com  Wed Nov 15 16:51:47 2006
+From: francisco at fusemail.com (Francisco Azevedo)
+Date: Wed, 15 Nov 2006 15:51:47 +0000
+Subject: [ydf-users] Documentation experiences
+In-Reply-To: <4aef63030611142323y26747395xb910e9436d2ee96d@mail.gmail.com>
+References: <455A504C.2000405@fusemail.com>
+	<4aef63030611142323y26747395xb910e9436d2ee96d@mail.gmail.com>
+Message-ID: <455B3793.3020308@fusemail.com>
+
+Hi Pieter
+
+> Very nice, but I see a problem with it. Right now, we are able to 
+> automatically build the documentation which is by far the easiest way of 
+> working. Everytime we generate a new build, the documentation gets 
+> generated automatically.
+
+Yes, but you must agree that the documentation is not changed every 
+time.. We have a new documentation version every.. month?
+
+Generating the documention with help&manual is as easy as clicking in 
+PDF, CHM, WORD, WEB or any other export button.
+Yes it's windows only but far the best tool out there for documentation.
+
+Note, this was an experience on how to create manuals. I will use it on 
+my own projects but i don't want to force the use on YDF.. i just wanted 
+to show its capabilities.
+If you think it's usefull and a valid choise.. ok. If not.. ok too :)
+
+Btw, i have exported for web too. Here goes:
+http://precabo.com/ydf/web/help_toc.html
+
+regards
+Francisco A
+
+
+From paultoytoy at gmail.com  Wed Nov 15 22:44:43 2006
+From: paultoytoy at gmail.com (aga toytoy)
+Date: Thu, 16 Nov 2006 05:44:43 +0800
+Subject: [ydf-users] Would this work?
+Message-ID: <93778d790611151344m282b30e8p7bcd62281105ed4d@mail.gmail.com>
+
+Hi guys, I have much trouble on how  to use this arrayed name for the
+<select> element.
+
+For example, I have this in my class:
+
+            $form->addElement( 'hidden',    'district_city[]',
+"Select District(s) or City(ies) or Don't Select If All" );
+
+And if I implement it in the templates like:
+        {$form.district_city[].html}
+
+I got this error message
+Fatal error: Smarty error: [in forms/searchlisting.tpl line 32]:
+syntax error: unrecognized tag: $form.district_city[].html
+(Smarty_Compiler.class.php, line 439) in
+/www/servers/mlslister.com/includes/YDFramework2/3rdparty/smarty/libs/Smarty.class.php
+on line 1095
+
+Is there a way to make that work? What do you think?
+
+
+From paultoytoy at gmail.com  Wed Nov 15 22:48:38 2006
+From: paultoytoy at gmail.com (aga toytoy)
+Date: Thu, 16 Nov 2006 05:48:38 +0800
+Subject: [ydf-users] Would this work?
+In-Reply-To: <93778d790611151344m282b30e8p7bcd62281105ed4d@mail.gmail.com>
+References: <93778d790611151344m282b30e8p7bcd62281105ed4d@mail.gmail.com>
+Message-ID: <93778d790611151348l42e028efraf41abc95f3f9f8b@mail.gmail.com>
+
+Oops! Sorry, I forgot to edit it. Its
+$form->addElement( 'select',    'district_city[]',
+ "Select District(s) or City(ies) or Don't Select If All" );
+
+Any help?
+
+On 11/16/06, aga toytoy <paultoytoy at gmail.com> wrote:
+> Hi guys, I have much trouble on how  to use this arrayed name for the
+> <select> element.
+>
+> For example, I have this in my class:
+>
+>             $form->addElement( 'hidden',    'district_city[]',
+> "Select District(s) or City(ies) or Don't Select If All" );
+>
+> And if I implement it in the templates like:
+>         {$form.district_city[].html}
+>
+> I got this error message
+> Fatal error: Smarty error: [in forms/searchlisting.tpl line 32]:
+> syntax error: unrecognized tag: $form.district_city[].html
+> (Smarty_Compiler.class.php, line 439) in
+> /www/servers/mlslister.com/includes/YDFramework2/3rdparty/smarty/libs/Smarty.class.php
+> on line 1095
+>
+> Is there a way to make that work? What do you think?
+>
+
+
+From francisco at fusemail.com  Wed Nov 15 22:52:51 2006
+From: francisco at fusemail.com (Francisco Azevedo)
+Date: Wed, 15 Nov 2006 21:52:51 +0000
+Subject: [ydf-users] Would this work?
+In-Reply-To: <93778d790611151344m282b30e8p7bcd62281105ed4d@mail.gmail.com>
+References: <93778d790611151344m282b30e8p7bcd62281105ed4d@mail.gmail.com>
+Message-ID: <455B8C33.2070903@fusemail.com>
+
+Hi aga toytoy
+
+> Hi guys, I have much trouble on how  to use this arrayed name for the
+> <select> element.
+> 
+> For example, I have this in my class:
+> 
+>             $form->addElement( 'hidden',    'district_city[]',
+> "Select District(s) or City(ies) or Don't Select If All" );
+> 
+> And if I implement it in the templates like:
+>         {$form.district_city[].html}
+> 
+> I got this error message
+> Fatal error: Smarty error: [in forms/searchlisting.tpl line 32]:
+> syntax error: unrecognized tag: $form.district_city[].html
+> (Smarty_Compiler.class.php, line 439) in
+> /www/servers/mlslister.com/includes/YDFramework2/3rdparty/smarty/libs/Smarty.class.php
+> on line 1095
+
+
+You cannot use [].
+What do you want to do?
+
+
+regards
+Francisco A
+
+
+From paultoytoy at gmail.com  Thu Nov 16 22:28:12 2006
+From: paultoytoy at gmail.com (aga toytoy)
+Date: Fri, 17 Nov 2006 05:28:12 +0800
+Subject: [ydf-users] Would this work?
+Message-ID: <93778d790611161328n630b38feje499ce7613b545c9@mail.gmail.com>
+
+Hi Francisco,
+
+I want to use using [] for an arrayed list box or <select
+name="sample[]" multiple="multiple">
+by using YDFramework with this  $this->addElement( "select",
+"sample[]", "", "", $a_obj ) but I found out it won't work.
+
+However, I have found a technique on how to logically server its
+purpose through this,
+
+In my php class, its something like:
+     $this->addElement( "hidden", "sample", "I want this to be in array" );
+
+Then in my tpl script, i just use the html way of encoding:
+     <select name="sample[]" multiple>
+         {html_options options=$a_obj}
+     </select>
+
+Now, when I debug it for example when i hit submit from a form,
+YDDebugUtil::dump ( $fields );
+
+I have found it does work and serve its purpose to make it array.
+Output is like:
+array(
+  'sample' =>array (
+    0 => 'Waimea',
+    1 => 'Koloa',
+    2 => 'Kawaihau',
+  ),
+
+If you have your own technique of doing this, hope to hear it also
+from you guys! Hope mine too helps!
+
+
+From dab214 at yahoo.com  Thu Nov 16 22:33:16 2006
+From: dab214 at yahoo.com (dab)
+Date: Thu, 16 Nov 2006 13:33:16 -0800 (PST)
+Subject: [ydf-users] Documentation experiences
+In-Reply-To: <455A504C.2000405@fusemail.com>
+Message-ID: <20061116213316.38234.qmail@web50213.mail.yahoo.com>
+
+THANK U!
+
+--- Francisco Azevedo <francisco at fusemail.com> wrote:
+
+> Hi all
+> 
+> After so much searching the web for a GOOD help
+> authoring tool for a
+> project, i found THE documentor  :)  ... Help &
+> Manual 4.
+> 
+> This tool (www.helpandmanual.com) is amazing as you
+> can see by its
+> features.. wysiwyg, create in one place&export to
+> lots of formats.. pdf,
+> chm, web, word .. styles, keyword search in web,
+> syntax highlighting ..
+> but not free of course.
+> 
+> 
+> I have ported our user-guide to help&manual4. Here
+> goes my first draft:
+> 
+> Windows Help format:
+> http://precabo.com/ydf/YDFdoc.chm
+> 
+> PDF format: http://precabo.com/ydf/YDFdoc.pdf
+> 
+> 
+> What do you think?
+> 
+> regards
+> Francisco A
+> 
+> _______________________________________________
+> YDFramework-users mailing list
+> YDFramework-users at lists.berlios.de
+>
+https://lists.berlios.de/mailman/listinfo/ydframework-users
+> 
+
+
+
+ 
+____________________________________________________________________________________
+Sponsored Link
+
+Mortgage rates near 39yr lows. 
+$420k for $1,399/mo. Calculate new payment! 
+www.LowerMyBills.com/lre
+
+
+From paultoytoy at gmail.com  Thu Nov 16 22:44:10 2006
+From: paultoytoy at gmail.com (aga toytoy)
+Date: Fri, 17 Nov 2006 05:44:10 +0800
+Subject: [ydf-users] Documentation experiences
+Message-ID: <93778d790611161344h6433cf80v43651b2ba41bdbad@mail.gmail.com>
+
+Hi guyz,
+
+Fransisco has a point there. IMHO, If it won't take time to export
+documentation in CHM format, but still serves its purpose to
+disseminate the contents and the contents are still exact and
+accurate, then its quite essential but depending on what format does
+the user wants.
+
+Anyway, I use linux and I have xCHM and I have also Fransisco's
+documentation. When I view it, the content helps!
+
+Cheers!
+
+
+aga toytoy
+
+
+From francisco at fusemail.com  Fri Nov 17 00:08:05 2006
+From: francisco at fusemail.com (Francisco Azevedo)
+Date: Thu, 16 Nov 2006 23:08:05 +0000
+Subject: [ydf-users] Documentation experiences
+In-Reply-To: <20061116213316.38234.qmail@web50213.mail.yahoo.com>
+References: <20061116213316.38234.qmail@web50213.mail.yahoo.com>
+Message-ID: <455CEF55.7010405@fusemail.com>
+
+Hi dab
+
+> THANK U!
+
+No problem.. :)
+
+regards
+Francisco A
+
+
+From francisco at fusemail.com  Fri Nov 17 00:22:56 2006
+From: francisco at fusemail.com (Francisco Azevedo)
+Date: Thu, 16 Nov 2006 23:22:56 +0000
+Subject: [ydf-users] Documentation experiences
+In-Reply-To: <93778d790611161344h6433cf80v43651b2ba41bdbad@mail.gmail.com>
+References: <93778d790611161344h6433cf80v43651b2ba41bdbad@mail.gmail.com>
+Message-ID: <455CF2D0.8090608@fusemail.com>
+
+Hi aga
+
+> Fransisco has a point there. IMHO, If it won't take time to export
+> documentation in CHM format, but still serves its purpose to
+> disseminate the contents and the contents are still exact and
+> accurate, then its quite essential but depending on what format does
+> the user wants.
+> 
+> Anyway, I use linux and I have xCHM and I have also Fransisco's
+> documentation. When I view it, the content helps!
+
+Well.. now i know there's a chm reader for linux :)
+As i said, it takes the time to click on the CHM export button ;) The 
+greatest feature in this editor is the export types it support.
+Afaik, help&manual is the only one to export to so much formats.. and 
+the other features are.. amazing.. and btw it has some import formats 
+too, including xml.
+
+The best help documentation out there.. i don't have any doubts.
+
+Imho, .. the only problem it has is that it's not free (btw $499). It's 
+not much if you use it for commercial reasons.. but a lot for a project 
+that is free, like YDF.
+
+Anyway, i will continue to update (and export it pdf, chm and web).. 
+unless you (community) don't want to.
+
+
+There's another question..
+Currently, we (Pieter, Db and I) can update the "official" documentation 
+, so how about this help&manual version?
+I propose to:
+  - share the help&manual file (if you want to use help&manual)
+  - or, update my help&manual based on your changes
+  - or, do nothing.. and forget it
+
+What do you think? Pieter, Db?
+
+
+regards
+Francisco A
+
+
+
+From tidrion at mac.com  Sat Nov 18 18:54:56 2006
+From: tidrion at mac.com (Chris Escalante)
+Date: Sat, 18 Nov 2006 11:54:56 -0600
+Subject: [ydf-users] Adding multiple form elements with YDAJAX
+Message-ID: <56B1F822-E1D9-4273-A679-A3277839449A@mac.com>
+
+Trying to add multiple form elements on a one button click(call).
+
+Scenario. Certain users of our system wish to differentiate their  
+shipping and billing. I want to hide the second address form until  
+they click (preferably a checkbox) to specify that they wish to have  
+a different billing and shipping address. I've tried to get this to  
+work with the single element example and have had no luck. Please if  
+anyone could help it would be appreciated.
+
+Chris Escalante
+YDFramework2
+http://seodelusions.com
+
+
+From francisco at fusemail.com  Sat Nov 18 23:17:47 2006
+From: francisco at fusemail.com (Francisco Azevedo)
+Date: Sat, 18 Nov 2006 22:17:47 +0000
+Subject: [ydf-users] Adding multiple form elements with YDAJAX
+In-Reply-To: <56B1F822-E1D9-4273-A679-A3277839449A@mac.com>
+References: <56B1F822-E1D9-4273-A679-A3277839449A@mac.com>
+Message-ID: <455F868B.3@fusemail.com>
+
+Hi Chris
+
+> Trying to add multiple form elements on a one button click(call).
+> 
+> Scenario. Certain users of our system wish to differentiate their  
+> shipping and billing. I want to hide the second address form until  
+> they click (preferably a checkbox) to specify that they wish to have  
+> a different billing and shipping address. I've tried to get this to  
+> work with the single element example and have had no luck. Please if  
+> anyone could help it would be appreciated.
+
+
+Why don't you add an event to that checkbox? Than you need to compute 
+the shipping address form and send it to some pre-defined span or div.
+
+regards
+Francisco A
+
+
+From tidrion at mac.com  Sun Nov 19 03:37:10 2006
+From: tidrion at mac.com (Chris Escalante)
+Date: Sat, 18 Nov 2006 18:37:10 -0800
+Subject: [ydf-users] Adding multiple form elements with YDAJAX
+In-Reply-To: <455F868B.3@fusemail.com>
+References: <56B1F822-E1D9-4273-A679-A3277839449A@mac.com>
+	<455F868B.3@fusemail.com>
+Message-ID: <6C153FF8-010E-1000-F7A8-035D602E3710-Webmail-10021@mac.com>
+
+right but I've tried, I can't seem to get it figured out, keep getting errors. Is there a good example of this being done in YDF somewhere?
+
+Chris Escalante
+
+ 
+On Saturday, November 18, 2006, at 04:18PM, "Francisco Azevedo" <francisco at fusemail.com> wrote:
+>Hi Chris
+>
+>> Trying to add multiple form elements on a one button click(call).
+>> 
+>> Scenario. Certain users of our system wish to differentiate their  
+>> shipping and billing. I want to hide the second address form until  
+>> they click (preferably a checkbox) to specify that they wish to have  
+>> a different billing and shipping address. I've tried to get this to  
+>> work with the single element example and have had no luck. Please if  
+>> anyone could help it would be appreciated.
+>
+>
+>Why don't you add an event to that checkbox? Than you need to compute 
+>the shipping address form and send it to some pre-defined span or div.
+>
+>regards
+>Francisco A
+>_______________________________________________
+>YDFramework-users mailing list
+>YDFramework-users at lists.berlios.de
+>https://lists.berlios.de/mailman/listinfo/ydframework-users
+>
+>
+
+
+From francisco at fusemail.com  Sun Nov 19 20:56:48 2006
+From: francisco at fusemail.com (Francisco Azevedo)
+Date: Sun, 19 Nov 2006 19:56:48 +0000
+Subject: [ydf-users] Adding multiple form elements with YDAJAX
+In-Reply-To: <6C153FF8-010E-1000-F7A8-035D602E3710-Webmail-10021@mac.com>
+References: <56B1F822-E1D9-4273-A679-A3277839449A@mac.com>	<455F868B.3@fusemail.com>
+	<6C153FF8-010E-1000-F7A8-035D602E3710-Webmail-10021@mac.com>
+Message-ID: <4560B700.8080208@fusemail.com>
+
+Hi Chris
+
+> right but I've tried, I can't seem to get it figured out, keep getting errors. Is there a good example of this being done in YDF somewhere?
+
+
+You could do that easily..
+
+1- exporting the form with all extra fields
+
+2- applying display none to extra elements (using array( "style" => 
+"display:none" ) in each attribute of those extra elements.
+
+3- Then you would only needed to create simple js function (in the 
+client side) to display all extra fields and apply that function in 
+checkbox attribute (eg: array( "onclick" => "toogle() )).
+
+
+But... if you want to *generate* the extra elements only when the user 
+clicks the checkbox.. that's another story.
+
+If that is what you want.. take a look to my new YDAjax example 
+(form_runtime).
+
+
+I hope this could be your good example.
+
+
+regards
+Francisco A
+
+
+From luis.taboada at gmail.com  Fri Nov 24 00:59:06 2006
+From: luis.taboada at gmail.com (Luis Taboada)
+Date: Thu, 23 Nov 2006 15:59:06 -0800
+Subject: [ydf-users] help.
+Message-ID: <18c3a31a0611231559v43df7bcao4a6cbb559f2cd80b@mail.gmail.com>
+
+hi all from Mexico!!
+
+this is my cuestion.
+
+how can i use a class in yellow duck framework?
+i made an elaborate class that generate a special calendar for a school and
+it use smarty for displaying it
+
+
+thanks.
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <https://lists.berlios.de/pipermail/ydframework-users/attachments/20061123/0f88e9d9/attachment.html>
+
+From francisco at fusemail.com  Fri Nov 24 02:26:29 2006
+From: francisco at fusemail.com (Francisco Azevedo)
+Date: Thu, 23 Nov 2006 19:26:29 -0600 (CST)
+Subject: [ydf-users] help.
+Message-ID: <1164331589.v2.fusewebmail-15630@f>
+
+Hi Luis
+
+> how can i use a class in yellow duck framework?
+
+You only need to init the framework.
+To do that, you just need to include the YDF2_init.php file.
+
+======================
+<?php
+
+    // Init the framework
+    include_once( dirname( __FILE__ ) . '/../YDFramework2/YDF2_init.php' );
+
+    // include the yellow duck class you want using YDInclude
+    YDInclude( 'YDRequest.php' );
+
+    ...
+======================
+
+
+Luis, take a look to the user-guide:
+
+HTML: http://ydframework.berlios.de/doc/index.html
+PDF:  http://ydframework.berlios.de/doc/YDFramework2.pdf
+
+
+.. and open the examples files.
+
+
+Francisco A
+
+
+
+
+From luis.taboada at gmail.com  Fri Nov 24 18:31:55 2006
+From: luis.taboada at gmail.com (Luis Taboada)
+Date: Fri, 24 Nov 2006 09:31:55 -0800
+Subject: [ydf-users] YDFramework-users Digest, Vol 5, Issue 8
+In-Reply-To: <mailman.125.1164366089.7875.ydframework-users@lists.berlios.de>
+References: <mailman.125.1164366089.7875.ydframework-users@lists.berlios.de>
+Message-ID: <18c3a31a0611240931o525d5c3m1d0bae74794cfba7@mail.gmail.com>
+
+ok, but how can i use a class that i made (is in plain php, mycalendar.php) as
+3drparty library for the YDF.
+
+thanks
+
+
+On 11/24/06, ydframework-users-request at lists.berlios.de <
+ydframework-users-request at lists.berlios.de> wrote:
+>
+> Send YDFramework-users mailing list submissions to
+>        ydframework-users at lists.berlios.de
+>
+> To subscribe or unsubscribe via the World Wide Web, visit
+>        https://lists.berlios.de/mailman/listinfo/ydframework-users
+> or, via email, send a message with subject or body 'help' to
+>        ydframework-users-request at lists.berlios.de
+>
+> You can reach the person managing the list at
+>        ydframework-users-owner at lists.berlios.de
+>
+> When replying, please edit your Subject line so it is more specific
+> than "Re: Contents of YDFramework-users digest..."
+>
+>
+> Today's Topics:
+>
+>   1. help. (Luis Taboada)
+>   2. Re: help. (Francisco Azevedo)
+>
+>
+> ----------------------------------------------------------------------
+>
+> Message: 1
+> Date: Thu, 23 Nov 2006 15:59:06 -0800
+> From: "Luis Taboada" <luis.taboada at gmail.com>
+> Subject: [ydf-users] help.
+> To: ydframework-users at lists.berlios.de
+> Message-ID:
+>        <18c3a31a0611231559v43df7bcao4a6cbb559f2cd80b at mail.gmail.com>
+> Content-Type: text/plain; charset="iso-8859-1"
+>
+> hi all from Mexico!!
+>
+> this is my cuestion.
+>
+> how can i use a class in yellow duck framework?
+> i made an elaborate class that generate a special calendar for a school
+> and
+> it use smarty for displaying it
+>
+>
+> thanks.
+> -------------- next part --------------
+> An HTML attachment was scrubbed...
+> URL:
+> https://lists.berlios.de/pipermail/ydframework-users/attachments/20061123/0f88e9d9/attachment-0001.html
+>
+> ------------------------------
+>
+> Message: 2
+> Date: Thu, 23 Nov 2006 19:26:29 -0600 (CST)
+> From: "Francisco Azevedo" <francisco at fusemail.com>
+> Subject: Re: [ydf-users] help.
+> To: ydframework-users at lists.berlios.de
+> Message-ID: <1164331589.v2.fusewebmail-15630 at f>
+> Content-Type: text/plain;charset=iso-8859-1
+>
+> Hi Luis
+>
+> > how can i use a class in yellow duck framework?
+>
+> You only need to init the framework.
+> To do that, you just need to include the YDF2_init.php file.
+>
+> ======================
+> <?php
+>
+>    // Init the framework
+>    include_once( dirname( __FILE__ ) . '/../YDFramework2/YDF2_init.php' );
+>
+>    // include the yellow duck class you want using YDInclude
+>    YDInclude( 'YDRequest.php' );
+>
+>    ...
+> ======================
+>
+>
+> Luis, take a look to the user-guide:
+>
+> HTML: http://ydframework.berlios.de/doc/index.html
+> PDF:  http://ydframework.berlios.de/doc/YDFramework2.pdf
+>
+>
+> .. and open the examples files.
+>
+>
+> Francisco A
+>
+>
+>
+>
+> ------------------------------
+>
+> _______________________________________________
+> YDFramework-users mailing list
+> YDFramework-users at lists.berlios.de
+> https://lists.berlios.de/mailman/listinfo/ydframework-users
+>
+>
+> End of YDFramework-users Digest, Vol 5, Issue 8
+> ***********************************************
+>
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <https://lists.berlios.de/pipermail/ydframework-users/attachments/20061124/0f5b4558/attachment.html>
+
+From francisco at fusemail.com  Sun Nov 26 18:48:35 2006
+From: francisco at fusemail.com (Francisco Azevedo)
+Date: Sun, 26 Nov 2006 11:48:35 -0600 (CST)
+Subject: [ydf-users] YDFramework-users Digest, Vol 5, Issue 8
+Message-ID: <1164563315.v2.fusewebmail-15630@f>
+
+> ok, but how can i use a class that i made (is in plain php,
+> mycalendar.php) as 3drparty library for the YDF.
+
+
+Create a new YDF addon:
+	1- create a new directory inside addons, eg: ..\addons\MyCalendar\
+
+	2- put your class file "MyCalendar.php" inside the previous directory.
+	NOTE: your class must have the same name as directory!!
+
+	3- use YDInclude( "MyCalendar.php" );
+
+
+regards
+Francisco A
+
+
+From paultoytoy at gmail.com  Wed Nov 29 00:07:57 2006
+From: paultoytoy at gmail.com (aga toytoy)
+Date: Wed, 29 Nov 2006 07:07:57 +0800
+Subject: [ydf-users] Add setHTMLRequired for hidden field
+Message-ID: <93778d790611281507p7bbb691apd4ebfdce291f3b00@mail.gmail.com>
+
+Hi guyz,
+
+Is it possible if we are going to add a setHTMLRequired or enable it
+for the hidden field? Because I am trying to override a field which is
+done in smarty, but the lable is done in my controller script. just
+for example I declare something like this
+
+
+        $form->addElement( 'hidden',	'list_date',		'Listing Date' );
+        $form->addRule( 'list_date','required','List Date is required
+in this form!' );
+        $form->setHtmlRequired( '', '<span style="color:red">&nbsp;*</span>' );
+
+and on my template is
+{$form.list_date.label_html}
+{include file="common/date.tpl" menuname=$formname|concat:"list_date"
+width="75"}
+
+I expect this to output just like
+
+        Listing Date *
+but it shows only
+
+        Listing Date
+
+Would it be possible if we can do Listing Date* instead of Listing Date ?
+
+
+From paultoytoy at gmail.com  Wed Nov 29 00:30:37 2006
+From: paultoytoy at gmail.com (aga toytoy)
+Date: Wed, 29 Nov 2006 07:30:37 +0800
+Subject: [ydf-users] Add setHTMLRequired for hidden field
+In-Reply-To: <93778d790611281507p7bbb691apd4ebfdce291f3b00@mail.gmail.com>
+References: <93778d790611281507p7bbb691apd4ebfdce291f3b00@mail.gmail.com>
+Message-ID: <93778d790611281530o2405380awb2153d9b57edd762@mail.gmail.com>
+
+Have found it in this method:
+        function YDFormElement_Hidden( $form, $name, $label='',
+$attributes=array(), $options=array() ) {
+
+            // Initialize the parent
+            $this->YDFormElement( $form, $name, $label, $attributes, $options );
+
+            // Set the type
+            $this->_type = 'hidden';
+            $this->_placeLabel = 'none';
+
+            // If options is a string, it overrides the value
+            if ( is_string( $options ) ) {
+                $this->setValue( $options );
+            }
+
+            // Indicate if filters need to be applied
+            $this->_applyFilters = false;
+
+        }
+
+I have tried to eleminate this line ($this->_placeLabel = 'none'; ) it
+displays what I want to display, which is "Listing Date * ".
+Is it possible and would it there be any dependent classes or methods
+will be affected or be corrupted if we would have to eliminate this ->
+$this->_placeLabel = 'none'; ?
+
+
+From francisco at fusemail.com  Wed Nov 29 00:41:16 2006
+From: francisco at fusemail.com (Francisco Azevedo)
+Date: Tue, 28 Nov 2006 23:41:16 +0000
+Subject: [ydf-users] Add setHTMLRequired for hidden field
+In-Reply-To: <93778d790611281530o2405380awb2153d9b57edd762@mail.gmail.com>
+References: <93778d790611281507p7bbb691apd4ebfdce291f3b00@mail.gmail.com>
+	<93778d790611281530o2405380awb2153d9b57edd762@mail.gmail.com>
+Message-ID: <456CC91C.7050408@fusemail.com>
+
+Hi
+
+> I have tried to eleminate this line ($this->_placeLabel = 'none'; ) it
+> displays what I want to display, which is "Listing Date * ".
+> Is it possible and would it there be any dependent classes or methods
+> will be affected or be corrupted if we would have to eliminate this ->
+> $this->_placeLabel = 'none'; ?
+
+
+Afaik, no. Place label is the flag that defines where to place the label 
+  and is used on some render exports.
+
+My opinion is that, don't delete that line, otherwise you will have 
+problems in future updates of that file. If you don't have to place the 
+label before and you want to place the label in a default position, why 
+you just define that when creating the hidden field?
+
+
+$element = & $form->addElement( 'hidden', 'list_date', 'Listing Date' );
+$element->_placeLabel = 'before';
+...
+
+
+Francisco A
+
+
+From paultoytoy at gmail.com  Wed Nov 29 14:47:44 2006
+From: paultoytoy at gmail.com (aga toytoy)
+Date: Wed, 29 Nov 2006 21:47:44 +0800
+Subject: [ydf-users] YDFramework-users Digest, Vol 5, Issue 11
+In-Reply-To: <mailman.147.1164798097.6949.ydframework-users@lists.berlios.de>
+References: <mailman.147.1164798097.6949.ydframework-users@lists.berlios.de>
+Message-ID: <93778d790611290547v78f3eabfs7edab181d2feed21@mail.gmail.com>
+
+Hi Francisco,
+
+Thanks for the reply Francisco! That's definitely what I wanted to happen.
+
+
+cheers,
+
+toytoy
+
+
+From paultoytoy at gmail.com  Wed Nov 29 14:54:35 2006
+From: paultoytoy at gmail.com (aga toytoy)
+Date: Wed, 29 Nov 2006 21:54:35 +0800
+Subject: [ydf-users] YDFramework-users Digest, Vol 5, Issue 11
+In-Reply-To: <93778d790611290547v78f3eabfs7edab181d2feed21@mail.gmail.com>
+References: <mailman.147.1164798097.6949.ydframework-users@lists.berlios.de>
+	<93778d790611290547v78f3eabfs7edab181d2feed21@mail.gmail.com>
+Message-ID: <93778d790611290554x495e6757me5f6f0d62465c28@mail.gmail.com>
+
+Hi Francisco,
+
+Just a clarification, why does this able to access and change the
+variable from YDFormElement_Hidden with this code:
+
+         $element = & $form->addElement( 'hidden', 'list_date',
+'Listing Date' );
+         $element->_placeLabel = 'before';
+
+Do you have any idea why?
+
+Thanks,
+
+toytoy
+
+
+From francisco at fusemail.com  Wed Nov 29 18:10:46 2006
+From: francisco at fusemail.com (Francisco Azevedo)
+Date: Wed, 29 Nov 2006 17:10:46 +0000
+Subject: [ydf-users] YDFramework-users Digest, Vol 5, Issue 11
+In-Reply-To: <93778d790611290554x495e6757me5f6f0d62465c28@mail.gmail.com>
+References: <mailman.147.1164798097.6949.ydframework-users@lists.berlios.de>	<93778d790611290547v78f3eabfs7edab181d2feed21@mail.gmail.com>
+	<93778d790611290554x495e6757me5f6f0d62465c28@mail.gmail.com>
+Message-ID: <456DBF16.50301@fusemail.com>
+
+Hi
+
+> Just a clarification, why does this able to access and change the
+> variable from YDFormElement_Hidden with this code:
+> 
+>          $element = & $form->addElement( 'hidden', 'list_date',
+> 'Listing Date' );
+>          $element->_placeLabel = 'before';
+> 
+> Do you have any idea why?
+
+
+As i said, _placeLabel defines where to render the label when exporting. 
+When you use {$form.list_date...} in the template you are using an 
+_exported_ value.
+On other convertions (eg: form to array), the export converter will look 
+to the _placeLabel definition and if value is:
+	- "none" will _not_ use labels
+	- "before" will place label _before_ the element html
+	- "after" will place label _after_ the element html
+
+If you use $form->display() in your code you can see the difference.
+
+
+Francisco A
+
+

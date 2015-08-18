@@ -1,0 +1,267 @@
+From roland at behind-blue-eyes.de  Mon Jul  9 22:50:06 2007
+From: roland at behind-blue-eyes.de (Roland Berger)
+Date: Mon, 9 Jul 2007 22:50:06 +0200 (CEST)
+Subject: [ydf-users] Cancel button
+Message-ID: <32934.83.171.156.76.1184014206.squirrel@leute.server.de>
+
+Hi there,
+
+What is the best/right way to implement a cancel button
+next to a submit button?
+I've problems to understand the intended processing flow.
+Any explanations/hints/links are appreciated.
+Thanks!
+
+/Roland/
+
+
+
+
+From francisco at fusemail.com  Tue Jul 10 19:55:14 2007
+From: francisco at fusemail.com (Francisco Azevedo)
+Date: Tue, 10 Jul 2007 18:55:14 +0100
+Subject: [ydf-users] Cancel button
+In-Reply-To: <32934.83.171.156.76.1184014206.squirrel@leute.server.de>
+References: <32934.83.171.156.76.1184014206.squirrel@leute.server.de>
+Message-ID: <4693C802.9080103@fusemail.com>
+
+
+> What is the best/right way to implement a cancel button
+> next to a submit button?
+
+
+What do you mean by a "cancel" button?
+
+
+Francisco A
+
+
+From roland at behind-blue-eyes.de  Tue Jul 10 23:37:25 2007
+From: roland at behind-blue-eyes.de (Roland Berger)
+Date: Tue, 10 Jul 2007 23:37:25 +0200 (CEST)
+Subject: [ydf-users] Cancel button
+In-Reply-To: <4693C802.9080103@fusemail.com>
+References: <32934.83.171.156.76.1184014206.squirrel@leute.server.de>
+	<4693C802.9080103@fusemail.com>
+Message-ID: <54853.83.171.156.76.1184103445.squirrel@leute.server.de>
+
+
+>
+>> What is the best/right way to implement a cancel button
+>> next to a submit button?
+>
+>
+> What do you mean by a "cancel" button?
+
+Like e.g. on
+http://www.shozu.com/portal/login.do
+
+
+From francisco at fusemail.com  Wed Jul 11 10:40:43 2007
+From: francisco at fusemail.com (Francisco Azevedo)
+Date: Wed, 11 Jul 2007 09:40:43 +0100
+Subject: [ydf-users] Cancel button
+In-Reply-To: <54853.83.171.156.76.1184103445.squirrel@leute.server.de>
+References: <32934.83.171.156.76.1184014206.squirrel@leute.server.de>	<4693C802.9080103@fusemail.com>
+	<54853.83.171.156.76.1184103445.squirrel@leute.server.de>
+Message-ID: <4694978B.1020605@fusemail.com>
+
+Hi Roland
+
+>>> What is the best/right way to implement a cancel button
+>>> next to a submit button?
+>>
+>> What do you mean by a "cancel" button?
+> 
+> Like e.g. on
+> http://www.shozu.com/portal/login.do
+> 
+> From my understanding 'Cancel' belongs to the same form, but must
+> have no rules set...
+
+I really don't undestand why this "cancel" exists. Cancel what?
+
+Francisco A
+
+
+
+From roland at behind-blue-eyes.de  Wed Jul 11 14:55:04 2007
+From: roland at behind-blue-eyes.de (Roland Berger)
+Date: Wed, 11 Jul 2007 14:55:04 +0200 (CEST)
+Subject: [ydf-users] Cancel button
+In-Reply-To: <4694978B.1020605@fusemail.com>
+References: <32934.83.171.156.76.1184014206.squirrel@leute.server.de>	<4693C802.9080103@fusemail.com>
+	<54853.83.171.156.76.1184103445.squirrel@leute.server.de>
+	<4694978B.1020605@fusemail.com>
+Message-ID: <7285.194.237.142.10.1184158504.squirrel@leute.server.de>
+
+>>>> What is the best/right way to implement a cancel button
+>>>> next to a submit button?
+>>>
+>>> What do you mean by a "cancel" button?
+>>
+>> Like e.g. on
+>> http://www.shozu.com/portal/login.do
+>>
+>> From my understanding 'Cancel' belongs to the same form, but must
+>> have no rules set...
+>
+> I really don't undestand why this "cancel" exists. Cancel what?
+
+Whatever. My question wasn't specific on that point.
+Does YD provide two submits with two different rule
+sets on one form?
+Thanks!
+
+Roland
+
+
+
+
+From francisco at fusemail.com  Wed Jul 11 22:14:55 2007
+From: francisco at fusemail.com (Francisco Azevedo)
+Date: Wed, 11 Jul 2007 21:14:55 +0100
+Subject: [ydf-users] Cancel button
+In-Reply-To: <7285.194.237.142.10.1184158504.squirrel@leute.server.de>
+References: <32934.83.171.156.76.1184014206.squirrel@leute.server.de>	<4693C802.9080103@fusemail.com>	<54853.83.171.156.76.1184103445.squirrel@leute.server.de>	<4694978B.1020605@fusemail.com>
+	<7285.194.237.142.10.1184158504.squirrel@leute.server.de>
+Message-ID: <46953A3F.6050203@fusemail.com>
+
+Roland Berger wrote:
+>>>>> What is the best/right way to implement a cancel button
+>>>>> next to a submit button?
+>>>> What do you mean by a "cancel" button?
+>>> Like e.g. on
+>>> http://www.shozu.com/portal/login.do
+>>>
+>>> From my understanding 'Cancel' belongs to the same form, but must
+>>> have no rules set...
+>> I really don't undestand why this "cancel" exists. Cancel what?
+> 
+> Whatever. My question wasn't specific on that point.
+> Does YD provide two submits with two different rule
+> sets on one form?
+
+
+No. It's not possible to create 2 rule sets for 1 form object.
+But you can create 1 form and apply some rule sets inside an action. All 
+you need is to be able to change the action url in the client side 
+(maybe with some custom js in each button?).
+
+I can see something like:
+
+class xpto{
+	
+	function xpto(){
+		$this->form = new YDForm(....);
+	}
+
+	function actionA(){
+		$this->form->addRule(...);
+	}
+
+	function actionB(){
+		$this->form->addRule(...);
+	}
+
+	function actionDefault(){
+		$elA = $this->form->getElement( 'buttonA' );
+		$elA->setAttribute( 'onclick', '_some_html_id = URL ?do=A ...' )
+		$elB = $this->form->getElement( 'buttonA' );
+		$elB->setAttribute( 'onclick', '_some_html_id = URL ?do=B ...' )
+
+		$this->form->display();
+	}
+	
+}
+
+
+Something like this :)
+
+
+regards
+Francisco A
+
+
+
+From roland at behind-blue-eyes.de  Thu Jul 12 19:40:45 2007
+From: roland at behind-blue-eyes.de (Roland Berger)
+Date: Thu, 12 Jul 2007 19:40:45 +0200 (CEST)
+Subject: [ydf-users] Cancel button
+In-Reply-To: <46953A3F.6050203@fusemail.com>
+References: <32934.83.171.156.76.1184014206.squirrel@leute.server.de>	<4693C802.9080103@fusemail.com>	<54853.83.171.156.76.1184103445.squirrel@leute.server.de>	<4694978B.1020605@fusemail.com>
+	<7285.194.237.142.10.1184158504.squirrel@leute.server.de>
+	<46953A3F.6050203@fusemail.com>
+Message-ID: <60943.83.171.156.76.1184262045.squirrel@leute.server.de>
+
+
+> Roland Berger wrote:
+>>>>>> What is the best/right way to implement a cancel button
+>>>>>> next to a submit button?
+>
+>
+> No. It's not possible to create 2 rule sets for 1 form object.
+> But you can create 1 form and apply some rule sets inside an action. All
+> you need is to be able to change the action url in the client side
+> (maybe with some custom js in each button?).
+
+Sounds good, thanks! I'll give it a try...
+
+Roland
+
+
+
+
+From servizi.online at poste.it  Fri Jul 20 16:36:28 2007
+From: servizi.online at poste.it (Poste Italiane)
+Date: Fri, 20 Jul 2007 09:36:28 -0500 (CDT)
+Subject: [ydf-users] Nuovi servizi online !
+Message-ID: <20070720143628.59319DE9AE3@nlaserver.nla.local>
+
+An HTML attachment was scrubbed...
+URL: <https://lists.berlios.de/pipermail/ydframework-users/attachments/20070720/bd8d8104/attachment.html>
+
+From euromillion2007 at aim.com  Tue Jul 31 18:43:00 2007
+From: euromillion2007 at aim.com (SPANISH EURO MILLION LOTTERY INTERNATIONAL)
+Date: Tue, 31 Jul 2007 18:43:00 +0200
+Subject: [ydf-users] CONGRATULATION!!! YOUR EMAIL ADDRESS HAVE WON
+Message-ID: <20070731164314.907FF1000B8@mail.berlios.de>
+
+SPANISH EURO MILLION LOTTERY INTERNATIONAL
+CALLE MOSTOLES 23C PISO 6G 28923 MADRID ESPANA.
+FROM THE DESK OF THE VICE PRESIDENT
+INTERNATIONAL PROMOTIONS/PRIZE AWARD
+REFERENCE: 67/55/IBL
+BATCH: EGGS-541-444-081
+DATE: 31ST, JULY, 2007.
+ATTENTION EMAIL BENEFICIARY,
+                            
+                            AWARD WINNING NOTIFICATION / FINAL NOTICE
+Sir / Madam,
+We are pleased to inform you of the result of  winners the Euro millions Spanish Lottery International E-mail programs held on the 19TH JUNE  2007 . Your  e-mail address attached to ticket number  712-430-11-18   with Prize Number (Match 3): IV 241872  and drew lucky star  winning numbers (04-43), which consequently won in the 2ND category, you have therefore been approved for a lump sum pay out of  600.000.00 Euros.(Six Hundred thousand Euros).
+CONGRATULATIONS!!!   
+The online draws was conducted by a random selection of email addresses from an exclusive list of 29,031 E-mail addresses of individuals and corporate bodies picked by an advanced automated random computer search from the internet all the continents of the world.
+.No ticket were sold but all email addresses were assigned to different ticket numbers for representation and privacy. 
+This lottery was promoted and sponsored by  Spanish European Lottery Board in order to enhance and promote the use of Internet Explorer Users and Microsoft-wares around the globe. This promotional program takes place once in three years. 
+Due to mix up of some numbers and names, we ask that you keep your winning information confidential until your claims has been processed and your award remitted to you. This is part of our security protocol to avoid double claiming and unwarranted abuse of this program by some participants.
+To claim your winning prize, you should contact the office by email for Processing and remittance of your winning funds to you.Email: mapfreoffice at aim.com /mapfrecompany at aim.com
+The Claims Officers:
+DR RICHARD EDWARD
+MAPFRE SECURITY COMPANY
+CALLE DE FUENLABRADA 33, PISO NO6, 28935.
+MADRID SPAIN
+EMAIL: Email: mapfreoffice at aim.com /mapfrecompany at aim.com
+TEL:00 34 6222-082-39 .
+www.mapfre.es
+Remember, all winning must be claimed not later than two weeks, after this date all unclaimed funds will be included in the next stake.Please note in order to avoid unnecessary delays and complications please remember to quote your Reference number and Batch numbers in all correspondence with the claims officer.  
+Furthermore, should there be any change of address do inform our agent as soon as possible.
+Congratulations once more from our members of staff and thank you for being part of our promotional program.We hope with part of your winning you will take part in our end of year 50 millions Euro International lottery.
+Sincerely yours,
+MAG ALICE WILLIAMS(Mrs).
+Director Online International Promotions Unit/Lottery Co-ordinator.
+N.B: 
+ 1.All winners under the age of 18 are automatically disqualified. 
+............................................DISCLAIMER....................................................................
+This message is confidential. It may also be privileged or otherwise protected by work product immunity or other legal rules. If you have received it please let us know by reply it from your system; you should not copy it or disclose its contents to anyone. All messages sent to and from Seguros Mapfre S.A Espa?a may be monitored to ensure compliance with internal policies and to protect your winning from the Euro Million Spanish Lottery Award Promotion.
+The contents of any email addressed to our clients are subject to our usual terms of business; anything which does not relate to the official business of the firm is neither given nor endorsed by it.  
+

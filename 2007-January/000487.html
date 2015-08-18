@@ -1,0 +1,102 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [ydf-users] Multiple connection
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/ydframework-users/2007-January/index.html" >
+   <LINK REL="made" HREF="mailto:ydframework-users%40lists.berlios.de?Subject=Re%3A%20%5Bydf-users%5D%20Multiple%20connection&In-Reply-To=%3C93778d790701231917y25bfc349w1854413ef0e7fc5%40mail.gmail.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000486.html">
+   
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[ydf-users] Multiple connection</H1>
+    <B>aga toytoy</B> 
+    <A HREF="mailto:ydframework-users%40lists.berlios.de?Subject=Re%3A%20%5Bydf-users%5D%20Multiple%20connection&In-Reply-To=%3C93778d790701231917y25bfc349w1854413ef0e7fc5%40mail.gmail.com%3E"
+       TITLE="[ydf-users] Multiple connection">paultoytoy at gmail.com
+       </A><BR>
+    <I>Wed Jan 24 04:17:38 CET 2007</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000486.html">[ydf-users] Multiple connection
+</A></li>
+        
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#487">[ date ]</a>
+              <a href="thread.html#487">[ thread ]</a>
+              <a href="subject.html#487">[ subject ]</a>
+              <a href="author.html#487">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Hi Piete,
+
+Having this example,
+
+       $this-&gt;db =
+YDDatabase::getInstance('mysql','db1','username','password','localhost');
+       $this-&gt;db2 =
+YDDatabase::getInstance('mysql','db2','username','password','localhost'
+
+using those objects above will result just like this
+
+               echo $this-&gt;db-&gt;getDatabase(); // prints db1
+               echo $this-&gt;db2-&gt;connect(); // prints 1
+               echo $this-&gt;db2-&gt;getDatabase(); // prints db2
+               echo $this-&gt;db2-&gt;getRecord( &quot;SELECT * FROM #_TEMP
+WHERE t_sessid='{$_SESSION['t_sessid']}' LIMIT 1&quot; );  // prefix for #
+is tbl and it says table
+db1.tbl_TEMP doesn't exist
+               exit;
+
+Note that, db1 has no tbl_TEMP, else db2 has it.
+
+BUT:
+
+               echo $this-&gt;db-&gt;getDatabase(); // prints db1
+               echo $this-&gt;db2-&gt;connect(); // prints 1
+               echo $this-&gt;db2-&gt;getDatabase(); // prints db2
+               mysql_select_db( YDConfig::get( 'DATABASE2' ) ); //
+set db in php's native convention, where YDConfig::get( 'DATABASE2' )
+== 'db2'
+               echo $this-&gt;db2-&gt;getRecord( &quot;SELECT * FROM #_TEMP
+WHERE t_sessid='{$_SESSION['t_sessid']}' LIMIT 1&quot; );  // prints Array
+in which I really expect
+               YDDebugUtil::dump( $this-&gt;db2-&gt;getRecord( &quot;SELECT * FROM #_TEMP
+WHERE t_sessid='{$_SESSION['t_sessid']}' LIMIT 1&quot; ) ); // Prints array
+('t_sessid' =&gt; 't_45b6ced8808ca', 'name' =&gt; 'my name',
+  'age' =&gt; '12', 'country' =&gt; 'phi',) which i really expect too
+               exit;
+
+
+Thanks for the reply piete!
+
+paul
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000486.html">[ydf-users] Multiple connection
+</A></li>
+	
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#487">[ date ]</a>
+              <a href="thread.html#487">[ thread ]</a>
+              <a href="subject.html#487">[ subject ]</a>
+              <a href="author.html#487">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/ydframework-users">More information about the YDFramework-users
+mailing list</a><br>
+</body></html>

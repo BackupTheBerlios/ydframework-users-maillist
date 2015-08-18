@@ -1,0 +1,195 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [ydf-users] YDAjax autocompleter
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/ydframework-users/2006-March/index.html" >
+   <LINK REL="made" HREF="mailto:ydframework-users%40lists.berlios.de?Subject=Re%3A%20%5Bydf-users%5D%20YDAjax%20autocompleter&In-Reply-To=%3C4410B113.90403%40fusemail.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000093.html">
+   <LINK REL="Next"  HREF="000098.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[ydf-users] YDAjax autocompleter</H1>
+    <B>Francisco Azevedo</B> 
+    <A HREF="mailto:ydframework-users%40lists.berlios.de?Subject=Re%3A%20%5Bydf-users%5D%20YDAjax%20autocompleter&In-Reply-To=%3C4410B113.90403%40fusemail.com%3E"
+       TITLE="[ydf-users] YDAjax autocompleter">francisco at fusemail.com
+       </A><BR>
+    <I>Thu Mar  9 23:49:55 CET 2006</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000093.html">[ydf-users] YDAjax autocompleter
+</A></li>
+        <LI>Next message: <A HREF="000098.html">[ydf-users] YDAjax autocompleter
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#94">[ date ]</a>
+              <a href="thread.html#94">[ thread ]</a>
+              <a href="subject.html#94">[ subject ]</a>
+              <a href="author.html#94">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Hi dab
+
+The solution for your problem is exactly what i said on my last email.
+Please not that:
+
+1 - You should define all arguments in a array (when adding a 
+autocompleter to a form)
+
+2 - You should define the same quantity of arguments in the server function.
+
+3 - You should NOT use any of the YDFormElement_Autocompleter methods
+
+So..
+
+1:
+$this-&gt;form-&gt;addElement( 'autocompleter', 'firstname', 'First Name:', 
+$this-&gt;attributes, array( &amp;$this, 'getAjaxElement', array( 'affiliate', 
+'firstname' ) ) );
+
+2:
+function getAjaxElement ( $affiliate, $firstname ) {
+      ...
+}
+
+
+Francisco A
+
+
+&gt;<i> thanks for your reply. i can't get it to work though
+</I>&gt;<i> =(
+</I>&gt;<i> 
+</I>&gt;<i> you mean i have to do this?
+</I>&gt;<i> $this-&gt;form-&gt;addElement ( 'autocompleter',
+</I>&gt;<i> 'firstname', 'First Name:', $this-&gt;attributes, array(
+</I>&gt;<i> &amp;$this, 'getAjaxElement', 'affiliate', 'firstname' )
+</I>&gt;<i> );
+</I>&gt;<i> 
+</I>&gt;<i> function getAjaxElement ( $text, $field, $table ) {
+</I>&gt;<i>     ...     
+</I>&gt;<i> }
+</I>&gt;<i> 
+</I>&gt;<i> 
+</I>&gt;<i> YDFormElement_Autocompleter::getAjaxArguments()
+</I>&gt;<i> returns $this-&gt;_options[2]. So if the the third value
+</I>&gt;<i> in the options array is:
+</I>&gt;<i> array ( 'tablename', 'fieldname' )
+</I>&gt;<i> 
+</I>&gt;<i> and in getAjaxElement() you do:
+</I>&gt;<i> function getAjaxElement ( $text ) {
+</I>&gt;<i>     $info = $this-&gt;getAjaxArguments();
+</I>&gt;<i>     $table = $info[0];
+</I>&gt;<i>     $field = $info[1];
+</I>&gt;<i>     ...
+</I>&gt;<i> }
+</I>&gt;<i> 
+</I>&gt;<i> why doesn't that work? i need to pass arguments =)
+</I>&gt;<i> thanks.
+</I>&gt;<i> 
+</I>&gt;<i> /dab
+</I>&gt;<i> 
+</I>&gt;<i> 
+</I>&gt;<i> 
+</I>&gt;<i> --- Francisco Azevedo &lt;<A HREF="https://lists.berlios.de/mailman/listinfo/ydframework-users">francisco at fusemail.com</A>&gt; wrote:
+</I>&gt;<i> 
+</I>&gt;<i> 
+</I>&gt;&gt;<i>dab wrote:
+</I>&gt;&gt;<i>
+</I>&gt;&gt;&gt;<i>hi all,
+</I>&gt;&gt;&gt;<i>i use the autocomplete function on quite a lot of
+</I>&gt;&gt;&gt;<i>fields so it would be better if i could pass the
+</I>&gt;&gt;<i>
+</I>&gt;&gt;<i>table
+</I>&gt;&gt;<i>
+</I>&gt;&gt;&gt;<i>and field name to the ajax method so i don't have
+</I>&gt;&gt;<i>
+</I>&gt;&gt;<i>to
+</I>&gt;&gt;<i>
+</I>&gt;&gt;&gt;<i>write one extra method for each element.
+</I>&gt;&gt;&gt;<i>by looking at the YDFormElement_Autocompleter
+</I>&gt;&gt;<i>
+</I>&gt;&gt;<i>below
+</I>&gt;&gt;<i>
+</I>&gt;&gt;&gt;<i>code should work, but it doesn't :(
+</I>&gt;&gt;&gt;<i>
+</I>&gt;&gt;&gt;<i>$this-&gt;form-&gt;addElement ( 'autocompleter',
+</I>&gt;&gt;&gt;<i>'firstname', 'First Name:', $this-&gt;attributes,
+</I>&gt;&gt;<i>
+</I>&gt;&gt;<i>array(
+</I>&gt;&gt;<i>
+</I>&gt;&gt;&gt;<i>&amp;$this, 'getAjaxElement', array ( 'affiliate',
+</I>&gt;&gt;&gt;<i>'firstname' ) ) );
+</I>&gt;&gt;&gt;<i>
+</I>&gt;&gt;&gt;<i>function getAjaxElement ( $text ) {
+</I>&gt;&gt;&gt;<i>    $info = $this-&gt;getAjaxArguments();
+</I>&gt;&gt;&gt;<i>    $table = $info[0];
+</I>&gt;&gt;&gt;<i>    $field = $info[1];
+</I>&gt;&gt;&gt;<i>    $user = YDDatabaseObject::getInstance ( $table
+</I>&gt;&gt;<i>
+</I>&gt;&gt;<i>);
+</I>&gt;&gt;<i>
+</I>&gt;&gt;&gt;<i>    $user-&gt;select ( 'id', $field );
+</I>&gt;&gt;&gt;<i>    $user-&gt;find();
+</I>&gt;&gt;&gt;<i>    $db = $user-&gt;getResultsAsAssocArray( 'id',
+</I>&gt;&gt;<i>
+</I>&gt;&gt;<i>$field
+</I>&gt;&gt;<i>
+</I>&gt;&gt;&gt;<i>);
+</I>&gt;&gt;&gt;<i>	$result = array();
+</I>&gt;&gt;&gt;<i>	foreach( $db as $key =&gt; $el )
+</I>&gt;&gt;&gt;<i>		if (eregi(&quot;^&quot;. $text .&quot;+&quot;, $el)) $result[] =
+</I>&gt;&gt;<i>
+</I>&gt;&gt;<i>$el;
+</I>&gt;&gt;<i>
+</I>&gt;&gt;&gt;<i>		
+</I>&gt;&gt;&gt;<i>	$this-&gt;ajax-&gt;addCompleterResult( $result ); 
+</I>&gt;&gt;&gt;<i>	return $this-&gt;ajax-&gt;processResults();           
+</I>&gt;&gt;&gt;<i>}
+</I>&gt;&gt;&gt;<i>
+</I>&gt;&gt;<i>
+</I>&gt;&gt;<i>Hi dab.
+</I>&gt;&gt;<i>
+</I>&gt;&gt;<i>My first look at your code is telling me that you
+</I>&gt;&gt;<i>are defining an 
+</I>&gt;&gt;<i>autocompleter with 'getAjaxElement' and 2
+</I>&gt;&gt;<i>arguments.. but on your 
+</I>&gt;&gt;<i>'getAjaxElement' you only set 1 argument ($text).
+</I>&gt;&gt;<i>
+</I>&gt;&gt;<i>You should try:
+</I>&gt;&gt;<i>
+</I>&gt;&gt;<i>function getAjaxElement ( $affiliate, $firstname ) {
+</I>&gt;&gt;<i>    ...
+</I>&gt;&gt;<i>}
+</I>&gt;&gt;<i>
+</I>&gt;&gt;<i>Francisco A
+</I>
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000093.html">[ydf-users] YDAjax autocompleter
+</A></li>
+	<LI>Next message: <A HREF="000098.html">[ydf-users] YDAjax autocompleter
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#94">[ date ]</a>
+              <a href="thread.html#94">[ thread ]</a>
+              <a href="subject.html#94">[ subject ]</a>
+              <a href="author.html#94">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/ydframework-users">More information about the YDFramework-users
+mailing list</a><br>
+</body></html>

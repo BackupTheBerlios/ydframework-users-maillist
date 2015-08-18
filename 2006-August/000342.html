@@ -1,0 +1,216 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [ydf-users] How to remove form rule and elements rule .
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/ydframework-users/2006-August/index.html" >
+   <LINK REL="made" HREF="mailto:ydframework-users%40lists.berlios.de?Subject=Re%3A%20%5Bydf-users%5D%20How%20to%20remove%20form%20rule%20and%20elements%20rule%20.&In-Reply-To=%3C4aef63030608250614u5b6eb187s857f37d075118b23%40mail.gmail.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000341.html">
+   <LINK REL="Next"  HREF="000343.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[ydf-users] How to remove form rule and elements rule .</H1>
+    <B>Pieter Claerhout</B> 
+    <A HREF="mailto:ydframework-users%40lists.berlios.de?Subject=Re%3A%20%5Bydf-users%5D%20How%20to%20remove%20form%20rule%20and%20elements%20rule%20.&In-Reply-To=%3C4aef63030608250614u5b6eb187s857f37d075118b23%40mail.gmail.com%3E"
+       TITLE="[ydf-users] How to remove form rule and elements rule .">pieter at yellowduck.be
+       </A><BR>
+    <I>Fri Aug 25 15:14:44 CEST 2006</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000341.html">[ydf-users] How to remove form rule and elements rule .
+</A></li>
+        <LI>Next message: <A HREF="000343.html">[ydf-users] How to remove form rule and elements rule .
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#342">[ date ]</a>
+              <a href="thread.html#342">[ thread ]</a>
+              <a href="subject.html#342">[ subject ]</a>
+              <a href="author.html#342">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>I will put it on the list of things to do...
+
+Can you log it as a feature request in berlios?
+
+pieter
+
+On 8/25/06, Moses Dinakaran &lt;<A HREF="https://lists.berlios.de/mailman/listinfo/ydframework-users">mosesdinakaran at gmail.com</A>&gt; wrote:
+&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i> Hello Sir
+</I>&gt;<i>
+</I>&gt;<i>       Thank U for ur reply.
+</I>&gt;<i>
+</I>&gt;<i>       Though I colud  solve the issue I fell good if we can add or remove
+</I>&gt;<i> the rules dynamically.
+</I>&gt;<i>
+</I>&gt;<i> The following is the code
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i> *class test
+</I>&gt;<i>  {
+</I>&gt;<i>   function test()
+</I>&gt;<i>   {
+</I>&gt;<i>    $this-&gt;form-&gt;addElement('text','creditunion','Credit Union');
+</I>&gt;<i>    $this-&gt;form-&gt;addElement('text','dealer','Dealer');
+</I>&gt;<i>    $this-&gt;form-&gt;addElement('submit','search','Search');
+</I>&gt;<i>    $this-&gt;form-&gt;addElement('submit','update','Update');
+</I>&gt;<i>
+</I>&gt;<i>    $this-&gt;form-&gt;addFormRule(array(&amp;$this,'validateData'));
+</I>&gt;<i>   }
+</I>&gt;<i>
+</I>&gt;<i>   function validateData($fields)
+</I>&gt;<i>   {
+</I>&gt;<i>    if($fields['creditunion']==''&amp;&amp;$fields['dealer']=='')
+</I>&gt;<i>    {
+</I>&gt;<i>    return array(&quot;search&quot;=&gt;&quot;Please Enter at least one value&quot;);
+</I>&gt;<i>    }
+</I>&gt;<i>    else
+</I>&gt;<i>    {
+</I>&gt;<i>    return true;
+</I>&gt;<i>    }
+</I>&gt;<i>   }
+</I>&gt;<i>
+</I>&gt;<i>   function actionDefault()
+</I>&gt;<i>   {
+</I>&gt;<i>          //Here I need the validation
+</I>&gt;<i>         if($form-&gt;validate)
+</I>&gt;<i>         {
+</I>&gt;<i>                 //retrive the datas from the database
+</I>&gt;<i>          }
+</I>&gt;<i>   }
+</I>&gt;<i>
+</I>&gt;<i>   function actionEdit()
+</I>&gt;<i>   {
+</I>&gt;<i>           //Here I dont need the validation
+</I>&gt;<i>            if($form-&gt;validate)
+</I>&gt;<i>            {
+</I>&gt;<i>                  //Update the records
+</I>&gt;<i>             }
+</I>&gt;<i>    }
+</I>&gt;<i>  }*
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i>    Initially I need to search the records
+</I>&gt;<i>    the validation is that the user should enter  atleast one  value if the
+</I>&gt;<i> validation satcifies
+</I>&gt;<i>    he will get a edit link in each record so on clicking the edit link it
+</I>&gt;<i> goes to actionEdit
+</I>&gt;<i>    Here he can update, but i dont need the form rules validateData
+</I>&gt;<i> validation in action Edit
+</I>&gt;<i>    Since I have added the formRule validateData in the constructor here
+</I>&gt;<i> also it checks for validation
+</I>&gt;<i>    So I feel that If I could remove the validation in actionEdit the
+</I>&gt;<i> problem is solved.
+</I>&gt;<i>
+</I>&gt;<i>    I have solved the problem by removing the validation  from the
+</I>&gt;<i> constructor and put it in the actionDefaut.
+</I>&gt;<i>
+</I>&gt;<i>    But It will be good if I could dynamically add or remove the rules.
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i> regards
+</I>&gt;<i>
+</I>&gt;<i> moses
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i> On 8/25/06, Pieter Claerhout &lt;<A HREF="https://lists.berlios.de/mailman/listinfo/ydframework-users">pieter at yellowduck.be</A>&gt; wrote:
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt;  Currently, there is no way to do this as the list of rules is put in a
+</I>&gt;<i> &gt; non associative array.
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt; Can you shed some light on what you are trying to accomplish?
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt; pieter
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt;  On 8/25/06, Moses Dinakaran &lt; <A HREF="https://lists.berlios.de/mailman/listinfo/ydframework-users">mosesdinakaran at gmail.com</A>&gt; wrote:
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt; &gt;
+</I>&gt;<i> &gt; Hi Everybody
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt;      How to remove  form rule and elements rule .
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt;      I have registered a form rule like the following
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt;      $this-&gt;form-&gt;addFormRule(array(&amp;$this,'validateData'));
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt;      How to remove this rule.
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt;      And Also is it possible to remove a particular rule of a particular
+</I>&gt;<i> &gt; element
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt;      (ie) if we have 2 rules required,numeric initially for a element
+</I>&gt;<i> &gt; and at some time we only need required rule so how to  remove the
+</I>&gt;<i> &gt;      numeric rule from the element.
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt; regards
+</I>&gt;<i> &gt; moses
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt; _______________________________________________
+</I>&gt;<i> &gt; YDFramework-users mailing list
+</I>&gt;<i> &gt; <A HREF="https://lists.berlios.de/mailman/listinfo/ydframework-users">YDFramework-users at lists.berlios.de</A>
+</I>&gt;<i> &gt; <A HREF="https://lists.berlios.de/mailman/listinfo/ydframework-users">https://lists.berlios.de/mailman/listinfo/ydframework-users</A>
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt; --
+</I>&gt;<i> &gt; pieter claerhout . <A HREF="https://lists.berlios.de/mailman/listinfo/ydframework-users">pieter at yellowduck.be</A> . <A HREF="http://www.yellowduck.be/">http://www.yellowduck.be/</A>
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt; _______________________________________________
+</I>&gt;<i> &gt; YDFramework-users mailing list
+</I>&gt;<i> &gt; <A HREF="https://lists.berlios.de/mailman/listinfo/ydframework-users">YDFramework-users at lists.berlios.de</A>
+</I>&gt;<i> &gt; <A HREF="https://lists.berlios.de/mailman/listinfo/ydframework-users">https://lists.berlios.de/mailman/listinfo/ydframework-users</A>
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt;
+</I>&gt;<i>
+</I>&gt;<i> _______________________________________________
+</I>&gt;<i> YDFramework-users mailing list
+</I>&gt;<i> <A HREF="https://lists.berlios.de/mailman/listinfo/ydframework-users">YDFramework-users at lists.berlios.de</A>
+</I>&gt;<i> <A HREF="https://lists.berlios.de/mailman/listinfo/ydframework-users">https://lists.berlios.de/mailman/listinfo/ydframework-users</A>
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i>
+</I>
+
+-- 
+pieter claerhout . <A HREF="https://lists.berlios.de/mailman/listinfo/ydframework-users">pieter at yellowduck.be</A> . <A HREF="http://www.yellowduck.be/">http://www.yellowduck.be/</A>
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: &lt;<A HREF="https://lists.berlios.de/pipermail/ydframework-users/attachments/20060825/cdec18bc/attachment.html">https://lists.berlios.de/pipermail/ydframework-users/attachments/20060825/cdec18bc/attachment.html</A>&gt;
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000341.html">[ydf-users] How to remove form rule and elements rule .
+</A></li>
+	<LI>Next message: <A HREF="000343.html">[ydf-users] How to remove form rule and elements rule .
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#342">[ date ]</a>
+              <a href="thread.html#342">[ thread ]</a>
+              <a href="subject.html#342">[ subject ]</a>
+              <a href="author.html#342">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/ydframework-users">More information about the YDFramework-users
+mailing list</a><br>
+</body></html>

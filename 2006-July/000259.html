@@ -1,0 +1,116 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [ydf-users] YDDatabaseObject - What's the right way to do ?
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/ydframework-users/2006-July/index.html" >
+   <LINK REL="made" HREF="mailto:ydframework-users%40lists.berlios.de?Subject=Re%3A%20%5Bydf-users%5D%20YDDatabaseObject%20-%20What%27s%20the%20right%20way%20to%20do%20%3F&In-Reply-To=%3C44A7AFCC.60408%40free.fr%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   
+   <LINK REL="Next"  HREF="000262.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[ydf-users] YDDatabaseObject - What's the right way to do ?</H1>
+    <B>Erwan</B> 
+    <A HREF="mailto:ydframework-users%40lists.berlios.de?Subject=Re%3A%20%5Bydf-users%5D%20YDDatabaseObject%20-%20What%27s%20the%20right%20way%20to%20do%20%3F&In-Reply-To=%3C44A7AFCC.60408%40free.fr%3E"
+       TITLE="[ydf-users] YDDatabaseObject - What's the right way to do ?">araviski at free.fr
+       </A><BR>
+    <I>Sun Jul  2 13:36:44 CEST 2006</I>
+    <P><UL>
+        
+        <LI>Next message: <A HREF="000262.html">[ydf-users] YDDatabaseObject - What's the right way to do ?
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#259">[ date ]</a>
+              <a href="thread.html#259">[ thread ]</a>
+              <a href="subject.html#259">[ subject ]</a>
+              <a href="author.html#259">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Hi all,
+Here is something I'd like to do with the YDDatabaseObject but I cannot
+find the right way to do.
+In the YDDO examples provided with the framework, there's always
+multiple rows associated to one object. I mean, a user can have multiple
+phone numbers and can be associated with multiple groups. I know that in
+this case the phone number row is associated to one and only one user,
+but how should I consider a row that can be associated to &quot;one&quot; other
+row, many times. I mean for example an object which can be in one place
+and associated with one state, of which labels and other valuable
+information would be in other tables ? I hope it'll be more
+understandable with the detailled example, if not let me know :
+
+Objects table :
+idobject-name-idstate-idplace
+1-one hammer-1-2
+2-Swiss knive-1-1
+3-one other hammer-2-2
+
+States table :
+idstate-label-and other valuable attributes...
+---------------------
+1-new-...
+2-in good condition-...
+3-word-...
+
+Places table :
+idplace- label-and other valuable attributes...
+---------------------
+1-kitchen-...
+2-cellar-...
+
+I'd like to be able to write something like :
+$object-&gt;id = 1;
+$object-&gt;find('state', 'place');
+ in order to retrieve :
+$object-&gt;id = 1
+$object-&gt;label-&gt;one hammer
+$object-&gt;state_id =1
+$object-&gt;state_label =new
+$object-&gt;place_id = 2
+$object-&gt;place_label = cellar
+
+I thought first I could reuse the phone relationship example, with an
+INNER join association, but I don't succeed and it breaks my head since
+two days. The best I'have made is to retrieve the object with a
+$object-&gt;find('state', 'place'), but the inner joins are not made on the
+proper key.
+I can handle it with a multiple relationship and an intermediate table
+of mapping like the user_group provided example, with a single
+association row, but before using this way I'd like to know if I miss
+something.
+Any pieces of information would be appreciated,
+Many thanks,
+
+Erwan.
+
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	
+	<LI>Next message: <A HREF="000262.html">[ydf-users] YDDatabaseObject - What's the right way to do ?
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#259">[ date ]</a>
+              <a href="thread.html#259">[ thread ]</a>
+              <a href="subject.html#259">[ subject ]</a>
+              <a href="author.html#259">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/ydframework-users">More information about the YDFramework-users
+mailing list</a><br>
+</body></html>

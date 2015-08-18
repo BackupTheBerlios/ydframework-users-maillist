@@ -1,0 +1,127 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [ydf-users] YDDatabaseObject - howto not add quotes around the value
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/ydframework-users/2006-February/index.html" >
+   <LINK REL="made" HREF="mailto:ydframework-users%40lists.berlios.de?Subject=Re%3A%20%5Bydf-users%5D%20YDDatabaseObject%20-%20howto%20not%20add%20quotes%20around%20the%20value&In-Reply-To=%3C20060221195625.18862.qmail%40web50205.mail.yahoo.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000038.html">
+   <LINK REL="Next"  HREF="000037.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[ydf-users] YDDatabaseObject - howto not add quotes around the value</H1>
+    <B>dab</B> 
+    <A HREF="mailto:ydframework-users%40lists.berlios.de?Subject=Re%3A%20%5Bydf-users%5D%20YDDatabaseObject%20-%20howto%20not%20add%20quotes%20around%20the%20value&In-Reply-To=%3C20060221195625.18862.qmail%40web50205.mail.yahoo.com%3E"
+       TITLE="[ydf-users] YDDatabaseObject - howto not add quotes around the value">dab214 at yahoo.com
+       </A><BR>
+    <I>Tue Feb 21 20:56:25 CET 2006</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000038.html">[ydf-users] YDDatabaseObject - howto not add quotes around the value
+</A></li>
+        <LI>Next message: <A HREF="000037.html">[ydf-users] YDDatabaseObject - changing aliases on columns (AS)
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#39">[ date ]</a>
+              <a href="thread.html#39">[ thread ]</a>
+              <a href="subject.html#39">[ subject ]</a>
+              <a href="author.html#39">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>hi db,
+yep that sounds good. thanks for implementing this.
+
+/dan
+
+--- David Bittencourt &lt;<A HREF="https://lists.berlios.de/mailman/listinfo/ydframework-users">muitocomplicado at gmail.com</A>&gt;
+wrote:
+
+&gt;<i> Hmmm... that can't be done because the date_created
+</I>&gt;<i> value is interpreted as
+</I>&gt;<i> a string with value &quot;NOW()&quot;.
+</I>&gt;<i> 
+</I>&gt;<i> But I'm thinking of something to do so we will be
+</I>&gt;<i> able to add expressions to
+</I>&gt;<i> INSERTs and UPDATEs values.
+</I>&gt;<i> 
+</I>&gt;<i> My idea is to add an array as parameter to the
+</I>&gt;<i> function so they will
+</I>&gt;<i> overwritte the current values in the object and will
+</I>&gt;<i> not add quotes.
+</I>&gt;<i> 
+</I>&gt;<i> $problem-&gt;user_id = $user_results['id'];
+</I>&gt;<i> $problem-&gt;insert( array( 'date_created' =&gt; 'NOW()' )
+</I>&gt;<i> );
+</I>&gt;<i> 
+</I>&gt;<i> INSERT INTO table ( 'user_id', 'date_created' )
+</I>&gt;<i> VALUES ( 23, NOW() )
+</I>&gt;<i> 
+</I>&gt;<i> What do you think?
+</I>&gt;<i> 
+</I>&gt;<i> -db
+</I>&gt;<i> 
+</I>&gt;<i> On 2/21/06, dab &lt;<A HREF="https://lists.berlios.de/mailman/listinfo/ydframework-users">dab214 at yahoo.com</A>&gt; wrote:
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt; hi all,
+</I>&gt;<i> &gt; when using insert on YDDatabaseObject on for
+</I>&gt;<i> example
+</I>&gt;<i> &gt; date columns with mysql function like NOW(). How
+</I>&gt;<i> do i
+</I>&gt;<i> &gt; stop YDDatabaseObject from adding quotes ('')?
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt; i want to do something simular:
+</I>&gt;<i> &gt; $problem-&gt;user_id = $user_results['id'];
+</I>&gt;<i> &gt; $problem-&gt;date_created = &quot;NOW()&quot;;
+</I>&gt;<i> &gt; $problem-&gt;insert();
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt; __________________________________________________
+</I>&gt;<i> &gt; Do You Yahoo!?
+</I>&gt;<i> &gt; Tired of spam?  Yahoo! Mail has the best spam
+</I>&gt;<i> protection around
+</I>&gt;<i> &gt; <A HREF="http://mail.yahoo.com">http://mail.yahoo.com</A>
+</I>&gt;<i> &gt; _______________________________________________
+</I>&gt;<i> &gt; YDFramework-users mailing list
+</I>&gt;<i> &gt; <A HREF="https://lists.berlios.de/mailman/listinfo/ydframework-users">YDFramework-users at lists.berlios.de</A>
+</I>&gt;<i> &gt;
+</I>&gt;<i>
+</I><A HREF="http://lists.berlios.de/mailman/listinfo/ydframework-users">http://lists.berlios.de/mailman/listinfo/ydframework-users</A>
+&gt;<i> &gt;
+</I>&gt;<i> 
+</I>
+
+__________________________________________________
+Do You Yahoo!?
+Tired of spam?  Yahoo! Mail has the best spam protection around 
+<A HREF="http://mail.yahoo.com">http://mail.yahoo.com</A> 
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000038.html">[ydf-users] YDDatabaseObject - howto not add quotes around the value
+</A></li>
+	<LI>Next message: <A HREF="000037.html">[ydf-users] YDDatabaseObject - changing aliases on columns (AS)
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#39">[ date ]</a>
+              <a href="thread.html#39">[ thread ]</a>
+              <a href="subject.html#39">[ subject ]</a>
+              <a href="author.html#39">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/ydframework-users">More information about the YDFramework-users
+mailing list</a><br>
+</body></html>

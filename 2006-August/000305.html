@@ -1,0 +1,92 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [ydf-users] How to make the label of radio buttons invisible.
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/ydframework-users/2006-August/index.html" >
+   <LINK REL="made" HREF="mailto:ydframework-users%40lists.berlios.de?Subject=Re%3A%20%5Bydf-users%5D%20How%20to%20make%20the%20label%20of%20radio%20buttons%20invisible.&In-Reply-To=%3Cfbd383e30608010539k214e57f5qa6bdf26d07bdef%40mail.gmail.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000304.html">
+   <LINK REL="Next"  HREF="000306.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[ydf-users] How to make the label of radio buttons invisible.</H1>
+    <B>Moses Dinakaran</B> 
+    <A HREF="mailto:ydframework-users%40lists.berlios.de?Subject=Re%3A%20%5Bydf-users%5D%20How%20to%20make%20the%20label%20of%20radio%20buttons%20invisible.&In-Reply-To=%3Cfbd383e30608010539k214e57f5qa6bdf26d07bdef%40mail.gmail.com%3E"
+       TITLE="[ydf-users] How to make the label of radio buttons invisible.">mosesdinakaran at gmail.com
+       </A><BR>
+    <I>Tue Aug  1 14:39:57 CEST 2006</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000304.html">[ydf-users] Query Regarding Variable scope
+</A></li>
+        <LI>Next message: <A HREF="000306.html">[ydf-users] query regarding regex validation rule
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#305">[ date ]</a>
+              <a href="thread.html#305">[ thread ]</a>
+              <a href="subject.html#305">[ subject ]</a>
+              <a href="author.html#305">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Hi Everybody
+
+     How to make the label of radio buttons invisible.
+
+    I have created three radio buttons
+
+     $this-&gt;form-&gt;addElement('radio','reason','','',array
+(&quot;tea&quot;=&gt;&quot;Tea&quot;,&quot;lunch&quot;=&gt;&quot;Lunch&quot;,&quot;Other&quot;=&gt;&quot;other&quot;));
+
+    To hide this buttons dynamically I did the following:
+    $this-&gt;elm_reason =&amp; $this-&gt;form-&gt;getElement('reason');
+    $this-&gt;elm_reason-&gt;_attributes[&quot;class&quot;] =&quot;hidden&quot;;
+
+   where the css contains
+  .hidden
+  {
+     visibility:hidden;
+  }
+
+   It works fine  the option buttons is not visible, but the problem is
+label for the option button is being displayed
+
+  (ie)  (Tea,Lunch,Other) is being displayed
+
+  How to avoid this.
+  Is there any other way to hide the elements
+
+regards
+ moses
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: &lt;<A HREF="https://lists.berlios.de/pipermail/ydframework-users/attachments/20060801/3d0f6fb4/attachment.html">https://lists.berlios.de/pipermail/ydframework-users/attachments/20060801/3d0f6fb4/attachment.html</A>&gt;
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000304.html">[ydf-users] Query Regarding Variable scope
+</A></li>
+	<LI>Next message: <A HREF="000306.html">[ydf-users] query regarding regex validation rule
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#305">[ date ]</a>
+              <a href="thread.html#305">[ thread ]</a>
+              <a href="subject.html#305">[ subject ]</a>
+              <a href="author.html#305">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/ydframework-users">More information about the YDFramework-users
+mailing list</a><br>
+</body></html>

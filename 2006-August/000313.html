@@ -1,0 +1,163 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [ydf-users] YDDatabaseObject, GroupBy and aggreate functions ?
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/ydframework-users/2006-August/index.html" >
+   <LINK REL="made" HREF="mailto:ydframework-users%40lists.berlios.de?Subject=Re%3A%20%5Bydf-users%5D%20YDDatabaseObject%2C%20GroupBy%20and%20aggreate%20functions%20%3F&In-Reply-To=%3C12260be20608072256k6e8fd2c4v54784b3a51a43dfe%40mail.gmail.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000303.html">
+   <LINK REL="Next"  HREF="000316.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[ydf-users] YDDatabaseObject, GroupBy and aggreate functions ?</H1>
+    <B>David Bittencourt</B> 
+    <A HREF="mailto:ydframework-users%40lists.berlios.de?Subject=Re%3A%20%5Bydf-users%5D%20YDDatabaseObject%2C%20GroupBy%20and%20aggreate%20functions%20%3F&In-Reply-To=%3C12260be20608072256k6e8fd2c4v54784b3a51a43dfe%40mail.gmail.com%3E"
+       TITLE="[ydf-users] YDDatabaseObject, GroupBy and aggreate functions ?">muitocomplicado at gmail.com
+       </A><BR>
+    <I>Tue Aug  8 07:56:37 CEST 2006</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000303.html">[ydf-users] YDDatabaseObject, GroupBy and aggreate functions ?
+</A></li>
+        <LI>Next message: <A HREF="000316.html">[ydf-users] YDDatabaseObject, GroupBy and aggreate functions ?
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#313">[ date ]</a>
+              <a href="thread.html#313">[ thread ]</a>
+              <a href="subject.html#313">[ subject ]</a>
+              <a href="author.html#313">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Hi Erwan,
+
+You can retrieve the results of count, avg, sum or any SQL expression by
+registering the select expression. For example:
+
+class MyObject extends YDDatabaseObject {
+
+    function MyObject() {
+        $this-&gt;YDDatabaseObject();
+
+        $this-&gt;registerDatabase();
+        $this-&gt;registerTable( 'mytable' );
+
+        $this-&gt;registerKey( 'id' );
+        $this-&gt;registerField( 'type' );
+        $this-&gt;registerField( 'total' );
+
+        $this-&gt;registerSelect( 'big', 'IF( #.total &gt; 100, 1, 0 )' );
+
+        // third parameter means that this select is not going to be added
+in all queries
+        $this-&gt;registerSelect( 'rows', 'COUNT( #.id )', false );
+        $this-&gt;registerSelect( 'average', 'AVG( #.total )', false );
+
+    }
+
+}
+
+$obj = YDDatabaseObject::getInstance( 'MyObject' );
+$obj-&gt;id = 1;
+$obj-&gt;find(); // SELECT id, type, total, IF( mytable.total &gt; 100, 1, 0 ) AS
+big FROM mytable WHERE id = 1
+
+$obj-&gt;reset();
+$obj-&gt;select( 'count' );
+$obj-&gt;find(); // SELECT COUNT( mytable.total ) AS rows FROM mytable
+
+$obj-&gt;reset();
+$obj-&gt;select( 'type', 'average', 'count' );
+$obj-&gt;group( 'type' );
+$obj-&gt;find(); // SELECT AVG( mytable.total ) AS average, COUNT(
+mytable.total ) AS rows FROM mytable GROUP BY type
+
+// result example
+
+array (
+
+    array (
+        'type' =&gt; 1,
+        'average' =&gt; 25,
+        'rows' =&gt; 3,
+    ),
+    array (
+        'type' =&gt; 2,
+        'average' =&gt; 86,
+        'rows' =&gt; 11,
+    ),
+
+);
+
+
+Hope this can help.
+
+-db
+
+
+On 8/1/06, <A HREF="https://lists.berlios.de/mailman/listinfo/ydframework-users">araviski at free.fr</A> &lt;<A HREF="https://lists.berlios.de/mailman/listinfo/ydframework-users">araviski at free.fr</A>&gt; wrote:
+&gt;<i>
+</I>&gt;<i> Hi all !
+</I>&gt;<i>
+</I>&gt;<i> I'm currently trying to make some little stats about my application, and I
+</I>&gt;<i> wonder if I can use the YDDatabaseObject to retrieve the results of Count,
+</I>&gt;<i> avg,
+</I>&gt;<i> sum, etc.. expressions in a query. I successfully used the groupby()
+</I>&gt;<i> function,
+</I>&gt;<i> but only without any aggregate function.
+</I>&gt;<i> I tried the findSql() method to make my whole query, but the fact that the
+</I>&gt;<i> aggregate expressions are not registred in the object trigger some errors.
+</I>&gt;<i> I also tried to register the expressions using registerSelect in the
+</I>&gt;<i> definition
+</I>&gt;<i> of the objects on the off-chance but it doesn't work (and I understand
+</I>&gt;<i> that I
+</I>&gt;<i> cannot have permanently aggregate functions in the select queries).
+</I>&gt;<i>
+</I>&gt;<i> So my question is, is it possible to use aggregate functions using the
+</I>&gt;<i> YDDatabaseObject or have I to use a YDDatabaseQuery ?
+</I>&gt;<i>
+</I>&gt;<i> BTW, the findSql() function trigger &quot;Notice: Undefined offset:&quot; errors in
+</I>&gt;<i> YDDatabaseObject.php on line 1475 when the select fields are not precised
+</I>&gt;<i> using
+</I>&gt;<i> the select() function just before using the findSql() one.
+</I>&gt;<i>
+</I>&gt;<i> Thanks for any help,
+</I>&gt;<i>
+</I>&gt;<i> Erwan.
+</I>&gt;<i> _______________________________________________
+</I>&gt;<i> YDFramework-users mailing list
+</I>&gt;<i> <A HREF="https://lists.berlios.de/mailman/listinfo/ydframework-users">YDFramework-users at lists.berlios.de</A>
+</I>&gt;<i> <A HREF="http://bat.berlios.de/mailman/listinfo/ydframework-users">http://bat.berlios.de/mailman/listinfo/ydframework-users</A>
+</I>&gt;<i>
+</I>-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: &lt;<A HREF="https://lists.berlios.de/pipermail/ydframework-users/attachments/20060808/88507c11/attachment.html">https://lists.berlios.de/pipermail/ydframework-users/attachments/20060808/88507c11/attachment.html</A>&gt;
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000303.html">[ydf-users] YDDatabaseObject, GroupBy and aggreate functions ?
+</A></li>
+	<LI>Next message: <A HREF="000316.html">[ydf-users] YDDatabaseObject, GroupBy and aggreate functions ?
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#313">[ date ]</a>
+              <a href="thread.html#313">[ thread ]</a>
+              <a href="subject.html#313">[ subject ]</a>
+              <a href="author.html#313">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/ydframework-users">More information about the YDFramework-users
+mailing list</a><br>
+</body></html>

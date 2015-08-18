@@ -1,0 +1,155 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [ydf-users] Re:
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/ydframework-users/2006-March/index.html" >
+   <LINK REL="made" HREF="mailto:ydframework-users%40lists.berlios.de?Subject=Re%3A%20%5Bydf-users%5D%20Re%3A&In-Reply-To=%3C4aef63030603272246l3eb88332gd1036569810c209d%40mail.gmail.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000168.html">
+   <LINK REL="Next"  HREF="000169.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[ydf-users] Re:</H1>
+    <B>Pieter Claerhout</B> 
+    <A HREF="mailto:ydframework-users%40lists.berlios.de?Subject=Re%3A%20%5Bydf-users%5D%20Re%3A&In-Reply-To=%3C4aef63030603272246l3eb88332gd1036569810c209d%40mail.gmail.com%3E"
+       TITLE="[ydf-users] Re:">pieter at yellowduck.be
+       </A><BR>
+    <I>Tue Mar 28 08:46:40 CEST 2006</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000168.html">[ydf-users] (no subject)
+</A></li>
+        <LI>Next message: <A HREF="000169.html">[ydf-users] Query Regarding |@replace:'##ITEMSEP##'
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#170">[ date ]</a>
+              <a href="thread.html#170">[ thread ]</a>
+              <a href="subject.html#170">[ subject ]</a>
+              <a href="author.html#170">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Hi Moses,
+
+the validate function and therefor also the form rules only get checked when
+a form is submitted. It basically checks if the $_POST array is populated or
+not to see if the form values are submitted or not.
+
+Have a look at the validate function in YDForm.php. The source code is
+pretty straightforward for this part.
+
+cheers,
+
+
+pieter
+
+On 3/27/06, <A HREF="https://lists.berlios.de/mailman/listinfo/ydframework-users">moses at softwaysolutions.com</A> &lt;<A HREF="https://lists.berlios.de/mailman/listinfo/ydframework-users">moses at softwaysolutions.com</A>&gt; wrote:
+&gt;<i>
+</I>&gt;<i>  Dear Sir
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i>           The following is the code what I have written for
+</I>&gt;<i> validiation.....
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i> function actionDefault()
+</I>&gt;<i> {
+</I>&gt;<i>     $this-&gt;form-&gt;addElement('text','txtPageName','',array());
+</I>&gt;<i>     $this-&gt;form-&gt;addRule('txtPageName','required','Page Name Required');
+</I>&gt;<i>     $this-&gt;form-&gt;addElement('submit','btnSubmit','Add This page');
+</I>&gt;<i>     $this-&gt;form-&gt;addFormRule(array($this,'checkFileExists'));
+</I>&gt;<i>     if($this-&gt;form-&gt;validate())
+</I>&gt;<i>     {
+</I>&gt;<i>            $data = $this-&gt;form-&gt;getValues();
+</I>&gt;<i>            $pageName =  $data['txtPageName'];
+</I>&gt;<i>            return;
+</I>&gt;<i>     }
+</I>&gt;<i>     $this-&gt;template-&gt;assignForm('form',$this-&gt;form);
+</I>&gt;<i>     $this-&gt;template-&gt;display('templates/addNewPage.tpl');
+</I>&gt;<i>   }
+</I>&gt;<i>   function checkFileExists($fields)
+</I>&gt;<i>   {
+</I>&gt;<i>           $pageName = $fields['txtPageName'];
+</I>&gt;<i>           if (!file_exists(&quot;NewPages/&quot;.$pageName.&quot;.php&quot;))
+</I>&gt;<i>           {
+</I>&gt;<i>                    fopen(&quot;NewPages/&quot;.$pageName.&quot;.php&quot;,'w');
+</I>&gt;<i>                    return true;
+</I>&gt;<i>            }
+</I>&gt;<i>          else
+</I>&gt;<i>         {
+</I>&gt;<i>                    return array( 'btnSubmit' =&gt; 'The File Name Already
+</I>&gt;<i> Exists' );
+</I>&gt;<i>         }
+</I>&gt;<i>    }
+</I>&gt;<i>
+</I>&gt;<i> Brief Explaination.
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i>               The Things happend here are
+</I>&gt;<i>
+</I>&gt;<i>                1) One text is added with validiation rule 'required'
+</I>&gt;<i>                2) one submit button is added.
+</I>&gt;<i>                3) Another rule is to check wheathe the file already
+</I>&gt;<i> exists.
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i>                 Every thing works fine here.....
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i> My Doubt
+</I>&gt;<i>
+</I>&gt;<i>                1)When the page is first Loaded will the  function
+</I>&gt;<i> checkFileExists($fields) executes or it executes after submiting the form.
+</I>&gt;<i>                 2)If it executes after submiting the form how it
+</I>&gt;<i> identifies wheather the page is loaded first or the page is submitted.
+</I>&gt;<i>                 3)If it executes when the page is loaded first  then how
+</I>&gt;<i> it is working without any value.
+</I>&gt;<i>
+</I>&gt;<i>                  4)The same doubt I have in the following  declaration
+</I>&gt;<i> if($this-&gt;form-&gt;validate()) also
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i>  regards
+</I>&gt;<i>  moses
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i>
+</I>
+
+
+--
+pieter claerhout . <A HREF="https://lists.berlios.de/mailman/listinfo/ydframework-users">pieter at yellowduck.be</A> . <A HREF="http://www.yellowduck.be/">http://www.yellowduck.be/</A>
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: &lt;<A HREF="https://lists.berlios.de/pipermail/ydframework-users/attachments/20060328/b7ae7761/attachment.html">https://lists.berlios.de/pipermail/ydframework-users/attachments/20060328/b7ae7761/attachment.html</A>&gt;
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000168.html">[ydf-users] (no subject)
+</A></li>
+	<LI>Next message: <A HREF="000169.html">[ydf-users] Query Regarding |@replace:'##ITEMSEP##'
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#170">[ date ]</a>
+              <a href="thread.html#170">[ thread ]</a>
+              <a href="subject.html#170">[ subject ]</a>
+              <a href="author.html#170">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/ydframework-users">More information about the YDFramework-users
+mailing list</a><br>
+</body></html>

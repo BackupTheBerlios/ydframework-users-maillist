@@ -1,0 +1,163 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [ydf-users] query regarding database (YDDatabse)
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/ydframework-users/2006-March/index.html" >
+   <LINK REL="made" HREF="mailto:ydframework-users%40lists.berlios.de?Subject=Re%3A%20%5Bydf-users%5D%20query%20regarding%20database%20%28YDDatabse%29&In-Reply-To=%3C4aef63030603221208t6d0db976me097034a488667e5%40mail.gmail.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000120.html">
+   <LINK REL="Next"  HREF="000115.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[ydf-users] query regarding database (YDDatabse)</H1>
+    <B>Pieter Claerhout</B> 
+    <A HREF="mailto:ydframework-users%40lists.berlios.de?Subject=Re%3A%20%5Bydf-users%5D%20query%20regarding%20database%20%28YDDatabse%29&In-Reply-To=%3C4aef63030603221208t6d0db976me097034a488667e5%40mail.gmail.com%3E"
+       TITLE="[ydf-users] query regarding database (YDDatabse)">pieter at yellowduck.be
+       </A><BR>
+    <I>Wed Mar 22 21:08:36 CET 2006</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000120.html">[ydf-users] query regarding database (YDDatabse)
+</A></li>
+        <LI>Next message: <A HREF="000115.html">[ydf-users] how to pass value to textarea in the template page  from php page
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#121">[ date ]</a>
+              <a href="thread.html#121">[ thread ]</a>
+              <a href="subject.html#121">[ subject ]</a>
+              <a href="author.html#121">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>HI Moses,
+
+as of build 1810, the connect function of the database driver instance
+returns true on success or false on failure.
+
+pieter
+
+On 3/20/06, Pieter Claerhout &lt;<A HREF="https://lists.berlios.de/mailman/listinfo/ydframework-users">pieter at yellowduck.be</A>&gt; wrote:
+&gt;<i>
+</I>&gt;<i>  Hi Moses,
+</I>&gt;<i>
+</I>&gt;<i> this is something on my todo list for YDFramework 3.
+</I>&gt;<i>
+</I>&gt;<i> The problem with version 4 of PHP is that is quite difficult to build in
+</I>&gt;<i> proper exception handling as PHP4 doesn't support throw/catch constructs.
+</I>&gt;<i> PHP5 however does support these and will make it very straightforward to
+</I>&gt;<i> handle situations like these.
+</I>&gt;<i>
+</I>&gt;<i> There are some tricks we can do to emulate something like this in PHP4,
+</I>&gt;<i> but it's very time consuming and not easy to do.
+</I>&gt;<i>
+</I>&gt;<i> Cheers,
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i> pieter
+</I>&gt;<i>
+</I>&gt;<i>  On 3/17/06, <A HREF="https://lists.berlios.de/mailman/listinfo/ydframework-users">moses at softwaysolutions.com</A> &lt;<A HREF="https://lists.berlios.de/mailman/listinfo/ydframework-users">moses at softwaysolutions.com</A> &gt;
+</I>&gt;<i> wrote:
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt; Dear Sir
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt;          Sub: How to format the error message based upon my needs....
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt; Situation:
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt;           I am  using the methods in the YDDatabase class to execute  my
+</I>&gt;<i> &gt; Query
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt;           It is working fine if i pass correct arguments and correct
+</I>&gt;<i> &gt; query.....
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt;           Now i am giving wrong arguments or wrong sql. so it displays
+</I>&gt;<i> &gt; the error it is also fine
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt;         What i need is When the query is wrong i should catch the error
+</I>&gt;<i> &gt; and display the error message based upon my style.
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt; Brief Details:
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt;         1)While the query is correct
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt;                    $query = ' select * from userdetails';
+</I>&gt;<i> &gt;                    $ record =    $this-&gt;db-&gt;getRecords($query);
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt;                  now  it calls the function and the query is
+</I>&gt;<i> &gt; executed every thing is  fine.......
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt;         2)While the query is wrong
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt;                     $query = ' selecssst * from userdetails';
+</I>&gt;<i> &gt;                      $ record =    $this-&gt;db-&gt;getRecords($query);
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt;                      Here I have made mistakake in the query. so in the
+</I>&gt;<i> &gt; method getRecord() itself it is triggering the error and displaying the
+</I>&gt;<i> &gt; error message
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt;                   But what I need is the method should not trigger the
+</I>&gt;<i> &gt; error it should return true or false based upon it I will trigger the error
+</I>&gt;<i> &gt; or do some other things on my style
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt;                 What to do.......
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt; regards
+</I>&gt;<i> &gt; moses
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt; _______________________________________________ YDFramework-users
+</I>&gt;<i> &gt; mailing list <A HREF="https://lists.berlios.de/mailman/listinfo/ydframework-users">YDFramework-users at lists.berlios.de</A> <A HREF="http://lists.berlios.de/mailman/listinfo/ydframework-users">http://lists.berlios.de/mailman/listinfo/ydframework-users</A>
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt;
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i> --
+</I>&gt;<i> pieter claerhout . <A HREF="https://lists.berlios.de/mailman/listinfo/ydframework-users">pieter at yellowduck.be</A> . <A HREF="http://www.yellowduck.be/">http://www.yellowduck.be/</A>
+</I>&gt;<i>
+</I>
+
+
+--
+pieter claerhout . <A HREF="https://lists.berlios.de/mailman/listinfo/ydframework-users">pieter at yellowduck.be</A> . <A HREF="http://www.yellowduck.be/">http://www.yellowduck.be/</A>
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: &lt;<A HREF="https://lists.berlios.de/pipermail/ydframework-users/attachments/20060322/30583419/attachment.html">https://lists.berlios.de/pipermail/ydframework-users/attachments/20060322/30583419/attachment.html</A>&gt;
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000120.html">[ydf-users] query regarding database (YDDatabse)
+</A></li>
+	<LI>Next message: <A HREF="000115.html">[ydf-users] how to pass value to textarea in the template page  from php page
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#121">[ date ]</a>
+              <a href="thread.html#121">[ thread ]</a>
+              <a href="subject.html#121">[ subject ]</a>
+              <a href="author.html#121">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/ydframework-users">More information about the YDFramework-users
+mailing list</a><br>
+</body></html>

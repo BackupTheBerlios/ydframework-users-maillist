@@ -1,0 +1,116 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [ydf-users] YDAJax::addEvent( &quot;*&quot;,	... ) and adding events in a response
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/ydframework-users/2006-October/index.html" >
+   <LINK REL="made" HREF="mailto:ydframework-users%40lists.berlios.de?Subject=Re%3A%20%5Bydf-users%5D%20YDAJax%3A%3AaddEvent%28%20%22%2A%22%2C%0A%09...%20%29%20and%20adding%20events%20in%20a%20response&In-Reply-To=%3C20061003153253.66429.qmail%40web54002.mail.yahoo.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   
+   <LINK REL="Next"  HREF="000394.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[ydf-users] YDAJax::addEvent( &quot;*&quot;,	... ) and adding events in a response</H1>
+    <B>maximus meridius</B> 
+    <A HREF="mailto:ydframework-users%40lists.berlios.de?Subject=Re%3A%20%5Bydf-users%5D%20YDAJax%3A%3AaddEvent%28%20%22%2A%22%2C%0A%09...%20%29%20and%20adding%20events%20in%20a%20response&In-Reply-To=%3C20061003153253.66429.qmail%40web54002.mail.yahoo.com%3E"
+       TITLE="[ydf-users] YDAJax::addEvent( &quot;*&quot;,	... ) and adding events in a response">maximus_meridius79 at yahoo.com
+       </A><BR>
+    <I>Tue Oct  3 17:32:53 CEST 2006</I>
+    <P><UL>
+        
+        <LI>Next message: <A HREF="000394.html">[ydf-users] YDAJax::addEvent( &quot;*&quot;, ... ) and adding events in a response
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#393">[ date ]</a>
+              <a href="thread.html#393">[ thread ]</a>
+              <a href="subject.html#393">[ subject ]</a>
+              <a href="author.html#393">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Hi Francisco,
+
+I am having a great deal of trouble trying to work out
+how to correctly 
+generate the events and forms in the YDAjax response.
+
+The result that I am getting is that _everything_ is
+processed by the 
+catchAll event and there are not arguments such as the
+name of the 
+calling function passed (the only data I get is the
+form contents). In 
+my &quot;catch all&quot; function I have no basis for
+determining what function to 
+call to process the specific event (their are no
+parameters that tell me 
+the function / event / element id, etc).
+
+When I tried to set up a close() event, the javascript
+was generated but 
+the desired PHP function was not called.
+
+Thanks,
+
+Graeme
+
+Francisco Azevedo wrote:
+&gt;<i> I have an application built 100% with your idea ;)
+</I>and i can tell you 
+&gt;<i> that it works very well. All forms (and
+</I>correspondent events for it) are 
+&gt;<i> generated on the response side ;)
+</I>&gt;<i>
+</I>&gt;<i> Well.. the security must be checked on the server
+</I>side. If you are 
+&gt;<i> trying to use * on addEvent you should check the
+</I>function name and 
+&gt;<i> arguments syntax, if they really exists.. etc.. but
+</I>you can control that.
+&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i> regards
+</I>&gt;<i> Francisco A
+</I>&gt;<i> _______________________________________________
+</I>&gt;<i> YDFramework-users mailing list
+</I>&gt;<i> <A HREF="https://lists.berlios.de/mailman/listinfo/ydframework-users">YDFramework-users at lists.berlios.de</A>
+</I>&gt;<i>
+</I><A HREF="https://lists.berlios.de/mailman/listinfo/ydframework-users">https://lists.berlios.de/mailman/listinfo/ydframework-users</A>
+&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i>   
+</I>
+
+__________________________________________________
+Do You Yahoo!?
+Tired of spam?  Yahoo! Mail has the best spam protection around 
+<A HREF="http://mail.yahoo.com">http://mail.yahoo.com</A> 
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	
+	<LI>Next message: <A HREF="000394.html">[ydf-users] YDAJax::addEvent( &quot;*&quot;, ... ) and adding events in a response
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#393">[ date ]</a>
+              <a href="thread.html#393">[ thread ]</a>
+              <a href="subject.html#393">[ subject ]</a>
+              <a href="author.html#393">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/ydframework-users">More information about the YDFramework-users
+mailing list</a><br>
+</body></html>

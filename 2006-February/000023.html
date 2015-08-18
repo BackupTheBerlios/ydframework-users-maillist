@@ -1,0 +1,93 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [ydf-users] YDDatabaseObject issue
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/ydframework-users/2006-February/index.html" >
+   <LINK REL="made" HREF="mailto:ydframework-users%40lists.berlios.de?Subject=Re%3A%20%5Bydf-users%5D%20YDDatabaseObject%20issue&In-Reply-To=%3C43EF65D0.7050701%40jocosoft.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000022.html">
+   <LINK REL="Next"  HREF="000024.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[ydf-users] YDDatabaseObject issue</H1>
+    <B>Peter</B> 
+    <A HREF="mailto:ydframework-users%40lists.berlios.de?Subject=Re%3A%20%5Bydf-users%5D%20YDDatabaseObject%20issue&In-Reply-To=%3C43EF65D0.7050701%40jocosoft.com%3E"
+       TITLE="[ydf-users] YDDatabaseObject issue">ydf at jocosoft.com
+       </A><BR>
+    <I>Sun Feb 12 17:44:00 CET 2006</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000022.html">[ydf-users] Catching unhandled actions
+</A></li>
+        <LI>Next message: <A HREF="000024.html">[ydf-users] YDDatabaseObject issue
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#23">[ date ]</a>
+              <a href="thread.html#23">[ thread ]</a>
+              <a href="subject.html#23">[ subject ]</a>
+              <a href="author.html#23">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Hi guys,
+
+First of all, congratulations on the 2.0 release!
+
+I have a question on the YDDatabaseObject class, which may be something 
+obvious I'm missing, or mabe something bigger. I like to retrieve a list 
+of artists with the number of albums they have released.
+In plain sql, my first thought was:
+
+SELECT artist.name, count(album.id) AS numalbums FROM artist,album WHERE 
+album.artistid=artist.id GROUP BY artist.id
+
+But that one leaves out the artists which have no albums (yet), instead 
+of having numalbums set to 0.
+So even my plain sql solution doesn't work right. But when I try to 
+accomplish this in YDDatabaseObject, it keeps whining about count not 
+being a registered fieldname (which is correct of course)
+I currently retrieve the artists, loop through them, get all the albums 
+for the current artist, and use the count() method, but that's not very 
+resouce efficient, not to mention slow...
+So, the basic question is, what is the proper way to get such an sql 
+result? and secondly, any hints on how to get the results I want 
+(including the artists with no albums) are welcome.
+
+Secondly, if I retrieve a list of albums with artists, both tables have 
+a 'name' field, which causes all sorts of problems of course. How do for 
+instance say that the name field in artist should be returned as 
+'artistname'?
+
+Thanks for any feedback.
+
+Peter
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000022.html">[ydf-users] Catching unhandled actions
+</A></li>
+	<LI>Next message: <A HREF="000024.html">[ydf-users] YDDatabaseObject issue
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#23">[ date ]</a>
+              <a href="thread.html#23">[ thread ]</a>
+              <a href="subject.html#23">[ subject ]</a>
+              <a href="author.html#23">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/ydframework-users">More information about the YDFramework-users
+mailing list</a><br>
+</body></html>

@@ -1,0 +1,122 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [ydf-users] Ajax Error
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/ydframework-users/2006-March/index.html" >
+   <LINK REL="made" HREF="mailto:ydframework-users%40lists.berlios.de?Subject=Re%3A%20%5Bydf-users%5D%20Ajax%20Error&In-Reply-To=%3C829084a60603011002p405effeao%40mail.gmail.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000076.html">
+   <LINK REL="Next"  HREF="000078.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[ydf-users] Ajax Error</H1>
+    <B>ph-m</B> 
+    <A HREF="mailto:ydframework-users%40lists.berlios.de?Subject=Re%3A%20%5Bydf-users%5D%20Ajax%20Error&In-Reply-To=%3C829084a60603011002p405effeao%40mail.gmail.com%3E"
+       TITLE="[ydf-users] Ajax Error">phmassa at gmail.com
+       </A><BR>
+    <I>Wed Mar  1 19:02:37 CET 2006</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000076.html">[ydf-users] Ajax Error
+</A></li>
+        <LI>Next message: <A HREF="000078.html">[ydf-users] Ajax Error
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#77">[ date ]</a>
+              <a href="thread.html#77">[ thread ]</a>
+              <a href="subject.html#77">[ subject ]</a>
+              <a href="author.html#77">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>it's seems it's in YDAjax.php script, cause when I test Ajax examples
+with last release 1755, all fail.
+
+I try at home and I got this in my apache log error :
+
+[Wed Mar 01 18:58:28 2006] [error] PHP Parse error:  parse error,
+unexpected '=', expecting ')' in
+e:\\wamp\\htdocs\\www\\ydf2\\YDFramework2\\addons\\YDAjax\\YDAjax.php
+on line 68
+
++
+ph-m
+
+2006/3/1, ydf poi &lt;<A HREF="https://lists.berlios.de/mailman/listinfo/ydframework-users">ydfpoi at gmail.com</A>&gt;:
+&gt;<i> Salut ph-m,
+</I>&gt;<i>
+</I>&gt;<i> it seems that you can't assign a default value to reference parameters
+</I>&gt;<i> (cf. <A HREF="http://fr2.php.net/manual/fr/language.references.pass.php#56644">http://fr2.php.net/manual/fr/language.references.pass.php#56644</A>)
+</I>&gt;<i> this is why you got your error when calling YDAjax constructor
+</I>&gt;<i> function in line 68 of YDAjax.php...
+</I>&gt;<i>
+</I>&gt;<i> Amicalement
+</I>&gt;<i> po&#239;
+</I>&gt;<i>
+</I>&gt;<i> PS: En clair, dans une d&#233;finition, tu ne peux pas initialiser un
+</I>&gt;<i> argument pass&#233; par r&#233;f&#233;rence ;-)
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i> 2006/3/1, ph-m &lt;<A HREF="https://lists.berlios.de/mailman/listinfo/ydframework-users">phmassa at gmail.com</A>&gt;:
+</I>&gt;<i> &gt; hi,
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt; I got this error :
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt; [Wed Mar 01 14:12:23 2006] [error] [client 55.121.6.1] PHP Parse
+</I>&gt;<i> &gt; error:  parse error, unexpected '=', expecting ')' in
+</I>&gt;<i> &gt; e:\\wamp\\phpshare\\includes\\YDFramework2\\addons\\YDAjax\\YDAjax.php
+</I>&gt;<i> &gt; on line 68, referer: <A HREF="http://localhost/test/">http://localhost/test/</A>
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt; this line :
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt;         function YDAjax( &amp; $template, &amp; $form = null){
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt; Since YDF2 Release 1752, I think
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt; ph-m
+</I>&gt;<i> &gt; (Windows, Apache, PHP 4.4.0, YDF2 rel 1755)
+</I>&gt;<i> &gt; _______________________________________________
+</I>&gt;<i> &gt; YDFramework-users mailing list
+</I>&gt;<i> &gt; <A HREF="https://lists.berlios.de/mailman/listinfo/ydframework-users">YDFramework-users at lists.berlios.de</A>
+</I>&gt;<i> &gt; <A HREF="http://lists.berlios.de/mailman/listinfo/ydframework-users">http://lists.berlios.de/mailman/listinfo/ydframework-users</A>
+</I>&gt;<i> &gt;
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i> --
+</I>&gt;<i> po&#239;
+</I>&gt;<i> _______________________________________________
+</I>&gt;<i> YDFramework-users mailing list
+</I>&gt;<i> <A HREF="https://lists.berlios.de/mailman/listinfo/ydframework-users">YDFramework-users at lists.berlios.de</A>
+</I>&gt;<i> <A HREF="http://lists.berlios.de/mailman/listinfo/ydframework-users">http://lists.berlios.de/mailman/listinfo/ydframework-users</A>
+</I>&gt;<i>
+</I>
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000076.html">[ydf-users] Ajax Error
+</A></li>
+	<LI>Next message: <A HREF="000078.html">[ydf-users] Ajax Error
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#77">[ date ]</a>
+              <a href="thread.html#77">[ thread ]</a>
+              <a href="subject.html#77">[ subject ]</a>
+              <a href="author.html#77">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/ydframework-users">More information about the YDFramework-users
+mailing list</a><br>
+</body></html>

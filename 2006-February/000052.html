@@ -1,0 +1,92 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [ydf-users] Content Management Framework proposal
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/ydframework-users/2006-February/index.html" >
+   <LINK REL="made" HREF="mailto:ydframework-users%40lists.berlios.de?Subject=Re%3A%20%5Bydf-users%5D%20Content%20Management%20Framework%20proposal&In-Reply-To=%3C43FDEFAF.8030202%40fusemail.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000049.html">
+   <LINK REL="Next"  HREF="000053.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[ydf-users] Content Management Framework proposal</H1>
+    <B>Francisco Azevedo</B> 
+    <A HREF="mailto:ydframework-users%40lists.berlios.de?Subject=Re%3A%20%5Bydf-users%5D%20Content%20Management%20Framework%20proposal&In-Reply-To=%3C43FDEFAF.8030202%40fusemail.com%3E"
+       TITLE="[ydf-users] Content Management Framework proposal">francisco at fusemail.com
+       </A><BR>
+    <I>Thu Feb 23 18:23:59 CET 2006</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000049.html">[ydf-users] Content Management Framework proposal
+</A></li>
+        <LI>Next message: <A HREF="000053.html">[ydf-users] Content Management Framework proposal
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#52">[ date ]</a>
+              <a href="thread.html#52">[ thread ]</a>
+              <a href="subject.html#52">[ subject ]</a>
+              <a href="author.html#52">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>&gt;<i> I wanted to share an idea with you about what I call a &quot;Content 
+</I>&gt;<i> Management Framework&quot;, which I might be adding to the framework.
+</I>&gt;<i>  
+</I>&gt;<i> Essentially, I would like to add a system that makes it easy to create a 
+</I>&gt;<i> CMS based on the Yellow Duck Framework by avoiding to have to do the 
+</I>&gt;<i> same work over and over again.
+</I>
+This idea sounds good, especially because, as you know, i'm a little 
+involved is those caind of applications.
+
+&gt;<i> Any suggestions, additions, comments, remarks?
+</I>
+My opinion is that the core (ydf) should have some important features 
+before starting the (ydCMf), eg YDError. This is, imho, extremely 
+important in a application and if not done now, it will be integrated 
+later in CMf and that's bad. We will have 2x the job because we will 
+port the framework _and_ the CMframework. Other feature is the Locale.
+
+I think that all nodes should extend an abstract class that, eg, checks 
+autentication and/or has an mecanism where we can define public methods 
+(that can be invoked in the template side) and private methods that will 
+only work if the class detects that the user is authenticated.
+To be perfect, this means that we could have some mecanism (ACL) 
+integrated in that master class.
+
+So, the idea about a tree of components and some automatic store and 
+retrieve sounds excellent but i think we must care about YDError, 
+YDLocale, YDACL? and then start integration those and start creating 
+nodes.. just my 0.02
+
+Francisco
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000049.html">[ydf-users] Content Management Framework proposal
+</A></li>
+	<LI>Next message: <A HREF="000053.html">[ydf-users] Content Management Framework proposal
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#52">[ date ]</a>
+              <a href="thread.html#52">[ thread ]</a>
+              <a href="subject.html#52">[ subject ]</a>
+              <a href="author.html#52">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/ydframework-users">More information about the YDFramework-users
+mailing list</a><br>
+</body></html>

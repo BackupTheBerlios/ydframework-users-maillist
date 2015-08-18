@@ -1,0 +1,96 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [ydf-users] query regarding regex validation rule
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/ydframework-users/2006-August/index.html" >
+   <LINK REL="made" HREF="mailto:ydframework-users%40lists.berlios.de?Subject=Re%3A%20%5Bydf-users%5D%20query%20regarding%20regex%20validation%20rule&In-Reply-To=%3C44D72192.5010200%40fusemail.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000308.html">
+   <LINK REL="Next"  HREF="000310.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[ydf-users] query regarding regex validation rule</H1>
+    <B>Francisco Azevedo</B> 
+    <A HREF="mailto:ydframework-users%40lists.berlios.de?Subject=Re%3A%20%5Bydf-users%5D%20query%20regarding%20regex%20validation%20rule&In-Reply-To=%3C44D72192.5010200%40fusemail.com%3E"
+       TITLE="[ydf-users] query regarding regex validation rule">francisco at fusemail.com
+       </A><BR>
+    <I>Mon Aug  7 13:18:42 CEST 2006</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000308.html">[ydf-users] query regarding regex validation rule
+</A></li>
+        <LI>Next message: <A HREF="000310.html">[ydf-users] Adding form elements below button elements
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#309">[ date ]</a>
+              <a href="thread.html#309">[ thread ]</a>
+              <a href="subject.html#309">[ subject ]</a>
+              <a href="author.html#309">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Hi Moses
+
+&gt;<i>  
+</I>&gt;<i>   Actually what I need is
+</I>&gt;<i>  
+</I>&gt;<i>  In the form validation we have a rule named regex
+</I>&gt;<i>  
+</I>&gt;<i>  I dont know how to use that (ie) where to give the expression for the regex
+</I>&gt;<i>  
+</I>&gt;<i>  I tried the folowing but it gives unexpected results.   
+</I>&gt;<i>  
+</I>&gt;<i>   $this-&gt;form-&gt;addRule('app_social','regex','Pleased Enter 0 to 9','[0-9]');
+</I>
+
+You get _unexpected_ results because your regular expression is wrong. 
+You want to match the variable with a string that starts (so use /^ that 
+defines _starts_ ) with 0..9 and _ends_ (use $/ to define ends) there 
+(read: the string don't have more characters).
+
+So. To your example you must do:
+
+$this-&gt;form-&gt;addRule('app_social','regex','Pleased Enter 0 to 9' 
+'/^[0-9]$/' );
+
+
+Basically, you are creating and passing the arguments ok. The problem is 
+on creating the regular expressions. See the next *url* on how to create 
+regular expressions:
+
+<A HREF="http://www.regular-expressions.info/examples.html">http://www.regular-expressions.info/examples.html</A>
+
+
+
+regards
+Francisco A
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000308.html">[ydf-users] query regarding regex validation rule
+</A></li>
+	<LI>Next message: <A HREF="000310.html">[ydf-users] Adding form elements below button elements
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#309">[ date ]</a>
+              <a href="thread.html#309">[ thread ]</a>
+              <a href="subject.html#309">[ subject ]</a>
+              <a href="author.html#309">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/ydframework-users">More information about the YDFramework-users
+mailing list</a><br>
+</body></html>

@@ -1,0 +1,922 @@
+From moses at softwaysolutions.com  Wed Jun 14 08:46:57 2006
+From: moses at softwaysolutions.com (moses at softwaysolutions.com)
+Date: Tue, 13 Jun 2006 23:46:57 -0700
+Subject: [ydf-users] Qery Regarding Register Functions
+Message-ID: <20060613234657.fe477b357a56c857c15a39baa2ae95d5.5afefd8de3.wbe@email.secureserver.net>
+
+Hi Everybody
+
+    How to register functions within YDTemplate.
+
+Regarding Smarty we will be doing the following.
+
+(.php)
+
+    $smarty->register_function("displayName", "displayName");
+    function displayName()
+    {
+           echo "My Name is Moses";
+    }
+(.tpl)
+
+   {displayName}   
+
+
+   How can I implement this in YDTemplate.
+
+   I tried the following
+(.php)
+   function actionDefault()
+   {
+        $smarty = new Smarty;
+        $smarty->register_function("displayName", "displayName"); 
+        $this->template->display();
+   }
+   function displayName()
+   {
+           echo "My Name is Moses";
+   }
+
+(.tpl)
+
+  {displayName}
+
+   Get the Following Error
+
+        Warning: Smarty error: [in datagridSmarty.tpl line 1]: syntax
+error: custom function 'displayName' is not implemented
+(Smarty_Compiler.class.php, line 795) in
+D:\web\Moses\test\pear\DataGrid\YDFramework2\3rdparty\smarty\libs\Smarty.class.php
+on line 1095 
+       
+Second I triend tried the following
+
+     (.php)
+   function actionDefault()
+   {
+       
+        $this->template->register_function("displayName",
+"displayName"); 
+        $this->template->display()
+   }
+   function displayName()
+   {
+           echo "My Name is Moses";
+   }
+
+(.tpl)
+
+  {displayName}
+
+  But I didnt get any Result
+
+
+How to slove the problem
+
+
+
+regards
+moses
+
+
+         
+
+
+
+From moses at softwaysolutions.com  Wed Jun 14 08:49:29 2006
+From: moses at softwaysolutions.com (moses at softwaysolutions.com)
+Date: Tue, 13 Jun 2006 23:49:29 -0700
+Subject: [ydf-users] Qery Regarding Register Functions
+Message-ID: <20060613234929.fe477b357a56c857c15a39baa2ae95d5.d5217584a6.wbe@email.secureserver.net>
+
+Hi Everybody
+
+   How to register functions within YDTemplate.
+
+Regarding Smarty we will be doing the following.
+
+(.php)
+
+   $smarty->register_function("displayName", "displayName");
+   function displayName()
+   {
+          echo "My Name is Moses";
+   }
+(.tpl)
+
+  {displayName}  
+
+
+  How can I implement this in YDTemplate.
+
+  I tried the following
+(.php)
+  function actionDefault()
+  {
+       $smarty = new Smarty;
+       $smarty->register_function("displayName", "displayName");
+       $this->template->display();
+  }
+  function displayName()
+  {
+          echo "My Name is Moses";
+  }
+
+(.tpl)
+
+ {displayName}
+
+  Get the Following Error
+
+       Warning: Smarty error: [in datagridSmarty.tpl line 1]: syntax
+error: custom function 'displayName' is not implemented
+(Smarty_Compiler.class.php, line 795) in
+D:\web\Moses\test\pear\DataGrid\YDFramework2\3rdparty\smarty\libs\Smarty.class.php
+on line 1095
+     
+Second I triend tried the following
+
+    (.php)
+  function actionDefault()
+  {
+     
+       $this->template->register_function("displayName",
+"displayName");
+       $this->template->display()
+  }
+  function displayName()
+  {
+          echo "My Name is Moses";
+  }
+
+(.tpl)
+
+ {displayName}
+
+ But I didnt get any Result
+
+
+How to slove the problem
+
+
+
+regards
+moses
+
+
+
+From ydfpoi at gmail.com  Wed Jun 14 10:26:18 2006
+From: ydfpoi at gmail.com (ydf poi)
+Date: Wed, 14 Jun 2006 10:26:18 +0200
+Subject: [ydf-users] Qery Regarding Register Functions
+In-Reply-To: <20060613234657.fe477b357a56c857c15a39baa2ae95d5.5afefd8de3.wbe@email.secureserver.net>
+References: <20060613234657.fe477b357a56c857c15a39baa2ae95d5.5afefd8de3.wbe@email.secureserver.net>
+Message-ID: <306340e00606140126u4604fde6h2bf92940cb238a0e@mail.gmail.com>
+
+Hi moses,
+
+1) You have to manage an YDTemplate object (because YDTemplate
+inherits from Smarty) as you did in your second solution.
+
+2) You have to command something like
+    $this->template->register_function("displayName", array(& $this,
+"displayName"));
+because displayName is not a function but a method defined in the
+class of $this.
+Thus $this->displayName will be executed, not displayName (which
+doesn't exists).
+
+Note that, in order for displayName to have parameters, you have to specify
+    function displayName($params) { ... }
+where $params should be an array of all parameters.
+
+3) you can look at a real example in examples/weblog/manage/stats.php
+from YDF Weblog application. (In build 1780 it is located at lines 16
+and 26.)
+
+Kind regards
+
+2006/6/14, moses at softwaysolutions.com <moses at softwaysolutions.com>:
+>
+> Hi Everybody
+>
+>     How to register functions within YDTemplate.
+>
+> Regarding Smarty we will be doing the following.
+>
+> (.php)
+>
+>     $smarty->register_function("displayName", "displayName");
+>     function displayName()
+>     {
+>            echo "My Name is Moses";
+>     }
+> (.tpl)
+>
+>    {displayName}
+>
+>
+>    How can I implement this in YDTemplate.
+>
+>    I tried the following
+> (.php)
+>    function actionDefault()
+>    {
+>         $smarty = new Smarty;
+>         $smarty->register_function("displayName", "displayName");
+>         $this->template->display();
+>    }
+>    function displayName()
+>    {
+>            echo "My Name is Moses";
+>    }
+>
+> (.tpl)
+>
+>   {displayName}
+>
+>    Get the Following Error
+>
+>         Warning: Smarty error: [in datagridSmarty.tpl line 1]: syntax
+> error: custom function 'displayName' is not implemented
+> (Smarty_Compiler.class.php, line 795) in
+> D:\web\Moses\test\pear\DataGrid\YDFramework2\3rdparty\smarty\libs\Smarty.class.php
+> on line 1095
+>
+> Second I triend tried the following
+>
+>      (.php)
+>    function actionDefault()
+>    {
+>
+>         $this->template->register_function("displayName",
+> "displayName");
+>         $this->template->display()
+>    }
+>    function displayName()
+>    {
+>            echo "My Name is Moses";
+>    }
+>
+> (.tpl)
+>
+>   {displayName}
+>
+>   But I didnt get any Result
+>
+>
+> How to slove the problem
+>
+>
+>
+> regards
+> moses
+>
+>
+>
+>
+> _______________________________________________
+> YDFramework-users mailing list
+> YDFramework-users at lists.berlios.de
+> http://lists.berlios.de/mailman/listinfo/ydframework-users
+>
+
+
+-- 
+po?
+
+
+From gonzillaaa at gmail.com  Thu Jun 22 11:13:02 2006
+From: gonzillaaa at gmail.com (Gonzillaaa)
+Date: Thu, 22 Jun 2006 10:13:02 +0100
+Subject: [ydf-users] recordset direction indicators
+Message-ID: <A24127BF-A630-4F36-8781-68BAECD9D791@gmail.com>
+
+Hello All,
+
+when working with recordsets and setting sort fields I'm using the  
+following on my template
+
+{if $items->sortfield eq 'id'} ({$items->sortdirection}){/if} (as in  
+the examples)
+
+this produces something like : id (ASC) or id (DESC)  is there a way  
+of setting the values of {$items->sortdirection} to be perhaps an  
+arrow image or something similar?
+
+many thanks.
+
+
+From dab214 at yahoo.com  Thu Jun 22 12:30:11 2006
+From: dab214 at yahoo.com (dab)
+Date: Thu, 22 Jun 2006 03:30:11 -0700 (PDT)
+Subject: [ydf-users] recordset direction indicators
+In-Reply-To: <A24127BF-A630-4F36-8781-68BAECD9D791@gmail.com>
+Message-ID: <20060622103011.86905.qmail@web50206.mail.yahoo.com>
+
+hi gonzillaaa,
+i'm not sure if i understand what you want but you
+might want to take a look at smarty columnsort.
+
+/dab
+
+--- Gonzillaaa <gonzillaaa at gmail.com> wrote:
+
+> Hello All,
+> 
+> when working with recordsets and setting sort fields
+> I'm using the  
+> following on my template
+> 
+> {if $items->sortfield eq 'id'}
+> ({$items->sortdirection}){/if} (as in  
+> the examples)
+> 
+> this produces something like : id (ASC) or id (DESC)
+>  is there a way  
+> of setting the values of {$items->sortdirection} to
+> be perhaps an  
+> arrow image or something similar?
+> 
+> many thanks.
+> _______________________________________________
+> YDFramework-users mailing list
+> YDFramework-users at lists.berlios.de
+>
+http://lists.berlios.de/mailman/listinfo/ydframework-users
+> 
+
+
+__________________________________________________
+Do You Yahoo!?
+Tired of spam?  Yahoo! Mail has the best spam protection around 
+http://mail.yahoo.com 
+
+
+From gonzillaaa at gmail.com  Thu Jun 22 13:17:07 2006
+From: gonzillaaa at gmail.com (Gonzillaaa)
+Date: Thu, 22 Jun 2006 12:17:07 +0100
+Subject: [ydf-users] recordset direction indicators
+In-Reply-To: <20060622103011.86905.qmail@web50206.mail.yahoo.com>
+References: <20060622103011.86905.qmail@web50206.mail.yahoo.com>
+Message-ID: <952B806A-1049-4CD1-B1BD-F6219EAC10C8@gmail.com>
+
+hey dab thanks for the pointer to columnsort. I was referring more to  
+the value returned by $recordset->sortdirection which is set on the  
+class constructor. I hadn't though about it long enough the solution  
+to my problem is very simple it would look something like this  
+(haven't tested it yet)
+
+{if $items->sortfield eq 'id'}
+{if $items->sortdirection eq 'DESC'}
+<img src="arrow_down.gif" />
+{else}
+<img src="arrow_up.gif" />
+{/if}
+{/if}
+
+thanks
+
+On 22 Jun 2006, at 11:30, dab wrote:
+
+> hi gonzillaaa,
+> i'm not sure if i understand what you want but you
+> might want to take a look at smarty columnsort.
+>
+> /dab
+>
+> --- Gonzillaaa <gonzillaaa at gmail.com> wrote:
+>
+>> Hello All,
+>>
+>> when working with recordsets and setting sort fields
+>> I'm using the
+>> following on my template
+>>
+>> {if $items->sortfield eq 'id'}
+>> ({$items->sortdirection}){/if} (as in
+>> the examples)
+>>
+>> this produces something like : id (ASC) or id (DESC)
+>>  is there a way
+>> of setting the values of {$items->sortdirection} to
+>> be perhaps an
+>> arrow image or something similar?
+>>
+>> many thanks.
+>> _______________________________________________
+>> YDFramework-users mailing list
+>> YDFramework-users at lists.berlios.de
+>>
+> http://lists.berlios.de/mailman/listinfo/ydframework-users
+>>
+>
+>
+> __________________________________________________
+> Do You Yahoo!?
+> Tired of spam?  Yahoo! Mail has the best spam protection around
+> http://mail.yahoo.com
+> _______________________________________________
+> YDFramework-users mailing list
+> YDFramework-users at lists.berlios.de
+> http://lists.berlios.de/mailman/listinfo/ydframework-users
+
+
+
+From gonzillaaa at gmail.com  Thu Jun 22 18:40:16 2006
+From: gonzillaaa at gmail.com (Gonzillaaa)
+Date: Thu, 22 Jun 2006 17:40:16 +0100
+Subject: [ydf-users] listing directories
+Message-ID: <7A798F3F-8431-4348-B3A9-F0AD8A5DC467@gmail.com>
+
+hello again I upgraded today YDF on a previous project that I hadn't  
+touch for a while and this code doesn't seems to work anymore
+$dir->getContents( '', null, array( 'YDFSDirectory' )
+
+I've checked the examples (fsdirectory2.php) of the latest svn and it  
+doesn't seem to work there either..
+
+thank you.
+
+
+From gonzillaaa at gmail.com  Thu Jun 22 20:11:55 2006
+From: gonzillaaa at gmail.com (Gonzillaaa)
+Date: Thu, 22 Jun 2006 19:11:55 +0100
+Subject: [ydf-users] Re: listing directories
+In-Reply-To: <7A798F3F-8431-4348-B3A9-F0AD8A5DC467@gmail.com>
+References: <7A798F3F-8431-4348-B3A9-F0AD8A5DC467@gmail.com>
+Message-ID: <6C676B46-C8D2-49EF-A335-50FE98D9A16B@gmail.com>
+
+btw I get following warning in case it gives you more info:
+
+Warning: array_values() [function.array-values]: The argument should  
+be an array in ~/Sites/YDF/YDFramework2/YDClasses/YDFileSystem.php on  
+line 1409
+
+Warning: Invalid argument supplied for foreach() in ~/Sites/YDF/ 
+YDFramework2/YDClasses/YDFileSystem.php on line 1413
+
+
+any clues as to what is happening?
+
+thanks
+
+
+On 22 Jun 2006, at 17:40, Gonzillaaa wrote:
+
+> hello again I upgraded today YDF on a previous project that I  
+> hadn't touch for a while and this code doesn't seems to work anymore
+> $dir->getContents( '', null, array( 'YDFSDirectory' )
+>
+> I've checked the examples (fsdirectory2.php) of the latest svn and  
+> it doesn't seem to work there either..
+>
+> thank you.
+
+
+
+From muitocomplicado at gmail.com  Fri Jun 23 09:59:59 2006
+From: muitocomplicado at gmail.com (David Bittencourt)
+Date: Fri, 23 Jun 2006 04:59:59 -0300
+Subject: [ydf-users] Re: listing directories
+In-Reply-To: <6C676B46-C8D2-49EF-A335-50FE98D9A16B@gmail.com>
+References: <7A798F3F-8431-4348-B3A9-F0AD8A5DC467@gmail.com>
+	 <6C676B46-C8D2-49EF-A335-50FE98D9A16B@gmail.com>
+Message-ID: <12260be20606230059g2da04640jf462da80a80d739a@mail.gmail.com>
+
+Hi Gonzillaaa,
+
+Fixed in build 1950.
+
+-db
+
+On 6/22/06, Gonzillaaa <gonzillaaa at gmail.com> wrote:
+>
+> btw I get following warning in case it gives you more info:
+>
+> Warning: array_values() [function.array-values]: The argument should
+> be an array in ~/Sites/YDF/YDFramework2/YDClasses/YDFileSystem.php on
+> line 1409
+>
+> Warning: Invalid argument supplied for foreach() in ~/Sites/YDF/
+> YDFramework2/YDClasses/YDFileSystem.php on line 1413
+>
+>
+> any clues as to what is happening?
+>
+> thanks
+>
+>
+> On 22 Jun 2006, at 17:40, Gonzillaaa wrote:
+>
+> > hello again I upgraded today YDF on a previous project that I
+> > hadn't touch for a while and this code doesn't seems to work anymore
+> > $dir->getContents( '', null, array( 'YDFSDirectory' )
+> >
+> > I've checked the examples (fsdirectory2.php) of the latest svn and
+> > it doesn't seem to work there either..
+> >
+> > thank you.
+>
+> _______________________________________________
+> YDFramework-users mailing list
+> YDFramework-users at lists.berlios.de
+> http://lists.berlios.de/mailman/listinfo/ydframework-users
+>
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <https://lists.berlios.de/pipermail/ydframework-users/attachments/20060623/2d28ebe0/attachment.html>
+
+From muitocomplicado at gmail.com  Fri Jun 23 10:14:36 2006
+From: muitocomplicado at gmail.com (David Bittencourt)
+Date: Fri, 23 Jun 2006 05:14:36 -0300
+Subject: [ydf-users] Re: listing directories
+In-Reply-To: <12260be20606230059g2da04640jf462da80a80d739a@mail.gmail.com>
+References: <7A798F3F-8431-4348-B3A9-F0AD8A5DC467@gmail.com>
+	 <6C676B46-C8D2-49EF-A335-50FE98D9A16B@gmail.com>
+	 <12260be20606230059g2da04640jf462da80a80d739a@mail.gmail.com>
+Message-ID: <12260be20606230114w22fbf508p570d711d188307c8@mail.gmail.com>
+
+Actually, build 1951 is the good one.
+
+-db
+
+On 6/23/06, David Bittencourt <muitocomplicado at gmail.com> wrote:
+>
+> Hi Gonzillaaa,
+>
+> Fixed in build 1950.
+>
+> -db
+>
+>
+> On 6/22/06, Gonzillaaa <gonzillaaa at gmail.com> wrote:
+> >
+> > btw I get following warning in case it gives you more info:
+> >
+> > Warning: array_values() [ function.array-values]: The argument should
+> > be an array in ~/Sites/YDF/YDFramework2/YDClasses/YDFileSystem.php on
+> > line 1409
+> >
+> > Warning: Invalid argument supplied for foreach() in ~/Sites/YDF/
+> > YDFramework2/YDClasses/YDFileSystem.php on line 1413
+> >
+> >
+> > any clues as to what is happening?
+> >
+> > thanks
+> >
+> >
+> > On 22 Jun 2006, at 17:40, Gonzillaaa wrote:
+> >
+> > > hello again I upgraded today YDF on a previous project that I
+> > > hadn't touch for a while and this code doesn't seems to work anymore
+> > > $dir->getContents( '', null, array( 'YDFSDirectory' )
+> > >
+> > > I've checked the examples (fsdirectory2.php) of the latest svn and
+> > > it doesn't seem to work there either..
+> > >
+> > > thank you.
+> >
+> > _______________________________________________
+> > YDFramework-users mailing list
+> > YDFramework-users at lists.berlios.de
+> > http://lists.berlios.de/mailman/listinfo/ydframework-users
+> >
+>
+>
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <https://lists.berlios.de/pipermail/ydframework-users/attachments/20060623/96e9c907/attachment.html>
+
+From gonzillaaa at gmail.com  Fri Jun 23 11:07:35 2006
+From: gonzillaaa at gmail.com (Gonzillaaa)
+Date: Fri, 23 Jun 2006 10:07:35 +0100
+Subject: [ydf-users] Re: listing directories
+In-Reply-To: <12260be20606230114w22fbf508p570d711d188307c8@mail.gmail.com>
+References: <7A798F3F-8431-4348-B3A9-F0AD8A5DC467@gmail.com> <6C676B46-C8D2-49EF-A335-50FE98D9A16B@gmail.com> <12260be20606230059g2da04640jf462da80a80d739a@mail.gmail.com> <12260be20606230114w22fbf508p570d711d188307c8@mail.gmail.com>
+Message-ID: <08ED4535-5E47-45A9-B037-1B2CC07EC92F@gmail.com>
+
+DB thank you so much for fixing it.
+
+On 23 Jun 2006, at 09:14, David Bittencourt wrote:
+
+> Actually, build 1951 is the good one.
+>
+> -db
+>
+> On 6/23/06, David Bittencourt <muitocomplicado at gmail.com > wrote:
+> Hi Gonzillaaa,
+>
+> Fixed in build 1950.
+>
+> -db
+>
+>
+> On 6/22/06, Gonzillaaa < gonzillaaa at gmail.com> wrote: btw I get  
+> following warning in case it gives you more info:
+>
+> Warning: array_values() [ function.array-values]: The argument should
+> be an array in ~/Sites/YDF/YDFramework2/YDClasses/YDFileSystem.php on
+> line 1409
+>
+> Warning: Invalid argument supplied for foreach() in ~/Sites/YDF/
+> YDFramework2/YDClasses/YDFileSystem.php on line 1413
+>
+>
+> any clues as to what is happening?
+>
+> thanks
+>
+>
+> On 22 Jun 2006, at 17:40, Gonzillaaa wrote:
+>
+> > hello again I upgraded today YDF on a previous project that I
+> > hadn't touch for a while and this code doesn't seems to work anymore
+> > $dir->getContents( '', null, array( 'YDFSDirectory' )
+> >
+> > I've checked the examples (fsdirectory2.php) of the latest svn and
+> > it doesn't seem to work there either..
+> >
+> > thank you.
+>
+> _______________________________________________
+> YDFramework-users mailing list
+> YDFramework-users at lists.berlios.de
+> http://lists.berlios.de/mailman/listinfo/ydframework-users
+>
+>
+
+
+
+From gonzillaaa at gmail.com  Sat Jun 24 12:57:59 2006
+From: gonzillaaa at gmail.com (Gonzillaaa)
+Date: Sat, 24 Jun 2006 11:57:59 +0100
+Subject: [ydf-users] addElements syntax
+Message-ID: <2551F096-4215-4015-975B-D220C81B6932@gmail.com>
+
+Hello could you tell me why this isn't working?
+
+function actionDefault() {
+		$labels = array ();
+		$values = array ();
+		$num_fields= 6;
+		$form = new YDForm('Snippets');
+		if (isset ($_GET['num_fields']) && is_numeric ($_GET['num_fields'])) {
+			$num_fields = $_GET['num_fields'];
+		}
+		for ($i = 0; $i < $num_fields; $i++) {
+			$labels[] = 'Field #' . $i . ' value';
+			$values[] = 'field_value' . $i;
+		}
+		$form->addElements('text', $values, $labels, array (
+			'size' => 40
+		));
+		$this->template->assign('form', $form->toHtml());
+		$this->template->display('snippets.tpl');
+	}
+
+All i get is Array as labels & the values are empty..
+
+many thanks.
+
+
+
+
+From araviski at free.fr  Sat Jun 24 15:46:43 2006
+From: araviski at free.fr (araviski at free.fr)
+Date: Sat, 24 Jun 2006 15:46:43 +0200
+Subject: [ydf-users] addElements syntax
+In-Reply-To: <2551F096-4215-4015-975B-D220C81B6932@gmail.com>
+References: <2551F096-4215-4015-975B-D220C81B6932@gmail.com>
+Message-ID: <449D4243.10808@free.fr>
+
+Hello Gonzillaaa,
+
+As it is currently implemented, the syntax for addElements is :
+$form->addElements($type, $names, $label, $attributes, $options);
+
+There is a single lable for all the elements. To solve your problem you
+can use the traditionnal addElement instead of addElements :
+  
+              for ($i = 0; $i < $num_fields; $i++) {
+                  $e =& $form->addElement('text', 'field_value' . $i,
+'Field #' . $i , array( 'size' => 40) );
+                  $e->setDefault('field_value' . $i);
+              }
+
+Erwan.
+
+Gonzillaaa a ?crit :
+> Hello could you tell me why this isn't working?
+>
+> function actionDefault() {
+>         $labels = array ();
+>         $values = array ();
+>         $num_fields= 6;
+>         $form = new YDForm('Snippets');
+>         if (isset ($_GET['num_fields']) && is_numeric
+> ($_GET['num_fields'])) {
+>             $num_fields = $_GET['num_fields'];
+>         }
+>         for ($i = 0; $i < $num_fields; $i++) {
+>             $labels[] = 'Field #' . $i . ' value';
+>             $values[] = 'field_value' . $i;
+>         }
+>         $form->addElements('text', $values, $labels, array (
+>             'size' => 40
+>         ));
+>         $this->template->assign('form', $form->toHtml());
+>         $this->template->display('snippets.tpl');
+>     }
+>
+> All i get is Array as labels & the values are empty..
+>
+> many thanks.
+>
+>
+> _______________________________________________
+> YDFramework-users mailing list
+> YDFramework-users at lists.berlios.de
+> http://lists.berlios.de/mailman/listinfo/ydframework-users
+>
+>
+
+
+
+From francisco at fusemail.com  Tue Jun 27 11:30:30 2006
+From: francisco at fusemail.com (Francisco Azevedo)
+Date: Tue, 27 Jun 2006 10:30:30 +0100
+Subject: [ydf-users] YDDatabaseObject
+Message-ID: <44A0FAB6.5060100@fusemail.com>
+
+Hi all
+
+When reseting values, the key seems to persist. How can i reset the key?
+Eg, with key "content_id", the next code seems not working:
+
+	$this->resetValues();
+
+	$this->content_id  = 123;
+	$this->xptoVar = 'x';
+	// some code..
+
+	$this->resetValues();
+	$this->xptoVar = 'y';
+	$this->find();
+
+.. i want to do something first and then get all values where xptoVar is 
+'y' but the sql generated by find() seems to include 'AND content_id = 
+123' in the sql clause even after my resetValues().
+
+Any solution?
+
+regards
+Francisco A
+	
+
+
+From muitocomplicado at gmail.com  Tue Jun 27 23:09:02 2006
+From: muitocomplicado at gmail.com (David Bittencourt)
+Date: Tue, 27 Jun 2006 18:09:02 -0300
+Subject: [ydf-users] YDDatabaseObject
+In-Reply-To: <44A0FAB6.5060100@fusemail.com>
+References: <44A0FAB6.5060100@fusemail.com>
+Message-ID: <12260be20606271409v776d3b3eva5c2766c17d79afc@mail.gmail.com>
+
+If content_id is a protected field the value will not be removed.
+
+If it is not, this shouldn't be happening.
+
+-db
+
+
+
+On 6/27/06, Francisco Azevedo <francisco at fusemail.com> wrote:
+>
+> Hi all
+>
+> When reseting values, the key seems to persist. How can i reset the key?
+> Eg, with key "content_id", the next code seems not working:
+>
+>         $this->resetValues();
+>
+>         $this->content_id  = 123;
+>         $this->xptoVar = 'x';
+>         // some code..
+>
+>         $this->resetValues();
+>         $this->xptoVar = 'y';
+>         $this->find();
+>
+> .. i want to do something first and then get all values where xptoVar is
+> 'y' but the sql generated by find() seems to include 'AND content_id =
+> 123' in the sql clause even after my resetValues().
+>
+> Any solution?
+>
+> regards
+> Francisco A
+>
+> _______________________________________________
+> YDFramework-users mailing list
+> YDFramework-users at lists.berlios.de
+> http://lists.berlios.de/mailman/listinfo/ydframework-users
+>
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <https://lists.berlios.de/pipermail/ydframework-users/attachments/20060627/a155891c/attachment.html>
+
+From francisco at fusemail.com  Wed Jun 28 00:26:53 2006
+From: francisco at fusemail.com (Francisco Azevedo)
+Date: Tue, 27 Jun 2006 23:26:53 +0100
+Subject: [ydf-users] YDDatabaseObject
+In-Reply-To: <12260be20606271409v776d3b3eva5c2766c17d79afc@mail.gmail.com>
+References: <44A0FAB6.5060100@fusemail.com> <12260be20606271409v776d3b3eva5c2766c17d79afc@mail.gmail.com>
+Message-ID: <44A1B0AD.2040205@fusemail.com>
+
+Hi David
+
+> If content_id is a protected field the value will not be removed.
+> 
+> If it is not, this shouldn't be happening.
+> 
+
+It's the key.. so it's protected by default, right? So, resetValues() is 
+not affecting it..
+
+regards
+Francisco A
+
+
+From muitocomplicado at gmail.com  Thu Jun 29 01:23:06 2006
+From: muitocomplicado at gmail.com (David Bittencourt)
+Date: Wed, 28 Jun 2006 20:23:06 -0300
+Subject: [ydf-users] YDDatabaseObject
+In-Reply-To: <44A1B0AD.2040205@fusemail.com>
+References: <44A0FAB6.5060100@fusemail.com>
+	 <12260be20606271409v776d3b3eva5c2766c17d79afc@mail.gmail.com>
+	 <44A1B0AD.2040205@fusemail.com>
+Message-ID: <12260be20606281623v1bbbbe2aj25ac32889843533@mail.gmail.com>
+
+A protected field is defined by registerProtected. The field value will
+remain the same for all instances.
+
+Keys are NOT protected fields. You can change the value and use it to do
+different queries.
+
+Try to use resetQuery together with resetValues. Maybe the content_id
+condition may be defined there from the last query.
+
+-db
+
+
+
+On 6/27/06, Francisco Azevedo <francisco at fusemail.com> wrote:
+>
+> Hi David
+>
+> > If content_id is a protected field the value will not be removed.
+> >
+> > If it is not, this shouldn't be happening.
+> >
+>
+> It's the key.. so it's protected by default, right? So, resetValues() is
+> not affecting it..
+>
+> regards
+> Francisco A
+> _______________________________________________
+> YDFramework-users mailing list
+> YDFramework-users at lists.berlios.de
+> http://lists.berlios.de/mailman/listinfo/ydframework-users
+>
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <https://lists.berlios.de/pipermail/ydframework-users/attachments/20060628/6b7dda9d/attachment.html>
+
+From maximus_meridius79 at yahoo.com  Fri Jun 30 19:05:10 2006
+From: maximus_meridius79 at yahoo.com (maximus meridius)
+Date: Fri, 30 Jun 2006 10:05:10 -0700 (PDT)
+Subject: [ydf-users] How to use YDFormElement_Grid?
+Message-ID: <20060630170510.11675.qmail@web53814.mail.yahoo.com>
+
+Hi,
+
+I just noticed the grid element. I can't find an
+example that uses it. 
+Can someone describe how this is used or ideally
+provide an example? Can 
+the grid element be used within a form that is
+ajax-based?
+
+Thanks,
+
+Graeme
+
+__________________________________________________
+Do You Yahoo!?
+Tired of spam?  Yahoo! Mail has the best spam protection around 
+http://mail.yahoo.com 
+
+

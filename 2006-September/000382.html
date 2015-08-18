@@ -1,0 +1,109 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [ydf-users] YDDatabaseTree.php / database_tree.php example
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/ydframework-users/2006-September/index.html" >
+   <LINK REL="made" HREF="mailto:ydframework-users%40lists.berlios.de?Subject=Re%3A%20%5Bydf-users%5D%20YDDatabaseTree.php%20/%20database_tree.php%20example&In-Reply-To=%3C450A68CE.80709%40fusemail.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000380.html">
+   <LINK REL="Next"  HREF="000381.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[ydf-users] YDDatabaseTree.php / database_tree.php example</H1>
+    <B>Francisco Azevedo</B> 
+    <A HREF="mailto:ydframework-users%40lists.berlios.de?Subject=Re%3A%20%5Bydf-users%5D%20YDDatabaseTree.php%20/%20database_tree.php%20example&In-Reply-To=%3C450A68CE.80709%40fusemail.com%3E"
+       TITLE="[ydf-users] YDDatabaseTree.php / database_tree.php example">francisco at fusemail.com
+       </A><BR>
+    <I>Fri Sep 15 10:48:14 CEST 2006</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000380.html">[ydf-users] YDDatabaseTree.php / database_tree.php example
+</A></li>
+        <LI>Next message: <A HREF="000381.html">[ydf-users] Query Regarding getRecordsAsSet
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#382">[ date ]</a>
+              <a href="thread.html#382">[ thread ]</a>
+              <a href="subject.html#382">[ subject ]</a>
+              <a href="author.html#382">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Hi Graeme
+
+&gt;<i> I guessed that the position field was for ordering children and can see 
+</I>&gt;<i> the benefits of doing so. A 'setChildPosition' method would be a nice 
+</I>&gt;<i> way to move a child element to a specific position. You could also have 
+</I>&gt;<i> moveChildToFirst( $id ), moveChildToLast ( $id ), moveChildLeft( $id, $n 
+</I>&gt;<i> ) and moveChildRight( $id, $n ). The last two would move the child N 
+</I>&gt;<i> positions (within the current parent).
+</I>
+
+.. but you would do that with YDDatabaseTree::moveNode, i think.
+
+Currently, with moveNode( $id, $new_parent ) you can define the new 
+parent only.. with a new moveNode, eg, moveNode( $id, $new_parent, 
+$position ) then you have:
+
+moveChildToFirst( $id )  == moveNode( $id, null, 1 )
+
+moveChildToLast( $id )   == moveNode( $id, null, -1 )
+
+but i don't know about moveChildLeft/moveChildRight..
+
+A
++- B
+|<i>
+</I>+- C
+|<i>
+</I>+- D
+|<i>  +- X
+</I>|<i>  +- Y
+</I>|<i>
+</I>+--E
+
+If moveChildLeft is applyed to X what would be the new parent? C? A?
+
+
+My opinion, is that moveNode is the best way because it's the most basic 
+and powerfull. With moveNode we define exactly what we want, eg:
+
+
+moveNode( X, A, 1 );   or    moveNode( X, C, 1 );
+
+moveNode( E, D, 2 );
+
+
+
+regards
+Francisco A
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000380.html">[ydf-users] YDDatabaseTree.php / database_tree.php example
+</A></li>
+	<LI>Next message: <A HREF="000381.html">[ydf-users] Query Regarding getRecordsAsSet
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#382">[ date ]</a>
+              <a href="thread.html#382">[ thread ]</a>
+              <a href="subject.html#382">[ subject ]</a>
+              <a href="author.html#382">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/ydframework-users">More information about the YDFramework-users
+mailing list</a><br>
+</body></html>

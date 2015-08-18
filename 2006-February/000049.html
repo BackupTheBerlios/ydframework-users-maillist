@@ -1,0 +1,141 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [ydf-users] Content Management Framework proposal
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/ydframework-users/2006-February/index.html" >
+   <LINK REL="made" HREF="mailto:ydframework-users%40lists.berlios.de?Subject=Re%3A%20%5Bydf-users%5D%20Content%20Management%20Framework%20proposal&In-Reply-To=%3C4aef63030602230140k2c144eeej816ca3367e33b392%40mail.gmail.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000043.html">
+   <LINK REL="Next"  HREF="000052.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[ydf-users] Content Management Framework proposal</H1>
+    <B>Pieter Claerhout</B> 
+    <A HREF="mailto:ydframework-users%40lists.berlios.de?Subject=Re%3A%20%5Bydf-users%5D%20Content%20Management%20Framework%20proposal&In-Reply-To=%3C4aef63030602230140k2c144eeej816ca3367e33b392%40mail.gmail.com%3E"
+       TITLE="[ydf-users] Content Management Framework proposal">pieter at yellowduck.be
+       </A><BR>
+    <I>Thu Feb 23 10:40:21 CET 2006</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000043.html">[ydf-users] SQL Question
+</A></li>
+        <LI>Next message: <A HREF="000052.html">[ydf-users] Content Management Framework proposal
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#49">[ date ]</a>
+              <a href="thread.html#49">[ thread ]</a>
+              <a href="subject.html#49">[ subject ]</a>
+              <a href="author.html#49">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Hi all,
+
+I wanted to share an idea with you about what I call a &quot;Content Management
+Framework&quot;, which I might be adding to the framework.
+
+Essentially, I would like to add a system that makes it easy to create a CMS
+based on the Yellow Duck Framework by avoiding to have to do the same work
+over and over again.
+
+Most CMS systems work based on a tree of objects, which I find a good
+approach. Since we have the YDDatabaseTree class, this is quite easy to do.
+Additionally, every node on the tree could have a specific object type that
+describes the different properties and defines some metadata about what
+properties are required/optional, different constraints and possible custom
+actions (more about this later).
+
+The basic idea would be to create something like YDCmsContentTree that
+allows you to query the database and get objects from the database in the
+proper format (read: object type), which you can use in your templates.
+
+On the other hand, since we know exactly what we can expect as properties
+for each object, we can easily build the administration side of things in an
+automated way, rather than having to do it manually.
+
+Just to give an example:
+
+- Home -&gt; YDRootNode
+- Shop -&gt; YDShopNode
+  - Product -&gt; YDShopProductNode
+  - Category -&gt; YDShopCategoryNode
+    - Product -&gt; YDShopProductNode
+- News -&gt; YDNewsNode
+  - News Item -&gt; YDNewsNode
+  - News Item -&gt; YDNewsNode
+- Gallery -&gt; YDGalleryNode
+  - Photo Album -&gt; YDGalleryAlbumNode
+    - Picture -&gt; YDGalleryPhotoNode
+    - Picture -&gt; YDGalleryPhotoNode
+This is how the tree would look like. For the administration part, some
+content nodes might have additional (custom) actions, such as the
+&quot;ActiveOrders&quot; action for the YDShopNode class, which would list the orders.
+
+Deriving an actual CMS from that would be quite straightforward. You simply
+instantiate the YDCmsContentTree and start defining all the objects and
+their properties/constraints. All that is left then is to setup the
+templates, and all the rest of the stuff happens automatically.
+
+We can even make it that smart that the database schema gets
+generated/updated automatically when instantiating the YDCmsContentTree. I
+plan to make it even that intelligent to allow the content tree to be
+instantiated in all the different database engines supported by the
+framework. This will require us however to create a class that is able to
+create database tables in a database independant way.
+
+Later on, it should be quite easy to add extra features such as security and
+permissions, authentication and so on.
+
+The only thing I'm still not sure about is how we can integrate with
+external pieces of software such as e.g. forum software (phpBB, MyBB, UseBB,
+etc.). There should be a way to do it, but I still need to think how
+exactly.
+
+PS1: it would be very easy to apply this structure to e.g. the weblog
+application.
+
+PS2: multi-lingual sites should be supported from the start, as this is
+often a requirement.
+
+Any suggestions, additions, comments, remarks?
+
+Regards,
+
+
+
+pieter
+
+--
+pieter claerhout . <A HREF="https://lists.berlios.de/mailman/listinfo/ydframework-users">pieter at yellowduck.be</A> . <A HREF="http://www.yellowduck.be/">http://www.yellowduck.be/</A>
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: &lt;<A HREF="https://lists.berlios.de/pipermail/ydframework-users/attachments/20060223/4d62b14e/attachment.html">https://lists.berlios.de/pipermail/ydframework-users/attachments/20060223/4d62b14e/attachment.html</A>&gt;
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000043.html">[ydf-users] SQL Question
+</A></li>
+	<LI>Next message: <A HREF="000052.html">[ydf-users] Content Management Framework proposal
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#49">[ date ]</a>
+              <a href="thread.html#49">[ thread ]</a>
+              <a href="subject.html#49">[ subject ]</a>
+              <a href="author.html#49">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/ydframework-users">More information about the YDFramework-users
+mailing list</a><br>
+</body></html>

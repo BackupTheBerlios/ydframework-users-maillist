@@ -1,0 +1,190 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [ydf-users] YDF2_process problems on php5
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/ydframework-users/2006-September/index.html" >
+   <LINK REL="made" HREF="mailto:ydframework-users%40lists.berlios.de?Subject=Re%3A%20%5Bydf-users%5D%20YDF2_process%20problems%20on%20php5&In-Reply-To=%3C4aef63030609130029h66e68f74o48c6367c43c5751b%40mail.gmail.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000370.html">
+   <LINK REL="Next"  HREF="000372.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[ydf-users] YDF2_process problems on php5</H1>
+    <B>Pieter Claerhout</B> 
+    <A HREF="mailto:ydframework-users%40lists.berlios.de?Subject=Re%3A%20%5Bydf-users%5D%20YDF2_process%20problems%20on%20php5&In-Reply-To=%3C4aef63030609130029h66e68f74o48c6367c43c5751b%40mail.gmail.com%3E"
+       TITLE="[ydf-users] YDF2_process problems on php5">pieter at yellowduck.be
+       </A><BR>
+    <I>Wed Sep 13 09:29:20 CEST 2006</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000370.html">[ydf-users] YDF2_process problems on php5
+</A></li>
+        <LI>Next message: <A HREF="000372.html">[ydf-users] YDF2_process problems on php5
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#371">[ date ]</a>
+              <a href="thread.html#371">[ thread ]</a>
+              <a href="subject.html#371">[ subject ]</a>
+              <a href="author.html#371">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Seems really easy to fix. Will do that asap.
+
+pieter
+
+On 9/11/06, Francisco Azevedo &lt;<A HREF="https://lists.berlios.de/mailman/listinfo/ydframework-users">francisco at fusemail.com</A>&gt; wrote:
+&gt;<i>
+</I>&gt;<i> I'm getting some troubles when using YDF in php5. On php4 i can see a
+</I>&gt;<i> 'PATH_TRANSLATED' is $_SERVER but i cannot see it on php5
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i> PHP4 $_SERVER:
+</I>&gt;<i>
+</I>&gt;<i> array (
+</I>&gt;<i>   'HTTP_ACCEPT' =&gt; '*/*',
+</I>&gt;<i>   'HTTP_ACCEPT_LANGUAGE' =&gt; 'pt',
+</I>&gt;<i>   'HTTP_ACCEPT_ENCODING' =&gt; 'gzip, deflate',
+</I>&gt;<i>   'HTTP_USER_AGENT' =&gt; 'Mozilla/4.0 (compatible; MSIE 6.0; Windows NT
+</I>&gt;<i> 5.1; Q312461; SV1; .NET CLR 1.1.4322)',
+</I>&gt;<i>   'HTTP_HOST' =&gt; 'localhost',
+</I>&gt;<i>   'HTTP_CONNECTION' =&gt; 'Keep-Alive',
+</I>&gt;<i>   'HTTP_COOKIE' =&gt; '...',
+</I>&gt;<i>   'PATH' =&gt;
+</I>&gt;<i> 'C:\\WINDOWS\\system32;C:\\WINDOWS;C:\\WINDOWS\\System32\\Wbem;C:\\fop-
+</I>&gt;<i> 0.20.5;C:\\Python24',
+</I>&gt;<i>   'SystemRoot' =&gt; 'C:\\WINDOWS',
+</I>&gt;<i>   'COMSPEC' =&gt; 'C:\\WINDOWS\\system32\\cmd.exe',
+</I>&gt;<i>   'PATHEXT' =&gt; '.COM;.EXE;.BAT;.CMD;.VBS;.VBE;.JS;.JSE;.WSF;.WSH',
+</I>&gt;<i>   'WINDIR' =&gt; 'C:\\WINDOWS',
+</I>&gt;<i>   'SERVER_SIGNATURE' =&gt; '&lt;address&gt;Apache/2.0.55 (Win32) PHP/4.4.2
+</I>&gt;<i> Server at localhost Port 80&lt;/address&gt;
+</I>&gt;<i> ',
+</I>&gt;<i>   'SERVER_SOFTWARE' =&gt; 'Apache/2.0.55 (Win32) PHP/4.4.2',
+</I>&gt;<i>   'SERVER_NAME' =&gt; 'localhost',
+</I>&gt;<i>   'SERVER_ADDR' =&gt; '127.0.0.1',
+</I>&gt;<i>   'SERVER_PORT' =&gt; '80',
+</I>&gt;<i>   'REMOTE_ADDR' =&gt; '127.0.0.1',
+</I>&gt;<i>   'DOCUMENT_ROOT' =&gt; 'C:/wamp/www',
+</I>&gt;<i>   'SERVER_ADMIN' =&gt; '...',
+</I>&gt;<i>   'SCRIPT_FILENAME' =&gt; 'C:/wamp/www/main/ph/manager/index.php',
+</I>&gt;<i>   'REMOTE_PORT' =&gt; '1744',
+</I>&gt;<i>   'GATEWAY_INTERFACE' =&gt; 'CGI/1.1',
+</I>&gt;<i>   'SERVER_PROTOCOL' =&gt; 'HTTP/1.1',
+</I>&gt;<i>   'REQUEST_METHOD' =&gt; 'GET',
+</I>&gt;<i>   'QUERY_STRING' =&gt; '',
+</I>&gt;<i>   'REQUEST_URI' =&gt; '/main/ph/manager/',
+</I>&gt;<i>   'SCRIPT_NAME' =&gt; '/main/ph/manager/index.php',
+</I>&gt;<i>   'PHP_SELF' =&gt; '/main/ph/manager/index.php',
+</I>&gt;<i>   'PATH_TRANSLATED' =&gt; 'C:/wamp/www/main/ph/manager/index.php',
+</I>&gt;<i>   'argv' =&gt;
+</I>&gt;<i>   array (
+</I>&gt;<i>   ),
+</I>&gt;<i>   'argc' =&gt; 0,
+</I>&gt;<i> )
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i> PHP5 $_SERVER:
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i> array (
+</I>&gt;<i>   'HTTP_ACCEPT' =&gt; '*/*',
+</I>&gt;<i>   'HTTP_ACCEPT_LANGUAGE' =&gt; 'pt',
+</I>&gt;<i>   'HTTP_ACCEPT_ENCODING' =&gt; 'gzip, deflate',
+</I>&gt;<i>   'HTTP_USER_AGENT' =&gt; 'Mozilla/4.0 (compatible; MSIE 6.0; Windows NT
+</I>&gt;<i> 5.1; Q312461; SV1; .NET CLR 1.1.4322)',
+</I>&gt;<i>   'HTTP_HOST' =&gt; 'localhost',
+</I>&gt;<i>   'HTTP_CONNECTION' =&gt; 'Keep-Alive',
+</I>&gt;<i>   'HTTP_COOKIE' =&gt; '...',
+</I>&gt;<i>   'PATH' =&gt;
+</I>&gt;<i> 'C:\WINDOWS\system32;C:\WINDOWS;C:\WINDOWS\System32\Wbem;C:\fop-0.20.5
+</I>&gt;<i> ;C:\Python24',
+</I>&gt;<i>   'SystemRoot' =&gt; 'C:\WINDOWS',
+</I>&gt;<i>   'COMSPEC' =&gt; 'C:\WINDOWS\system32\cmd.exe',
+</I>&gt;<i>   'PATHEXT' =&gt; '.COM;.EXE;.BAT;.CMD;.VBS;.VBE;.JS;.JSE;.WSF;.WSH',
+</I>&gt;<i>   'WINDIR' =&gt; 'C:\WINDOWS',
+</I>&gt;<i>   'SERVER_SIGNATURE' =&gt; '&lt;address&gt;Apache/2.0.55 (Win32) PHP/5.1.2
+</I>&gt;<i> Server at localhost Port 80&lt;/address&gt;
+</I>&gt;<i> ',
+</I>&gt;<i>   'SERVER_SOFTWARE' =&gt; 'Apache/2.0.55 (Win32) PHP/5.1.2',
+</I>&gt;<i>   'SERVER_NAME' =&gt; 'localhost',
+</I>&gt;<i>   'SERVER_ADDR' =&gt; '127.0.0.1',
+</I>&gt;<i>   'SERVER_PORT' =&gt; '80',
+</I>&gt;<i>   'REMOTE_ADDR' =&gt; '127.0.0.1',
+</I>&gt;<i>   'DOCUMENT_ROOT' =&gt; 'C:/wamp/www',
+</I>&gt;<i>   'SERVER_ADMIN' =&gt; '...',
+</I>&gt;<i>   'SCRIPT_FILENAME' =&gt; 'C:/wamp/www/main/ph/manager/index.php',
+</I>&gt;<i>   'REMOTE_PORT' =&gt; '1752',
+</I>&gt;<i>   'GATEWAY_INTERFACE' =&gt; 'CGI/1.1',
+</I>&gt;<i>   'SERVER_PROTOCOL' =&gt; 'HTTP/1.1',
+</I>&gt;<i>   'REQUEST_METHOD' =&gt; 'GET',
+</I>&gt;<i>   'QUERY_STRING' =&gt; '',
+</I>&gt;<i>   'REQUEST_URI' =&gt; '/main/ph/manager/',
+</I>&gt;<i>   'SCRIPT_NAME' =&gt; '/main/ph/manager/index.php',
+</I>&gt;<i>   'PHP_SELF' =&gt; '/main/ph/manager/index.php',
+</I>&gt;<i>   'REQUEST_TIME' =&gt; 1157972571,
+</I>&gt;<i>   'argv' =&gt;
+</I>&gt;<i>   array (
+</I>&gt;<i>   ),
+</I>&gt;<i>   'argc' =&gt; 0,
+</I>&gt;<i> )
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i> So, i get a error:
+</I>&gt;<i>
+</I>&gt;<i> Fatal error: Class '' not found in YDFramework2\YDF2_process.php on line
+</I>&gt;<i> 59
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i> Any ideas?
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i> regards
+</I>&gt;<i> Francisco A
+</I>&gt;<i> _______________________________________________
+</I>&gt;<i> YDFramework-users mailing list
+</I>&gt;<i> <A HREF="https://lists.berlios.de/mailman/listinfo/ydframework-users">YDFramework-users at lists.berlios.de</A>
+</I>&gt;<i> <A HREF="https://lists.berlios.de/mailman/listinfo/ydframework-users">https://lists.berlios.de/mailman/listinfo/ydframework-users</A>
+</I>&gt;<i>
+</I>
+
+
+-- 
+pieter claerhout . <A HREF="https://lists.berlios.de/mailman/listinfo/ydframework-users">pieter at yellowduck.be</A> . <A HREF="http://www.yellowduck.be/">http://www.yellowduck.be/</A>
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: &lt;<A HREF="https://lists.berlios.de/pipermail/ydframework-users/attachments/20060913/e71ea3eb/attachment.html">https://lists.berlios.de/pipermail/ydframework-users/attachments/20060913/e71ea3eb/attachment.html</A>&gt;
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000370.html">[ydf-users] YDF2_process problems on php5
+</A></li>
+	<LI>Next message: <A HREF="000372.html">[ydf-users] YDF2_process problems on php5
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#371">[ date ]</a>
+              <a href="thread.html#371">[ thread ]</a>
+              <a href="subject.html#371">[ subject ]</a>
+              <a href="author.html#371">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/ydframework-users">More information about the YDFramework-users
+mailing list</a><br>
+</body></html>

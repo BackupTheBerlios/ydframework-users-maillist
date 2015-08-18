@@ -1,0 +1,112 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [ydf-users] addElements syntax
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/ydframework-users/2006-June/index.html" >
+   <LINK REL="made" HREF="mailto:ydframework-users%40lists.berlios.de?Subject=Re%3A%20%5Bydf-users%5D%20addElements%20syntax&In-Reply-To=%3C449D4243.10808%40free.fr%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000252.html">
+   <LINK REL="Next"  HREF="000254.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[ydf-users] addElements syntax</H1>
+    <B>araviski at free.fr</B> 
+    <A HREF="mailto:ydframework-users%40lists.berlios.de?Subject=Re%3A%20%5Bydf-users%5D%20addElements%20syntax&In-Reply-To=%3C449D4243.10808%40free.fr%3E"
+       TITLE="[ydf-users] addElements syntax">araviski at free.fr
+       </A><BR>
+    <I>Sat Jun 24 15:46:43 CEST 2006</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000252.html">[ydf-users] addElements syntax
+</A></li>
+        <LI>Next message: <A HREF="000254.html">[ydf-users] YDDatabaseObject
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#253">[ date ]</a>
+              <a href="thread.html#253">[ thread ]</a>
+              <a href="subject.html#253">[ subject ]</a>
+              <a href="author.html#253">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Hello Gonzillaaa,
+
+As it is currently implemented, the syntax for addElements is :
+$form-&gt;addElements($type, $names, $label, $attributes, $options);
+
+There is a single lable for all the elements. To solve your problem you
+can use the traditionnal addElement instead of addElements :
+  
+              for ($i = 0; $i &lt; $num_fields; $i++) {
+                  $e =&amp; $form-&gt;addElement('text', 'field_value' . $i,
+'Field #' . $i , array( 'size' =&gt; 40) );
+                  $e-&gt;setDefault('field_value' . $i);
+              }
+
+Erwan.
+
+Gonzillaaa a &#233;crit :
+&gt;<i> Hello could you tell me why this isn't working?
+</I>&gt;<i>
+</I>&gt;<i> function actionDefault() {
+</I>&gt;<i>         $labels = array ();
+</I>&gt;<i>         $values = array ();
+</I>&gt;<i>         $num_fields= 6;
+</I>&gt;<i>         $form = new YDForm('Snippets');
+</I>&gt;<i>         if (isset ($_GET['num_fields']) &amp;&amp; is_numeric
+</I>&gt;<i> ($_GET['num_fields'])) {
+</I>&gt;<i>             $num_fields = $_GET['num_fields'];
+</I>&gt;<i>         }
+</I>&gt;<i>         for ($i = 0; $i &lt; $num_fields; $i++) {
+</I>&gt;<i>             $labels[] = 'Field #' . $i . ' value';
+</I>&gt;<i>             $values[] = 'field_value' . $i;
+</I>&gt;<i>         }
+</I>&gt;<i>         $form-&gt;addElements('text', $values, $labels, array (
+</I>&gt;<i>             'size' =&gt; 40
+</I>&gt;<i>         ));
+</I>&gt;<i>         $this-&gt;template-&gt;assign('form', $form-&gt;toHtml());
+</I>&gt;<i>         $this-&gt;template-&gt;display('snippets.tpl');
+</I>&gt;<i>     }
+</I>&gt;<i>
+</I>&gt;<i> All i get is Array as labels &amp; the values are empty..
+</I>&gt;<i>
+</I>&gt;<i> many thanks.
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i> _______________________________________________
+</I>&gt;<i> YDFramework-users mailing list
+</I>&gt;<i> <A HREF="https://lists.berlios.de/mailman/listinfo/ydframework-users">YDFramework-users at lists.berlios.de</A>
+</I>&gt;<i> <A HREF="http://lists.berlios.de/mailman/listinfo/ydframework-users">http://lists.berlios.de/mailman/listinfo/ydframework-users</A>
+</I>&gt;<i>
+</I>&gt;<i>
+</I>
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000252.html">[ydf-users] addElements syntax
+</A></li>
+	<LI>Next message: <A HREF="000254.html">[ydf-users] YDDatabaseObject
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#253">[ date ]</a>
+              <a href="thread.html#253">[ thread ]</a>
+              <a href="subject.html#253">[ subject ]</a>
+              <a href="author.html#253">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/ydframework-users">More information about the YDFramework-users
+mailing list</a><br>
+</body></html>

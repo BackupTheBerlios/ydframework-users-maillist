@@ -1,0 +1,81 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [ydf-users] YDDatabaseObject code generator
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/ydframework-users/2006-February/index.html" >
+   <LINK REL="made" HREF="mailto:ydframework-users%40lists.berlios.de?Subject=Re%3A%20%5Bydf-users%5D%20YDDatabaseObject%20code%20generator&In-Reply-To=%3C43FF19DF.7010803%40fusemail.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000061.html">
+   <LINK REL="Next"  HREF="000063.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[ydf-users] YDDatabaseObject code generator</H1>
+    <B>Francisco Azevedo</B> 
+    <A HREF="mailto:ydframework-users%40lists.berlios.de?Subject=Re%3A%20%5Bydf-users%5D%20YDDatabaseObject%20code%20generator&In-Reply-To=%3C43FF19DF.7010803%40fusemail.com%3E"
+       TITLE="[ydf-users] YDDatabaseObject code generator">francisco at fusemail.com
+       </A><BR>
+    <I>Fri Feb 24 15:36:15 CET 2006</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000061.html">[ydf-users] YDDatabaseObject code generator
+</A></li>
+        <LI>Next message: <A HREF="000063.html">[ydf-users] YDDatabaseObject code generator
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#62">[ date ]</a>
+              <a href="thread.html#62">[ thread ]</a>
+              <a href="subject.html#62">[ subject ]</a>
+              <a href="author.html#62">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>&gt;<i> it's a bit tedios writing the database classes,
+</I>&gt;<i> registring all the keys and fields.
+</I>&gt;<i> anyone written something that automates this stuff?
+</I>
+Maybe db could integrate YDDatabaseMetaData with YDDatabaseObject. Then 
+would only need:
+
+class {$class_name} extends YDDatabaseObject {
+     function {$class_name} {
+         $this-&gt;YDDatabaseObject();
+         $this-&gt;registerDatabase( $GLOBALS['YDDBOBJ_CONN'] );
+
+         // 'readTable' instead of 'registerTable' that
+         // could use YDDatabaseMetaData to add fields/keys
+         $this-&gt;readTable( {$table_name} );
+     }
+}
+
+
+What do you think db? ;)
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000061.html">[ydf-users] YDDatabaseObject code generator
+</A></li>
+	<LI>Next message: <A HREF="000063.html">[ydf-users] YDDatabaseObject code generator
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#62">[ date ]</a>
+              <a href="thread.html#62">[ thread ]</a>
+              <a href="subject.html#62">[ subject ]</a>
+              <a href="author.html#62">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/ydframework-users">More information about the YDFramework-users
+mailing list</a><br>
+</body></html>

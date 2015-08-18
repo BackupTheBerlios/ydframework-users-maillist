@@ -1,0 +1,93 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [ydf-users] Would this work?
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/ydframework-users/2006-November/index.html" >
+   <LINK REL="made" HREF="mailto:ydframework-users%40lists.berlios.de?Subject=Re%3A%20%5Bydf-users%5D%20Would%20this%20work%3F&In-Reply-To=%3C93778d790611161328n630b38feje499ce7613b545c9%40mail.gmail.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000414.html">
+   <LINK REL="Next"  HREF="000417.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[ydf-users] Would this work?</H1>
+    <B>aga toytoy</B> 
+    <A HREF="mailto:ydframework-users%40lists.berlios.de?Subject=Re%3A%20%5Bydf-users%5D%20Would%20this%20work%3F&In-Reply-To=%3C93778d790611161328n630b38feje499ce7613b545c9%40mail.gmail.com%3E"
+       TITLE="[ydf-users] Would this work?">paultoytoy at gmail.com
+       </A><BR>
+    <I>Thu Nov 16 22:28:12 CET 2006</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000414.html">[ydf-users] Would this work?
+</A></li>
+        <LI>Next message: <A HREF="000417.html">[ydf-users] Documentation experiences
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#415">[ date ]</a>
+              <a href="thread.html#415">[ thread ]</a>
+              <a href="subject.html#415">[ subject ]</a>
+              <a href="author.html#415">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Hi Francisco,
+
+I want to use using [] for an arrayed list box or &lt;select
+name=&quot;sample[]&quot; multiple=&quot;multiple&quot;&gt;
+by using YDFramework with this  $this-&gt;addElement( &quot;select&quot;,
+&quot;sample[]&quot;, &quot;&quot;, &quot;&quot;, $a_obj ) but I found out it won't work.
+
+However, I have found a technique on how to logically server its
+purpose through this,
+
+In my php class, its something like:
+     $this-&gt;addElement( &quot;hidden&quot;, &quot;sample&quot;, &quot;I want this to be in array&quot; );
+
+Then in my tpl script, i just use the html way of encoding:
+     &lt;select name=&quot;sample[]&quot; multiple&gt;
+         {html_options options=$a_obj}
+     &lt;/select&gt;
+
+Now, when I debug it for example when i hit submit from a form,
+YDDebugUtil::dump ( $fields );
+
+I have found it does work and serve its purpose to make it array.
+Output is like:
+array(
+  'sample' =&gt;array (
+    0 =&gt; 'Waimea',
+    1 =&gt; 'Koloa',
+    2 =&gt; 'Kawaihau',
+  ),
+
+If you have your own technique of doing this, hope to hear it also
+from you guys! Hope mine too helps!
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000414.html">[ydf-users] Would this work?
+</A></li>
+	<LI>Next message: <A HREF="000417.html">[ydf-users] Documentation experiences
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#415">[ date ]</a>
+              <a href="thread.html#415">[ thread ]</a>
+              <a href="subject.html#415">[ subject ]</a>
+              <a href="author.html#415">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/ydframework-users">More information about the YDFramework-users
+mailing list</a><br>
+</body></html>

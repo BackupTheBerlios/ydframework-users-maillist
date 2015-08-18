@@ -1,0 +1,127 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [ydf-users] Password field value needs to be cleared out
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/ydframework-users/2006-December/index.html" >
+   <LINK REL="made" HREF="mailto:ydframework-users%40lists.berlios.de?Subject=Re%3A%20%5Bydf-users%5D%20Password%20field%20value%20needs%20to%20be%20cleared%20out&In-Reply-To=%3C4aef63030612170427l3edfb69fk4605e3d69e1d932%40mail.gmail.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000439.html">
+   <LINK REL="Next"  HREF="000437.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[ydf-users] Password field value needs to be cleared out</H1>
+    <B>Pieter Claerhout</B> 
+    <A HREF="mailto:ydframework-users%40lists.berlios.de?Subject=Re%3A%20%5Bydf-users%5D%20Password%20field%20value%20needs%20to%20be%20cleared%20out&In-Reply-To=%3C4aef63030612170427l3edfb69fk4605e3d69e1d932%40mail.gmail.com%3E"
+       TITLE="[ydf-users] Password field value needs to be cleared out">pieter at yellowduck.be
+       </A><BR>
+    <I>Sun Dec 17 13:27:13 CET 2006</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000439.html">[ydf-users] Password field value needs to be cleared out
+</A></li>
+        <LI>Next message: <A HREF="000437.html">[ydf-users] mod_rewrite and recordsets
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#443">[ date ]</a>
+              <a href="thread.html#443">[ thread ]</a>
+              <a href="subject.html#443">[ subject ]</a>
+              <a href="author.html#443">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Fixed in build 2261.
+
+pieter
+
+2006/12/11, Pieter Claerhout &lt;<A HREF="https://lists.berlios.de/mailman/listinfo/ydframework-users">pieter at yellowduck.be</A>&gt;:
+&gt;<i>
+</I>&gt;<i> Please log it on berlios.de...
+</I>&gt;<i>
+</I>&gt;<i> thanks,
+</I>&gt;<i>
+</I>&gt;<i> pieter
+</I>&gt;<i>
+</I>&gt;<i> 2006/12/7, aga toytoy &lt;<A HREF="https://lists.berlios.de/mailman/listinfo/ydframework-users">paultoytoy at gmail.com</A>&gt;:
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt; Hi guyz!
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt; I just discover this on my code:
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt;                $form-&gt;addElement( 'password','password','New
+</I>&gt;<i> &gt; Password',$attributes_1 );
+</I>&gt;<i> &gt;                $form-&gt;addElement( 'password','rpassword','Confirm
+</I>&gt;<i> &gt; password',$attributes_1 );
+</I>&gt;<i> &gt;                 ....
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt;                $form-&gt;addRule( 'password',  'required','Password
+</I>&gt;<i> &gt; field is required in this form!');
+</I>&gt;<i> &gt;                $form-&gt;addRule( 'rpassword', 'required','Confirm
+</I>&gt;<i> &gt; Password field is required in this form!');
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt; When those two fields' values won't matched after hitting submit
+</I>&gt;<i> &gt; button, definitely it will post an error message. But what I don't
+</I>&gt;<i> &gt; like is that, let's say for example,
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt;            &lt;input style=&quot;width: 200px&quot; id=&quot;registration_password&quot;
+</I>&gt;<i> &gt; type=&quot;password&quot; name=&quot;registration_password&quot; value=&quot;admin&quot; /&gt;
+</I>&gt;<i> &gt;            &lt;input style=&quot;width: 200px&quot; id=&quot;registration_rpassword&quot;
+</I>&gt;<i> &gt; type=&quot;password&quot; name=&quot;registration_rpassword&quot; value=&quot;aamin&quot; /&gt;
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt; you see that the value=&quot;aamin&quot;  and value=&quot;aamin&quot; is there. What I
+</I>&gt;<i> &gt; expect to happen is after hitting submit button, values for passwod
+</I>&gt;<i> &gt; field must be cleared out. I guess, its a bad idea if we let our
+</I>&gt;<i> &gt; password remain visible to somebody. Just concern of security risk.
+</I>&gt;<i> &gt; Can we make it to autmomatically clear this thing after hitting submit
+</I>&gt;<i> &gt; button?
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt; Cheers!
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt; toytoy
+</I>&gt;<i> &gt; _______________________________________________
+</I>&gt;<i> &gt; YDFramework-users mailing list
+</I>&gt;<i> &gt; <A HREF="https://lists.berlios.de/mailman/listinfo/ydframework-users">YDFramework-users at lists.berlios.de</A>
+</I>&gt;<i> &gt; <A HREF="https://lists.berlios.de/mailman/listinfo/ydframework-users">https://lists.berlios.de/mailman/listinfo/ydframework-users</A>
+</I>&gt;<i> &gt;
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i> --
+</I>&gt;<i> pieter claerhout . <A HREF="https://lists.berlios.de/mailman/listinfo/ydframework-users">pieter at yellowduck.be</A> . <A HREF="http://www.yellowduck.be/">http://www.yellowduck.be/</A>
+</I>
+
+
+
+-- 
+pieter claerhout . <A HREF="https://lists.berlios.de/mailman/listinfo/ydframework-users">pieter at yellowduck.be</A> . <A HREF="http://www.yellowduck.be/">http://www.yellowduck.be/</A>
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: &lt;<A HREF="https://lists.berlios.de/pipermail/ydframework-users/attachments/20061217/c41da5e9/attachment.html">https://lists.berlios.de/pipermail/ydframework-users/attachments/20061217/c41da5e9/attachment.html</A>&gt;
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000439.html">[ydf-users] Password field value needs to be cleared out
+</A></li>
+	<LI>Next message: <A HREF="000437.html">[ydf-users] mod_rewrite and recordsets
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#443">[ date ]</a>
+              <a href="thread.html#443">[ thread ]</a>
+              <a href="subject.html#443">[ subject ]</a>
+              <a href="author.html#443">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/ydframework-users">More information about the YDFramework-users
+mailing list</a><br>
+</body></html>

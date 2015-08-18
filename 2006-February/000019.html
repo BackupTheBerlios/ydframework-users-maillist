@@ -1,0 +1,283 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [ydf-users] UPDATE with YDDatabaseObject
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/ydframework-users/2006-February/index.html" >
+   <LINK REL="made" HREF="mailto:ydframework-users%40lists.berlios.de?Subject=Re%3A%20%5Bydf-users%5D%20UPDATE%20with%20YDDatabaseObject&In-Reply-To=%3C20060210221509.15045.qmail%40web50215.mail.yahoo.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000018.html">
+   <LINK REL="Next"  HREF="000020.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[ydf-users] UPDATE with YDDatabaseObject</H1>
+    <B>dab</B> 
+    <A HREF="mailto:ydframework-users%40lists.berlios.de?Subject=Re%3A%20%5Bydf-users%5D%20UPDATE%20with%20YDDatabaseObject&In-Reply-To=%3C20060210221509.15045.qmail%40web50215.mail.yahoo.com%3E"
+       TITLE="[ydf-users] UPDATE with YDDatabaseObject">dab214 at yahoo.com
+       </A><BR>
+    <I>Fri Feb 10 23:15:09 CET 2006</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000018.html">[ydf-users] UPDATE with YDDatabaseObject
+</A></li>
+        <LI>Next message: <A HREF="000020.html">[ydf-users] Catching unhandled actions
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#19">[ date ]</a>
+              <a href="thread.html#19">[ thread ]</a>
+              <a href="subject.html#19">[ subject ]</a>
+              <a href="author.html#19">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>hi db,
+yes i was extending the users class from a class
+extending YDDatabaseObject.
+it works now, thanks a lot!
+
+/dan
+
+
+--- David Bittencourt &lt;<A HREF="https://lists.berlios.de/mailman/listinfo/ydframework-users">muitocomplicado at gmail.com</A>&gt;
+wrote:
+
+&gt;<i> In this case we have 2 things.
+</I>&gt;<i> 
+</I>&gt;<i> 1. The id field is set to '' (empty string) so
+</I>&gt;<i> there's why you have WHERE id
+</I>&gt;<i> = 1 AND `users`.`id` = ''. You should unset it
+</I>&gt;<i> before adding the values, or
+</I>&gt;<i> unset it from the object, or set it with the correct
+</I>&gt;<i> value.
+</I>&gt;<i> 
+</I>&gt;<i> 2. It's very strange that all the fields are being
+</I>&gt;<i> added to the query. In
+</I>&gt;<i> all my tests here I'm getting the correct query.
+</I>&gt;<i> 
+</I>&gt;<i> Have you modified the class with any custom code?
+</I>&gt;<i> Is the users class extending a class other than
+</I>&gt;<i> YDDatabaseObject?
+</I>&gt;<i> What php version are you running?
+</I>&gt;<i> What is YDDatabaseObject's version? (check it on
+</I>&gt;<i> $_version var at the
+</I>&gt;<i> constructor)
+</I>&gt;<i> Please execute the following code please after
+</I>&gt;<i> setValues and send me the
+</I>&gt;<i> results.
+</I>&gt;<i> 
+</I>&gt;<i> YDDebugUtil::dump( $user-&gt;_fields );
+</I>&gt;<i> 
+</I>&gt;<i> -db
+</I>&gt;<i> 
+</I>&gt;<i> On 2/10/06, dab &lt;<A HREF="https://lists.berlios.de/mailman/listinfo/ydframework-users">dab214 at yahoo.com</A>&gt; wrote:
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt; hi db,
+</I>&gt;<i> &gt; thanks for your reply. i just updated the SVN
+</I>&gt;<i> though
+</I>&gt;<i> &gt; and i'm still having the same problem.
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt; This is the form content:
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt; Array
+</I>&gt;<i> &gt; (
+</I>&gt;<i> &gt;     [id] =&gt;
+</I>&gt;<i> &gt;     [firstname] =&gt;
+</I>&gt;<i> &gt;     [lastname] =&gt;
+</I>&gt;<i> &gt;     [username] =&gt; dab
+</I>&gt;<i> &gt;     [email] =&gt; <A HREF="https://lists.berlios.de/mailman/listinfo/ydframework-users">admin at site.com</A>
+</I>&gt;<i> &gt;     [address] =&gt;
+</I>&gt;<i> &gt;     [phone_work] =&gt;
+</I>&gt;<i> &gt;     [phone_home] =&gt;
+</I>&gt;<i> &gt;     [phone_mobile] =&gt;
+</I>&gt;<i> &gt;     [password] =&gt;
+</I>&gt;<i> &gt;     [password_repeat] =&gt;
+</I>&gt;<i> &gt;     [country] =&gt; 0
+</I>&gt;<i> &gt;     [gender] =&gt; 0
+</I>&gt;<i> &gt; )
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt; the normal code:
+</I>&gt;<i> &gt; $user = YDDatabaseObject::getInstance( 'users' );
+</I>&gt;<i> &gt; $values = $this-&gt;form-&gt;getValues();
+</I>&gt;<i> &gt; print_r($values);
+</I>&gt;<i> &gt; $user-&gt;setValues ( $values );
+</I>&gt;<i> &gt; $user-&gt;where ( &quot;id = &quot;.$this-&gt;id);
+</I>&gt;<i> &gt; $user-&gt;update();
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt; the users class:
+</I>&gt;<i> &gt; $this-&gt;registerKey( 'id', true );
+</I>&gt;<i> &gt; $this-&gt;registerField( 'username' );
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt; and last the sql output:
+</I>&gt;<i> &gt; UPDATE `users` SET `firstname` = '', `lastname` =
+</I>&gt;<i> '',
+</I>&gt;<i> &gt; `username` = 'dab', `email` = '<A HREF="https://lists.berlios.de/mailman/listinfo/ydframework-users">admin at site.com</A>',
+</I>&gt;<i> &gt; `address` = '', `phone_work` = '', `phone_home` =
+</I>&gt;<i> '',
+</I>&gt;<i> &gt; `phone_mobile` = '', `password` = '',
+</I>&gt;<i> &gt; `password_repeat` = '', `country` = '0', `gender`
+</I>&gt;<i> =
+</I>&gt;<i> &gt; '0' WHERE id = 1 AND `users`.`id` = ''
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt; Which of course produces this error:
+</I>&gt;<i> &gt; Fatal error: [1054] Unknown column 'email' in
+</I>&gt;<i> 'field
+</I>&gt;<i> &gt; list' in
+</I>&gt;<i> &gt;
+</I>&gt;<i>
+</I>D:\htdocs\sportingbet\YDFramework2\YDClasses\YDDatabase.php
+&gt;<i> &gt; on line 1360
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt; So for me it's not taking out key fields in the
+</I>&gt;<i> WHERE
+</I>&gt;<i> &gt; clause and it's not unsetting the fields that are
+</I>&gt;<i> not
+</I>&gt;<i> &gt; registered.
+</I>&gt;<i> &gt; thanks again.
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt; regards,
+</I>&gt;<i> &gt; dan
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt; --- David Bittencourt &lt;<A HREF="https://lists.berlios.de/mailman/listinfo/ydframework-users">muitocomplicado at gmail.com</A>&gt;
+</I>&gt;<i> &gt; wrote:
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt; &gt; I was looking more into this, and why the first
+</I>&gt;<i> code
+</I>&gt;<i> &gt; &gt; from dab wasn't working
+</I>&gt;<i> &gt; &gt; when it should be.
+</I>&gt;<i> &gt; &gt;
+</I>&gt;<i> &gt; &gt; In build 1658 I updated the class to handle the
+</I>&gt;<i> &gt; &gt; WHERE statement a little
+</I>&gt;<i> &gt; &gt; different in update() from the usual in find()
+</I>&gt;<i> and
+</I>&gt;<i> &gt; &gt; delete().
+</I>&gt;<i> &gt; &gt;
+</I>&gt;<i> &gt; &gt; In find() and delete() the WHERE statement is
+</I>&gt;<i> built
+</I>&gt;<i> &gt; &gt; by the union of field
+</I>&gt;<i> &gt; &gt; values and where() calls. Example:
+</I>&gt;<i> &gt; &gt;
+</I>&gt;<i> &gt; &gt; $user-&gt;active = 0;
+</I>&gt;<i> &gt; &gt; $user-&gt;where( &quot;date_created &gt; '2006-01-01''&quot; );
+</I>&gt;<i> &gt; &gt; $user-&gt;find();
+</I>&gt;<i> &gt; &gt;
+</I>&gt;<i> &gt; &gt; SELECT * FROM user WHERE active = 0 AND
+</I>&gt;<i> date_created
+</I>&gt;<i> &gt; &gt; &gt; '2006-01-01''
+</I>&gt;<i> &gt; &gt;
+</I>&gt;<i> &gt; &gt; $user-&gt;active = 0;
+</I>&gt;<i> &gt; &gt; $user-&gt;where( &quot;date_created &gt; '2006-01-01''&quot; );
+</I>&gt;<i> &gt; &gt; $user-&gt;delete();
+</I>&gt;<i> &gt; &gt;
+</I>&gt;<i> &gt; &gt; DELETE FROM user WHERE active = 0 AND
+</I>&gt;<i> date_created &gt;
+</I>&gt;<i> &gt; &gt; '2006-01-01''
+</I>&gt;<i> &gt; &gt;
+</I>&gt;<i> &gt; &gt; But when working with update() we want to be
+</I>&gt;<i> able to
+</I>&gt;<i> &gt; &gt; SET values and have
+</I>&gt;<i> &gt; &gt; WHERE statements different from those values.
+</I>&gt;<i> &gt; &gt; Example:
+</I>&gt;<i> &gt; &gt;
+</I>&gt;<i> &gt; &gt; $user-&gt;active = 0;
+</I>&gt;<i> &gt; &gt; $user-&gt;where( &quot;date_created &gt; '2006-01-01''&quot; );
+</I>&gt;<i> &gt; &gt; $user-&gt;find();
+</I>&gt;<i> &gt; &gt;
+</I>&gt;<i> &gt; &gt; Now the result be:
+</I>&gt;<i> &gt; &gt;
+</I>&gt;<i> &gt; &gt; UPDATE user SET active = 0 WHERE date_created &gt;
+</I>&gt;<i> &gt; &gt; '2006-01-01''
+</I>&gt;<i> &gt; &gt;
+</I>&gt;<i> &gt; &gt; and NOT
+</I>&gt;<i> &gt; &gt;
+</I>&gt;<i> &gt; &gt; UPDATE user SET active = 0 WHERE active = 0 AND
+</I>&gt;<i> &gt; &gt; date_created &gt; '2006-01-01''
+</I>&gt;<i> &gt; &gt;
+</I>&gt;<i> &gt; &gt; The only time values set in the object are added
+</I>&gt;<i> to
+</I>&gt;<i> &gt; &gt; the WHERE clause, is
+</I>&gt;<i> &gt; &gt; when the field is a key. Example, considering
+</I>&gt;<i> &quot;id&quot;
+</I>&gt;<i> &gt; &gt; is a key:
+</I>&gt;<i> &gt; &gt;
+</I>&gt;<i> &gt; &gt; $user-&gt;id = 1;
+</I>&gt;<i> &gt; &gt; $user-&gt;active = 0;
+</I>&gt;<i> &gt; &gt; $user-&gt;find();
+</I>&gt;<i> &gt; &gt;
+</I>&gt;<i> &gt; &gt; UPDATE user SET active = 0 WHERE id = 1
+</I>&gt;<i> &gt; &gt;
+</I>&gt;<i> &gt; &gt; $user-&gt;id = 1;
+</I>&gt;<i> &gt; &gt; $user-&gt;active = 0;
+</I>&gt;<i> &gt; &gt; $user-&gt;where( &quot;date_created &gt; '2006-01-01'&quot; );
+</I>&gt;<i> &gt; &gt; $user-&gt;find();
+</I>&gt;<i> &gt; &gt;
+</I>&gt;<i> &gt; &gt; UPDATE user SET active = 0 WHERE id = 1 AND
+</I>&gt;<i> &gt; &gt; date_created &gt; '2006-01-01'
+</I>&gt;<i> &gt; &gt;
+</I>&gt;<i> &gt; &gt; Also, as you noticed, the keys are no longer
+</I>&gt;<i> being
+</I>&gt;<i> &gt; &gt; added to the SET
+</I>&gt;<i> &gt; &gt; statements as they are not needed in there, are
+</I>&gt;<i> &gt; &gt; they?
+</I>&gt;<i> &gt; &gt;
+</I>&gt;<i> &gt; &gt; I asked about this in another e-mail to the
+</I>&gt;<i> &gt; &gt; developers mailing list.
+</I>&gt;<i> &gt; &gt;
+</I>&gt;<i> &gt; &gt; -db
+</I>&gt;<i> &gt; &gt;
+</I>&gt;<i> &gt; &gt; On 2/10/06, David Bittencourt
+</I>&gt;<i> &gt; &gt; &lt;<A HREF="https://lists.berlios.de/mailman/listinfo/ydframework-users">muitocomplicado at gmail.com</A>&gt; wrote:
+</I>&gt;<i> &gt; &gt; &gt;
+</I>&gt;<i> &gt; &gt; &gt; That's the default.
+</I>&gt;<i> &gt; &gt; &gt;
+</I>&gt;<i> &gt; &gt; &gt; $user-&gt;setValues() is going to set all values
+</I>&gt;<i> from
+</I>&gt;<i> &gt; &gt; $form-&gt;getValues() but
+</I>&gt;<i> &gt; &gt; &gt; only registered fields will be added to the
+</I>&gt;<i> query.
+</I>&gt;<i> &gt; &gt; &gt;
+</I>&gt;<i> &gt; &gt; &gt; -db
+</I>&gt;<i> &gt; &gt; &gt;
+</I>&gt;<i> &gt; &gt; &gt; On 2/10/06, dab &lt;<A HREF="https://lists.berlios.de/mailman/listinfo/ydframework-users">dab214 at yahoo.com</A>&gt; wrote:
+</I>&gt;<i> &gt; &gt; &gt; &gt;
+</I>&gt;<i> &gt; &gt; &gt; &gt; hi peter,
+</I>&gt;<i> &gt; &gt; &gt; &gt; no i totally missed that line being gone in
+</I>&gt;<i> your
+</I>&gt;<i> 
+</I>=== message truncated ===
+
+
+__________________________________________________
+Do You Yahoo!?
+Tired of spam?  Yahoo! Mail has the best spam protection around 
+<A HREF="http://mail.yahoo.com">http://mail.yahoo.com</A> 
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000018.html">[ydf-users] UPDATE with YDDatabaseObject
+</A></li>
+	<LI>Next message: <A HREF="000020.html">[ydf-users] Catching unhandled actions
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#19">[ date ]</a>
+              <a href="thread.html#19">[ thread ]</a>
+              <a href="subject.html#19">[ subject ]</a>
+              <a href="author.html#19">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/ydframework-users">More information about the YDFramework-users
+mailing list</a><br>
+</body></html>

@@ -1,0 +1,94 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [ydf-users] YDError extension
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/ydframework-users/2006-August/index.html" >
+   <LINK REL="made" HREF="mailto:ydframework-users%40lists.berlios.de?Subject=Re%3A%20%5Bydf-users%5D%20YDError%20extension&In-Reply-To=%3C386D3D93.7080809%40fusemail.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000344.html">
+   <LINK REL="Next"  HREF="000346.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[ydf-users] YDError extension</H1>
+    <B>Francisco Azevedo</B> 
+    <A HREF="mailto:ydframework-users%40lists.berlios.de?Subject=Re%3A%20%5Bydf-users%5D%20YDError%20extension&In-Reply-To=%3C386D3D93.7080809%40fusemail.com%3E"
+       TITLE="[ydf-users] YDError extension">francisco at fusemail.com
+       </A><BR>
+    <I>Mon Aug 28 17:07:59 CEST 2006</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000344.html">[ydf-users] Problems with getRecordsAsSet
+</A></li>
+        <LI>Next message: <A HREF="000346.html">[ydf-users] YDError extension
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#345">[ date ]</a>
+              <a href="thread.html#345">[ thread ]</a>
+              <a href="subject.html#345">[ subject ]</a>
+              <a href="author.html#345">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Hi
+
+As i said in a latter email, it could be very usefull to have a standard 
+way of representing results. YDError is an excellent choice for that but 
+currently it can represent only results that are errors ( because normal 
+results are returned without any modification ). This works but normal 
+results have a user message associated.
+
+I propose to:
+
+- rename YDError to eg, YDResult
+
+- add a new level ( OK ) to YDResult:
+
+     @define( 'YD_ERROR_FATAL',   4 );
+     @define( 'YD_ERROR_WARNING', 3 );
+     @define( 'YD_ERROR_NOTICE',  2 );
+
+     @define( 'YD_ERROR_OK',  1 );
+
+     @define( 'YD_ERROR_NONE',    0 );
+
+- add a new static method for the creation of normal results:
+
+         function ok( $message, $value ){ ... }
+
+
+
+What do you think?
+
+
+regards
+Francisco A
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000344.html">[ydf-users] Problems with getRecordsAsSet
+</A></li>
+	<LI>Next message: <A HREF="000346.html">[ydf-users] YDError extension
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#345">[ date ]</a>
+              <a href="thread.html#345">[ thread ]</a>
+              <a href="subject.html#345">[ subject ]</a>
+              <a href="author.html#345">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/ydframework-users">More information about the YDFramework-users
+mailing list</a><br>
+</body></html>

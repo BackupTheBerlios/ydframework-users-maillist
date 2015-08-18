@@ -1,0 +1,149 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [ydf-users] Ajax
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/ydframework-users/2006-March/index.html" >
+   <LINK REL="made" HREF="mailto:ydframework-users%40lists.berlios.de?Subject=Re%3A%20%5Bydf-users%5D%20Ajax&In-Reply-To=%3C829084a60603272327y44836149oec2706bccff35fde%40mail.gmail.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000174.html">
+   <LINK REL="Next"  HREF="000176.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[ydf-users] Ajax</H1>
+    <B>ph-m</B> 
+    <A HREF="mailto:ydframework-users%40lists.berlios.de?Subject=Re%3A%20%5Bydf-users%5D%20Ajax&In-Reply-To=%3C829084a60603272327y44836149oec2706bccff35fde%40mail.gmail.com%3E"
+       TITLE="[ydf-users] Ajax">phmassa at gmail.com
+       </A><BR>
+    <I>Tue Mar 28 09:27:48 CEST 2006</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000174.html">[ydf-users] Re: Query Regarding File Upload
+</A></li>
+        <LI>Next message: <A HREF="000176.html">[ydf-users] Ajax
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#175">[ date ]</a>
+              <a href="thread.html#175">[ thread ]</a>
+              <a href="subject.html#175">[ subject ]</a>
+              <a href="author.html#175">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>hi,
+
+Since last releases, with ajax, I've lost styles, this is my code :
+
+		function index() {
+
+			$this-&gt;YDRequest();
+			$this-&gt;tpl = new YDTemplate();
+            $this-&gt;timer = new YDTimer();
+
+		}
+
+
+		// Default action
+		function actionDefault() {
+
+            $myform = new YDForm('myform');
+			$myform-&gt;addElement( 'text', 'arg1', 'Nom :', array( 'maxlength' =&gt; 15 ) );
+			$myform-&gt;addElement( 'button', 'mybutton', 'Interroger' );
+			$myform-&gt;addElement( 'span', 'myspanresult', '&nbsp;' );
+
+            $myform-&gt;addFilter( 'arg1', 'trim' );
+            $myform-&gt;addRule( 'arg1', 'required', 'requis' );
+
+			// create ajax object
+			$this-&gt;ajax = new YDAjax( $this-&gt;tpl );
+            $this-&gt;ajax-&gt;addForm( $myform );
+
+            // create custom effects for waiting message
+            $onStart = new YDAjaxEffect('', 'opacity', 'hide()', 0 );
+            $onShow  = new YDAjaxEffect('', 'opacity', 'custom(0,1)', 0 );
+            $onHide  = new YDAjaxEffect('', 'opacity', &quot;toggle()&quot; );
+
+            // use waiting message with custom effects
+            $this-&gt;ajax-&gt;useWaitingMessage( &quot;&lt;h2&gt;&nbsp;Recherche en
+cours ... &nbsp;&lt;\/h2&gt;&quot;, array(), $onStart, $onShow, $onHide );
+            //$this-&gt;ajax-&gt;useWaitingMessage( );
+
+            $this-&gt;ajax-&gt;addEvent( 'mybutton', array( &amp; $this,
+'compute' ), array('arg1') );
+
+			$this-&gt;ajax-&gt;processEvents();
+
+			// assign form and display template
+			$this-&gt;tpl-&gt;assign( 'app_titre', 'Annuaire' );
+			$this-&gt;tpl-&gt;assign( 'app_nom', 'Annuaire Local' );
+			$this-&gt;tpl-&gt;assignForm( 'form',  $myform );
+            $this-&gt;tpl-&gt;assign( 'timer', $this-&gt;timer-&gt;getElapsed() );
+			$this-&gt;tpl-&gt;display();
+		}
+
+		// compute call invoked by ajax client
+		function compute( $x ){
+
+            $retour = &quot;&quot;;
+            if($x!=&quot;&quot;) {
+                $strSQL = &quot;SELECT ag_nom, ag_prenom, ag_tel FROM
+agents WHERE ag_nom LIKE '&quot; . $x . &quot;%'&quot;;
+                $db = YDDatabase::getInstance( 'mysql',
+YDConfig::get('db_name'), YDConfig::get('db_user'),
+YDConfig::get('db_pass'), YDConfig::get('db_host') );
+                $retour = &quot;&quot;;
+                $res = $db-&gt;getRecords( $strSQL );
+                if($res) {
+                    $retour = &quot;&lt;table cellspacing=\&quot;0\&quot;
+cellpadding=\&quot;0\&quot; border=\&quot;0\&quot;&gt;&lt;tr&gt;&lt;th class=\&quot;adminRowL\&quot;
+width=\&quot;40%\&quot;&gt;Nom&lt;/th&gt;&lt;th class=\&quot;adminRowL\&quot;
+width=\&quot;40%\&quot;&gt;Pr&#233;nom&lt;/th&gt;&lt;th class=\&quot;adminRowL\&quot;
+width=\&quot;20%\&quot;&gt;T&#233;l&#233;phone&lt;/th&gt;&lt;/tr&gt;&quot;;
+                    foreach ($res as $row )
+                            $retour .= &quot;&lt;tr
+onMouseOver=\&quot;YDRowMouseOver(this);\&quot;
+onMouseOut=\&quot;YDRowMouseOut(this);\&quot;&gt;&lt;td class=\&quot;adminRowL\&quot;&gt;&quot;.
+$row['ag_nom'] . &quot;&lt;/td&gt;&lt;td class=\&quot;adminRowL\&quot;&gt;&quot; . $row['ag_prenom'] .
+&quot;&lt;/td&gt;&lt;td class=\&quot;adminRowL\&quot;&gt;&quot; . $row['ag_tel']  .&quot;&lt;/td&gt;&lt;/tr&gt;&quot;;
+                    $retour .= &quot;&lt;/table&gt;&quot;;
+                } else
+                    $retour .= &quot;&lt;table cellspacing=\&quot;0\&quot;
+cellpadding=\&quot;0\&quot; border=\&quot;0\&quot;&gt;&lt;tr&gt;&lt;td&gt;pas de
+r&#233;ponse&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&quot;;
+            }
+
+            // assign result to span
+			$this-&gt;ajax-&gt;addResult( 'myspanresult', $retour );
+
+			// return response to client browser
+			return $this-&gt;ajax-&gt;processResults();
+		}
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000174.html">[ydf-users] Re: Query Regarding File Upload
+</A></li>
+	<LI>Next message: <A HREF="000176.html">[ydf-users] Ajax
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#175">[ date ]</a>
+              <a href="thread.html#175">[ thread ]</a>
+              <a href="subject.html#175">[ subject ]</a>
+              <a href="author.html#175">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/ydframework-users">More information about the YDFramework-users
+mailing list</a><br>
+</body></html>

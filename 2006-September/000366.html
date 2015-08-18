@@ -1,0 +1,163 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [ydf-users] YDDatabaseObject - another feature
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/ydframework-users/2006-September/index.html" >
+   <LINK REL="made" HREF="mailto:ydframework-users%40lists.berlios.de?Subject=Re%3A%20%5Bydf-users%5D%20YDDatabaseObject%20-%20another%20feature&In-Reply-To=%3C12260be20609060413u4b4dfd05qebb0d34f9009b654%40mail.gmail.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000363.html">
+   <LINK REL="Next"  HREF="000368.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[ydf-users] YDDatabaseObject - another feature</H1>
+    <B>David Bittencourt</B> 
+    <A HREF="mailto:ydframework-users%40lists.berlios.de?Subject=Re%3A%20%5Bydf-users%5D%20YDDatabaseObject%20-%20another%20feature&In-Reply-To=%3C12260be20609060413u4b4dfd05qebb0d34f9009b654%40mail.gmail.com%3E"
+       TITLE="[ydf-users] YDDatabaseObject - another feature">muitocomplicado at gmail.com
+       </A><BR>
+    <I>Wed Sep  6 13:13:53 CEST 2006</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000363.html">[ydf-users] YDDatabaseObject - another feature
+</A></li>
+        <LI>Next message: <A HREF="000368.html">[ydf-users] YDDatabaseObject - another feature
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#366">[ date ]</a>
+              <a href="thread.html#366">[ thread ]</a>
+              <a href="subject.html#366">[ subject ]</a>
+              <a href="author.html#366">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>You can retrieve the SQL query that would be used without executing it by
+setting the YDConfig variable YD_DBOBJECT_EXECUTE to false. Example:
+
+YDConfig::set( 'YD_DBOBJECT_EXECUTE', false );
+
+$obj-&gt;id = 1;
+$sql = $obj-&gt;delete();
+
+YDConfig::set( 'YD_DBOBJECT_EXECUTE', true ); // get it back to normal use
+
+Now $sql will have something like:
+
+DELETE FROM table WHERE id = 1
+
+Is this what you want?
+
+Notice that you can use this config variable YD_DBOBJECT_EXECUTE to retrieve
+the SQL queries from find(), update(), insert() and delete().
+
+-db
+
+On 9/5/06, Francisco Azevedo &lt;<A HREF="https://lists.berlios.de/mailman/listinfo/ydframework-users">francisco at fusemail.com</A>&gt; wrote:
+&gt;<i>
+</I>&gt;<i> Hi David
+</I>&gt;<i>
+</I>&gt;<i> When using YDDatabaseObject i create ( only in my mind ) a new feature
+</I>&gt;<i> that i think it's very useful and can make the development with
+</I>&gt;<i> YDDatabaseObject easier and with a _huge_ performance improvement.
+</I>&gt;<i>
+</I>&gt;<i> See this simple example..
+</I>&gt;<i> I have 4 different class objects (that are YDDatabaseObject extensions)
+</I>&gt;<i> in a array:
+</I>&gt;<i>
+</I>&gt;<i> array( $classA, $classB, $classC, $classD );
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i> . and each one has a method that do some DELETE stuff:
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i> class A{
+</I>&gt;<i>         ...
+</I>&gt;<i>         function deleteRow(){
+</I>&gt;<i>                 $this-&gt;resetAll();
+</I>&gt;<i>                 $this-&gt;id = X;
+</I>&gt;<i>                 $this-&gt;delete();
+</I>&gt;<i>         }
+</I>&gt;<i> }
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i> .. now, if i want to delete _all_ objects i must do:
+</I>&gt;<i>
+</I>&gt;<i> foreach( $array as $obj )
+</I>&gt;<i>         $obj-&gt;deleteRow();
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i> This is ok.. works but it's not performant. In this simple scenario i
+</I>&gt;<i> will make 4 db calls.
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i> Now, how to solve this in better way: with a new YDDabataseObject called
+</I>&gt;<i> YDDabataseObject::deleteSQL() that &quot;returns the SQL string that would by
+</I>&gt;<i>   used by YDDabataseObject::delete()&quot;.
+</I>&gt;<i>
+</I>&gt;<i> Then i would only need to:
+</I>&gt;<i>
+</I>&gt;<i> class A{
+</I>&gt;<i>         ...
+</I>&gt;<i>         function deleteRow(){
+</I>&gt;<i>                 $this-&gt;resetAll();
+</I>&gt;<i>                 $this-&gt;id = X;
+</I>&gt;<i>                 return $this-&gt;deleteSQL();
+</I>&gt;<i>         }
+</I>&gt;<i> }
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i> and..
+</I>&gt;<i>
+</I>&gt;<i> foreach( $array as $obj )
+</I>&gt;<i>         $sql .= $obj-&gt;deleteRow();
+</I>&gt;<i>
+</I>&gt;<i> $db-&gt;execute( $sql );
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i> This could be an _huge_ performance boost because i would only need 1 db
+</I>&gt;<i> call for all objects. Imagine if i have 100 objects, instead of 100 db
+</I>&gt;<i> calls (as i need now) i would only need 1. This is something like a
+</I>&gt;<i> transactional call and is the best way of doing it. Maybe someday we
+</I>&gt;<i> could make execute transactional too and then this will be perfect.
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i> What do you think about it?
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i> regards
+</I>&gt;<i> Francisco A
+</I>&gt;<i> _______________________________________________
+</I>&gt;<i> YDFramework-users mailing list
+</I>&gt;<i> <A HREF="https://lists.berlios.de/mailman/listinfo/ydframework-users">YDFramework-users at lists.berlios.de</A>
+</I>&gt;<i> <A HREF="https://lists.berlios.de/mailman/listinfo/ydframework-users">https://lists.berlios.de/mailman/listinfo/ydframework-users</A>
+</I>&gt;<i>
+</I>-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: &lt;<A HREF="https://lists.berlios.de/pipermail/ydframework-users/attachments/20060906/49a9fd5d/attachment.html">https://lists.berlios.de/pipermail/ydframework-users/attachments/20060906/49a9fd5d/attachment.html</A>&gt;
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000363.html">[ydf-users] YDDatabaseObject - another feature
+</A></li>
+	<LI>Next message: <A HREF="000368.html">[ydf-users] YDDatabaseObject - another feature
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#366">[ date ]</a>
+              <a href="thread.html#366">[ thread ]</a>
+              <a href="subject.html#366">[ subject ]</a>
+              <a href="author.html#366">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/ydframework-users">More information about the YDFramework-users
+mailing list</a><br>
+</body></html>

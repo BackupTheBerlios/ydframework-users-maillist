@@ -1,0 +1,173 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [ydf-users] How to add an attribute to a label element.
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/ydframework-users/2006-July/index.html" >
+   <LINK REL="made" HREF="mailto:ydframework-users%40lists.berlios.de?Subject=Re%3A%20%5Bydf-users%5D%20How%20to%20add%20an%20attribute%20to%20a%20label%20element.&In-Reply-To=%3C20060712140655.17519.qmail%40web50207.mail.yahoo.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000291.html">
+   <LINK REL="Next"  HREF="000294.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[ydf-users] How to add an attribute to a label element.</H1>
+    <B>dab</B> 
+    <A HREF="mailto:ydframework-users%40lists.berlios.de?Subject=Re%3A%20%5Bydf-users%5D%20How%20to%20add%20an%20attribute%20to%20a%20label%20element.&In-Reply-To=%3C20060712140655.17519.qmail%40web50207.mail.yahoo.com%3E"
+       TITLE="[ydf-users] How to add an attribute to a label element.">dab214 at yahoo.com
+       </A><BR>
+    <I>Wed Jul 12 16:06:55 CEST 2006</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000291.html">[ydf-users] How to add an attribute to a label element.
+</A></li>
+        <LI>Next message: <A HREF="000294.html">[ydf-users] How to add an attribute to a label element.
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#292">[ date ]</a>
+              <a href="thread.html#292">[ thread ]</a>
+              <a href="subject.html#292">[ subject ]</a>
+              <a href="author.html#292">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>hi moses,
+i could be wrong (and i guess somebody will correct me
+if that's the case) but looking at the
+YDFormRenderer_html.php it doesn't seem to support
+that.
+You could hack it a bit though and create your own
+form renderer by doing:
+
+$form-&gt;registerRenderer('whatever','MyRenderer',
+'renderers/MyRenderer.php');	
+$this-&gt;template-&gt;assign( 'form',
+$form-&gt;render('whatever') );
+
+hope that helps.
+
+/dab
+
+
+--- <A HREF="https://lists.berlios.de/mailman/listinfo/ydframework-users">moses at softwaysolutions.com</A> wrote:
+
+&gt;<i> 
+</I>&gt;<i> Hello Sir
+</I>&gt;<i> 
+</I>&gt;<i>   I am not  trying to add an error msg to the form
+</I>&gt;<i> element.
+</I>&gt;<i>   
+</I>&gt;<i>   I want to know is it possible to add an attribute
+</I>&gt;<i> to the html label
+</I>&gt;<i> element
+</I>&gt;<i>   (ie)
+</I>&gt;<i> 
+</I>&gt;<i>   {$form.name.label}
+</I>&gt;<i> 
+</I>&gt;<i>   the above code generates the following html output
+</I>&gt;<i> 
+</I>&gt;<i>   &lt;label for = &quot;form_name&quot;&gt;Name&lt;/label&gt;
+</I>&gt;<i> 
+</I>&gt;<i>   Now I want to add one attribute class = &quot;test&quot; to
+</I>&gt;<i> the label element
+</I>&gt;<i>          &lt;label class = &quot;test&quot; for =
+</I>&gt;<i> &quot;form_name&quot;&gt;Name&lt;/label&gt;
+</I>&gt;<i> 
+</I>&gt;<i>  Is it possible.
+</I>&gt;<i> 
+</I>&gt;<i> regards
+</I>&gt;<i> moses  
+</I>&gt;<i>   
+</I>&gt;<i> 
+</I>&gt;<i> 
+</I>&gt;<i> 
+</I>&gt;<i> &gt; -------- Original Message --------
+</I>&gt;<i> &gt; Subject: Re: [ydf-users] How to add an attribute
+</I>&gt;<i> to a label element.
+</I>&gt;<i> &gt; From: dab &lt;<A HREF="https://lists.berlios.de/mailman/listinfo/ydframework-users">dab214 at yahoo.com</A>&gt;
+</I>&gt;<i> &gt; Date: Mon, July 10, 2006 11:57 am
+</I>&gt;<i> &gt; To: <A HREF="https://lists.berlios.de/mailman/listinfo/ydframework-users">ydframework-users at berlios.de</A>
+</I>&gt;<i> &gt; 
+</I>&gt;<i> &gt; maybe i'm wrong but isn't moses just trying to add
+</I>&gt;<i> an
+</I>&gt;<i> &gt; error msg to the form element? that is supported
+</I>&gt;<i> &gt; already no?
+</I>&gt;<i> &gt; 
+</I>&gt;<i> &gt; --- Francisco Azevedo &lt;<A HREF="https://lists.berlios.de/mailman/listinfo/ydframework-users">francisco at fusemail.com</A>&gt;
+</I>&gt;<i> wrote:
+</I>&gt;<i> &gt; 
+</I>&gt;<i> &gt; &gt; Hi moses
+</I>&gt;<i> &gt; &gt; 
+</I>&gt;<i> &gt; &gt; 
+</I>&gt;<i> &gt; &gt; &gt;     How to add an attribute to a label
+</I>&gt;<i> element.
+</I>&gt;<i> &gt; &gt; 
+</I>&gt;<i> &gt; &gt; 
+</I>&gt;<i> &gt; &gt; Afaik, it's not possible. Maybe it's a good
+</I>&gt;<i> feature
+</I>&gt;<i> &gt; &gt; request. :)
+</I>&gt;<i> &gt; &gt; 
+</I>&gt;<i> &gt; &gt; regards
+</I>&gt;<i> &gt; &gt; Francisco A
+</I>&gt;<i> &gt; &gt; _______________________________________________
+</I>&gt;<i> &gt; &gt; YDFramework-users mailing list
+</I>&gt;<i> &gt; &gt; <A HREF="https://lists.berlios.de/mailman/listinfo/ydframework-users">YDFramework-users at lists.berlios.de</A>
+</I>&gt;<i> &gt; &gt;
+</I>&gt;<i> &gt;
+</I>&gt;<i>
+</I><A HREF="http://lists.berlios.de/mailman/listinfo/ydframework-users">http://lists.berlios.de/mailman/listinfo/ydframework-users</A>
+&gt;<i> &gt; &gt; 
+</I>&gt;<i> &gt; 
+</I>&gt;<i> &gt; 
+</I>&gt;<i> &gt; __________________________________________________
+</I>&gt;<i> &gt; Do You Yahoo!?
+</I>&gt;<i> &gt; Tired of spam?  Yahoo! Mail has the best spam
+</I>&gt;<i> protection around 
+</I>&gt;<i> &gt; <A HREF="http://mail.yahoo.com">http://mail.yahoo.com</A> 
+</I>&gt;<i> &gt; _______________________________________________
+</I>&gt;<i> &gt; YDFramework-users mailing list
+</I>&gt;<i> &gt; <A HREF="https://lists.berlios.de/mailman/listinfo/ydframework-users">YDFramework-users at lists.berlios.de</A>
+</I>&gt;<i> &gt;
+</I>&gt;<i>
+</I><A HREF="http://lists.berlios.de/mailman/listinfo/ydframework-users">http://lists.berlios.de/mailman/listinfo/ydframework-users</A>
+&gt;<i> 
+</I>&gt;<i> _______________________________________________
+</I>&gt;<i> YDFramework-users mailing list
+</I>&gt;<i> <A HREF="https://lists.berlios.de/mailman/listinfo/ydframework-users">YDFramework-users at lists.berlios.de</A>
+</I>&gt;<i>
+</I><A HREF="http://lists.berlios.de/mailman/listinfo/ydframework-users">http://lists.berlios.de/mailman/listinfo/ydframework-users</A>
+&gt;<i> 
+</I>
+
+__________________________________________________
+Do You Yahoo!?
+Tired of spam?  Yahoo! Mail has the best spam protection around 
+<A HREF="http://mail.yahoo.com">http://mail.yahoo.com</A> 
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000291.html">[ydf-users] How to add an attribute to a label element.
+</A></li>
+	<LI>Next message: <A HREF="000294.html">[ydf-users] How to add an attribute to a label element.
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#292">[ date ]</a>
+              <a href="thread.html#292">[ thread ]</a>
+              <a href="subject.html#292">[ subject ]</a>
+              <a href="author.html#292">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/ydframework-users">More information about the YDFramework-users
+mailing list</a><br>
+</body></html>

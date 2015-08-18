@@ -1,0 +1,161 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [ydf-users] How to Remove an attribute from an element after it has been created
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/ydframework-users/2006-July/index.html" >
+   <LINK REL="made" HREF="mailto:ydframework-users%40lists.berlios.de?Subject=Re%3A%20%5Bydf-users%5D%20How%20to%20Remove%20an%20attribute%20from%20an%20element%20after%20it%20has%20been%20created&In-Reply-To=%3C12260be20607041448t4221d389u72c42c9c133df1d5%40mail.gmail.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000274.html">
+   <LINK REL="Next"  HREF="000276.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[ydf-users] How to Remove an attribute from an element after it has been created</H1>
+    <B>David Bittencourt</B> 
+    <A HREF="mailto:ydframework-users%40lists.berlios.de?Subject=Re%3A%20%5Bydf-users%5D%20How%20to%20Remove%20an%20attribute%20from%20an%20element%20after%20it%20has%20been%20created&In-Reply-To=%3C12260be20607041448t4221d389u72c42c9c133df1d5%40mail.gmail.com%3E"
+       TITLE="[ydf-users] How to Remove an attribute from an element after it has been created">muitocomplicado at gmail.com
+       </A><BR>
+    <I>Tue Jul  4 23:48:13 CEST 2006</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000274.html">[ydf-users] How to Remove an attribute  from  an element after it has been created
+</A></li>
+        <LI>Next message: <A HREF="000276.html">[ydf-users] How to Remove an attribute  from  an element after it has been created
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#275">[ date ]</a>
+              <a href="thread.html#275">[ thread ]</a>
+              <a href="subject.html#275">[ subject ]</a>
+              <a href="author.html#275">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>unset( $elm-&gt;_attributes['disabled'] );
+
+-db
+
+On 7/4/06, <A HREF="https://lists.berlios.de/mailman/listinfo/ydframework-users">moses at softwaysolutions.com</A> &lt;<A HREF="https://lists.berlios.de/mailman/listinfo/ydframework-users">moses at softwaysolutions.com</A>&gt; wrote:
+&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i> Hello Sir
+</I>&gt;<i>
+</I>&gt;<i>     Thank you for ur reply
+</I>&gt;<i>
+</I>&gt;<i>     The following code add one  attribute to the element timeInHrs
+</I>&gt;<i>
+</I>&gt;<i>     $elm =&amp; $this-&gt;form-&gt;getElement( 'timeInHrs' );
+</I>&gt;<i>     $elm-&gt;_attributes['disabled'] = 'disabled';
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i>      As per my situation I need to disable a element then enable then
+</I>&gt;<i> disable and goes on
+</I>&gt;<i>      If I code like this
+</I>&gt;<i>
+</I>&gt;<i>      $elm-&gt;_attributes['disabled'] = '';
+</I>&gt;<i>      $elm-&gt;_attributes['enabled'] = 'enabled'
+</I>&gt;<i>
+</I>&gt;<i>      there is no use
+</I>&gt;<i>
+</I>&gt;<i>      Can u please tell me how to  remove an particular attribute from an
+</I>&gt;<i> element
+</I>&gt;<i>
+</I>&gt;<i> regards
+</I>&gt;<i> moses
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i> &gt; -------- Original Message --------
+</I>&gt;<i> &gt; Subject: Re: [ydf-users] How to set Properties for a element after it
+</I>&gt;<i> &gt; has been created
+</I>&gt;<i> &gt; From: &quot;David Bittencourt&quot; &lt;<A HREF="https://lists.berlios.de/mailman/listinfo/ydframework-users">muitocomplicado at gmail.com</A>&gt;
+</I>&gt;<i> &gt; Date: Tue, July 04, 2006 12:03 am
+</I>&gt;<i> &gt; To: <A HREF="https://lists.berlios.de/mailman/listinfo/ydframework-users">ydframework-users at berlios.de</A>
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt; Use YDForm::getElement to get a reference to the element object and
+</I>&gt;<i> change the $_attributes var.
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt; $elm =&amp; $this-&gt;form-&gt;getElement( 'timeInHrs' );
+</I>&gt;<i> &gt; $elm-&gt;_attributes['disabled'] = 'disabled';
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt; -db
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt; On 7/4/06, <A HREF="https://lists.berlios.de/mailman/listinfo/ydframework-users">moses at softwaysolutions.com</A> &lt;<A HREF="https://lists.berlios.de/mailman/listinfo/ydframework-users">moses at softwaysolutions.com</A> &gt;
+</I>&gt;<i> wrote:
+</I>&gt;<i> &gt; Hello Sir
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt;    How to set Properties for a element  after it has  been created
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt;     I add an text element to a form like this
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt;           $this-&gt;form-&gt;addElement('text','timeInHrs','Time In','');
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt;     After completing the processing I should disable the text
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt;     So in actionComplete
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt;     Can I use the following coding
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt;           $this-&gt;form-&gt;addElement('text','timeInHrs','Time
+</I>&gt;<i> &gt; In',array(&quot;disabled&quot;=&gt;&quot;disabled&quot;));
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt;     If so I have an doubt
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt;      In the same page if it possible to add two elements is it
+</I>&gt;<i> &gt; correct!!!!!
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt;     Is there any other way.
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt; regards
+</I>&gt;<i> &gt; moses
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt; _______________________________________________
+</I>&gt;<i> &gt; YDFramework-users mailing list
+</I>&gt;<i> &gt;  <A HREF="https://lists.berlios.de/mailman/listinfo/ydframework-users">YDFramework-users at lists.berlios.de</A>
+</I>&gt;<i> &gt; <A HREF="http://lists.berlios.de/mailman/listinfo/ydframework-users">http://lists.berlios.de/mailman/listinfo/ydframework-users</A>
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt;
+</I>&gt;<i>
+</I>&gt;<i> _______________________________________________
+</I>&gt;<i> YDFramework-users mailing list
+</I>&gt;<i> <A HREF="https://lists.berlios.de/mailman/listinfo/ydframework-users">YDFramework-users at lists.berlios.de</A>
+</I>&gt;<i> <A HREF="http://lists.berlios.de/mailman/listinfo/ydframework-users">http://lists.berlios.de/mailman/listinfo/ydframework-users</A>
+</I>&gt;<i>
+</I>-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: &lt;<A HREF="https://lists.berlios.de/pipermail/ydframework-users/attachments/20060704/8e035c32/attachment.html">https://lists.berlios.de/pipermail/ydframework-users/attachments/20060704/8e035c32/attachment.html</A>&gt;
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000274.html">[ydf-users] How to Remove an attribute  from  an element after it has been created
+</A></li>
+	<LI>Next message: <A HREF="000276.html">[ydf-users] How to Remove an attribute  from  an element after it has been created
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#275">[ date ]</a>
+              <a href="thread.html#275">[ thread ]</a>
+              <a href="subject.html#275">[ subject ]</a>
+              <a href="author.html#275">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/ydframework-users">More information about the YDFramework-users
+mailing list</a><br>
+</body></html>

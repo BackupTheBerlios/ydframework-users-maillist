@@ -1,0 +1,299 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [ydf-users] Suggested YDFramework Commenting and Code Structure
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/ydframework-users/2006-December/index.html" >
+   <LINK REL="made" HREF="mailto:ydframework-users%40lists.berlios.de?Subject=Re%3A%20%5Bydf-users%5D%20Suggested%20YDFramework%20Commenting%20and%20Code%20Structure&In-Reply-To=%3C93778d790612282118l140c39deh4785cc2d3c1e61c%40mail.gmail.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000444.html">
+   <LINK REL="Next"  HREF="000446.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[ydf-users] Suggested YDFramework Commenting and Code Structure</H1>
+    <B>aga toytoy</B> 
+    <A HREF="mailto:ydframework-users%40lists.berlios.de?Subject=Re%3A%20%5Bydf-users%5D%20Suggested%20YDFramework%20Commenting%20and%20Code%20Structure&In-Reply-To=%3C93778d790612282118l140c39deh4785cc2d3c1e61c%40mail.gmail.com%3E"
+       TITLE="[ydf-users] Suggested YDFramework Commenting and Code Structure">paultoytoy at gmail.com
+       </A><BR>
+    <I>Fri Dec 29 06:18:48 CET 2006</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000444.html">[ydf-users] smarty plugin
+</A></li>
+        <LI>Next message: <A HREF="000446.html">[ydf-users] Suggested YDFramework Commenting and Code Structure -	font to be used
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#445">[ date ]</a>
+              <a href="thread.html#445">[ thread ]</a>
+              <a href="subject.html#445">[ subject ]</a>
+              <a href="author.html#445">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Hi guyz,
+
+Though I may not be good with it, but I really think we have a proper
+structure or ethics of our scripts. How the way we code, how we can
+properly structure it. The thing here is that, I notice from
+YDFramework website, there's nothing more about this. I guess its a
+nice thing if we people have mind structure, I guess it would be great
+also to have our code have structure and character.
+
+Kindly correct me, suggest anything that would be really good and
+perfect for our needs using this YDFramework. I hope it helps and I
+hope it would be formalized and started.
+
+
+
+- indention must always be set to four (4) spaces
+ ex. php code
+switch (condition) {
+	case 1: {
+        	action1;
+        	break;
+    	}
+    	case 2: {
+        	action2;
+        	break;
+    	}
+    	default: {
+        	defaultaction;
+        	break;
+    	}
+}
+
+ex. template code
+&lt;table&gt;
+	{if $required}
+		{foreach from=$fields-&gt;set item=&quot;loop&quot;}
+			&lt;tr&gt;
+				... anything...                                 	
+			&lt;/tr&gt;
+		{/foreach}
+	{/if}
+&lt;/table&gt;
+
+- every methods of a class must have a two (2) lines of indention,
+above and below
+- YDInclude('YDF2_process.php'); must be after the line of the closing
+brace of the class
+
+class A
+{
+
+
+     method 1(){
+
+     }
+
+
+     // Short comment
+     method 2(){
+
+     }
+
+
+}
+YDInclude('YDF2_process.php');
+
+- if an if statement contains only one (1) statement, always separate
+them with a new line
+  		ex.
+		    if( $a_obj )
+		        $res = $obj_resetpass-&gt;sendMail( $a_obj );
+		    else
+		        $linkid = '';
+- variable declaration must always be easy for perusal
+		ex.		
+			$qlid 			= 	$this-&gt;_get( &quot;qlid&quot; );		
+			$linkid 			= 	isset( $_GET['linkid'] ) ? trim( $_GET['linkid'] ) : '';
+			$this-&gt;blocks		=	new blocks( array('login'),array() );
+			
+			
+			$fields			= 	array(
+							       &quot;realname&quot; 	=&gt; 	$u_realname,
+							       &quot;mail&quot; 		=&gt; 	$u_email,
+							       &quot;username&quot; 	=&gt; 	$u_username,
+							       &quot;password&quot; 	=&gt; 	$u_password2,
+							       &quot;phone&quot;		=&gt;	$u_phone			
+			) + $fields;
+	Note: Always indent one (1) space when using a non-empty methods or
+functions or statements that might use a parenthesis. ex. $this-&gt;_get(
+&quot;qlid&quot; );
+	Note: declaring an associative array, after the opening parenthesis,
+a key of must not be parallel with the &quot;array(&quot; word, but must be one
+space after should be paralleled.
+	      ex. (bad)	
+			$fields			= 	array(
+							     &quot;realname&quot; 	=&gt; 	$u_realname,
+							     &quot;mail&quot; 		=&gt; 	$u_email,
+							     &quot;username&quot; 	=&gt; 	$u_username,
+							     &quot;password&quot; 	=&gt; 	$u_password2,
+							     &quot;phone&quot;		=&gt;	$u_phone			
+			) + $fields;
+			
+		ex. (good)
+			$fields			= 	array(
+							       &quot;realname&quot; 	=&gt; 	$u_realname,
+							       &quot;mail&quot; 		=&gt; 	$u_email,
+							       &quot;username&quot; 	=&gt; 	$u_username,
+							       &quot;password&quot; 	=&gt; 	$u_password2,
+							       &quot;phone&quot;		=&gt;	$u_phone			
+			) + $fields;
+- declaring variables, calling a non-returning variable methods or
+functions or executing an anonymous
+  functions, since they are having different processes, always use
+carriage return as its indention.
+		  ex.
+		  	
+		$password	=	$fields['password'];
+		$email 		= 	$this-&gt;db-&gt;escape( $fields['mail'] );
+		
+		$this-&gt;_getAllValues();
+		
+		if( $small &gt; $big ){
+			$p	= &quot;pass&quot;;
+			
+			$processPee();
+		}else{
+			$p	= &quot;stop&quot;;
+			
+			$processPee();			
+		}
+- using brackets within a function, open bracket must be after the
+close parenthesis or use the UNIX convention
+	ex.
+		function sendEmail($fields){
+		(not)
+		function sendEmail($fields)
+		{
+- coding under the realms of if statement, after making a condition,
+it must have no carriage return available as its indention. This is
+because, if an if condition consists of only one (1) statement, so
+	ex.
+		(good)
+		if( $big &lt; $small ){
+		   // No carriage return available above
+		   // Here's what I'm going to do
+		
+		
+		   //Ending my code
+		   // No carriage return available below
+		}
+		
+		(wrong)
+		if( $big &lt; $small ){
+		
+		   // Here's what I'm going to do
+		
+		   // Ending my code
+
+- allowed style of comments are only C++ (/* */) and C's (//) are only
+acceptable.
+  Using perl/shell style comments (#)  are prohibited
+
+- For files/scripts that have been changed since the script was fork,
+the following header should be used:
+/**
+ *
+ * brief description.
+ * long description.  more long description.
+ *
+ * Portions Copyright 1999-2001 (c) VA Linux Systems
+ * The rest Copyright 2002 (c) their respective authors
+ *
+ * @version   $Id: coding_standards.html,v 1.3 2001/05/17 17:19:37
+authors_initalis Exp $
+ *
+ */
+
+
+- for function/method/property comments,  this must be followed
+/**
+ * brief description.
+ * long description.  more long description.
+ *
+ * @author    firstname lastname email
+ * @param     variable  description
+ * @return    value     description
+ * @date      YYYY-MM-DD
+ * @deprecated
+ * @see
+ *
+ */
+
+
+- Expressions
+
+    * Use parentheses liberally to resolve ambiguity.
+    * Using parentheses can force an order of evaluation. This saves
+the time a reader may spend remembering precedence of operators.
+    * Don't sacrifice clarity for cleverness.
+    * Write conditional expressions so that they read naturally aloud.
+    * Sometimes eliminating a not operator (!) will make an expression
+more understandable.
+    * Keep each line simple.
+    * The ternary operator (x ? 1 : 2) usually indicates too much code
+on one line. if... else if... else is usually more readable.
+
+- Functions
+
+Function Calls
+
+Functions shall be called with 1 space between the function name, the
+opening parenthesis, and the first parameter; spaces between commas
+and each parameter, and 1 space between the last parameter, the
+closing parenthesis, and the semicolon. Here's an example:
+
+$var = foo( $bar, $baz, $quux );
+
+Arguments with default values go at the end of the argument list and
+must have 1 space before and after the equal (=) sign. Always attempt
+to return a meaningful value from a function if one is appropriate.
+Here is a slightly longer example:
+
+function connect( &amp;$dsn, $persistent = false ) {
+
+    if ( is_array( $dsn ) ) {
+        $dsninfo = &amp;$dsn;
+    } else {
+        YDDebugUtil::dump($dsn);
+    }
+
+    return true;
+
+}
+
+
+- Scripts/Files Structure = Any suggestion?
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: &lt;<A HREF="https://lists.berlios.de/pipermail/ydframework-users/attachments/20061229/36c3c21e/attachment.html">https://lists.berlios.de/pipermail/ydframework-users/attachments/20061229/36c3c21e/attachment.html</A>&gt;
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000444.html">[ydf-users] smarty plugin
+</A></li>
+	<LI>Next message: <A HREF="000446.html">[ydf-users] Suggested YDFramework Commenting and Code Structure -	font to be used
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#445">[ date ]</a>
+              <a href="thread.html#445">[ thread ]</a>
+              <a href="subject.html#445">[ subject ]</a>
+              <a href="author.html#445">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/ydframework-users">More information about the YDFramework-users
+mailing list</a><br>
+</body></html>

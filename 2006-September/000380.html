@@ -1,0 +1,105 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [ydf-users] YDDatabaseTree.php / database_tree.php example
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/ydframework-users/2006-September/index.html" >
+   <LINK REL="made" HREF="mailto:ydframework-users%40lists.berlios.de?Subject=Re%3A%20%5Bydf-users%5D%20YDDatabaseTree.php%20/%20database_tree.php%20example&In-Reply-To=%3C20060914161147.40096.qmail%40web54003.mail.yahoo.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000376.html">
+   <LINK REL="Next"  HREF="000382.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[ydf-users] YDDatabaseTree.php / database_tree.php example</H1>
+    <B>maximus meridius</B> 
+    <A HREF="mailto:ydframework-users%40lists.berlios.de?Subject=Re%3A%20%5Bydf-users%5D%20YDDatabaseTree.php%20/%20database_tree.php%20example&In-Reply-To=%3C20060914161147.40096.qmail%40web54003.mail.yahoo.com%3E"
+       TITLE="[ydf-users] YDDatabaseTree.php / database_tree.php example">maximus_meridius79 at yahoo.com
+       </A><BR>
+    <I>Thu Sep 14 18:11:47 CEST 2006</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000376.html">[ydf-users] YDDatabaseTree.php / database_tree.php example
+</A></li>
+        <LI>Next message: <A HREF="000382.html">[ydf-users] YDDatabaseTree.php / database_tree.php example
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#380">[ date ]</a>
+              <a href="thread.html#380">[ thread ]</a>
+              <a href="subject.html#380">[ subject ]</a>
+              <a href="author.html#380">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>  Hi Pieter &amp; Francisco,
+
+I guessed that the position field was for ordering children and can seethe benefits of doing so. A 'setChildPosition' method would be a niceway to move a child element to a specific position. You could also havemoveChildToFirst( $id ), moveChildToLast ( $id ), moveChildLeft( $id,$n ) and moveChildRight( $id, $n ). The last two would move the child Npositions (within the current parent).
+
+I am working on a modification to YDDatabaseTree that enables a filterto be set. The aim of the filter is to enable multiple trees (e.g. onetree per user) to reside in a single database table and for rebuild ofone tree not to affect another tree in the same table.
+
+This filter has the effect of adding criteria into all of the selectclauses and correspondingly to the insert / update clauses.
+
+Usage currently looks like this:
+
+            $this-&gt;_tree = new YDDatabaseTree2( $this-&gt;_db,'tree', 'id', 'parent_id', 'title' );
+
+            // add a custom field
+            $this-&gt;_tree-&gt;addFields( array( 'userid' ) );
+            
+            // add a default value for the custom field
+            $this-&gt;_tree-&gt;setAddDefaults( array( 'userid' =&gt;$userid ) );
+            
+            // set the filter used for all tree operations
+            $this-&gt;_tree-&gt;setFilter( 'userid = ' . $userid );
+
+For a cleaner implementation I think I could combine setFilter andsetAddDefaults into one method. If the argument is an array of defaults/ criterias, then multiple columns could be used for filtering. If moreadvanced criteria operation is needed other than &quot;=&quot; then I think amethod that takes a callback function as an argument is a possiblesolution. 
+
+I'll see how this implementation goes in my application. As this changeis in the early stages I would appreciate suggestions for the filtermethods to provide.
+
+Regards,
+
+Graeme
+
+
+Francisco Azevedo wrote:  
+Hi Pieter  
+      
+I don't want to make it optional as I will add full support for positions in a later stage. If we do so, we need to have a position field. I fixed the example in build 2135.    
+    
+Sounds a good idea.regardsFrancisco A_______________________________________________YDFramework-users mailing <A HREF="https://lists.berlios.de/mailman/listinfo/ydframework-users">listYDFramework-users at lists.berlios.dehttps</A>://lists.berlios.de/mailman/listinfo/ydframework-users  
+
+
+ 		
+---------------------------------
+Do you Yahoo!?
+ Everyone is raving about the  all-new Yahoo! Mail.
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: &lt;<A HREF="https://lists.berlios.de/pipermail/ydframework-users/attachments/20060914/e0ee771b/attachment.html">https://lists.berlios.de/pipermail/ydframework-users/attachments/20060914/e0ee771b/attachment.html</A>&gt;
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000376.html">[ydf-users] YDDatabaseTree.php / database_tree.php example
+</A></li>
+	<LI>Next message: <A HREF="000382.html">[ydf-users] YDDatabaseTree.php / database_tree.php example
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#380">[ date ]</a>
+              <a href="thread.html#380">[ thread ]</a>
+              <a href="subject.html#380">[ subject ]</a>
+              <a href="author.html#380">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/ydframework-users">More information about the YDFramework-users
+mailing list</a><br>
+</body></html>

@@ -1,0 +1,158 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [ydf-users] Query Regarding Default Values in form
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/ydframework-users/2006-April/index.html" >
+   <LINK REL="made" HREF="mailto:ydframework-users%40lists.berlios.de?Subject=Re%3A%20%5Bydf-users%5D%20Query%20Regarding%20Default%20Values%20in%20form&In-Reply-To=%3C12260be20604201507g28136becl8bd977478d65b4e9%40mail.gmail.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000210.html">
+   <LINK REL="Next"  HREF="000214.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[ydf-users] Query Regarding Default Values in form</H1>
+    <B>David Bittencourt</B> 
+    <A HREF="mailto:ydframework-users%40lists.berlios.de?Subject=Re%3A%20%5Bydf-users%5D%20Query%20Regarding%20Default%20Values%20in%20form&In-Reply-To=%3C12260be20604201507g28136becl8bd977478d65b4e9%40mail.gmail.com%3E"
+       TITLE="[ydf-users] Query Regarding Default Values in form">muitocomplicado at gmail.com
+       </A><BR>
+    <I>Fri Apr 21 00:07:19 CEST 2006</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000210.html">[ydf-users] Query Regarding Default Values in form
+</A></li>
+        <LI>Next message: <A HREF="000214.html">[ydf-users] Query Regarding Default Values in form
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#212">[ date ]</a>
+              <a href="thread.html#212">[ thread ]</a>
+              <a href="subject.html#212">[ subject ]</a>
+              <a href="author.html#212">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>setRawDefaults was an idea of setting and getting a form element value in a
+different way, but is actually not being used.
+
+An example: suppose there is a form element called 'comma'.
+
+class comma extends YDFormElement {
+
+  ...
+
+ function setRawValue( $value='' ) {
+   $arr = explode( ',', $value );
+   $this-&gt;setValue( $arr );
+ }
+
+ function setValue( $value=array() ) {
+   $this-&gt;_value = $value;
+ }
+
+ function getRawValue() {
+   return implode( ',', $this-&gt;getValue() );
+ }
+
+}
+
+The idea is to receive a value directly from a database, for example, that
+is a comma separatted string an use setRawValue to transform it into an
+array to be used in the class. The good thing is getting it back as a raw
+value using getRawValue so you don't have to transform it into an array in
+your code.
+
+This is the main usage. Another example, if you get the value from a date
+element you receive an array with the value for year, month, day, etc. But
+we could create a getRawValue function that would directly transform it to a
+DATETIME sql type YYYYMMDDHHMMSS, for example.
+
+It's a nice idea, but I think complicates the form usage and is not being
+used by the framework or by myself. Maybe we could think of taking it out.
+
+-db
+
+On 4/20/06, Pieter Claerhout &lt;<A HREF="https://lists.berlios.de/mailman/listinfo/ydframework-users">pieter at yellowduck.be</A>&gt; wrote:
+&gt;<i>
+</I>&gt;<i> Hi Moses,
+</I>&gt;<i>
+</I>&gt;<i> the difference is not that difficult:
+</I>&gt;<i>
+</I>&gt;<i> 1. setDefault: sets the value of a specific element
+</I>&gt;<i>
+</I>&gt;<i> 2. setDefaults: sets the value of multiple elements in one go using an
+</I>&gt;<i> associative array
+</I>&gt;<i>
+</I>&gt;<i> 3. setRawDefaults: I'm not really sure what the meaning of this one is.
+</I>&gt;<i> Maybe Francisco or db can enlighten you on this one.
+</I>&gt;<i>
+</I>&gt;<i> regards,
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i> pieter
+</I>&gt;<i>
+</I>&gt;<i> On 4/14/06, <A HREF="https://lists.berlios.de/mailman/listinfo/ydframework-users">moses at softwaysolutions.com</A> &lt;<A HREF="https://lists.berlios.de/mailman/listinfo/ydframework-users">moses at softwaysolutions.com</A> &gt;
+</I>&gt;<i> wrote:
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt; Dear Sir
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt;            What is the difference between
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt;                         1)function setRawDefaults()
+</I>&gt;<i> &gt;                         2)function setDefault()
+</I>&gt;<i> &gt;                         3)function setDefaults()
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt;          By the following coding
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt;                        $this-&gt;form-&gt;setDefaults(array(&quot;txtName&quot;=&gt;&quot;Moses&quot;));
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt;          I assign a default value to the element in the form but I am
+</I>&gt;<i> &gt; very confused at some time the value is displayed some time the value is not
+</I>&gt;<i> &gt; displayed I could not find the solution. How should I  assign default value
+</I>&gt;<i> &gt; to the elements in the form that shoul work every time
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt; regards
+</I>&gt;<i> &gt; moses
+</I>&gt;<i> &gt; _______________________________________________ YDFramework-users
+</I>&gt;<i> &gt; mailing list <A HREF="https://lists.berlios.de/mailman/listinfo/ydframework-users">YDFramework-users at lists.berlios.de</A>
+</I>&gt;<i> &gt; <A HREF="http://lists.berlios.de/mailman/listinfo/ydframework-users">http://lists.berlios.de/mailman/listinfo/ydframework-users</A>
+</I>&gt;<i> &gt;
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i> --
+</I>&gt;<i> pieter claerhout . <A HREF="https://lists.berlios.de/mailman/listinfo/ydframework-users">pieter at yellowduck.be</A> . <A HREF="http://www.yellowduck.be/">http://www.yellowduck.be/</A>
+</I>&gt;<i>
+</I>-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: &lt;<A HREF="https://lists.berlios.de/pipermail/ydframework-users/attachments/20060420/b96b977c/attachment.html">https://lists.berlios.de/pipermail/ydframework-users/attachments/20060420/b96b977c/attachment.html</A>&gt;
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000210.html">[ydf-users] Query Regarding Default Values in form
+</A></li>
+	<LI>Next message: <A HREF="000214.html">[ydf-users] Query Regarding Default Values in form
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#212">[ date ]</a>
+              <a href="thread.html#212">[ thread ]</a>
+              <a href="subject.html#212">[ subject ]</a>
+              <a href="author.html#212">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/ydframework-users">More information about the YDFramework-users
+mailing list</a><br>
+</body></html>

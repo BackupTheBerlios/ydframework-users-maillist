@@ -1,0 +1,115 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [ydf-users] Query regarding adding an attribute to a label
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/ydframework-users/2006-July/index.html" >
+   <LINK REL="made" HREF="mailto:ydframework-users%40lists.berlios.de?Subject=Re%3A%20%5Bydf-users%5D%20Query%20regarding%20adding%20an%20attribute%20to%20a%20label&In-Reply-To=%3C20060708033024.fe477b357a56c857c15a39baa2ae95d5.e77d57da03.wbe%40email.secureserver.net%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000279.html">
+   <LINK REL="Next"  HREF="000280.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[ydf-users] Query regarding adding an attribute to a label</H1>
+    <B>moses at softwaysolutions.com</B> 
+    <A HREF="mailto:ydframework-users%40lists.berlios.de?Subject=Re%3A%20%5Bydf-users%5D%20Query%20regarding%20adding%20an%20attribute%20to%20a%20label&In-Reply-To=%3C20060708033024.fe477b357a56c857c15a39baa2ae95d5.e77d57da03.wbe%40email.secureserver.net%3E"
+       TITLE="[ydf-users] Query regarding adding an attribute to a label">moses at softwaysolutions.com
+       </A><BR>
+    <I>Sat Jul  8 12:30:24 CEST 2006</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000279.html">[ydf-users] To get the name of the elements  that does not  satisify  the  Rule
+</A></li>
+        <LI>Next message: <A HREF="000280.html">[ydf-users] hindering the post value to be selected on a select after   submit
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#282">[ date ]</a>
+              <a href="thread.html#282">[ thread ]</a>
+              <a href="subject.html#282">[ subject ]</a>
+              <a href="author.html#282">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Hello Sir
+
+     How to add an attribute to a label tag.
+
+     In my form I have added an element with label
+
+     $this-&gt;form-&gt;addElement('text','firstName','First
+Name',array(&quot;class&quot;=&gt;&quot;textbox&quot;));
+     $this-&gt;form-&gt;addRule('firstName','required','First Name is
+required');
+
+     The html output is
+   
+     &lt;label for=&quot;form_firstName&quot;&gt;First Name&lt;/label&gt; &lt;input
+class=&quot;textbox&quot; type=&quot;text&quot; name=&quot;form_firstName&quot; value=&quot;&quot;&gt;       
+
+     Now I am submiting the form without entering the First Name So it
+displays the error  First Name is required
+
+     At this time what I need is 
+
+     I want to add an attributte class = &quot;error&quot; in the label element ie
+  &lt;label for=&quot;form_firstName&quot; class = &quot;error&quot;&gt;First Name&lt;/label&gt;
+
+     I tried with the folowing coding
+
+     if ( sizeof( $this-&gt;form-&gt;_errors ) &gt; 0 ) 
+     {
+        while(list($element)=each($this-&gt;form-&gt;_errors))
+        {
+	  $this-&gt;elmErr =&amp; $this-&gt;form-&gt;getElement(&quot;$element&quot;);
+          $this-&gt;elmErr-&gt;_label = '&lt;label class = &quot;error&quot;
+for=&quot;'.$this-&gt;form-&gt;_name.'_'.$element.'&quot;&gt;'.$label.'&lt;/label&gt;';
+        }
+     }
+
+
+    Here the out put becomes
+
+    &lt;label for=&quot;form_firstName&quot;&gt;&lt;label for=&quot;form_firstName&quot; class =
+&quot;error&quot;&gt;First Name&lt;/label&gt;&lt;/label&gt;  
+
+
+    ie Two label element is being displayed
+
+    How to avoid this or How to solve the problem
+
+    Please Help
+
+
+regards
+moses   
+
+
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000279.html">[ydf-users] To get the name of the elements  that does not  satisify  the  Rule
+</A></li>
+	<LI>Next message: <A HREF="000280.html">[ydf-users] hindering the post value to be selected on a select after   submit
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#282">[ date ]</a>
+              <a href="thread.html#282">[ thread ]</a>
+              <a href="subject.html#282">[ subject ]</a>
+              <a href="author.html#282">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/ydframework-users">More information about the YDFramework-users
+mailing list</a><br>
+</body></html>

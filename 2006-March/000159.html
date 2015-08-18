@@ -1,0 +1,446 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [ydf-users] Re: [Feature #2020] line breaks in SQL debug code
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/ydframework-users/2006-March/index.html" >
+   <LINK REL="made" HREF="mailto:ydframework-users%40lists.berlios.de?Subject=Re%3A%20%5Bydf-users%5D%20Re%3A%20%5BFeature%20%232020%5D%20line%20breaks%20in%20SQL%20debug%20code&In-Reply-To=%3C4aef63030603240047t340afc87v402d0a8f77f7fe58%40mail.gmail.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000153.html">
+   <LINK REL="Next"  HREF="000162.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[ydf-users] Re: [Feature #2020] line breaks in SQL debug code</H1>
+    <B>Pieter Claerhout</B> 
+    <A HREF="mailto:ydframework-users%40lists.berlios.de?Subject=Re%3A%20%5Bydf-users%5D%20Re%3A%20%5BFeature%20%232020%5D%20line%20breaks%20in%20SQL%20debug%20code&In-Reply-To=%3C4aef63030603240047t340afc87v402d0a8f77f7fe58%40mail.gmail.com%3E"
+       TITLE="[ydf-users] Re: [Feature #2020] line breaks in SQL debug code">pieter at yellowduck.be
+       </A><BR>
+    <I>Fri Mar 24 09:47:09 CET 2006</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000153.html">[ydf-users] Re: [Feature #2020] line breaks in SQL debug code
+</A></li>
+        <LI>Next message: <A HREF="000162.html">[ydf-users] Re: [Feature #2020] line breaks in SQL debug code
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#159">[ date ]</a>
+              <a href="thread.html#159">[ thread ]</a>
+              <a href="subject.html#159">[ subject ]</a>
+              <a href="author.html#159">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Can you confirm that:
+
+YDF2_process.php lines 177-186 are:
+
+                // Add the queries if any
+                if ( sizeof( $GLOBALS['YD_SQL_QUERY'] ) &gt; 0 ) {
+                    $debug .= 'EXECUTED SQL QUERIES (' . sizeof(
+$GLOBALS['YD_SQL_QUERY'] ) . ' queries)' . YD_CRLF . YD_CRLF;
+                    foreach ( $GLOBALS['YD_SQL_QUERY'] as $key=&gt;$query ) {
+                        foreach ( explode( YD_CRLF, trim( $query ) ) as
+$line ) {
+                            $debug .= &quot;\t&quot; . ( $key+1 ) . ':' . &quot;\t&quot; . trim(
+$line ) . YD_CRLF;
+                        }
+                        $debug .= YD_CRLF;
+                    }
+                }
+
+YDDatabase.php lines 1180 - 1210 are:
+
+
+        function _logSql( $sql ) {
+
+            // Split the SQL in different lines
+            $sql = str_ireplace( 'SELECT', 'SELECT', $sql );
+            $sql = str_ireplace( 'UPDATE', 'UPDATE', $sql );
+            $sql = str_ireplace( 'DELETE', 'DELETE', $sql );
+            $sql = str_ireplace( 'INSERT', 'INSERT', $sql );
+            $sql = str_ireplace( 'FROM', YD_CRLF . 'FROM', $sql );
+            $sql = str_ireplace( 'INTO', YD_CRLF . 'INTO', $sql );
+            $sql = str_ireplace( 'VALUES', YD_CRLF . 'VALUES', $sql );
+            $sql = str_ireplace( 'LEFT JOIN', YD_CRLF . 'LEFT JOIN', $sql );
+            $sql = str_ireplace( 'RIGHT JOIN', YD_CRLF . 'RIGHT JOIN', $sql
+);
+            $sql = str_ireplace( 'INNER JOIN', YD_CRLF . 'INNER JOIN', $sql
+);
+            $sql = str_ireplace( 'WHERE', YD_CRLF . 'WHERE', $sql );
+            $sql = str_ireplace( 'ORDER BY', YD_CRLF . 'ORDER BY', $sql );
+            $sql = str_ireplace( 'GROUP BY', YD_CRLF . 'GROUP BY', $sql );
+            $sql = str_ireplace( 'LIMIT', YD_CRLF . 'LIMIT', $sql );
+
+            // Get the backtrace
+            $trace = debug_backtrace();
+
+            // Format the SQL
+            $sql_final = '';
+            foreach ( explode( YD_CRLF, $sql ) as $line ) {
+                $sql_final .= '[' . $trace[2]['file'] . ':' .
+$trace[2]['line'] . '] ' . $line . YD_CRLF;
+            }
+
+            // Add it to the query log
+            array_push( $GLOBALS['YD_SQL_QUERY'], $sql_final );
+
+        }
+And that YDF2_core.php lines 416-429 read:
+
+
+    // Add if not exists yet
+    if (!function_exists('str_ireplace')) {
+
+        /**
+         *  Function to do a case insensitve str_replace
+         *
+         *  @param  $search     The string to search for.
+         *  @param  $replace    The replacement string.
+         *  @param  $subject    The string to replace in
+         *  @param  $count      (optional) The maximum number of
+replacements. Default us all.
+         *
+         *  @returns    The updated string.
+         */
+        function str_ireplace( $search, $replace, $subject, $count = null )
+{
+
+If not, you have the wrong source files. If yes, then it should work fine. I
+tested it myself and it works fine on PHP4 and 5.
+
+cheers,
+
+pieter
+On 3/23/06, dab &lt;<A HREF="https://lists.berlios.de/mailman/listinfo/ydframework-users">dab214 at yahoo.com</A>&gt; wrote:
+&gt;<i>
+</I>&gt;<i> hi pieter,
+</I>&gt;<i> first i did an SVN Update on the YMDFramework2 folder,
+</I>&gt;<i> then i did it on YDDatabase.php and YDProcess.php
+</I>&gt;<i> specifically and still the same output.
+</I>&gt;<i>
+</I>&gt;<i> i had some problems with ajax too (the examples are
+</I>&gt;<i> giving me an error). i even downloaded the whole
+</I>&gt;<i> repository again (clean) and still had the same
+</I>&gt;<i> problem. maybe it's releted, maybe not.
+</I>&gt;<i> anyways, thanks again for taking your time to help me
+</I>&gt;<i> with this.
+</I>&gt;<i>
+</I>&gt;<i> /dan
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i> --- Pieter Claerhout &lt;<A HREF="https://lists.berlios.de/mailman/listinfo/ydframework-users">pieter at yellowduck.be</A>&gt; wrote:
+</I>&gt;<i>
+</I>&gt;<i> &gt; Can you doublecheck you are using the latest version
+</I>&gt;<i> &gt; of YDDatabase.php and
+</I>&gt;<i> &gt; YDProcess.php?
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt; pieter
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt; On 3/23/06, dab &lt;<A HREF="https://lists.berlios.de/mailman/listinfo/ydframework-users">dab214 at yahoo.com</A>&gt; wrote:
+</I>&gt;<i> &gt; &gt;
+</I>&gt;<i> &gt; &gt; hi pieter,
+</I>&gt;<i> &gt; &gt; here's the html output after the &lt;/html&gt; tag:
+</I>&gt;<i> &gt; &gt;
+</I>&gt;<i> &gt; &gt; &lt;!-- [ YD_DEBUG ]
+</I>&gt;<i> &gt; &gt;
+</I>&gt;<i> &gt; &gt; PROCESSING TIME:
+</I>&gt;<i> &gt; &gt;
+</I>&gt;<i> &gt; &gt;        Elapsed   Diff    Marker
+</I>&gt;<i> &gt; &gt;        0 ms      0 ms    ** Start
+</I>&gt;<i> &gt; &gt;        107 ms    107 ms          ** Finish
+</I>&gt;<i> &gt; &gt;
+</I>&gt;<i> &gt; &gt; INCLUDED FILES (39 files - 678.3 KB)
+</I>&gt;<i> &gt; &gt;
+</I>&gt;<i> &gt; &gt;        92.8 KB
+</I>&gt;<i> &gt; &gt;
+</I>&gt;<i> &gt; &gt;
+</I>&gt;<i> &gt;
+</I>&gt;<i>
+</I>&gt;<i> /home/dubbs2/public_html/YDFramework2/addons/YDDatabaseObject/YDDatabaseObject.php
+</I>&gt;<i> &gt; &gt;        61.8 KB
+</I>&gt;<i> &gt; &gt;
+</I>&gt;<i> &gt; &gt;
+</I>&gt;<i> &gt;
+</I>&gt;<i>
+</I>&gt;<i> /home/dubbs2/public_html/YDFramework2/3rdparty/smarty/libs/Smarty.class.php
+</I>&gt;<i> &gt; &gt;        60.9 KB
+</I>&gt;<i> &gt; &gt;
+</I>&gt;<i> &gt;
+</I>&gt;<i> /home/dubbs2/public_html/YDFramework2/YDClasses/YDForm.php
+</I>&gt;<i> &gt; &gt;        52.6 KB
+</I>&gt;<i> &gt; &gt;
+</I>&gt;<i> &gt;
+</I>&gt;<i> /home/dubbs2/public_html/YDFramework2/YDClasses/YDDatabase.php
+</I>&gt;<i> &gt; &gt;        50.3 KB
+</I>&gt;<i> &gt; &gt;
+</I>&gt;<i> &gt;
+</I>&gt;<i> /home/dubbs2/public_html/YDFramework2/addons/YDAjax/YDAjax.php
+</I>&gt;<i> &gt; &gt;        38.4 KB
+</I>&gt;<i> &gt; &gt;
+</I>&gt;<i> &gt;
+</I>&gt;<i> /home/dubbs2/public_html/YDFramework2/YDClasses/YDUtil.php
+</I>&gt;<i> &gt; &gt;        37.6 KB
+</I>&gt;<i> &gt; &gt;
+</I>&gt;<i> &gt; &gt;
+</I>&gt;<i> &gt;
+</I>&gt;<i>
+</I>&gt;<i> /home/dubbs2/public_html/YDFramework2/addons/YDDatabaseQuery/YDDatabaseQuery.php
+</I>&gt;<i> &gt; &gt;        28.3 KB
+</I>&gt;<i> &gt; &gt;
+</I>&gt;<i> &gt;
+</I>&gt;<i> /home/dubbs2/public_html/YDFramework2/addons/YDAjax/xajax.inc.php
+</I>&gt;<i> &gt; &gt;        27.1 KB
+</I>&gt;<i> &gt; /home/dubbs2/public_html/admin/player.php
+</I>&gt;<i> &gt; &gt;        27.0 KB
+</I>&gt;<i> &gt; &gt;
+</I>&gt;<i> &gt;
+</I>&gt;<i> /home/dubbs2/public_html/YDFramework2/YDClasses/YDUrl.php
+</I>&gt;<i> &gt; &gt;        25.1 KB
+</I>&gt;<i> &gt; &gt;
+</I>&gt;<i> &gt;
+</I>&gt;<i> /home/dubbs2/public_html/YDFramework2/YDClasses/YDTemplate.php
+</I>&gt;<i> &gt; &gt;        24.5 KB
+</I>&gt;<i> &gt; /home/dubbs2/public_html/admin/Core.php
+</I>&gt;<i> &gt; &gt;        20.8 KB
+</I>&gt;<i> &gt; &gt; /home/dubbs2/public_html/admin/debuglib.phps
+</I>&gt;<i> &gt; &gt;        13.7 KB
+</I>&gt;<i> &gt; &gt;
+</I>&gt;<i> &gt; /home/dubbs2/public_html/YDFramework2/YDF2_core.php
+</I>&gt;<i> &gt; &gt;        13.7 KB
+</I>&gt;<i> &gt; &gt;
+</I>&gt;<i> &gt;
+</I>&gt;<i> /home/dubbs2/public_html/YDFramework2/YDClasses/YDRequest.php
+</I>&gt;<i> &gt; &gt;        13.0 KB
+</I>&gt;<i> &gt; &gt;
+</I>&gt;<i> &gt;
+</I>&gt;<i> /home/dubbs2/public_html/YDFramework2/addons/YDAjax/xajaxResponse.inc.php
+</I>&gt;<i> &gt; &gt;        11.7 KB
+</I>&gt;<i> &gt; &gt;
+</I>&gt;<i> &gt; &gt;
+</I>&gt;<i> &gt;
+</I>&gt;<i>
+</I>&gt;<i> /home/dubbs2/public_html/YDFramework2/3rdparty/smarty/libs/SmartyPaginate.class.php
+</I>&gt;<i> &gt; &gt;        8.1 KB
+</I>&gt;<i> &gt; &gt;
+</I>&gt;<i> &gt;
+</I>&gt;<i> /home/dubbs2/public_html/YDFramework2/YDF2_process.php
+</I>&gt;<i> &gt; &gt;        7.2 KB
+</I>&gt;<i> &gt; &gt;
+</I>&gt;<i> &gt; &gt;
+</I>&gt;<i> &gt;
+</I>&gt;<i>
+</I>&gt;<i> /home/dubbs2/public_html/YDFramework2/3rdparty/smarty/libs/SmartyColumnSort.class.php
+</I>&gt;<i> &gt; &gt;        6.2 KB
+</I>&gt;<i> &gt; &gt;
+</I>&gt;<i> &gt; /home/dubbs2/public_html/YDFramework2/YDF2_init.php
+</I>&gt;<i> &gt; &gt;        5.9 KB
+</I>&gt;<i> &gt; &gt;
+</I>&gt;<i> &gt; &gt;
+</I>&gt;<i> &gt;
+</I>&gt;<i>
+</I>&gt;<i> /home/dubbs2/public_html/YDFramework2/YDClasses/YDFormRenderers/YDFormRenderer_array.php
+</I>&gt;<i> &gt; &gt;        4.7 KB
+</I>&gt;<i> &gt; &gt;
+</I>&gt;<i> &gt; &gt;
+</I>&gt;<i> &gt;
+</I>&gt;<i>
+</I>&gt;<i> /home/dubbs2/public_html/YDFramework2/3rdparty/smarty/libs/plugins/function.paginate_middle.php
+</I>&gt;<i> &gt; &gt;        4.5 KB
+</I>&gt;<i> &gt; &gt;
+</I>&gt;<i> &gt; &gt;
+</I>&gt;<i> &gt;
+</I>&gt;<i>
+</I>&gt;<i> /home/dubbs2/public_html/YDFramework2/3rdparty/smarty/libs/plugins/function.columnsort.php
+</I>&gt;<i> &gt; &gt;        4.3 KB
+</I>&gt;<i> &gt; &gt;
+</I>&gt;<i> &gt; &gt;
+</I>&gt;<i> &gt;
+</I>&gt;<i>
+</I>&gt;<i> /home/dubbs2/public_html/YDFramework2/3rdparty/smarty/libs/internals/core.load_plugins.php
+</I>&gt;<i> &gt; &gt;        4.1 KB
+</I>&gt;<i> &gt; &gt;
+</I>&gt;<i> &gt; &gt;
+</I>&gt;<i> &gt;
+</I>&gt;<i>
+</I>&gt;<i> /home/dubbs2/public_html/YDFramework2/temp/4043510970^%%0E^0E4^0E407559%%footer.tpl.php
+</I>&gt;<i> &gt; &gt;        4.0 KB
+</I>&gt;<i> &gt; &gt;
+</I>&gt;<i> &gt; &gt;
+</I>&gt;<i> &gt;
+</I>&gt;<i>
+</I>&gt;<i> /home/dubbs2/public_html/YDFramework2/temp/4043510970^%%03^035^0355572F%%player_list.tpl.php
+</I>&gt;<i> &gt; &gt;        3.4 KB
+</I>&gt;<i> &gt; &gt;
+</I>&gt;<i> &gt; &gt;
+</I>&gt;<i> &gt;
+</I>&gt;<i>
+</I>&gt;<i> /home/dubbs2/public_html/YDFramework2/temp/4043510970^%%F7^F7F^F7F34188%%header.tpl.php
+</I>&gt;<i> &gt; &gt;        3.4 KB
+</I>&gt;<i> &gt; &gt;
+</I>&gt;<i> &gt; &gt;
+</I>&gt;<i> &gt;
+</I>&gt;<i>
+</I>&gt;<i> /home/dubbs2/public_html/YDFramework2/YDClasses/YDFormElements/YDFormElement_Submit.php
+</I>&gt;<i> &gt; &gt;        3.1 KB
+</I>&gt;<i> &gt; &gt;
+</I>&gt;<i> &gt; &gt;
+</I>&gt;<i> &gt;
+</I>&gt;<i>
+</I>&gt;<i> /home/dubbs2/public_html/YDFramework2/3rdparty/smarty/libs/plugins/function.cycle.php
+</I>&gt;<i> &gt; &gt;        2.7 KB
+</I>&gt;<i> &gt; &gt;
+</I>&gt;<i> &gt; &gt;
+</I>&gt;<i> &gt;
+</I>&gt;<i>
+</I>&gt;<i> /home/dubbs2/public_html/YDFramework2/3rdparty/smarty/libs/plugins/function.paginate_prev.php
+</I>&gt;<i> &gt; &gt;        2.7 KB
+</I>&gt;<i> &gt; &gt;
+</I>&gt;<i> &gt; &gt;
+</I>&gt;<i> &gt;
+</I>&gt;<i>
+</I>&gt;<i> /home/dubbs2/public_html/YDFramework2/3rdparty/smarty/libs/plugins/function.paginate_next.php
+</I>&gt;<i> &gt; &gt;        2.7 KB
+</I>&gt;<i> &gt; &gt;
+</I>&gt;<i> &gt; &gt;
+</I>&gt;<i> &gt;
+</I>&gt;<i>
+</I>&gt;<i> /home/dubbs2/public_html/YDFramework2/temp/4043510970^%%F1^F10^F10314BA%%player.tpl.php
+</I>&gt;<i> &gt; &gt;        2.7 KB
+</I>&gt;<i> &gt; &gt;
+</I>&gt;<i> &gt; &gt;
+</I>&gt;<i> &gt;
+</I>&gt;<i>
+</I>&gt;<i> /home/dubbs2/public_html/YDFramework2/YDClasses/YDFormElements/YDFormElement_Password.php
+</I>&gt;<i> &gt; &gt;        2.6 KB
+</I>&gt;<i> &gt; &gt;
+</I>&gt;<i> &gt; &gt;
+</I>&gt;<i> &gt;
+</I>&gt;<i>
+</I>&gt;<i> /home/dubbs2/public_html/YDFramework2/YDClasses/YDFormElements/YDFormElement_Text.php
+</I>&gt;<i> &gt; &gt;        2.1 KB
+</I>&gt;<i> &gt; &gt;
+</I>&gt;<i> &gt; &gt;
+</I>&gt;<i> &gt;
+</I>&gt;<i>
+</I>&gt;<i> /home/dubbs2/public_html/YDFramework2/temp/4043510970^%%A8^A85^A856C5B5%%player_header.tpl.php
+</I>&gt;<i> &gt; &gt;        1.9 KB
+</I>&gt;<i> &gt; &gt;
+</I>&gt;<i> &gt; &gt;
+</I>&gt;<i> &gt;
+</I>&gt;<i>
+</I>&gt;<i> /home/dubbs2/public_html/YDFramework2/3rdparty/smarty/libs/internals/core.assemble_plugin_filepath.php
+</I>&gt;<i> &gt; &gt;        1.1 KB
+</I>&gt;<i> &gt; &gt; /home/dubbs2/public_html/database/players.php
+</I>&gt;<i> &gt; &gt;        1.1 KB
+</I>&gt;<i> &gt; /home/dubbs2/public_html/database/users.php
+</I>&gt;<i> &gt; &gt;        601 bytes
+</I>&gt;<i> &gt; /home/dubbs2/public_html/admin/config.php
+</I>&gt;<i> &gt; &gt;
+</I>&gt;<i> &gt; &gt; INCLUDES SEARCH PATH (22 directories)
+</I>&gt;<i> &gt; &gt;
+</I>&gt;<i> &gt; &gt;        /home/dubbs2/public_html/admin
+</I>&gt;<i> &gt; &gt;
+</I>&gt;<i> &gt; /home/dubbs2/public_html/YDFramework2/YDClasses
+</I>&gt;<i> &gt; &gt;        /home/dubbs2/public_html/YDFramework2
+</I>&gt;<i> &gt; &gt;
+</I>&gt;<i> &gt; &gt;
+</I>&gt;<i> &gt;
+</I>&gt;<i> /home/dubbs2/public_html/YDFramework2/YDClasses/YDFormElements
+</I>&gt;<i> &gt; &gt;
+</I>&gt;<i> &gt; &gt;
+</I>&gt;<i> &gt;
+</I>&gt;<i> /home/dubbs2/public_html/YDFramework2/YDClasses/YDFormRenderers
+</I>&gt;<i> &gt; &gt;
+</I>&gt;<i> &gt; &gt;
+</I>&gt;<i> &gt;
+</I>&gt;<i> /home/dubbs2/public_html/YDFramework2/YDClasses/YDDatabaseDrivers
+</I>&gt;<i> &gt; &gt;
+</I>&gt;<i> &gt; /home/dubbs2/public_html/YDFramework2/3rdparty
+</I>&gt;<i> &gt; &gt;
+</I>&gt;<i> &gt; /home/dubbs2/public_html/YDFramework2/addons
+</I>&gt;<i> &gt; &gt;
+</I>&gt;<i> &gt; /home/dubbs2/public_html/YDFramework2/addons/YDGraph
+</I>&gt;<i> &gt; &gt;
+</I>&gt;<i> &gt; &gt;
+</I>&gt;<i> &gt;
+</I>&gt;<i> /home/dubbs2/public_html/YDFramework2/addons/YDGraphPie
+</I>&gt;<i> &gt; &gt;
+</I>&gt;<i> &gt;
+</I>&gt;<i> /home/dubbs2/public_html/YDFramework2/addons/YDBBCode
+</I>&gt;<i> &gt; &gt;
+</I>&gt;<i> &gt; &gt;
+</I>&gt;<i> &gt;
+</I>&gt;<i> /home/dubbs2/public_html/YDFramework2/addons/YDInstaller
+</I>&gt;<i> &gt; &gt;
+</I>&gt;<i> &gt; &gt;
+</I>&gt;<i> &gt;
+</I>&gt;<i> /home/dubbs2/public_html/YDFramework2/addons/YDMysqlDump
+</I>&gt;<i> &gt; &gt;
+</I>&gt;<i> &gt; &gt;
+</I>&gt;<i> &gt;
+</I>&gt;<i> /home/dubbs2/public_html/YDFramework2/addons/YDDatabaseObject
+</I>&gt;<i> &gt; &gt;
+</I>&gt;<i> &gt; &gt;
+</I>&gt;<i> &gt;
+</I>&gt;<i> /home/dubbs2/public_html/YDFramework2/addons/YDDatabaseQuery
+</I>&gt;<i> &gt; &gt;
+</I>&gt;<i> &gt; /home/dubbs2/public_html/YDFramework2/addons/YDCart
+</I>&gt;<i> &gt; &gt;
+</I>&gt;<i> &gt; &gt;
+</I>&gt;<i> &gt;
+</I>&gt;<i> /home/dubbs2/public_html/YDFramework2/addons/YDPdfReport
+</I>&gt;<i> &gt; &gt;
+</I>&gt;<i> &gt; &gt;
+</I>&gt;<i> &gt;
+</I>&gt;<i> /home/dubbs2/public_html/YDFramework2/addons/YDFeedCreator
+</I>&gt;<i> &gt; &gt;
+</I>&gt;<i> &gt; /home/dubbs2/public_html/YDFramework2/addons/YDAjax
+</I>&gt;<i> &gt;
+</I>&gt;<i> === message truncated ===
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i> __________________________________________________
+</I>&gt;<i> Do You Yahoo!?
+</I>&gt;<i> Tired of spam?  Yahoo! Mail has the best spam protection around
+</I>&gt;<i> <A HREF="http://mail.yahoo.com">http://mail.yahoo.com</A>
+</I>&gt;<i> _______________________________________________
+</I>&gt;<i> YDFramework-users mailing list
+</I>&gt;<i> <A HREF="https://lists.berlios.de/mailman/listinfo/ydframework-users">YDFramework-users at lists.berlios.de</A>
+</I>&gt;<i> <A HREF="http://lists.berlios.de/mailman/listinfo/ydframework-users">http://lists.berlios.de/mailman/listinfo/ydframework-users</A>
+</I>&gt;<i>
+</I>
+
+
+--
+pieter claerhout . <A HREF="https://lists.berlios.de/mailman/listinfo/ydframework-users">pieter at yellowduck.be</A> . <A HREF="http://www.yellowduck.be/">http://www.yellowduck.be/</A>
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: &lt;<A HREF="https://lists.berlios.de/pipermail/ydframework-users/attachments/20060324/a4fb27b8/attachment.html">https://lists.berlios.de/pipermail/ydframework-users/attachments/20060324/a4fb27b8/attachment.html</A>&gt;
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000153.html">[ydf-users] Re: [Feature #2020] line breaks in SQL debug code
+</A></li>
+	<LI>Next message: <A HREF="000162.html">[ydf-users] Re: [Feature #2020] line breaks in SQL debug code
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#159">[ date ]</a>
+              <a href="thread.html#159">[ thread ]</a>
+              <a href="subject.html#159">[ subject ]</a>
+              <a href="author.html#159">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/ydframework-users">More information about the YDFramework-users
+mailing list</a><br>
+</body></html>

@@ -1,0 +1,113 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [ydf-users] YDDatabaseObject reseting
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/ydframework-users/2006-September/index.html" >
+   <LINK REL="made" HREF="mailto:ydframework-users%40lists.berlios.de?Subject=Re%3A%20%5Bydf-users%5D%20YDDatabaseObject%20reseting&In-Reply-To=%3C12260be20609032043k625fa39dkfe1d5bbf404c0c0e%40mail.gmail.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000359.html">
+   <LINK REL="Next"  HREF="000362.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[ydf-users] YDDatabaseObject reseting</H1>
+    <B>David Bittencourt</B> 
+    <A HREF="mailto:ydframework-users%40lists.berlios.de?Subject=Re%3A%20%5Bydf-users%5D%20YDDatabaseObject%20reseting&In-Reply-To=%3C12260be20609032043k625fa39dkfe1d5bbf404c0c0e%40mail.gmail.com%3E"
+       TITLE="[ydf-users] YDDatabaseObject reseting">muitocomplicado at gmail.com
+       </A><BR>
+    <I>Mon Sep  4 05:43:22 CEST 2006</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000359.html">[ydf-users] YDDatabaseObject reseting
+</A></li>
+        <LI>Next message: <A HREF="000362.html">[ydf-users] YDDatabaseObject reseting
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#360">[ date ]</a>
+              <a href="thread.html#360">[ thread ]</a>
+              <a href="subject.html#360">[ subject ]</a>
+              <a href="author.html#360">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Commited another version of YDDatabaseObject that will behave as you wish.
+
+reset() don't have a parameter and will reset only registered field values,
+select values, query values and results.
+resetAll() will execute a reset() in the object and also a resetRelations()
+that will reset all relation objects.
+
+If you want to completely clear an object you can use resetObject().
+
+-db
+
+On 9/3/06, Francisco Azevedo &lt;<A HREF="https://lists.berlios.de/mailman/listinfo/ydframework-users">francisco at fusemail.com</A>&gt; wrote:
+&gt;<i>
+</I>&gt;<i> Hi David
+</I>&gt;<i>
+</I>&gt;<i> &gt; I was thinking more about this and the way reset() is working today is
+</I>&gt;<i> &gt; not that good.
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt; reset() should &quot;reset&quot; the object to it's initial state, or close to it.
+</I>&gt;<i> &gt; So it should reset the fields, selects and also reset relations vars
+</I>&gt;<i> &gt; (not doing this now).
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt; I commited my changes to the svn repository and the main differences
+</I>&gt;<i> are:
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt; - added resetRelations that reset all relations
+</I>&gt;<i> &gt; - added parameter to reset( $all=false ) that resets everything in the
+</I>&gt;<i> &gt; object including relations and other custom variables when true.
+</I>&gt;<i> &gt; - modified resetValues to reset selects values too
+</I>&gt;<i>
+</I>&gt;<i> I'm using resetAll() in all methods. All i want to do is, as you said,
+</I>&gt;<i> clean the YDDatabaseObject to make other query types and to assign other
+</I>&gt;<i> values from the beginning.
+</I>&gt;<i>
+</I>&gt;<i> The problem is that when extending YDDatabaseObject, resetAll() deletes
+</I>&gt;<i> not only its own varibles but my class variables too.. and i can't find
+</I>&gt;<i> a reason for that.
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i> Is resetAll() now deleting their fields (deleting variables that are a
+</I>&gt;<i> registered fields), relations ?
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i> regards
+</I>&gt;<i> Francisco A
+</I>&gt;<i> _______________________________________________
+</I>&gt;<i> YDFramework-users mailing list
+</I>&gt;<i> <A HREF="https://lists.berlios.de/mailman/listinfo/ydframework-users">YDFramework-users at lists.berlios.de</A>
+</I>&gt;<i> <A HREF="https://lists.berlios.de/mailman/listinfo/ydframework-users">https://lists.berlios.de/mailman/listinfo/ydframework-users</A>
+</I>&gt;<i>
+</I>-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: &lt;<A HREF="https://lists.berlios.de/pipermail/ydframework-users/attachments/20060904/fd85e543/attachment.html">https://lists.berlios.de/pipermail/ydframework-users/attachments/20060904/fd85e543/attachment.html</A>&gt;
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000359.html">[ydf-users] YDDatabaseObject reseting
+</A></li>
+	<LI>Next message: <A HREF="000362.html">[ydf-users] YDDatabaseObject reseting
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#360">[ date ]</a>
+              <a href="thread.html#360">[ thread ]</a>
+              <a href="subject.html#360">[ subject ]</a>
+              <a href="author.html#360">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/ydframework-users">More information about the YDFramework-users
+mailing list</a><br>
+</body></html>

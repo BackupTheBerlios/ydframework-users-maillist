@@ -1,0 +1,136 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [ydf-users] hindering the post value to be selected on a select after   submit
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/ydframework-users/2006-July/index.html" >
+   <LINK REL="made" HREF="mailto:ydframework-users%40lists.berlios.de?Subject=Re%3A%20%5Bydf-users%5D%20hindering%20the%20post%20value%20to%20be%20selected%20on%20a%20select%20after%20%20%20submit&In-Reply-To=%3C20060710114145.44116.qmail%40web50205.mail.yahoo.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000281.html">
+   <LINK REL="Next"  HREF="000284.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[ydf-users] hindering the post value to be selected on a select after   submit</H1>
+    <B>dab</B> 
+    <A HREF="mailto:ydframework-users%40lists.berlios.de?Subject=Re%3A%20%5Bydf-users%5D%20hindering%20the%20post%20value%20to%20be%20selected%20on%20a%20select%20after%20%20%20submit&In-Reply-To=%3C20060710114145.44116.qmail%40web50205.mail.yahoo.com%3E"
+       TITLE="[ydf-users] hindering the post value to be selected on a select after   submit">dab214 at yahoo.com
+       </A><BR>
+    <I>Mon Jul 10 13:41:45 CEST 2006</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000281.html">[ydf-users] hindering the post value to be selected on a select after   submit
+</A></li>
+        <LI>Next message: <A HREF="000284.html">[ydf-users] Difference in versions
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#283">[ date ]</a>
+              <a href="thread.html#283">[ thread ]</a>
+              <a href="subject.html#283">[ subject ]</a>
+              <a href="author.html#283">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>hi moses,
+thanks for your help, all i actually had to do was:
+if ( $this-&gt;form-&gt;isSubmitted()) {
+    $element =&amp;      
+$this-&gt;form-&gt;getElement('num_poll_alt');
+    unset($element-&gt;_value);
+}
+
+/dab
+
+--- <A HREF="https://lists.berlios.de/mailman/listinfo/ydframework-users">moses at softwaysolutions.com</A> wrote:
+
+&gt;<i> 
+</I>&gt;<i> Hi Dab
+</I>&gt;<i> 
+</I>&gt;<i>    I hope this will help U
+</I>&gt;<i> 
+</I>&gt;<i>    $arrName = array(&quot;&quot;=&gt;&quot;-- Please Choose the
+</I>&gt;<i> Name--&quot;,&quot;Dab&quot;=&gt;&quot;Dab&quot;,&quot;Moses&quot;=&gt;&quot;Moses&quot;,&quot;Din&quot;=&gt;&quot;Din&quot;);
+</I>&gt;<i>    $this-&gt;form-&gt;addElement('select','name','Choose
+</I>&gt;<i> Name','',$arrName);
+</I>&gt;<i> 
+</I>&gt;<i>    function actionDefault()
+</I>&gt;<i>    {
+</I>&gt;<i> 	 $data = $this-&gt;form-&gt;getValues();
+</I>&gt;<i> 	 $this-&gt;elm =&amp; $this-&gt;form-&gt;getElement('name');
+</I>&gt;<i> 	 $val = $data['name'];
+</I>&gt;<i> 	 unset($this-&gt;elm-&gt;_options[&quot;$val&quot;]);
+</I>&gt;<i>    }
+</I>&gt;<i> 
+</I>&gt;<i> regards
+</I>&gt;<i> moses
+</I>&gt;<i> 
+</I>&gt;<i> 
+</I>&gt;<i> &gt; -------- Original Message --------
+</I>&gt;<i> &gt; Subject: [ydf-users] hindering the post value to
+</I>&gt;<i> be selected on a
+</I>&gt;<i> &gt; select after   submit
+</I>&gt;<i> &gt; From: dab &lt;<A HREF="https://lists.berlios.de/mailman/listinfo/ydframework-users">dab214 at yahoo.com</A>&gt;
+</I>&gt;<i> &gt; Date: Sun, July 09, 2006 6:34 am
+</I>&gt;<i> &gt; To: <A HREF="https://lists.berlios.de/mailman/listinfo/ydframework-users">ydframework-users at berlios.de</A>
+</I>&gt;<i> &gt; 
+</I>&gt;<i> &gt; hi all,
+</I>&gt;<i> &gt; is there any way of making the select drop down
+</I>&gt;<i> not to
+</I>&gt;<i> &gt; add the selected attributes on the options after
+</I>&gt;<i> &gt; submitting the form?
+</I>&gt;<i> &gt; thanks.
+</I>&gt;<i> &gt; 
+</I>&gt;<i> &gt; /dab
+</I>&gt;<i> &gt; 
+</I>&gt;<i> &gt; __________________________________________________
+</I>&gt;<i> &gt; Do You Yahoo!?
+</I>&gt;<i> &gt; Tired of spam?  Yahoo! Mail has the best spam
+</I>&gt;<i> protection around 
+</I>&gt;<i> &gt; <A HREF="http://mail.yahoo.com">http://mail.yahoo.com</A> 
+</I>&gt;<i> &gt; _______________________________________________
+</I>&gt;<i> &gt; YDFramework-users mailing list
+</I>&gt;<i> &gt; <A HREF="https://lists.berlios.de/mailman/listinfo/ydframework-users">YDFramework-users at lists.berlios.de</A>
+</I>&gt;<i> &gt;
+</I>&gt;<i>
+</I><A HREF="http://lists.berlios.de/mailman/listinfo/ydframework-users">http://lists.berlios.de/mailman/listinfo/ydframework-users</A>
+&gt;<i> 
+</I>&gt;<i> _______________________________________________
+</I>&gt;<i> YDFramework-users mailing list
+</I>&gt;<i> <A HREF="https://lists.berlios.de/mailman/listinfo/ydframework-users">YDFramework-users at lists.berlios.de</A>
+</I>&gt;<i>
+</I><A HREF="http://lists.berlios.de/mailman/listinfo/ydframework-users">http://lists.berlios.de/mailman/listinfo/ydframework-users</A>
+&gt;<i> 
+</I>
+
+__________________________________________________
+Do You Yahoo!?
+Tired of spam?  Yahoo! Mail has the best spam protection around 
+<A HREF="http://mail.yahoo.com">http://mail.yahoo.com</A> 
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000281.html">[ydf-users] hindering the post value to be selected on a select after   submit
+</A></li>
+	<LI>Next message: <A HREF="000284.html">[ydf-users] Difference in versions
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#283">[ date ]</a>
+              <a href="thread.html#283">[ thread ]</a>
+              <a href="subject.html#283">[ subject ]</a>
+              <a href="author.html#283">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/ydframework-users">More information about the YDFramework-users
+mailing list</a><br>
+</body></html>

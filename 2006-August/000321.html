@@ -1,0 +1,124 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [ydf-users] Problems with getRecordsAsSet
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/ydframework-users/2006-August/index.html" >
+   <LINK REL="made" HREF="mailto:ydframework-users%40lists.berlios.de?Subject=Re%3A%20%5Bydf-users%5D%20Problems%20with%20getRecordsAsSet&In-Reply-To=%3Cfbd383e30608140813k37321985iaa15d515863edbb0%40mail.gmail.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000322.html">
+   <LINK REL="Next"  HREF="000340.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[ydf-users] Problems with getRecordsAsSet</H1>
+    <B>Moses Dinakaran</B> 
+    <A HREF="mailto:ydframework-users%40lists.berlios.de?Subject=Re%3A%20%5Bydf-users%5D%20Problems%20with%20getRecordsAsSet&In-Reply-To=%3Cfbd383e30608140813k37321985iaa15d515863edbb0%40mail.gmail.com%3E"
+       TITLE="[ydf-users] Problems with getRecordsAsSet">mosesdinakaran at gmail.com
+       </A><BR>
+    <I>Mon Aug 14 17:13:37 CEST 2006</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000322.html">[ydf-users] Any chance of getting an example for YDCMComponent
+</A></li>
+        <LI>Next message: <A HREF="000340.html">[ydf-users] Problems with getRecordsAsSet
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#321">[ date ]</a>
+              <a href="thread.html#321">[ thread ]</a>
+              <a href="subject.html#321">[ subject ]</a>
+              <a href="author.html#321">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Hi Everybody
+
+      I have a problem with ordering the records based upon the sortfld and
+sortdir using getRecordsAsSet
+
+     the following is the code
+
+     $recordSet =
+$this-&gt;db-&gt;getRecordsAsSet(&quot;$this-&gt;query&quot;,$this-&gt;page,$this-&gt;size);
+
+    .tpl
+
+      {$recordSet-&gt;getSortUrl('app_first_name')}
+
+    The problem is If the sortfld datatype  is string (Not for all string
+datatype only for some particular field  )order is not displayed
+properly.Onthe other hand  If the sortfld datatype  is numeric it
+works fine.
+
+    *Again if I  run the same query in the phpMyAdmin which gives me the
+correct result.*
+
+    Any Suggestions Please.
+
+
+My Query
+
+select p.pre_approval_id,p.cu_id,date_format(p.created_date,'%m-%d-%Y') as
+date,     p.created_date ,p.loan_officer_id,p.app_first_name,p.app_last_name
+,p.amount ,
+p.loan_type_id,date_format(p.expires_date,'%m-%d-%Y') as date_expires,
+p.expires_date,
+p.pre_approval_status as status, CONCAT(p.app_first_name, ' ',
+p.app_last_name ) as app_name ,
+cum.cu_name ,lo.first_name,lt.name as loan_name from tbl_preapprovals as p
+left join tbl_credit_union_master as cum on p.cu_id=cum.cu_id
+left join tbl_loan_user as lo on p.loan_officer_id = lo.loan_user_id
+left join tbl_loan_type_master as lt on p.loan_type_id = lt.loan_type_id
+where 1=1 order by p.app_first_name DESC
+
+
+.tpl
+
+
+$recordSet-&gt;getSortUrl('p.pre_approval_id')} --&gt;Works Fine
+{$recordSet-&gt;getSortUrl('cum.cu_name')}--&gt;Works Fine
+{$recordSet-&gt;getSortUrl('p.created_date')}--&gt;Works Fine
+{$recordSet-&gt;getSortUrl('lo.first_name')}--&gt;Works Fine
+*{$recordSet-&gt;getSortUrl('p.app_first_name')}--&gt;Gives the problem*
+{$recordSet-&gt;getSortUrl('amount')}--&gt;Works Fine
+{$recordSet-&gt;getSortUrl('lt.name')}--&gt;Works Fine
+
+
+
+
+
+
+
+
+regards
+moses
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: &lt;<A HREF="https://lists.berlios.de/pipermail/ydframework-users/attachments/20060814/efa4b404/attachment.html">https://lists.berlios.de/pipermail/ydframework-users/attachments/20060814/efa4b404/attachment.html</A>&gt;
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000322.html">[ydf-users] Any chance of getting an example for YDCMComponent
+</A></li>
+	<LI>Next message: <A HREF="000340.html">[ydf-users] Problems with getRecordsAsSet
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#321">[ date ]</a>
+              <a href="thread.html#321">[ thread ]</a>
+              <a href="subject.html#321">[ subject ]</a>
+              <a href="author.html#321">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/ydframework-users">More information about the YDFramework-users
+mailing list</a><br>
+</body></html>

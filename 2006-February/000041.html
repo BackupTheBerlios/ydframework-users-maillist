@@ -1,0 +1,97 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [ydf-users] SQL Question
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/ydframework-users/2006-February/index.html" >
+   <LINK REL="made" HREF="mailto:ydframework-users%40lists.berlios.de?Subject=Re%3A%20%5Bydf-users%5D%20SQL%20Question&In-Reply-To=%3C43FB9D66.4080107%40jocosoft.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000040.html">
+   <LINK REL="Next"  HREF="000044.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[ydf-users] SQL Question</H1>
+    <B>Peter</B> 
+    <A HREF="mailto:ydframework-users%40lists.berlios.de?Subject=Re%3A%20%5Bydf-users%5D%20SQL%20Question&In-Reply-To=%3C43FB9D66.4080107%40jocosoft.com%3E"
+       TITLE="[ydf-users] SQL Question">ydf at jocosoft.com
+       </A><BR>
+    <I>Wed Feb 22 00:08:22 CET 2006</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000040.html">[ydf-users] YDDatabaseObject - changing aliases on columns (AS)
+</A></li>
+        <LI>Next message: <A HREF="000044.html">[ydf-users] SQL Question
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#41">[ date ]</a>
+              <a href="thread.html#41">[ thread ]</a>
+              <a href="subject.html#41">[ subject ]</a>
+              <a href="author.html#41">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>This has nothing to do with YDF as such, but since I'm using YDF for 
+this project, and I know there are some bright minds reading these 
+lists, I'll give it a shot...
+
+I am building this inventory system for the company I work for, and I'm 
+running into a wall. Hopefully one of you SQL gurus can help me out. 
+This thing is (unfortunately) running on MS-SQL, so I can't use any of 
+the YDF classes, but I do have views, stored procedures, triggers and 
+what not. (if that would be needed)
+
+I have this table with the folowing fields:
+item, pallet, location, user, movedate
+
+It will hold the location of each item and/or pallet (an item can be 
+moved by itself, or as part of a pallet), who put it there, and when.
+
+The tricky part is that there are no key fields. They are indexed for 
+speed, but nothing is unique. The reason is that stuff moves around a 
+lot, so an item can be moved several times a day, on and off a pallet, 
+etc, etc... So this table holds the history of every move, ever 
+performed on every item and pallet in the building. (Needless to say, 
+it's gonna be a big one)
+
+What I want is a subset of this table, with only the last entry for each 
+item and pallet (not the history). Thus showing me every item and 
+pallet, with it's *current* location, who put it there, and when.
+
+Easier said than done, as I've been struggling with this all day, but 
+can't get my head around it. I have to say, I'm not the best with SQL, 
+just know the basics.
+
+If anyone can give me an idea of how to build a query for this, I owe 
+you my first born (well, almost)
+
+Any help would be appriciated!
+
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000040.html">[ydf-users] YDDatabaseObject - changing aliases on columns (AS)
+</A></li>
+	<LI>Next message: <A HREF="000044.html">[ydf-users] SQL Question
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#41">[ date ]</a>
+              <a href="thread.html#41">[ thread ]</a>
+              <a href="subject.html#41">[ subject ]</a>
+              <a href="author.html#41">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/ydframework-users">More information about the YDFramework-users
+mailing list</a><br>
+</body></html>

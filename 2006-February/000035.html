@@ -1,0 +1,118 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [ydf-users] YDDatabaseObject - changing aliases on columns (AS)
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/ydframework-users/2006-February/index.html" >
+   <LINK REL="made" HREF="mailto:ydframework-users%40lists.berlios.de?Subject=Re%3A%20%5Bydf-users%5D%20YDDatabaseObject%20-%20changing%20aliases%20on%20columns%20%28AS%29&In-Reply-To=%3C20060221121216.7388.qmail%40web50214.mail.yahoo.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000034.html">
+   <LINK REL="Next"  HREF="000036.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[ydf-users] YDDatabaseObject - changing aliases on columns (AS)</H1>
+    <B>dab</B> 
+    <A HREF="mailto:ydframework-users%40lists.berlios.de?Subject=Re%3A%20%5Bydf-users%5D%20YDDatabaseObject%20-%20changing%20aliases%20on%20columns%20%28AS%29&In-Reply-To=%3C20060221121216.7388.qmail%40web50214.mail.yahoo.com%3E"
+       TITLE="[ydf-users] YDDatabaseObject - changing aliases on columns (AS)">dab214 at yahoo.com
+       </A><BR>
+    <I>Tue Feb 21 13:12:16 CET 2006</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000034.html">[ydf-users] YDDatabaseObject - changing aliases on columns (AS)
+</A></li>
+        <LI>Next message: <A HREF="000036.html">[ydf-users] YDDatabaseObject - howto not add quotes around the value
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#35">[ date ]</a>
+              <a href="thread.html#35">[ thread ]</a>
+              <a href="subject.html#35">[ subject ]</a>
+              <a href="author.html#35">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>hi db,
+thanks for your reply. below code would apply for all
+selects made on that table no? what if i just wanted
+to change the column name on one specific select?
+thanks.
+
+/dan
+
+--- David Bittencourt &lt;<A HREF="https://lists.berlios.de/mailman/listinfo/ydframework-users">muitocomplicado at gmail.com</A>&gt;
+wrote:
+
+&gt;<i> When registering a field, the name of the field is
+</I>&gt;<i> the alias. You can define
+</I>&gt;<i> the real column with setColumn:
+</I>&gt;<i> 
+</I>&gt;<i> $field =&amp; $this-&gt;registerField( 'user_name' );
+</I>&gt;<i> $field-&gt;setColumn( 'username' ); // the real table
+</I>&gt;<i> column
+</I>&gt;<i> 
+</I>&gt;<i> -db
+</I>&gt;<i> 
+</I>&gt;<i> On 2/20/06, dab &lt;<A HREF="https://lists.berlios.de/mailman/listinfo/ydframework-users">dab214 at yahoo.com</A>&gt; wrote:
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt; Hi,
+</I>&gt;<i> &gt; I noticed that the alias in the select statement
+</I>&gt;<i> &gt; (SELECT username AS user_name) is being set in
+</I>&gt;<i> &gt; YDDatabaseQuery::getSelect() but i can't seem to
+</I>&gt;<i> &gt; figure out how i would change this from my code
+</I>&gt;<i> using
+</I>&gt;<i> &gt; YDDatabaseObject.
+</I>&gt;<i> &gt; Is there another way than doing it by a
+</I>&gt;<i> &gt; registerSelect?
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt; thanks.
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt; /dan
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt; __________________________________________________
+</I>&gt;<i> &gt; Do You Yahoo!?
+</I>&gt;<i> &gt; Tired of spam?  Yahoo! Mail has the best spam
+</I>&gt;<i> protection around
+</I>&gt;<i> &gt; <A HREF="http://mail.yahoo.com">http://mail.yahoo.com</A>
+</I>&gt;<i> &gt; _______________________________________________
+</I>&gt;<i> &gt; YDFramework-users mailing list
+</I>&gt;<i> &gt; <A HREF="https://lists.berlios.de/mailman/listinfo/ydframework-users">YDFramework-users at lists.berlios.de</A>
+</I>&gt;<i> &gt;
+</I>&gt;<i>
+</I><A HREF="http://lists.berlios.de/mailman/listinfo/ydframework-users">http://lists.berlios.de/mailman/listinfo/ydframework-users</A>
+&gt;<i> &gt;
+</I>&gt;<i> 
+</I>
+
+__________________________________________________
+Do You Yahoo!?
+Tired of spam?  Yahoo! Mail has the best spam protection around 
+<A HREF="http://mail.yahoo.com">http://mail.yahoo.com</A> 
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000034.html">[ydf-users] YDDatabaseObject - changing aliases on columns (AS)
+</A></li>
+	<LI>Next message: <A HREF="000036.html">[ydf-users] YDDatabaseObject - howto not add quotes around the value
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#35">[ date ]</a>
+              <a href="thread.html#35">[ thread ]</a>
+              <a href="subject.html#35">[ subject ]</a>
+              <a href="author.html#35">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/ydframework-users">More information about the YDFramework-users
+mailing list</a><br>
+</body></html>

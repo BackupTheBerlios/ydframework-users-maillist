@@ -1,0 +1,147 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [ydf-users] Query Regarding YD_ACTION
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/ydframework-users/2006-October/index.html" >
+   <LINK REL="made" HREF="mailto:ydframework-users%40lists.berlios.de?Subject=Re%3A%20%5Bydf-users%5D%20Query%20Regarding%20YD_ACTION&In-Reply-To=%3C4aef63030610130455h7bc8256aoe154027711027a6f%40mail.gmail.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000396.html">
+   <LINK REL="Next"  HREF="000397.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[ydf-users] Query Regarding YD_ACTION</H1>
+    <B>Pieter Claerhout</B> 
+    <A HREF="mailto:ydframework-users%40lists.berlios.de?Subject=Re%3A%20%5Bydf-users%5D%20Query%20Regarding%20YD_ACTION&In-Reply-To=%3C4aef63030610130455h7bc8256aoe154027711027a6f%40mail.gmail.com%3E"
+       TITLE="[ydf-users] Query Regarding YD_ACTION">pieter at yellowduck.be
+       </A><BR>
+    <I>Fri Oct 13 13:55:05 CEST 2006</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000396.html">[ydf-users] Query Regarding YD_ACTION
+</A></li>
+        <LI>Next message: <A HREF="000397.html">[ydf-users] Erm... Hello? Weblog
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#399">[ date ]</a>
+              <a href="thread.html#399">[ thread ]</a>
+              <a href="subject.html#399">[ subject ]</a>
+              <a href="author.html#399">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Hi Moses,
+
+the forward action actually takes care of updating the references to
+YD_ACTION and also calls the action handler.
+
+It's the preferred way to do what you are looking for.
+
+cheers,
+
+
+pieter
+
+2006/10/10, <A HREF="https://lists.berlios.de/mailman/listinfo/ydframework-users">moses at hysistechnologies.com</A> &lt;<A HREF="https://lists.berlios.de/mailman/listinfo/ydframework-users">moses at hysistechnologies.com</A>&gt;:
+&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i> Hello,
+</I>&gt;<i>
+</I>&gt;<i>    Can the template variable  {YD_ACTION}  be changed.
+</I>&gt;<i>
+</I>&gt;<i>    (ie)
+</I>&gt;<i>
+</I>&gt;<i>    Currently the script is on  actionEdit, On clicking the update
+</I>&gt;<i> button I am validating the form and updating the database and again I
+</I>&gt;<i> need to display a message called &quot;Sucesssfully Updated&quot;
+</I>&gt;<i> so my tpl will be like this
+</I>&gt;<i>
+</I>&gt;<i>   .(tpl)
+</I>&gt;<i>
+</I>&gt;<i>    {if $YD_ACTION == 'edit'}
+</I>&gt;<i>        displayed all the values that need to be edited
+</I>&gt;<i>
+</I>&gt;<i>    {/if}
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i>    {if $YD_ACTION == 'update'}
+</I>&gt;<i>
+</I>&gt;<i>      Successfully updated Click here to continue.
+</I>&gt;<i>
+</I>&gt;<i>    {/if}
+</I>&gt;<i>
+</I>&gt;<i> (.php)
+</I>&gt;<i>
+</I>&gt;<i>     function acionEdit()
+</I>&gt;<i>     {
+</I>&gt;<i>
+</I>&gt;<i>         if($this-&gt;form-&gt;validate())
+</I>&gt;<i>         {
+</I>&gt;<i>
+</I>&gt;<i>              executeUpdate();
+</I>&gt;<i>              $this-&gt;forward('update');
+</I>&gt;<i>              return;
+</I>&gt;<i>
+</I>&gt;<i>         }
+</I>&gt;<i>     }
+</I>&gt;<i>
+</I>&gt;<i>     function actionUpdate()
+</I>&gt;<i>     {
+</I>&gt;<i>
+</I>&gt;<i>         $this-&gt;template-&gt;display();
+</I>&gt;<i>     }
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i>     Every Thing works fine
+</I>&gt;<i>     My Question is insteed of [ $this-&gt;forward('update') ] can I set
+</I>&gt;<i> the value   to {YD_ACTION}
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i> regards
+</I>&gt;<i> moses
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i> regards
+</I>&gt;<i> moses
+</I>&gt;<i>
+</I>&gt;<i> _______________________________________________
+</I>&gt;<i> YDFramework-users mailing list
+</I>&gt;<i> <A HREF="https://lists.berlios.de/mailman/listinfo/ydframework-users">YDFramework-users at lists.berlios.de</A>
+</I>&gt;<i> <A HREF="https://lists.berlios.de/mailman/listinfo/ydframework-users">https://lists.berlios.de/mailman/listinfo/ydframework-users</A>
+</I>&gt;<i>
+</I>
+
+
+-- 
+pieter claerhout . <A HREF="https://lists.berlios.de/mailman/listinfo/ydframework-users">pieter at yellowduck.be</A> . <A HREF="http://www.yellowduck.be/">http://www.yellowduck.be/</A>
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: &lt;<A HREF="https://lists.berlios.de/pipermail/ydframework-users/attachments/20061013/721a8c9b/attachment.html">https://lists.berlios.de/pipermail/ydframework-users/attachments/20061013/721a8c9b/attachment.html</A>&gt;
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000396.html">[ydf-users] Query Regarding YD_ACTION
+</A></li>
+	<LI>Next message: <A HREF="000397.html">[ydf-users] Erm... Hello? Weblog
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#399">[ date ]</a>
+              <a href="thread.html#399">[ thread ]</a>
+              <a href="subject.html#399">[ subject ]</a>
+              <a href="author.html#399">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/ydframework-users">More information about the YDFramework-users
+mailing list</a><br>
+</body></html>

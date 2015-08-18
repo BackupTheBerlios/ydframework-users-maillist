@@ -1,0 +1,180 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [ydf-users] Query Regarding Submit button
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/ydframework-users/2006-July/index.html" >
+   <LINK REL="made" HREF="mailto:ydframework-users%40lists.berlios.de?Subject=Re%3A%20%5Bydf-users%5D%20Query%20Regarding%20Submit%20button&In-Reply-To=%3C306340e00607040104t74c52950k8a2e471b526268fb%40mail.gmail.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000268.html">
+   <LINK REL="Next"  HREF="000266.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[ydf-users] Query Regarding Submit button</H1>
+    <B>ydf poi</B> 
+    <A HREF="mailto:ydframework-users%40lists.berlios.de?Subject=Re%3A%20%5Bydf-users%5D%20Query%20Regarding%20Submit%20button&In-Reply-To=%3C306340e00607040104t74c52950k8a2e471b526268fb%40mail.gmail.com%3E"
+       TITLE="[ydf-users] Query Regarding Submit button">ydfpoi at gmail.com
+       </A><BR>
+    <I>Tue Jul  4 10:04:31 CEST 2006</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000268.html">[ydf-users] Query Regarding Submit button
+</A></li>
+        <LI>Next message: <A HREF="000266.html">[ydf-users] How to set Properties for a element  after it has been created
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#269">[ date ]</a>
+              <a href="thread.html#269">[ thread ]</a>
+              <a href="subject.html#269">[ subject ]</a>
+              <a href="author.html#269">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Hi
+
+I think javascript enables you to do what you want.
+
+You can create a HTML document like this one:
+&lt;header&gt;
+    ...
+    &lt;script type=&quot;text/javascript&quot; src=&quot;foo.js&quot;&gt;&lt;/script&gt;
+&lt;/header&gt;
+&lt;body&gt;
+    ...
+    &lt;form id=&quot;myForm&quot; action=&quot;&quot; ...&gt;
+        ...
+        &lt;input id=&quot;addButton&quot; type=&quot;button&quot; value=&quot;Add&quot; /&gt;
+        &lt;input id=&quot;editButton&quot; type=&quot;button&quot; value=&quot;Edit&quot; /&gt;
+        ...
+    &lt;/form&gt;
+    ...
+&lt;/body&gt;
+
+Then the foo.js file has to contain something like:
+    window.onload = init();
+
+    var addButton = null;
+    var editButton = null;
+    var myForm = null;
+
+    function init() {
+        myForm = document.getElementById('myForm');
+
+        addButton = document.getElementById('addButton');
+        addButton.onclick = function() {
+            myForm.action = '<A HREF="http://yourpage.html?do=add">http://yourpage.html?do=add</A>'; // or only
+'?do=add' here
+            myForm.submit();
+        }
+
+        editButton = document.getElementById('editButton');
+        editButton.onclick = function() {
+            myForm.action = '<A HREF="http://yourpage.html?do=edit">http://yourpage.html?do=edit</A>'; // or only
+'?do=edit' here
+            myForm.submit();
+        }
+    }
+
+Well, I have not tested this code but I think it should work.
+Kind regards
+
+2006/7/4, David Bittencourt &lt;<A HREF="https://lists.berlios.de/mailman/listinfo/ydframework-users">muitocomplicado at gmail.com</A>&gt;:
+&gt;<i> Well... this kind of behavior is not that simple because a form can have
+</I>&gt;<i> only one action and that action can't be changed with javascript (I think).
+</I>&gt;<i>
+</I>&gt;<i> I don't know a nice solution for it, but perhaps you could add a text field
+</I>&gt;<i> called 'action' with style=&quot;display:none&quot;. Then with javascript when the
+</I>&gt;<i> user presses the Add button, you fill the 'action' field with &quot;add&quot; and for
+</I>&gt;<i> the Edit button, fill with &quot;edit&quot;. In your php script you can now redirect
+</I>&gt;<i> the request to the desired action.
+</I>&gt;<i>
+</I>&gt;<i> Just a suggestion, someone knows a better way?
+</I>&gt;<i>
+</I>&gt;<i> -db
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i> On 7/4/06, <A HREF="https://lists.berlios.de/mailman/listinfo/ydframework-users">moses at softwaysolutions.com</A> &lt;<A HREF="https://lists.berlios.de/mailman/listinfo/ydframework-users">moses at softwaysolutions.com</A>&gt; wrote:
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt; Hello Sir
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt;      In my page I have a form and within that I have two submit buttons
+</I>&gt;<i> &gt; named add,edit
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt;
+</I>&gt;<i> $this-&gt;form-&gt;addElement('submit','add','Add',array(&quot;class&quot;=&gt;&quot;button&quot;));
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt;
+</I>&gt;<i> $this-&gt;form-&gt;addElement('submit','edit','Edit',array(&quot;class&quot;=&gt;&quot;button&quot;));
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt;     and I have two functions named
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt;     function actionAdd
+</I>&gt;<i> &gt;     {
+</I>&gt;<i> &gt;             -- The Code --
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt;     }
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt;    function actionEdit
+</I>&gt;<i> &gt;    {
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt;        -- The Code for Edit --
+</I>&gt;<i> &gt;    }
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt;    So when I click add submit button the function actionAdd() should be
+</I>&gt;<i> &gt; executed and when I click Edit the function actionEdit() should be
+</I>&gt;<i> &gt; executed.
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt;     What should I do...
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt; regards
+</I>&gt;<i> &gt; moses
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt; _______________________________________________
+</I>&gt;<i> &gt; YDFramework-users mailing list
+</I>&gt;<i> &gt; <A HREF="https://lists.berlios.de/mailman/listinfo/ydframework-users">YDFramework-users at lists.berlios.de</A>
+</I>&gt;<i> &gt;
+</I>&gt;<i> <A HREF="http://lists.berlios.de/mailman/listinfo/ydframework-users">http://lists.berlios.de/mailman/listinfo/ydframework-users</A>
+</I>&gt;<i> &gt;
+</I>&gt;<i>
+</I>&gt;<i>
+</I>
+
+-- 
+po&#239;
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000268.html">[ydf-users] Query Regarding Submit button
+</A></li>
+	<LI>Next message: <A HREF="000266.html">[ydf-users] How to set Properties for a element  after it has been created
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#269">[ date ]</a>
+              <a href="thread.html#269">[ thread ]</a>
+              <a href="subject.html#269">[ subject ]</a>
+              <a href="author.html#269">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/ydframework-users">More information about the YDFramework-users
+mailing list</a><br>
+</body></html>

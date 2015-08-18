@@ -1,0 +1,95 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [ydf-users] YDAjax autocompleter
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/ydframework-users/2006-March/index.html" >
+   <LINK REL="made" HREF="mailto:ydframework-users%40lists.berlios.de?Subject=Re%3A%20%5Bydf-users%5D%20YDAjax%20autocompleter&In-Reply-To=%3C20060308141907.9248.qmail%40web50203.mail.yahoo.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000090.html">
+   <LINK REL="Next"  HREF="000092.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[ydf-users] YDAjax autocompleter</H1>
+    <B>dab</B> 
+    <A HREF="mailto:ydframework-users%40lists.berlios.de?Subject=Re%3A%20%5Bydf-users%5D%20YDAjax%20autocompleter&In-Reply-To=%3C20060308141907.9248.qmail%40web50203.mail.yahoo.com%3E"
+       TITLE="[ydf-users] YDAjax autocompleter">dab214 at yahoo.com
+       </A><BR>
+    <I>Wed Mar  8 15:19:07 CET 2006</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000090.html">[ydf-users] User oriented project (wtcom)
+</A></li>
+        <LI>Next message: <A HREF="000092.html">[ydf-users] YDAjax autocompleter
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#91">[ date ]</a>
+              <a href="thread.html#91">[ thread ]</a>
+              <a href="subject.html#91">[ subject ]</a>
+              <a href="author.html#91">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>hi all,
+i use the autocomplete function on quite a lot of
+fields so it would be better if i could pass the table
+and field name to the ajax method so i don't have to
+write one extra method for each element.
+by looking at the YDFormElement_Autocompleter below
+code should work, but it doesn't :(
+
+$this-&gt;form-&gt;addElement ( 'autocompleter',
+'firstname', 'First Name:', $this-&gt;attributes, array(
+&amp;$this, 'getAjaxElement', array ( 'affiliate',
+'firstname' ) ) );
+
+function getAjaxElement ( $text ) {
+    $info = $this-&gt;getAjaxArguments();
+    $table = $info[0];
+    $field = $info[1];
+    $user = YDDatabaseObject::getInstance ( $table );
+    $user-&gt;select ( 'id', $field );
+    $user-&gt;find();
+    $db = $user-&gt;getResultsAsAssocArray( 'id', $field
+);
+	$result = array();
+	foreach( $db as $key =&gt; $el )
+		if (eregi(&quot;^&quot;. $text .&quot;+&quot;, $el)) $result[] = $el;
+		
+	$this-&gt;ajax-&gt;addCompleterResult( $result ); 
+	return $this-&gt;ajax-&gt;processResults();           
+}
+
+__________________________________________________
+Do You Yahoo!?
+Tired of spam?  Yahoo! Mail has the best spam protection around 
+<A HREF="http://mail.yahoo.com">http://mail.yahoo.com</A> 
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000090.html">[ydf-users] User oriented project (wtcom)
+</A></li>
+	<LI>Next message: <A HREF="000092.html">[ydf-users] YDAjax autocompleter
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#91">[ date ]</a>
+              <a href="thread.html#91">[ thread ]</a>
+              <a href="subject.html#91">[ subject ]</a>
+              <a href="author.html#91">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/ydframework-users">More information about the YDFramework-users
+mailing list</a><br>
+</body></html>

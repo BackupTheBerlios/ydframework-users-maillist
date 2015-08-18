@@ -1,0 +1,2656 @@
+From araviski at free.fr  Tue Aug  1 14:13:37 2006
+From: araviski at free.fr (araviski at free.fr)
+Date: Tue, 01 Aug 2006 14:13:37 +0200
+Subject: [ydf-users] YDDatabaseObject, GroupBy and aggreate functions ?
+Message-ID: <1154434417.44cf4571c6d29@imp2-g19.free.fr>
+
+Hi all !
+
+I'm currently trying to make some little stats about my application, and I
+wonder if I can use the YDDatabaseObject to retrieve the results of Count, avg,
+sum, etc.. expressions in a query. I successfully used the groupby() function,
+but only without any aggregate function.
+I tried the findSql() method to make my whole query, but the fact that the
+aggregate expressions are not registred in the object trigger some errors.
+I also tried to register the expressions using registerSelect in the definition
+of the objects on the off-chance but it doesn't work (and I understand that I
+cannot have permanently aggregate functions in the select queries).
+
+So my question is, is it possible to use aggregate functions using the
+YDDatabaseObject or have I to use a YDDatabaseQuery ?
+
+BTW, the findSql() function trigger "Notice: Undefined offset:" errors in
+YDDatabaseObject.php on line 1475 when the select fields are not precised using
+the select() function just before using the findSql() one.
+
+Thanks for any help,
+
+Erwan.
+
+
+From mosesdinakaran at gmail.com  Tue Aug  1 14:35:57 2006
+From: mosesdinakaran at gmail.com (Moses Dinakaran)
+Date: Tue, 1 Aug 2006 18:05:57 +0530
+Subject: [ydf-users] Query Regarding Variable scope
+In-Reply-To: <44CDB896.9000903@fusemail.com>
+References: <fbd383e30607290349r782e6b95s71e7cd35c60d120f@mail.gmail.com>
+	<44CB9BC3.6090307@fusemail.com>
+	<fbd383e30607302126i15894da7i6df8c20011e3d33@mail.gmail.com>
+	<44CDB896.9000903@fusemail.com>
+Message-ID: <fbd383e30608010535j36ae25bfvdc0b71146f6d3d17@mail.gmail.com>
+
+Hi Francisco
+
+      I tried with $this->form->addFormRule(array( &
+$this,'validateTimings'));
+
+     Now I could access the variable.
+
+     Thanks for your help
+
+regards
+moses
+
+
+
+
+
+
+
+On 7/31/06, Francisco Azevedo <francisco at fusemail.com> wrote:
+>
+> Hi Moses
+>
+> > *          *Thanks for ur reply, still my doubt is not cleared.
+> >
+> >           In a function if we declare a variable as $this it becoms
+> > global so that we can access it from any functions.
+> >
+> > *           *But in the addFormRule function() Though  I decalre a
+> > variable as $this I could not access the variable outside the function.
+> >
+> >            Is there any restriction that the  addFormRule function()
+> > will only return either true nor
+> > array( $errorMessage ) and we cannot access its variables.
+> >
+>
+> Afaik no.. but it seems you are not trying to access variables inside
+> the class because it seems you are cloning the object.
+> Can you try:
+>
+> $this->form->addFormRule(array( & $this,'validateTimings'));
+>
+> instead of:
+>
+> $this->form->addFormRule(array($this,'validateTimings'));
+>
+>
+> regards
+> Francisco A
+> _______________________________________________
+> YDFramework-users mailing list
+> YDFramework-users at lists.berlios.de
+> http://bat.berlios.de/mailman/listinfo/ydframework-users
+>
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <https://lists.berlios.de/pipermail/ydframework-users/attachments/20060801/5a710d68/attachment.html>
+
+From mosesdinakaran at gmail.com  Tue Aug  1 14:39:57 2006
+From: mosesdinakaran at gmail.com (Moses Dinakaran)
+Date: Tue, 1 Aug 2006 18:09:57 +0530
+Subject: [ydf-users] How to make the label of radio buttons invisible.
+Message-ID: <fbd383e30608010539k214e57f5qa6bdf26d07bdef@mail.gmail.com>
+
+Hi Everybody
+
+     How to make the label of radio buttons invisible.
+
+    I have created three radio buttons
+
+     $this->form->addElement('radio','reason','','',array
+("tea"=>"Tea","lunch"=>"Lunch","Other"=>"other"));
+
+    To hide this buttons dynamically I did the following:
+    $this->elm_reason =& $this->form->getElement('reason');
+    $this->elm_reason->_attributes["class"] ="hidden";
+
+   where the css contains
+  .hidden
+  {
+     visibility:hidden;
+  }
+
+   It works fine  the option buttons is not visible, but the problem is
+label for the option button is being displayed
+
+  (ie)  (Tea,Lunch,Other) is being displayed
+
+  How to avoid this.
+  Is there any other way to hide the elements
+
+regards
+ moses
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <https://lists.berlios.de/pipermail/ydframework-users/attachments/20060801/3d0f6fb4/attachment.html>
+
+From mosesdinakaran at gmail.com  Mon Aug  7 07:22:20 2006
+From: mosesdinakaran at gmail.com (Moses Dinakaran)
+Date: Mon, 7 Aug 2006 10:52:20 +0530
+Subject: [ydf-users] query regarding regex validation rule
+Message-ID: <fbd383e30608062222o7fac6bcaw1803a9948a8a243@mail.gmail.com>
+
+Hi Everybody
+
+    Can any one please send me an example about How to use the regex
+validation rule.
+
+regards
+moses
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <https://lists.berlios.de/pipermail/ydframework-users/attachments/20060807/20bcf610/attachment.html>
+
+From francisco at fusemail.com  Mon Aug  7 10:45:55 2006
+From: francisco at fusemail.com (Francisco Azevedo)
+Date: Mon, 07 Aug 2006 09:45:55 +0100
+Subject: [ydf-users] query regarding regex validation rule
+In-Reply-To: <fbd383e30608062222o7fac6bcaw1803a9948a8a243@mail.gmail.com>
+References: <fbd383e30608062222o7fac6bcaw1803a9948a8a243@mail.gmail.com>
+Message-ID: <44D6FDC3.40405@fusemail.com>
+
+Moses Dinakaran wrote:
+
+> Hi Everybody
+>  
+>     Can any one please send me an example about How to use the regex 
+> validation rule.
+
+Some rules use regex internally. Anyway, you have:
+
+YDValidateRules::regex( $val, 
+'/^((\"[^\"\f\n\r\t\v\b]+\")|([\w\!\#\$\%\&\'\*\+\-\~\/\^\`\|\{\}]+(\.[\w\!\#\$\%\&\'\*\+\-\~\/\^\`\|\{\}]+)*))@((\[(((25[0-5])|(2[0-4][0-9])|([0-1]?[0-9]?[0-9]))\.((25[0-5])|(2[0-4][0-9])|([0-1]?[0-9]?[0-9]))\.((25[0-5])|(2[0-4][0-9])|([0-1]?[0-9]?[0-9]))\.((25[0-5])|(2[0-4][0-9])|([0-1]?[0-9]?[0-9])))\])|(((25[0-5])|(2[0-4][0-9])|([0-1]?[0-9]?[0-9]))\.((25[0-5])|(2[0-4][0-9])|([0-1]?[0-9]?[0-9]))\.((25[0-5])|(2[0-4][0-9])|([0-1]?[0-9]?[0-9]))\.((25[0-5])|(2[0-4][0-9])|([0-1]?[0-9]?[0-9])))|((([A-Za-z0-9\-])+\.)+[A-Za-z\-]+))$/' 
+);
+
+that checks if $val is a valid email format.
+
+
+
+YDValidateRules::regex( $val, 
+'/\b(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\b/' 
+);
+
+that checks if $val is a valid ip format.
+
+
+Btw, take a look to http://www.regular-expressions.info/examples.html
+
+
+regards
+Francisco A
+
+
+From mosesdinakaran at gmail.com  Mon Aug  7 13:02:26 2006
+From: mosesdinakaran at gmail.com (Moses Dinakaran)
+Date: Mon, 7 Aug 2006 16:32:26 +0530
+Subject: [ydf-users] query regarding regex validation rule
+In-Reply-To: <44D6FDC3.40405@fusemail.com>
+References: <fbd383e30608062222o7fac6bcaw1803a9948a8a243@mail.gmail.com>
+	<44D6FDC3.40405@fusemail.com>
+Message-ID: <fbd383e30608070402t2a509f9esf3f5465c1a818bc4@mail.gmail.com>
+
+*Hi* *Francisco *
+
+  Actually what I need is
+
+ In the form validation we have a rule named regex
+
+ I dont know how to use that (ie) where to give the expression for the regex
+
+ I tried the folowing but it gives unexpected results.
+
+  $this->form->addRule('app_social','regex','Pleased Enter 0 to 9','[0-9]');
+
+regards
+moses
+
+
+On 8/7/06, Francisco Azevedo <francisco at fusemail.com> wrote:
+>
+> Moses Dinakaran wrote:
+>
+> > Hi Everybody
+> >
+> >     Can any one please send me an example about How to use the regex
+> > validation rule.
+>
+> Some rules use regex internally. Anyway, you have:
+>
+> YDValidateRules::regex( $val,
+>
+> '/^((\"[^\"\f\n\r\t\v\b]+\")|([\w\!\#\$\%\&\'\*\+\-\~\/\^\`\|\{\}]+(\.[\w\!\#\$\%\&\'\*\+\-\~\/\^\`\|\{\}]+)*))@((\[(((25[0-5])|(2[0-4][0-9])|([0-1]?[0-9]?[0-9]))\.((25[0-5])|(2[0-4][0-9])|([0-1]?[0-9]?[0-9]))\.((25[0-5])|(2[0-4][0-9])|([0-1]?[0-9]?[0-9]))\.((25[0-5])|(2[0-4][0-9])|([0-1]?[0-9]?[0-9])))\])|(((25[0-5])|(2[0-4][0-9])|([0-1]?[0-9]?[0-9]))\.((25[0-5])|(2[0-4][0-9])|([0-1]?[0-9]?[0-9]))\.((25[0-5])|(2[0-4][0-9])|([0-1]?[0-9]?[0-9]))\.((25[0-5])|(2[0-4][0-9])|([0-1]?[0-9]?[0-9])))|((([A-Za-z0-9\-])+\.)+[A-Za-z\-]+))$/'
+> );
+>
+> that checks if $val is a valid email format.
+>
+>
+>
+> YDValidateRules::regex( $val,
+>
+> '/\b(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\b/'
+> );
+>
+> that checks if $val is a valid ip format.
+>
+>
+> Btw, take a look to http://www.regular-expressions.info/examples.html
+>
+>
+> regards
+> Francisco A
+> _______________________________________________
+> YDFramework-users mailing list
+> YDFramework-users at lists.berlios.de
+> http://bat.berlios.de/mailman/listinfo/ydframework-users
+>
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <https://lists.berlios.de/pipermail/ydframework-users/attachments/20060807/c37531aa/attachment.html>
+
+From francisco at fusemail.com  Mon Aug  7 13:18:42 2006
+From: francisco at fusemail.com (Francisco Azevedo)
+Date: Mon, 07 Aug 2006 12:18:42 +0100
+Subject: [ydf-users] query regarding regex validation rule
+In-Reply-To: <fbd383e30608070402t2a509f9esf3f5465c1a818bc4@mail.gmail.com>
+References: <fbd383e30608062222o7fac6bcaw1803a9948a8a243@mail.gmail.com>	<44D6FDC3.40405@fusemail.com>
+	<fbd383e30608070402t2a509f9esf3f5465c1a818bc4@mail.gmail.com>
+Message-ID: <44D72192.5010200@fusemail.com>
+
+Hi Moses
+
+>  
+>   Actually what I need is
+>  
+>  In the form validation we have a rule named regex
+>  
+>  I dont know how to use that (ie) where to give the expression for the regex
+>  
+>  I tried the folowing but it gives unexpected results.   
+>  
+>   $this->form->addRule('app_social','regex','Pleased Enter 0 to 9','[0-9]');
+
+
+You get _unexpected_ results because your regular expression is wrong. 
+You want to match the variable with a string that starts (so use /^ that 
+defines _starts_ ) with 0..9 and _ends_ (use $/ to define ends) there 
+(read: the string don't have more characters).
+
+So. To your example you must do:
+
+$this->form->addRule('app_social','regex','Pleased Enter 0 to 9' 
+'/^[0-9]$/' );
+
+
+Basically, you are creating and passing the arguments ok. The problem is 
+on creating the regular expressions. See the next *url* on how to create 
+regular expressions:
+
+http://www.regular-expressions.info/examples.html
+
+
+
+regards
+Francisco A
+
+
+From maximus_meridius79 at yahoo.com  Mon Aug  7 15:01:51 2006
+From: maximus_meridius79 at yahoo.com (maximus meridius)
+Date: Mon, 7 Aug 2006 06:01:51 -0700 (PDT)
+Subject: [ydf-users] Adding form elements below button elements
+Message-ID: <20060807130151.16920.qmail@web54007.mail.yahoo.com>
+
+  Hi,
+
+The "button" elements always seem to be rendered at the bottom of aform by the form renderer. Is there a way to place elements below"button" elements? Should I be using different button-style elements -e.g. "radio" elements.
+
+Thanks,
+
+Graeme
+
+ 		
+---------------------------------
+Yahoo! Messenger with Voice. Make PC-to-Phone Calls to the US (and 30+ countries) for 2?/min or less.
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <https://lists.berlios.de/pipermail/ydframework-users/attachments/20060807/297e0414/attachment.html>
+
+From francisco at fusemail.com  Mon Aug  7 15:04:37 2006
+From: francisco at fusemail.com (Francisco Azevedo)
+Date: Mon, 07 Aug 2006 14:04:37 +0100
+Subject: [ydf-users] Adding form elements below button elements
+In-Reply-To: <20060807130151.16920.qmail@web54007.mail.yahoo.com>
+References: <20060807130151.16920.qmail@web54007.mail.yahoo.com>
+Message-ID: <44D73A65.3080709@fusemail.com>
+
+Hi Graeme
+
+> The "button" elements always seem to be rendered at the bottom of a form 
+> by the form renderer. Is there a way to place elements below "button" 
+> elements? Should I be using different button-style elements - e.g. 
+> "radio" elements.
+
+
+Yes. You are using the YDForm html render and this render will place 
+buttons at the end.
+
+If you want a different way you can:
+
+- (the hard choice) Create your own render
+
+- (the simple) Create a template and add elements in a custom way to the 
+template.
+
+
+regards
+Francisco A
+
+
+From francisco at fusemail.com  Mon Aug  7 15:59:38 2006
+From: francisco at fusemail.com (Francisco Azevedo)
+Date: Mon, 07 Aug 2006 14:59:38 +0100
+Subject: [ydf-users] How to support YDF
+Message-ID: <44D7474A.80002@fusemail.com>
+
+Hi all
+
+How can we support the YDF? :)  Pieter, DB, any amazon wishlist?
+
+
+Francisco A
+
+
+From muitocomplicado at gmail.com  Tue Aug  8 07:56:37 2006
+From: muitocomplicado at gmail.com (David Bittencourt)
+Date: Tue, 8 Aug 2006 02:56:37 -0300
+Subject: [ydf-users] YDDatabaseObject, GroupBy and aggreate functions ?
+In-Reply-To: <1154434417.44cf4571c6d29@imp2-g19.free.fr>
+References: <1154434417.44cf4571c6d29@imp2-g19.free.fr>
+Message-ID: <12260be20608072256k6e8fd2c4v54784b3a51a43dfe@mail.gmail.com>
+
+Hi Erwan,
+
+You can retrieve the results of count, avg, sum or any SQL expression by
+registering the select expression. For example:
+
+class MyObject extends YDDatabaseObject {
+
+    function MyObject() {
+        $this->YDDatabaseObject();
+
+        $this->registerDatabase();
+        $this->registerTable( 'mytable' );
+
+        $this->registerKey( 'id' );
+        $this->registerField( 'type' );
+        $this->registerField( 'total' );
+
+        $this->registerSelect( 'big', 'IF( #.total > 100, 1, 0 )' );
+
+        // third parameter means that this select is not going to be added
+in all queries
+        $this->registerSelect( 'rows', 'COUNT( #.id )', false );
+        $this->registerSelect( 'average', 'AVG( #.total )', false );
+
+    }
+
+}
+
+$obj = YDDatabaseObject::getInstance( 'MyObject' );
+$obj->id = 1;
+$obj->find(); // SELECT id, type, total, IF( mytable.total > 100, 1, 0 ) AS
+big FROM mytable WHERE id = 1
+
+$obj->reset();
+$obj->select( 'count' );
+$obj->find(); // SELECT COUNT( mytable.total ) AS rows FROM mytable
+
+$obj->reset();
+$obj->select( 'type', 'average', 'count' );
+$obj->group( 'type' );
+$obj->find(); // SELECT AVG( mytable.total ) AS average, COUNT(
+mytable.total ) AS rows FROM mytable GROUP BY type
+
+// result example
+
+array (
+
+    array (
+        'type' => 1,
+        'average' => 25,
+        'rows' => 3,
+    ),
+    array (
+        'type' => 2,
+        'average' => 86,
+        'rows' => 11,
+    ),
+
+);
+
+
+Hope this can help.
+
+-db
+
+
+On 8/1/06, araviski at free.fr <araviski at free.fr> wrote:
+>
+> Hi all !
+>
+> I'm currently trying to make some little stats about my application, and I
+> wonder if I can use the YDDatabaseObject to retrieve the results of Count,
+> avg,
+> sum, etc.. expressions in a query. I successfully used the groupby()
+> function,
+> but only without any aggregate function.
+> I tried the findSql() method to make my whole query, but the fact that the
+> aggregate expressions are not registred in the object trigger some errors.
+> I also tried to register the expressions using registerSelect in the
+> definition
+> of the objects on the off-chance but it doesn't work (and I understand
+> that I
+> cannot have permanently aggregate functions in the select queries).
+>
+> So my question is, is it possible to use aggregate functions using the
+> YDDatabaseObject or have I to use a YDDatabaseQuery ?
+>
+> BTW, the findSql() function trigger "Notice: Undefined offset:" errors in
+> YDDatabaseObject.php on line 1475 when the select fields are not precised
+> using
+> the select() function just before using the findSql() one.
+>
+> Thanks for any help,
+>
+> Erwan.
+> _______________________________________________
+> YDFramework-users mailing list
+> YDFramework-users at lists.berlios.de
+> http://bat.berlios.de/mailman/listinfo/ydframework-users
+>
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <https://lists.berlios.de/pipermail/ydframework-users/attachments/20060808/88507c11/attachment.html>
+
+From pieter at yellowduck.be  Tue Aug  8 12:27:18 2006
+From: pieter at yellowduck.be (Pieter Claerhout)
+Date: Tue, 8 Aug 2006 12:27:18 +0200
+Subject: [ydf-users] How to support YDF
+In-Reply-To: <44D7474A.80002@fusemail.com>
+References: <44D7474A.80002@fusemail.com>
+Message-ID: <4aef63030608080327m3a18a30fx578557c8d118ae4c@mail.gmail.com>
+
+Hi Franciso,
+
+I don't have an amazon wishlist, but I can create one if you like. I'm not
+sure if paypal would be an option?
+
+cheers,
+
+pieter
+
+On 8/7/06, Francisco Azevedo <francisco at fusemail.com> wrote:
+>
+> Hi all
+>
+> How can we support the YDF? :)  Pieter, DB, any amazon wishlist?
+>
+>
+> Francisco A
+> _______________________________________________
+> YDFramework-users mailing list
+> YDFramework-users at lists.berlios.de
+> http://bat.berlios.de/mailman/listinfo/ydframework-users
+>
+
+
+
+-- 
+pieter claerhout . pieter at yellowduck.be . http://www.yellowduck.be/
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <https://lists.berlios.de/pipermail/ydframework-users/attachments/20060808/91888f91/attachment.html>
+
+From francisco at fusemail.com  Tue Aug  8 18:05:25 2006
+From: francisco at fusemail.com (Francisco Azevedo)
+Date: Tue, 08 Aug 2006 17:05:25 +0100
+Subject: [ydf-users] How to support YDF
+In-Reply-To: <4aef63030608080327m3a18a30fx578557c8d118ae4c@mail.gmail.com>
+References: <44D7474A.80002@fusemail.com>
+	<4aef63030608080327m3a18a30fx578557c8d118ae4c@mail.gmail.com>
+Message-ID: <44D8B645.4060602@fusemail.com>
+
+Hi Pieter
+
+> I don't have an amazon wishlist, but I can create one if you like. I'm 
+> not sure if paypal would be an option?
+
+An amazon wishlist is more funny :) maybe some php books ;)
+
+
+regards
+Francisco A
+
+
+From araviski at free.fr  Fri Aug 11 21:25:27 2006
+From: araviski at free.fr (Erwan)
+Date: Fri, 11 Aug 2006 21:25:27 +0200
+Subject: [ydf-users] YDDatabaseObject, GroupBy and aggreate functions ?
+In-Reply-To: <12260be20608072256k6e8fd2c4v54784b3a51a43dfe@mail.gmail.com>
+References: <1154434417.44cf4571c6d29@imp2-g19.free.fr>
+	<12260be20608072256k6e8fd2c4v54784b3a51a43dfe@mail.gmail.com>
+Message-ID: <44DCD9A7.90600@free.fr>
+
+Hi David !
+Thank you very much for your help, the third parameter was exactly what
+I was looking for :-)
+It's a nice example for the YDF papers !
+
+regards
+Erwan.
+
+David Bittencourt a ?crit :
+> Hi Erwan,
+>
+> You can retrieve the results of count, avg, sum or any SQL expression
+> by registering the select expression. For example:
+>
+> class MyObject extends YDDatabaseObject {
+>
+>     function MyObject() {
+>         $this->YDDatabaseObject();
+>        
+>         $this->registerDatabase();
+>         $this->registerTable( 'mytable' );
+>        
+>         $this->registerKey( 'id' );
+>         $this->registerField( 'type' );
+>         $this->registerField( 'total' );
+>        
+>         $this->registerSelect( 'big', 'IF( #.total > 100, 1, 0 )' );
+>        
+>         // third parameter means that this select is not going to be
+> added in all queries
+>         $this->registerSelect( 'rows', 'COUNT( #.id )', false );
+>         $this->registerSelect( 'average', 'AVG( #.total )', false );
+>        
+>     }
+>
+> }
+>
+> $obj = YDDatabaseObject::getInstance( 'MyObject' );
+> $obj->id = 1;
+> $obj->find(); // SELECT id, type, total, IF( mytable.total > 100, 1, 0
+> ) AS big FROM mytable WHERE id = 1
+>
+> $obj->reset();
+> $obj->select( 'count' );
+> $obj->find(); // SELECT COUNT( mytable.total ) AS rows FROM mytable
+>
+> $obj->reset();
+> $obj->select( 'type', 'average', 'count' );
+> $obj->group( 'type' );
+> $obj->find(); // SELECT AVG( mytable.total ) AS average, COUNT(
+> mytable.total ) AS rows FROM mytable GROUP BY type
+>
+> // result example
+>
+> array (
+>
+>     array (
+>         'type' => 1,
+>         'average' => 25,
+>         'rows' => 3,
+>     ),
+>     array (
+>         'type' => 2,
+>         'average' => 86,
+>         'rows' => 11,
+>     ),
+>
+> );
+>
+>
+> Hope this can help.
+>
+> -db
+>
+>
+> On 8/1/06, * araviski at free.fr <mailto:araviski at free.fr>*
+> <araviski at free.fr <mailto:araviski at free.fr>> wrote:
+>
+>     Hi all !
+>
+>     I'm currently trying to make some little stats about my
+>     application, and I
+>     wonder if I can use the YDDatabaseObject to retrieve the results
+>     of Count, avg,
+>     sum, etc.. expressions in a query. I successfully used the
+>     groupby() function,
+>     but only without any aggregate function.
+>     I tried the findSql() method to make my whole query, but the fact
+>     that the
+>     aggregate expressions are not registred in the object trigger some
+>     errors.
+>     I also tried to register the expressions using registerSelect in
+>     the definition
+>     of the objects on the off-chance but it doesn't work (and I
+>     understand that I
+>     cannot have permanently aggregate functions in the select queries).
+>
+>     So my question is, is it possible to use aggregate functions using
+>     the
+>     YDDatabaseObject or have I to use a YDDatabaseQuery ?
+>
+>     BTW, the findSql() function trigger "Notice: Undefined offset:"
+>     errors in
+>     YDDatabaseObject.php on line 1475 when the select fields are not
+>     precised using
+>     the select() function just before using the findSql() one.
+>
+>     Thanks for any help,
+>
+>     Erwan.
+>     _______________________________________________
+>     YDFramework-users mailing list
+>     YDFramework-users at lists.berlios.de
+>     <mailto:YDFramework-users at lists.berlios.de>
+>     http://bat.berlios.de/mailman/listinfo/ydframework-users
+>
+>
+> ------------------------------------------------------------------------
+>
+> _______________________________________________
+> YDFramework-users mailing list
+> YDFramework-users at lists.berlios.de
+> http://bat.berlios.de/mailman/listinfo/ydframework-users
+>   
+
+
+
+From gonzillaaa at gmail.com  Sat Aug 12 14:14:11 2006
+From: gonzillaaa at gmail.com (Gonzillaaa)
+Date: Sat, 12 Aug 2006 13:14:11 +0100
+Subject: [ydf-users] $form->addElement('image') syntax
+Message-ID: <F213FCEF-539E-4D3B-92F8-E154EA5C9B48@gmail.com>
+
+hello does anybody have an example of $form->addElement('image')  
+somewhere? I don't seem to be passing the parameters right, in  
+particular I'm not sure how to pass the image/path in question. How  
+would that be rendered on a template would it still be by  
+{$form._cmdSubmit.html} or would it have to be {$form.image.html}
+
+many thanks,
+
+G.
+
+
+From mosesdinakaran at gmail.com  Sun Aug 13 10:18:51 2006
+From: mosesdinakaran at gmail.com (Moses Dinakaran)
+Date: Sun, 13 Aug 2006 13:48:51 +0530
+Subject: [ydf-users] $form->addElement('image') syntax
+In-Reply-To: <F213FCEF-539E-4D3B-92F8-E154EA5C9B48@gmail.com>
+References: <F213FCEF-539E-4D3B-92F8-E154EA5C9B48@gmail.com>
+Message-ID: <fbd383e30608130118m5f4ee479r2099cb24116a3b18@mail.gmail.com>
+
+Hi  Gonzillaaa
+
+    hopes the following code will help u
+
+      $form->addElement( 'image', 'img1', '', array(),
+'/images/xml.gif' <http://www.scripting.com/images/xml.gif'>);
+.tpl
+
+   {$form.img1.html}
+
+regards
+moses
+
+
+
+
+On 8/12/06, Gonzillaaa <gonzillaaa at gmail.com> wrote:
+>
+> hello does anybody have an example of $form->addElement('image')
+> somewhere? I don't seem to be passing the parameters right, in
+> particular I'm not sure how to pass the image/path in question. How
+> would that be rendered on a template would it still be by
+> {$form._cmdSubmit.html} or would it have to be {$form.image.html}
+>
+> many thanks,
+>
+> G.
+> _______________________________________________
+> YDFramework-users mailing list
+> YDFramework-users at lists.berlios.de
+> http://bat.berlios.de/mailman/listinfo/ydframework-users
+>
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <https://lists.berlios.de/pipermail/ydframework-users/attachments/20060813/ffd52899/attachment.html>
+
+From gonzillaaa at gmail.com  Sun Aug 13 11:48:44 2006
+From: gonzillaaa at gmail.com (Gonzillaaa)
+Date: Sun, 13 Aug 2006 10:48:44 +0100
+Subject: [ydf-users] $form->addElement('image') syntax
+In-Reply-To: <fbd383e30608130118m5f4ee479r2099cb24116a3b18@mail.gmail.com>
+References: <F213FCEF-539E-4D3B-92F8-E154EA5C9B48@gmail.com>
+	<fbd383e30608130118m5f4ee479r2099cb24116a3b18@mail.gmail.com>
+Message-ID: <9E262D14-4487-40EE-A287-73047040F362@gmail.com>
+
+Hi Moses thanks for the reply. I did work it out last night, it was a  
+pretty silly question :) this did it for me:
+
+$form->addElement('image', 'add', 'order.gif', array('alt'=>'Add to  
+order'), array());
+then {$form.add.html}
+
+Thanks,
+
+G.
+
+On 13 Aug 2006, at 09:18, Moses Dinakaran wrote:
+
+>
+> Hi  Gonzillaaa
+>
+>     hopes the following code will help u
+>
+>       $form->addElement( 'image', 'img1', '', array(),
+> '/images/xml.gif' );
+> .tpl
+>
+>    {$form.img1.html}
+>
+> regards
+> moses
+>
+>
+>
+>
+> On 8/12/06, Gonzillaaa <gonzillaaa at gmail.com> wrote: hello does  
+> anybody have an example of $form->addElement('image')
+> somewhere? I don't seem to be passing the parameters right, in
+> particular I'm not sure how to pass the image/path in question. How
+> would that be rendered on a template would it still be by
+> {$form._cmdSubmit.html} or would it have to be {$form.image.html}
+>
+> many thanks,
+>
+> G.
+> _______________________________________________
+> YDFramework-users mailing list
+> YDFramework-users at lists.berlios.de
+> http://bat.berlios.de/mailman/listinfo/ydframework-users
+>
+> _______________________________________________
+> YDFramework-users mailing list
+> YDFramework-users at lists.berlios.de
+> http://bat.berlios.de/mailman/listinfo/ydframework-users
+
+
+
+From pieter at yellowduck.be  Mon Aug 14 11:06:58 2006
+From: pieter at yellowduck.be (Pieter Claerhout)
+Date: Mon, 14 Aug 2006 11:06:58 +0200
+Subject: [ydf-users] Any chance of getting an example for YDCMComponent
+Message-ID: <4aef63030608140206p62577e48o172a1b4d4e4f0ce8@mail.gmail.com>
+
+Hi Ximian,
+
+I'm trying to get my head around the YDCMComponent structure you created,
+but I don't really see how to get started.
+
+Is there any chance you can add a simple example that shows the basics of
+using this class? Without an example and documentation, I don't think anyone
+will be able to use this.
+
+cheers,
+
+
+pieter
+
+-- 
+pieter claerhout . pieter at yellowduck.be . http://www.yellowduck.be/
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <https://lists.berlios.de/pipermail/ydframework-users/attachments/20060814/f92ba678/attachment.html>
+
+From mosesdinakaran at gmail.com  Mon Aug 14 17:13:37 2006
+From: mosesdinakaran at gmail.com (Moses Dinakaran)
+Date: Mon, 14 Aug 2006 20:43:37 +0530
+Subject: [ydf-users] Problems with getRecordsAsSet
+Message-ID: <fbd383e30608140813k37321985iaa15d515863edbb0@mail.gmail.com>
+
+Hi Everybody
+
+      I have a problem with ordering the records based upon the sortfld and
+sortdir using getRecordsAsSet
+
+     the following is the code
+
+     $recordSet =
+$this->db->getRecordsAsSet("$this->query",$this->page,$this->size);
+
+    .tpl
+
+      {$recordSet->getSortUrl('app_first_name')}
+
+    The problem is If the sortfld datatype  is string (Not for all string
+datatype only for some particular field  )order is not displayed
+properly.Onthe other hand  If the sortfld datatype  is numeric it
+works fine.
+
+    *Again if I  run the same query in the phpMyAdmin which gives me the
+correct result.*
+
+    Any Suggestions Please.
+
+
+My Query
+
+select p.pre_approval_id,p.cu_id,date_format(p.created_date,'%m-%d-%Y') as
+date,     p.created_date ,p.loan_officer_id,p.app_first_name,p.app_last_name
+,p.amount ,
+p.loan_type_id,date_format(p.expires_date,'%m-%d-%Y') as date_expires,
+p.expires_date,
+p.pre_approval_status as status, CONCAT(p.app_first_name, ' ',
+p.app_last_name ) as app_name ,
+cum.cu_name ,lo.first_name,lt.name as loan_name from tbl_preapprovals as p
+left join tbl_credit_union_master as cum on p.cu_id=cum.cu_id
+left join tbl_loan_user as lo on p.loan_officer_id = lo.loan_user_id
+left join tbl_loan_type_master as lt on p.loan_type_id = lt.loan_type_id
+where 1=1 order by p.app_first_name DESC
+
+
+.tpl
+
+
+$recordSet->getSortUrl('p.pre_approval_id')} -->Works Fine
+{$recordSet->getSortUrl('cum.cu_name')}-->Works Fine
+{$recordSet->getSortUrl('p.created_date')}-->Works Fine
+{$recordSet->getSortUrl('lo.first_name')}-->Works Fine
+*{$recordSet->getSortUrl('p.app_first_name')}-->Gives the problem*
+{$recordSet->getSortUrl('amount')}-->Works Fine
+{$recordSet->getSortUrl('lt.name')}-->Works Fine
+
+
+
+
+
+
+
+
+regards
+moses
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <https://lists.berlios.de/pipermail/ydframework-users/attachments/20060814/efa4b404/attachment.html>
+
+From francisco at fusemail.com  Mon Aug 14 19:00:39 2006
+From: francisco at fusemail.com (Francisco Azevedo)
+Date: Mon, 14 Aug 2006 18:00:39 +0100
+Subject: [ydf-users] Any chance of getting an example for YDCMComponent
+In-Reply-To: <4aef63030608140206p62577e48o172a1b4d4e4f0ce8@mail.gmail.com>
+References: <4aef63030608140206p62577e48o172a1b4d4e4f0ce8@mail.gmail.com>
+Message-ID: <44E0AC37.8090700@fusemail.com>
+
+Hi Pieter
+
+> I'm trying to get my head around the YDCMComponent structure you 
+> created, but I don't really see how to get started.
+>  
+> Is there any chance you can add a simple example that shows the basics 
+> of using this class? Without an example and documentation, I don't think 
+> anyone will be able to use this.
+
+Sure. In the next commit i'll try to add a simple example.
+
+regards
+Francisco A
+
+
+From gonzillaaa at gmail.com  Thu Aug 17 12:27:53 2006
+From: gonzillaaa at gmail.com (Gonzillaaa)
+Date: Thu, 17 Aug 2006 11:27:53 +0100
+Subject: [ydf-users] unexpected behaviour of $image->saveThumbnail
+Message-ID: <E442238A-A726-4243-B369-0D5A685ECD73@gmail.com>
+
+Hello al I have a really weird thing happening, I am uploading a  
+bunch of images directly from a  digital camera and resizing them  
+using saveThumbnail like:
+
+$image->saveThumbnail(265, 335, $path . $image->getBaseName(), true);
+$image->saveThumbnail(450, 600, $path . 'large/' . $image->getBaseName 
+(), true);
+
+
+the problem I'm getting is that the images uploaded are vertical and  
+in the resizing process they get rotated and turn 90 degrees on their  
+side, not matter if I crop them or not...
+
+Have you seen this behaviour before? would it be possible to have a  
+resize & rotate methods on YDFSImage?
+
+
+Many thanks,
+
+G.
+
+
+
+
+From pieter at yellowduck.be  Thu Aug 17 13:26:19 2006
+From: pieter at yellowduck.be (Pieter Claerhout)
+Date: Thu, 17 Aug 2006 13:26:19 +0200
+Subject: [ydf-users] unexpected behaviour of $image->saveThumbnail
+In-Reply-To: <E442238A-A726-4243-B369-0D5A685ECD73@gmail.com>
+References: <E442238A-A726-4243-B369-0D5A685ECD73@gmail.com>
+Message-ID: <4aef63030608170426k119a4d0ew52304c7a56ded137@mail.gmail.com>
+
+Normally, it shouldn't rotate the images. Can you send me a sample
+image/script that shows this?
+
+pieter
+
+On 8/17/06, Gonzillaaa <gonzillaaa at gmail.com> wrote:
+>
+> Hello al I have a really weird thing happening, I am uploading a
+> bunch of images directly from a  digital camera and resizing them
+> using saveThumbnail like:
+>
+> $image->saveThumbnail(265, 335, $path . $image->getBaseName(), true);
+> $image->saveThumbnail(450, 600, $path . 'large/' . $image->getBaseName
+> (), true);
+>
+>
+> the problem I'm getting is that the images uploaded are vertical and
+> in the resizing process they get rotated and turn 90 degrees on their
+> side, not matter if I crop them or not...
+>
+> Have you seen this behaviour before? would it be possible to have a
+> resize & rotate methods on YDFSImage?
+>
+>
+> Many thanks,
+>
+> G.
+>
+>
+> _______________________________________________
+> YDFramework-users mailing list
+> YDFramework-users at lists.berlios.de
+> https://lists.berlios.de/mailman/listinfo/ydframework-users
+>
+
+
+
+-- 
+pieter claerhout . pieter at yellowduck.be . http://www.yellowduck.be/
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <https://lists.berlios.de/pipermail/ydframework-users/attachments/20060817/6b72f4de/attachment.html>
+
+From gonzillaaa at gmail.com  Thu Aug 17 13:59:45 2006
+From: gonzillaaa at gmail.com (Gonzillaaa)
+Date: Thu, 17 Aug 2006 12:59:45 +0100
+Subject: [ydf-users] unexpected behaviour of $image->saveThumbnail
+In-Reply-To: <4aef63030608170426k119a4d0ew52304c7a56ded137@mail.gmail.com>
+References: <E442238A-A726-4243-B369-0D5A685ECD73@gmail.com>
+	<4aef63030608170426k119a4d0ew52304c7a56ded137@mail.gmail.com>
+Message-ID: <B4E11938-28BA-4AB2-A115-C23EA9C485A2@gmail.com>
+
+Hi Pieter uploading the image to show it to you I have realised the  
+problem lies in how the camera takes the shots and the finder (in  
+osx) displays them.
+
+I have two cameras and tested this with both (both canon btw). It  
+seems all shots are stored horizontally but there must be something  
+on the exif data that says that the shot has been taken vertically so  
+finder and other photo management programs display it vertically.  
+When viewing the image with a browser for instance or uploading it  
+with php the image remains horizontal. Now I'm not sure if this is  
+something in particular of my cameras or general to all of them. Have  
+you had this before?
+
+If I open the images with photoshop btw they appear vertical I save  
+them without any editing and now they reman vertical to all effects...
+
+
+is there a straight forward way to rotate the image with php?
+
+btw here is a sample image with the problem in question: http:// 
+artificialtourism.com/IMG_4337.JPG
+
+and this the code for uploading and resizing I'm using:
+
+function saveMainView($file, $file_path) {
+	$path = MEDIA_PATH . $file_path . '/';
+	$date_name = date("dmy") . "_" . date("His");
+	if (!$file_path) {
+		die('$file_path is not set');
+	}
+	if (!$file) {
+		die('no file specified');
+	}
+	if ($file->isUploaded()) {
+		/** check whether path exists or not
+		 * if not make the directory */
+		if (!file_exists($path)) {
+			mkdir($path);
+		}
+		if (!file_exists($path . 'thumbnails/')) {
+			mkdir($path . 'thumbnails/');
+		}
+		if (!file_exists($path . 'large/')) {
+			mkdir($path . 'large/');
+		}
+		/** ================================================================
+		 * strip character from filename & get the new filename */
+		$filename = YDStringUtil :: stripSpecialCharacters($file- 
+ >getBaseName());
+		$file->moveUpload($path, $filename);
+		/** Check if it's an image (filetype) */
+		$fileObj = new YDFSFile($path . $filename);
+		if (!$fileObj->isImage()) {
+			@ unlink($path . $filename);
+			die('Image file not recognised');
+		}
+		/** ================================================================
+		 * create image object to rename etc */
+		$image = new YDFSImage($path . $filename);
+		$ext = strtolower($image->getExtension());
+		$image->rename($path . $date_name . '.' . $ext);
+		/** ================================================================
+		 * change permissions on the directories & file */
+		@ chmod($path, 0777);
+		@ chmod($path . 'thumbnails/', 0777);
+		@ chmod($path . 'large/', 0777);
+		@ chmod($path . $image->getBaseName(), 0777);
+		/** ================================================================
+		 * resize */
+		$image->saveThumbnail(450, 600, $path . 'large/' . $image- 
+ >getBaseName(), true);
+		$image->saveThumbnail(265, 335, $path . $image->getBaseName(), true);
+		/** ================================================================
+		 * create thumbnail */
+		$image->saveThumbnail(100, 100, $path . 'thumbnails/' . $image- 
+ >getBaseName());
+	}
+	/** @return filename */
+	return $image->getBaseName();
+}
+
+many thanks,
+
+On 17 Aug 2006, at 12:26, Pieter Claerhout wrote:
+
+> Normally, it shouldn't rotate the images. Can you send me a sample  
+> image/script that shows this?
+>
+> pieter
+>
+> On 8/17/06, Gonzillaaa <gonzillaaa at gmail.com> wrote: Hello al I  
+> have a really weird thing happening, I am uploading a
+> bunch of images directly from a  digital camera and resizing them
+> using saveThumbnail like:
+>
+> $image->saveThumbnail(265, 335, $path . $image->getBaseName(), true);
+> $image->saveThumbnail(450, 600, $path . 'large/' . $image->getBaseName
+> (), true);
+>
+>
+> the problem I'm getting is that the images uploaded are vertical and
+> in the resizing process they get rotated and turn 90 degrees on their
+> side, not matter if I crop them or not...
+>
+> Have you seen this behaviour before? would it be possible to have a
+> resize & rotate methods on YDFSImage?
+>
+>
+> Many thanks,
+>
+> G.
+>
+>
+> _______________________________________________
+> YDFramework-users mailing list
+> YDFramework-users at lists.berlios.de
+> https://lists.berlios.de/mailman/listinfo/ydframework-users
+>
+>
+>
+> -- 
+> pieter claerhout . pieter at yellowduck.be . http://www.yellowduck.be/
+> _______________________________________________
+> YDFramework-users mailing list
+> YDFramework-users at lists.berlios.de
+> https://lists.berlios.de/mailman/listinfo/ydframework-users
+
+
+
+From pieter at yellowduck.be  Thu Aug 17 15:01:59 2006
+From: pieter at yellowduck.be (Pieter Claerhout)
+Date: Thu, 17 Aug 2006 15:01:59 +0200
+Subject: [ydf-users] unexpected behaviour of $image->saveThumbnail
+In-Reply-To: <B4E11938-28BA-4AB2-A115-C23EA9C485A2@gmail.com>
+References: <E442238A-A726-4243-B369-0D5A685ECD73@gmail.com>
+	<4aef63030608170426k119a4d0ew52304c7a56ded137@mail.gmail.com>
+	<B4E11938-28BA-4AB2-A115-C23EA9C485A2@gmail.com>
+Message-ID: <4aef63030608170601j717d56a1v4fbbad3202148118@mail.gmail.com>
+
+Yes, most Canon and Nikon cameras record the image orientation in the EXIF
+data. Most software like Adobe Photoshop and probably the Finder in OS X
+read this information and automatically rotate the image based on that
+information.
+
+However, the Yellow Duck Framework (or more precisely, the jpeg functions in
+PHP) doesn't look at this information and just show this information as is.
+
+There is an imagerotate function in PHP that can probably take care of this,
+but it's not built in into the framework.
+
+pieter
+
+On 8/17/06, Gonzillaaa <gonzillaaa at gmail.com> wrote:
+>
+> Hi Pieter uploading the image to show it to you I have realised the
+> problem lies in how the camera takes the shots and the finder (in
+> osx) displays them.
+>
+> I have two cameras and tested this with both (both canon btw). It
+> seems all shots are stored horizontally but there must be something
+> on the exif data that says that the shot has been taken vertically so
+> finder and other photo management programs display it vertically.
+> When viewing the image with a browser for instance or uploading it
+> with php the image remains horizontal. Now I'm not sure if this is
+> something in particular of my cameras or general to all of them. Have
+> you had this before?
+>
+> If I open the images with photoshop btw they appear vertical I save
+> them without any editing and now they reman vertical to all effects...
+>
+>
+> is there a straight forward way to rotate the image with php?
+>
+> btw here is a sample image with the problem in question: http://
+> artificialtourism.com/IMG_4337.JPG
+>
+> and this the code for uploading and resizing I'm using:
+>
+> function saveMainView($file, $file_path) {
+>        $path = MEDIA_PATH . $file_path . '/';
+>        $date_name = date("dmy") . "_" . date("His");
+>        if (!$file_path) {
+>                die('$file_path is not set');
+>        }
+>        if (!$file) {
+>                die('no file specified');
+>        }
+>        if ($file->isUploaded()) {
+>                /** check whether path exists or not
+>                 * if not make the directory */
+>                if (!file_exists($path)) {
+>                        mkdir($path);
+>                }
+>                if (!file_exists($path . 'thumbnails/')) {
+>                        mkdir($path . 'thumbnails/');
+>                }
+>                if (!file_exists($path . 'large/')) {
+>                        mkdir($path . 'large/');
+>                }
+>                /**
+> ================================================================
+>                 * strip character from filename & get the new filename */
+>                $filename = YDStringUtil :: stripSpecialCharacters($file-
+> >getBaseName());
+>                $file->moveUpload($path, $filename);
+>                /** Check if it's an image (filetype) */
+>                $fileObj = new YDFSFile($path . $filename);
+>                if (!$fileObj->isImage()) {
+>                        @ unlink($path . $filename);
+>                        die('Image file not recognised');
+>                }
+>                /**
+> ================================================================
+>                 * create image object to rename etc */
+>                $image = new YDFSImage($path . $filename);
+>                $ext = strtolower($image->getExtension());
+>                $image->rename($path . $date_name . '.' . $ext);
+>                /**
+> ================================================================
+>                 * change permissions on the directories & file */
+>                @ chmod($path, 0777);
+>                @ chmod($path . 'thumbnails/', 0777);
+>                @ chmod($path . 'large/', 0777);
+>                @ chmod($path . $image->getBaseName(), 0777);
+>                /**
+> ================================================================
+>                 * resize */
+>                $image->saveThumbnail(450, 600, $path . 'large/' . $image-
+> >getBaseName(), true);
+>                $image->saveThumbnail(265, 335, $path .
+> $image->getBaseName(), true);
+>                /**
+> ================================================================
+>                 * create thumbnail */
+>                $image->saveThumbnail(100, 100, $path . 'thumbnails/' .
+> $image-
+> >getBaseName());
+>        }
+>        /** @return filename */
+>        return $image->getBaseName();
+> }
+>
+> many thanks,
+>
+> On 17 Aug 2006, at 12:26, Pieter Claerhout wrote:
+>
+> > Normally, it shouldn't rotate the images. Can you send me a sample
+> > image/script that shows this?
+> >
+> > pieter
+> >
+> > On 8/17/06, Gonzillaaa <gonzillaaa at gmail.com> wrote: Hello al I
+> > have a really weird thing happening, I am uploading a
+> > bunch of images directly from a  digital camera and resizing them
+> > using saveThumbnail like:
+> >
+> > $image->saveThumbnail(265, 335, $path . $image->getBaseName(), true);
+> > $image->saveThumbnail(450, 600, $path . 'large/' . $image->getBaseName
+> > (), true);
+> >
+> >
+> > the problem I'm getting is that the images uploaded are vertical and
+> > in the resizing process they get rotated and turn 90 degrees on their
+> > side, not matter if I crop them or not...
+> >
+> > Have you seen this behaviour before? would it be possible to have a
+> > resize & rotate methods on YDFSImage?
+> >
+> >
+> > Many thanks,
+> >
+> > G.
+> >
+> >
+> > _______________________________________________
+> > YDFramework-users mailing list
+> > YDFramework-users at lists.berlios.de
+> > https://lists.berlios.de/mailman/listinfo/ydframework-users
+> >
+> >
+> >
+> > --
+> > pieter claerhout . pieter at yellowduck.be . http://www.yellowduck.be/
+> > _______________________________________________
+> > YDFramework-users mailing list
+> > YDFramework-users at lists.berlios.de
+> > https://lists.berlios.de/mailman/listinfo/ydframework-users
+>
+> _______________________________________________
+> YDFramework-users mailing list
+> YDFramework-users at lists.berlios.de
+> https://lists.berlios.de/mailman/listinfo/ydframework-users
+>
+
+
+
+-- 
+pieter claerhout . pieter at yellowduck.be . http://www.yellowduck.be/
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <https://lists.berlios.de/pipermail/ydframework-users/attachments/20060817/cb7e64ce/attachment.html>
+
+From gonzillaaa at gmail.com  Thu Aug 17 20:04:21 2006
+From: gonzillaaa at gmail.com (Gonzillaaa)
+Date: Thu, 17 Aug 2006 19:04:21 +0100
+Subject: [ydf-users] unexpected behaviour of $image->saveThumbnail
+In-Reply-To: <4aef63030608170601j717d56a1v4fbbad3202148118@mail.gmail.com>
+References: <E442238A-A726-4243-B369-0D5A685ECD73@gmail.com>
+	<4aef63030608170426k119a4d0ew52304c7a56ded137@mail.gmail.com>
+	<B4E11938-28BA-4AB2-A115-C23EA9C485A2@gmail.com>
+	<4aef63030608170601j717d56a1v4fbbad3202148118@mail.gmail.com>
+Message-ID: <9A2C1B92-50E8-463F-BAE6-462B31B9ECF2@gmail.com>
+
+Hi Pieter thanks very much for the explanation, I didn't now about  
+it. I found a good image rotation function here http://uk2.php.net/ 
+manual/en/function.imagerotate.php
+
+thanks again,
+G.
+On 17 Aug 2006, at 14:01, Pieter Claerhout wrote:
+
+> Yes, most Canon and Nikon cameras record the image orientation in  
+> the EXIF data. Most software like Adobe Photoshop and probably the  
+> Finder in OS X read this information and automatically rotate the  
+> image based on that information.
+>
+> However, the Yellow Duck Framework (or more precisely, the jpeg  
+> functions in PHP) doesn't look at this information and just show  
+> this information as is.
+>
+> There is an imagerotate function in PHP that can probably take care  
+> of this, but it's not built in into the framework.
+>
+> pieter
+>
+
+
+
+
+From mb-list at adfinis.ch  Mon Aug 21 13:27:27 2006
+From: mb-list at adfinis.ch (Matthias Blaser)
+Date: Mon, 21 Aug 2006 13:27:27 +0200
+Subject: [ydf-users] multiple ajax forms
+Message-ID: <200608211327.27870.mb-list@adfinis.ch>
+
+Hi,
+
+I recently tried to use multiple forms on one page with some ajax events 
+attached - unfortunately the javascript code of the first form will be 
+overwritten when calling the processEvents method of the 2nd ajax object 
+attached to the 2nd form.
+
+Is there a way to use ajax with multiple forms on the same page? do I have to 
+use a specific order to not overwrite the events of each other form?
+
+Thanks in advance,
+Matthias
+
+
+
+
+
+From pieter at yellowduck.be  Mon Aug 21 16:03:21 2006
+From: pieter at yellowduck.be (Pieter Claerhout)
+Date: Mon, 21 Aug 2006 16:03:21 +0200
+Subject: [ydf-users] How to support YDF
+In-Reply-To: <44D8B645.4060602@fusemail.com>
+References: <44D7474A.80002@fusemail.com>
+	<4aef63030608080327m3a18a30fx578557c8d118ae4c@mail.gmail.com>
+	<44D8B645.4060602@fusemail.com>
+Message-ID: <4aef63030608210703s4dbead03g1143dbf343f748ef@mail.gmail.com>
+
+I have a wishlist now, just need to add some more stuff now:
+http://www.amazon.com/gp/registry/10UPZWW4WSCIU
+
+cheers,
+
+pieter
+
+On 8/8/06, Francisco Azevedo <francisco at fusemail.com> wrote:
+>
+> Hi Pieter
+>
+> > I don't have an amazon wishlist, but I can create one if you like. I'm
+> > not sure if paypal would be an option?
+>
+> An amazon wishlist is more funny :) maybe some php books ;)
+>
+>
+> regards
+> Francisco A
+> _______________________________________________
+> YDFramework-users mailing list
+> YDFramework-users at lists.berlios.de
+> http://bat.berlios.de/mailman/listinfo/ydframework-users
+>
+
+
+
+-- 
+pieter claerhout . pieter at yellowduck.be . http://www.yellowduck.be/
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <https://lists.berlios.de/pipermail/ydframework-users/attachments/20060821/d003540c/attachment.html>
+
+From francisco at fusemail.com  Tue Aug 22 02:42:16 2006
+From: francisco at fusemail.com (Francisco Azevedo)
+Date: Tue, 22 Aug 2006 01:42:16 +0100
+Subject: [ydf-users] multiple ajax forms
+In-Reply-To: <200608211327.27870.mb-list@adfinis.ch>
+References: <200608211327.27870.mb-list@adfinis.ch>
+Message-ID: <44EA52E8.9020204@fusemail.com>
+
+Hi Matthias
+
+> I recently tried to use multiple forms on one page with some ajax events 
+> attached - unfortunately the javascript code of the first form will be 
+> overwritten when calling the processEvents method of the 2nd ajax object 
+> attached to the 2nd form.
+> 
+> Is there a way to use ajax with multiple forms on the same page? do I have to 
+> use a specific order to not overwrite the events of each other form?
+
+YDAjax was created with that feature (more than one form) in mind. The 
+process should be transparent like if you are using just one form. Note 
+that you should:
+
+- create form elements with different names (even if they belong to 
+different forms)
+
+- add all object forms to YDAjax (using YDAjax::addForm( $YDFormObject ))
+
+
+Anyway, i added a new YDAjax example on how to use more than one YDForm 
+with YDAjax.
+
+I hope this can solve your problem.
+
+
+regards
+Francisco A
+
+
+From francisco at fusemail.com  Tue Aug 22 02:56:14 2006
+From: francisco at fusemail.com (Francisco Azevedo)
+Date: Tue, 22 Aug 2006 01:56:14 +0100
+Subject: [ydf-users] How to support YDF
+In-Reply-To: <4aef63030608210703s4dbead03g1143dbf343f748ef@mail.gmail.com>
+References: <44D7474A.80002@fusemail.com>	<4aef63030608080327m3a18a30fx578557c8d118ae4c@mail.gmail.com>	<44D8B645.4060602@fusemail.com>
+	<4aef63030608210703s4dbead03g1143dbf343f748ef@mail.gmail.com>
+Message-ID: <44EA562E.4010605@fusemail.com>
+
+Hi Pieter
+
+> I have a wishlist now, just need to add some more stuff now:
+> http://www.amazon.com/gp/registry/10UPZWW4WSCIU
+
+Just a note.. You live in BE, amazon.com is USA this means that you will 
+pay additional taxes (that are not included in amazon but in your 
+country mail). Create your wishlist in amazon.co.UK ;)
+
+
+regards
+Francisco A
+
+
+From pieter at yellowduck.be  Tue Aug 22 08:33:04 2006
+From: pieter at yellowduck.be (Pieter Claerhout)
+Date: Tue, 22 Aug 2006 08:33:04 +0200
+Subject: [ydf-users] How to support YDF
+In-Reply-To: <44EA562E.4010605@fusemail.com>
+References: <44D7474A.80002@fusemail.com>
+	<4aef63030608080327m3a18a30fx578557c8d118ae4c@mail.gmail.com>
+	<44D8B645.4060602@fusemail.com>
+	<4aef63030608210703s4dbead03g1143dbf343f748ef@mail.gmail.com>
+	<44EA562E.4010605@fusemail.com>
+Message-ID: <4aef63030608212333y41ed2a50n68823a8e1a64339f@mail.gmail.com>
+
+Done. The correct wish list is now on:
+http://www.amazon.co.uk/gp/registry/2AA65OXXHNLFY
+
+cheers,
+
+
+pieter
+
+On 8/22/06, Francisco Azevedo <francisco at fusemail.com> wrote:
+>
+> Hi Pieter
+>
+> > I have a wishlist now, just need to add some more stuff now:
+> > http://www.amazon.com/gp/registry/10UPZWW4WSCIU
+>
+> Just a note.. You live in BE, amazon.com is USA this means that you will
+> pay additional taxes (that are not included in amazon but in your
+> country mail). Create your wishlist in amazon.co.UK ;)
+>
+>
+> regards
+> Francisco A
+> _______________________________________________
+> YDFramework-users mailing list
+> YDFramework-users at lists.berlios.de
+> https://lists.berlios.de/mailman/listinfo/ydframework-users
+>
+
+
+
+-- 
+pieter claerhout . pieter at yellowduck.be . http://www.yellowduck.be/
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <https://lists.berlios.de/pipermail/ydframework-users/attachments/20060822/8d6d6e3e/attachment.html>
+
+From mb-list at adfinis.ch  Tue Aug 22 10:17:18 2006
+From: mb-list at adfinis.ch (Matthias Blaser)
+Date: Tue, 22 Aug 2006 10:17:18 +0200
+Subject: [ydf-users] multiple ajax forms
+In-Reply-To: <44EA52E8.9020204@fusemail.com>
+References: <200608211327.27870.mb-list@adfinis.ch>
+	<44EA52E8.9020204@fusemail.com>
+Message-ID: <200608221017.19255.mb-list@adfinis.ch>
+
+Hi,
+
+On Tuesday 22 August 2006 02:42, Francisco Azevedo wrote:
+> > Is there a way to use ajax with multiple forms on the same page? do I
+> > have to use a specific order to not overwrite the events of each other
+> > form?
+[...]
+> - create form elements with different names (even if they belong to
+> different forms)
+>
+> - add all object forms to YDAjax (using YDAjax::addForm( $YDFormObject ))
+
+Thanks a lot - that solves my problem. I was using the package version of ydf 
+2.0 where this method is missing - using the SVN checkout works great.
+
+Regards,
+Matthias
+
+
+
+From francisco at fusemail.com  Tue Aug 22 15:53:27 2006
+From: francisco at fusemail.com (Francisco Azevedo)
+Date: Tue, 22 Aug 2006 14:53:27 +0100
+Subject: [ydf-users] multiple ajax forms
+In-Reply-To: <200608221017.19255.mb-list@adfinis.ch>
+References: <200608211327.27870.mb-list@adfinis.ch>	<44EA52E8.9020204@fusemail.com>
+	<200608221017.19255.mb-list@adfinis.ch>
+Message-ID: <44EB0C57.4060904@fusemail.com>
+
+Hi Matthias
+
+> On Tuesday 22 August 2006 02:42, Francisco Azevedo wrote:
+>>> Is there a way to use ajax with multiple forms on the same page? do I
+>>> have to use a specific order to not overwrite the events of each other
+>>> form?
+> [...]
+>> - create form elements with different names (even if they belong to
+>> different forms)
+>>
+>> - add all object forms to YDAjax (using YDAjax::addForm( $YDFormObject ))
+> 
+> Thanks a lot - that solves my problem. I was using the package version of ydf 
+> 2.0 where this method is missing - using the SVN checkout works great.
+
+No problem ;)
+
+
+regards
+Francisco A
+
+
+From francisco at fusemail.com  Tue Aug 22 15:56:22 2006
+From: francisco at fusemail.com (Francisco Azevedo)
+Date: Tue, 22 Aug 2006 14:56:22 +0100
+Subject: [ydf-users] How to support YDF
+In-Reply-To: <4aef63030608212333y41ed2a50n68823a8e1a64339f@mail.gmail.com>
+References: <44D7474A.80002@fusemail.com>	<4aef63030608080327m3a18a30fx578557c8d118ae4c@mail.gmail.com>	<44D8B645.4060602@fusemail.com>	<4aef63030608210703s4dbead03g1143dbf343f748ef@mail.gmail.com>	<44EA562E.4010605@fusemail.com>
+	<4aef63030608212333y41ed2a50n68823a8e1a64339f@mail.gmail.com>
+Message-ID: <44EB0D06.1080408@fusemail.com>
+
+Hi Pieter
+> Done. The correct wish list is now on:
+> http://www.amazon.co.uk/gp/registry/2AA65OXXHNLFY
+
+ From amazon: "Important Message: The owner of this Wish List has not 
+entered a delivery address."  :D
+
+
+regards
+Francisco A
+
+
+From pieter at yellowduck.be  Tue Aug 22 16:01:11 2006
+From: pieter at yellowduck.be (Pieter Claerhout)
+Date: Tue, 22 Aug 2006 16:01:11 +0200
+Subject: [ydf-users] How to support YDF
+In-Reply-To: <44EB0D06.1080408@fusemail.com>
+References: <44D7474A.80002@fusemail.com>
+	<4aef63030608080327m3a18a30fx578557c8d118ae4c@mail.gmail.com>
+	<44D8B645.4060602@fusemail.com>
+	<4aef63030608210703s4dbead03g1143dbf343f748ef@mail.gmail.com>
+	<44EA562E.4010605@fusemail.com>
+	<4aef63030608212333y41ed2a50n68823a8e1a64339f@mail.gmail.com>
+	<44EB0D06.1080408@fusemail.com>
+Message-ID: <4aef63030608220701m4ccf83far27b936757edddaf2@mail.gmail.com>
+
+That's fixed now.
+
+pieter
+
+On 8/22/06, Francisco Azevedo <francisco at fusemail.com> wrote:
+>
+> Hi Pieter
+> > Done. The correct wish list is now on:
+> > http://www.amazon.co.uk/gp/registry/2AA65OXXHNLFY
+>
+> From amazon: "Important Message: The owner of this Wish List has not
+> entered a delivery address."  :D
+>
+>
+> regards
+> Francisco A
+> _______________________________________________
+> YDFramework-users mailing list
+> YDFramework-users at lists.berlios.de
+> https://lists.berlios.de/mailman/listinfo/ydframework-users
+>
+
+
+
+-- 
+pieter claerhout . pieter at yellowduck.be . http://www.yellowduck.be/
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <https://lists.berlios.de/pipermail/ydframework-users/attachments/20060822/662403fe/attachment.html>
+
+From francisco at fusemail.com  Wed Aug 23 00:16:24 2006
+From: francisco at fusemail.com (Francisco Azevedo)
+Date: Tue, 22 Aug 2006 23:16:24 +0100
+Subject: [ydf-users] YDCM Error handling
+In-Reply-To: <4aef63030604241031x93e0b05pc1c15c25213c9622@mail.gmail.com>
+References: <444CFB1D.4060102@fusemail.com>
+	<4aef63030604241031x93e0b05pc1c15c25213c9622@mail.gmail.com>
+Message-ID: <44EB8238.4010804@fusemail.com>
+
+Hi
+
+> I agree that this would indeed be the best way of working. We have the 
+> YDError class already, so we better start using it.
+
+
+I have added a new class YDResult (defined in YDCMComponent.php) for 
+results.
+
+Currently, in almost any method we set things like true/false or even 
+some integer (that are codes) as returning values.
+
+I propose to start using a standard way of returning values. YDError is 
+excellent to returning errors, so i have created YDResult that extends 
+YDError with a new method for results that are not errors (i called OK).
+
+So, i propose that:
+
+- a result is _always_ a YDReturn object (except for method that don't 
+result nothing, eg: sets() )
+
+- this YDReturn result is a 'ok' type or an error
+
+
+Not only we get a more powerful way of handling results (and not results 
+that are errors only) but this can give very good features.
+
+A very good features is that, because any result has a message, we can 
+incorporate returning (translated) messages inside any YDCM or other 
+class, then the developer that is using YDCM stuff needs only to use 
+that message (it's already created)! Eg, imagine the YDCMUser class and 
+a method to create a user.. if the result is a YDResult we only need to 
+get the message like:
+
+$res = $ydcmuser->add( ... );
+
+print $res->message;
+
+
+this will print something like 'User was added' (if ok) or 'User cannot 
+be created because...'  .. and note that these messages are already 
+created inside YDCMUser!
+
+
+Any comments about this idea?
+
+
+regards
+Francisco A
+
+
+From mosesdinakaran at gmail.com  Fri Aug 25 08:33:11 2006
+From: mosesdinakaran at gmail.com (Moses Dinakaran)
+Date: Fri, 25 Aug 2006 12:03:11 +0530
+Subject: [ydf-users] How to remove form rule and elements rule .
+Message-ID: <fbd383e30608242333t53eb99d6rbc7508132660f6d6@mail.gmail.com>
+
+Hi Everybody
+
+     How to remove  form rule and elements rule .
+
+     I have registered a form rule like the following
+
+     $this->form->addFormRule(array(&$this,'validateData'));
+
+     How to remove this rule.
+
+     And Also is it possible to remove a particular rule of a particular
+element
+
+     (ie) if we have 2 rules required,numeric initially for a element and at
+some time we only need required rule so how to  remove the
+     numeric rule from the element.
+
+
+regards
+moses
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <https://lists.berlios.de/pipermail/ydframework-users/attachments/20060825/e7b57918/attachment.html>
+
+From pieter at yellowduck.be  Fri Aug 25 11:49:17 2006
+From: pieter at yellowduck.be (Pieter Claerhout)
+Date: Fri, 25 Aug 2006 11:49:17 +0200
+Subject: [ydf-users] How to remove form rule and elements rule .
+In-Reply-To: <fbd383e30608242333t53eb99d6rbc7508132660f6d6@mail.gmail.com>
+References: <fbd383e30608242333t53eb99d6rbc7508132660f6d6@mail.gmail.com>
+Message-ID: <4aef63030608250249p3ab9101ja43a9f188a82e36a@mail.gmail.com>
+
+Currently, there is no way to do this as the list of rules is put in a non
+associative array.
+
+Can you shed some light on what you are trying to accomplish?
+
+pieter
+
+On 8/25/06, Moses Dinakaran <mosesdinakaran at gmail.com> wrote:
+>
+>
+> Hi Everybody
+>
+>      How to remove  form rule and elements rule .
+>
+>      I have registered a form rule like the following
+>
+>      $this->form->addFormRule(array(&$this,'validateData'));
+>
+>      How to remove this rule.
+>
+>      And Also is it possible to remove a particular rule of a particular
+> element
+>
+>      (ie) if we have 2 rules required,numeric initially for a element and
+> at some time we only need required rule so how to  remove the
+>      numeric rule from the element.
+>
+>
+> regards
+> moses
+>
+> _______________________________________________
+> YDFramework-users mailing list
+> YDFramework-users at lists.berlios.de
+> https://lists.berlios.de/mailman/listinfo/ydframework-users
+>
+>
+>
+
+
+-- 
+pieter claerhout . pieter at yellowduck.be . http://www.yellowduck.be/
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <https://lists.berlios.de/pipermail/ydframework-users/attachments/20060825/d33891da/attachment.html>
+
+From pieter at yellowduck.be  Fri Aug 25 11:51:14 2006
+From: pieter at yellowduck.be (Pieter Claerhout)
+Date: Fri, 25 Aug 2006 11:51:14 +0200
+Subject: [ydf-users] Problems with getRecordsAsSet
+In-Reply-To: <fbd383e30608140813k37321985iaa15d515863edbb0@mail.gmail.com>
+References: <fbd383e30608140813k37321985iaa15d515863edbb0@mail.gmail.com>
+Message-ID: <4aef63030608250251n896ec25g6327af82103dde0f@mail.gmail.com>
+
+HI Moses,
+
+the sorting in YDRecordSet is not using the sorting algorithms from the
+database but is relying on the sorting functions from PHP (which might be
+different).
+
+cheers,
+
+
+pieter
+
+On 8/14/06, Moses Dinakaran <mosesdinakaran at gmail.com> wrote:
+>
+>  Hi Everybody
+>
+>       I have a problem with ordering the records based upon the sortfld
+> and sortdir using getRecordsAsSet
+>
+>      the following is the code
+>
+>      $recordSet =
+> $this->db->getRecordsAsSet("$this->query",$this->page,$this->size);
+>
+>     .tpl
+>
+>       {$recordSet->getSortUrl('app_first_name')}
+>
+>     The problem is If the sortfld datatype  is string (Not for all string
+> datatype only for some particular field  )order is not displayed
+> properly.On the other hand  If the sortfld datatype  is numeric it works
+> fine.
+>
+>     *Again if I  run the same query in the phpMyAdmin which gives me the
+> correct result.*
+>
+>     Any Suggestions Please.
+>
+>
+> My Query
+>
+> select p.pre_approval_id,p.cu_id,date_format(p.created_date,'%m-%d-%Y') as
+> date,     p.created_date ,p.loan_officer_id,p.app_first_name,
+> p.app_last_name,p.amount ,
+> p.loan_type_id,date_format(p.expires_date,'%m-%d-%Y') as date_expires,
+> p.expires_date,
+> p.pre_approval_status as status, CONCAT(p.app_first_name, ' ',
+> p.app_last_name ) as app_name ,
+> cum.cu_name ,lo.first_name,lt.name as loan_name from tbl_preapprovals as p
+>
+> left join tbl_credit_union_master as cum on p.cu_id=cum.cu_id
+> left join tbl_loan_user as lo on p.loan_officer_id = lo.loan_user_id
+> left join tbl_loan_type_master as lt on p.loan_type_id = lt.loan_type_id
+> where 1=1 order by p.app_first_name DESC
+>
+>
+> .tpl
+>
+>
+> $recordSet->getSortUrl('p.pre_approval_id')} -->Works Fine
+> {$recordSet->getSortUrl('cum.cu_name')}-->Works Fine
+> {$recordSet->getSortUrl('p.created_date')}-->Works Fine
+> {$recordSet->getSortUrl(' lo.first_name')}-->Works Fine
+> *{$recordSet->getSortUrl('p.app_first_name')}-->Gives the problem*
+> {$recordSet->getSortUrl('amount')}-->Works Fine
+> {$recordSet->getSortUrl(' lt.name')}-->Works Fine
+>
+>
+>
+>
+>
+>
+>
+>
+> regards
+>  moses
+>
+>
+> _______________________________________________
+> YDFramework-users mailing list
+> YDFramework-users at lists.berlios.de
+> http://bat.berlios.de/mailman/listinfo/ydframework-users
+>
+>
+>
+
+
+-- 
+pieter claerhout . pieter at yellowduck.be . http://www.yellowduck.be/
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <https://lists.berlios.de/pipermail/ydframework-users/attachments/20060825/f6acff2b/attachment.html>
+
+From mosesdinakaran at gmail.com  Fri Aug 25 14:24:12 2006
+From: mosesdinakaran at gmail.com (Moses Dinakaran)
+Date: Fri, 25 Aug 2006 17:54:12 +0530
+Subject: [ydf-users] How to remove form rule and elements rule .
+In-Reply-To: <4aef63030608250249p3ab9101ja43a9f188a82e36a@mail.gmail.com>
+References: <fbd383e30608242333t53eb99d6rbc7508132660f6d6@mail.gmail.com>
+	<4aef63030608250249p3ab9101ja43a9f188a82e36a@mail.gmail.com>
+Message-ID: <fbd383e30608250524h317baf57o2a08b62668b0dd42@mail.gmail.com>
+
+Hello Sir
+
+      Thank U for ur reply.
+
+      Though I colud  solve the issue I fell good if we can add or remove
+the rules dynamically.
+
+The following is the code
+
+
+*class test
+ {
+  function test()
+  {
+   $this->form->addElement('text','creditunion','Credit Union');
+   $this->form->addElement('text','dealer','Dealer');
+   $this->form->addElement('submit','search','Search');
+   $this->form->addElement('submit','update','Update');
+   $this->form->addFormRule(array(&$this,'validateData'));
+  }
+
+  function validateData($fields)
+  {
+   if($fields['creditunion']==''&&$fields['dealer']=='')
+   {
+   return array("search"=>"Please Enter at least one value");
+   }
+   else
+   {
+   return true;
+   }
+  }
+
+  function actionDefault()
+  {
+        //Here I need the validation
+        if($form->validate)
+        {
+                //retrive the datas from the database
+         }
+  }
+
+  function actionEdit()
+  {
+          //Here I dont need the validation
+           if($form->validate)
+           {
+                 //Update the records
+            }
+   }
+ }*
+
+
+   Initially I need to search the records
+   the validation is that the user should enter  atleast one  value if the
+validation satcifies
+   he will get a edit link in each record so on clicking the edit link it
+goes to actionEdit
+   Here he can update, but i dont need the form rules validateData
+validation in action Edit
+   Since I have added the formRule validateData in the constructor here also
+it checks for validation
+   So I feel that If I could remove the validation in actionEdit the problem
+is solved.
+
+   I have solved the problem by removing the validation  from the
+constructor and put it in the actionDefaut.
+
+   But It will be good if I could dynamically add or remove the rules.
+
+
+
+regards
+
+moses
+
+
+
+On 8/25/06, Pieter Claerhout <pieter at yellowduck.be> wrote:
+>
+>  Currently, there is no way to do this as the list of rules is put in a
+> non associative array.
+>
+> Can you shed some light on what you are trying to accomplish?
+>
+> pieter
+>
+>  On 8/25/06, Moses Dinakaran <mosesdinakaran at gmail.com> wrote:
+>
+> >
+> Hi Everybody
+>
+>      How to remove  form rule and elements rule .
+>
+>      I have registered a form rule like the following
+>
+>      $this->form->addFormRule(array(&$this,'validateData'));
+>
+>      How to remove this rule.
+>
+>      And Also is it possible to remove a particular rule of a particular
+> element
+>
+>      (ie) if we have 2 rules required,numeric initially for a element and
+> at some time we only need required rule so how to  remove the
+>      numeric rule from the element.
+>
+>
+> regards
+> moses
+>
+> _______________________________________________
+> YDFramework-users mailing list
+> YDFramework-users at lists.berlios.de
+> https://lists.berlios.de/mailman/listinfo/ydframework-users
+>
+>
+>
+>
+>
+> --
+> pieter claerhout . pieter at yellowduck.be . http://www.yellowduck.be/
+>
+> _______________________________________________
+> YDFramework-users mailing list
+> YDFramework-users at lists.berlios.de
+> https://lists.berlios.de/mailman/listinfo/ydframework-users
+>
+>
+>
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <https://lists.berlios.de/pipermail/ydframework-users/attachments/20060825/fcc41fa5/attachment.html>
+
+From pieter at yellowduck.be  Fri Aug 25 15:14:44 2006
+From: pieter at yellowduck.be (Pieter Claerhout)
+Date: Fri, 25 Aug 2006 15:14:44 +0200
+Subject: [ydf-users] How to remove form rule and elements rule .
+In-Reply-To: <fbd383e30608250524h317baf57o2a08b62668b0dd42@mail.gmail.com>
+References: <fbd383e30608242333t53eb99d6rbc7508132660f6d6@mail.gmail.com>
+	<4aef63030608250249p3ab9101ja43a9f188a82e36a@mail.gmail.com>
+	<fbd383e30608250524h317baf57o2a08b62668b0dd42@mail.gmail.com>
+Message-ID: <4aef63030608250614u5b6eb187s857f37d075118b23@mail.gmail.com>
+
+I will put it on the list of things to do...
+
+Can you log it as a feature request in berlios?
+
+pieter
+
+On 8/25/06, Moses Dinakaran <mosesdinakaran at gmail.com> wrote:
+>
+>
+>
+> Hello Sir
+>
+>       Thank U for ur reply.
+>
+>       Though I colud  solve the issue I fell good if we can add or remove
+> the rules dynamically.
+>
+> The following is the code
+>
+>
+> *class test
+>  {
+>   function test()
+>   {
+>    $this->form->addElement('text','creditunion','Credit Union');
+>    $this->form->addElement('text','dealer','Dealer');
+>    $this->form->addElement('submit','search','Search');
+>    $this->form->addElement('submit','update','Update');
+>
+>    $this->form->addFormRule(array(&$this,'validateData'));
+>   }
+>
+>   function validateData($fields)
+>   {
+>    if($fields['creditunion']==''&&$fields['dealer']=='')
+>    {
+>    return array("search"=>"Please Enter at least one value");
+>    }
+>    else
+>    {
+>    return true;
+>    }
+>   }
+>
+>   function actionDefault()
+>   {
+>          //Here I need the validation
+>         if($form->validate)
+>         {
+>                 //retrive the datas from the database
+>          }
+>   }
+>
+>   function actionEdit()
+>   {
+>           //Here I dont need the validation
+>            if($form->validate)
+>            {
+>                  //Update the records
+>             }
+>    }
+>  }*
+>
+>
+>    Initially I need to search the records
+>    the validation is that the user should enter  atleast one  value if the
+> validation satcifies
+>    he will get a edit link in each record so on clicking the edit link it
+> goes to actionEdit
+>    Here he can update, but i dont need the form rules validateData
+> validation in action Edit
+>    Since I have added the formRule validateData in the constructor here
+> also it checks for validation
+>    So I feel that If I could remove the validation in actionEdit the
+> problem is solved.
+>
+>    I have solved the problem by removing the validation  from the
+> constructor and put it in the actionDefaut.
+>
+>    But It will be good if I could dynamically add or remove the rules.
+>
+>
+>
+> regards
+>
+> moses
+>
+>
+>
+> On 8/25/06, Pieter Claerhout <pieter at yellowduck.be> wrote:
+> >
+> >  Currently, there is no way to do this as the list of rules is put in a
+> > non associative array.
+> >
+> > Can you shed some light on what you are trying to accomplish?
+> >
+> > pieter
+> >
+> >  On 8/25/06, Moses Dinakaran < mosesdinakaran at gmail.com> wrote:
+> >
+> > >
+> > Hi Everybody
+> >
+> >      How to remove  form rule and elements rule .
+> >
+> >      I have registered a form rule like the following
+> >
+> >      $this->form->addFormRule(array(&$this,'validateData'));
+> >
+> >      How to remove this rule.
+> >
+> >      And Also is it possible to remove a particular rule of a particular
+> > element
+> >
+> >      (ie) if we have 2 rules required,numeric initially for a element
+> > and at some time we only need required rule so how to  remove the
+> >      numeric rule from the element.
+> >
+> >
+> > regards
+> > moses
+> >
+> > _______________________________________________
+> > YDFramework-users mailing list
+> > YDFramework-users at lists.berlios.de
+> > https://lists.berlios.de/mailman/listinfo/ydframework-users
+> >
+> >
+> >
+> >
+> >
+> > --
+> > pieter claerhout . pieter at yellowduck.be . http://www.yellowduck.be/
+> >
+> > _______________________________________________
+> > YDFramework-users mailing list
+> > YDFramework-users at lists.berlios.de
+> > https://lists.berlios.de/mailman/listinfo/ydframework-users
+> >
+> >
+> >
+>
+> _______________________________________________
+> YDFramework-users mailing list
+> YDFramework-users at lists.berlios.de
+> https://lists.berlios.de/mailman/listinfo/ydframework-users
+>
+>
+>
+
+
+-- 
+pieter claerhout . pieter at yellowduck.be . http://www.yellowduck.be/
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <https://lists.berlios.de/pipermail/ydframework-users/attachments/20060825/cdec18bc/attachment.html>
+
+From moses at hysistechnologies.com  Fri Aug 25 18:08:33 2006
+From: moses at hysistechnologies.com (moses at hysistechnologies.com)
+Date: Fri, 25 Aug 2006 09:08:33 -0700
+Subject: [ydf-users] How to remove form rule and elements rule .
+Message-ID: <20060825090833.2b7eeeb4c62f4bb8603cfb01b826e9ec.7a9d9903e0.wbe@email.secureserver.net>
+
+
+Hello sir
+
+  Sure I will do that.
+
+regards
+moses
+
+
+
+> -------- Original Message --------
+> Subject: Re: [ydf-users] How to remove form rule and elements rule .
+> From: "Pieter Claerhout" <pieter at yellowduck.be>
+> Date: Fri, August 25, 2006 6:14 am
+> To: ydframework-users at lists.berlios.de
+> 
+> 
+> I will put it on the list of things to do... 
+>   
+> Can you log it as a feature request in berlios? 
+>   
+> pieter
+>   
+> On 8/25/06, Moses Dinakaran <mosesdinakaran at gmail.com> wrote:  
+>  
+>   
+>   
+> Hello Sir  
+>   
+>       Thank U for ur reply. 
+>   
+>       Though I colud  solve the issue I fell good if we can add or remove the rules dynamically. 
+>   
+> The following is the code 
+>   
+> 
+> class test 
+>  {
+>   function test()
+>   {
+>    $this->form->addElement('text','creditunion','Credit Union');
+>    $this->form->addElement('text','dealer','Dealer');
+>    $this->form->addElement('submit','search','Search'); 
+>    $this->form->addElement('submit','update','Update'); 
+> 
+>    $this->form->addFormRule(array(&$this,'validateData'));
+>   }
+>   
+>  
+>   function validateData($fields)
+>   {
+>    if($fields['creditunion']==''&&$fields['dealer']=='') 
+>    {
+>    return array("search"=>"Please Enter at least one value");
+>    }
+>     else
+>    {
+>    return true;
+>    }
+>   }
+>   
+>   function actionDefault()
+>   {
+>          //Here I need the validation
+>         if($form->validate)
+>         {
+>                 //retrive the datas from the database
+>          }
+>   }
+>   
+>   function actionEdit() 
+>   {
+>           //Here I dont need the validation
+>            if($form->validate) 
+>            {
+>                  //Update the records
+>             } 
+>    }
+>  } 
+> 
+>  
+> 
+> 
+>    Initially I need to search the records 
+>    the validation is that the user should enter  atleast one  value if the validation satcifies
+>    he will get a edit link in each record so on clicking the edit link it goes to actionEdit  
+>    Here he can update, but i dont need the form rules validateData validation in action Edit
+>    Since I have added the formRule validateData in the constructor here also it checks for validation 
+>    So I feel that If I could remove the validation in actionEdit the problem is solved. 
+>    
+>    I have solved the problem by removing the validation  from the constructor and put it in the actionDefaut.
+>    
+>    But It will be good if I could dynamically add or remove the rules. 
+> 
+>   
+> 
+> regards 
+>  
+> 
+> moses 
+>  
+>  
+> 
+> 
+>   
+> On 8/25/06, Pieter Claerhout <pieter at yellowduck.be > wrote:  
+>  
+> Currently, there is no way to do this as the list of rules is put in a non associative array. 
+>   
+> Can you shed some light on what you are trying to accomplish? 
+>   
+> pieter
+>   
+>  
+> On 8/25/06, Moses Dinakaran < mosesdinakaran at gmail.com > wrote:  
+>   
+>  
+>  
+> 
+> 
+> Hi Everybody 
+> 
+>      How to remove  form rule and elements rule . 
+> 
+>      I have registered a form rule like the following
+>  
+>      $this->form->addFormRule(array(&$this,'validateData')); 
+> 
+>      How to remove this rule.
+>   
+>      And Also is it possible to remove a particular rule of a particular element
+>  
+>      (ie) if we have 2 rules required,numeric initially for a element and at some time we only need required rule so how to  remove the 
+>      numeric rule from the element.  
+>       
+> 
+> regards
+> moses
+>  
+> _______________________________________________
+> YDFramework-users mailing list
+> YDFramework-users at lists.berlios.de 
+> https://lists.berlios.de/mailman/listinfo/ydframework-users 
+> 
+>  
+>  
+> 
+> 
+> -- 
+> pieter claerhout . pieter at yellowduck.be .  http://www.yellowduck.be/ 
+> _______________________________________________
+> YDFramework-users mailing list
+>  YDFramework-users at lists.berlios.de
+> https://lists.berlios.de/mailman/listinfo/ydframework-users 
+> 
+> 
+> 
+> 
+> _______________________________________________
+> YDFramework-users mailing list
+>  YDFramework-users at lists.berlios.de
+> https://lists.berlios.de/mailman/listinfo/ydframework-users 
+> 
+> 
+> 
+> 
+> 
+> -- 
+> pieter claerhout . pieter at yellowduck.be . http://www.yellowduck.be/ 
+> ---------------------------------------------------------------------
+> _______________________________________________
+> YDFramework-users mailing list
+> YDFramework-users at lists.berlios.de
+> https://lists.berlios.de/mailman/listinfo/ydframework-users
+> 
+
+
+
+From moses at hysistechnologies.com  Fri Aug 25 18:13:26 2006
+From: moses at hysistechnologies.com (moses at hysistechnologies.com)
+Date: Fri, 25 Aug 2006 09:13:26 -0700
+Subject: [ydf-users] Problems with getRecordsAsSet
+Message-ID: <20060825091326.2b7eeeb4c62f4bb8603cfb01b826e9ec.97f7d5ef2e.wbe@email.secureserver.net>
+
+
+
+Hello sir
+
+    What will be the solution to it.
+
+    Will the getSortUrl(),getNextUrl(),getPreviousUrl() can be used
+without using getRecordsAsSet().
+
+    Any other way for paging. 
+
+regards
+moses
+
+    
+
+
+> -------- Original Message --------
+> Subject: Re: [ydf-users] Problems with getRecordsAsSet
+> From: "Pieter Claerhout" <pieter at yellowduck.be>
+> Date: Fri, August 25, 2006 2:51 am
+> To: ydframework-users at lists.berlios.de
+> 
+> 
+> HI Moses, 
+>   
+> the sorting in YDRecordSet is not using the sorting algorithms from the database but is relying on the sorting functions from PHP (which might be different). 
+>   
+> cheers, 
+>   
+>   
+> pieter
+>   
+> On 8/14/06, Moses Dinakaran <mosesdinakaran at gmail.com> wrote:  
+>  
+> Hi Everybody 
+>   
+>       I have a problem with ordering the records based upon the sortfld and sortdir using getRecordsAsSet 
+>     
+>      the following is the code 
+>      
+>      $recordSet = $this->db->getRecordsAsSet("$this->query",$this->page,$this->size);  
+>   
+>     .tpl 
+>   
+>       {$recordSet->getSortUrl('app_first_name')} 
+>   
+>     The problem is If the sortfld datatype  is string (Not for all string datatype only for some particular field  )order is not displayed properly.On the other hand  If the sortfld datatype  is numeric it works fine.  
+>   
+>     Again if I  run the same query in the phpMyAdmin which gives me the correct result. 
+>   
+>     Any Suggestions Please. 
+>   
+>   
+> My Query 
+>   
+> select p.pre_approval_id,p.cu_id,date_format(p.created_date,'%m-%d-%Y') as date,     p.created_date ,p.loan_officer_id,p.app_first_name,p.app_last_name,p.amount , 
+> p.loan_type_id,date_format(p.expires_date,'%m-%d-%Y') as date_expires,p.expires_date,  
+> p.pre_approval_status as status, CONCAT(p.app_first_name, ' ', p.app_last_name ) as app_name , 
+> cum.cu_name ,lo.first_name,lt.name as loan_name from tbl_preapprovals as p  
+> left join tbl_credit_union_master as cum on p.cu_id=cum.cu_id 
+> left join tbl_loan_user as lo on p.loan_officer_id = lo.loan_user_id  
+> left join tbl_loan_type_master as lt on p.loan_type_id = lt.loan_type_id  
+> where 1=1 order by p.app_first_name DESC 
+>     
+>   
+> .tpl 
+>   
+>   
+> $recordSet->getSortUrl('p.pre_approval_id')} -->Works Fine
+> {$recordSet->getSortUrl('cum.cu_name')}-->Works Fine
+> {$recordSet->getSortUrl('p.created_date')}-->Works Fine
+> {$recordSet->getSortUrl(' lo.first_name')}-->Works Fine
+> {$recordSet->getSortUrl('p.app_first_name')}-->Gives the problem
+> {$recordSet->getSortUrl('amount')}-->Works Fine
+> {$recordSet->getSortUrl(' lt.name')}-->Works Fine
+> 
+> 
+>   
+>   
+>   
+>   
+>   
+>   
+> regards 
+>  
+> moses  
+>        
+> _______________________________________________
+> YDFramework-users mailing list
+>  YDFramework-users at lists.berlios.de
+> http://bat.berlios.de/mailman/listinfo/ydframework-users 
+> 
+> 
+> 
+> 
+> 
+> -- 
+> pieter claerhout . pieter at yellowduck.be . http://www.yellowduck.be/ 
+> ---------------------------------------------------------------------
+> _______________________________________________
+> YDFramework-users mailing list
+> YDFramework-users at lists.berlios.de
+> https://lists.berlios.de/mailman/listinfo/ydframework-users
+> 
+
+
+
+From francisco at fusemail.com  Mon Aug 28 17:07:59 2006
+From: francisco at fusemail.com (Francisco Azevedo)
+Date: Mon, 28 Aug 2006 15:07:59 -0000
+Subject: [ydf-users] YDError extension
+Message-ID: <386D3D93.7080809@fusemail.com>
+
+Hi
+
+As i said in a latter email, it could be very usefull to have a standard 
+way of representing results. YDError is an excellent choice for that but 
+currently it can represent only results that are errors ( because normal 
+results are returned without any modification ). This works but normal 
+results have a user message associated.
+
+I propose to:
+
+- rename YDError to eg, YDResult
+
+- add a new level ( OK ) to YDResult:
+
+     @define( 'YD_ERROR_FATAL',   4 );
+     @define( 'YD_ERROR_WARNING', 3 );
+     @define( 'YD_ERROR_NOTICE',  2 );
+
+     @define( 'YD_ERROR_OK',  1 );
+
+     @define( 'YD_ERROR_NONE',    0 );
+
+- add a new static method for the creation of normal results:
+
+         function ok( $message, $value ){ ... }
+
+
+
+What do you think?
+
+
+regards
+Francisco A
+
+
+From muitocomplicado at gmail.com  Thu Aug 31 01:14:46 2006
+From: muitocomplicado at gmail.com (David Bittencourt)
+Date: Wed, 30 Aug 2006 20:14:46 -0300
+Subject: [ydf-users] YDError extension
+In-Reply-To: <386D3D93.7080809@fusemail.com>
+References: <386D3D93.7080809@fusemail.com>
+Message-ID: <12260be20608301614h58e899bbg74af8c27c324de67@mail.gmail.com>
+
+That's ok by me. I think you already did it, right?
+
+-db
+
+On 12/31/99, Francisco Azevedo <francisco at fusemail.com> wrote:
+>
+> Hi
+>
+> As i said in a latter email, it could be very usefull to have a standard
+> way of representing results. YDError is an excellent choice for that but
+> currently it can represent only results that are errors ( because normal
+> results are returned without any modification ). This works but normal
+> results have a user message associated.
+>
+> I propose to:
+>
+> - rename YDError to eg, YDResult
+>
+> - add a new level ( OK ) to YDResult:
+>
+>      @define( 'YD_ERROR_FATAL',   4 );
+>      @define( 'YD_ERROR_WARNING', 3 );
+>      @define( 'YD_ERROR_NOTICE',  2 );
+>
+>      @define( 'YD_ERROR_OK',  1 );
+>
+>      @define( 'YD_ERROR_NONE',    0 );
+>
+> - add a new static method for the creation of normal results:
+>
+>          function ok( $message, $value ){ ... }
+>
+>
+>
+> What do you think?
+>
+>
+> regards
+> Francisco A
+> _______________________________________________
+> YDFramework-users mailing list
+> YDFramework-users at lists.berlios.de
+> https://lists.berlios.de/mailman/listinfo/ydframework-users
+>
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <https://lists.berlios.de/pipermail/ydframework-users/attachments/20060830/92bd3cc6/attachment.html>
+
+From francisco at fusemail.com  Thu Aug 31 02:59:01 2006
+From: francisco at fusemail.com (Francisco Azevedo)
+Date: Thu, 31 Aug 2006 01:59:01 +0100
+Subject: [ydf-users] YDError extension
+In-Reply-To: <12260be20608301614h58e899bbg74af8c27c324de67@mail.gmail.com>
+References: <386D3D93.7080809@fusemail.com>
+	<12260be20608301614h58e899bbg74af8c27c324de67@mail.gmail.com>
+Message-ID: <44F63455.2000000@fusemail.com>
+
+Hi David
+
+> That's ok by me. I think you already did it, right?
+
+Yes but we have two (almost) equal classes. :)
+
+
+regards
+Francisco A
+
+
+From muitocomplicado at gmail.com  Thu Aug 31 21:09:13 2006
+From: muitocomplicado at gmail.com (David Bittencourt)
+Date: Thu, 31 Aug 2006 16:09:13 -0300
+Subject: [ydf-users] YDError extension
+In-Reply-To: <44F63455.2000000@fusemail.com>
+References: <386D3D93.7080809@fusemail.com>
+	<12260be20608301614h58e899bbg74af8c27c324de67@mail.gmail.com>
+	<44F63455.2000000@fusemail.com>
+Message-ID: <12260be20608311209s6f8e7c49l965b68762c4ed66d@mail.gmail.com>
+
+I think you can remove YDError then. It's not being used.
+
+Just remember to remove the examples too. Or update them to use YDResult.
+
+-db
+
+On 8/30/06, Francisco Azevedo <francisco at fusemail.com> wrote:
+>
+> Hi David
+>
+> > That's ok by me. I think you already did it, right?
+>
+> Yes but we have two (almost) equal classes. :)
+>
+>
+> regards
+> Francisco A
+> _______________________________________________
+> YDFramework-users mailing list
+> YDFramework-users at lists.berlios.de
+> https://lists.berlios.de/mailman/listinfo/ydframework-users
+>
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <https://lists.berlios.de/pipermail/ydframework-users/attachments/20060831/da0cdc2e/attachment.html>
+

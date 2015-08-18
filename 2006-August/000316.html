@@ -1,0 +1,186 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [ydf-users] YDDatabaseObject, GroupBy and aggreate functions ?
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/ydframework-users/2006-August/index.html" >
+   <LINK REL="made" HREF="mailto:ydframework-users%40lists.berlios.de?Subject=Re%3A%20%5Bydf-users%5D%20YDDatabaseObject%2C%20GroupBy%20and%20aggreate%20functions%20%3F&In-Reply-To=%3C44DCD9A7.90600%40free.fr%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000313.html">
+   <LINK REL="Next"  HREF="000304.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[ydf-users] YDDatabaseObject, GroupBy and aggreate functions ?</H1>
+    <B>Erwan</B> 
+    <A HREF="mailto:ydframework-users%40lists.berlios.de?Subject=Re%3A%20%5Bydf-users%5D%20YDDatabaseObject%2C%20GroupBy%20and%20aggreate%20functions%20%3F&In-Reply-To=%3C44DCD9A7.90600%40free.fr%3E"
+       TITLE="[ydf-users] YDDatabaseObject, GroupBy and aggreate functions ?">araviski at free.fr
+       </A><BR>
+    <I>Fri Aug 11 21:25:27 CEST 2006</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000313.html">[ydf-users] YDDatabaseObject, GroupBy and aggreate functions ?
+</A></li>
+        <LI>Next message: <A HREF="000304.html">[ydf-users] Query Regarding Variable scope
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#316">[ date ]</a>
+              <a href="thread.html#316">[ thread ]</a>
+              <a href="subject.html#316">[ subject ]</a>
+              <a href="author.html#316">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Hi David !
+Thank you very much for your help, the third parameter was exactly what
+I was looking for :-)
+It's a nice example for the YDF papers !
+
+regards
+Erwan.
+
+David Bittencourt a &#233;crit :
+&gt;<i> Hi Erwan,
+</I>&gt;<i>
+</I>&gt;<i> You can retrieve the results of count, avg, sum or any SQL expression
+</I>&gt;<i> by registering the select expression. For example:
+</I>&gt;<i>
+</I>&gt;<i> class MyObject extends YDDatabaseObject {
+</I>&gt;<i>
+</I>&gt;<i>     function MyObject() {
+</I>&gt;<i>         $this-&gt;YDDatabaseObject();
+</I>&gt;<i>        
+</I>&gt;<i>         $this-&gt;registerDatabase();
+</I>&gt;<i>         $this-&gt;registerTable( 'mytable' );
+</I>&gt;<i>        
+</I>&gt;<i>         $this-&gt;registerKey( 'id' );
+</I>&gt;<i>         $this-&gt;registerField( 'type' );
+</I>&gt;<i>         $this-&gt;registerField( 'total' );
+</I>&gt;<i>        
+</I>&gt;<i>         $this-&gt;registerSelect( 'big', 'IF( #.total &gt; 100, 1, 0 )' );
+</I>&gt;<i>        
+</I>&gt;<i>         // third parameter means that this select is not going to be
+</I>&gt;<i> added in all queries
+</I>&gt;<i>         $this-&gt;registerSelect( 'rows', 'COUNT( #.id )', false );
+</I>&gt;<i>         $this-&gt;registerSelect( 'average', 'AVG( #.total )', false );
+</I>&gt;<i>        
+</I>&gt;<i>     }
+</I>&gt;<i>
+</I>&gt;<i> }
+</I>&gt;<i>
+</I>&gt;<i> $obj = YDDatabaseObject::getInstance( 'MyObject' );
+</I>&gt;<i> $obj-&gt;id = 1;
+</I>&gt;<i> $obj-&gt;find(); // SELECT id, type, total, IF( mytable.total &gt; 100, 1, 0
+</I>&gt;<i> ) AS big FROM mytable WHERE id = 1
+</I>&gt;<i>
+</I>&gt;<i> $obj-&gt;reset();
+</I>&gt;<i> $obj-&gt;select( 'count' );
+</I>&gt;<i> $obj-&gt;find(); // SELECT COUNT( mytable.total ) AS rows FROM mytable
+</I>&gt;<i>
+</I>&gt;<i> $obj-&gt;reset();
+</I>&gt;<i> $obj-&gt;select( 'type', 'average', 'count' );
+</I>&gt;<i> $obj-&gt;group( 'type' );
+</I>&gt;<i> $obj-&gt;find(); // SELECT AVG( mytable.total ) AS average, COUNT(
+</I>&gt;<i> mytable.total ) AS rows FROM mytable GROUP BY type
+</I>&gt;<i>
+</I>&gt;<i> // result example
+</I>&gt;<i>
+</I>&gt;<i> array (
+</I>&gt;<i>
+</I>&gt;<i>     array (
+</I>&gt;<i>         'type' =&gt; 1,
+</I>&gt;<i>         'average' =&gt; 25,
+</I>&gt;<i>         'rows' =&gt; 3,
+</I>&gt;<i>     ),
+</I>&gt;<i>     array (
+</I>&gt;<i>         'type' =&gt; 2,
+</I>&gt;<i>         'average' =&gt; 86,
+</I>&gt;<i>         'rows' =&gt; 11,
+</I>&gt;<i>     ),
+</I>&gt;<i>
+</I>&gt;<i> );
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i> Hope this can help.
+</I>&gt;<i>
+</I>&gt;<i> -db
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i> On 8/1/06, * <A HREF="https://lists.berlios.de/mailman/listinfo/ydframework-users">araviski at free.fr</A> &lt;mailto:<A HREF="https://lists.berlios.de/mailman/listinfo/ydframework-users">araviski at free.fr</A>&gt;*
+</I>&gt;<i> &lt;<A HREF="https://lists.berlios.de/mailman/listinfo/ydframework-users">araviski at free.fr</A> &lt;mailto:<A HREF="https://lists.berlios.de/mailman/listinfo/ydframework-users">araviski at free.fr</A>&gt;&gt; wrote:
+</I>&gt;<i>
+</I>&gt;<i>     Hi all !
+</I>&gt;<i>
+</I>&gt;<i>     I'm currently trying to make some little stats about my
+</I>&gt;<i>     application, and I
+</I>&gt;<i>     wonder if I can use the YDDatabaseObject to retrieve the results
+</I>&gt;<i>     of Count, avg,
+</I>&gt;<i>     sum, etc.. expressions in a query. I successfully used the
+</I>&gt;<i>     groupby() function,
+</I>&gt;<i>     but only without any aggregate function.
+</I>&gt;<i>     I tried the findSql() method to make my whole query, but the fact
+</I>&gt;<i>     that the
+</I>&gt;<i>     aggregate expressions are not registred in the object trigger some
+</I>&gt;<i>     errors.
+</I>&gt;<i>     I also tried to register the expressions using registerSelect in
+</I>&gt;<i>     the definition
+</I>&gt;<i>     of the objects on the off-chance but it doesn't work (and I
+</I>&gt;<i>     understand that I
+</I>&gt;<i>     cannot have permanently aggregate functions in the select queries).
+</I>&gt;<i>
+</I>&gt;<i>     So my question is, is it possible to use aggregate functions using
+</I>&gt;<i>     the
+</I>&gt;<i>     YDDatabaseObject or have I to use a YDDatabaseQuery ?
+</I>&gt;<i>
+</I>&gt;<i>     BTW, the findSql() function trigger &quot;Notice: Undefined offset:&quot;
+</I>&gt;<i>     errors in
+</I>&gt;<i>     YDDatabaseObject.php on line 1475 when the select fields are not
+</I>&gt;<i>     precised using
+</I>&gt;<i>     the select() function just before using the findSql() one.
+</I>&gt;<i>
+</I>&gt;<i>     Thanks for any help,
+</I>&gt;<i>
+</I>&gt;<i>     Erwan.
+</I>&gt;<i>     _______________________________________________
+</I>&gt;<i>     YDFramework-users mailing list
+</I>&gt;<i>     <A HREF="https://lists.berlios.de/mailman/listinfo/ydframework-users">YDFramework-users at lists.berlios.de</A>
+</I>&gt;<i>     &lt;mailto:<A HREF="https://lists.berlios.de/mailman/listinfo/ydframework-users">YDFramework-users at lists.berlios.de</A>&gt;
+</I>&gt;<i>     <A HREF="http://bat.berlios.de/mailman/listinfo/ydframework-users">http://bat.berlios.de/mailman/listinfo/ydframework-users</A>
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i> ------------------------------------------------------------------------
+</I>&gt;<i>
+</I>&gt;<i> _______________________________________________
+</I>&gt;<i> YDFramework-users mailing list
+</I>&gt;<i> <A HREF="https://lists.berlios.de/mailman/listinfo/ydframework-users">YDFramework-users at lists.berlios.de</A>
+</I>&gt;<i> <A HREF="http://bat.berlios.de/mailman/listinfo/ydframework-users">http://bat.berlios.de/mailman/listinfo/ydframework-users</A>
+</I>&gt;<i>   
+</I>
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000313.html">[ydf-users] YDDatabaseObject, GroupBy and aggreate functions ?
+</A></li>
+	<LI>Next message: <A HREF="000304.html">[ydf-users] Query Regarding Variable scope
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#316">[ date ]</a>
+              <a href="thread.html#316">[ thread ]</a>
+              <a href="subject.html#316">[ subject ]</a>
+              <a href="author.html#316">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/ydframework-users">More information about the YDFramework-users
+mailing list</a><br>
+</body></html>

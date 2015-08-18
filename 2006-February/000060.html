@@ -1,0 +1,137 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [ydf-users] YDDatabaseObject code generator
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/ydframework-users/2006-February/index.html" >
+   <LINK REL="made" HREF="mailto:ydframework-users%40lists.berlios.de?Subject=Re%3A%20%5Bydf-users%5D%20YDDatabaseObject%20code%20generator&In-Reply-To=%3C4aef63030602240530i46d82d18s2dd9d58bfe956f09%40mail.gmail.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000059.html">
+   <LINK REL="Next"  HREF="000061.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[ydf-users] YDDatabaseObject code generator</H1>
+    <B>Pieter Claerhout</B> 
+    <A HREF="mailto:ydframework-users%40lists.berlios.de?Subject=Re%3A%20%5Bydf-users%5D%20YDDatabaseObject%20code%20generator&In-Reply-To=%3C4aef63030602240530i46d82d18s2dd9d58bfe956f09%40mail.gmail.com%3E"
+       TITLE="[ydf-users] YDDatabaseObject code generator">pieter at yellowduck.be
+       </A><BR>
+    <I>Fri Feb 24 14:30:37 CET 2006</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000059.html">[ydf-users] YDDatabaseObject code generator
+</A></li>
+        <LI>Next message: <A HREF="000061.html">[ydf-users] YDDatabaseObject code generator
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#60">[ date ]</a>
+              <a href="thread.html#60">[ thread ]</a>
+              <a href="subject.html#60">[ subject ]</a>
+              <a href="author.html#60">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>To automate $result = mysql_query(&quot;SHOW COLUMNS FROM&quot;.$_GET['table']);, you
+can use the new YDDatabaseMetaData class.
+
+Something along the lines of:
+
+$metadata = new YDDatabaseMetaData( $db );
+$cols = $metadata-&gt;getFields( $_GET['table'] );
+
+Cheers,
+
+pieter
+
+On 2/24/06, dab &lt;<A HREF="https://lists.berlios.de/mailman/listinfo/ydframework-users">dab214 at yahoo.com</A>&gt; wrote:
+&gt;<i>
+</I>&gt;<i> hi all,
+</I>&gt;<i> it's a bit tedios writing the database classes,
+</I>&gt;<i> registring all the keys and fields.
+</I>&gt;<i> anyone written something that automates this stuff?
+</I>&gt;<i>
+</I>&gt;<i> i just wrote this quickly:
+</I>&gt;<i>
+</I>&gt;<i> $link = mysql_connect('localhost', 'root', '');
+</I>&gt;<i> mysql_select_db(&quot;whatever&quot;);
+</I>&gt;<i> $result = mysql_query(&quot;SHOW COLUMNS FROM
+</I>&gt;<i> &quot;.$_GET['table']);
+</I>&gt;<i> while ( $row = mysql_fetch_assoc($result)) {
+</I>&gt;<i>   if ( $row[&quot;Field&quot;] == &quot;id&quot; )
+</I>&gt;<i>      echo &quot;\$this-&gt;registerKey ( '&quot;.$row[&quot;Field&quot;].&quot;',
+</I>&gt;<i> true );&lt;br&gt;&quot;;
+</I>&gt;<i>   elseif ( substr ( $row[&quot;Field&quot;], -2, 2 ) == &quot;id&quot;)
+</I>&gt;<i>      echo &quot;\$this-&gt;registerKey ( '&quot;.$row[&quot;Field&quot;].&quot;'
+</I>&gt;<i> );&lt;br&gt;&quot;;
+</I>&gt;<i>   else
+</I>&gt;<i>      echo &quot;\$this-&gt;registerField (
+</I>&gt;<i> '&quot;.$row[&quot;Field&quot;].&quot;' );&lt;br&gt;&quot;;
+</I>&gt;<i> }
+</I>&gt;<i>
+</I>&gt;<i> but it be nice to have something a bit more extensive.
+</I>&gt;<i> maybe generate code for the other classes and the
+</I>&gt;<i> templates too. and even be able to choose from several
+</I>&gt;<i> code templates before generating the file.
+</I>&gt;<i> E.g. template database_cross_ref:
+</I>&gt;<i> include...
+</I>&gt;<i> class {$class_name} extends YDDatabaseObject {
+</I>&gt;<i>    function {$class_name} {
+</I>&gt;<i>        $this-&gt;YDDatabaseObject();
+</I>&gt;<i>        $this-&gt;registerDatabase(
+</I>&gt;<i> $GLOBALS['YDDBOBJ_CONN'] );
+</I>&gt;<i>        $this-&gt;registerTable( {$table_name} );
+</I>&gt;<i>
+</I>&gt;<i>        // SHOW COLUMNS
+</I>&gt;<i>        {$keys_and_fields}
+</I>&gt;<i>    }
+</I>&gt;<i> }
+</I>&gt;<i>
+</I>&gt;<i> so for the type &quot;create database class&quot;, setting the
+</I>&gt;<i> class and table name and picking a template.
+</I>&gt;<i>
+</I>&gt;<i> please let me know what you think, thanks.
+</I>&gt;<i>
+</I>&gt;<i> __________________________________________________
+</I>&gt;<i> Do You Yahoo!?
+</I>&gt;<i> Tired of spam?  Yahoo! Mail has the best spam protection around
+</I>&gt;<i> <A HREF="http://mail.yahoo.com">http://mail.yahoo.com</A>
+</I>&gt;<i> _______________________________________________
+</I>&gt;<i> YDFramework-users mailing list
+</I>&gt;<i> <A HREF="https://lists.berlios.de/mailman/listinfo/ydframework-users">YDFramework-users at lists.berlios.de</A>
+</I>&gt;<i> <A HREF="http://lists.berlios.de/mailman/listinfo/ydframework-users">http://lists.berlios.de/mailman/listinfo/ydframework-users</A>
+</I>&gt;<i>
+</I>
+
+
+--
+pieter claerhout . <A HREF="https://lists.berlios.de/mailman/listinfo/ydframework-users">pieter at yellowduck.be</A> . <A HREF="http://www.yellowduck.be/">http://www.yellowduck.be/</A>
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: &lt;<A HREF="https://lists.berlios.de/pipermail/ydframework-users/attachments/20060224/2a673dfe/attachment.html">https://lists.berlios.de/pipermail/ydframework-users/attachments/20060224/2a673dfe/attachment.html</A>&gt;
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000059.html">[ydf-users] YDDatabaseObject code generator
+</A></li>
+	<LI>Next message: <A HREF="000061.html">[ydf-users] YDDatabaseObject code generator
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#60">[ date ]</a>
+              <a href="thread.html#60">[ thread ]</a>
+              <a href="subject.html#60">[ subject ]</a>
+              <a href="author.html#60">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/ydframework-users">More information about the YDFramework-users
+mailing list</a><br>
+</body></html>

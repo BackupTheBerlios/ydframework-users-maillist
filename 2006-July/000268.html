@@ -1,0 +1,124 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [ydf-users] Query Regarding Submit button
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/ydframework-users/2006-July/index.html" >
+   <LINK REL="made" HREF="mailto:ydframework-users%40lists.berlios.de?Subject=Re%3A%20%5Bydf-users%5D%20Query%20Regarding%20Submit%20button&In-Reply-To=%3C12260be20607040009k2129edb3ke0b5673e18fd1ff4%40mail.gmail.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000265.html">
+   <LINK REL="Next"  HREF="000269.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[ydf-users] Query Regarding Submit button</H1>
+    <B>David Bittencourt</B> 
+    <A HREF="mailto:ydframework-users%40lists.berlios.de?Subject=Re%3A%20%5Bydf-users%5D%20Query%20Regarding%20Submit%20button&In-Reply-To=%3C12260be20607040009k2129edb3ke0b5673e18fd1ff4%40mail.gmail.com%3E"
+       TITLE="[ydf-users] Query Regarding Submit button">muitocomplicado at gmail.com
+       </A><BR>
+    <I>Tue Jul  4 09:09:10 CEST 2006</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000265.html">[ydf-users] Query Regarding Submit button
+</A></li>
+        <LI>Next message: <A HREF="000269.html">[ydf-users] Query Regarding Submit button
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#268">[ date ]</a>
+              <a href="thread.html#268">[ thread ]</a>
+              <a href="subject.html#268">[ subject ]</a>
+              <a href="author.html#268">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Well... this kind of behavior is not that simple because a form can have
+only one action and that action can't be changed with javascript (I think).
+
+I don't know a nice solution for it, but perhaps you could add a text field
+called 'action' with style=&quot;display:none&quot;. Then with javascript when the
+user presses the Add button, you fill the 'action' field with &quot;add&quot; and for
+the Edit button, fill with &quot;edit&quot;. In your php script you can now redirect
+the request to the desired action.
+
+Just a suggestion, someone knows a better way?
+
+-db
+
+On 7/4/06, <A HREF="https://lists.berlios.de/mailman/listinfo/ydframework-users">moses at softwaysolutions.com</A> &lt;<A HREF="https://lists.berlios.de/mailman/listinfo/ydframework-users">moses at softwaysolutions.com</A>&gt; wrote:
+&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i> Hello Sir
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i>      In my page I have a form and within that I have two submit buttons
+</I>&gt;<i> named add,edit
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i> $this-&gt;form-&gt;addElement('submit','add','Add',array(&quot;class&quot;=&gt;&quot;button&quot;));
+</I>&gt;<i>
+</I>&gt;<i> $this-&gt;form-&gt;addElement('submit','edit','Edit',array(&quot;class&quot;=&gt;&quot;button&quot;));
+</I>&gt;<i>
+</I>&gt;<i>     and I have two functions named
+</I>&gt;<i>
+</I>&gt;<i>     function actionAdd
+</I>&gt;<i>     {
+</I>&gt;<i>             -- The Code --
+</I>&gt;<i>
+</I>&gt;<i>     }
+</I>&gt;<i>
+</I>&gt;<i>    function actionEdit
+</I>&gt;<i>    {
+</I>&gt;<i>
+</I>&gt;<i>        -- The Code for Edit --
+</I>&gt;<i>    }
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i>    So when I click add submit button the function actionAdd() should be
+</I>&gt;<i> executed and when I click Edit the function actionEdit() should be
+</I>&gt;<i> executed.
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i>     What should I do...
+</I>&gt;<i>
+</I>&gt;<i> regards
+</I>&gt;<i> moses
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i> _______________________________________________
+</I>&gt;<i> YDFramework-users mailing list
+</I>&gt;<i> <A HREF="https://lists.berlios.de/mailman/listinfo/ydframework-users">YDFramework-users at lists.berlios.de</A>
+</I>&gt;<i> <A HREF="http://lists.berlios.de/mailman/listinfo/ydframework-users">http://lists.berlios.de/mailman/listinfo/ydframework-users</A>
+</I>&gt;<i>
+</I>-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: &lt;<A HREF="https://lists.berlios.de/pipermail/ydframework-users/attachments/20060704/8882bb5f/attachment.html">https://lists.berlios.de/pipermail/ydframework-users/attachments/20060704/8882bb5f/attachment.html</A>&gt;
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000265.html">[ydf-users] Query Regarding Submit button
+</A></li>
+	<LI>Next message: <A HREF="000269.html">[ydf-users] Query Regarding Submit button
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#268">[ date ]</a>
+              <a href="thread.html#268">[ thread ]</a>
+              <a href="subject.html#268">[ subject ]</a>
+              <a href="author.html#268">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/ydframework-users">More information about the YDFramework-users
+mailing list</a><br>
+</body></html>

@@ -1,0 +1,252 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [ydf-users] Query Regarding Submit button
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/ydframework-users/2006-July/index.html" >
+   <LINK REL="made" HREF="mailto:ydframework-users%40lists.berlios.de?Subject=Re%3A%20%5Bydf-users%5D%20Query%20Regarding%20Submit%20button&In-Reply-To=%3C4aef63030607040256g5502d1e3v3674adc57364dc6f%40mail.gmail.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000270.html">
+   <LINK REL="Next"  HREF="000272.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[ydf-users] Query Regarding Submit button</H1>
+    <B>Pieter Claerhout</B> 
+    <A HREF="mailto:ydframework-users%40lists.berlios.de?Subject=Re%3A%20%5Bydf-users%5D%20Query%20Regarding%20Submit%20button&In-Reply-To=%3C4aef63030607040256g5502d1e3v3674adc57364dc6f%40mail.gmail.com%3E"
+       TITLE="[ydf-users] Query Regarding Submit button">pieter at yellowduck.be
+       </A><BR>
+    <I>Tue Jul  4 11:56:12 CEST 2006</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000270.html">[ydf-users] Query Regarding Submit button
+</A></li>
+        <LI>Next message: <A HREF="000272.html">[ydf-users] One Minor issue with header
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#271">[ date ]</a>
+              <a href="thread.html#271">[ thread ]</a>
+              <a href="subject.html#271">[ subject ]</a>
+              <a href="author.html#271">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>In a lot of cases, there is no need for two separate actions for
+insert/edit. What I generally tend to do, is to include the primary key as a
+hidden field in the form. If there is no primary key, an insert needs to
+happen, otherwise, an edit needs to happen.
+
+pieter
+
+On 7/4/06, <A HREF="https://lists.berlios.de/mailman/listinfo/ydframework-users">moses at softwaysolutions.com</A> &lt;<A HREF="https://lists.berlios.de/mailman/listinfo/ydframework-users">moses at softwaysolutions.com</A>&gt; wrote:
+&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i> Hello Sir
+</I>&gt;<i>
+</I>&gt;<i>      Thank U for your reply.
+</I>&gt;<i>
+</I>&gt;<i>      I didnt tried with javascript but I used the following coding
+</I>&gt;<i>
+</I>&gt;<i>      if($_POST['form_add'])
+</I>&gt;<i>      {
+</I>&gt;<i>          $this-&gt;forward('add');
+</I>&gt;<i>      }
+</I>&gt;<i>
+</I>&gt;<i>       if($_POST['form_edit'])
+</I>&gt;<i>      {
+</I>&gt;<i>          $this-&gt;forward('edit');
+</I>&gt;<i>      }
+</I>&gt;<i>
+</I>&gt;<i>      One more question.
+</I>&gt;<i>      Now while creating a form we where specifing the action to the
+</I>&gt;<i> form
+</I>&gt;<i>      Is there any way to specify the action to be performed by the form
+</I>&gt;<i> should given in the submit button. so that we can have any no of submit
+</I>&gt;<i> buttons and actions.
+</I>&gt;<i>
+</I>&gt;<i> regards
+</I>&gt;<i> moses
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i> &gt; -------- Original Message --------
+</I>&gt;<i> &gt; Subject: Re: [ydf-users] Query Regarding Submit button
+</I>&gt;<i> &gt; From: &quot;ydf poi&quot; &lt;<A HREF="https://lists.berlios.de/mailman/listinfo/ydframework-users">ydfpoi at gmail.com</A>&gt;
+</I>&gt;<i> &gt; Date: Tue, July 04, 2006 1:04 am
+</I>&gt;<i> &gt; To: <A HREF="https://lists.berlios.de/mailman/listinfo/ydframework-users">ydframework-users at berlios.de</A>
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt; Hi
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt; I think javascript enables you to do what you want.
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt; You can create a HTML document like this one:
+</I>&gt;<i> &gt; &lt;header&gt;
+</I>&gt;<i> &gt;     ...
+</I>&gt;<i> &gt;     &lt;script type=&quot;text/javascript&quot; src=&quot;foo.js&quot;&gt;&lt;/script&gt;
+</I>&gt;<i> &gt; &lt;/header&gt;
+</I>&gt;<i> &gt; &lt;body&gt;
+</I>&gt;<i> &gt;     ...
+</I>&gt;<i> &gt;     &lt;form id=&quot;myForm&quot; action=&quot;&quot; ...&gt;
+</I>&gt;<i> &gt;         ...
+</I>&gt;<i> &gt;         &lt;input id=&quot;addButton&quot; type=&quot;button&quot; value=&quot;Add&quot; /&gt;
+</I>&gt;<i> &gt;         &lt;input id=&quot;editButton&quot; type=&quot;button&quot; value=&quot;Edit&quot; /&gt;
+</I>&gt;<i> &gt;         ...
+</I>&gt;<i> &gt;     &lt;/form&gt;
+</I>&gt;<i> &gt;     ...
+</I>&gt;<i> &gt; &lt;/body&gt;
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt; Then the foo.js file has to contain something like:
+</I>&gt;<i> &gt;     window.onload = init();
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt;     var addButton = null;
+</I>&gt;<i> &gt;     var editButton = null;
+</I>&gt;<i> &gt;     var myForm = null;
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt;     function init() {
+</I>&gt;<i> &gt;         myForm = document.getElementById('myForm');
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt;         addButton = document.getElementById('addButton');
+</I>&gt;<i> &gt;         addButton.onclick = function() {
+</I>&gt;<i> &gt;             myForm.action = '<A HREF="http://yourpage.html?do=add">http://yourpage.html?do=add</A>'; // or only
+</I>&gt;<i> &gt; '?do=add' here
+</I>&gt;<i> &gt;             myForm.submit();
+</I>&gt;<i> &gt;         }
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt;         editButton = document.getElementById('editButton');
+</I>&gt;<i> &gt;         editButton.onclick = function() {
+</I>&gt;<i> &gt;             myForm.action = '<A HREF="http://yourpage.html?do=edit">http://yourpage.html?do=edit</A>'; // or only
+</I>&gt;<i> &gt; '?do=edit' here
+</I>&gt;<i> &gt;             myForm.submit();
+</I>&gt;<i> &gt;         }
+</I>&gt;<i> &gt;     }
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt; Well, I have not tested this code but I think it should work.
+</I>&gt;<i> &gt; Kind regards
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt; 2006/7/4, David Bittencourt &lt;<A HREF="https://lists.berlios.de/mailman/listinfo/ydframework-users">muitocomplicado at gmail.com</A>&gt;:
+</I>&gt;<i> &gt; &gt; Well... this kind of behavior is not that simple because a form can
+</I>&gt;<i> have
+</I>&gt;<i> &gt; &gt; only one action and that action can't be changed with javascript (I
+</I>&gt;<i> think).
+</I>&gt;<i> &gt; &gt;
+</I>&gt;<i> &gt; &gt; I don't know a nice solution for it, but perhaps you could add a text
+</I>&gt;<i> field
+</I>&gt;<i> &gt; &gt; called 'action' with style=&quot;display:none&quot;. Then with javascript when
+</I>&gt;<i> the
+</I>&gt;<i> &gt; &gt; user presses the Add button, you fill the 'action' field with &quot;add&quot;
+</I>&gt;<i> and for
+</I>&gt;<i> &gt; &gt; the Edit button, fill with &quot;edit&quot;. In your php script you can now
+</I>&gt;<i> redirect
+</I>&gt;<i> &gt; &gt; the request to the desired action.
+</I>&gt;<i> &gt; &gt;
+</I>&gt;<i> &gt; &gt; Just a suggestion, someone knows a better way?
+</I>&gt;<i> &gt; &gt;
+</I>&gt;<i> &gt; &gt; -db
+</I>&gt;<i> &gt; &gt;
+</I>&gt;<i> &gt; &gt;
+</I>&gt;<i> &gt; &gt; On 7/4/06, <A HREF="https://lists.berlios.de/mailman/listinfo/ydframework-users">moses at softwaysolutions.com</A> &lt;<A HREF="https://lists.berlios.de/mailman/listinfo/ydframework-users">moses at softwaysolutions.com</A>&gt;
+</I>&gt;<i> wrote:
+</I>&gt;<i> &gt; &gt; &gt;
+</I>&gt;<i> &gt; &gt; &gt; Hello Sir
+</I>&gt;<i> &gt; &gt; &gt;
+</I>&gt;<i> &gt; &gt; &gt;
+</I>&gt;<i> &gt; &gt; &gt;      In my page I have a form and within that I have two submit
+</I>&gt;<i> buttons
+</I>&gt;<i> &gt; &gt; &gt; named add,edit
+</I>&gt;<i> &gt; &gt; &gt;
+</I>&gt;<i> &gt; &gt; &gt;
+</I>&gt;<i> &gt; &gt; &gt;
+</I>&gt;<i> &gt; &gt;
+</I>&gt;<i> $this-&gt;form-&gt;addElement('submit','add','Add',array(&quot;class&quot;=&gt;&quot;button&quot;));
+</I>&gt;<i> &gt; &gt; &gt;
+</I>&gt;<i> &gt; &gt; &gt;
+</I>&gt;<i> &gt; &gt;
+</I>&gt;<i> $this-&gt;form-&gt;addElement('submit','edit','Edit',array(&quot;class&quot;=&gt;&quot;button&quot;));
+</I>&gt;<i> &gt; &gt; &gt;
+</I>&gt;<i> &gt; &gt; &gt;     and I have two functions named
+</I>&gt;<i> &gt; &gt; &gt;
+</I>&gt;<i> &gt; &gt; &gt;     function actionAdd
+</I>&gt;<i> &gt; &gt; &gt;     {
+</I>&gt;<i> &gt; &gt; &gt;             -- The Code --
+</I>&gt;<i> &gt; &gt; &gt;
+</I>&gt;<i> &gt; &gt; &gt;     }
+</I>&gt;<i> &gt; &gt; &gt;
+</I>&gt;<i> &gt; &gt; &gt;    function actionEdit
+</I>&gt;<i> &gt; &gt; &gt;    {
+</I>&gt;<i> &gt; &gt; &gt;
+</I>&gt;<i> &gt; &gt; &gt;        -- The Code for Edit --
+</I>&gt;<i> &gt; &gt; &gt;    }
+</I>&gt;<i> &gt; &gt; &gt;
+</I>&gt;<i> &gt; &gt; &gt;
+</I>&gt;<i> &gt; &gt; &gt;    So when I click add submit button the function actionAdd() should
+</I>&gt;<i> be
+</I>&gt;<i> &gt; &gt; &gt; executed and when I click Edit the function actionEdit() should be
+</I>&gt;<i> &gt; &gt; &gt; executed.
+</I>&gt;<i> &gt; &gt; &gt;
+</I>&gt;<i> &gt; &gt; &gt;
+</I>&gt;<i> &gt; &gt; &gt;     What should I do...
+</I>&gt;<i> &gt; &gt; &gt;
+</I>&gt;<i> &gt; &gt; &gt; regards
+</I>&gt;<i> &gt; &gt; &gt; moses
+</I>&gt;<i> &gt; &gt; &gt;
+</I>&gt;<i> &gt; &gt; &gt;
+</I>&gt;<i> &gt; &gt; &gt;
+</I>&gt;<i> &gt; &gt; &gt;
+</I>&gt;<i> &gt; &gt; &gt;
+</I>&gt;<i> &gt; &gt; &gt; _______________________________________________
+</I>&gt;<i> &gt; &gt; &gt; YDFramework-users mailing list
+</I>&gt;<i> &gt; &gt; &gt; <A HREF="https://lists.berlios.de/mailman/listinfo/ydframework-users">YDFramework-users at lists.berlios.de</A>
+</I>&gt;<i> &gt; &gt; &gt;
+</I>&gt;<i> &gt; &gt; <A HREF="http://lists.berlios.de/mailman/listinfo/ydframework-users">http://lists.berlios.de/mailman/listinfo/ydframework-users</A>
+</I>&gt;<i> &gt; &gt; &gt;
+</I>&gt;<i> &gt; &gt;
+</I>&gt;<i> &gt; &gt;
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt; --
+</I>&gt;<i> &gt; po&#239;
+</I>&gt;<i> &gt; _______________________________________________
+</I>&gt;<i> &gt; YDFramework-users mailing list
+</I>&gt;<i> &gt; <A HREF="https://lists.berlios.de/mailman/listinfo/ydframework-users">YDFramework-users at lists.berlios.de</A>
+</I>&gt;<i> &gt; <A HREF="http://lists.berlios.de/mailman/listinfo/ydframework-users">http://lists.berlios.de/mailman/listinfo/ydframework-users</A>
+</I>&gt;<i>
+</I>&gt;<i> _______________________________________________
+</I>&gt;<i> YDFramework-users mailing list
+</I>&gt;<i> <A HREF="https://lists.berlios.de/mailman/listinfo/ydframework-users">YDFramework-users at lists.berlios.de</A>
+</I>&gt;<i> <A HREF="http://lists.berlios.de/mailman/listinfo/ydframework-users">http://lists.berlios.de/mailman/listinfo/ydframework-users</A>
+</I>&gt;<i>
+</I>
+
+
+-- 
+pieter claerhout . <A HREF="https://lists.berlios.de/mailman/listinfo/ydframework-users">pieter at yellowduck.be</A> . <A HREF="http://www.yellowduck.be/">http://www.yellowduck.be/</A>
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: &lt;<A HREF="https://lists.berlios.de/pipermail/ydframework-users/attachments/20060704/80801d00/attachment.html">https://lists.berlios.de/pipermail/ydframework-users/attachments/20060704/80801d00/attachment.html</A>&gt;
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000270.html">[ydf-users] Query Regarding Submit button
+</A></li>
+	<LI>Next message: <A HREF="000272.html">[ydf-users] One Minor issue with header
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#271">[ date ]</a>
+              <a href="thread.html#271">[ thread ]</a>
+              <a href="subject.html#271">[ subject ]</a>
+              <a href="author.html#271">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/ydframework-users">More information about the YDFramework-users
+mailing list</a><br>
+</body></html>

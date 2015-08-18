@@ -1,0 +1,437 @@
+From maximus_meridius79 at yahoo.com  Tue Oct  3 17:32:53 2006
+From: maximus_meridius79 at yahoo.com (maximus meridius)
+Date: Tue, 3 Oct 2006 08:32:53 -0700 (PDT)
+Subject: [ydf-users] YDAJax::addEvent( "*",
+	... ) and adding events in a response
+Message-ID: <20061003153253.66429.qmail@web54002.mail.yahoo.com>
+
+Hi Francisco,
+
+I am having a great deal of trouble trying to work out
+how to correctly 
+generate the events and forms in the YDAjax response.
+
+The result that I am getting is that _everything_ is
+processed by the 
+catchAll event and there are not arguments such as the
+name of the 
+calling function passed (the only data I get is the
+form contents). In 
+my "catch all" function I have no basis for
+determining what function to 
+call to process the specific event (their are no
+parameters that tell me 
+the function / event / element id, etc).
+
+When I tried to set up a close() event, the javascript
+was generated but 
+the desired PHP function was not called.
+
+Thanks,
+
+Graeme
+
+Francisco Azevedo wrote:
+> I have an application built 100% with your idea ;)
+and i can tell you 
+> that it works very well. All forms (and
+correspondent events for it) are 
+> generated on the response side ;)
+>
+> Well.. the security must be checked on the server
+side. If you are 
+> trying to use * on addEvent you should check the
+function name and 
+> arguments syntax, if they really exists.. etc.. but
+you can control that.
+>
+>
+> regards
+> Francisco A
+> _______________________________________________
+> YDFramework-users mailing list
+> YDFramework-users at lists.berlios.de
+>
+https://lists.berlios.de/mailman/listinfo/ydframework-users
+>
+>
+>   
+
+
+__________________________________________________
+Do You Yahoo!?
+Tired of spam?  Yahoo! Mail has the best spam protection around 
+http://mail.yahoo.com 
+
+
+From francisco at fusemail.com  Tue Oct  3 23:48:20 2006
+From: francisco at fusemail.com (Francisco Azevedo)
+Date: Tue, 03 Oct 2006 22:48:20 +0100
+Subject: [ydf-users] YDAJax::addEvent( "*",
+ ... ) and adding events in a response
+In-Reply-To: <20061003153253.66429.qmail@web54002.mail.yahoo.com>
+References: <20061003153253.66429.qmail@web54002.mail.yahoo.com>
+Message-ID: <4522DAA4.1020504@fusemail.com>
+
+Hi Graeme
+
+> I am having a great deal of trouble trying to work out
+> how to correctly 
+> generate the events and forms in the YDAjax response.
+> 
+> The result that I am getting is that _everything_ is
+> processed by the 
+> catchAll event and there are not arguments such as the
+> name of the 
+> calling function passed (the only data I get is the
+> form contents). In 
+> my "catch all" function I have no basis for
+> determining what function to 
+> call to process the specific event (their are no
+> parameters that tell me 
+> the function / event / element id, etc).
+> 
+> When I tried to set up a close() event, the javascript
+> was generated but 
+> the desired PHP function was not called.
+
+
+Look at example added at b2174. I hope to got your doubts answered about
+
+
+regards
+Francisco A
+
+
+From maximus_meridius79 at yahoo.com  Wed Oct  4 15:24:05 2006
+From: maximus_meridius79 at yahoo.com (maximus meridius)
+Date: Wed, 4 Oct 2006 06:24:05 -0700 (PDT)
+Subject: [ydf-users] YDAJax::addEvent( "*",
+	... ) and adding events in a response
+Message-ID: <20061004132406.78946.qmail@web54010.mail.yahoo.com>
+
+  Hi Francisco,
+
+Thanks for this! It's a great example that will point me in the rightdirection.
+
+Regards,
+
+Graeme
+
+Francisco Azevedo wrote:  
+Hi Graeme  
+      
+I am having a great deal of trouble trying to work outhow to correctly generate the events and forms in the YDAjax response.The result that I am getting is that _everything_ isprocessed by the catchAll event and there are not arguments such as thename of the calling function passed (the only data I get is theform contents). In my "catch all" function I have no basis fordetermining what function to call to process the specific event (their are noparameters that tell me the function / event / element id, etc).When I tried to set up a close() event, the javascriptwas generated but the desired PHP function was not called.    
+    
+Look at example added at b2174. I hope to got your doubts answered aboutregardsFrancisco A_______________________________________________YDFramework-users mailing listYDFramework-users at lists.berlios.dehttps://lists.berlios.de/mailman/listinfo/ydframework-users  
+
+
+ 		
+---------------------------------
+ All-new Yahoo! Mail - Fire up a more powerful email and get things done faster.
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <https://lists.berlios.de/pipermail/ydframework-users/attachments/20061004/eb61417b/attachment.html>
+
+From moses at hysistechnologies.com  Tue Oct 10 12:24:06 2006
+From: moses at hysistechnologies.com (moses at hysistechnologies.com)
+Date: Tue, 10 Oct 2006 03:24:06 -0700
+Subject: [ydf-users] Query Regarding YD_ACTION
+Message-ID: <20061010032406.2b7eeeb4c62f4bb8603cfb01b826e9ec.43d37fc14b.wbe@email.secureserver.net>
+
+
+Hello,
+
+    Can the template variable  {YD_ACTION}  be changed.
+
+    (ie)
+
+    Currently the script is on  actionEdit, On clicking the update
+button I am validating the form and updating the database and again I
+need to display a message called "Sucesssfully Updated" 
+so my tpl will be like this
+
+   .(tpl)
+
+    {if $YD_ACTION == 'edit'}
+        displayed all the values that need to be edited 
+            
+    {/if}
+
+     
+    {if $YD_ACTION == 'update'}
+   
+      Successfully updated Click here to continue.
+   
+    {/if}
+     
+  (.php)
+
+     function acionEdit()
+     {
+
+         if($this->form->validate())
+         {
+                  
+              executeUpdate();
+              $this->forward('update');
+              return;
+  
+         }
+     }
+      
+     function actionUpdate()
+     {
+
+         $this->template->display(); 
+     } 
+
+
+     Every Thing works fine 
+     My Question is insteed of [ $this->forward('update') ] can I set
+the value   to {YD_ACTION}  
+
+
+regards
+moses
+
+
+regards
+moses
+
+
+
+From rene at reneschmidt.de  Thu Oct 12 21:44:27 2006
+From: rene at reneschmidt.de (Rene Schmidt)
+Date: Thu, 12 Oct 2006 21:44:27 +0200
+Subject: [ydf-users] Erm... Hello? Weblog
+Message-ID: <1160682267.31975.8.camel@callisto>
+
+Someone here?
+
+Things were better when there was a forum btw.
+
+Anyway what's the roadmap for the weblog? I miss a plugin interface and
+rss import. Anyone working on this?
+
+-- 
+Rene Schmidt
+Berater f?r Web-Entwicklung und eCommerce 
+Lange Str. 15, 21614 Buxtehude
+Tel. 04161.558363 - http://www.reneschmidt.de/
+
+
+
+From pieter at yellowduck.be  Fri Oct 13 13:53:49 2006
+From: pieter at yellowduck.be (Pieter Claerhout)
+Date: Fri, 13 Oct 2006 13:53:49 +0200
+Subject: [ydf-users] Erm... Hello? Weblog
+In-Reply-To: <1160682267.31975.8.camel@callisto>
+References: <1160682267.31975.8.camel@callisto>
+Message-ID: <4aef63030610130453g57d204b8vf30a8f66acb90fa6@mail.gmail.com>
+
+Hi Rene,
+
+no, there's no roadmap unfortunately for the weblog application.
+
+Feel free to log these items as feature requests on berlios.de.
+
+By the way, I will have to put the Yellow Duck Framework on low maintenance
+till the end of the year as I'm travelling for work about 4 days a week...
+
+If someone feels free to take over the lead, feel free to stand up!
+
+Cheers,
+
+
+pieter
+
+2006/10/12, Rene Schmidt <rene at reneschmidt.de>:
+>
+> Someone here?
+>
+> Things were better when there was a forum btw.
+>
+> Anyway what's the roadmap for the weblog? I miss a plugin interface and
+> rss import. Anyone working on this?
+>
+> --
+> Rene Schmidt
+> Berater f?r Web-Entwicklung und eCommerce
+> Lange Str. 15, 21614 Buxtehude
+> Tel. 04161.558363 - http://www.reneschmidt.de/
+>
+> _______________________________________________
+> YDFramework-users mailing list
+> YDFramework-users at lists.berlios.de
+> https://lists.berlios.de/mailman/listinfo/ydframework-users
+>
+
+
+
+-- 
+pieter claerhout . pieter at yellowduck.be . http://www.yellowduck.be/
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <https://lists.berlios.de/pipermail/ydframework-users/attachments/20061013/515bdb8c/attachment.html>
+
+From pieter at yellowduck.be  Fri Oct 13 13:55:05 2006
+From: pieter at yellowduck.be (Pieter Claerhout)
+Date: Fri, 13 Oct 2006 13:55:05 +0200
+Subject: [ydf-users] Query Regarding YD_ACTION
+In-Reply-To: <20061010032406.2b7eeeb4c62f4bb8603cfb01b826e9ec.43d37fc14b.wbe@email.secureserver.net>
+References: <20061010032406.2b7eeeb4c62f4bb8603cfb01b826e9ec.43d37fc14b.wbe@email.secureserver.net>
+Message-ID: <4aef63030610130455h7bc8256aoe154027711027a6f@mail.gmail.com>
+
+Hi Moses,
+
+the forward action actually takes care of updating the references to
+YD_ACTION and also calls the action handler.
+
+It's the preferred way to do what you are looking for.
+
+cheers,
+
+
+pieter
+
+2006/10/10, moses at hysistechnologies.com <moses at hysistechnologies.com>:
+>
+>
+> Hello,
+>
+>    Can the template variable  {YD_ACTION}  be changed.
+>
+>    (ie)
+>
+>    Currently the script is on  actionEdit, On clicking the update
+> button I am validating the form and updating the database and again I
+> need to display a message called "Sucesssfully Updated"
+> so my tpl will be like this
+>
+>   .(tpl)
+>
+>    {if $YD_ACTION == 'edit'}
+>        displayed all the values that need to be edited
+>
+>    {/if}
+>
+>
+>    {if $YD_ACTION == 'update'}
+>
+>      Successfully updated Click here to continue.
+>
+>    {/if}
+>
+> (.php)
+>
+>     function acionEdit()
+>     {
+>
+>         if($this->form->validate())
+>         {
+>
+>              executeUpdate();
+>              $this->forward('update');
+>              return;
+>
+>         }
+>     }
+>
+>     function actionUpdate()
+>     {
+>
+>         $this->template->display();
+>     }
+>
+>
+>     Every Thing works fine
+>     My Question is insteed of [ $this->forward('update') ] can I set
+> the value   to {YD_ACTION}
+>
+>
+> regards
+> moses
+>
+>
+> regards
+> moses
+>
+> _______________________________________________
+> YDFramework-users mailing list
+> YDFramework-users at lists.berlios.de
+> https://lists.berlios.de/mailman/listinfo/ydframework-users
+>
+
+
+
+-- 
+pieter claerhout . pieter at yellowduck.be . http://www.yellowduck.be/
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <https://lists.berlios.de/pipermail/ydframework-users/attachments/20061013/721a8c9b/attachment.html>
+
+From paultoytoy at gmail.com  Fri Oct 27 17:26:18 2006
+From: paultoytoy at gmail.com (aga toytoy)
+Date: Fri, 27 Oct 2006 23:26:18 +0800
+Subject: [ydf-users] Coding Standards
+Message-ID: <93778d790610270826w388ea82fh51ee126bed7adaa0@mail.gmail.com>
+
+Hi Guys,
+
+I just found out that on http://ydframework.berlios.de, there's no manual
+for the coding standards produce on it. I think it would be likely easy for
+us if we have a set of ethics on our code so if we would have a system made
+and powered by Yellow Duck, it would be easy for those wanna-be's to
+edit/modify the code according to the standards we have followed. Is this
+possible for us to have this kind of stuff? What do you think?
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <https://lists.berlios.de/pipermail/ydframework-users/attachments/20061027/06ae4a41/attachment.html>
+
+From francisco at fusemail.com  Fri Oct 27 19:53:44 2006
+From: francisco at fusemail.com (Francisco Azevedo)
+Date: Fri, 27 Oct 2006 18:53:44 +0100
+Subject: [ydf-users] Coding Standards
+In-Reply-To: <93778d790610270826w388ea82fh51ee126bed7adaa0@mail.gmail.com>
+References: <93778d790610270826w388ea82fh51ee126bed7adaa0@mail.gmail.com>
+Message-ID: <454247A8.5070108@fusemail.com>
+
+Hi
+> 
+> I just found out that on http://ydframework.berlios.de, there's no 
+> manual for the coding standards produce on it. I think it would be 
+> likely easy for us if we have a set of ethics on our code so if we would 
+> have a system made and powered by Yellow Duck, it would be easy for 
+> those wanna-be's to edit/modify the code according to the standards we 
+> have followed. Is this possible for us to have this kind of stuff? What 
+> do you think?
+
+
+Sure.. why not.. Maybe you could start by enumerating some ideas?
+
+
+regards
+Francisco A
+
+
+From paultoytoy at gmail.com  Sat Oct 28 22:27:54 2006
+From: paultoytoy at gmail.com (aga toytoy)
+Date: Sun, 29 Oct 2006 04:27:54 +0800
+Subject: [ydf-users] YDFramework-users Digest, Vol 4, Issue 7
+In-Reply-To: <mailman.137.1162029699.29195.ydframework-users@lists.berlios.de>
+References: <mailman.137.1162029699.29195.ydframework-users@lists.berlios.de>
+Message-ID: <93778d790610281327x78839c4mb899e14ce0739d46@mail.gmail.com>
+
+Hi Francisco, thanks for the compliance! I will do this part and post those
+practice I have accumulated  which I also follow some of the PHPDoc/JavaDoc
+styles and mix with arbitrarian concepts. Anyway, as soon as I could post
+it, I hope we can collaborate, YD users, so that we can have a unity of
+standards for our codes.
+
+Regards,
+Paul Aga
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <https://lists.berlios.de/pipermail/ydframework-users/attachments/20061029/2956fc69/attachment.html>
+

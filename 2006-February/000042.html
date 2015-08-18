@@ -1,0 +1,157 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [ydf-users] SQL Question
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/ydframework-users/2006-February/index.html" >
+   <LINK REL="made" HREF="mailto:ydframework-users%40lists.berlios.de?Subject=Re%3A%20%5Bydf-users%5D%20SQL%20Question&In-Reply-To=%3C20060222081637.49892.qmail%40web53808.mail.yahoo.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000048.html">
+   <LINK REL="Next"  HREF="000045.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[ydf-users] SQL Question</H1>
+    <B>maximus meridius</B> 
+    <A HREF="mailto:ydframework-users%40lists.berlios.de?Subject=Re%3A%20%5Bydf-users%5D%20SQL%20Question&In-Reply-To=%3C20060222081637.49892.qmail%40web53808.mail.yahoo.com%3E"
+       TITLE="[ydf-users] SQL Question">maximus_meridius79 at yahoo.com
+       </A><BR>
+    <I>Wed Feb 22 09:16:37 CET 2006</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000048.html">[ydf-users] SQL Question
+</A></li>
+        <LI>Next message: <A HREF="000045.html">[ydf-users] SQL Question
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#42">[ date ]</a>
+              <a href="thread.html#42">[ thread ]</a>
+              <a href="subject.html#42">[ subject ]</a>
+              <a href="author.html#42">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Hi Peter,
+
+You should be able to setup a view to achieve this ...
+I found this link 
+on the Microsoft website:
+
+<A HREF="http://msdn2.microsoft.com/en-us/library/ms187956.aspx">http://msdn2.microsoft.com/en-us/library/ms187956.aspx</A>
+
+I didn't spend a great deal of time investigating this
+but it is 
+probably what you want. First determine a select
+statement that gives 
+you the data you want.
+
+You should also be able to create your own
+YDDatabase_Driver class for 
+MS-SQL databases. The existing driver classes for
+MySQL etc will give 
+you guidance on achieving this.
+
+Regards,
+
+Graeme
+
+
+
+Peter wrote:
+&gt;<i> This has nothing to do with YDF as such, but since
+</I>I'm using YDF for 
+&gt;<i> this project, and I know there are some bright minds
+</I>reading these 
+&gt;<i> lists, I'll give it a shot...
+</I>&gt;<i>
+</I>&gt;<i> I am building this inventory system for the company
+</I>I work for, and 
+&gt;<i> I'm running into a wall. Hopefully one of you SQL
+</I>gurus can help me 
+&gt;<i> out. This thing is (unfortunately) running on
+</I>MS-SQL, so I can't use 
+&gt;<i> any of the YDF classes, but I do have views, stored
+</I>procedures, 
+&gt;<i> triggers and what not. (if that would be needed)
+</I>&gt;<i>
+</I>&gt;<i> I have this table with the folowing fields:
+</I>&gt;<i> item, pallet, location, user, movedate
+</I>&gt;<i>
+</I>&gt;<i> It will hold the location of each item and/or pallet
+</I>(an item can be 
+&gt;<i> moved by itself, or as part of a pallet), who put it
+</I>there, and when.
+&gt;<i>
+</I>&gt;<i> The tricky part is that there are no key fields.
+</I>They are indexed for 
+&gt;<i> speed, but nothing is unique. The reason is that
+</I>stuff moves around a 
+&gt;<i> lot, so an item can be moved several times a day, on
+</I>and off a pallet, 
+&gt;<i> etc, etc... So this table holds the history of every
+</I>move, ever 
+&gt;<i> performed on every item and pallet in the building.
+</I>(Needless to say, 
+&gt;<i> it's gonna be a big one)
+</I>&gt;<i>
+</I>&gt;<i> What I want is a subset of this table, with only the
+</I>last entry for 
+&gt;<i> each item and pallet (not the history). Thus showing
+</I>me every item and 
+&gt;<i> pallet, with it's *current* location, who put it
+</I>there, and when.
+&gt;<i>
+</I>&gt;<i> Easier said than done, as I've been struggling with
+</I>this all day, but 
+&gt;<i> can't get my head around it. I have to say, I'm not
+</I>the best with SQL, 
+&gt;<i> just know the basics.
+</I>&gt;<i>
+</I>&gt;<i> If anyone can give me an idea of how to build a
+</I>query for this, I owe 
+&gt;<i> you my first born (well, almost)
+</I>&gt;<i>
+</I>&gt;<i> Any help would be appriciated!
+</I>&gt;<i>
+</I>&gt;<i> _______________________________________________
+</I>&gt;<i> YDFramework-users mailing list
+</I>&gt;<i> <A HREF="https://lists.berlios.de/mailman/listinfo/ydframework-users">YDFramework-users at lists.berlios.de</A>
+</I>&gt;<i>
+</I><A HREF="http://lists.berlios.de/mailman/listinfo/ydframework-users">http://lists.berlios.de/mailman/listinfo/ydframework-users</A>
+&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i>
+</I>
+
+__________________________________________________
+Do You Yahoo!?
+Tired of spam?  Yahoo! Mail has the best spam protection around 
+<A HREF="http://mail.yahoo.com">http://mail.yahoo.com</A> 
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000048.html">[ydf-users] SQL Question
+</A></li>
+	<LI>Next message: <A HREF="000045.html">[ydf-users] SQL Question
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#42">[ date ]</a>
+              <a href="thread.html#42">[ thread ]</a>
+              <a href="subject.html#42">[ subject ]</a>
+              <a href="author.html#42">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/ydframework-users">More information about the YDFramework-users
+mailing list</a><br>
+</body></html>

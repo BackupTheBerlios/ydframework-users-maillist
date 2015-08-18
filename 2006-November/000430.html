@@ -1,0 +1,85 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [ydf-users] Add setHTMLRequired for hidden field
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/ydframework-users/2006-November/index.html" >
+   <LINK REL="made" HREF="mailto:ydframework-users%40lists.berlios.de?Subject=Re%3A%20%5Bydf-users%5D%20Add%20setHTMLRequired%20for%20hidden%20field&In-Reply-To=%3C456CC91C.7050408%40fusemail.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000429.html">
+   <LINK REL="Next"  HREF="000431.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[ydf-users] Add setHTMLRequired for hidden field</H1>
+    <B>Francisco Azevedo</B> 
+    <A HREF="mailto:ydframework-users%40lists.berlios.de?Subject=Re%3A%20%5Bydf-users%5D%20Add%20setHTMLRequired%20for%20hidden%20field&In-Reply-To=%3C456CC91C.7050408%40fusemail.com%3E"
+       TITLE="[ydf-users] Add setHTMLRequired for hidden field">francisco at fusemail.com
+       </A><BR>
+    <I>Wed Nov 29 00:41:16 CET 2006</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000429.html">[ydf-users] Add setHTMLRequired for hidden field
+</A></li>
+        <LI>Next message: <A HREF="000431.html">[ydf-users] YDFramework-users Digest, Vol 5, Issue 11
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#430">[ date ]</a>
+              <a href="thread.html#430">[ thread ]</a>
+              <a href="subject.html#430">[ subject ]</a>
+              <a href="author.html#430">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Hi
+
+&gt;<i> I have tried to eleminate this line ($this-&gt;_placeLabel = 'none'; ) it
+</I>&gt;<i> displays what I want to display, which is &quot;Listing Date * &quot;.
+</I>&gt;<i> Is it possible and would it there be any dependent classes or methods
+</I>&gt;<i> will be affected or be corrupted if we would have to eliminate this -&gt;
+</I>&gt;<i> $this-&gt;_placeLabel = 'none'; ?
+</I>
+
+Afaik, no. Place label is the flag that defines where to place the label 
+  and is used on some render exports.
+
+My opinion is that, don't delete that line, otherwise you will have 
+problems in future updates of that file. If you don't have to place the 
+label before and you want to place the label in a default position, why 
+you just define that when creating the hidden field?
+
+
+$element = &amp; $form-&gt;addElement( 'hidden', 'list_date', 'Listing Date' );
+$element-&gt;_placeLabel = 'before';
+...
+
+
+Francisco A
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000429.html">[ydf-users] Add setHTMLRequired for hidden field
+</A></li>
+	<LI>Next message: <A HREF="000431.html">[ydf-users] YDFramework-users Digest, Vol 5, Issue 11
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#430">[ date ]</a>
+              <a href="thread.html#430">[ thread ]</a>
+              <a href="subject.html#430">[ subject ]</a>
+              <a href="author.html#430">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/ydframework-users">More information about the YDFramework-users
+mailing list</a><br>
+</body></html>

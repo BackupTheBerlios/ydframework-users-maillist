@@ -1,0 +1,152 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [ydf-users] YDDatabaseObject code generator
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/ydframework-users/2006-February/index.html" >
+   <LINK REL="made" HREF="mailto:ydframework-users%40lists.berlios.de?Subject=Re%3A%20%5Bydf-users%5D%20YDDatabaseObject%20code%20generator&In-Reply-To=%3C4aef63030602240531m7820f2f9va6dee32a9511e6a6%40mail.gmail.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000060.html">
+   <LINK REL="Next"  HREF="000062.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[ydf-users] YDDatabaseObject code generator</H1>
+    <B>Pieter Claerhout</B> 
+    <A HREF="mailto:ydframework-users%40lists.berlios.de?Subject=Re%3A%20%5Bydf-users%5D%20YDDatabaseObject%20code%20generator&In-Reply-To=%3C4aef63030602240531m7820f2f9va6dee32a9511e6a6%40mail.gmail.com%3E"
+       TITLE="[ydf-users] YDDatabaseObject code generator">pieter at yellowduck.be
+       </A><BR>
+    <I>Fri Feb 24 14:31:22 CET 2006</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000060.html">[ydf-users] YDDatabaseObject code generator
+</A></li>
+        <LI>Next message: <A HREF="000062.html">[ydf-users] YDDatabaseObject code generator
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#61">[ date ]</a>
+              <a href="thread.html#61">[ thread ]</a>
+              <a href="subject.html#61">[ subject ]</a>
+              <a href="author.html#61">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Forgot to mention that there is also something like $indexes =
+$metadata-&gt;getIndexes( $_GET['table'] );
+
+cheers,
+
+pieter
+
+On 2/24/06, Pieter Claerhout &lt;<A HREF="https://lists.berlios.de/mailman/listinfo/ydframework-users">pieter at yellowduck.be</A>&gt; wrote:
+&gt;<i>
+</I>&gt;<i> To automate $result = mysql_query(&quot;SHOW COLUMNS FROM&quot;.$_GET['table']);,
+</I>&gt;<i> you can use the new YDDatabaseMetaData class.
+</I>&gt;<i>
+</I>&gt;<i> Something along the lines of:
+</I>&gt;<i>
+</I>&gt;<i> $metadata = new YDDatabaseMetaData( $db );
+</I>&gt;<i> $cols = $metadata-&gt;getFields( $_GET['table'] );
+</I>&gt;<i>
+</I>&gt;<i> Cheers,
+</I>&gt;<i>
+</I>&gt;<i> pieter
+</I>&gt;<i>
+</I>&gt;<i>  On 2/24/06, dab &lt;<A HREF="https://lists.berlios.de/mailman/listinfo/ydframework-users">dab214 at yahoo.com</A>&gt; wrote:
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt; hi all,
+</I>&gt;<i> &gt; it's a bit tedios writing the database classes,
+</I>&gt;<i> &gt; registring all the keys and fields.
+</I>&gt;<i> &gt; anyone written something that automates this stuff?
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt; i just wrote this quickly:
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt; $link = mysql_connect('localhost', 'root', '');
+</I>&gt;<i> &gt; mysql_select_db(&quot;whatever&quot;);
+</I>&gt;<i> &gt; $result = mysql_query(&quot;SHOW COLUMNS FROM
+</I>&gt;<i> &gt; &quot;.$_GET['table']);
+</I>&gt;<i> &gt; while ( $row = mysql_fetch_assoc($result)) {
+</I>&gt;<i> &gt;   if ( $row[&quot;Field&quot;] == &quot;id&quot; )
+</I>&gt;<i> &gt;      echo &quot;\$this-&gt;registerKey ( '&quot;.$row[&quot;Field&quot;].&quot;',
+</I>&gt;<i> &gt; true );&lt;br&gt;&quot;;
+</I>&gt;<i> &gt;   elseif ( substr ( $row[&quot;Field&quot;], -2, 2 ) == &quot;id&quot;)
+</I>&gt;<i> &gt;      echo &quot;\$this-&gt;registerKey ( '&quot;.$row[&quot;Field&quot;].&quot;'
+</I>&gt;<i> &gt; );&lt;br&gt;&quot;;
+</I>&gt;<i> &gt;   else
+</I>&gt;<i> &gt;      echo &quot;\$this-&gt;registerField (
+</I>&gt;<i> &gt; '&quot;.$row[&quot;Field&quot;].&quot;' );&lt;br&gt;&quot;;
+</I>&gt;<i> &gt; }
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt; but it be nice to have something a bit more extensive.
+</I>&gt;<i> &gt; maybe generate code for the other classes and the
+</I>&gt;<i> &gt; templates too. and even be able to choose from several
+</I>&gt;<i> &gt; code templates before generating the file.
+</I>&gt;<i> &gt; E.g. template database_cross_ref:
+</I>&gt;<i> &gt; include...
+</I>&gt;<i> &gt; class {$class_name} extends YDDatabaseObject {
+</I>&gt;<i> &gt;    function {$class_name} {
+</I>&gt;<i> &gt;        $this-&gt;YDDatabaseObject();
+</I>&gt;<i> &gt;        $this-&gt;registerDatabase(
+</I>&gt;<i> &gt; $GLOBALS['YDDBOBJ_CONN'] );
+</I>&gt;<i> &gt;        $this-&gt;registerTable( {$table_name} );
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt;        // SHOW COLUMNS
+</I>&gt;<i> &gt;        {$keys_and_fields}
+</I>&gt;<i> &gt;    }
+</I>&gt;<i> &gt; }
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt; so for the type &quot;create database class&quot;, setting the
+</I>&gt;<i> &gt; class and table name and picking a template.
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt; please let me know what you think, thanks.
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt; __________________________________________________
+</I>&gt;<i> &gt; Do You Yahoo!?
+</I>&gt;<i> &gt; Tired of spam?  Yahoo! Mail has the best spam protection around
+</I>&gt;<i> &gt; <A HREF="http://mail.yahoo.com">http://mail.yahoo.com</A>
+</I>&gt;<i> &gt; _______________________________________________
+</I>&gt;<i> &gt; YDFramework-users mailing list
+</I>&gt;<i> &gt; <A HREF="https://lists.berlios.de/mailman/listinfo/ydframework-users">YDFramework-users at lists.berlios.de</A>
+</I>&gt;<i> &gt; <A HREF="http://lists.berlios.de/mailman/listinfo/ydframework-users">http://lists.berlios.de/mailman/listinfo/ydframework-users</A>
+</I>&gt;<i> &gt;
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i> --
+</I>&gt;<i> pieter claerhout . <A HREF="https://lists.berlios.de/mailman/listinfo/ydframework-users">pieter at yellowduck.be</A> . <A HREF="http://www.yellowduck.be/">http://www.yellowduck.be/</A>
+</I>
+
+
+
+--
+pieter claerhout . <A HREF="https://lists.berlios.de/mailman/listinfo/ydframework-users">pieter at yellowduck.be</A> . <A HREF="http://www.yellowduck.be/">http://www.yellowduck.be/</A>
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: &lt;<A HREF="https://lists.berlios.de/pipermail/ydframework-users/attachments/20060224/f92b7873/attachment.html">https://lists.berlios.de/pipermail/ydframework-users/attachments/20060224/f92b7873/attachment.html</A>&gt;
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000060.html">[ydf-users] YDDatabaseObject code generator
+</A></li>
+	<LI>Next message: <A HREF="000062.html">[ydf-users] YDDatabaseObject code generator
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#61">[ date ]</a>
+              <a href="thread.html#61">[ thread ]</a>
+              <a href="subject.html#61">[ subject ]</a>
+              <a href="author.html#61">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/ydframework-users">More information about the YDFramework-users
+mailing list</a><br>
+</body></html>

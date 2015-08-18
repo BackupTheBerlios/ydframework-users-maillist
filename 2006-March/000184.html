@@ -1,0 +1,139 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [ydf-users] Query Regarding Config Files
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/ydframework-users/2006-March/index.html" >
+   <LINK REL="made" HREF="mailto:ydframework-users%40lists.berlios.de?Subject=Re%3A%20%5Bydf-users%5D%20Query%20Regarding%20Config%20Files&In-Reply-To=%3C4aef63030603310127h17119ccdj497ff96add41f650%40mail.gmail.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000182.html">
+   <LINK REL="Next"  HREF="000181.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[ydf-users] Query Regarding Config Files</H1>
+    <B>Pieter Claerhout</B> 
+    <A HREF="mailto:ydframework-users%40lists.berlios.de?Subject=Re%3A%20%5Bydf-users%5D%20Query%20Regarding%20Config%20Files&In-Reply-To=%3C4aef63030603310127h17119ccdj497ff96add41f650%40mail.gmail.com%3E"
+       TITLE="[ydf-users] Query Regarding Config Files">pieter at yellowduck.be
+       </A><BR>
+    <I>Fri Mar 31 11:27:57 CEST 2006</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000182.html">[ydf-users] Query Regarding Config Files
+</A></li>
+        <LI>Next message: <A HREF="000181.html">[ydf-users] Query Regarding YDConfig
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#184">[ date ]</a>
+              <a href="thread.html#184">[ thread ]</a>
+              <a href="subject.html#184">[ subject ]</a>
+              <a href="author.html#184">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>As YDTemplate extends Smarty, you can use any of the smarty functions on a
+YDTemplate object. So yes, this can be done.
+
+cheers,
+
+pieter
+
+On 3/31/06, dab &lt;<A HREF="https://lists.berlios.de/mailman/listinfo/ydframework-users">dab214 at yahoo.com</A>&gt; wrote:
+&gt;<i>
+</I>&gt;<i> hi moses,
+</I>&gt;<i> have you tried below?
+</I>&gt;<i>
+</I>&gt;<i> $smarty = new Smarty();
+</I>&gt;<i> $smarty-&gt;config_load('my.conf');
+</I>&gt;<i>
+</I>&gt;<i> or am i not understanding your question?
+</I>&gt;<i>
+</I>&gt;<i> /dan
+</I>&gt;<i>
+</I>&gt;<i> --- <A HREF="https://lists.berlios.de/mailman/listinfo/ydframework-users">moses at softwaysolutions.com</A> wrote:
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i> ---------------------------------
+</I>&gt;<i>
+</I>&gt;<i> Dear Sir
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i>          While usingsmarty to load some predifined
+</I>&gt;<i> variables from config file I do thefollowing
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i>         1)Make a foldercalled configs
+</I>&gt;<i>         2)Create a filename called my.config
+</I>&gt;<i>         3)Write the defaultvariable such as
+</I>&gt;<i>
+</I>&gt;<i>                                dbName= 'DataBaseName'
+</I>&gt;<i>                                dbHost= 'Host name'
+</I>&gt;<i> etc.....
+</I>&gt;<i>
+</I>&gt;<i>        4)Load these variable intothe php file as
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i> $smarty-&gt;config_load('my.conf');
+</I>&gt;<i>
+</I>&gt;<i>               and I will access these variables
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i>        Can I do these thingsUsing YDFrame Work.
+</I>&gt;<i>
+</I>&gt;<i> regards
+</I>&gt;<i> moses
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i> _______________________________________________YDFramework-users
+</I>&gt;<i> mailing
+</I>&gt;<i> <A HREF="https://lists.berlios.de/mailman/listinfo/ydframework-users">listYDFramework-users at lists.berlios</A>
+</I>&gt;<i> .<A HREF="dehttp://lists.berlios.de/mailman/listinfo/ydframework-users">dehttp://lists.berlios.de/mailman/listinfo/ydframework-users</A>
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i> __________________________________________________
+</I>&gt;<i> Do You Yahoo!?
+</I>&gt;<i> Tired of spam?  Yahoo! Mail has the best spam protection around
+</I>&gt;<i> <A HREF="http://mail.yahoo.com">http://mail.yahoo.com</A>
+</I>&gt;<i> _______________________________________________
+</I>&gt;<i> YDFramework-users mailing list
+</I>&gt;<i> <A HREF="https://lists.berlios.de/mailman/listinfo/ydframework-users">YDFramework-users at lists.berlios.de</A>
+</I>&gt;<i> <A HREF="http://lists.berlios.de/mailman/listinfo/ydframework-users">http://lists.berlios.de/mailman/listinfo/ydframework-users</A>
+</I>&gt;<i>
+</I>
+
+
+--
+pieter claerhout . <A HREF="https://lists.berlios.de/mailman/listinfo/ydframework-users">pieter at yellowduck.be</A> . <A HREF="http://www.yellowduck.be/">http://www.yellowduck.be/</A>
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: &lt;<A HREF="https://lists.berlios.de/pipermail/ydframework-users/attachments/20060331/63121e2c/attachment.html">https://lists.berlios.de/pipermail/ydframework-users/attachments/20060331/63121e2c/attachment.html</A>&gt;
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000182.html">[ydf-users] Query Regarding Config Files
+</A></li>
+	<LI>Next message: <A HREF="000181.html">[ydf-users] Query Regarding YDConfig
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#184">[ date ]</a>
+              <a href="thread.html#184">[ thread ]</a>
+              <a href="subject.html#184">[ subject ]</a>
+              <a href="author.html#184">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/ydframework-users">More information about the YDFramework-users
+mailing list</a><br>
+</body></html>

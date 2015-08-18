@@ -1,0 +1,1199 @@
+From francisco at fusemail.com  Tue May  2 12:16:49 2006
+From: francisco at fusemail.com (Francisco Azevedo)
+Date: Tue, 02 May 2006 11:16:49 +0100
+Subject: [ydf-users] YDDatabaseObject code generator
+In-Reply-To: <20060430165658.20423.qmail@web50207.mail.yahoo.com>
+References: <20060430165658.20423.qmail@web50207.mail.yahoo.com>
+Message-ID: <44573191.9050908@fusemail.com>
+
+hi dab
+
+> how is below integration with YDDatabaseObject coming
+
+Afaik, that specific development is stopped. Db ? ;)
+
+Francisco A
+
+> 
+> --- Francisco Azevedo <francisco at fusemail.com> wrote:
+> 
+>>> i'm not sure i understand what the functionality
+>> of
+>>> readTable() would be. just to clarify: i didn't
+>> want
+>>> to change the YDFramework but i was merely asking
+>> if
+>>> anyone had written a script that automatically
+>> creates
+>>> the class and templates for you.
+>> And don't know what you mean by creating templates
+>> but i think that you 
+>> point a nice idea for YDDatabaseObject. We have
+>> already a class that can 
+>> read the db scheme.. so an integration of that class
+>> with 
+>> YDDatabaseObject could be excellent.. and that was
+>> what 'readTable()' 
+>> could do internally.. a method that would read the
+>> table configuration 
+>> and add fields and keys automatically.
+>>
+>> Francisco
+
+
+From moses at softwaysolutions.com  Tue May  2 14:52:10 2006
+From: moses at softwaysolutions.com (moses at softwaysolutions.com)
+Date: Tue, 02 May 2006 05:52:10 -0700
+Subject: [ydf-users] Query Regarding Image
+Message-ID: <20060502055209.fe477b357a56c857c15a39baa2ae95d5.1aabf2ce74.wbe@email.secureserver.net>
+
+Dear sir
+
+    When i Try to add an Image through the following coading
+
+          $this->rootForm->addElement('image','imgRoot','',array("src"=>"test.jpg","width"=>"100"));
+
+    the following error occours
+
+        Notice: Array to string conversion in D:\web\extec\YDFramework2\YDClasses\YDForm.php on line 940
+
+
+   how to solve
+
+
+regards
+moses  
+
+
+From pieter at yellowduck.be  Tue May  2 15:08:34 2006
+From: pieter at yellowduck.be (Pieter Claerhout)
+Date: Tue, 2 May 2006 15:08:34 +0200
+Subject: [ydf-users] Query Regarding Image
+In-Reply-To: <20060502055209.fe477b357a56c857c15a39baa2ae95d5.1aabf2ce74.wbe@email.secureserver.net>
+References: <20060502055209.fe477b357a56c857c15a39baa2ae95d5.1aabf2ce74.wbe@email.secureserver.net>
+Message-ID: <4aef63030605020608i1a32aa96lbf801499989ba1d@mail.gmail.com>
+
+It should read something like:
+
+            $form->addElement( 'image', 'img1', '', array(), '
+http://www.scripting.com/images/xml.gif' );
+
+It also looks like you are using an outdated version of YDForm.php, because
+line 940 on my system only contains a "}".
+
+cheers,
+
+pieter
+
+On 5/2/06, moses at softwaysolutions.com <moses at softwaysolutions.com> wrote:
+>
+> Dear sir
+>
+>    When i Try to add an Image through the following coading
+>
+>          $this->rootForm->addElement('image','imgRoot','',array("src"=>"
+> test.jpg","width"=>"100"));
+>
+>    the following error occours
+>
+>        Notice: Array to string conversion in
+> D:\web\extec\YDFramework2\YDClasses\YDForm.php on line 940
+>
+>
+>   how to solve
+>
+>
+> regards
+> moses
+> _______________________________________________
+> YDFramework-users mailing list
+> YDFramework-users at lists.berlios.de
+> http://lists.berlios.de/mailman/listinfo/ydframework-users
+>
+
+
+
+--
+pieter claerhout . pieter at yellowduck.be . http://www.yellowduck.be/
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <https://lists.berlios.de/pipermail/ydframework-users/attachments/20060502/c5f1c619/attachment.html>
+
+From muitocomplicado at gmail.com  Tue May  2 22:32:41 2006
+From: muitocomplicado at gmail.com (David Bittencourt)
+Date: Tue, 2 May 2006 17:32:41 -0300
+Subject: [ydf-users] YDDatabaseObject code generator
+In-Reply-To: <44573191.9050908@fusemail.com>
+References: <20060430165658.20423.qmail@web50207.mail.yahoo.com>
+	 <44573191.9050908@fusemail.com>
+Message-ID: <12260be20605021332h589aa950ocd576c763baae487@mail.gmail.com>
+
+I couldn't take a look at it yet.
+
+-db
+
+On 5/2/06, Francisco Azevedo <francisco at fusemail.com> wrote:
+>
+> hi dab
+>
+> > how is below integration with YDDatabaseObject coming
+>
+> Afaik, that specific development is stopped. Db ? ;)
+>
+> Francisco A
+>
+> >
+> > --- Francisco Azevedo <francisco at fusemail.com> wrote:
+> >
+> >>> i'm not sure i understand what the functionality
+> >> of
+> >>> readTable() would be. just to clarify: i didn't
+> >> want
+> >>> to change the YDFramework but i was merely asking
+> >> if
+> >>> anyone had written a script that automatically
+> >> creates
+> >>> the class and templates for you.
+> >> And don't know what you mean by creating templates
+> >> but i think that you
+> >> point a nice idea for YDDatabaseObject. We have
+> >> already a class that can
+> >> read the db scheme.. so an integration of that class
+> >> with
+> >> YDDatabaseObject could be excellent.. and that was
+> >> what 'readTable()'
+> >> could do internally.. a method that would read the
+> >> table configuration
+> >> and add fields and keys automatically.
+> >>
+> >> Francisco
+> _______________________________________________
+> YDFramework-users mailing list
+> YDFramework-users at lists.berlios.de
+> http://lists.berlios.de/mailman/listinfo/ydframework-users
+>
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <https://lists.berlios.de/pipermail/ydframework-users/attachments/20060502/9723c643/attachment.html>
+
+From dome at tel.co.th  Thu May  4 10:25:04 2006
+From: dome at tel.co.th (Dome C.)
+Date: Wed, 03 May 2006 20:25:04 -1200
+Subject: [ydf-users] User and permission
+Message-ID: <4459BA60.5040902@tel.co.th>
+
+Dear sir,
+Can someone show me example for use User Class.
+
+i want to enable security user and permission
+
+
+Dome C.
+
+
+
+
+From francisco at fusemail.com  Wed May  3 16:28:57 2006
+From: francisco at fusemail.com (Francisco Azevedo)
+Date: Wed, 03 May 2006 15:28:57 +0100
+Subject: [ydf-users] User and permission
+In-Reply-To: <4459BA60.5040902@tel.co.th>
+References: <4459BA60.5040902@tel.co.th>
+Message-ID: <4458BE29.5020502@fusemail.com>
+
+Hi Dome
+
+> Can someone show me example for use User Class.
+
+
+The user class is part of the Content Management component system that 
+is currently in development.
+
+
+> i want to enable security user and permission
+
+
+Sure but if you want to use the YDCMUser class you need to wait a little 
+more.
+
+
+regards
+Francisco A
+
+
+From dab214 at yahoo.com  Sat May  6 00:13:00 2006
+From: dab214 at yahoo.com (dab)
+Date: Fri, 5 May 2006 15:13:00 -0700 (PDT)
+Subject: [ydf-users] Query Regarding Dynamic textbox
+In-Reply-To: <4aef63030604260419k2968e129mb561bd80af782c3f@mail.gmail.com>
+Message-ID: <20060505221300.91326.qmail@web50214.mail.yahoo.com>
+
+hi pieter,
+that check that you describe below has to been done in
+the template code right? could you please advise on a
+solution how this could be done without using php
+functions from the template code?
+
+thanks.
+
+/daniel
+
+
+--- Pieter Claerhout <pieter at yellowduck.be> wrote:
+
+> There's a mistake in your logic of looping over the
+> fields. You basically
+> loop over all the form elements and properties,
+> which is not what you wanted
+> to do. You need to add an extra check that checks
+> either the prefix of the
+> field or the name or the type of the field.
+> 
+> pieter
+> 
+> On 4/25/06, moses at softwaysolutions.com
+> <moses at softwaysolutions.com> wrote:
+> >
+> >  Dear Sir
+> >
+> >         Than you  for your reply.
+> >
+> >         I tried with what u said.... but still  I
+> cant solve my problem
+> >
+> >         when using the following coding
+> >
+> >                     
+> $this->template->assign('form',$this->form) the HTML
+> > tag for the form array is empty
+> >
+> >         So I tested with
+> >
+> >                 
+> $this->template->assignForm('form',$this->form)
+> >
+> >         Here it works but still have some problem.
+> >
+> >                  1)Some Unwanted characters like (
+> <, >, r) are displayed
+> >                  2)Again It does not saticifies
+> what actually I need
+> >
+> >
+> >
+> >  The Following is the coding
+> >
+> >         (.php)
+> >                              $i+=0;
+> >                             while ($record =
+> mysql_fetch_array($result))
+> >                             {
+> >                                     $depName =
+> $record["department_Name"];
+> >                                    
+> $this->form->addElement( 'text',
+> > "txtName[$i]" , '');
+> >
+> > $this->form->setDefault("txtName[$i]","$depName");
+> >                                     $i+=1;
+> >
+> >                             }
+> >
+> >
+> > $this->template->assignForm('form',$this->form);
+> >                            
+> $this->template->display();
+> >       (.tpl)
+> >
+> >
+> >                          {foreach from = $form
+> item = formElement}
+> >                                   
+> {$formElement.html} ----------->  (This
+> > coding I tried by myself if it is wrong please
+> note
+> > me)
+> >                            {/foreach}
+> >
+> >
+> >      The HTML OutPut is
+> > 
+>
+------------------------------------------------------------------------------------------------------
+> >
+> >        <
+> >
+> >
+> >
+> >        <
+> >
+> >        f
+> >
+> >
+> >
+> >
+> >
+> >  <input id="form_txtName[0]" type="text"
+> name="form_txtName[0]"
+> > value="PHP" />
+> >
+> >  <input id="form_txtName[1]" type="text"
+> name="form_txtName[1]"
+> > value="Desigining" />
+> >
+> >  <input id="form_txtName[2]" type="text"
+> name="form_txtName[2]" value="DOT
+> > NET" />
+> >
+> >
+> >
+> >
+> >
+> >
+>
+---------------------------------------------------------------------------------------------------------
+> >    In the above tags to get the value of the
+> textboxes in the clientside
+> > through javascript like this
+> >
+> >    document.formName.form_txtName[0].value  
+> -----------> gives error
+> >
+> >
+> >
+> >
+> > If the above HTML is like the following
+> >
+> >  <input id="form_txtName" type="text"
+> name="form_txtName" value="PHP" />
+> >
+> >  <input id="form_txtName" type="text"
+> name="form_txtName"
+> > value="Desigining" />
+> >
+> >  <input id="form_txtName" type="text"
+> name="form_txtName" value="DOT NET"
+> > />
+> >
+> > so that i can use this coding
+> >
+> >                                   
+> document.formName.form_txtName
+> > [0].value
+> >                                   
+> document.formName.form_txtName[1].value
+> ...............so
+> > on
+> >
+> >
+> >
+> > To solve my problem I need to create more than one
+> text boxes with the
+> > same name(there should not be any index)
+> >
+> >
+> > I tried the following
+> >
+> >                       for($i=0;$<10;$i++)
+> >                      {
+> >
+> > $this->form->addElement('test','txtName','');
+> >                      }
+> >
+> > Here what happens is only one textbox is created
+> not 10 ;
+> >
+> >
+> >            1)Is it possible to create more the ont
+> textboxes with the same
+> > name
+> >            2)If so how to identify each textboxes
+> in the tpl
+> >
+> >
+> >
+> > regards
+> > moses
+> >
+> >
+> >
+> >
+> >
+> > regards
+> > moses
+> >
+> >
+> >
+> > -------- Original Message --------
+> > Subject: Re: [ydf-users] Query Regarding Dynamic
+> Text Box (again)
+> > From: Francisco Azevedo <francisco at fusemail.com>
+> > Date: Fri, April 21, 2006 2:27 am
+> > To: ydframework-users at berlios.de
+> > Hi moses
+> > What you want is possible with YDF. Btw, there's
+> more than one way to do
+> > it.. it only depends on your structure. Just use
+> your imagination ;)
+> > There is _not_ a method to do such thing but.. i'm
+> thinking about a way
+> > that can work.
+> > - Create a form for those text boxes only.
+> > - add text elements (with different name) to that
+> form
+> >   foreach (  ...  ){ $form2->addElement( 'text',
+> 'name_' . $i , ... ) }
+> > - assign the form Object with YDTemplate::assign
+> and 
+=== message truncated ===
+
+
+__________________________________________________
+Do You Yahoo!?
+Tired of spam?  Yahoo! Mail has the best spam protection around 
+http://mail.yahoo.com 
+
+
+From dab214 at yahoo.com  Sat May  6 00:22:13 2006
+From: dab214 at yahoo.com (dab)
+Date: Fri, 5 May 2006 15:22:13 -0700 (PDT)
+Subject: [ydf-users] Query Regarding Dynamic textbox
+In-Reply-To: <4aef63030604260419k2968e129mb561bd80af782c3f@mail.gmail.com>
+Message-ID: <20060505222213.31992.qmail@web50212.mail.yahoo.com>
+
+hi pieter,
+that check that you describe below has to been done in
+the template code right? could you please advise on a
+solution how this could be done without using php
+functions from the template code?
+
+thanks.
+
+/daniel
+
+
+--- Pieter Claerhout <pieter at yellowduck.be> wrote:
+
+> There's a mistake in your logic of looping over the
+> fields. You basically
+> loop over all the form elements and properties,
+> which is not what you wanted
+> to do. You need to add an extra check that checks
+> either the prefix of the
+> field or the name or the type of the field.
+> 
+> pieter
+> 
+> On 4/25/06, moses at softwaysolutions.com
+> <moses at softwaysolutions.com> wrote:
+> >
+> >  Dear Sir
+> >
+> >         Than you  for your reply.
+> >
+> >         I tried with what u said.... but still  I
+> cant solve my problem
+> >
+> >         when using the following coding
+> >
+> >                     
+> $this->template->assign('form',$this->form) the HTML
+> > tag for the form array is empty
+> >
+> >         So I tested with
+> >
+> >                 
+> $this->template->assignForm('form',$this->form)
+> >
+> >         Here it works but still have some problem.
+> >
+> >                  1)Some Unwanted characters like (
+> <, >, r) are displayed
+> >                  2)Again It does not saticifies
+> what actually I need
+> >
+> >
+> >
+> >  The Following is the coding
+> >
+> >         (.php)
+> >                              $i+=0;
+> >                             while ($record =
+> mysql_fetch_array($result))
+> >                             {
+> >                                     $depName =
+> $record["department_Name"];
+> >                                    
+> $this->form->addElement( 'text',
+> > "txtName[$i]" , '');
+> >
+> > $this->form->setDefault("txtName[$i]","$depName");
+> >                                     $i+=1;
+> >
+> >                             }
+> >
+> >
+> > $this->template->assignForm('form',$this->form);
+> >                            
+> $this->template->display();
+> >       (.tpl)
+> >
+> >
+> >                          {foreach from = $form
+> item = formElement}
+> >                                   
+> {$formElement.html} ----------->  (This
+> > coding I tried by myself if it is wrong please
+> note
+> > me)
+> >                            {/foreach}
+> >
+> >
+> >      The HTML OutPut is
+> > 
+>
+------------------------------------------------------------------------------------------------------
+> >
+> >        <
+> >
+> >
+> >
+> >        <
+> >
+> >        f
+> >
+> >
+> >
+> >
+> >
+> >  <input id="form_txtName[0]" type="text"
+> name="form_txtName[0]"
+> > value="PHP" />
+> >
+> >  <input id="form_txtName[1]" type="text"
+> name="form_txtName[1]"
+> > value="Desigining" />
+> >
+> >  <input id="form_txtName[2]" type="text"
+> name="form_txtName[2]" value="DOT
+> > NET" />
+> >
+> >
+> >
+> >
+> >
+> >
+>
+---------------------------------------------------------------------------------------------------------
+> >    In the above tags to get the value of the
+> textboxes in the clientside
+> > through javascript like this
+> >
+> >    document.formName.form_txtName[0].value  
+> -----------> gives error
+> >
+> >
+> >
+> >
+> > If the above HTML is like the following
+> >
+> >  <input id="form_txtName" type="text"
+> name="form_txtName" value="PHP" />
+> >
+> >  <input id="form_txtName" type="text"
+> name="form_txtName"
+> > value="Desigining" />
+> >
+> >  <input id="form_txtName" type="text"
+> name="form_txtName" value="DOT NET"
+> > />
+> >
+> > so that i can use this coding
+> >
+> >                                   
+> document.formName.form_txtName
+> > [0].value
+> >                                   
+> document.formName.form_txtName[1].value
+> ...............so
+> > on
+> >
+> >
+> >
+> > To solve my problem I need to create more than one
+> text boxes with the
+> > same name(there should not be any index)
+> >
+> >
+> > I tried the following
+> >
+> >                       for($i=0;$<10;$i++)
+> >                      {
+> >
+> > $this->form->addElement('test','txtName','');
+> >                      }
+> >
+> > Here what happens is only one textbox is created
+> not 10 ;
+> >
+> >
+> >            1)Is it possible to create more the ont
+> textboxes with the same
+> > name
+> >            2)If so how to identify each textboxes
+> in the tpl
+> >
+> >
+> >
+> > regards
+> > moses
+> >
+> >
+> >
+> >
+> >
+> > regards
+> > moses
+> >
+> >
+> >
+> > -------- Original Message --------
+> > Subject: Re: [ydf-users] Query Regarding Dynamic
+> Text Box (again)
+> > From: Francisco Azevedo <francisco at fusemail.com>
+> > Date: Fri, April 21, 2006 2:27 am
+> > To: ydframework-users at berlios.de
+> > Hi moses
+> > What you want is possible with YDF. Btw, there's
+> more than one way to do
+> > it.. it only depends on your structure. Just use
+> your imagination ;)
+> > There is _not_ a method to do such thing but.. i'm
+> thinking about a way
+> > that can work.
+> > - Create a form for those text boxes only.
+> > - add text elements (with different name) to that
+> form
+> >   foreach (  ...  ){ $form2->addElement( 'text',
+> 'name_' . $i , ... ) }
+> > - assign the form Object with YDTemplate::assign
+> and 
+=== message truncated ===
+
+
+__________________________________________________
+Do You Yahoo!?
+Tired of spam?  Yahoo! Mail has the best spam protection around 
+http://mail.yahoo.com 
+
+
+From dab214 at yahoo.com  Mon May  8 17:26:19 2006
+From: dab214 at yahoo.com (dab)
+Date: Mon, 8 May 2006 08:26:19 -0700 (PDT)
+Subject: [ydf-users] Query Regarding Dynamic textbox
+Message-ID: <20060508152619.55050.qmail@web50215.mail.yahoo.com>
+
+hi all,
+ok i wrote this not very good hack to this problem. it
+basically gives back just the html output of the
+element that later is being inserted into the array
+that you assign to the template. 
+in case anyone wants to use it:
+
+$dbo = YDDatabaseObject::getInstance( 'event' );
+$dbo->where( 'event_cat_id = '.$this->id );
+$dbo->find();
+$result = $dbo->getResults();
+
+foreach ( $result as $key => $value ) {
+    $type = 'type_'.$value[ 'id' ];
+    $bet = 'bet_'.$value[ 'id' ];
+    
+    $this->form->addElement( 'radio', $type, '',
+$attribs, array( 1 => 'one', 2=>'two' ) ); 
+    $this->form->addElement( 'text', $bet, '',
+$attribs ); 
+    
+    $result[$key]['type'] =
+$this->form->getElementHtml( $type );
+    $result[$key]['bet'] =
+$this->form->getElementHtml( $bet );
+} 
+
+then this method has to be in subclass of the YDForm
+class:
+
+function getElementHtml( $name, $attribs = array() ) {
+    $element = $this->getElement( $name );
+    
+    $html = '<input type="'.$element->_type.'"
+name="'.$element->_form.'_'.$element->_name.'" ';
+    
+    foreach ( $element as $key => $val) { 
+        
+        if ( is_array( $val ) ) {
+            
+            foreach ($val as $assoc_key => $assoc_val
+) {
+                
+                if ( $key == '_options' &&
+$element->_type == 'radio') {
+                    
+                    $radio .=
+$html.'value="'.$assoc_val.'" ';
+                    $radio .= $assoc_val ==
+$this->getValue($element->_name) ? 'checked' : '';
+                    $radio .= ' />';
+                    
+	            } else {
+	                
+	                if ( $attrib_val == 'id' )
+	                   $html .=
+$assoc_key.'="'.$element->_form.'_'.$assoc_val.'" ';
+	                else 
+	                   $html .=
+$assoc_key.'="'.$assoc_val.'" ';
+                }
+            }
+        }
+    }
+    
+    if ( $element->_type == 'radio' ) {
+        return $radio;
+    }
+    
+    $html .= 'value="'.$element->_value.'"/>';
+    
+    return $html;
+}
+
+
+
+--- dab <dab214 at yahoo.com> wrote:
+
+> hi pieter,
+> that check that you describe below has to been done
+> in
+> the template code right? could you please advise on
+> a
+> solution how this could be done without using php
+> functions from the template code?
+> 
+> thanks.
+> 
+> /daniel
+> 
+> 
+> --- Pieter Claerhout <pieter at yellowduck.be> wrote:
+> 
+> > There's a mistake in your logic of looping over
+> the
+> > fields. You basically
+> > loop over all the form elements and properties,
+> > which is not what you wanted
+> > to do. You need to add an extra check that checks
+> > either the prefix of the
+> > field or the name or the type of the field.
+> > 
+> > pieter
+> > 
+> > On 4/25/06, moses at softwaysolutions.com
+> > <moses at softwaysolutions.com> wrote:
+> > >
+> > >  Dear Sir
+> > >
+> > >         Than you  for your reply.
+> > >
+> > >         I tried with what u said.... but still 
+> I
+> > cant solve my problem
+> > >
+> > >         when using the following coding
+> > >
+> > >                     
+> > $this->template->assign('form',$this->form) the
+> HTML
+> > > tag for the form array is empty
+> > >
+> > >         So I tested with
+> > >
+> > >                 
+> > $this->template->assignForm('form',$this->form)
+> > >
+> > >         Here it works but still have some
+> problem.
+> > >
+> > >                  1)Some Unwanted characters like
+> (
+> > <, >, r) are displayed
+> > >                  2)Again It does not saticifies
+> > what actually I need
+> > >
+> > >
+> > >
+> > >  The Following is the coding
+> > >
+> > >         (.php)
+> > >                              $i+=0;
+> > >                             while ($record =
+> > mysql_fetch_array($result))
+> > >                             {
+> > >                                     $depName =
+> > $record["department_Name"];
+> > >                                    
+> > $this->form->addElement( 'text',
+> > > "txtName[$i]" , '');
+> > >
+> > >
+> $this->form->setDefault("txtName[$i]","$depName");
+> > >                                     $i+=1;
+> > >
+> > >                             }
+> > >
+> > >
+> > > $this->template->assignForm('form',$this->form);
+> > >                            
+> > $this->template->display();
+> > >       (.tpl)
+> > >
+> > >
+> > >                          {foreach from = $form
+> > item = formElement}
+> > >                                   
+> > {$formElement.html} ----------->  (This
+> > > coding I tried by myself if it is wrong please
+> > note
+> > > me)
+> > >                            {/foreach}
+> > >
+> > >
+> > >      The HTML OutPut is
+> > > 
+> >
+>
+------------------------------------------------------------------------------------------------------
+> > >
+> > >        <
+> > >
+> > >
+> > >
+> > >        <
+> > >
+> > >        f
+> > >
+> > >
+> > >
+> > >
+> > >
+> > >  <input id="form_txtName[0]" type="text"
+> > name="form_txtName[0]"
+> > > value="PHP" />
+> > >
+> > >  <input id="form_txtName[1]" type="text"
+> > name="form_txtName[1]"
+> > > value="Desigining" />
+> > >
+> > >  <input id="form_txtName[2]" type="text"
+> > name="form_txtName[2]" value="DOT
+> > > NET" />
+> > >
+> > >
+> > >
+> > >
+> > >
+> > >
+> >
+>
+---------------------------------------------------------------------------------------------------------
+> > >    In the above tags to get the value of the
+> > textboxes in the clientside
+> > > through javascript like this
+> > >
+> > >    document.formName.form_txtName[0].value  
+> > -----------> gives error
+> > >
+> > >
+> > >
+> > >
+> > > If the above HTML is like the following
+> > >
+> > >  <input id="form_txtName" type="text"
+> > name="form_txtName" value="PHP" />
+> > >
+> > >  <input id="form_txtName" type="text"
+> > name="form_txtName"
+> > > value="Desigining" />
+> > >
+> > >  <input id="form_txtName" type="text"
+> > name="form_txtName" value="DOT NET"
+> > > />
+> > >
+> > > so that i can use this coding
+> > >
+> > >                                   
+> > document.formName.form_txtName
+> > > [0].value
+> > >                                   
+> > document.formName.form_txtName[1].value
+> > ...............so
+> > > on
+> > >
+> > >
+> > >
+> > > To solve my problem I need to create more than
+> one
+> > text boxes with the
+> > > same name(there should not be any index)
+> > >
+> > >
+> > > I tried the following
+> > >
+> > >                       for($i=0;$<10;$i++)
+> > >                      {
+> > >
+> > > $this->form->addElement('test','txtName','');
+> > >                      }
+> > >
+> > > Here what happens is only one textbox is created
+> > not 10 ;
+> > >
+> > >
+> > >            1)Is it possible to create more the
+> ont
+> > textboxes with the same
+> > > name
+> > >            2)If so how to identify each
+> textboxes
+> > in the tpl
+> > >
+> > >
+> > >
+> > > regards
+> > > moses
+> > >
+> > >
+> > >
+> > >
+> 
+=== message truncated ===
+
+
+__________________________________________________
+Do You Yahoo!?
+Tired of spam?  Yahoo! Mail has the best spam protection around 
+http://mail.yahoo.com 
+
+
+From ydf at jocosoft.com  Wed May 10 17:49:42 2006
+From: ydf at jocosoft.com (Peter)
+Date: Wed, 10 May 2006 10:49:42 -0500 (CDT)
+Subject: [ydf-users] YDDatabaseObject
+Message-ID: <35300.71.39.100.121.1147276182.squirrel@www.jocosoft.com>
+
+Hi guys,
+
+I have a simple question. I'm either overlooking something, or I'm looking
+for something that's not there. What I want is a list of 5 randomly
+selected albums which have tracks in a given genre. So...
+
+$album = YDDatabaseObject::getInstance( 'album' );
+$album->load( 'track' );
+$album->track->genreid = $id;
+$album->order( 'RAND()' );
+$album->limit( 5 );
+$album->find( 'track' );
+$result = $album->getResults();
+
+Simple enough, except that it's possible that albums get listed more than
+once, which simply looks dumb. So, how do I add the DISTINCT option to it?
+
+I tried:
+
+$album->_query->options( array( 'DISTINCT' ) );
+
+Right before calling find(), but that didn't do the trick, and the
+YDDatabaseObject class has no options equivalent as far as I can tell...
+
+Any ideas?
+
+Thanks,
+Peter
+
+
+
+From stjepan.brbot at zg.t-com.hr  Thu May 11 10:35:51 2006
+From: stjepan.brbot at zg.t-com.hr (Stjepan Brbot)
+Date: Thu, 11 May 2006 10:35:51 +0200
+Subject: [ydf-users] Transactions in YD
+Message-ID: <4462F767.4040309@zg.t-com.hr>
+
+Hi all,
+
+when explicit transactions management (I mean to be able to explicitly 
+turn off db autocommit feature and to manually make commit or rollback) 
+can be expected in YD? Or it is possible right now that I don't know. At 
+this moment if I need transactional behavior in my app I have to go 
+outside YD functionalities and create direct OCI code.
+
+SB
+
+
+<HTML><P><FONT face=Arial color=#999999 size=1>
+
+IZJAVA O ODRICANJU ODGOVORNOSTI: Sadr?aj ove poruke i eventualno prilo?enih datoteka je povjerljiv i namijenjen je samo osobama ili subjektima koji su navedeni u adresi. Ukoliko ste primili ovu poruku gre?kom, molimo Vas, obavijestite po?iljatelja, a poruku i sve njene privitke odmah, bez ?itanja, trajno uklonite s ra?unala. Bilo kakvo preno?enje, kopiranje ili distribucija informacija sadr?anih u poruci tre?im osobama je zabranjeno i mo?e biti zakonski ka?njivo. Sadr?aj, stavovi i mi?ljenja izneseni u poruci su autorovi i ne predstavljaju nu?no stavove HT - Hrvatskih telekomunikacija d.d. HT ne prihva?a nikakvu odgovornost za eventualnu ?tetu nastalu primitkom ove poruke i priloga sadr?anih u poruci.
+
+</FONT></P><P><FONT face=Arial color=#999999 size=1>
+
+ DISCLAIMER:The contents of this email as well as any files attached to it are confidential and intended solely for individuals or entities which they are addressed to. If you have received this email message in error, please notify the sender and permanently remove the message and all attached files from the computer. Any disclosure, copying or distribution of all or a part of information contained herein to or by third parties is prohibited and may be unlawful. Please note that any views or opinions presented in this message are solely those of the author and do not necessarily represent the views and opinions of Croatian Telecom Inc. Croatian Telecom Inc. accepts no liability for any potential damage caused by this message and files attached to it.
+
+</FONT></P></HTML>
+
+
+From stjepan.brbot at zg.t-com.hr  Thu May 11 10:36:49 2006
+From: stjepan.brbot at zg.t-com.hr (Stjepan Brbot)
+Date: Thu, 11 May 2006 10:36:49 +0200
+Subject: [ydf-users] Stored procedures in YD
+Message-ID: <4462F7A1.6040902@zg.t-com.hr>
+
+Is it possible to use Oracle stored procedures from YD?
+
+
+<HTML><P><FONT face=Arial color=#999999 size=1>
+
+IZJAVA O ODRICANJU ODGOVORNOSTI: Sadr?aj ove poruke i eventualno prilo?enih datoteka je povjerljiv i namijenjen je samo osobama ili subjektima koji su navedeni u adresi. Ukoliko ste primili ovu poruku gre?kom, molimo Vas, obavijestite po?iljatelja, a poruku i sve njene privitke odmah, bez ?itanja, trajno uklonite s ra?unala. Bilo kakvo preno?enje, kopiranje ili distribucija informacija sadr?anih u poruci tre?im osobama je zabranjeno i mo?e biti zakonski ka?njivo. Sadr?aj, stavovi i mi?ljenja izneseni u poruci su autorovi i ne predstavljaju nu?no stavove HT - Hrvatskih telekomunikacija d.d. HT ne prihva?a nikakvu odgovornost za eventualnu ?tetu nastalu primitkom ove poruke i priloga sadr?anih u poruci.
+
+</FONT></P><P><FONT face=Arial color=#999999 size=1>
+
+ DISCLAIMER:The contents of this email as well as any files attached to it are confidential and intended solely for individuals or entities which they are addressed to. If you have received this email message in error, please notify the sender and permanently remove the message and all attached files from the computer. Any disclosure, copying or distribution of all or a part of information contained herein to or by third parties is prohibited and may be unlawful. Please note that any views or opinions presented in this message are solely those of the author and do not necessarily represent the views and opinions of Croatian Telecom Inc. Croatian Telecom Inc. accepts no liability for any potential damage caused by this message and files attached to it.
+
+</FONT></P></HTML>
+
+
+From pieter at yellowduck.be  Fri May 12 19:41:13 2006
+From: pieter at yellowduck.be (Pieter Claerhout)
+Date: Fri, 12 May 2006 19:41:13 +0200
+Subject: [ydf-users] Transactions in YD
+In-Reply-To: <4462F767.4040309@zg.t-com.hr>
+References: <4462F767.4040309@zg.t-com.hr>
+Message-ID: <4aef63030605121041q2a8b99b1y31c745e1c053fd0f@mail.gmail.com>
+
+Hi Stjepan,
+
+there are currently no plans made to integrate transaction support in YDF.
+
+pieter
+
+On 5/11/06, Stjepan Brbot <stjepan.brbot at zg.t-com.hr> wrote:
+>
+> Hi all,
+>
+> when explicit transactions management (I mean to be able to explicitly
+> turn off db autocommit feature and to manually make commit or rollback)
+> can be expected in YD? Or it is possible right now that I don't know. At
+> this moment if I need transactional behavior in my app I have to go
+> outside YD functionalities and create direct OCI code.
+>
+> SB
+>
+>
+> <HTML><P><FONT face=Arial color=#999999 size=1>
+>
+> IZJAVA O ODRICANJU ODGOVORNOSTI: Sadr?aj ove poruke i eventualno
+> prilo?enih datoteka je povjerljiv i namijenjen je samo osobama ili
+> subjektima koji su navedeni u adresi. Ukoliko ste primili ovu poruku
+> gre?kom, molimo Vas, obavijestite po?iljatelja, a poruku i sve njene
+> privitke odmah, bez ?itanja, trajno uklonite s ra?unala. Bilo kakvo
+> preno?enje, kopiranje ili distribucija informacija sadr?anih u poruci tre?im
+> osobama je zabranjeno i mo?e biti zakonski ka?njivo. Sadr?aj, stavovi i
+> mi?ljenja izneseni u poruci su autorovi i ne predstavljaju nu?no stavove HT
+> - Hrvatskih telekomunikacija d.d. HT ne prihva?a nikakvu odgovornost za
+> eventualnu ?tetu nastalu primitkom ove poruke i priloga sadr?anih u poruci.
+>
+> </FONT></P><P><FONT face=Arial color=#999999 size=1>
+>
+> DISCLAIMER:The contents of this email as well as any files attached to it
+> are confidential and intended solely for individuals or entities which they
+> are addressed to. If you have received this email message in error, please
+> notify the sender and permanently remove the message and all attached files
+> from the computer. Any disclosure, copying or distribution of all or a part
+> of information contained herein to or by third parties is prohibited and may
+> be unlawful. Please note that any views or opinions presented in this
+> message are solely those of the author and do not necessarily represent the
+> views and opinions of Croatian Telecom Inc. Croatian Telecom Inc. accepts no
+> liability for any potential damage caused by this message and files attached
+> to it.
+>
+> </FONT></P></HTML>
+> _______________________________________________
+> YDFramework-users mailing list
+> YDFramework-users at lists.berlios.de
+> http://lists.berlios.de/mailman/listinfo/ydframework-users
+>
+
+
+
+-- 
+pieter claerhout . pieter at yellowduck.be . http://www.yellowduck.be/
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <https://lists.berlios.de/pipermail/ydframework-users/attachments/20060512/976b2e12/attachment.html>
+
+From muitocomplicado at gmail.com  Fri May 19 19:26:32 2006
+From: muitocomplicado at gmail.com (David Bittencourt)
+Date: Fri, 19 May 2006 14:26:32 -0300
+Subject: [ydf-users] YDDatabaseObject
+In-Reply-To: <35300.71.39.100.121.1147276182.squirrel@www.jocosoft.com>
+References: <35300.71.39.100.121.1147276182.squirrel@www.jocosoft.com>
+Message-ID: <12260be20605191026g5a3f8f71qe372779733637718@mail.gmail.com>
+
+Using  $album->_query->options( array( 'DISTINCT' ) ) you will have the
+DISTINCT option inserted in the query. Just check the debug information
+(setting YD_DEBUG=2, for example).
+
+I think the problem here is the SQL query. I believe there are problems with
+the RAND() function to get random results. I don't know the solution for
+that...
+
+-db
+
+
+On 5/10/06, Peter <ydf at jocosoft.com> wrote:
+>
+> Hi guys,
+>
+> I have a simple question. I'm either overlooking something, or I'm looking
+> for something that's not there. What I want is a list of 5 randomly
+> selected albums which have tracks in a given genre. So...
+>
+> $album = YDDatabaseObject::getInstance( 'album' );
+> $album->load( 'track' );
+> $album->track->genreid = $id;
+> $album->order( 'RAND()' );
+> $album->limit( 5 );
+> $album->find( 'track' );
+> $result = $album->getResults();
+>
+> Simple enough, except that it's possible that albums get listed more than
+> once, which simply looks dumb. So, how do I add the DISTINCT option to it?
+>
+> I tried:
+>
+> $album->_query->options( array( 'DISTINCT' ) );
+>
+> Right before calling find(), but that didn't do the trick, and the
+> YDDatabaseObject class has no options equivalent as far as I can tell...
+>
+> Any ideas?
+>
+> Thanks,
+> Peter
+>
+> _______________________________________________
+> YDFramework-users mailing list
+> YDFramework-users at lists.berlios.de
+> http://lists.berlios.de/mailman/listinfo/ydframework-users
+>
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <https://lists.berlios.de/pipermail/ydframework-users/attachments/20060519/c8101a50/attachment.html>
+

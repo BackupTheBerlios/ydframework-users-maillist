@@ -1,0 +1,148 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [ydf-users] UPDATE with YDDatabaseObject
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/ydframework-users/2006-February/index.html" >
+   <LINK REL="made" HREF="mailto:ydframework-users%40lists.berlios.de?Subject=Re%3A%20%5Bydf-users%5D%20UPDATE%20with%20YDDatabaseObject&In-Reply-To=%3C20060210035105.12323.qmail%40web50201.mail.yahoo.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000010.html">
+   <LINK REL="Next"  HREF="000012.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[ydf-users] UPDATE with YDDatabaseObject</H1>
+    <B>dab</B> 
+    <A HREF="mailto:ydframework-users%40lists.berlios.de?Subject=Re%3A%20%5Bydf-users%5D%20UPDATE%20with%20YDDatabaseObject&In-Reply-To=%3C20060210035105.12323.qmail%40web50201.mail.yahoo.com%3E"
+       TITLE="[ydf-users] UPDATE with YDDatabaseObject">dab214 at yahoo.com
+       </A><BR>
+    <I>Fri Feb 10 04:51:05 CET 2006</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000010.html">[ydf-users] UPDATE with YDDatabaseObject
+</A></li>
+        <LI>Next message: <A HREF="000012.html">[ydf-users] UPDATE with YDDatabaseObject
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#11">[ date ]</a>
+              <a href="thread.html#11">[ thread ]</a>
+              <a href="subject.html#11">[ subject ]</a>
+              <a href="author.html#11">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>hi peter,
+thanks for replying. 
+my id in the table users is set as a key already:
+
+$this-&gt;registerKey( 'id', true );
+$this-&gt;registerField( 'username' );
+
+sorry i should have posted the code in the database
+file already.
+but below code gives me the same sql result as with
+setValues()
+$user-&gt;id = 1;
+$user-&gt;username = 'dab';
+
+thanks.
+
+/dani
+
+
+--- Peter &lt;<A HREF="https://lists.berlios.de/mailman/listinfo/ydframework-users">ydf at jocosoft.com</A>&gt; wrote:
+
+&gt;<i> Hi dab,
+</I>&gt;<i> 
+</I>&gt;<i> I'm not sure why that happens, or if it is as
+</I>&gt;<i> intended, but what you're 
+</I>&gt;<i> trying to do can be done with:
+</I>&gt;<i> 
+</I>&gt;<i> $user = YDDatabaseObject::getInstance( 'users' );
+</I>&gt;<i> $user-&gt;id = 1;
+</I>&gt;<i> $user-&gt;username = 'dab';
+</I>&gt;<i> $user-&gt;update();
+</I>&gt;<i> 
+</I>&gt;<i> Provided that 'id' is the key field.
+</I>&gt;<i> 
+</I>&gt;<i> Good luck!
+</I>&gt;<i> Peter
+</I>&gt;<i> 
+</I>&gt;<i> dab wrote:
+</I>&gt;<i> 
+</I>&gt;<i> &gt;hi,
+</I>&gt;<i> &gt;this code:
+</I>&gt;<i> &gt;$user = YDDatabaseObject::getInstance( 'users' );
+</I>&gt;<i> &gt;$user-&gt;setValues ( array ( 'username' =&gt;  'dab' )
+</I>&gt;<i> );
+</I>&gt;<i> &gt;$user-&gt;where (&quot;id = &quot;.$this-&gt;id);
+</I>&gt;<i> &gt;$user-&gt;update();
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt;produces this sql query:
+</I>&gt;<i> &gt;UPDATE `users` SET `username` = 'dab' WHERE id = 1
+</I>&gt;<i> AND
+</I>&gt;<i> &gt;`users`.`username` = 'dab'
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt;when it should produce:
+</I>&gt;<i> &gt;UPDATE `users` SET `username` = 'dab' WHERE id = 1
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt;Please tell me why the username is being added to
+</I>&gt;<i> the
+</I>&gt;<i> &gt;where clause and how i can stop it.
+</I>&gt;<i> &gt;thanks.
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt;__________________________________________________
+</I>&gt;<i> &gt;Do You Yahoo!?
+</I>&gt;<i> &gt;Tired of spam?  Yahoo! Mail has the best spam
+</I>&gt;<i> protection around 
+</I>&gt;<i> &gt;<A HREF="http://mail.yahoo.com">http://mail.yahoo.com</A> 
+</I>&gt;<i> &gt;_______________________________________________
+</I>&gt;<i> &gt;YDFramework-users mailing list
+</I>&gt;<i> &gt;<A HREF="https://lists.berlios.de/mailman/listinfo/ydframework-users">YDFramework-users at lists.berlios.de</A>
+</I>&gt;<i>
+</I>&gt;<i><A HREF="http://lists.berlios.de/mailman/listinfo/ydframework-users">http://lists.berlios.de/mailman/listinfo/ydframework-users</A>
+</I>&gt;<i> &gt;  
+</I>&gt;<i> &gt;
+</I>&gt;<i> _______________________________________________
+</I>&gt;<i> YDFramework-users mailing list
+</I>&gt;<i> <A HREF="https://lists.berlios.de/mailman/listinfo/ydframework-users">YDFramework-users at lists.berlios.de</A>
+</I>&gt;<i>
+</I><A HREF="http://lists.berlios.de/mailman/listinfo/ydframework-users">http://lists.berlios.de/mailman/listinfo/ydframework-users</A>
+&gt;<i> 
+</I>
+
+__________________________________________________
+Do You Yahoo!?
+Tired of spam?  Yahoo! Mail has the best spam protection around 
+<A HREF="http://mail.yahoo.com">http://mail.yahoo.com</A> 
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000010.html">[ydf-users] UPDATE with YDDatabaseObject
+</A></li>
+	<LI>Next message: <A HREF="000012.html">[ydf-users] UPDATE with YDDatabaseObject
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#11">[ date ]</a>
+              <a href="thread.html#11">[ thread ]</a>
+              <a href="subject.html#11">[ subject ]</a>
+              <a href="author.html#11">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/ydframework-users">More information about the YDFramework-users
+mailing list</a><br>
+</body></html>

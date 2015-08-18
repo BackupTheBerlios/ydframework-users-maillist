@@ -1,0 +1,133 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [ydf-users] YDDatabaseObject - another feature
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/ydframework-users/2006-September/index.html" >
+   <LINK REL="made" HREF="mailto:ydframework-users%40lists.berlios.de?Subject=Re%3A%20%5Bydf-users%5D%20YDDatabaseObject%20-%20another%20feature&In-Reply-To=%3C44FDB54D.3020700%40fusemail.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000361.html">
+   <LINK REL="Next"  HREF="000366.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[ydf-users] YDDatabaseObject - another feature</H1>
+    <B>Francisco Azevedo</B> 
+    <A HREF="mailto:ydframework-users%40lists.berlios.de?Subject=Re%3A%20%5Bydf-users%5D%20YDDatabaseObject%20-%20another%20feature&In-Reply-To=%3C44FDB54D.3020700%40fusemail.com%3E"
+       TITLE="[ydf-users] YDDatabaseObject - another feature">francisco at fusemail.com
+       </A><BR>
+    <I>Tue Sep  5 19:35:09 CEST 2006</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000361.html">[ydf-users] query --- problem with sending html mail
+</A></li>
+        <LI>Next message: <A HREF="000366.html">[ydf-users] YDDatabaseObject - another feature
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#363">[ date ]</a>
+              <a href="thread.html#363">[ thread ]</a>
+              <a href="subject.html#363">[ subject ]</a>
+              <a href="author.html#363">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Hi David
+
+When using YDDatabaseObject i create ( only in my mind ) a new feature 
+that i think it's very useful and can make the development with 
+YDDatabaseObject easier and with a _huge_ performance improvement.
+
+See this simple example..
+I have 4 different class objects (that are YDDatabaseObject extensions) 
+in a array:
+
+array( $classA, $classB, $classC, $classD );
+
+
+. and each one has a method that do some DELETE stuff:
+
+
+class A{
+	...
+	function deleteRow(){
+		$this-&gt;resetAll();
+		$this-&gt;id = X;
+		$this-&gt;delete();
+	}
+}
+
+
+.. now, if i want to delete _all_ objects i must do:
+
+foreach( $array as $obj )
+	$obj-&gt;deleteRow();
+
+
+This is ok.. works but it's not performant. In this simple scenario i 
+will make 4 db calls.
+
+
+Now, how to solve this in better way: with a new YDDabataseObject called 
+YDDabataseObject::deleteSQL() that &quot;returns the SQL string that would by 
+  used by YDDabataseObject::delete()&quot;.
+
+Then i would only need to:
+
+class A{
+	...
+	function deleteRow(){
+		$this-&gt;resetAll();
+		$this-&gt;id = X;
+		return $this-&gt;deleteSQL();
+	}
+}
+
+
+and..
+
+foreach( $array as $obj )
+	$sql .= $obj-&gt;deleteRow();
+
+$db-&gt;execute( $sql );
+
+
+This could be an _huge_ performance boost because i would only need 1 db 
+call for all objects. Imagine if i have 100 objects, instead of 100 db 
+calls (as i need now) i would only need 1. This is something like a 
+transactional call and is the best way of doing it. Maybe someday we 
+could make execute transactional too and then this will be perfect.
+
+
+What do you think about it?
+
+
+regards
+Francisco A
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000361.html">[ydf-users] query --- problem with sending html mail
+</A></li>
+	<LI>Next message: <A HREF="000366.html">[ydf-users] YDDatabaseObject - another feature
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#363">[ date ]</a>
+              <a href="thread.html#363">[ thread ]</a>
+              <a href="subject.html#363">[ subject ]</a>
+              <a href="author.html#363">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/ydframework-users">More information about the YDFramework-users
+mailing list</a><br>
+</body></html>

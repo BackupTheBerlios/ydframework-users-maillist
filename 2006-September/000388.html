@@ -1,0 +1,97 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [ydf-users] conditional ajax request
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/ydframework-users/2006-September/index.html" >
+   <LINK REL="made" HREF="mailto:ydframework-users%40lists.berlios.de?Subject=Re%3A%20%5Bydf-users%5D%20conditional%20ajax%20request&In-Reply-To=%3C4512EB02.1070608%40fusemail.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000387.html">
+   <LINK REL="Next"  HREF="000390.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[ydf-users] conditional ajax request</H1>
+    <B>Francisco Azevedo</B> 
+    <A HREF="mailto:ydframework-users%40lists.berlios.de?Subject=Re%3A%20%5Bydf-users%5D%20conditional%20ajax%20request&In-Reply-To=%3C4512EB02.1070608%40fusemail.com%3E"
+       TITLE="[ydf-users] conditional ajax request">francisco at fusemail.com
+       </A><BR>
+    <I>Thu Sep 21 21:41:54 CEST 2006</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000387.html">[ydf-users] conditional ajax request
+</A></li>
+        <LI>Next message: <A HREF="000390.html">[ydf-users] YDAJax::addEvent( &quot;*&quot;,	... ) and adding events in a response
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#388">[ date ]</a>
+              <a href="thread.html#388">[ thread ]</a>
+              <a href="subject.html#388">[ subject ]</a>
+              <a href="author.html#388">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Hi Graeme and Matthias
+
+&gt;<i> I just found that you can do this by assigning the event attribute when 
+</I>&gt;<i> the form element is created. Such as in this example:
+</I>&gt;<i> 
+</I>&gt;<i>             // add a button to the form
+</I>&gt;<i>             $this-&gt;form-&gt;addElement('button', 'mybutton', 'Process the 
+</I>&gt;<i> Form', array( 'onclick' =&gt; 'var x = false; if(!x) { alert(1); return 
+</I>&gt;<i> false; }' ) );
+</I>&gt;<i> 
+</I>&gt;<i>             // add an event for 'mybutton'
+</I>&gt;<i>             $this-&gt;ajax-&gt;addEvent( 'mybutton', array( &amp; $this, 
+</I>&gt;<i> 'processform' ), 'myform' );           
+</I>&gt;<i> 
+</I>&gt;<i> This has the effect of including javascript of the form:
+</I>&gt;<i> 
+</I>&gt;<i> 	onclick=&quot;var x = false; if(!x) { alert(1); return false; };__ydfprocessform(xajax.getFormValues('myform'));&quot;
+</I>&gt;<i> 
+</I>&gt;<i> This is basically what you are looking for. You can see how this works 
+</I>&gt;<i> if you look at the last 10 lines of the code for YDAjax::addEvent. This 
+</I>&gt;<i> method basically checks if there is some JS already assigned to the 
+</I>&gt;<i> event of the form element and adds its magic afterwards.
+</I>
+
+Yes, that's right.. and, btw, you can prepend events too, eg:
+
+
+$this-&gt;form-&gt;addElement('button', 'mybutton', 'Process the Form', array( 
+'onclick' =&gt; '...' ) );
+
+$this-&gt;ajax-&gt;addEvent( 'mybutton', array( &amp; $this,'processform' ), 
+'myform', null, 'prepend' );
+
+
+regards
+Francisco A
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000387.html">[ydf-users] conditional ajax request
+</A></li>
+	<LI>Next message: <A HREF="000390.html">[ydf-users] YDAJax::addEvent( &quot;*&quot;,	... ) and adding events in a response
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#388">[ date ]</a>
+              <a href="thread.html#388">[ thread ]</a>
+              <a href="subject.html#388">[ subject ]</a>
+              <a href="author.html#388">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/ydframework-users">More information about the YDFramework-users
+mailing list</a><br>
+</body></html>

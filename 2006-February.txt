@@ -1,0 +1,5738 @@
+From pieter at yellowduck.be  Tue Feb  7 11:46:02 2006
+From: pieter at yellowduck.be (Pieter Claerhout)
+Date: Tue, 7 Feb 2006 11:46:02 +0100
+Subject: [ydf-users] Anyone has some CRUD functionality available?
+Message-ID: <4aef63030602070246k692a5612w9ced8d5726306512@mail.gmail.com>
+
+Hi all,
+
+as we have YDDatabaseObject available, I'm wondering if someone is perhaps
+working on some CRUD like functionality that can generate a user interface
+based on the model definition. For a lot of web applications, I guess this
+could save some really valuable time.
+
+Regards,
+
+
+pieter
+
+--
+pieter claerhout . pieter at yellowduck.be . http://www.yellowduck.be/
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <https://lists.berlios.de/pipermail/ydframework-users/attachments/20060207/09480a6f/attachment.html>
+
+From pieter at yellowduck.be  Tue Feb  7 11:54:36 2006
+From: pieter at yellowduck.be (Pieter Claerhout)
+Date: Tue, 7 Feb 2006 11:54:36 +0100
+Subject: [ydf-users] Interesting DB abstraction layer
+Message-ID: <4aef63030602070254v7c380eb9t4557bd9391bf8cc1@mail.gmail.com>
+
+Hi all,
+
+I just came across the following library:
+http://www.k5n.us/dbi4php.php?topic=About
+
+This seems to be a nice and easy way to make the YDDatabase class more
+universal.
+
+Did anyone try this one out by any chance?
+
+cheers,
+
+
+pieter
+
+--
+pieter claerhout . pieter at yellowduck.be . http://www.yellowduck.be/
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <https://lists.berlios.de/pipermail/ydframework-users/attachments/20060207/aa1f24b7/attachment.html>
+
+From francisco at fusemail.com  Tue Feb  7 23:08:52 2006
+From: francisco at fusemail.com (Francisco Azevedo)
+Date: Tue, 07 Feb 2006 22:08:52 +0000
+Subject: [ydf-users] Anyone has some CRUD functionality available?
+In-Reply-To: <4aef63030602070246k692a5612w9ced8d5726306512@mail.gmail.com>
+References: <4aef63030602070246k692a5612w9ced8d5726306512@mail.gmail.com>
+Message-ID: <43E91A74.6090602@fusemail.com>
+
+Hi
+
+Now, i'm ready for the ydf mailinglist.
+
+> As we have YDDatabaseObject available, I'm wondering if someone is 
+> perhaps working on some CRUD like functionality that can generate a 
+> user interface based on the model definition. For a lot of web 
+> applications, I guess this could save some really valuable time.
+
+I'm not. Do you mean something like what's implemented in ruby? 
+Something like an auto-form creator based on a table scheme?
+
+Francisco Azevedo
+
+
+From francisco at fusemail.com  Tue Feb  7 23:12:00 2006
+From: francisco at fusemail.com (Francisco Azevedo)
+Date: Tue, 07 Feb 2006 22:12:00 +0000
+Subject: [ydf-users] Interesting DB abstraction layer
+In-Reply-To: <4aef63030602070254v7c380eb9t4557bd9391bf8cc1@mail.gmail.com>
+References: <4aef63030602070254v7c380eb9t4557bd9391bf8cc1@mail.gmail.com>
+Message-ID: <43E91B30.6030200@fusemail.com>
+
+Hi
+
+> I just came across the following library:
+> http://www.k5n.us/dbi4php.php?topic=About
+>  
+> This seems to be a nice and easy way to make the YDDatabase class more 
+> universal.
+>  
+> Did anyone try this one out by any chance?
+
+Nops.. but it doesn't seems very usefull.. apart that it contains other 
+drivers than YDDatabase.
+Why do you want to change YDDatabase?
+
+Francisco Azevedo
+
+
+From muitocomplicado at gmail.com  Wed Feb  8 04:03:28 2006
+From: muitocomplicado at gmail.com (David Bittencourt)
+Date: Wed, 8 Feb 2006 00:03:28 -0300
+Subject: [ydf-users] Interesting DB abstraction layer
+In-Reply-To: <43E91B30.6030200@fusemail.com>
+References: <4aef63030602070254v7c380eb9t4557bd9391bf8cc1@mail.gmail.com>
+	 <43E91B30.6030200@fusemail.com>
+Message-ID: <12260be20602071903o1115c85agc8fe4e59c7513907@mail.gmail.com>
+
+I found out that the class only retrieves numeric arrays of the results.
+Their excuse is that some databases don't return associative arrays.
+
+-db
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <https://lists.berlios.de/pipermail/ydframework-users/attachments/20060208/fcfa8c42/attachment.html>
+
+From muitocomplicado at gmail.com  Wed Feb  8 04:15:49 2006
+From: muitocomplicado at gmail.com (David Bittencourt)
+Date: Wed, 8 Feb 2006 00:15:49 -0300
+Subject: [ydf-users] Anyone has some CRUD functionality available?
+In-Reply-To: <43E91A74.6090602@fusemail.com>
+References: <4aef63030602070246k692a5612w9ced8d5726306512@mail.gmail.com>
+	 <43E91A74.6090602@fusemail.com>
+Message-ID: <12260be20602071915iae5ae6cv29c48e0544e7e29c@mail.gmail.com>
+
+When I started YDDatabaseObject I had the idea of adding YDForm
+functionality to it.
+
+That was complicating the class with not database related stuff, so I
+didn't.
+
+Now that the class is more stable, I think is fairly easy to implement this
+kind of functionality, but I'm not sure if it's the best thing to add it
+into the YDDatabaseObject class.
+
+Perhaps creating a YDFormObject class (or something like this) to handle
+forms in conjunction with YDDatabaseObject classes.
+
+-db
+
+
+On 2/7/06, Francisco Azevedo <francisco at fusemail.com> wrote:
+>
+> Hi
+>
+> Now, i'm ready for the ydf mailinglist.
+>
+> > As we have YDDatabaseObject available, I'm wondering if someone is
+> > perhaps working on some CRUD like functionality that can generate a
+> > user interface based on the model definition. For a lot of web
+> > applications, I guess this could save some really valuable time.
+>
+> I'm not. Do you mean something like what's implemented in ruby?
+> Something like an auto-form creator based on a table scheme?
+>
+> Francisco Azevedo
+> _______________________________________________
+> YDFramework-users mailing list
+> YDFramework-users at lists.berlios.de
+> http://lists.berlios.de/mailman/listinfo/ydframework-users
+>
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <https://lists.berlios.de/pipermail/ydframework-users/attachments/20060208/ad3126cb/attachment.html>
+
+From pieter at yellowduck.be  Wed Feb  8 08:56:48 2006
+From: pieter at yellowduck.be (Pieter Claerhout)
+Date: Wed, 8 Feb 2006 08:56:48 +0100
+Subject: [ydf-users] Interesting DB abstraction layer
+In-Reply-To: <12260be20602071903o1115c85agc8fe4e59c7513907@mail.gmail.com>
+References: <4aef63030602070254v7c380eb9t4557bd9391bf8cc1@mail.gmail.com>
+	 <43E91B30.6030200@fusemail.com>
+	 <12260be20602071903o1115c85agc8fe4e59c7513907@mail.gmail.com>
+Message-ID: <4aef63030602072356y7cbd912dx74047ed495c01ec3@mail.gmail.com>
+
+It's also not really a good piece of code, as you can only have one
+connection active at the same time.
+
+The only reason I would change YDDatabase is to support more database
+engines.
+
+cheers,
+
+pieter
+
+On 2/8/06, David Bittencourt <muitocomplicado at gmail.com> wrote:
+>
+> I found out that the class only retrieves numeric arrays of the results.
+> Their excuse is that some databases don't return associative arrays.
+>
+> -db
+
+
+
+
+--
+pieter claerhout . pieter at yellowduck.be . http://www.yellowduck.be/
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <https://lists.berlios.de/pipermail/ydframework-users/attachments/20060208/f5650128/attachment.html>
+
+From pieter at yellowduck.be  Wed Feb  8 09:03:23 2006
+From: pieter at yellowduck.be (Pieter Claerhout)
+Date: Wed, 8 Feb 2006 09:03:23 +0100
+Subject: [ydf-users] Anyone has some CRUD functionality available?
+In-Reply-To: <12260be20602071915iae5ae6cv29c48e0544e7e29c@mail.gmail.com>
+References: <4aef63030602070246k692a5612w9ced8d5726306512@mail.gmail.com>
+	 <43E91A74.6090602@fusemail.com>
+	 <12260be20602071915iae5ae6cv29c48e0544e7e29c@mail.gmail.com>
+Message-ID: <4aef63030602080003kc245351rc934745fcf6d07cb@mail.gmail.com>
+
+I was actually thinking along the lines of something like RIFE/Crud (
+https://rife-crud.dev.java.net/).
+
+The basic idea is that you define objects for the different tables you have
+and the system automatically generates a user interface for it that allows
+you to add/update/delete/view the contents. RIFE/Crud adds some really nice
+features to that such as:
+
+- It allows you to easily override the way the interface is rendered
+- Everything is controlled by means of CSS stylesheets
+
+It unfortunately lacks some features such as:
+
+- many to many links
+- sorting
+- searching
+- filtering
+- grouping
+
+The reason I'm looking for something like this is because I been doing a lot
+of quite simple websites lately that basically contain database information.
+One of them was a really simple feature request database.
+
+Here at my workplace, people use a lot of Excel sheets to keep tabular data,
+but that's really not the way to do it. If you would be able to define the
+objects that should be kept as a list and then have the system generating
+the database schema and the user interface, one can save hours of time for
+these type of application.
+
+The key of course here is that we keep a system like this as flexible and
+customizable as possible.
+
+Regards,
+
+
+pieter
+
+On 2/8/06, David Bittencourt <muitocomplicado at gmail.com> wrote:
+>
+> When I started YDDatabaseObject I had the idea of adding YDForm
+> functionality to it.
+>
+> That was complicating the class with not database related stuff, so I
+> didn't.
+>
+> Now that the class is more stable, I think is fairly easy to implement
+> this kind of functionality, but I'm not sure if it's the best thing to add
+> it into the YDDatabaseObject class.
+>
+> Perhaps creating a YDFormObject class (or something like this) to handle
+> forms in conjunction with YDDatabaseObject classes.
+>
+> -db
+>
+>
+> On 2/7/06, Francisco Azevedo <francisco at fusemail.com> wrote:
+> >
+> > Hi
+> >
+> > Now, i'm ready for the ydf mailinglist.
+> >
+> > > As we have YDDatabaseObject available, I'm wondering if someone is
+> > > perhaps working on some CRUD like functionality that can generate a
+> > > user interface based on the model definition. For a lot of web
+> > > applications, I guess this could save some really valuable time.
+> >
+> > I'm not. Do you mean something like what's implemented in ruby?
+> > Something like an auto-form creator based on a table scheme?
+> >
+> > Francisco Azevedo
+> > _______________________________________________
+> > YDFramework-users mailing list
+> > YDFramework-users at lists.berlios.de
+> > http://lists.berlios.de/mailman/listinfo/ydframework-users
+> >
+>
+>
+
+
+--
+pieter claerhout . pieter at yellowduck.be . http://www.yellowduck.be/
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <https://lists.berlios.de/pipermail/ydframework-users/attachments/20060208/bcde4d22/attachment.html>
+
+From dab214 at yahoo.com  Thu Feb  9 15:53:52 2006
+From: dab214 at yahoo.com (dab)
+Date: Thu, 9 Feb 2006 06:53:52 -0800 (PST)
+Subject: [ydf-users] UPDATE with YDDatabaseObject
+In-Reply-To: <20060208210001.19698.77934.Mailman@bat.berlios.de>
+Message-ID: <20060209145353.13837.qmail@web50204.mail.yahoo.com>
+
+hi,
+this code:
+$user = YDDatabaseObject::getInstance( 'users' );
+$user->setValues ( array ( 'username' =>  'dab' ) );
+$user->where ("id = ".$this->id);
+$user->update();
+
+produces this sql query:
+UPDATE `users` SET `username` = 'dab' WHERE id = 1 AND
+`users`.`username` = 'dab'
+
+when it should produce:
+UPDATE `users` SET `username` = 'dab' WHERE id = 1
+
+Please tell me why the username is being added to the
+where clause and how i can stop it.
+thanks.
+
+
+
+
+__________________________________________________
+Do You Yahoo!?
+Tired of spam?  Yahoo! Mail has the best spam protection around 
+http://mail.yahoo.com 
+
+
+From ydf at jocosoft.com  Fri Feb 10 00:16:24 2006
+From: ydf at jocosoft.com (Peter)
+Date: Thu, 09 Feb 2006 17:16:24 -0600
+Subject: [ydf-users] UPDATE with YDDatabaseObject
+In-Reply-To: <20060209145353.13837.qmail@web50204.mail.yahoo.com>
+References: <20060209145353.13837.qmail@web50204.mail.yahoo.com>
+Message-ID: <43EBCD48.6010608@jocosoft.com>
+
+Hi dab,
+
+I'm not sure why that happens, or if it is as intended, but what you're 
+trying to do can be done with:
+
+$user = YDDatabaseObject::getInstance( 'users' );
+$user->id = 1;
+$user->username = 'dab';
+$user->update();
+
+Provided that 'id' is the key field.
+
+Good luck!
+Peter
+
+dab wrote:
+
+>hi,
+>this code:
+>$user = YDDatabaseObject::getInstance( 'users' );
+>$user->setValues ( array ( 'username' =>  'dab' ) );
+>$user->where ("id = ".$this->id);
+>$user->update();
+>
+>produces this sql query:
+>UPDATE `users` SET `username` = 'dab' WHERE id = 1 AND
+>`users`.`username` = 'dab'
+>
+>when it should produce:
+>UPDATE `users` SET `username` = 'dab' WHERE id = 1
+>
+>Please tell me why the username is being added to the
+>where clause and how i can stop it.
+>thanks.
+>
+>
+>
+>
+>__________________________________________________
+>Do You Yahoo!?
+>Tired of spam?  Yahoo! Mail has the best spam protection around 
+>http://mail.yahoo.com 
+>_______________________________________________
+>YDFramework-users mailing list
+>YDFramework-users at lists.berlios.de
+>http://lists.berlios.de/mailman/listinfo/ydframework-users
+>  
+>
+
+
+From muitocomplicado at gmail.com  Fri Feb 10 00:27:18 2006
+From: muitocomplicado at gmail.com (David Bittencourt)
+Date: Thu, 9 Feb 2006 20:27:18 -0300
+Subject: [ydf-users] UPDATE with YDDatabaseObject
+In-Reply-To: <43EBCD48.6010608@jocosoft.com>
+References: <20060209145353.13837.qmail@web50204.mail.yahoo.com>
+	 <43EBCD48.6010608@jocosoft.com>
+Message-ID: <12260be20602091527wf912ae3ncf8f50d183f18171@mail.gmail.com>
+
+Probably you didn't define "id" as key with registerKey.
+
+If there's a key registered and with a value, only the keys are used in the
+WHERE statement. If there's no key, or the keys have no values, all fields
+are used.
+
+-db
+
+
+
+On 2/9/06, Peter <ydf at jocosoft.com> wrote:
+>
+> Hi dab,
+>
+> I'm not sure why that happens, or if it is as intended, but what you're
+> trying to do can be done with:
+>
+> $user = YDDatabaseObject::getInstance( 'users' );
+> $user->id = 1;
+> $user->username = 'dab';
+> $user->update();
+>
+> Provided that 'id' is the key field.
+>
+> Good luck!
+> Peter
+>
+> dab wrote:
+>
+> >hi,
+> >this code:
+> >$user = YDDatabaseObject::getInstance( 'users' );
+> >$user->setValues ( array ( 'username' =>  'dab' ) );
+> >$user->where ("id = ".$this->id);
+> >$user->update();
+> >
+> >produces this sql query:
+> >UPDATE `users` SET `username` = 'dab' WHERE id = 1 AND
+> >`users`.`username` = 'dab'
+> >
+> >when it should produce:
+> >UPDATE `users` SET `username` = 'dab' WHERE id = 1
+> >
+> >Please tell me why the username is being added to the
+> >where clause and how i can stop it.
+> >thanks.
+> >
+> >
+> >
+> >
+> >__________________________________________________
+> >Do You Yahoo!?
+> >Tired of spam?  Yahoo! Mail has the best spam protection around
+> >http://mail.yahoo.com
+> >_______________________________________________
+> >YDFramework-users mailing list
+> >YDFramework-users at lists.berlios.de
+> >http://lists.berlios.de/mailman/listinfo/ydframework-users
+> >
+> >
+> _______________________________________________
+> YDFramework-users mailing list
+> YDFramework-users at lists.berlios.de
+> http://lists.berlios.de/mailman/listinfo/ydframework-users
+>
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <https://lists.berlios.de/pipermail/ydframework-users/attachments/20060209/5df64396/attachment.html>
+
+From dab214 at yahoo.com  Fri Feb 10 04:51:05 2006
+From: dab214 at yahoo.com (dab)
+Date: Thu, 9 Feb 2006 19:51:05 -0800 (PST)
+Subject: [ydf-users] UPDATE with YDDatabaseObject
+In-Reply-To: <43EBCD48.6010608@jocosoft.com>
+Message-ID: <20060210035105.12323.qmail@web50201.mail.yahoo.com>
+
+hi peter,
+thanks for replying. 
+my id in the table users is set as a key already:
+
+$this->registerKey( 'id', true );
+$this->registerField( 'username' );
+
+sorry i should have posted the code in the database
+file already.
+but below code gives me the same sql result as with
+setValues()
+$user->id = 1;
+$user->username = 'dab';
+
+thanks.
+
+/dani
+
+
+--- Peter <ydf at jocosoft.com> wrote:
+
+> Hi dab,
+> 
+> I'm not sure why that happens, or if it is as
+> intended, but what you're 
+> trying to do can be done with:
+> 
+> $user = YDDatabaseObject::getInstance( 'users' );
+> $user->id = 1;
+> $user->username = 'dab';
+> $user->update();
+> 
+> Provided that 'id' is the key field.
+> 
+> Good luck!
+> Peter
+> 
+> dab wrote:
+> 
+> >hi,
+> >this code:
+> >$user = YDDatabaseObject::getInstance( 'users' );
+> >$user->setValues ( array ( 'username' =>  'dab' )
+> );
+> >$user->where ("id = ".$this->id);
+> >$user->update();
+> >
+> >produces this sql query:
+> >UPDATE `users` SET `username` = 'dab' WHERE id = 1
+> AND
+> >`users`.`username` = 'dab'
+> >
+> >when it should produce:
+> >UPDATE `users` SET `username` = 'dab' WHERE id = 1
+> >
+> >Please tell me why the username is being added to
+> the
+> >where clause and how i can stop it.
+> >thanks.
+> >
+> >
+> >
+> >
+> >__________________________________________________
+> >Do You Yahoo!?
+> >Tired of spam?  Yahoo! Mail has the best spam
+> protection around 
+> >http://mail.yahoo.com 
+> >_______________________________________________
+> >YDFramework-users mailing list
+> >YDFramework-users at lists.berlios.de
+>
+>http://lists.berlios.de/mailman/listinfo/ydframework-users
+> >  
+> >
+> _______________________________________________
+> YDFramework-users mailing list
+> YDFramework-users at lists.berlios.de
+>
+http://lists.berlios.de/mailman/listinfo/ydframework-users
+> 
+
+
+__________________________________________________
+Do You Yahoo!?
+Tired of spam?  Yahoo! Mail has the best spam protection around 
+http://mail.yahoo.com 
+
+
+From muitocomplicado at gmail.com  Fri Feb 10 06:38:36 2006
+From: muitocomplicado at gmail.com (David Bittencourt)
+Date: Fri, 10 Feb 2006 02:38:36 -0300
+Subject: [ydf-users] UPDATE with YDDatabaseObject
+In-Reply-To: <20060210035105.12323.qmail@web50201.mail.yahoo.com>
+References: <43EBCD48.6010608@jocosoft.com>
+	 <20060210035105.12323.qmail@web50201.mail.yahoo.com>
+Message-ID: <12260be20602092138w5ee0c89cjc377c66dd4b2f332@mail.gmail.com>
+
+Make sure you have the latest SVN build of YDF and not the RC2 release.
+
+-db
+
+On 2/10/06, dab <dab214 at yahoo.com> wrote:
+>
+> hi peter,
+> thanks for replying.
+> my id in the table users is set as a key already:
+>
+> $this->registerKey( 'id', true );
+> $this->registerField( 'username' );
+>
+> sorry i should have posted the code in the database
+> file already.
+> but below code gives me the same sql result as with
+> setValues()
+> $user->id = 1;
+> $user->username = 'dab';
+>
+> thanks.
+>
+> /dani
+>
+>
+> --- Peter <ydf at jocosoft.com> wrote:
+>
+> > Hi dab,
+> >
+> > I'm not sure why that happens, or if it is as
+> > intended, but what you're
+> > trying to do can be done with:
+> >
+> > $user = YDDatabaseObject::getInstance( 'users' );
+> > $user->id = 1;
+> > $user->username = 'dab';
+> > $user->update();
+> >
+> > Provided that 'id' is the key field.
+> >
+> > Good luck!
+> > Peter
+> >
+> > dab wrote:
+> >
+> > >hi,
+> > >this code:
+> > >$user = YDDatabaseObject::getInstance( 'users' );
+> > >$user->setValues ( array ( 'username' =>  'dab' )
+> > );
+> > >$user->where ("id = ".$this->id);
+> > >$user->update();
+> > >
+> > >produces this sql query:
+> > >UPDATE `users` SET `username` = 'dab' WHERE id = 1
+> > AND
+> > >`users`.`username` = 'dab'
+> > >
+> > >when it should produce:
+> > >UPDATE `users` SET `username` = 'dab' WHERE id = 1
+> > >
+> > >Please tell me why the username is being added to
+> > the
+> > >where clause and how i can stop it.
+> > >thanks.
+> > >
+> > >
+> > >
+> > >
+> > >__________________________________________________
+> > >Do You Yahoo!?
+> > >Tired of spam?  Yahoo! Mail has the best spam
+> > protection around
+> > >http://mail.yahoo.com
+> > >_______________________________________________
+> > >YDFramework-users mailing list
+> > >YDFramework-users at lists.berlios.de
+> >
+> >http://lists.berlios.de/mailman/listinfo/ydframework-users
+> > >
+> > >
+> > _______________________________________________
+> > YDFramework-users mailing list
+> > YDFramework-users at lists.berlios.de
+> >
+> http://lists.berlios.de/mailman/listinfo/ydframework-users
+> >
+>
+>
+> __________________________________________________
+> Do You Yahoo!?
+> Tired of spam?  Yahoo! Mail has the best spam protection around
+> http://mail.yahoo.com
+> _______________________________________________
+> YDFramework-users mailing list
+> YDFramework-users at lists.berlios.de
+> http://lists.berlios.de/mailman/listinfo/ydframework-users
+>
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <https://lists.berlios.de/pipermail/ydframework-users/attachments/20060210/2c52f42c/attachment.html>
+
+From peter at jocosoft.com  Fri Feb 10 15:23:42 2006
+From: peter at jocosoft.com (peter at jocosoft.com)
+Date: Fri, 10 Feb 2006 08:23:42 -0600 (CST)
+Subject: [ydf-users] UPDATE with YDDatabaseObject
+In-Reply-To: <20060210035105.12323.qmail@web50201.mail.yahoo.com>
+References: <43EBCD48.6010608@jocosoft.com>
+    <20060210035105.12323.qmail@web50201.mail.yahoo.com>
+Message-ID: <36215.71.39.100.121.1139581422.squirrel@www.jocosoft.com>
+
+And you did remove the "$user->where" line?
+This is what I'm doing all the time, and it works like a charm.
+
+Peter
+
+
+> hi peter,
+> thanks for replying.
+> my id in the table users is set as a key already:
+>
+> $this->registerKey( 'id', true );
+> $this->registerField( 'username' );
+>
+> sorry i should have posted the code in the database
+> file already.
+> but below code gives me the same sql result as with
+> setValues()
+> $user->id = 1;
+> $user->username = 'dab';
+>
+> thanks.
+>
+> /dani
+>
+>
+> --- Peter <ydf at jocosoft.com> wrote:
+>
+>> Hi dab,
+>>
+>> I'm not sure why that happens, or if it is as
+>> intended, but what you're
+>> trying to do can be done with:
+>>
+>> $user = YDDatabaseObject::getInstance( 'users' );
+>> $user->id = 1;
+>> $user->username = 'dab';
+>> $user->update();
+>>
+>> Provided that 'id' is the key field.
+>>
+>> Good luck!
+>> Peter
+>>
+>> dab wrote:
+>>
+>> >hi,
+>> >this code:
+>> >$user = YDDatabaseObject::getInstance( 'users' );
+>> >$user->setValues ( array ( 'username' =>  'dab' )
+>> );
+>> >$user->where ("id = ".$this->id);
+>> >$user->update();
+>> >
+>> >produces this sql query:
+>> >UPDATE `users` SET `username` = 'dab' WHERE id = 1
+>> AND
+>> >`users`.`username` = 'dab'
+>> >
+>> >when it should produce:
+>> >UPDATE `users` SET `username` = 'dab' WHERE id = 1
+>> >
+>> >Please tell me why the username is being added to
+>> the
+>> >where clause and how i can stop it.
+>> >thanks.
+>> >
+>> >
+>> >
+>> >
+>> >__________________________________________________
+>> >Do You Yahoo!?
+>> >Tired of spam?  Yahoo! Mail has the best spam
+>> protection around
+>> >http://mail.yahoo.com
+>> >_______________________________________________
+>> >YDFramework-users mailing list
+>> >YDFramework-users at lists.berlios.de
+>>
+>>http://lists.berlios.de/mailman/listinfo/ydframework-users
+>> >
+>> >
+>> _______________________________________________
+>> YDFramework-users mailing list
+>> YDFramework-users at lists.berlios.de
+>>
+> http://lists.berlios.de/mailman/listinfo/ydframework-users
+>>
+>
+>
+> __________________________________________________
+> Do You Yahoo!?
+> Tired of spam?  Yahoo! Mail has the best spam protection around
+> http://mail.yahoo.com
+> _______________________________________________
+> YDFramework-users mailing list
+> YDFramework-users at lists.berlios.de
+> http://lists.berlios.de/mailman/listinfo/ydframework-users
+>
+
+
+
+From dab214 at yahoo.com  Fri Feb 10 16:57:30 2006
+From: dab214 at yahoo.com (dab)
+Date: Fri, 10 Feb 2006 07:57:30 -0800 (PST)
+Subject: [ydf-users] UPDATE with YDDatabaseObject
+In-Reply-To: <36215.71.39.100.121.1139581422.squirrel@www.jocosoft.com>
+Message-ID: <20060210155730.67767.qmail@web50215.mail.yahoo.com>
+
+hi peter,
+no i totally missed that line being gone in your email
+below. and yes now it works :) thanks!
+
+btw is it possible to build the sql string only with
+fields that have been registered with registerField.
+So for example when you do:
+$user->setValues ( $this->form->getValues() )
+
+the fields in the forms array are ignored if they
+haven't been registered in the object (this being
+user)
+
+/dan
+
+
+--- peter at jocosoft.com wrote:
+
+> And you did remove the "$user->where" line?
+> This is what I'm doing all the time, and it works
+> like a charm.
+> 
+> Peter
+> 
+> 
+> > hi peter,
+> > thanks for replying.
+> > my id in the table users is set as a key already:
+> >
+> > $this->registerKey( 'id', true );
+> > $this->registerField( 'username' );
+> >
+> > sorry i should have posted the code in the
+> database
+> > file already.
+> > but below code gives me the same sql result as
+> with
+> > setValues()
+> > $user->id = 1;
+> > $user->username = 'dab';
+> >
+> > thanks.
+> >
+> > /dani
+> >
+> >
+> > --- Peter <ydf at jocosoft.com> wrote:
+> >
+> >> Hi dab,
+> >>
+> >> I'm not sure why that happens, or if it is as
+> >> intended, but what you're
+> >> trying to do can be done with:
+> >>
+> >> $user = YDDatabaseObject::getInstance( 'users' );
+> >> $user->id = 1;
+> >> $user->username = 'dab';
+> >> $user->update();
+> >>
+> >> Provided that 'id' is the key field.
+> >>
+> >> Good luck!
+> >> Peter
+> >>
+> >> dab wrote:
+> >>
+> >> >hi,
+> >> >this code:
+> >> >$user = YDDatabaseObject::getInstance( 'users'
+> );
+> >> >$user->setValues ( array ( 'username' =>  'dab'
+> )
+> >> );
+> >> >$user->where ("id = ".$this->id);
+> >> >$user->update();
+> >> >
+> >> >produces this sql query:
+> >> >UPDATE `users` SET `username` = 'dab' WHERE id =
+> 1
+> >> AND
+> >> >`users`.`username` = 'dab'
+> >> >
+> >> >when it should produce:
+> >> >UPDATE `users` SET `username` = 'dab' WHERE id =
+> 1
+> >> >
+> >> >Please tell me why the username is being added
+> to
+> >> the
+> >> >where clause and how i can stop it.
+> >> >thanks.
+> >> >
+> >> >
+> >> >
+> >> >
+> >>
+> >__________________________________________________
+> >> >Do You Yahoo!?
+> >> >Tired of spam?  Yahoo! Mail has the best spam
+> >> protection around
+> >> >http://mail.yahoo.com
+> >> >_______________________________________________
+> >> >YDFramework-users mailing list
+> >> >YDFramework-users at lists.berlios.de
+> >>
+>
+>>http://lists.berlios.de/mailman/listinfo/ydframework-users
+> >> >
+> >> >
+> >> _______________________________________________
+> >> YDFramework-users mailing list
+> >> YDFramework-users at lists.berlios.de
+> >>
+> >
+>
+http://lists.berlios.de/mailman/listinfo/ydframework-users
+> >>
+> >
+> >
+> > __________________________________________________
+> > Do You Yahoo!?
+> > Tired of spam?  Yahoo! Mail has the best spam
+> protection around
+> > http://mail.yahoo.com
+> > _______________________________________________
+> > YDFramework-users mailing list
+> > YDFramework-users at lists.berlios.de
+> >
+>
+http://lists.berlios.de/mailman/listinfo/ydframework-users
+> >
+> 
+> _______________________________________________
+> YDFramework-users mailing list
+> YDFramework-users at lists.berlios.de
+>
+http://lists.berlios.de/mailman/listinfo/ydframework-users
+> 
+
+
+__________________________________________________
+Do You Yahoo!?
+Tired of spam?  Yahoo! Mail has the best spam protection around 
+http://mail.yahoo.com 
+
+
+From muitocomplicado at gmail.com  Fri Feb 10 17:28:10 2006
+From: muitocomplicado at gmail.com (David Bittencourt)
+Date: Fri, 10 Feb 2006 13:28:10 -0300
+Subject: [ydf-users] UPDATE with YDDatabaseObject
+In-Reply-To: <20060210155730.67767.qmail@web50215.mail.yahoo.com>
+References: <36215.71.39.100.121.1139581422.squirrel@www.jocosoft.com>
+	 <20060210155730.67767.qmail@web50215.mail.yahoo.com>
+Message-ID: <12260be20602100828yfab2265pfa3b4c0f97d139c9@mail.gmail.com>
+
+That's the default.
+
+$user->setValues() is going to set all values from $form->getValues() but
+only registered fields will be added to the query.
+
+-db
+
+On 2/10/06, dab <dab214 at yahoo.com> wrote:
+>
+> hi peter,
+> no i totally missed that line being gone in your email
+> below. and yes now it works :) thanks!
+>
+> btw is it possible to build the sql string only with
+> fields that have been registered with registerField.
+> So for example when you do:
+> $user->setValues ( $this->form->getValues() )
+>
+> the fields in the forms array are ignored if they
+> haven't been registered in the object (this being
+> user)
+>
+> /dan
+>
+>
+> --- peter at jocosoft.com wrote:
+>
+> > And you did remove the "$user->where" line?
+> > This is what I'm doing all the time, and it works
+> > like a charm.
+> >
+> > Peter
+> >
+> >
+> > > hi peter,
+> > > thanks for replying.
+> > > my id in the table users is set as a key already:
+> > >
+> > > $this->registerKey( 'id', true );
+> > > $this->registerField( 'username' );
+> > >
+> > > sorry i should have posted the code in the
+> > database
+> > > file already.
+> > > but below code gives me the same sql result as
+> > with
+> > > setValues()
+> > > $user->id = 1;
+> > > $user->username = 'dab';
+> > >
+> > > thanks.
+> > >
+> > > /dani
+> > >
+> > >
+> > > --- Peter <ydf at jocosoft.com> wrote:
+> > >
+> > >> Hi dab,
+> > >>
+> > >> I'm not sure why that happens, or if it is as
+> > >> intended, but what you're
+> > >> trying to do can be done with:
+> > >>
+> > >> $user = YDDatabaseObject::getInstance( 'users' );
+> > >> $user->id = 1;
+> > >> $user->username = 'dab';
+> > >> $user->update();
+> > >>
+> > >> Provided that 'id' is the key field.
+> > >>
+> > >> Good luck!
+> > >> Peter
+> > >>
+> > >> dab wrote:
+> > >>
+> > >> >hi,
+> > >> >this code:
+> > >> >$user = YDDatabaseObject::getInstance( 'users'
+> > );
+> > >> >$user->setValues ( array ( 'username' =>  'dab'
+> > )
+> > >> );
+> > >> >$user->where ("id = ".$this->id);
+> > >> >$user->update();
+> > >> >
+> > >> >produces this sql query:
+> > >> >UPDATE `users` SET `username` = 'dab' WHERE id =
+> > 1
+> > >> AND
+> > >> >`users`.`username` = 'dab'
+> > >> >
+> > >> >when it should produce:
+> > >> >UPDATE `users` SET `username` = 'dab' WHERE id =
+> > 1
+> > >> >
+> > >> >Please tell me why the username is being added
+> > to
+> > >> the
+> > >> >where clause and how i can stop it.
+> > >> >thanks.
+> > >> >
+> > >> >
+> > >> >
+> > >> >
+> > >>
+> > >__________________________________________________
+> > >> >Do You Yahoo!?
+> > >> >Tired of spam?  Yahoo! Mail has the best spam
+> > >> protection around
+> > >> >http://mail.yahoo.com
+> > >> >_______________________________________________
+> > >> >YDFramework-users mailing list
+> > >> >YDFramework-users at lists.berlios.de
+> > >>
+> >
+> >>http://lists.berlios.de/mailman/listinfo/ydframework-users
+> > >> >
+> > >> >
+> > >> _______________________________________________
+> > >> YDFramework-users mailing list
+> > >> YDFramework-users at lists.berlios.de
+> > >>
+> > >
+> >
+> http://lists.berlios.de/mailman/listinfo/ydframework-users
+> > >>
+> > >
+> > >
+> > > __________________________________________________
+> > > Do You Yahoo!?
+> > > Tired of spam?  Yahoo! Mail has the best spam
+> > protection around
+> > > http://mail.yahoo.com
+> > > _______________________________________________
+> > > YDFramework-users mailing list
+> > > YDFramework-users at lists.berlios.de
+> > >
+> >
+> http://lists.berlios.de/mailman/listinfo/ydframework-users
+> > >
+> >
+> > _______________________________________________
+> > YDFramework-users mailing list
+> > YDFramework-users at lists.berlios.de
+> >
+> http://lists.berlios.de/mailman/listinfo/ydframework-users
+> >
+>
+>
+> __________________________________________________
+> Do You Yahoo!?
+> Tired of spam?  Yahoo! Mail has the best spam protection around
+> http://mail.yahoo.com
+> _______________________________________________
+> YDFramework-users mailing list
+> YDFramework-users at lists.berlios.de
+> http://lists.berlios.de/mailman/listinfo/ydframework-users
+>
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <https://lists.berlios.de/pipermail/ydframework-users/attachments/20060210/52fdbcf7/attachment.html>
+
+From muitocomplicado at gmail.com  Fri Feb 10 18:40:05 2006
+From: muitocomplicado at gmail.com (David Bittencourt)
+Date: Fri, 10 Feb 2006 14:40:05 -0300
+Subject: [ydf-users] UPDATE with YDDatabaseObject
+In-Reply-To: <12260be20602100828yfab2265pfa3b4c0f97d139c9@mail.gmail.com>
+References: <36215.71.39.100.121.1139581422.squirrel@www.jocosoft.com>
+	 <20060210155730.67767.qmail@web50215.mail.yahoo.com>
+	 <12260be20602100828yfab2265pfa3b4c0f97d139c9@mail.gmail.com>
+Message-ID: <12260be20602100940j6e2afea9ue8e200613734a1e0@mail.gmail.com>
+
+I was looking more into this, and why the first code from dab wasn't working
+when it should be.
+
+In build 1658 I updated the class to handle the WHERE statement a little
+different in update() from the usual in find() and delete().
+
+In find() and delete() the WHERE statement is built by the union of field
+values and where() calls. Example:
+
+$user->active = 0;
+$user->where( "date_created > '2006-01-01''" );
+$user->find();
+
+SELECT * FROM user WHERE active = 0 AND date_created > '2006-01-01''
+
+$user->active = 0;
+$user->where( "date_created > '2006-01-01''" );
+$user->delete();
+
+DELETE FROM user WHERE active = 0 AND date_created > '2006-01-01''
+
+But when working with update() we want to be able to SET values and have
+WHERE statements different from those values. Example:
+
+$user->active = 0;
+$user->where( "date_created > '2006-01-01''" );
+$user->find();
+
+Now the result be:
+
+UPDATE user SET active = 0 WHERE date_created > '2006-01-01''
+
+and NOT
+
+UPDATE user SET active = 0 WHERE active = 0 AND date_created > '2006-01-01''
+
+The only time values set in the object are added to the WHERE clause, is
+when the field is a key. Example, considering "id" is a key:
+
+$user->id = 1;
+$user->active = 0;
+$user->find();
+
+UPDATE user SET active = 0 WHERE id = 1
+
+$user->id = 1;
+$user->active = 0;
+$user->where( "date_created > '2006-01-01'" );
+$user->find();
+
+UPDATE user SET active = 0 WHERE id = 1 AND date_created > '2006-01-01'
+
+Also, as you noticed, the keys are no longer being added to the SET
+statements as they are not needed in there, are they?
+
+I asked about this in another e-mail to the developers mailing list.
+
+-db
+
+On 2/10/06, David Bittencourt <muitocomplicado at gmail.com> wrote:
+>
+> That's the default.
+>
+> $user->setValues() is going to set all values from $form->getValues() but
+> only registered fields will be added to the query.
+>
+> -db
+>
+> On 2/10/06, dab <dab214 at yahoo.com> wrote:
+> >
+> > hi peter,
+> > no i totally missed that line being gone in your email
+> > below. and yes now it works :) thanks!
+> >
+> > btw is it possible to build the sql string only with
+> > fields that have been registered with registerField.
+> > So for example when you do:
+> > $user->setValues ( $this->form->getValues() )
+> >
+> > the fields in the forms array are ignored if they
+> > haven't been registered in the object (this being
+> > user)
+> >
+> > /dan
+> >
+> >
+> > --- peter at jocosoft.com wrote:
+> >
+> > > And you did remove the "$user->where" line?
+> > > This is what I'm doing all the time, and it works
+> > > like a charm.
+> > >
+> > > Peter
+> > >
+> > >
+> > > > hi peter,
+> > > > thanks for replying.
+> > > > my id in the table users is set as a key already:
+> > > >
+> > > > $this->registerKey( 'id', true );
+> > > > $this->registerField( 'username' );
+> > > >
+> > > > sorry i should have posted the code in the
+> > > database
+> > > > file already.
+> > > > but below code gives me the same sql result as
+> > > with
+> > > > setValues()
+> > > > $user->id = 1;
+> > > > $user->username = 'dab';
+> > > >
+> > > > thanks.
+> > > >
+> > > > /dani
+> > > >
+> > > >
+> > > > --- Peter < ydf at jocosoft.com> wrote:
+> > > >
+> > > >> Hi dab,
+> > > >>
+> > > >> I'm not sure why that happens, or if it is as
+> > > >> intended, but what you're
+> > > >> trying to do can be done with:
+> > > >>
+> > > >> $user = YDDatabaseObject::getInstance( 'users' );
+> > > >> $user->id = 1;
+> > > >> $user->username = 'dab';
+> > > >> $user->update();
+> > > >>
+> > > >> Provided that 'id' is the key field.
+> > > >>
+> > > >> Good luck!
+> > > >> Peter
+> > > >>
+> > > >> dab wrote:
+> > > >>
+> > > >> >hi,
+> > > >> >this code:
+> > > >> >$user = YDDatabaseObject::getInstance( 'users'
+> > > );
+> > > >> >$user->setValues ( array ( 'username' =>  'dab'
+> > > )
+> > > >> );
+> > > >> >$user->where ("id = ".$this->id);
+> > > >> >$user->update();
+> > > >> >
+> > > >> >produces this sql query:
+> > > >> >UPDATE `users` SET `username` = 'dab' WHERE id =
+> > > 1
+> > > >> AND
+> > > >> >`users`.`username` = 'dab'
+> > > >> >
+> > > >> >when it should produce:
+> > > >> >UPDATE `users` SET `username` = 'dab' WHERE id =
+> > > 1
+> > > >> >
+> > > >> >Please tell me why the username is being added
+> > > to
+> > > >> the
+> > > >> >where clause and how i can stop it.
+> > > >> >thanks.
+> > > >> >
+> > > >> >
+> > > >> >
+> > > >> >
+> > > >>
+> > > >__________________________________________________
+> > > >> >Do You Yahoo!?
+> > > >> >Tired of spam?  Yahoo! Mail has the best spam
+> > > >> protection around
+> > > >> > http://mail.yahoo.com
+> > > >> >_______________________________________________
+> > > >> >YDFramework-users mailing list
+> > > >> > YDFramework-users at lists.berlios.de
+> > > >>
+> > >
+> > >>http://lists.berlios.de/mailman/listinfo/ydframework-users
+> > > >> >
+> > > >> >
+> > > >> _______________________________________________
+> > > >> YDFramework-users mailing list
+> > > >> YDFramework-users at lists.berlios.de
+> > > >>
+> > > >
+> > >
+> > http://lists.berlios.de/mailman/listinfo/ydframework-users
+> > > >>
+> > > >
+> > > >
+> > > > __________________________________________________
+> > > > Do You Yahoo!?
+> > > > Tired of spam?  Yahoo! Mail has the best spam
+> > > protection around
+> > > > http://mail.yahoo.com
+> > > > _______________________________________________
+> > > > YDFramework-users mailing list
+> > > > YDFramework-users at lists.berlios.de
+> > > >
+> > >
+> > http://lists.berlios.de/mailman/listinfo/ydframework-users
+> > > >
+> > >
+> > > _______________________________________________
+> > > YDFramework-users mailing list
+> > > YDFramework-users at lists.berlios.de
+> > >
+> > http://lists.berlios.de/mailman/listinfo/ydframework-users
+> > >
+> >
+> >
+> > __________________________________________________
+> > Do You Yahoo!?
+> > Tired of spam?  Yahoo! Mail has the best spam protection around
+> > http://mail.yahoo.com
+> > _______________________________________________
+> > YDFramework-users mailing list
+> > YDFramework-users at lists.berlios.de
+> > http://lists.berlios.de/mailman/listinfo/ydframework-users
+> >
+>
+>
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <https://lists.berlios.de/pipermail/ydframework-users/attachments/20060210/8b9b7dbd/attachment.html>
+
+From dab214 at yahoo.com  Fri Feb 10 20:05:51 2006
+From: dab214 at yahoo.com (dab)
+Date: Fri, 10 Feb 2006 11:05:51 -0800 (PST)
+Subject: [ydf-users] UPDATE with YDDatabaseObject
+In-Reply-To: <12260be20602100940j6e2afea9ue8e200613734a1e0@mail.gmail.com>
+Message-ID: <20060210190551.76422.qmail@web50210.mail.yahoo.com>
+
+hi db,
+thanks for your reply. i just updated the SVN though
+and i'm still having the same problem.
+
+This is the form content:
+
+Array
+(
+    [id] => 
+    [firstname] => 
+    [lastname] => 
+    [username] => dab
+    [email] => admin at site.com
+    [address] => 
+    [phone_work] => 
+    [phone_home] => 
+    [phone_mobile] => 
+    [password] => 
+    [password_repeat] => 
+    [country] => 0
+    [gender] => 0
+)
+
+
+the normal code:
+$user = YDDatabaseObject::getInstance( 'users' );
+$values = $this->form->getValues();
+print_r($values);
+$user->setValues ( $values );
+$user->where ( "id = ".$this->id);
+$user->update();
+
+the users class:
+$this->registerKey( 'id', true );
+$this->registerField( 'username' );
+
+and last the sql output:
+UPDATE `users` SET `firstname` = '', `lastname` = '',
+`username` = 'dab', `email` = 'admin at site.com',
+`address` = '', `phone_work` = '', `phone_home` = '',
+`phone_mobile` = '', `password` = '',
+`password_repeat` = '', `country` = '0', `gender` =
+'0' WHERE id = 1 AND `users`.`id` = ''
+
+Which of course produces this error:
+Fatal error: [1054] Unknown column 'email' in 'field
+list' in
+D:\htdocs\sportingbet\YDFramework2\YDClasses\YDDatabase.php
+on line 1360
+
+So for me it's not taking out key fields in the WHERE
+clause and it's not unsetting the fields that are not
+registered.
+thanks again.
+
+regards,
+dan
+
+
+--- David Bittencourt <muitocomplicado at gmail.com>
+wrote:
+
+> I was looking more into this, and why the first code
+> from dab wasn't working
+> when it should be.
+> 
+> In build 1658 I updated the class to handle the
+> WHERE statement a little
+> different in update() from the usual in find() and
+> delete().
+> 
+> In find() and delete() the WHERE statement is built
+> by the union of field
+> values and where() calls. Example:
+> 
+> $user->active = 0;
+> $user->where( "date_created > '2006-01-01''" );
+> $user->find();
+> 
+> SELECT * FROM user WHERE active = 0 AND date_created
+> > '2006-01-01''
+> 
+> $user->active = 0;
+> $user->where( "date_created > '2006-01-01''" );
+> $user->delete();
+> 
+> DELETE FROM user WHERE active = 0 AND date_created >
+> '2006-01-01''
+> 
+> But when working with update() we want to be able to
+> SET values and have
+> WHERE statements different from those values.
+> Example:
+> 
+> $user->active = 0;
+> $user->where( "date_created > '2006-01-01''" );
+> $user->find();
+> 
+> Now the result be:
+> 
+> UPDATE user SET active = 0 WHERE date_created >
+> '2006-01-01''
+> 
+> and NOT
+> 
+> UPDATE user SET active = 0 WHERE active = 0 AND
+> date_created > '2006-01-01''
+> 
+> The only time values set in the object are added to
+> the WHERE clause, is
+> when the field is a key. Example, considering "id"
+> is a key:
+> 
+> $user->id = 1;
+> $user->active = 0;
+> $user->find();
+> 
+> UPDATE user SET active = 0 WHERE id = 1
+> 
+> $user->id = 1;
+> $user->active = 0;
+> $user->where( "date_created > '2006-01-01'" );
+> $user->find();
+> 
+> UPDATE user SET active = 0 WHERE id = 1 AND
+> date_created > '2006-01-01'
+> 
+> Also, as you noticed, the keys are no longer being
+> added to the SET
+> statements as they are not needed in there, are
+> they?
+> 
+> I asked about this in another e-mail to the
+> developers mailing list.
+> 
+> -db
+> 
+> On 2/10/06, David Bittencourt
+> <muitocomplicado at gmail.com> wrote:
+> >
+> > That's the default.
+> >
+> > $user->setValues() is going to set all values from
+> $form->getValues() but
+> > only registered fields will be added to the query.
+> >
+> > -db
+> >
+> > On 2/10/06, dab <dab214 at yahoo.com> wrote:
+> > >
+> > > hi peter,
+> > > no i totally missed that line being gone in your
+> email
+> > > below. and yes now it works :) thanks!
+> > >
+> > > btw is it possible to build the sql string only
+> with
+> > > fields that have been registered with
+> registerField.
+> > > So for example when you do:
+> > > $user->setValues ( $this->form->getValues() )
+> > >
+> > > the fields in the forms array are ignored if
+> they
+> > > haven't been registered in the object (this
+> being
+> > > user)
+> > >
+> > > /dan
+> > >
+> > >
+> > > --- peter at jocosoft.com wrote:
+> > >
+> > > > And you did remove the "$user->where" line?
+> > > > This is what I'm doing all the time, and it
+> works
+> > > > like a charm.
+> > > >
+> > > > Peter
+> > > >
+> > > >
+> > > > > hi peter,
+> > > > > thanks for replying.
+> > > > > my id in the table users is set as a key
+> already:
+> > > > >
+> > > > > $this->registerKey( 'id', true );
+> > > > > $this->registerField( 'username' );
+> > > > >
+> > > > > sorry i should have posted the code in the
+> > > > database
+> > > > > file already.
+> > > > > but below code gives me the same sql result
+> as
+> > > > with
+> > > > > setValues()
+> > > > > $user->id = 1;
+> > > > > $user->username = 'dab';
+> > > > >
+> > > > > thanks.
+> > > > >
+> > > > > /dani
+> > > > >
+> > > > >
+> > > > > --- Peter < ydf at jocosoft.com> wrote:
+> > > > >
+> > > > >> Hi dab,
+> > > > >>
+> > > > >> I'm not sure why that happens, or if it is
+> as
+> > > > >> intended, but what you're
+> > > > >> trying to do can be done with:
+> > > > >>
+> > > > >> $user = YDDatabaseObject::getInstance(
+> 'users' );
+> > > > >> $user->id = 1;
+> > > > >> $user->username = 'dab';
+> > > > >> $user->update();
+> > > > >>
+> > > > >> Provided that 'id' is the key field.
+> > > > >>
+> > > > >> Good luck!
+> > > > >> Peter
+> > > > >>
+> > > > >> dab wrote:
+> > > > >>
+> > > > >> >hi,
+> > > > >> >this code:
+> > > > >> >$user = YDDatabaseObject::getInstance(
+> 'users'
+> > > > );
+> > > > >> >$user->setValues ( array ( 'username' => 
+> 'dab'
+> > > > )
+> > > > >> );
+> > > > >> >$user->where ("id = ".$this->id);
+> > > > >> >$user->update();
+> > > > >> >
+> > > > >> >produces this sql query:
+> > > > >> >UPDATE `users` SET `username` = 'dab'
+> WHERE id =
+> > > > 1
+> > > > >> AND
+> > > > >> >`users`.`username` = 'dab'
+> > > > >> >
+> > > > >> >when it should produce:
+> > > > >> >UPDATE `users` SET `username` = 'dab'
+> WHERE id =
+> > > > 1
+> > > > >> >
+> > > > >> >Please tell me why the username is being
+> added
+> > > > to
+> > > > >> the
+> > > > >> >where clause and how i can stop it.
+> > > > >> >thanks.
+> > > > >> >
+> > > > >> >
+> > > > >> >
+> > > > >> >
+> > > > >>
+> > > >
+> >__________________________________________________
+> 
+=== message truncated ===
+
+
+__________________________________________________
+Do You Yahoo!?
+Tired of spam?  Yahoo! Mail has the best spam protection around 
+http://mail.yahoo.com 
+
+
+From muitocomplicado at gmail.com  Fri Feb 10 21:00:31 2006
+From: muitocomplicado at gmail.com (David Bittencourt)
+Date: Fri, 10 Feb 2006 17:00:31 -0300
+Subject: [ydf-users] UPDATE with YDDatabaseObject
+In-Reply-To: <20060210190551.76422.qmail@web50210.mail.yahoo.com>
+References: <12260be20602100940j6e2afea9ue8e200613734a1e0@mail.gmail.com>
+	 <20060210190551.76422.qmail@web50210.mail.yahoo.com>
+Message-ID: <12260be20602101200q2daad249pb2d16411bff48f04@mail.gmail.com>
+
+In this case we have 2 things.
+
+1. The id field is set to '' (empty string) so there's why you have WHERE id
+= 1 AND `users`.`id` = ''. You should unset it before adding the values, or
+unset it from the object, or set it with the correct value.
+
+2. It's very strange that all the fields are being added to the query. In
+all my tests here I'm getting the correct query.
+
+Have you modified the class with any custom code?
+Is the users class extending a class other than YDDatabaseObject?
+What php version are you running?
+What is YDDatabaseObject's version? (check it on $_version var at the
+constructor)
+Please execute the following code please after setValues and send me the
+results.
+
+YDDebugUtil::dump( $user->_fields );
+
+-db
+
+On 2/10/06, dab <dab214 at yahoo.com> wrote:
+>
+> hi db,
+> thanks for your reply. i just updated the SVN though
+> and i'm still having the same problem.
+>
+> This is the form content:
+>
+> Array
+> (
+>     [id] =>
+>     [firstname] =>
+>     [lastname] =>
+>     [username] => dab
+>     [email] => admin at site.com
+>     [address] =>
+>     [phone_work] =>
+>     [phone_home] =>
+>     [phone_mobile] =>
+>     [password] =>
+>     [password_repeat] =>
+>     [country] => 0
+>     [gender] => 0
+> )
+>
+>
+> the normal code:
+> $user = YDDatabaseObject::getInstance( 'users' );
+> $values = $this->form->getValues();
+> print_r($values);
+> $user->setValues ( $values );
+> $user->where ( "id = ".$this->id);
+> $user->update();
+>
+> the users class:
+> $this->registerKey( 'id', true );
+> $this->registerField( 'username' );
+>
+> and last the sql output:
+> UPDATE `users` SET `firstname` = '', `lastname` = '',
+> `username` = 'dab', `email` = 'admin at site.com',
+> `address` = '', `phone_work` = '', `phone_home` = '',
+> `phone_mobile` = '', `password` = '',
+> `password_repeat` = '', `country` = '0', `gender` =
+> '0' WHERE id = 1 AND `users`.`id` = ''
+>
+> Which of course produces this error:
+> Fatal error: [1054] Unknown column 'email' in 'field
+> list' in
+> D:\htdocs\sportingbet\YDFramework2\YDClasses\YDDatabase.php
+> on line 1360
+>
+> So for me it's not taking out key fields in the WHERE
+> clause and it's not unsetting the fields that are not
+> registered.
+> thanks again.
+>
+> regards,
+> dan
+>
+>
+> --- David Bittencourt <muitocomplicado at gmail.com>
+> wrote:
+>
+> > I was looking more into this, and why the first code
+> > from dab wasn't working
+> > when it should be.
+> >
+> > In build 1658 I updated the class to handle the
+> > WHERE statement a little
+> > different in update() from the usual in find() and
+> > delete().
+> >
+> > In find() and delete() the WHERE statement is built
+> > by the union of field
+> > values and where() calls. Example:
+> >
+> > $user->active = 0;
+> > $user->where( "date_created > '2006-01-01''" );
+> > $user->find();
+> >
+> > SELECT * FROM user WHERE active = 0 AND date_created
+> > > '2006-01-01''
+> >
+> > $user->active = 0;
+> > $user->where( "date_created > '2006-01-01''" );
+> > $user->delete();
+> >
+> > DELETE FROM user WHERE active = 0 AND date_created >
+> > '2006-01-01''
+> >
+> > But when working with update() we want to be able to
+> > SET values and have
+> > WHERE statements different from those values.
+> > Example:
+> >
+> > $user->active = 0;
+> > $user->where( "date_created > '2006-01-01''" );
+> > $user->find();
+> >
+> > Now the result be:
+> >
+> > UPDATE user SET active = 0 WHERE date_created >
+> > '2006-01-01''
+> >
+> > and NOT
+> >
+> > UPDATE user SET active = 0 WHERE active = 0 AND
+> > date_created > '2006-01-01''
+> >
+> > The only time values set in the object are added to
+> > the WHERE clause, is
+> > when the field is a key. Example, considering "id"
+> > is a key:
+> >
+> > $user->id = 1;
+> > $user->active = 0;
+> > $user->find();
+> >
+> > UPDATE user SET active = 0 WHERE id = 1
+> >
+> > $user->id = 1;
+> > $user->active = 0;
+> > $user->where( "date_created > '2006-01-01'" );
+> > $user->find();
+> >
+> > UPDATE user SET active = 0 WHERE id = 1 AND
+> > date_created > '2006-01-01'
+> >
+> > Also, as you noticed, the keys are no longer being
+> > added to the SET
+> > statements as they are not needed in there, are
+> > they?
+> >
+> > I asked about this in another e-mail to the
+> > developers mailing list.
+> >
+> > -db
+> >
+> > On 2/10/06, David Bittencourt
+> > <muitocomplicado at gmail.com> wrote:
+> > >
+> > > That's the default.
+> > >
+> > > $user->setValues() is going to set all values from
+> > $form->getValues() but
+> > > only registered fields will be added to the query.
+> > >
+> > > -db
+> > >
+> > > On 2/10/06, dab <dab214 at yahoo.com> wrote:
+> > > >
+> > > > hi peter,
+> > > > no i totally missed that line being gone in your
+> > email
+> > > > below. and yes now it works :) thanks!
+> > > >
+> > > > btw is it possible to build the sql string only
+> > with
+> > > > fields that have been registered with
+> > registerField.
+> > > > So for example when you do:
+> > > > $user->setValues ( $this->form->getValues() )
+> > > >
+> > > > the fields in the forms array are ignored if
+> > they
+> > > > haven't been registered in the object (this
+> > being
+> > > > user)
+> > > >
+> > > > /dan
+> > > >
+> > > >
+> > > > --- peter at jocosoft.com wrote:
+> > > >
+> > > > > And you did remove the "$user->where" line?
+> > > > > This is what I'm doing all the time, and it
+> > works
+> > > > > like a charm.
+> > > > >
+> > > > > Peter
+> > > > >
+> > > > >
+> > > > > > hi peter,
+> > > > > > thanks for replying.
+> > > > > > my id in the table users is set as a key
+> > already:
+> > > > > >
+> > > > > > $this->registerKey( 'id', true );
+> > > > > > $this->registerField( 'username' );
+> > > > > >
+> > > > > > sorry i should have posted the code in the
+> > > > > database
+> > > > > > file already.
+> > > > > > but below code gives me the same sql result
+> > as
+> > > > > with
+> > > > > > setValues()
+> > > > > > $user->id = 1;
+> > > > > > $user->username = 'dab';
+> > > > > >
+> > > > > > thanks.
+> > > > > >
+> > > > > > /dani
+> > > > > >
+> > > > > >
+> > > > > > --- Peter < ydf at jocosoft.com> wrote:
+> > > > > >
+> > > > > >> Hi dab,
+> > > > > >>
+> > > > > >> I'm not sure why that happens, or if it is
+> > as
+> > > > > >> intended, but what you're
+> > > > > >> trying to do can be done with:
+> > > > > >>
+> > > > > >> $user = YDDatabaseObject::getInstance(
+> > 'users' );
+> > > > > >> $user->id = 1;
+> > > > > >> $user->username = 'dab';
+> > > > > >> $user->update();
+> > > > > >>
+> > > > > >> Provided that 'id' is the key field.
+> > > > > >>
+> > > > > >> Good luck!
+> > > > > >> Peter
+> > > > > >>
+> > > > > >> dab wrote:
+> > > > > >>
+> > > > > >> >hi,
+> > > > > >> >this code:
+> > > > > >> >$user = YDDatabaseObject::getInstance(
+> > 'users'
+> > > > > );
+> > > > > >> >$user->setValues ( array ( 'username' =>
+> > 'dab'
+> > > > > )
+> > > > > >> );
+> > > > > >> >$user->where ("id = ".$this->id);
+> > > > > >> >$user->update();
+> > > > > >> >
+> > > > > >> >produces this sql query:
+> > > > > >> >UPDATE `users` SET `username` = 'dab'
+> > WHERE id =
+> > > > > 1
+> > > > > >> AND
+> > > > > >> >`users`.`username` = 'dab'
+> > > > > >> >
+> > > > > >> >when it should produce:
+> > > > > >> >UPDATE `users` SET `username` = 'dab'
+> > WHERE id =
+> > > > > 1
+> > > > > >> >
+> > > > > >> >Please tell me why the username is being
+> > added
+> > > > > to
+> > > > > >> the
+> > > > > >> >where clause and how i can stop it.
+> > > > > >> >thanks.
+> > > > > >> >
+> > > > > >> >
+> > > > > >> >
+> > > > > >> >
+> > > > > >>
+> > > > >
+> > >__________________________________________________
+> >
+> === message truncated ===
+>
+>
+> __________________________________________________
+> Do You Yahoo!?
+> Tired of spam?  Yahoo! Mail has the best spam protection around
+> http://mail.yahoo.com
+> _______________________________________________
+> YDFramework-users mailing list
+> YDFramework-users at lists.berlios.de
+> http://lists.berlios.de/mailman/listinfo/ydframework-users
+>
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <https://lists.berlios.de/pipermail/ydframework-users/attachments/20060210/f499e257/attachment.html>
+
+From dab214 at yahoo.com  Fri Feb 10 23:15:09 2006
+From: dab214 at yahoo.com (dab)
+Date: Fri, 10 Feb 2006 14:15:09 -0800 (PST)
+Subject: [ydf-users] UPDATE with YDDatabaseObject
+In-Reply-To: <12260be20602101200q2daad249pb2d16411bff48f04@mail.gmail.com>
+Message-ID: <20060210221509.15045.qmail@web50215.mail.yahoo.com>
+
+hi db,
+yes i was extending the users class from a class
+extending YDDatabaseObject.
+it works now, thanks a lot!
+
+/dan
+
+
+--- David Bittencourt <muitocomplicado at gmail.com>
+wrote:
+
+> In this case we have 2 things.
+> 
+> 1. The id field is set to '' (empty string) so
+> there's why you have WHERE id
+> = 1 AND `users`.`id` = ''. You should unset it
+> before adding the values, or
+> unset it from the object, or set it with the correct
+> value.
+> 
+> 2. It's very strange that all the fields are being
+> added to the query. In
+> all my tests here I'm getting the correct query.
+> 
+> Have you modified the class with any custom code?
+> Is the users class extending a class other than
+> YDDatabaseObject?
+> What php version are you running?
+> What is YDDatabaseObject's version? (check it on
+> $_version var at the
+> constructor)
+> Please execute the following code please after
+> setValues and send me the
+> results.
+> 
+> YDDebugUtil::dump( $user->_fields );
+> 
+> -db
+> 
+> On 2/10/06, dab <dab214 at yahoo.com> wrote:
+> >
+> > hi db,
+> > thanks for your reply. i just updated the SVN
+> though
+> > and i'm still having the same problem.
+> >
+> > This is the form content:
+> >
+> > Array
+> > (
+> >     [id] =>
+> >     [firstname] =>
+> >     [lastname] =>
+> >     [username] => dab
+> >     [email] => admin at site.com
+> >     [address] =>
+> >     [phone_work] =>
+> >     [phone_home] =>
+> >     [phone_mobile] =>
+> >     [password] =>
+> >     [password_repeat] =>
+> >     [country] => 0
+> >     [gender] => 0
+> > )
+> >
+> >
+> > the normal code:
+> > $user = YDDatabaseObject::getInstance( 'users' );
+> > $values = $this->form->getValues();
+> > print_r($values);
+> > $user->setValues ( $values );
+> > $user->where ( "id = ".$this->id);
+> > $user->update();
+> >
+> > the users class:
+> > $this->registerKey( 'id', true );
+> > $this->registerField( 'username' );
+> >
+> > and last the sql output:
+> > UPDATE `users` SET `firstname` = '', `lastname` =
+> '',
+> > `username` = 'dab', `email` = 'admin at site.com',
+> > `address` = '', `phone_work` = '', `phone_home` =
+> '',
+> > `phone_mobile` = '', `password` = '',
+> > `password_repeat` = '', `country` = '0', `gender`
+> =
+> > '0' WHERE id = 1 AND `users`.`id` = ''
+> >
+> > Which of course produces this error:
+> > Fatal error: [1054] Unknown column 'email' in
+> 'field
+> > list' in
+> >
+>
+D:\htdocs\sportingbet\YDFramework2\YDClasses\YDDatabase.php
+> > on line 1360
+> >
+> > So for me it's not taking out key fields in the
+> WHERE
+> > clause and it's not unsetting the fields that are
+> not
+> > registered.
+> > thanks again.
+> >
+> > regards,
+> > dan
+> >
+> >
+> > --- David Bittencourt <muitocomplicado at gmail.com>
+> > wrote:
+> >
+> > > I was looking more into this, and why the first
+> code
+> > > from dab wasn't working
+> > > when it should be.
+> > >
+> > > In build 1658 I updated the class to handle the
+> > > WHERE statement a little
+> > > different in update() from the usual in find()
+> and
+> > > delete().
+> > >
+> > > In find() and delete() the WHERE statement is
+> built
+> > > by the union of field
+> > > values and where() calls. Example:
+> > >
+> > > $user->active = 0;
+> > > $user->where( "date_created > '2006-01-01''" );
+> > > $user->find();
+> > >
+> > > SELECT * FROM user WHERE active = 0 AND
+> date_created
+> > > > '2006-01-01''
+> > >
+> > > $user->active = 0;
+> > > $user->where( "date_created > '2006-01-01''" );
+> > > $user->delete();
+> > >
+> > > DELETE FROM user WHERE active = 0 AND
+> date_created >
+> > > '2006-01-01''
+> > >
+> > > But when working with update() we want to be
+> able to
+> > > SET values and have
+> > > WHERE statements different from those values.
+> > > Example:
+> > >
+> > > $user->active = 0;
+> > > $user->where( "date_created > '2006-01-01''" );
+> > > $user->find();
+> > >
+> > > Now the result be:
+> > >
+> > > UPDATE user SET active = 0 WHERE date_created >
+> > > '2006-01-01''
+> > >
+> > > and NOT
+> > >
+> > > UPDATE user SET active = 0 WHERE active = 0 AND
+> > > date_created > '2006-01-01''
+> > >
+> > > The only time values set in the object are added
+> to
+> > > the WHERE clause, is
+> > > when the field is a key. Example, considering
+> "id"
+> > > is a key:
+> > >
+> > > $user->id = 1;
+> > > $user->active = 0;
+> > > $user->find();
+> > >
+> > > UPDATE user SET active = 0 WHERE id = 1
+> > >
+> > > $user->id = 1;
+> > > $user->active = 0;
+> > > $user->where( "date_created > '2006-01-01'" );
+> > > $user->find();
+> > >
+> > > UPDATE user SET active = 0 WHERE id = 1 AND
+> > > date_created > '2006-01-01'
+> > >
+> > > Also, as you noticed, the keys are no longer
+> being
+> > > added to the SET
+> > > statements as they are not needed in there, are
+> > > they?
+> > >
+> > > I asked about this in another e-mail to the
+> > > developers mailing list.
+> > >
+> > > -db
+> > >
+> > > On 2/10/06, David Bittencourt
+> > > <muitocomplicado at gmail.com> wrote:
+> > > >
+> > > > That's the default.
+> > > >
+> > > > $user->setValues() is going to set all values
+> from
+> > > $form->getValues() but
+> > > > only registered fields will be added to the
+> query.
+> > > >
+> > > > -db
+> > > >
+> > > > On 2/10/06, dab <dab214 at yahoo.com> wrote:
+> > > > >
+> > > > > hi peter,
+> > > > > no i totally missed that line being gone in
+> your
+> 
+=== message truncated ===
+
+
+__________________________________________________
+Do You Yahoo!?
+Tired of spam?  Yahoo! Mail has the best spam protection around 
+http://mail.yahoo.com 
+
+
+From maximus_meridius79 at yahoo.com  Sun Feb 12 12:15:11 2006
+From: maximus_meridius79 at yahoo.com (maximus meridius)
+Date: Sun, 12 Feb 2006 03:15:11 -0800 (PST)
+Subject: [ydf-users] Catching unhandled actions
+Message-ID: <20060212111511.8280.qmail@web53810.mail.yahoo.com>
+
+Hi,
+
+I have been trying to workout how to catch actions
+that are not defined 
+as I have seen this message:
+
+*Fatal error*: Class index does not contain an action
+called 
+"actionlogin" (function name). in 
+*###/YDF2/YDFramework2/YDClasses/YDRequest.php* on
+line *227
+
+*I can't work out how to redirect to an error page or
+setup the request 
+to catch the problem in the first place.
+
+I'm missing the forums, although it's quite nostalgic
+to use a mailing 
+list such as this again.
+
+Regards,
+
+Graeme
+aka grep ( that was my forum user id)
+
+__________________________________________________
+Do You Yahoo!?
+Tired of spam?  Yahoo! Mail has the best spam protection around 
+http://mail.yahoo.com 
+
+
+From maximus_meridius79 at yahoo.com  Sun Feb 12 14:51:09 2006
+From: maximus_meridius79 at yahoo.com (maximus meridius)
+Date: Sun, 12 Feb 2006 05:51:09 -0800 (PST)
+Subject: [ydf-users] Catching unhandled actions
+Message-ID: <20060212135109.93984.qmail@web53803.mail.yahoo.com>
+
+After looking at YDrequest more carefully, I found
+this method:
+
+        /**
+         *    This function gets called by the process
+function if the 
+specified action was not implemented in the class.
+         *    By default, it raises a fatal error
+indicating this.
+         *
+         *    @param $action    The name of the action
+that is missing.
+         */
+        function errorMissingAction( $action ) {
+            trigger_error(
+                'Class ' . get_class( $this ) . ' does
+not contain an 
+action called "' . strtolower( $action ) . '" '
+                . '(function name).', YD_ERROR
+            );
+        }
+
+
+Regards,
+
+Graeme
+
+__________________________________________________
+Do You Yahoo!?
+Tired of spam?  Yahoo! Mail has the best spam protection around 
+http://mail.yahoo.com 
+
+
+From francisco at fusemail.com  Sun Feb 12 17:23:16 2006
+From: francisco at fusemail.com (Francisco Azevedo)
+Date: Sun, 12 Feb 2006 16:23:16 +0000
+Subject: [ydf-users] Catching unhandled actions
+In-Reply-To: <20060212135109.93984.qmail@web53803.mail.yahoo.com>
+References: <20060212135109.93984.qmail@web53803.mail.yahoo.com>
+Message-ID: <43EF60F4.40704@fusemail.com>
+
+Hi maximus meridius
+
+You must define a errorMissingAction function in your class that extends 
+YDRequest.
+
+Francisco
+
+
+From ydf at jocosoft.com  Sun Feb 12 17:44:00 2006
+From: ydf at jocosoft.com (Peter)
+Date: Sun, 12 Feb 2006 10:44:00 -0600
+Subject: [ydf-users] YDDatabaseObject issue
+Message-ID: <43EF65D0.7050701@jocosoft.com>
+
+Hi guys,
+
+First of all, congratulations on the 2.0 release!
+
+I have a question on the YDDatabaseObject class, which may be something 
+obvious I'm missing, or mabe something bigger. I like to retrieve a list 
+of artists with the number of albums they have released.
+In plain sql, my first thought was:
+
+SELECT artist.name, count(album.id) AS numalbums FROM artist,album WHERE 
+album.artistid=artist.id GROUP BY artist.id
+
+But that one leaves out the artists which have no albums (yet), instead 
+of having numalbums set to 0.
+So even my plain sql solution doesn't work right. But when I try to 
+accomplish this in YDDatabaseObject, it keeps whining about count not 
+being a registered fieldname (which is correct of course)
+I currently retrieve the artists, loop through them, get all the albums 
+for the current artist, and use the count() method, but that's not very 
+resouce efficient, not to mention slow...
+So, the basic question is, what is the proper way to get such an sql 
+result? and secondly, any hints on how to get the results I want 
+(including the artists with no albums) are welcome.
+
+Secondly, if I retrieve a list of albums with artists, both tables have 
+a 'name' field, which causes all sorts of problems of course. How do for 
+instance say that the name field in artist should be returned as 
+'artistname'?
+
+Thanks for any feedback.
+
+Peter
+
+
+From francisco at fusemail.com  Sun Feb 12 19:52:03 2006
+From: francisco at fusemail.com (Francisco Azevedo)
+Date: Sun, 12 Feb 2006 18:52:03 +0000
+Subject: [ydf-users] YDDatabaseObject issue
+In-Reply-To: <43EF65D0.7050701@jocosoft.com>
+References: <43EF65D0.7050701@jocosoft.com>
+Message-ID: <43EF83D3.7070801@fusemail.com>
+
+> 
+> I have a question on the YDDatabaseObject class, which may be something 
+> obvious I'm missing, or mabe something bigger. I like to retrieve a list 
+> of artists with the number of albums they have released.
+> In plain sql, my first thought was:
+> 
+> SELECT artist.name, count(album.id) AS numalbums FROM artist,album WHERE 
+> album.artistid=artist.id GROUP BY artist.id
+> 
+> But that one leaves out the artists which have no albums (yet), instead 
+> of having numalbums set to 0.
+> So even my plain sql solution doesn't work right. But when I try to 
+> accomplish this in YDDatabaseObject, it keeps whining about count not 
+> being a registered fieldname (which is correct of course)
+> I currently retrieve the artists, loop through them, get all the albums 
+> for the current artist, and use the count() method, but that's not very 
+> resouce efficient, not to mention slow...
+> So, the basic question is, what is the proper way to get such an sql 
+> result? and secondly, any hints on how to get the results I want 
+> (including the artists with no albums) are welcome.
+
+I'm not the db expert here :) but, imho, you should use an LEFT join.
+An LEFT join will join your artist table with your albums table and 
+return all artist names (even if your album table don't have those ids).
+
+> Secondly, if I retrieve a list of albums with artists, both tables have 
+> a 'name' field, which causes all sorts of problems of course. How do for 
+> instance say that the name field in artist should be returned as 
+> 'artistname'?
+
+Afaik, when you define a relation and get those values, event if you 
+have a 'name' in albuns and a 'name' in artists, YDDatabaseObject will 
+transform the artists 'name' in 'artist_name'.
+
+Francisco
+
+
+From peter at jocosoft.com  Sun Feb 12 21:59:26 2006
+From: peter at jocosoft.com (Peter)
+Date: Sun, 12 Feb 2006 14:59:26 -0600
+Subject: [ydf-users] YDDatabaseObject issue
+In-Reply-To: <43EF83D3.7070801@fusemail.com>
+References: <43EF65D0.7050701@jocosoft.com> <43EF83D3.7070801@fusemail.com>
+Message-ID: <43EFA1AE.9080401@jocosoft.com>
+
+Hey Francisco,
+
+>> So, the basic question is, what is the proper way to get such an sql 
+>> result? and secondly, any hints on how to get the results I want 
+>> (including the artists with no albums) are welcome.
+>
+>
+> I'm not the db expert here :) but, imho, you should use an LEFT join.
+> An LEFT join will join your artist table with your albums table and 
+> return all artist names (even if your album table don't have those ids).
+
+No, neither am I, and that's part of the problem I'm sure :)  What I've 
+come up with is
+SELECT artist.name, count(album.id) AS numalbums FROM artist LEFT JOIN 
+album ON album.artistid=artist.id GROUP BY artist.id
+
+and that works! We've come a step closer. Now the only problem is to 
+translate this to YDDatabaseObject as it will complain that 
+count(album.id) is not a registered field
+
+>
+>> Secondly, if I retrieve a list of albums with artists, both tables 
+>> have a 'name' field, which causes all sorts of problems of course. 
+>> How do for instance say that the name field in artist should be 
+>> returned as 'artistname'?
+>
+> Afaik, when you define a relation and get those values, event if you 
+> have a 'name' in albuns and a 'name' in artists, YDDatabaseObject will 
+> transform the artists 'name' in 'artist_name'.
+
+Oh! see, that's one of those obvious things I always miss...  works like 
+a charm!
+
+Thanks!
+Peter
+
+>
+> Francisco
+> _______________________________________________
+> YDFramework-users mailing list
+> YDFramework-users at lists.berlios.de
+> http://lists.berlios.de/mailman/listinfo/ydframework-users
+
+
+
+From francisco at fusemail.com  Mon Feb 13 00:15:03 2006
+From: francisco at fusemail.com (Francisco Azevedo)
+Date: Sun, 12 Feb 2006 23:15:03 +0000
+Subject: [ydf-users] YDDatabaseObject issue
+In-Reply-To: <43EFA1AE.9080401@jocosoft.com>
+References: <43EF65D0.7050701@jocosoft.com> <43EF83D3.7070801@fusemail.com> <43EFA1AE.9080401@jocosoft.com>
+Message-ID: <43EFC177.9030700@fusemail.com>
+
+>> I'm not the db expert here :) but, imho, you should use an LEFT join.
+>> An LEFT join will join your artist table with your albums table and 
+>> return all artist names (even if your album table don't have those ids).
+>
+>
+> No, neither am I, and that's part of the problem I'm sure :)  What 
+> I've come up with is
+> SELECT artist.name, count(album.id) AS numalbums FROM artist LEFT JOIN 
+> album ON album.artistid=artist.id GROUP BY artist.id
+>
+> and that works! We've come a step closer. Now the only problem is to 
+> translate this to YDDatabaseObject as it will complain that 
+> count(album.id) is not a registered field
+
+And its correct.. "count(album.id)" is not a field but an expression.
+Afaik, YDDatabaseObject has registerSelect() to add custom expressions
+to a select.
+Something like:
+
+$this->registerSelect( 'numalbums', 'count( X )');
+
+.. where X is the album.id.. you can try hardcode it.. or using a
+previous defined variable:
+
+$var = & $this->registerField( 'xpto' );
+
+$this->registerSelect( 'numalbums', 'count( '. $var->getColumn() .' )');
+
+The problem here is that your X is a field of _other_ table and i don't
+know if it's possible to use an variable of other table... maybe db can
+help here.
+
+Francisco
+
+
+
+From peter at jocosoft.com  Mon Feb 13 00:27:10 2006
+From: peter at jocosoft.com (Peter)
+Date: Sun, 12 Feb 2006 17:27:10 -0600
+Subject: [ydf-users] YDDatabaseObject issue
+In-Reply-To: <43EFC177.9030700@fusemail.com>
+References: <43EF65D0.7050701@jocosoft.com> <43EF83D3.7070801@fusemail.com> <43EFA1AE.9080401@jocosoft.com> <43EFC177.9030700@fusemail.com>
+Message-ID: <43EFC44E.1040707@jocosoft.com>
+
+>> No, neither am I, and that's part of the problem I'm sure :)  What 
+>> I've come up with is
+>> SELECT artist.name, count(album.id) AS numalbums FROM artist LEFT 
+>> JOIN album ON album.artistid=artist.id GROUP BY artist.id
+>>
+>> and that works! We've come a step closer. Now the only problem is to 
+>> translate this to YDDatabaseObject as it will complain that 
+>> count(album.id) is not a registered field
+>
+>
+> And its correct.. "count(album.id)" is not a field but an expression.
+> Afaik, YDDatabaseObject has registerSelect() to add custom expressions
+> to a select.
+> Something like:
+>
+> $this->registerSelect( 'numalbums', 'count( X )');
+
+Oh, is that how you use registerselect.... I've actually been staring at 
+that method, wondering what it was for. (and sorry, the avalable 
+documentation is not very helpful)
+This actually totally makes sense though! I'm sure this is going to work!
+
+>
+> .. where X is the album.id.. you can try hardcode it.. or using a
+> previous defined variable:
+>
+> $var = & $this->registerField( 'xpto' );
+>
+> $this->registerSelect( 'numalbums', 'count( '. $var->getColumn() .' )');
+>
+> The problem here is that your X is a field of _other_ table and i don't
+> know if it's possible to use an variable of other table... maybe db can
+> help here.
+
+That would be a lot nicer indeed. And the current class already "knows 
+about" the other table through a relation that is defined, so maybe we 
+may be able to use that to our advantage here...
+
+Thanks a bunch Francisco! You heped me well on my way here.
+
+Peter
+
+
+
+From muitocomplicado at gmail.com  Mon Feb 13 01:36:28 2006
+From: muitocomplicado at gmail.com (David Bittencourt)
+Date: Sun, 12 Feb 2006 21:36:28 -0300
+Subject: [ydf-users] YDDatabaseObject issue
+In-Reply-To: <43EFC177.9030700@fusemail.com>
+References: <43EF65D0.7050701@jocosoft.com> <43EF83D3.7070801@fusemail.com>
+	 <43EFA1AE.9080401@jocosoft.com> <43EFC177.9030700@fusemail.com>
+Message-ID: <12260be20602121636g2dfead8w24d6b05dbdfec4b7@mail.gmail.com>
+
+Just define the select in the album class and use select() to add it to the
+query. Example:
+
+class artist extends YDDatabaseObject {
+
+    function artist() {
+
+        $this->YDDatabaseObject();
+
+        $this->registerDatabase( ... );
+        $this->registerTable( 'artist' );
+
+        $this->registerKey( 'id', true );
+        $this->registerField( 'name' );
+
+        $rel =& $this->registerRelation( 'album' );
+        $rel->setForeignKey( 'artistid' );
+        $rel->setForeignJoin( 'LEFT' );
+
+    }
+
+    function getAlbums() {
+
+        $this->reset();
+
+        $this->load( 'album' );
+
+        $this->select( 'id', 'name' );
+        $this->album->select( 'count' );
+
+        $this->group( 'id' );
+
+        $this->find( 'album' );
+
+        return $this->getResults();
+
+    }
+
+}
+
+
+class album extends YDDatabaseObject {
+
+    function album() {
+
+        $this->YDDatabaseObject();
+
+        $this->registerDatabase( ... );
+        $this->registerTable( 'album' );
+
+        $id =& $this->registerKey( 'id', true );
+        $this->registerField( 'artistid' );
+        $this->registerField( 'name' );
+
+        $this->registerSelect( 'count', 'count( #.id )', false );
+        // or
+        $this->registerSelect( 'count', 'count( #.' . $id->getColumn() . '
+)', false );
+        // or
+        $this->registerSelect( 'count', 'count( ' . $this->getAlias() . '.'
+. $id->getColumn() . ' )', false );
+        // or
+        $this->registerSelect( 'count', 'count( ' . $this->getColumn( 'id',
+true ) . ' )', false );
+
+    }
+
+}
+
+In every SQL expression you define (with where(), group(), having(), etc)
+the # symbol will be replaced by the table alias. If you are defining a
+where() statement in the user class, # will be replaced by the user table
+alias. If you are defining a where() statement in the album class from the
+user class (see getAlbums above) a # would be replaced by the album table
+alias. This is useful when having two relations in the same class to the
+same class, in this case, you will have two different aliases. So I
+recommend using the # symbol.
+
+Another way of getting a count, but from the artist table is to use the
+relation foreign var as alias, because that's what it is actually. Example:
+
+// artist class ...
+
+        $rel =& $this->registerRelation( 'album' );
+        $rel->setForeignKey( 'artistid' );
+        $rel->setForeignJoin( 'LEFT' );
+
+        $this->registerSelect( 'album_count', 'COUNT( $rel->getForeignVar()
+. '.id' )' );
+        ....
+
+// in getAlbums
+
+    function getAlbums() {
+
+        $this->reset();
+
+        $this->select( 'id', 'name', 'album_count' );
+
+        $this->group( 'id' );
+
+        $this->find( 'album' ); // you must add the album relation to get
+'album_count' to work
+
+        return $this->getResults();
+
+    }
+
+But in this case you can't define the field name column (id) dynamically
+from there. Well... actually there's another way:
+
+$rel =& $this->registerRelation( 'album' );
+$rel->setForeignKey( 'artistid' );
+$rel->setForeignJoin( 'LEFT' );
+
+$album = YDDatabaseObject::getInstance( $rel->getForeignClass() );
+
+$this->registerSelect( 'album_count', 'COUNT( $rel->getForeignVar() . '.' .
+$album->getColumn( 'id' ) )' );
+
+Writing this e-mail I thought about some helpful functions to be added to
+YDDatabaseObject_Relation:
+
+getForeignInstance = YDDatabaseObject::getInstance( $rel->getForeignClass()
+);
+getCrossInstance  = YDDatabaseObject::getInstance( $rel->getCrossClass() )
+getForeignAlias = same as getForeignVar
+getCrossAlias = same as getCrossVar
+getForeignField = getField in YDDatabaseObject for the foreign object
+getCrossField = getField in YDDatabaseObject for the cross object
+getForeignColumn = getColumn in YDDatabaseObject for the foreign object
+getCrossColumn = getColumn in YDDatabaseObject for the cross object
+
+So I added them on build 1664 and 1665. Please test it out and see if it's
+working as expected.
+
+You can get good (I think) documentation about the class in the User Guide:
+
+http://ydframework.berlios.de/doc/yddatabaseobject.html
+
+If you think something is missing, please let me know.
+
+cheers,
+
+-db
+
+
+On 2/12/06, Francisco Azevedo < francisco at fusemail.com> wrote:
+>
+>
+> >> I'm not the db expert here :) but, imho, you should use an LEFT join.
+> >> An LEFT join will join your artist table with your albums table and
+> >> return all artist names (even if your album table don't have those
+> ids).
+> >
+> >
+> > No, neither am I, and that's part of the problem I'm sure :)  What
+> > I've come up with is
+> > SELECT artist.name, count(album.id) AS numalbums FROM artist LEFT JOIN
+> > album ON album.artistid=artist.id GROUP BY artist.id
+> >
+> > and that works! We've come a step closer. Now the only problem is to
+> > translate this to YDDatabaseObject as it will complain that
+> > count( album.id) is not a registered field
+>
+> And its correct.. "count(album.id)" is not a field but an expression.
+> Afaik, YDDatabaseObject has registerSelect() to add custom expressions
+> to a select.
+> Something like:
+>
+> $this->registerSelect( 'numalbums', 'count( X )');
+>
+> .. where X is the album.id.. you can try hardcode it.. or using a
+> previous defined variable:
+>
+> $var = & $this->registerField( 'xpto' );
+>
+> $this->registerSelect( 'numalbums', 'count( '. $var->getColumn() .' )');
+>
+> The problem here is that your X is a field of _other_ table and i don't
+> know if it's possible to use an variable of other table... maybe db can
+> help here.
+>
+> Francisco
+>
+> _______________________________________________
+> YDFramework-users mailing list
+> YDFramework-users at lists.berlios.de
+> http://lists.berlios.de/mailman/listinfo/ydframework-users
+>
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <https://lists.berlios.de/pipermail/ydframework-users/attachments/20060212/0aa7fbd0/attachment.html>
+
+From peter at jocosoft.com  Mon Feb 13 02:01:00 2006
+From: peter at jocosoft.com (Peter)
+Date: Sun, 12 Feb 2006 19:01:00 -0600
+Subject: [ydf-users] YDDatabaseObject issue
+In-Reply-To: <12260be20602121636g2dfead8w24d6b05dbdfec4b7@mail.gmail.com>
+References: <43EF65D0.7050701@jocosoft.com> <43EF83D3.7070801@fusemail.com>	 <43EFA1AE.9080401@jocosoft.com> <43EFC177.9030700@fusemail.com> <12260be20602121636g2dfead8w24d6b05dbdfec4b7@mail.gmail.com>
+Message-ID: <43EFDA4C.3050004@jocosoft.com>
+
+An HTML attachment was scrubbed...
+URL: <https://lists.berlios.de/pipermail/ydframework-users/attachments/20060212/d9706798/attachment.html>
+
+From muitocomplicado at gmail.com  Mon Feb 13 03:33:11 2006
+From: muitocomplicado at gmail.com (David Bittencourt)
+Date: Sun, 12 Feb 2006 23:33:11 -0300
+Subject: [ydf-users] YDDatabaseObject issue
+In-Reply-To: <43EFDA4C.3050004@jocosoft.com>
+References: <43EF65D0.7050701@jocosoft.com> <43EF83D3.7070801@fusemail.com>
+	 <43EFA1AE.9080401@jocosoft.com> <43EFC177.9030700@fusemail.com>
+	 <12260be20602121636g2dfead8w24d6b05dbdfec4b7@mail.gmail.com>
+	 <43EFDA4C.3050004@jocosoft.com>
+Message-ID: <12260be20602121833t7c738bdfi975863d7be4edc9b@mail.gmail.com>
+
+You could use
+
+$artist->album->getAlias()
+
+Tip: you don't have to add the alias to the groupby, just add the field
+name. The function checks to see if the expression passed is a field name,
+and if it is the function adds the alias automatically.
+
+$artist->groupby( 'id' );
+
+-db
+
+On 2/12/06, Peter <peter at jocosoft.com> wrote:
+>
+> What I have come up with right before I got this beauty here is this:
+>
+> $artist = YDDatabaseObject::getInstance( 'artist' );
+> $artist->load( 'album' );
+> $artist->registerSelect( 'numalbums',
+> 'count('.$artist->album->_alias.'.id)' );
+> $artist->select( 'id', 'name', 'numalbums' );
+> $artist->album->select();
+> $artist->groupby( $artist->getAlias() . '.id' );
+> $artist->find( 'album' );
+>
+> And that does the trick. The only ugly part was "$artist->album->_alias"
+> as I don't like using properties directly, but that seems to have been fixed
+> in the meantime, so I'll be looking at that next.
+>
+> Thanks again guys!
+>
+>
+> David Bittencourt wrote:
+>
+> Just define the select in the album class and use select() to add it to
+> the query. Example:
+>
+> class artist extends YDDatabaseObject {
+>
+>     function artist() {
+>
+>         $this->YDDatabaseObject();
+>
+>         $this->registerDatabase( ... );
+>         $this->registerTable( 'artist' );
+>
+>         $this->registerKey( 'id', true );
+>         $this->registerField( 'name' );
+>
+>         $rel =& $this->registerRelation( 'album' );
+>         $rel->setForeignKey( 'artistid' );
+>         $rel->setForeignJoin( 'LEFT' );
+>
+>     }
+>
+>     function getAlbums() {
+>
+>         $this->reset();
+>
+>         $this->load( 'album' );
+>
+>         $this->select( 'id', 'name' );
+>         $this->album->select( 'count' );
+>
+>         $this->group( 'id' );
+>
+>         $this->find( 'album' );
+>
+>         return $this->getResults();
+>
+>     }
+>
+> }
+>
+>
+> class album extends YDDatabaseObject {
+>
+>     function album() {
+>
+>         $this->YDDatabaseObject();
+>
+>         $this->registerDatabase( ... );
+>         $this->registerTable( 'album' );
+>
+>         $id =& $this->registerKey( 'id', true );
+>         $this->registerField( 'artistid' );
+>         $this->registerField( 'name' );
+>
+>         $this->registerSelect( 'count', 'count( #.id )', false );
+>         // or
+>         $this->registerSelect( 'count', 'count( #.' . $id->getColumn() . '
+> )', false );
+>         // or
+>         $this->registerSelect( 'count', 'count( ' . $this->getAlias() .
+> '.' . $id->getColumn() . ' )', false );
+>         // or
+>         $this->registerSelect( 'count', 'count( ' . $this->getColumn(
+> 'id', true ) . ' )', false );
+>
+>     }
+>
+> }
+>
+> In every SQL expression you define (with where(), group(), having(), etc)
+> the # symbol will be replaced by the table alias. If you are defining a
+> where() statement in the user class, # will be replaced by the user table
+> alias. If you are defining a where() statement in the album class from the
+> user class (see getAlbums above) a # would be replaced by the album table
+> alias. This is useful when having two relations in the same class to the
+> same class, in this case, you will have two different aliases. So I
+> recommend using the # symbol.
+>
+> Another way of getting a count, but from the artist table is to use the
+> relation foreign var as alias, because that's what it is actually. Example:
+>
+> // artist class ...
+>
+>         $rel =& $this->registerRelation( 'album' );
+>         $rel->setForeignKey( 'artistid' );
+>         $rel->setForeignJoin( 'LEFT' );
+>
+>         $this->registerSelect( 'album_count', 'COUNT(
+> $rel->getForeignVar() . '.id' )' );
+>         ....
+>
+> // in getAlbums
+>
+>     function getAlbums() {
+>
+>         $this->reset();
+>
+>         $this->select( 'id', 'name', 'album_count' );
+>
+>         $this->group( 'id' );
+>
+>         $this->find( 'album' ); // you must add the album relation to get
+> 'album_count' to work
+>
+>         return $this->getResults();
+>
+>     }
+>
+> But in this case you can't define the field name column (id) dynamically
+> from there. Well... actually there's another way:
+>
+> $rel =& $this->registerRelation( 'album' );
+> $rel->setForeignKey( 'artistid' );
+> $rel->setForeignJoin( 'LEFT' );
+>
+> $album = YDDatabaseObject::getInstance( $rel->getForeignClass() );
+>
+> $this->registerSelect( 'album_count', 'COUNT( $rel->getForeignVar() . '.'
+> . $album->getColumn( 'id' ) )' );
+>
+> Writing this e-mail I thought about some helpful functions to be added to
+> YDDatabaseObject_Relation:
+>
+> getForeignInstance = YDDatabaseObject::getInstance(
+> $rel->getForeignClass() );
+> getCrossInstance  = YDDatabaseObject::getInstance( $rel->getCrossClass() )
+> getForeignAlias = same as getForeignVar
+> getCrossAlias = same as getCrossVar
+> getForeignField = getField in YDDatabaseObject for the foreign object
+> getCrossField = getField in YDDatabaseObject for the cross object
+> getForeignColumn = getColumn in YDDatabaseObject for the foreign object
+> getCrossColumn = getColumn in YDDatabaseObject for the cross object
+>
+> So I added them on build 1664 and 1665. Please test it out and see if it's
+> working as expected.
+>
+> You can get good (I think) documentation about the class in the User
+> Guide:
+>
+> http://ydframework.berlios.de/doc/yddatabaseobject.html
+>
+> If you think something is missing, please let me know.
+>
+> cheers,
+>
+> -db
+>
+>
+> On 2/12/06, Francisco Azevedo < francisco at fusemail.com> wrote:
+> >
+> >
+> > >> I'm not the db expert here :) but, imho, you should use an LEFT join.
+> >
+> > >> An LEFT join will join your artist table with your albums table and
+> > >> return all artist names (even if your album table don't have those
+> > ids).
+> > >
+> > >
+> > > No, neither am I, and that's part of the problem I'm sure :)  What
+> > > I've come up with is
+> > > SELECT artist.name, count( album.id) AS numalbums FROM artist LEFT
+> > JOIN
+> > > album ON album.artistid=artist.id GROUP BY artist.id
+> > >
+> > > and that works! We've come a step closer. Now the only problem is to
+> > > translate this to YDDatabaseObject as it will complain that
+> > > count( album.id) is not a registered field
+> >
+> > And its correct.. "count(album.id)" is not a field but an expression.
+> > Afaik, YDDatabaseObject has registerSelect() to add custom expressions
+> > to a select.
+> > Something like:
+> >
+> > $this->registerSelect( 'numalbums', 'count( X )');
+> >
+> > .. where X is the album.id .. you can try hardcode it.. or using a
+> > previous defined variable:
+> >
+> > $var = & $this->registerField( 'xpto' );
+> >
+> > $this->registerSelect( 'numalbums', 'count( '. $var->getColumn() .' )');
+> >
+> > The problem here is that your X is a field of _other_ table and i don't
+> > know if it's possible to use an variable of other table... maybe db can
+> > help here.
+> >
+> > Francisco
+> >
+> > _______________________________________________
+> > YDFramework-users mailing list
+> > YDFramework-users at lists.berlios.de
+> > http://lists.berlios.de/mailman/listinfo/ydframework-users
+> >
+>
+>  _______________________________________________ YDFramework-users mailing
+> list YDFramework-users at lists.berlios.de
+> http://lists.berlios.de/mailman/listinfo/ydframework-users
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <https://lists.berlios.de/pipermail/ydframework-users/attachments/20060212/6175e7af/attachment.html>
+
+From peter at jocosoft.com  Mon Feb 13 16:02:14 2006
+From: peter at jocosoft.com (Peter)
+Date: Mon, 13 Feb 2006 09:02:14 -0600 (CST)
+Subject: [ydf-users] YDDatabaseObject issue
+In-Reply-To: <12260be20602121833t7c738bdfi975863d7be4edc9b@mail.gmail.com>
+References: <43EF65D0.7050701@jocosoft.com> <43EF83D3.7070801@fusemail.com> 
+    <43EFA1AE.9080401@jocosoft.com> <43EFC177.9030700@fusemail.com> 
+    <12260be20602121636g2dfead8w24d6b05dbdfec4b7@mail.gmail.com> 
+    <43EFDA4C.3050004@jocosoft.com>
+    <12260be20602121833t7c738bdfi975863d7be4edc9b@mail.gmail.com>
+Message-ID: <54439.71.39.100.121.1139842934.squirrel@www.jocosoft.com>
+
+> You could use
+>
+> $artist->album->getAlias()
+
+I noted you added that yesterday. Exactly what I needed!
+
+>
+> Tip: you don't have to add the alias to the groupby, just add the field
+> name. The function checks to see if the expression passed is a field name,
+> and if it is the function adds the alias automatically.
+>
+> $artist->groupby( 'id' );
+
+Oh, smart! I really like the YDDatabaseObject approach, but having a hard
+time changing my thinking process. I'm so used to thinking in sql :)
+
+Thanks David!
+
+
+
+From muitocomplicado at gmail.com  Mon Feb 13 21:13:08 2006
+From: muitocomplicado at gmail.com (David Bittencourt)
+Date: Mon, 13 Feb 2006 17:13:08 -0300
+Subject: [ydf-users] YDDatabaseObject issue
+In-Reply-To: <54439.71.39.100.121.1139842934.squirrel@www.jocosoft.com>
+References: <43EF65D0.7050701@jocosoft.com> <43EF83D3.7070801@fusemail.com>
+	 <43EFA1AE.9080401@jocosoft.com> <43EFC177.9030700@fusemail.com>
+	 <12260be20602121636g2dfead8w24d6b05dbdfec4b7@mail.gmail.com>
+	 <43EFDA4C.3050004@jocosoft.com>
+	 <12260be20602121833t7c738bdfi975863d7be4edc9b@mail.gmail.com>
+	 <54439.71.39.100.121.1139842934.squirrel@www.jocosoft.com>
+Message-ID: <12260be20602131213t492c5b27h79bda3cd8323eed3@mail.gmail.com>
+
+Actually the getAlias function exists for a while. I added some additional
+functions to the relations class yesterday, like:
+
+getForeignAlias
+getCrossAlias
+
+-db
+
+On 2/13/06, Peter <peter at jocosoft.com> wrote:
+>
+> > You could use
+> >
+> > $artist->album->getAlias()
+>
+> I noted you added that yesterday. Exactly what I needed!
+>
+> >
+> > Tip: you don't have to add the alias to the groupby, just add the field
+> > name. The function checks to see if the expression passed is a field
+> name,
+> > and if it is the function adds the alias automatically.
+> >
+> > $artist->groupby( 'id' );
+>
+> Oh, smart! I really like the YDDatabaseObject approach, but having a hard
+> time changing my thinking process. I'm so used to thinking in sql :)
+>
+> Thanks David!
+>
+> _______________________________________________
+> YDFramework-users mailing list
+> YDFramework-users at lists.berlios.de
+> http://lists.berlios.de/mailman/listinfo/ydframework-users
+>
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <https://lists.berlios.de/pipermail/ydframework-users/attachments/20060213/ab3e99b0/attachment.html>
+
+From dab214 at yahoo.com  Tue Feb 21 01:21:22 2006
+From: dab214 at yahoo.com (dab)
+Date: Mon, 20 Feb 2006 16:21:22 -0800 (PST)
+Subject: [ydf-users] YDDatabaseObject - changing aliases on columns (AS)
+In-Reply-To: <12260be20602131213t492c5b27h79bda3cd8323eed3@mail.gmail.com>
+Message-ID: <20060221002122.75747.qmail@web50215.mail.yahoo.com>
+
+Hi,
+I noticed that the alias in the select statement
+(SELECT username AS user_name) is being set in
+YDDatabaseQuery::getSelect() but i can't seem to
+figure out how i would change this from my code using
+YDDatabaseObject.
+Is there another way than doing it by a
+registerSelect?
+
+thanks.
+
+/dan
+
+
+__________________________________________________
+Do You Yahoo!?
+Tired of spam?  Yahoo! Mail has the best spam protection around 
+http://mail.yahoo.com 
+
+
+From muitocomplicado at gmail.com  Tue Feb 21 12:57:32 2006
+From: muitocomplicado at gmail.com (David Bittencourt)
+Date: Tue, 21 Feb 2006 08:57:32 -0300
+Subject: [ydf-users] YDDatabaseObject - changing aliases on columns (AS)
+In-Reply-To: <20060221002122.75747.qmail@web50215.mail.yahoo.com>
+References: <12260be20602131213t492c5b27h79bda3cd8323eed3@mail.gmail.com>
+	 <20060221002122.75747.qmail@web50215.mail.yahoo.com>
+Message-ID: <12260be20602210357j5636108ftec11b44f874492a7@mail.gmail.com>
+
+When registering a field, the name of the field is the alias. You can define
+the real column with setColumn:
+
+$field =& $this->registerField( 'user_name' );
+$field->setColumn( 'username' ); // the real table column
+
+-db
+
+On 2/20/06, dab <dab214 at yahoo.com> wrote:
+>
+> Hi,
+> I noticed that the alias in the select statement
+> (SELECT username AS user_name) is being set in
+> YDDatabaseQuery::getSelect() but i can't seem to
+> figure out how i would change this from my code using
+> YDDatabaseObject.
+> Is there another way than doing it by a
+> registerSelect?
+>
+> thanks.
+>
+> /dan
+>
+>
+> __________________________________________________
+> Do You Yahoo!?
+> Tired of spam?  Yahoo! Mail has the best spam protection around
+> http://mail.yahoo.com
+> _______________________________________________
+> YDFramework-users mailing list
+> YDFramework-users at lists.berlios.de
+> http://lists.berlios.de/mailman/listinfo/ydframework-users
+>
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <https://lists.berlios.de/pipermail/ydframework-users/attachments/20060221/dfad41da/attachment.html>
+
+From dab214 at yahoo.com  Tue Feb 21 13:12:16 2006
+From: dab214 at yahoo.com (dab)
+Date: Tue, 21 Feb 2006 04:12:16 -0800 (PST)
+Subject: [ydf-users] YDDatabaseObject - changing aliases on columns (AS)
+In-Reply-To: <12260be20602210357j5636108ftec11b44f874492a7@mail.gmail.com>
+Message-ID: <20060221121216.7388.qmail@web50214.mail.yahoo.com>
+
+hi db,
+thanks for your reply. below code would apply for all
+selects made on that table no? what if i just wanted
+to change the column name on one specific select?
+thanks.
+
+/dan
+
+--- David Bittencourt <muitocomplicado at gmail.com>
+wrote:
+
+> When registering a field, the name of the field is
+> the alias. You can define
+> the real column with setColumn:
+> 
+> $field =& $this->registerField( 'user_name' );
+> $field->setColumn( 'username' ); // the real table
+> column
+> 
+> -db
+> 
+> On 2/20/06, dab <dab214 at yahoo.com> wrote:
+> >
+> > Hi,
+> > I noticed that the alias in the select statement
+> > (SELECT username AS user_name) is being set in
+> > YDDatabaseQuery::getSelect() but i can't seem to
+> > figure out how i would change this from my code
+> using
+> > YDDatabaseObject.
+> > Is there another way than doing it by a
+> > registerSelect?
+> >
+> > thanks.
+> >
+> > /dan
+> >
+> >
+> > __________________________________________________
+> > Do You Yahoo!?
+> > Tired of spam?  Yahoo! Mail has the best spam
+> protection around
+> > http://mail.yahoo.com
+> > _______________________________________________
+> > YDFramework-users mailing list
+> > YDFramework-users at lists.berlios.de
+> >
+>
+http://lists.berlios.de/mailman/listinfo/ydframework-users
+> >
+> 
+
+
+__________________________________________________
+Do You Yahoo!?
+Tired of spam?  Yahoo! Mail has the best spam protection around 
+http://mail.yahoo.com 
+
+
+From dab214 at yahoo.com  Tue Feb 21 15:13:32 2006
+From: dab214 at yahoo.com (dab)
+Date: Tue, 21 Feb 2006 06:13:32 -0800 (PST)
+Subject: [ydf-users] YDDatabaseObject - howto not add quotes around the value
+In-Reply-To: <20060221121216.7388.qmail@web50214.mail.yahoo.com>
+Message-ID: <20060221141332.32169.qmail@web50210.mail.yahoo.com>
+
+hi all,
+when using insert on YDDatabaseObject on for example
+date columns with mysql function like NOW(). How do i
+stop YDDatabaseObject from adding quotes ('')?
+
+i want to do something simular:
+$problem->user_id = $user_results['id'];
+$problem->date_created = "NOW()";
+$problem->insert();
+
+
+__________________________________________________
+Do You Yahoo!?
+Tired of spam?  Yahoo! Mail has the best spam protection around 
+http://mail.yahoo.com 
+
+
+From muitocomplicado at gmail.com  Tue Feb 21 18:00:08 2006
+From: muitocomplicado at gmail.com (David Bittencourt)
+Date: Tue, 21 Feb 2006 14:00:08 -0300
+Subject: [ydf-users] YDDatabaseObject - changing aliases on columns (AS)
+In-Reply-To: <20060221121216.7388.qmail@web50214.mail.yahoo.com>
+References: <12260be20602210357j5636108ftec11b44f874492a7@mail.gmail.com>
+	 <20060221121216.7388.qmail@web50214.mail.yahoo.com>
+Message-ID: <12260be20602210900n5ec8173n5a90c0ab5729908e@mail.gmail.com>
+
+"below code would apply for all selects made on that table no?"
+
+Yes, that's true.
+
+"what if i just wanted to change the column name on one specific select?"
+
+You wanna change the column or the alias? We call "column" the exact name
+that is defined in the database table. The alias, in the case of fields, is
+the "field" name itself, the first argument in registerField and the name
+you will use to change that column.
+
+To change the "column":
+
+$field =& $this->getField( 'user_name' );
+$field->setColumn( 'my_user_name' );
+
+You can't change the alias. The alias is the name of the field registered in
+the class. But you can register a select that returns the same field.
+
+$field =& $this->registerField( 'user_name' );
+$field->setColumn( 'username' );
+
+$this->registerSelect( 'my_user_name', $this->getColumn( 'user_name', true )
+);
+
+So when executing a find you will get the following array
+
+array(
+  'user_name' => 'dab',
+  'my_user_name' => 'dab',
+)
+
+With registerSelect you can also add full expressions using mysql functions
+too.
+
+$this->registerSelect( 'fullname', "CONCAT( " . $this->getColumn(
+'firstname', true ) . ", ' ', " . $this->getColumn( 'lastname', true ) . ")"
+);
+
+array(
+  'firstname' => 'David',
+  'lastname' => 'Bittencourt',
+  'fullname' => 'David Bittencourt'
+)
+
+-db
+
+On 2/21/06, dab <dab214 at yahoo.com> wrote:
+>
+> hi db,
+> thanks for your reply. below code would apply for all
+> selects made on that table no? what if i just wanted
+> to change the column name on one specific select?
+> thanks.
+>
+> /dan
+>
+> --- David Bittencourt <muitocomplicado at gmail.com>
+> wrote:
+>
+> > When registering a field, the name of the field is
+> > the alias. You can define
+> > the real column with setColumn:
+> >
+> > $field =& $this->registerField( 'user_name' );
+> > $field->setColumn( 'username' ); // the real table
+> > column
+> >
+> > -db
+> >
+> > On 2/20/06, dab <dab214 at yahoo.com> wrote:
+> > >
+> > > Hi,
+> > > I noticed that the alias in the select statement
+> > > (SELECT username AS user_name) is being set in
+> > > YDDatabaseQuery::getSelect() but i can't seem to
+> > > figure out how i would change this from my code
+> > using
+> > > YDDatabaseObject.
+> > > Is there another way than doing it by a
+> > > registerSelect?
+> > >
+> > > thanks.
+> > >
+> > > /dan
+> > >
+> > >
+> > > __________________________________________________
+> > > Do You Yahoo!?
+> > > Tired of spam?  Yahoo! Mail has the best spam
+> > protection around
+> > > http://mail.yahoo.com
+> > > _______________________________________________
+> > > YDFramework-users mailing list
+> > > YDFramework-users at lists.berlios.de
+> > >
+> >
+> http://lists.berlios.de/mailman/listinfo/ydframework-users
+> > >
+> >
+>
+>
+> __________________________________________________
+> Do You Yahoo!?
+> Tired of spam?  Yahoo! Mail has the best spam protection around
+> http://mail.yahoo.com
+> _______________________________________________
+> YDFramework-users mailing list
+> YDFramework-users at lists.berlios.de
+> http://lists.berlios.de/mailman/listinfo/ydframework-users
+>
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <https://lists.berlios.de/pipermail/ydframework-users/attachments/20060221/a1e849bb/attachment.html>
+
+From muitocomplicado at gmail.com  Tue Feb 21 18:13:01 2006
+From: muitocomplicado at gmail.com (David Bittencourt)
+Date: Tue, 21 Feb 2006 14:13:01 -0300
+Subject: [ydf-users] YDDatabaseObject - howto not add quotes around the value
+In-Reply-To: <20060221141332.32169.qmail@web50210.mail.yahoo.com>
+References: <20060221121216.7388.qmail@web50214.mail.yahoo.com>
+	 <20060221141332.32169.qmail@web50210.mail.yahoo.com>
+Message-ID: <12260be20602210913s7a1da491m18ba95b3346e268@mail.gmail.com>
+
+Hmmm... that can't be done because the date_created value is interpreted as
+a string with value "NOW()".
+
+But I'm thinking of something to do so we will be able to add expressions to
+INSERTs and UPDATEs values.
+
+My idea is to add an array as parameter to the function so they will
+overwritte the current values in the object and will not add quotes.
+
+$problem->user_id = $user_results['id'];
+$problem->insert( array( 'date_created' => 'NOW()' ) );
+
+INSERT INTO table ( 'user_id', 'date_created' ) VALUES ( 23, NOW() )
+
+What do you think?
+
+-db
+
+On 2/21/06, dab <dab214 at yahoo.com> wrote:
+>
+> hi all,
+> when using insert on YDDatabaseObject on for example
+> date columns with mysql function like NOW(). How do i
+> stop YDDatabaseObject from adding quotes ('')?
+>
+> i want to do something simular:
+> $problem->user_id = $user_results['id'];
+> $problem->date_created = "NOW()";
+> $problem->insert();
+>
+>
+> __________________________________________________
+> Do You Yahoo!?
+> Tired of spam?  Yahoo! Mail has the best spam protection around
+> http://mail.yahoo.com
+> _______________________________________________
+> YDFramework-users mailing list
+> YDFramework-users at lists.berlios.de
+> http://lists.berlios.de/mailman/listinfo/ydframework-users
+>
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <https://lists.berlios.de/pipermail/ydframework-users/attachments/20060221/37e8fdc8/attachment.html>
+
+From dab214 at yahoo.com  Tue Feb 21 20:56:25 2006
+From: dab214 at yahoo.com (dab)
+Date: Tue, 21 Feb 2006 11:56:25 -0800 (PST)
+Subject: [ydf-users] YDDatabaseObject - howto not add quotes around the value
+In-Reply-To: <12260be20602210913s7a1da491m18ba95b3346e268@mail.gmail.com>
+Message-ID: <20060221195625.18862.qmail@web50205.mail.yahoo.com>
+
+hi db,
+yep that sounds good. thanks for implementing this.
+
+/dan
+
+--- David Bittencourt <muitocomplicado at gmail.com>
+wrote:
+
+> Hmmm... that can't be done because the date_created
+> value is interpreted as
+> a string with value "NOW()".
+> 
+> But I'm thinking of something to do so we will be
+> able to add expressions to
+> INSERTs and UPDATEs values.
+> 
+> My idea is to add an array as parameter to the
+> function so they will
+> overwritte the current values in the object and will
+> not add quotes.
+> 
+> $problem->user_id = $user_results['id'];
+> $problem->insert( array( 'date_created' => 'NOW()' )
+> );
+> 
+> INSERT INTO table ( 'user_id', 'date_created' )
+> VALUES ( 23, NOW() )
+> 
+> What do you think?
+> 
+> -db
+> 
+> On 2/21/06, dab <dab214 at yahoo.com> wrote:
+> >
+> > hi all,
+> > when using insert on YDDatabaseObject on for
+> example
+> > date columns with mysql function like NOW(). How
+> do i
+> > stop YDDatabaseObject from adding quotes ('')?
+> >
+> > i want to do something simular:
+> > $problem->user_id = $user_results['id'];
+> > $problem->date_created = "NOW()";
+> > $problem->insert();
+> >
+> >
+> > __________________________________________________
+> > Do You Yahoo!?
+> > Tired of spam?  Yahoo! Mail has the best spam
+> protection around
+> > http://mail.yahoo.com
+> > _______________________________________________
+> > YDFramework-users mailing list
+> > YDFramework-users at lists.berlios.de
+> >
+>
+http://lists.berlios.de/mailman/listinfo/ydframework-users
+> >
+> 
+
+
+__________________________________________________
+Do You Yahoo!?
+Tired of spam?  Yahoo! Mail has the best spam protection around 
+http://mail.yahoo.com 
+
+
+From dab214 at yahoo.com  Tue Feb 21 21:38:20 2006
+From: dab214 at yahoo.com (dab)
+Date: Tue, 21 Feb 2006 12:38:20 -0800 (PST)
+Subject: [ydf-users] YDDatabaseObject - changing aliases on columns (AS)
+In-Reply-To: <12260be20602210900n5ec8173n5a90c0ab5729908e@mail.gmail.com>
+Message-ID: <20060221203820.40547.qmail@web50203.mail.yahoo.com>
+
+hi db,
+yes registerSelect was what i was looking for. i was
+hoping for a simple fix but i'll just change my naming
+convention on columns instead.
+thanks for clarifying.
+
+/dan
+
+--- David Bittencourt <muitocomplicado at gmail.com>
+wrote:
+
+> "below code would apply for all selects made on that
+> table no?"
+> 
+> Yes, that's true.
+> 
+> "what if i just wanted to change the column name on
+> one specific select?"
+> 
+> You wanna change the column or the alias? We call
+> "column" the exact name
+> that is defined in the database table. The alias, in
+> the case of fields, is
+> the "field" name itself, the first argument in
+> registerField and the name
+> you will use to change that column.
+> 
+> To change the "column":
+> 
+> $field =& $this->getField( 'user_name' );
+> $field->setColumn( 'my_user_name' );
+> 
+> You can't change the alias. The alias is the name of
+> the field registered in
+> the class. But you can register a select that
+> returns the same field.
+> 
+> $field =& $this->registerField( 'user_name' );
+> $field->setColumn( 'username' );
+> 
+> $this->registerSelect( 'my_user_name',
+> $this->getColumn( 'user_name', true )
+> );
+> 
+> So when executing a find you will get the following
+> array
+> 
+> array(
+>   'user_name' => 'dab',
+>   'my_user_name' => 'dab',
+> )
+> 
+> With registerSelect you can also add full
+> expressions using mysql functions
+> too.
+> 
+> $this->registerSelect( 'fullname', "CONCAT( " .
+> $this->getColumn(
+> 'firstname', true ) . ", ' ', " . $this->getColumn(
+> 'lastname', true ) . ")"
+> );
+> 
+> array(
+>   'firstname' => 'David',
+>   'lastname' => 'Bittencourt',
+>   'fullname' => 'David Bittencourt'
+> )
+> 
+> -db
+> 
+> On 2/21/06, dab <dab214 at yahoo.com> wrote:
+> >
+> > hi db,
+> > thanks for your reply. below code would apply for
+> all
+> > selects made on that table no? what if i just
+> wanted
+> > to change the column name on one specific select?
+> > thanks.
+> >
+> > /dan
+> >
+> > --- David Bittencourt <muitocomplicado at gmail.com>
+> > wrote:
+> >
+> > > When registering a field, the name of the field
+> is
+> > > the alias. You can define
+> > > the real column with setColumn:
+> > >
+> > > $field =& $this->registerField( 'user_name' );
+> > > $field->setColumn( 'username' ); // the real
+> table
+> > > column
+> > >
+> > > -db
+> > >
+> > > On 2/20/06, dab <dab214 at yahoo.com> wrote:
+> > > >
+> > > > Hi,
+> > > > I noticed that the alias in the select
+> statement
+> > > > (SELECT username AS user_name) is being set in
+> > > > YDDatabaseQuery::getSelect() but i can't seem
+> to
+> > > > figure out how i would change this from my
+> code
+> > > using
+> > > > YDDatabaseObject.
+> > > > Is there another way than doing it by a
+> > > > registerSelect?
+> > > >
+> > > > thanks.
+> > > >
+> > > > /dan
+> > > >
+> > > >
+> > > >
+> __________________________________________________
+> > > > Do You Yahoo!?
+> > > > Tired of spam?  Yahoo! Mail has the best spam
+> > > protection around
+> > > > http://mail.yahoo.com
+> > > >
+> _______________________________________________
+> > > > YDFramework-users mailing list
+> > > > YDFramework-users at lists.berlios.de
+> > > >
+> > >
+> >
+>
+http://lists.berlios.de/mailman/listinfo/ydframework-users
+> > > >
+> > >
+> >
+> >
+> > __________________________________________________
+> > Do You Yahoo!?
+> > Tired of spam?  Yahoo! Mail has the best spam
+> protection around
+> > http://mail.yahoo.com
+> > _______________________________________________
+> > YDFramework-users mailing list
+> > YDFramework-users at lists.berlios.de
+> >
+>
+http://lists.berlios.de/mailman/listinfo/ydframework-users
+> >
+> 
+
+
+__________________________________________________
+Do You Yahoo!?
+Tired of spam?  Yahoo! Mail has the best spam protection around 
+http://mail.yahoo.com 
+
+
+From ydf at jocosoft.com  Wed Feb 22 00:08:22 2006
+From: ydf at jocosoft.com (Peter)
+Date: Tue, 21 Feb 2006 17:08:22 -0600
+Subject: [ydf-users] SQL Question
+Message-ID: <43FB9D66.4080107@jocosoft.com>
+
+This has nothing to do with YDF as such, but since I'm using YDF for 
+this project, and I know there are some bright minds reading these 
+lists, I'll give it a shot...
+
+I am building this inventory system for the company I work for, and I'm 
+running into a wall. Hopefully one of you SQL gurus can help me out. 
+This thing is (unfortunately) running on MS-SQL, so I can't use any of 
+the YDF classes, but I do have views, stored procedures, triggers and 
+what not. (if that would be needed)
+
+I have this table with the folowing fields:
+item, pallet, location, user, movedate
+
+It will hold the location of each item and/or pallet (an item can be 
+moved by itself, or as part of a pallet), who put it there, and when.
+
+The tricky part is that there are no key fields. They are indexed for 
+speed, but nothing is unique. The reason is that stuff moves around a 
+lot, so an item can be moved several times a day, on and off a pallet, 
+etc, etc... So this table holds the history of every move, ever 
+performed on every item and pallet in the building. (Needless to say, 
+it's gonna be a big one)
+
+What I want is a subset of this table, with only the last entry for each 
+item and pallet (not the history). Thus showing me every item and 
+pallet, with it's *current* location, who put it there, and when.
+
+Easier said than done, as I've been struggling with this all day, but 
+can't get my head around it. I have to say, I'm not the best with SQL, 
+just know the basics.
+
+If anyone can give me an idea of how to build a query for this, I owe 
+you my first born (well, almost)
+
+Any help would be appriciated!
+
+
+
+From maximus_meridius79 at yahoo.com  Wed Feb 22 09:16:37 2006
+From: maximus_meridius79 at yahoo.com (maximus meridius)
+Date: Wed, 22 Feb 2006 00:16:37 -0800 (PST)
+Subject: [ydf-users] SQL Question
+Message-ID: <20060222081637.49892.qmail@web53808.mail.yahoo.com>
+
+Hi Peter,
+
+You should be able to setup a view to achieve this ...
+I found this link 
+on the Microsoft website:
+
+http://msdn2.microsoft.com/en-us/library/ms187956.aspx
+
+I didn't spend a great deal of time investigating this
+but it is 
+probably what you want. First determine a select
+statement that gives 
+you the data you want.
+
+You should also be able to create your own
+YDDatabase_Driver class for 
+MS-SQL databases. The existing driver classes for
+MySQL etc will give 
+you guidance on achieving this.
+
+Regards,
+
+Graeme
+
+
+
+Peter wrote:
+> This has nothing to do with YDF as such, but since
+I'm using YDF for 
+> this project, and I know there are some bright minds
+reading these 
+> lists, I'll give it a shot...
+>
+> I am building this inventory system for the company
+I work for, and 
+> I'm running into a wall. Hopefully one of you SQL
+gurus can help me 
+> out. This thing is (unfortunately) running on
+MS-SQL, so I can't use 
+> any of the YDF classes, but I do have views, stored
+procedures, 
+> triggers and what not. (if that would be needed)
+>
+> I have this table with the folowing fields:
+> item, pallet, location, user, movedate
+>
+> It will hold the location of each item and/or pallet
+(an item can be 
+> moved by itself, or as part of a pallet), who put it
+there, and when.
+>
+> The tricky part is that there are no key fields.
+They are indexed for 
+> speed, but nothing is unique. The reason is that
+stuff moves around a 
+> lot, so an item can be moved several times a day, on
+and off a pallet, 
+> etc, etc... So this table holds the history of every
+move, ever 
+> performed on every item and pallet in the building.
+(Needless to say, 
+> it's gonna be a big one)
+>
+> What I want is a subset of this table, with only the
+last entry for 
+> each item and pallet (not the history). Thus showing
+me every item and 
+> pallet, with it's *current* location, who put it
+there, and when.
+>
+> Easier said than done, as I've been struggling with
+this all day, but 
+> can't get my head around it. I have to say, I'm not
+the best with SQL, 
+> just know the basics.
+>
+> If anyone can give me an idea of how to build a
+query for this, I owe 
+> you my first born (well, almost)
+>
+> Any help would be appriciated!
+>
+> _______________________________________________
+> YDFramework-users mailing list
+> YDFramework-users at lists.berlios.de
+>
+http://lists.berlios.de/mailman/listinfo/ydframework-users
+>
+>
+>
+
+
+__________________________________________________
+Do You Yahoo!?
+Tired of spam?  Yahoo! Mail has the best spam protection around 
+http://mail.yahoo.com 
+
+
+From maximus_meridius79 at yahoo.com  Wed Feb 22 09:17:02 2006
+From: maximus_meridius79 at yahoo.com (maximus meridius)
+Date: Wed, 22 Feb 2006 00:17:02 -0800 (PST)
+Subject: [ydf-users] SQL Question
+Message-ID: <20060222081702.58481.qmail@web53801.mail.yahoo.com>
+
+Hi Peter,
+
+You should be able to setup a view to achieve this ...
+I found this link 
+on the Microsoft website:
+
+http://msdn2.microsoft.com/en-us/library/ms187956.aspx
+
+I didn't spend a great deal of time investigating this
+but it is 
+probably what you want. First determine a select
+statement that gives 
+you the data you want.
+
+You should also be able to create your own
+YDDatabase_Driver class for 
+MS-SQL databases. The existing driver classes for
+MySQL etc will give 
+you guidance on achieving this.
+
+Regards,
+
+Graeme
+
+
+
+Peter wrote:
+> This has nothing to do with YDF as such, but since
+I'm using YDF for 
+> this project, and I know there are some bright minds
+reading these 
+> lists, I'll give it a shot...
+>
+> I am building this inventory system for the company
+I work for, and 
+> I'm running into a wall. Hopefully one of you SQL
+gurus can help me 
+> out. This thing is (unfortunately) running on
+MS-SQL, so I can't use 
+> any of the YDF classes, but I do have views, stored
+procedures, 
+> triggers and what not. (if that would be needed)
+>
+> I have this table with the folowing fields:
+> item, pallet, location, user, movedate
+>
+> It will hold the location of each item and/or pallet
+(an item can be 
+> moved by itself, or as part of a pallet), who put it
+there, and when.
+>
+> The tricky part is that there are no key fields.
+They are indexed for 
+> speed, but nothing is unique. The reason is that
+stuff moves around a 
+> lot, so an item can be moved several times a day, on
+and off a pallet, 
+> etc, etc... So this table holds the history of every
+move, ever 
+> performed on every item and pallet in the building.
+(Needless to say, 
+> it's gonna be a big one)
+>
+> What I want is a subset of this table, with only the
+last entry for 
+> each item and pallet (not the history). Thus showing
+me every item and 
+> pallet, with it's *current* location, who put it
+there, and when.
+>
+> Easier said than done, as I've been struggling with
+this all day, but 
+> can't get my head around it. I have to say, I'm not
+the best with SQL, 
+> just know the basics.
+>
+> If anyone can give me an idea of how to build a
+query for this, I owe 
+> you my first born (well, almost)
+>
+> Any help would be appriciated!
+>
+> _______________________________________________
+> YDFramework-users mailing list
+> YDFramework-users at lists.berlios.de
+>
+http://lists.berlios.de/mailman/listinfo/ydframework-users
+>
+>
+>
+
+
+__________________________________________________
+Do You Yahoo!?
+Tired of spam?  Yahoo! Mail has the best spam protection around 
+http://mail.yahoo.com 
+
+
+From ydfpoi at gmail.com  Wed Feb 22 12:05:09 2006
+From: ydfpoi at gmail.com (ydf poi)
+Date: Wed, 22 Feb 2006 12:05:09 +0100
+Subject: [ydf-users] SQL Question
+In-Reply-To: <43FB9D66.4080107@jocosoft.com>
+References: <43FB9D66.4080107@jocosoft.com>
+Message-ID: <306340e00602220305w412b7525x@mail.gmail.com>
+
+Hi Peter,
+
+I am far from a SQL guru and i don't know MS-SQL (only MySQL a little)
+so read the following with most care.
+However i guess that MS-SQL syntax is not different from MySQL for our concern.
+
+If i understand your question well, i would state the following MySQL command:
+
+SELECT item, pallet, location, user, MAX(movedate) AS movedate
+FROM `yourtable`
+GROUP BY item
+
+Hope this will help...
+
+Kind regards
+
+2006/2/22, Peter <ydf at jocosoft.com>:
+> This has nothing to do with YDF as such, but since I'm using YDF for
+> this project, and I know there are some bright minds reading these
+> lists, I'll give it a shot...
+>
+> I am building this inventory system for the company I work for, and I'm
+> running into a wall. Hopefully one of you SQL gurus can help me out.
+> This thing is (unfortunately) running on MS-SQL, so I can't use any of
+> the YDF classes, but I do have views, stored procedures, triggers and
+> what not. (if that would be needed)
+>
+> I have this table with the folowing fields:
+> item, pallet, location, user, movedate
+>
+> It will hold the location of each item and/or pallet (an item can be
+> moved by itself, or as part of a pallet), who put it there, and when.
+>
+> The tricky part is that there are no key fields. They are indexed for
+> speed, but nothing is unique. The reason is that stuff moves around a
+> lot, so an item can be moved several times a day, on and off a pallet,
+> etc, etc... So this table holds the history of every move, ever
+> performed on every item and pallet in the building. (Needless to say,
+> it's gonna be a big one)
+>
+> What I want is a subset of this table, with only the last entry for each
+> item and pallet (not the history). Thus showing me every item and
+> pallet, with it's *current* location, who put it there, and when.
+>
+> Easier said than done, as I've been struggling with this all day, but
+> can't get my head around it. I have to say, I'm not the best with SQL,
+> just know the basics.
+>
+> If anyone can give me an idea of how to build a query for this, I owe
+> you my first born (well, almost)
+>
+> Any help would be appriciated!
+>
+> _______________________________________________
+> YDFramework-users mailing list
+> YDFramework-users at lists.berlios.de
+> http://lists.berlios.de/mailman/listinfo/ydframework-users
+>
+
+
+--
+po?
+
+
+From peter at jocosoft.com  Wed Feb 22 15:02:44 2006
+From: peter at jocosoft.com (Peter)
+Date: Wed, 22 Feb 2006 08:02:44 -0600 (CST)
+Subject: [ydf-users] SQL Question
+In-Reply-To: <20060222081637.49892.qmail@web53808.mail.yahoo.com>
+References: <20060222081637.49892.qmail@web53808.mail.yahoo.com>
+Message-ID: <46774.71.39.100.121.1140616964.squirrel@www.jocosoft.com>
+
+Hi Graeme,
+
+> Hi Peter,
+>
+> You should be able to setup a view to achieve this ...
+> I found this link
+> on the Microsoft website:
+>
+> http://msdn2.microsoft.com/en-us/library/ms187956.aspx
+>
+> I didn't spend a great deal of time investigating this
+> but it is
+> probably what you want. First determine a select
+> statement that gives
+> you the data you want.
+
+Well, I do know how to create a view once I have the select. Creating the
+select is the problem :)
+
+> You should also be able to create your own
+> YDDatabase_Driver class for
+> MS-SQL databases. The existing driver classes for
+> MySQL etc will give
+> you guidance on achieving this.
+
+I have been looking into that actually, and some day I may try again, but
+I ran into some weird issues. MS-SQL is, like anything else coming from
+MS, weird, and following its own standards. Most notably, there is no
+"limit" equivalent, so creating a paginated result is hell. But that's a
+different story:)
+
+Thanks for thinking with me though!
+
+Peter
+
+
+
+From ydf at jocosoft.com  Wed Feb 22 15:19:27 2006
+From: ydf at jocosoft.com (Peter)
+Date: Wed, 22 Feb 2006 08:19:27 -0600 (CST)
+Subject: [ydf-users] SQL Question
+In-Reply-To: <306340e00602220305w412b7525x@mail.gmail.com>
+References: <43FB9D66.4080107@jocosoft.com>
+    <306340e00602220305w412b7525x@mail.gmail.com>
+Message-ID: <47433.71.39.100.121.1140617967.squirrel@www.jocosoft.com>
+
+Hi Poi,
+
+> If i understand your question well, i would state the following MySQL
+> command:
+>
+> SELECT item, pallet, location, user, MAX(movedate) AS movedate
+> FROM `yourtable`
+> GROUP BY item
+
+Well, you can't retrieve any fields that are not part of the group by or
+aggregate field(s), so this doesn't work.
+Following your theory this would work:
+
+SELECT item, MAX(movedate) AS movedate
+FROM `yourtable`
+GROUP BY item
+
+But that only gives me when it was last moved, not by whom or where it
+went...
+
+It is an interesting challenge, that looks simple at first, but really
+isn't when you start playing with it :)
+
+Thanks for thinking with me though!
+
+Peter
+
+
+
+
+From ydfpoi at gmail.com  Wed Feb 22 17:49:51 2006
+From: ydfpoi at gmail.com (ydf poi)
+Date: Wed, 22 Feb 2006 17:49:51 +0100
+Subject: [ydf-users] SQL Question
+In-Reply-To: <47433.71.39.100.121.1140617967.squirrel@www.jocosoft.com>
+References: <43FB9D66.4080107@jocosoft.com>
+	 <306340e00602220305w412b7525x@mail.gmail.com>
+	 <47433.71.39.100.121.1140617967.squirrel@www.jocosoft.com>
+Message-ID: <306340e00602220849w166a8245x@mail.gmail.com>
+
+Hi Peter,
+
+you said "you can't retrieve any fields that are not part of the group
+by or aggregate field(s)" is it because you are in MS-SQL?
+
+In MySQL this does work (i have tried it)...
+
+--
+po?
+
+
+From peter at jocosoft.com  Wed Feb 22 18:05:36 2006
+From: peter at jocosoft.com (Peter)
+Date: Wed, 22 Feb 2006 11:05:36 -0600 (CST)
+Subject: [ydf-users] SQL Question
+In-Reply-To: <306340e00602220849w166a8245x@mail.gmail.com>
+References: <43FB9D66.4080107@jocosoft.com> 
+    <306340e00602220305w412b7525x@mail.gmail.com> 
+    <47433.71.39.100.121.1140617967.squirrel@www.jocosoft.com>
+    <306340e00602220849w166a8245x@mail.gmail.com>
+Message-ID: <57080.71.39.100.121.1140627936.squirrel@www.jocosoft.com>
+
+Really? Hmm... then MySQL is even more superiour than I thought :)
+
+The exact error message I get is:
+
+Column 'location.pallet' is invalid in the select list because it is not
+contained in either an aggregate function or the GROUP BY clause.
+(severity 16)
+
+And that for every field, except 'item' and 'movedate'
+
+So yeah, it is because of MS-SQL...
+
+I never thought this would be such a pain. Maybe I should rethink my
+strategy... Maybe it's easier to maintain 2 tables, one with current and
+one with history info? As redundant as that is, is may just make things
+easier :-(
+
+Thanks!
+
+Peter
+
+
+> Hi Peter,
+>
+> you said "you can't retrieve any fields that are not part of the group
+> by or aggregate field(s)" is it because you are in MS-SQL?
+>
+> In MySQL this does work (i have tried it)...
+>
+> --
+> po?
+> _______________________________________________
+> YDFramework-users mailing list
+> YDFramework-users at lists.berlios.de
+> http://lists.berlios.de/mailman/listinfo/ydframework-users
+>
+
+
+
+From pieter at yellowduck.be  Thu Feb 23 10:40:21 2006
+From: pieter at yellowduck.be (Pieter Claerhout)
+Date: Thu, 23 Feb 2006 10:40:21 +0100
+Subject: [ydf-users] Content Management Framework proposal
+Message-ID: <4aef63030602230140k2c144eeej816ca3367e33b392@mail.gmail.com>
+
+Hi all,
+
+I wanted to share an idea with you about what I call a "Content Management
+Framework", which I might be adding to the framework.
+
+Essentially, I would like to add a system that makes it easy to create a CMS
+based on the Yellow Duck Framework by avoiding to have to do the same work
+over and over again.
+
+Most CMS systems work based on a tree of objects, which I find a good
+approach. Since we have the YDDatabaseTree class, this is quite easy to do.
+Additionally, every node on the tree could have a specific object type that
+describes the different properties and defines some metadata about what
+properties are required/optional, different constraints and possible custom
+actions (more about this later).
+
+The basic idea would be to create something like YDCmsContentTree that
+allows you to query the database and get objects from the database in the
+proper format (read: object type), which you can use in your templates.
+
+On the other hand, since we know exactly what we can expect as properties
+for each object, we can easily build the administration side of things in an
+automated way, rather than having to do it manually.
+
+Just to give an example:
+
+- Home -> YDRootNode
+- Shop -> YDShopNode
+  - Product -> YDShopProductNode
+  - Category -> YDShopCategoryNode
+    - Product -> YDShopProductNode
+- News -> YDNewsNode
+  - News Item -> YDNewsNode
+  - News Item -> YDNewsNode
+- Gallery -> YDGalleryNode
+  - Photo Album -> YDGalleryAlbumNode
+    - Picture -> YDGalleryPhotoNode
+    - Picture -> YDGalleryPhotoNode
+This is how the tree would look like. For the administration part, some
+content nodes might have additional (custom) actions, such as the
+"ActiveOrders" action for the YDShopNode class, which would list the orders.
+
+Deriving an actual CMS from that would be quite straightforward. You simply
+instantiate the YDCmsContentTree and start defining all the objects and
+their properties/constraints. All that is left then is to setup the
+templates, and all the rest of the stuff happens automatically.
+
+We can even make it that smart that the database schema gets
+generated/updated automatically when instantiating the YDCmsContentTree. I
+plan to make it even that intelligent to allow the content tree to be
+instantiated in all the different database engines supported by the
+framework. This will require us however to create a class that is able to
+create database tables in a database independant way.
+
+Later on, it should be quite easy to add extra features such as security and
+permissions, authentication and so on.
+
+The only thing I'm still not sure about is how we can integrate with
+external pieces of software such as e.g. forum software (phpBB, MyBB, UseBB,
+etc.). There should be a way to do it, but I still need to think how
+exactly.
+
+PS1: it would be very easy to apply this structure to e.g. the weblog
+application.
+
+PS2: multi-lingual sites should be supported from the start, as this is
+often a requirement.
+
+Any suggestions, additions, comments, remarks?
+
+Regards,
+
+
+
+pieter
+
+--
+pieter claerhout . pieter at yellowduck.be . http://www.yellowduck.be/
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <https://lists.berlios.de/pipermail/ydframework-users/attachments/20060223/4d62b14e/attachment.html>
+
+From maximus_meridius79 at yahoo.com  Thu Feb 23 11:06:57 2006
+From: maximus_meridius79 at yahoo.com (maximus meridius)
+Date: Thu, 23 Feb 2006 02:06:57 -0800 (PST)
+Subject: [ydf-users] Anyone has some CRUD functionality available?
+Message-ID: <20060223100657.53049.qmail@web53807.mail.yahoo.com>
+
+Hi all,
+
+With regard to the below post, i have been working on
+a driver for the 
+ADODB class which is still in its infancy ... I set it
+up so that I 
+could make use of the AXMLS class ( 
+http://adodb-xmlschema.sourceforge.net/docs/index.html
+) for 
+installation and upgrade scripts. AXMLS is included
+with recent releases 
+of ADODB.
+
+The principle is that you define the table schemas in
+XML files and 
+AXMLS generates the SQL to create or update table
+structure. This could 
+be part of what you are looking for Pieter ??
+
+I'm happy to provide the ADODB driver class for
+YellowDuck once I'm sure 
+its working correctly.
+
+In my opinion though, it is better to use drivers that
+interface 
+directly with the relavant database php apis for
+efficiency. Otherwise 
+its a driver on a driver. For this reason I am just
+using the ADODB 
+driver for the install script whilst I am using
+YellowDuck's mysql 
+driver for the application.
+
+I also came across this article ( 
+http://www-128.ibm.com/developerworks/opensource/library/os-php-flexobj/
+)
+via one of my RSS feeds - just can't remember which
+one.
+
+Regards,
+
+Graeme
+
+
+> Hi all,
+>
+> as we have YDDatabaseObject available, I'm wondering
+if someone is perhaps
+> working on some CRUD like functionality that can
+generate a user interface
+> based on the model definition. For a lot of web
+applications, I guess this
+> could save some really valuable time.
+> 
+> Regards,
+>
+>
+> pieter
+
+
+
+__________________________________________________
+Do You Yahoo!?
+Tired of spam?  Yahoo! Mail has the best spam protection around 
+http://mail.yahoo.com 
+
+
+From maximus_meridius79 at yahoo.com  Thu Feb 23 11:22:51 2006
+From: maximus_meridius79 at yahoo.com (maximus meridius)
+Date: Thu, 23 Feb 2006 02:22:51 -0800 (PST)
+Subject: [ydf-users] Content Management Framework proposal
+Message-ID: <20060223102251.61190.qmail@web53809.mail.yahoo.com>
+
+Pieter,
+
+This all sounds like a great idea!
+> The only thing I'm still not sure about is how we
+can integrate with 
+> external pieces of software such as e.g. forum
+software (phpBB, MyBB, 
+> UseBB, etc.). There should be a way to do it, but I
+still need to 
+> think how exactly.
+>  
+For the integration, you could setup a data structure
+that maps table 
+names and fields in the YD-based system and the
+external application. 
+This would need methods ( or "triggers" ) that get
+executed when a user 
+changes their details in the YD-based system to ensure
+that 
+corresponding details in other applications are
+updated. This class 
+would also need to carefully manage session data and
+cookies in the 
+external application. This work would be handled by a
+"synchronisation" 
+class which is initialised with appropriate field
+mapping.
+
+Regards,
+
+Graeme
+
+__________________________________________________
+Do You Yahoo!?
+Tired of spam?  Yahoo! Mail has the best spam protection around 
+http://mail.yahoo.com 
+
+
+From francisco at fusemail.com  Thu Feb 23 18:23:59 2006
+From: francisco at fusemail.com (Francisco Azevedo)
+Date: Thu, 23 Feb 2006 17:23:59 +0000
+Subject: [ydf-users] Content Management Framework proposal
+In-Reply-To: <4aef63030602230140k2c144eeej816ca3367e33b392@mail.gmail.com>
+References: <4aef63030602230140k2c144eeej816ca3367e33b392@mail.gmail.com>
+Message-ID: <43FDEFAF.8030202@fusemail.com>
+
+> I wanted to share an idea with you about what I call a "Content 
+> Management Framework", which I might be adding to the framework.
+>  
+> Essentially, I would like to add a system that makes it easy to create a 
+> CMS based on the Yellow Duck Framework by avoiding to have to do the 
+> same work over and over again.
+
+This idea sounds good, especially because, as you know, i'm a little 
+involved is those caind of applications.
+
+> Any suggestions, additions, comments, remarks?
+
+My opinion is that the core (ydf) should have some important features 
+before starting the (ydCMf), eg YDError. This is, imho, extremely 
+important in a application and if not done now, it will be integrated 
+later in CMf and that's bad. We will have 2x the job because we will 
+port the framework _and_ the CMframework. Other feature is the Locale.
+
+I think that all nodes should extend an abstract class that, eg, checks 
+autentication and/or has an mecanism where we can define public methods 
+(that can be invoked in the template side) and private methods that will 
+only work if the class detects that the user is authenticated.
+To be perfect, this means that we could have some mecanism (ACL) 
+integrated in that master class.
+
+So, the idea about a tree of components and some automatic store and 
+retrieve sounds excellent but i think we must care about YDError, 
+YDLocale, YDACL? and then start integration those and start creating 
+nodes.. just my 0.02
+
+Francisco
+
+
+From pieter at yellowduck.be  Fri Feb 24 10:18:17 2006
+From: pieter at yellowduck.be (Pieter Claerhout)
+Date: Fri, 24 Feb 2006 10:18:17 +0100
+Subject: [ydf-users] Content Management Framework proposal
+In-Reply-To: <43FDEFAF.8030202@fusemail.com>
+References: <4aef63030602230140k2c144eeej816ca3367e33b392@mail.gmail.com>
+	 <43FDEFAF.8030202@fusemail.com>
+Message-ID: <4aef63030602240118o2e353455i64e615b6fccf68d@mail.gmail.com>
+
+Francisco,
+
+I've already logged the neccessary feature requests for improved error
+handling and translations.
+
+For the errors, I plan to make a custom error handler that, depending on how
+you configure it, will do the following:
+- If already defined, it will use that one (by means of a standard name)
+- If not defined yet:
+  - PHP4: will use trigger_error
+  - PHP5: will throw an exception
+
+This way, we maintain backwards compatibility, while, if possible, taking
+advantage of the new features of PHP5. Since most people are still using
+PHP4 rather than PHP5 (unless you can prove me otherwise), this is the best
+we can do I guess.
+
+For the locale stuff, if we backport the translation stuff available in the
+weblog application, would that be sufficient you think? If not, can you
+enlighten me a little bit on what you would like to see added/changed?
+
+For the switch, eventually, we will need to do the switch anyway if we want
+to take full advantage of the new PHP 5 features.
+
+For sure, all the nodes will extend a base class that has all the goodies
+such as security, public/private methods and so on. The way I see it right
+now is to implement it a bit similar to the way YDRequest is implemented.
+
+I remember that for YDAcl, we had some stuff on the forum, right? If we can
+get this in a database independant way, I guess that's what we can use, no?
+
+For the schema updates, I don't think there will be a problem. With some
+tricks such as serialized objects, we can very easily overcome this. By just
+updating the object definitions, the rest will already happen automatically
+without having to change anything to the database.
+
+Cheers,
+
+
+pieter
+
+On 2/23/06, Francisco Azevedo <francisco at fusemail.com> wrote:
+>
+>
+> > I wanted to share an idea with you about what I call a "Content
+> > Management Framework", which I might be adding to the framework.
+> >
+> > Essentially, I would like to add a system that makes it easy to create a
+> > CMS based on the Yellow Duck Framework by avoiding to have to do the
+> > same work over and over again.
+>
+> This idea sounds good, especially because, as you know, i'm a little
+> involved is those caind of applications.
+>
+> > Any suggestions, additions, comments, remarks?
+>
+> My opinion is that the core (ydf) should have some important features
+> before starting the (ydCMf), eg YDError. This is, imho, extremely
+> important in a application and if not done now, it will be integrated
+> later in CMf and that's bad. We will have 2x the job because we will
+> port the framework _and_ the CMframework. Other feature is the Locale.
+>
+> I think that all nodes should extend an abstract class that, eg, checks
+> autentication and/or has an mecanism where we can define public methods
+> (that can be invoked in the template side) and private methods that will
+> only work if the class detects that the user is authenticated.
+> To be perfect, this means that we could have some mecanism (ACL)
+> integrated in that master class.
+>
+> So, the idea about a tree of components and some automatic store and
+> retrieve sounds excellent but i think we must care about YDError,
+> YDLocale, YDACL? and then start integration those and start creating
+> nodes.. just my 0.02
+>
+> Francisco
+> _______________________________________________
+> YDFramework-users mailing list
+> YDFramework-users at lists.berlios.de
+> http://lists.berlios.de/mailman/listinfo/ydframework-users
+>
+
+
+
+--
+pieter claerhout . pieter at yellowduck.be . http://www.yellowduck.be/
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <https://lists.berlios.de/pipermail/ydframework-users/attachments/20060224/742e03c0/attachment.html>
+
+From pieter at yellowduck.be  Fri Feb 24 10:19:19 2006
+From: pieter at yellowduck.be (Pieter Claerhout)
+Date: Fri, 24 Feb 2006 10:19:19 +0100
+Subject: [ydf-users] Anyone has some CRUD functionality available?
+In-Reply-To: <20060223100657.53049.qmail@web53807.mail.yahoo.com>
+References: <20060223100657.53049.qmail@web53807.mail.yahoo.com>
+Message-ID: <4aef63030602240119u7c92ff81v943ef1b6f42daacf@mail.gmail.com>
+
+Hi Maximus,
+
+a database driver for adoDB seems like an interesting idea. Me too, I prefer
+not having this extra layer though. I'm just wondering how dbo from PHP 5
+might be able to help us in this respect.
+
+cheers,
+
+
+pieter
+
+On 2/23/06, maximus meridius <maximus_meridius79 at yahoo.com> wrote:
+>
+> Hi all,
+>
+> With regard to the below post, i have been working on
+> a driver for the
+> ADODB class which is still in its infancy ... I set it
+> up so that I
+> could make use of the AXMLS class (
+> http://adodb-xmlschema.sourceforge.net/docs/index.html
+> ) for
+> installation and upgrade scripts. AXMLS is included
+> with recent releases
+> of ADODB.
+>
+> The principle is that you define the table schemas in
+> XML files and
+> AXMLS generates the SQL to create or update table
+> structure. This could
+> be part of what you are looking for Pieter ??
+>
+> I'm happy to provide the ADODB driver class for
+> YellowDuck once I'm sure
+> its working correctly.
+>
+> In my opinion though, it is better to use drivers that
+> interface
+> directly with the relavant database php apis for
+> efficiency. Otherwise
+> its a driver on a driver. For this reason I am just
+> using the ADODB
+> driver for the install script whilst I am using
+> YellowDuck's mysql
+> driver for the application.
+>
+> I also came across this article (
+> http://www-128.ibm.com/developerworks/opensource/library/os-php-flexobj/
+> )
+> via one of my RSS feeds - just can't remember which
+> one.
+>
+> Regards,
+>
+> Graeme
+>
+>
+> > Hi all,
+> >
+> > as we have YDDatabaseObject available, I'm wondering
+> if someone is perhaps
+> > working on some CRUD like functionality that can
+> generate a user interface
+> > based on the model definition. For a lot of web
+> applications, I guess this
+> > could save some really valuable time.
+> >
+> > Regards,
+> >
+> >
+> > pieter
+>
+>
+>
+> __________________________________________________
+> Do You Yahoo!?
+> Tired of spam?  Yahoo! Mail has the best spam protection around
+> http://mail.yahoo.com
+> _______________________________________________
+> YDFramework-users mailing list
+> YDFramework-users at lists.berlios.de
+> http://lists.berlios.de/mailman/listinfo/ydframework-users
+>
+
+
+
+--
+pieter claerhout . pieter at yellowduck.be . http://www.yellowduck.be/
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <https://lists.berlios.de/pipermail/ydframework-users/attachments/20060224/0049065b/attachment.html>
+
+From pieter at yellowduck.be  Fri Feb 24 10:20:22 2006
+From: pieter at yellowduck.be (Pieter Claerhout)
+Date: Fri, 24 Feb 2006 10:20:22 +0100
+Subject: [ydf-users] Who is using which version of PHP?
+Message-ID: <4aef63030602240120x9347248w9cfd017537a2afbf@mail.gmail.com>
+
+I was just wondering how many people using the Yellow Duck Framework already
+made the switch to PHP5?
+
+If so, can you share any comments or things one needs to watch out for if
+you make the switch? Is it easy to find hosting for PHP5?
+
+cheers,
+
+
+pieter
+
+--
+pieter claerhout . pieter at yellowduck.be . http://www.yellowduck.be/
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <https://lists.berlios.de/pipermail/ydframework-users/attachments/20060224/756c3d39/attachment.html>
+
+From francisco at fusemail.com  Fri Feb 24 13:29:08 2006
+From: francisco at fusemail.com (Francisco Azevedo)
+Date: Fri, 24 Feb 2006 12:29:08 +0000
+Subject: [ydf-users] Content Management Framework proposal
+In-Reply-To: <4aef63030602240118o2e353455i64e615b6fccf68d@mail.gmail.com>
+References: <4aef63030602230140k2c144eeej816ca3367e33b392@mail.gmail.com>	 <43FDEFAF.8030202@fusemail.com> <4aef63030602240118o2e353455i64e615b6fccf68d@mail.gmail.com>
+Message-ID: <43FEFC14.9090209@fusemail.com>
+
+> I've already logged the neccessary feature requests for improved error 
+> handling and translations.
+>  
+> For the errors, I plan to make a custom error handler that, depending on 
+> how you configure it, will do the following:
+> - If already defined, it will use that one (by means of a standard name)
+> - If not defined yet:
+>   - PHP4: will use trigger_error
+>   - PHP5: will throw an exception
+
+Sorry but, are you talking about YDError internals? Or we will need to 
+know if we are in a php4 or php5 environment?
+
+> This way, we maintain backwards compatibility, while, if possible, 
+> taking advantage of the new features of PHP5. Since most people are 
+> still using PHP4 rather than PHP5 (unless you can prove me otherwise), 
+> this is the best we can do I guess.
+
+Yes, this send us to a previous discussed topic about "php5 only or not?".
+
+> For the locale stuff, if we backport the translation stuff available in 
+> the weblog application, would that be sufficient you think? If not, can 
+> you enlighten me a little bit on what you would like to see added/changed?
+
+Yes. Like db said, maybe integrate it with YDLocale could be better. 
+Some remarks about that translation function are:
+- make it the more fast (optimized) as possible as it will be called 
+dozens of times..
+- make it possible to handle custom arguments for dynamic values.
+Another detail is maybe we should include the language file inside 
+YDLocale::set(), this way YDLocale::t() will not try to include it every 
+time...
+
+> For the switch, eventually, we will need to do the switch anyway if we 
+> want to take full advantage of the new PHP 5 features.
+
+That's a problem. I think we need to wait a little more. Php5 is not yet 
+very used (i think).
+
+> For sure, all the nodes will extend a base class that has all the 
+> goodies such as security, public/private methods and so on. The way I 
+> see it right now is to implement it a bit similar to the way YDRequest 
+> is implemented.
+
+Sounds good :)
+
+> I remember that for YDAcl, we had some stuff on the forum, right? If we 
+> can get this in a database independent way, I guess that's what we can 
+> use, no?
+
+Sure.. YDAcl is really important. We could have some mechanism (in the 
+abstract node class) that checks the db (on private methods) for correct 
+authentication.. or maybe even a more smart way where it could check db 
+just one time if it knows that we have private methods defined.
+Why this class we can define on private methods the minimun level for 
+that method (based on acl).. then, the abstract class would 
+automagically test db authentication for user/pass/level.. just some ideas.
+
+> For the schema updates, I don't think there will be a problem. With some 
+> tricks such as serialized objects, we can very easily overcome this. By 
+> just updating the object definitions, the rest will already happen 
+> automatically without having to change anything to the database.
+>  
+> Cheers,
+>  
+>  
+> pieter
+>  
+> On 2/23/06, *Francisco Azevedo* <francisco at fusemail.com 
+> <mailto:francisco at fusemail.com>> wrote:
+> 
+> 
+>      > I wanted to share an idea with you about what I call a "Content
+>      > Management Framework", which I might be adding to the framework.
+>      >
+>      > Essentially, I would like to add a system that makes it easy to
+>     create a
+>      > CMS based on the Yellow Duck Framework by avoiding to have to do the
+>      > same work over and over again.
+> 
+>     This idea sounds good, especially because, as you know, i'm a little
+>     involved is those caind of applications.
+> 
+>      > Any suggestions, additions, comments, remarks?
+> 
+>     My opinion is that the core (ydf) should have some important features
+>     before starting the (ydCMf), eg YDError. This is, imho, extremely
+>     important in a application and if not done now, it will be integrated
+>     later in CMf and that's bad. We will have 2x the job because we will
+>     port the framework _and_ the CMframework. Other feature is the Locale.
+> 
+>     I think that all nodes should extend an abstract class that, eg, checks
+>     autentication and/or has an mecanism where we can define public methods
+>     (that can be invoked in the template side) and private methods that
+>     will
+>     only work if the class detects that the user is authenticated.
+>     To be perfect, this means that we could have some mecanism (ACL)
+>     integrated in that master class.
+> 
+>     So, the idea about a tree of components and some automatic store and
+>     retrieve sounds excellent but i think we must care about YDError,
+>     YDLocale, YDACL? and then start integration those and start creating
+>     nodes.. just my 0.02
+
+
+From francisco at fusemail.com  Fri Feb 24 13:38:16 2006
+From: francisco at fusemail.com (Francisco Azevedo)
+Date: Fri, 24 Feb 2006 12:38:16 +0000
+Subject: [ydf-users] Who is using which version of PHP?
+In-Reply-To: <4aef63030602240120x9347248w9cfd017537a2afbf@mail.gmail.com>
+References: <4aef63030602240120x9347248w9cfd017537a2afbf@mail.gmail.com>
+Message-ID: <43FEFE38.1060509@fusemail.com>
+
+> I was just wondering how many people using the Yellow Duck Framework 
+> already made the switch to PHP5?
+
+I'm using php 5.1.2.. not because of any special reason.. just for testing.
+
+> If so, can you share any comments or things one needs to watch out for 
+> if you make the switch? Is it easy to find hosting for PHP5?
+
+I don't know if it's easy.. but i think it's not very difficult.
+
+Francisco
+
+
+From dab214 at yahoo.com  Fri Feb 24 13:55:02 2006
+From: dab214 at yahoo.com (dab)
+Date: Fri, 24 Feb 2006 04:55:02 -0800 (PST)
+Subject: [ydf-users] Request: YDForm::addElements()
+In-Reply-To: <4aef63030602240120x9347248w9cfd017537a2afbf@mail.gmail.com>
+Message-ID: <20060224125502.62941.qmail@web50205.mail.yahoo.com>
+
+any one else who would like to have the following
+function added:
+
+$form->addElements ( $array );
+
+instead of doing:
+$form->addElement ( 'text', 'username');
+$form->addElement ( 'text', 'password');
+
+
+
+__________________________________________________
+Do You Yahoo!?
+Tired of spam?  Yahoo! Mail has the best spam protection around 
+http://mail.yahoo.com 
+
+
+From dab214 at yahoo.com  Fri Feb 24 14:24:25 2006
+From: dab214 at yahoo.com (dab)
+Date: Fri, 24 Feb 2006 05:24:25 -0800 (PST)
+Subject: [ydf-users] YDDatabaseObject code generator
+In-Reply-To: <4aef63030602240120x9347248w9cfd017537a2afbf@mail.gmail.com>
+Message-ID: <20060224132425.35934.qmail@web50212.mail.yahoo.com>
+
+hi all,
+it's a bit tedios writing the database classes,
+registring all the keys and fields.
+anyone written something that automates this stuff?
+
+i just wrote this quickly:
+
+$link = mysql_connect('localhost', 'root', '');
+mysql_select_db("whatever");
+$result = mysql_query("SHOW COLUMNS FROM
+".$_GET['table']);
+while ( $row = mysql_fetch_assoc($result)) {
+   if ( $row["Field"] == "id" ) 
+      echo "\$this->registerKey ( '".$row["Field"]."',
+true );<br>"; 
+   elseif ( substr ( $row["Field"], -2, 2 ) == "id") 
+      echo "\$this->registerKey ( '".$row["Field"]."'
+);<br>"; 
+   else  
+      echo "\$this->registerField (
+'".$row["Field"]."' );<br>";   
+} 
+
+but it be nice to have something a bit more extensive.
+maybe generate code for the other classes and the
+templates too. and even be able to choose from several
+code templates before generating the file. 
+E.g. template database_cross_ref:
+include...
+class {$class_name} extends YDDatabaseObject {
+    function {$class_name} {
+        $this->YDDatabaseObject();
+        $this->registerDatabase(
+$GLOBALS['YDDBOBJ_CONN'] );
+        $this->registerTable( {$table_name} );
+
+        // SHOW COLUMNS
+        {$keys_and_fields}
+    }
+}
+
+so for the type "create database class", setting the
+class and table name and picking a template.
+
+please let me know what you think, thanks. 
+
+__________________________________________________
+Do You Yahoo!?
+Tired of spam?  Yahoo! Mail has the best spam protection around 
+http://mail.yahoo.com 
+
+
+From pieter at yellowduck.be  Fri Feb 24 14:30:37 2006
+From: pieter at yellowduck.be (Pieter Claerhout)
+Date: Fri, 24 Feb 2006 14:30:37 +0100
+Subject: [ydf-users] YDDatabaseObject code generator
+In-Reply-To: <20060224132425.35934.qmail@web50212.mail.yahoo.com>
+References: <4aef63030602240120x9347248w9cfd017537a2afbf@mail.gmail.com>
+	 <20060224132425.35934.qmail@web50212.mail.yahoo.com>
+Message-ID: <4aef63030602240530i46d82d18s2dd9d58bfe956f09@mail.gmail.com>
+
+To automate $result = mysql_query("SHOW COLUMNS FROM".$_GET['table']);, you
+can use the new YDDatabaseMetaData class.
+
+Something along the lines of:
+
+$metadata = new YDDatabaseMetaData( $db );
+$cols = $metadata->getFields( $_GET['table'] );
+
+Cheers,
+
+pieter
+
+On 2/24/06, dab <dab214 at yahoo.com> wrote:
+>
+> hi all,
+> it's a bit tedios writing the database classes,
+> registring all the keys and fields.
+> anyone written something that automates this stuff?
+>
+> i just wrote this quickly:
+>
+> $link = mysql_connect('localhost', 'root', '');
+> mysql_select_db("whatever");
+> $result = mysql_query("SHOW COLUMNS FROM
+> ".$_GET['table']);
+> while ( $row = mysql_fetch_assoc($result)) {
+>   if ( $row["Field"] == "id" )
+>      echo "\$this->registerKey ( '".$row["Field"]."',
+> true );<br>";
+>   elseif ( substr ( $row["Field"], -2, 2 ) == "id")
+>      echo "\$this->registerKey ( '".$row["Field"]."'
+> );<br>";
+>   else
+>      echo "\$this->registerField (
+> '".$row["Field"]."' );<br>";
+> }
+>
+> but it be nice to have something a bit more extensive.
+> maybe generate code for the other classes and the
+> templates too. and even be able to choose from several
+> code templates before generating the file.
+> E.g. template database_cross_ref:
+> include...
+> class {$class_name} extends YDDatabaseObject {
+>    function {$class_name} {
+>        $this->YDDatabaseObject();
+>        $this->registerDatabase(
+> $GLOBALS['YDDBOBJ_CONN'] );
+>        $this->registerTable( {$table_name} );
+>
+>        // SHOW COLUMNS
+>        {$keys_and_fields}
+>    }
+> }
+>
+> so for the type "create database class", setting the
+> class and table name and picking a template.
+>
+> please let me know what you think, thanks.
+>
+> __________________________________________________
+> Do You Yahoo!?
+> Tired of spam?  Yahoo! Mail has the best spam protection around
+> http://mail.yahoo.com
+> _______________________________________________
+> YDFramework-users mailing list
+> YDFramework-users at lists.berlios.de
+> http://lists.berlios.de/mailman/listinfo/ydframework-users
+>
+
+
+
+--
+pieter claerhout . pieter at yellowduck.be . http://www.yellowduck.be/
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <https://lists.berlios.de/pipermail/ydframework-users/attachments/20060224/2a673dfe/attachment.html>
+
+From pieter at yellowduck.be  Fri Feb 24 14:31:22 2006
+From: pieter at yellowduck.be (Pieter Claerhout)
+Date: Fri, 24 Feb 2006 14:31:22 +0100
+Subject: [ydf-users] YDDatabaseObject code generator
+In-Reply-To: <4aef63030602240530i46d82d18s2dd9d58bfe956f09@mail.gmail.com>
+References: <4aef63030602240120x9347248w9cfd017537a2afbf@mail.gmail.com>
+	 <20060224132425.35934.qmail@web50212.mail.yahoo.com>
+	 <4aef63030602240530i46d82d18s2dd9d58bfe956f09@mail.gmail.com>
+Message-ID: <4aef63030602240531m7820f2f9va6dee32a9511e6a6@mail.gmail.com>
+
+Forgot to mention that there is also something like $indexes =
+$metadata->getIndexes( $_GET['table'] );
+
+cheers,
+
+pieter
+
+On 2/24/06, Pieter Claerhout <pieter at yellowduck.be> wrote:
+>
+> To automate $result = mysql_query("SHOW COLUMNS FROM".$_GET['table']);,
+> you can use the new YDDatabaseMetaData class.
+>
+> Something along the lines of:
+>
+> $metadata = new YDDatabaseMetaData( $db );
+> $cols = $metadata->getFields( $_GET['table'] );
+>
+> Cheers,
+>
+> pieter
+>
+>  On 2/24/06, dab <dab214 at yahoo.com> wrote:
+> >
+> > hi all,
+> > it's a bit tedios writing the database classes,
+> > registring all the keys and fields.
+> > anyone written something that automates this stuff?
+> >
+> > i just wrote this quickly:
+> >
+> > $link = mysql_connect('localhost', 'root', '');
+> > mysql_select_db("whatever");
+> > $result = mysql_query("SHOW COLUMNS FROM
+> > ".$_GET['table']);
+> > while ( $row = mysql_fetch_assoc($result)) {
+> >   if ( $row["Field"] == "id" )
+> >      echo "\$this->registerKey ( '".$row["Field"]."',
+> > true );<br>";
+> >   elseif ( substr ( $row["Field"], -2, 2 ) == "id")
+> >      echo "\$this->registerKey ( '".$row["Field"]."'
+> > );<br>";
+> >   else
+> >      echo "\$this->registerField (
+> > '".$row["Field"]."' );<br>";
+> > }
+> >
+> > but it be nice to have something a bit more extensive.
+> > maybe generate code for the other classes and the
+> > templates too. and even be able to choose from several
+> > code templates before generating the file.
+> > E.g. template database_cross_ref:
+> > include...
+> > class {$class_name} extends YDDatabaseObject {
+> >    function {$class_name} {
+> >        $this->YDDatabaseObject();
+> >        $this->registerDatabase(
+> > $GLOBALS['YDDBOBJ_CONN'] );
+> >        $this->registerTable( {$table_name} );
+> >
+> >        // SHOW COLUMNS
+> >        {$keys_and_fields}
+> >    }
+> > }
+> >
+> > so for the type "create database class", setting the
+> > class and table name and picking a template.
+> >
+> > please let me know what you think, thanks.
+> >
+> > __________________________________________________
+> > Do You Yahoo!?
+> > Tired of spam?  Yahoo! Mail has the best spam protection around
+> > http://mail.yahoo.com
+> > _______________________________________________
+> > YDFramework-users mailing list
+> > YDFramework-users at lists.berlios.de
+> > http://lists.berlios.de/mailman/listinfo/ydframework-users
+> >
+>
+>
+>
+> --
+> pieter claerhout . pieter at yellowduck.be . http://www.yellowduck.be/
+
+
+
+
+--
+pieter claerhout . pieter at yellowduck.be . http://www.yellowduck.be/
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <https://lists.berlios.de/pipermail/ydframework-users/attachments/20060224/f92b7873/attachment.html>
+
+From francisco at fusemail.com  Fri Feb 24 15:36:15 2006
+From: francisco at fusemail.com (Francisco Azevedo)
+Date: Fri, 24 Feb 2006 14:36:15 +0000
+Subject: [ydf-users] YDDatabaseObject code generator
+In-Reply-To: <20060224132425.35934.qmail@web50212.mail.yahoo.com>
+References: <20060224132425.35934.qmail@web50212.mail.yahoo.com>
+Message-ID: <43FF19DF.7010803@fusemail.com>
+
+> it's a bit tedios writing the database classes,
+> registring all the keys and fields.
+> anyone written something that automates this stuff?
+
+Maybe db could integrate YDDatabaseMetaData with YDDatabaseObject. Then 
+would only need:
+
+class {$class_name} extends YDDatabaseObject {
+     function {$class_name} {
+         $this->YDDatabaseObject();
+         $this->registerDatabase( $GLOBALS['YDDBOBJ_CONN'] );
+
+         // 'readTable' instead of 'registerTable' that
+         // could use YDDatabaseMetaData to add fields/keys
+         $this->readTable( {$table_name} );
+     }
+}
+
+
+What do you think db? ;)
+
+
+From muitocomplicado at gmail.com  Fri Feb 24 15:44:54 2006
+From: muitocomplicado at gmail.com (David Bittencourt)
+Date: Fri, 24 Feb 2006 11:44:54 -0300
+Subject: [ydf-users] YDDatabaseObject code generator
+In-Reply-To: <43FF19DF.7010803@fusemail.com>
+References: <20060224132425.35934.qmail@web50212.mail.yahoo.com>
+	 <43FF19DF.7010803@fusemail.com>
+Message-ID: <12260be20602240644h108225bdh9dc8d6709ba3f8e4@mail.gmail.com>
+
+I will take a look.
+
+-db
+
+On 2/24/06, Francisco Azevedo <francisco at fusemail.com> wrote:
+>
+>
+> > it's a bit tedios writing the database classes,
+> > registring all the keys and fields.
+> > anyone written something that automates this stuff?
+>
+> Maybe db could integrate YDDatabaseMetaData with YDDatabaseObject. Then
+> would only need:
+>
+> class {$class_name} extends YDDatabaseObject {
+>      function {$class_name} {
+>          $this->YDDatabaseObject();
+>          $this->registerDatabase( $GLOBALS['YDDBOBJ_CONN'] );
+>
+>          // 'readTable' instead of 'registerTable' that
+>          // could use YDDatabaseMetaData to add fields/keys
+>          $this->readTable( {$table_name} );
+>      }
+> }
+>
+>
+> What do you think db? ;)
+> _______________________________________________
+> YDFramework-users mailing list
+> YDFramework-users at lists.berlios.de
+> http://lists.berlios.de/mailman/listinfo/ydframework-users
+>
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <https://lists.berlios.de/pipermail/ydframework-users/attachments/20060224/63ed2444/attachment.html>
+
+From pieter at yellowduck.be  Fri Feb 24 16:04:16 2006
+From: pieter at yellowduck.be (Pieter Claerhout)
+Date: Fri, 24 Feb 2006 16:04:16 +0100
+Subject: [ydf-users] Request: YDForm::addElements()
+In-Reply-To: <20060224125502.62941.qmail@web50205.mail.yahoo.com>
+References: <4aef63030602240120x9347248w9cfd017537a2afbf@mail.gmail.com>
+	 <20060224125502.62941.qmail@web50205.mail.yahoo.com>
+Message-ID: <4aef63030602240704y615b1d12l58dcd8c12513b893@mail.gmail.com>
+
+Can you please log a feature request in berlios?
+
+http://developer.berlios.de/feature/?group_id=3988
+
+Thanks,
+
+
+pieter
+
+On 2/24/06, dab <dab214 at yahoo.com> wrote:
+>
+> any one else who would like to have the following
+> function added:
+>
+> $form->addElements ( $array );
+>
+> instead of doing:
+> $form->addElement ( 'text', 'username');
+> $form->addElement ( 'text', 'password');
+>
+>
+>
+> __________________________________________________
+> Do You Yahoo!?
+> Tired of spam?  Yahoo! Mail has the best spam protection around
+> http://mail.yahoo.com
+> _______________________________________________
+> YDFramework-users mailing list
+> YDFramework-users at lists.berlios.de
+> http://lists.berlios.de/mailman/listinfo/ydframework-users
+>
+
+
+
+--
+pieter claerhout . pieter at yellowduck.be . http://www.yellowduck.be/
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <https://lists.berlios.de/pipermail/ydframework-users/attachments/20060224/7c7be61d/attachment.html>
+
+From ydf at jocosoft.com  Fri Feb 24 19:48:53 2006
+From: ydf at jocosoft.com (Peter)
+Date: Fri, 24 Feb 2006 12:48:53 -0600 (CST)
+Subject: [ydf-users] Who is using which version of PHP?
+In-Reply-To: <4aef63030602240120x9347248w9cfd017537a2afbf@mail.gmail.com>
+References: <4aef63030602240120x9347248w9cfd017537a2afbf@mail.gmail.com>
+Message-ID: <32791.71.39.100.121.1140806933.squirrel@www.jocosoft.com>
+
+I'm using both PHP 4 and 5 on multiple machines, and having very little to
+no problems, running the same code base on different versions.
+
+Peter
+
+
+> I was just wondering how many people using the Yellow Duck Framework
+> already
+> made the switch to PHP5?
+>
+> If so, can you share any comments or things one needs to watch out for if
+> you make the switch? Is it easy to find hosting for PHP5?
+>
+> cheers,
+>
+>
+> pieter
+>
+> --
+> pieter claerhout . pieter at yellowduck.be . http://www.yellowduck.be/
+>
+
+
+
+From dab214 at yahoo.com  Fri Feb 24 23:30:55 2006
+From: dab214 at yahoo.com (dab)
+Date: Fri, 24 Feb 2006 14:30:55 -0800 (PST)
+Subject: [ydf-users] YDDatabaseObject code generator
+In-Reply-To: <12260be20602240644h108225bdh9dc8d6709ba3f8e4@mail.gmail.com>
+Message-ID: <20060224223055.73716.qmail@web50207.mail.yahoo.com>
+
+hi franisco,
+i'm not sure i understand what the functionality of
+readTable() would be. just to clarify: i didn't want
+to change the YDFramework but i was merely asking if
+anyone had written a script that automatically creates
+the class and templates for you.
+thanks.
+
+/dan
+
+--- David Bittencourt <muitocomplicado at gmail.com>
+wrote:
+
+> I will take a look.
+> 
+> -db
+> 
+> On 2/24/06, Francisco Azevedo
+> <francisco at fusemail.com> wrote:
+> >
+> >
+> > > it's a bit tedios writing the database classes,
+> > > registring all the keys and fields.
+> > > anyone written something that automates this
+> stuff?
+> >
+> > Maybe db could integrate YDDatabaseMetaData with
+> YDDatabaseObject. Then
+> > would only need:
+> >
+> > class {$class_name} extends YDDatabaseObject {
+> >      function {$class_name} {
+> >          $this->YDDatabaseObject();
+> >          $this->registerDatabase(
+> $GLOBALS['YDDBOBJ_CONN'] );
+> >
+> >          // 'readTable' instead of 'registerTable'
+> that
+> >          // could use YDDatabaseMetaData to add
+> fields/keys
+> >          $this->readTable( {$table_name} );
+> >      }
+> > }
+> >
+> >
+> > What do you think db? ;)
+> > _______________________________________________
+> > YDFramework-users mailing list
+> > YDFramework-users at lists.berlios.de
+> >
+>
+http://lists.berlios.de/mailman/listinfo/ydframework-users
+> >
+> 
+
+
+__________________________________________________
+Do You Yahoo!?
+Tired of spam?  Yahoo! Mail has the best spam protection around 
+http://mail.yahoo.com 
+
+
+From dab214 at yahoo.com  Fri Feb 24 23:32:29 2006
+From: dab214 at yahoo.com (dab)
+Date: Fri, 24 Feb 2006 14:32:29 -0800 (PST)
+Subject: [ydf-users] Request: YDForm::addElements()
+In-Reply-To: <4aef63030602240704y615b1d12l58dcd8c12513b893@mail.gmail.com>
+Message-ID: <20060224223229.40196.qmail@web50213.mail.yahoo.com>
+
+hi pieter,
+sorry, feuture request added in berlios.
+
+--- Pieter Claerhout <pieter at yellowduck.be> wrote:
+
+> Can you please log a feature request in berlios?
+> 
+> http://developer.berlios.de/feature/?group_id=3988
+> 
+> Thanks,
+> 
+> 
+> pieter
+> 
+> On 2/24/06, dab <dab214 at yahoo.com> wrote:
+> >
+> > any one else who would like to have the following
+> > function added:
+> >
+> > $form->addElements ( $array );
+> >
+> > instead of doing:
+> > $form->addElement ( 'text', 'username');
+> > $form->addElement ( 'text', 'password');
+> >
+> >
+> >
+> > __________________________________________________
+> > Do You Yahoo!?
+> > Tired of spam?  Yahoo! Mail has the best spam
+> protection around
+> > http://mail.yahoo.com
+> > _______________________________________________
+> > YDFramework-users mailing list
+> > YDFramework-users at lists.berlios.de
+> >
+>
+http://lists.berlios.de/mailman/listinfo/ydframework-users
+> >
+> 
+> 
+> 
+> --
+> pieter claerhout . pieter at yellowduck.be .
+> http://www.yellowduck.be/
+> 
+
+
+__________________________________________________
+Do You Yahoo!?
+Tired of spam?  Yahoo! Mail has the best spam protection around 
+http://mail.yahoo.com 
+
+
+From francisco at fusemail.com  Sat Feb 25 13:31:23 2006
+From: francisco at fusemail.com (Francisco Azevedo)
+Date: Sat, 25 Feb 2006 12:31:23 +0000
+Subject: [ydf-users] YDDatabaseObject code generator
+In-Reply-To: <20060224223055.73716.qmail@web50207.mail.yahoo.com>
+References: <20060224223055.73716.qmail@web50207.mail.yahoo.com>
+Message-ID: <44004E1B.3000508@fusemail.com>
+
+> i'm not sure i understand what the functionality of
+> readTable() would be. just to clarify: i didn't want
+> to change the YDFramework but i was merely asking if
+> anyone had written a script that automatically creates
+> the class and templates for you.
+
+And don't know what you mean by creating templates but i think that you 
+point a nice idea for YDDatabaseObject. We have already a class that can 
+read the db scheme.. so an integration of that class with 
+YDDatabaseObject could be excellent.. and that was what 'readTable()' 
+could do internally.. a method that would read the table configuration 
+and add fields and keys automatically.
+
+Francisco
+
+
+From dab214 at yahoo.com  Sat Feb 25 14:09:24 2006
+From: dab214 at yahoo.com (dab)
+Date: Sat, 25 Feb 2006 05:09:24 -0800 (PST)
+Subject: [ydf-users] YDDatabaseObject code generator
+In-Reply-To: <44004E1B.3000508@fusemail.com>
+Message-ID: <20060225130924.17897.qmail@web50213.mail.yahoo.com>
+
+hi Francisco,
+yeah you're right it is a good idea. but that wasn't
+what i had in mind though :)
+so protected fields would have to be declared after
+readTable() no?
+anyways please let me know when implemented.
+thanks.
+
+/dan
+
+
+--- Francisco Azevedo <francisco at fusemail.com> wrote:
+
+> > i'm not sure i understand what the functionality
+> of
+> > readTable() would be. just to clarify: i didn't
+> want
+> > to change the YDFramework but i was merely asking
+> if
+> > anyone had written a script that automatically
+> creates
+> > the class and templates for you.
+> 
+> And don't know what you mean by creating templates
+> but i think that you 
+> point a nice idea for YDDatabaseObject. We have
+> already a class that can 
+> read the db scheme.. so an integration of that class
+> with 
+> YDDatabaseObject could be excellent.. and that was
+> what 'readTable()' 
+> could do internally.. a method that would read the
+> table configuration 
+> and add fields and keys automatically.
+> 
+> Francisco
+> _______________________________________________
+> YDFramework-users mailing list
+> YDFramework-users at lists.berlios.de
+>
+http://lists.berlios.de/mailman/listinfo/ydframework-users
+> 
+
+
+__________________________________________________
+Do You Yahoo!?
+Tired of spam?  Yahoo! Mail has the best spam protection around 
+http://mail.yahoo.com 
+
+
+From francisco at fusemail.com  Sat Feb 25 18:58:12 2006
+From: francisco at fusemail.com (Francisco Azevedo)
+Date: Sat, 25 Feb 2006 17:58:12 +0000
+Subject: [ydf-users] YDDatabaseObject getResultsAsAssocArray question
+Message-ID: <44009AB4.3050402@fusemail.com>
+
+Hi db
+
+Just a simple question.. i'm trying to use getResultsAsAssocArray to 
+retrieve an array of array of results.
+Eg:
+
+Cars (id_car, name)
+People (id_people, id_car, name)  // each person can be just in 1 car
+
+Now i have:
+
+cars:
+1, 'ferrari'
+2, 'fiat'
+
+people:
+5, 1, 'db'
+6, 2, 'me'
+7, 1, 'pieter'
+
+
+.. after defining all db classes, if i use getResults() (on people 
+class) i will get something like:
+array( 0 => array( 'id_people' => 'db, ....) and that's ok.
+
+But i want to get an array of cars and inside each car element i want 
+all people, eg:
+
+array( 1 => array( 5 => ...  'people_id' => 5
+                    7 => ...  'people_id' => 7
+        ,
+        2 => array( 6 => ...
+      )
+
+To do this i had tryed:
+     getResultsAsAssocArray( array( 'id_car', 'id_people' ) )
+
+It works but i notice that it retrieves only the first people of each 
+car. So, i'm getting it ordered by cars and inside each car i get just 
+the first person and not all that belongs to that car.. strange
+Anyway, if i use getResults() instead .. i get all people in a regular 
+array.
+
+Am i doing something wrong?
+
+Francisco
+
+
+From francisco at fusemail.com  Sat Feb 25 19:47:59 2006
+From: francisco at fusemail.com (Francisco Azevedo)
+Date: Sat, 25 Feb 2006 18:47:59 +0000
+Subject: [ydf-users] YDDatabaseObject getResultsAsAssocArray question
+In-Reply-To: <44009AB4.3050402@fusemail.com>
+References: <44009AB4.3050402@fusemail.com>
+Message-ID: <4400A65F.1080700@fusemail.com>
+
+Problem solved. Yes, it works as expected.. i had defined a 'groupBy' 
+that shouldn't exist.. shame on me :D
+
+> 
+> Just a simple question.. i'm trying to use getResultsAsAssocArray to 
+> retrieve an array of array of results.
+> Eg:
+> 
+> Cars (id_car, name)
+> People (id_people, id_car, name)  // each person can be just in 1 car
+> 
+> Now i have:
+> 
+> cars:
+> 1, 'ferrari'
+> 2, 'fiat'
+> 
+> people:
+> 5, 1, 'db'
+> 6, 2, 'me'
+> 7, 1, 'pieter'
+> 
+> 
+> .. after defining all db classes, if i use getResults() (on people 
+> class) i will get something like:
+> array( 0 => array( 'id_people' => 'db, ....) and that's ok.
+> 
+> But i want to get an array of cars and inside each car element i want 
+> all people, eg:
+> 
+> array( 1 => array( 5 => ...  'people_id' => 5
+>                    7 => ...  'people_id' => 7
+>        ,
+>        2 => array( 6 => ...
+>      )
+> 
+> To do this i had tryed:
+>     getResultsAsAssocArray( array( 'id_car', 'id_people' ) )
+> 
+> It works but i notice that it retrieves only the first people of each 
+> car. So, i'm getting it ordered by cars and inside each car i get just 
+> the first person and not all that belongs to that car.. strange
+> Anyway, if i use getResults() instead .. i get all people in a regular 
+> array.
+> 
+> Am i doing something wrong?
+> 
+> Francisco
+> _______________________________________________
+> YDFramework-users mailing list
+> YDFramework-users at lists.berlios.de
+> http://lists.berlios.de/mailman/listinfo/ydframework-users
+> 
+
+
+
+From pieter at yellowduck.be  Mon Feb 27 13:44:58 2006
+From: pieter at yellowduck.be (Pieter Claerhout)
+Date: Mon, 27 Feb 2006 13:44:58 +0100
+Subject: [ydf-users] Request: YDForm::addElements()
+In-Reply-To: <20060224223229.40196.qmail@web50213.mail.yahoo.com>
+References: <4aef63030602240704y615b1d12l58dcd8c12513b893@mail.gmail.com>
+	 <20060224223229.40196.qmail@web50213.mail.yahoo.com>
+Message-ID: <4aef63030602270444x7bd159cdjb882a93d3906c09d@mail.gmail.com>
+
+Added in build 1738.
+
+pieter
+
+On 2/24/06, dab <dab214 at yahoo.com> wrote:
+>
+> hi pieter,
+> sorry, feuture request added in berlios.
+>
+> --- Pieter Claerhout <pieter at yellowduck.be> wrote:
+>
+> > Can you please log a feature request in berlios?
+> >
+> > http://developer.berlios.de/feature/?group_id=3988
+> >
+> > Thanks,
+> >
+> >
+> > pieter
+> >
+> > On 2/24/06, dab <dab214 at yahoo.com> wrote:
+> > >
+> > > any one else who would like to have the following
+> > > function added:
+> > >
+> > > $form->addElements ( $array );
+> > >
+> > > instead of doing:
+> > > $form->addElement ( 'text', 'username');
+> > > $form->addElement ( 'text', 'password');
+> > >
+> > >
+> > >
+> > > __________________________________________________
+> > > Do You Yahoo!?
+> > > Tired of spam?  Yahoo! Mail has the best spam
+> > protection around
+> > > http://mail.yahoo.com
+> > > _______________________________________________
+> > > YDFramework-users mailing list
+> > > YDFramework-users at lists.berlios.de
+> > >
+> >
+> http://lists.berlios.de/mailman/listinfo/ydframework-users
+> > >
+> >
+> >
+> >
+> > --
+> > pieter claerhout . pieter at yellowduck.be .
+> > http://www.yellowduck.be/
+> >
+>
+>
+> __________________________________________________
+> Do You Yahoo!?
+> Tired of spam?  Yahoo! Mail has the best spam protection around
+> http://mail.yahoo.com
+> _______________________________________________
+> YDFramework-users mailing list
+> YDFramework-users at lists.berlios.de
+> http://lists.berlios.de/mailman/listinfo/ydframework-users
+>
+
+
+
+--
+pieter claerhout . pieter at yellowduck.be . http://www.yellowduck.be/
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <https://lists.berlios.de/pipermail/ydframework-users/attachments/20060227/0c1982ba/attachment.html>
+
+From dab214 at yahoo.com  Mon Feb 27 16:41:27 2006
+From: dab214 at yahoo.com (dab)
+Date: Mon, 27 Feb 2006 07:41:27 -0800 (PST)
+Subject: [ydf-users] Request: YDForm::addElements()
+In-Reply-To: <4aef63030602270444x7bd159cdjb882a93d3906c09d@mail.gmail.com>
+Message-ID: <20060227154127.27168.qmail@web50210.mail.yahoo.com>
+
+hi pieter,
+yeah i saw that, you get an automatic email when
+updating the status of the request in berlios.
+thanks a lot!
+
+/dan
+
+--- Pieter Claerhout <pieter at yellowduck.be> wrote:
+
+> Added in build 1738.
+> 
+> pieter
+> 
+> On 2/24/06, dab <dab214 at yahoo.com> wrote:
+> >
+> > hi pieter,
+> > sorry, feuture request added in berlios.
+> >
+> > --- Pieter Claerhout <pieter at yellowduck.be> wrote:
+> >
+> > > Can you please log a feature request in berlios?
+> > >
+> > >
+> http://developer.berlios.de/feature/?group_id=3988
+> > >
+> > > Thanks,
+> > >
+> > >
+> > > pieter
+> > >
+> > > On 2/24/06, dab <dab214 at yahoo.com> wrote:
+> > > >
+> > > > any one else who would like to have the
+> following
+> > > > function added:
+> > > >
+> > > > $form->addElements ( $array );
+> > > >
+> > > > instead of doing:
+> > > > $form->addElement ( 'text', 'username');
+> > > > $form->addElement ( 'text', 'password');
+> > > >
+> > > >
+> > > >
+> > > >
+> __________________________________________________
+> > > > Do You Yahoo!?
+> > > > Tired of spam?  Yahoo! Mail has the best spam
+> > > protection around
+> > > > http://mail.yahoo.com
+> > > >
+> _______________________________________________
+> > > > YDFramework-users mailing list
+> > > > YDFramework-users at lists.berlios.de
+> > > >
+> > >
+> >
+>
+http://lists.berlios.de/mailman/listinfo/ydframework-users
+> > > >
+> > >
+> > >
+> > >
+> > > --
+> > > pieter claerhout . pieter at yellowduck.be .
+> > > http://www.yellowduck.be/
+> > >
+> >
+> >
+> > __________________________________________________
+> > Do You Yahoo!?
+> > Tired of spam?  Yahoo! Mail has the best spam
+> protection around
+> > http://mail.yahoo.com
+> > _______________________________________________
+> > YDFramework-users mailing list
+> > YDFramework-users at lists.berlios.de
+> >
+>
+http://lists.berlios.de/mailman/listinfo/ydframework-users
+> >
+> 
+> 
+> 
+> --
+> pieter claerhout . pieter at yellowduck.be .
+> http://www.yellowduck.be/
+> 
+
+
+__________________________________________________
+Do You Yahoo!?
+Tired of spam?  Yahoo! Mail has the best spam protection around 
+http://mail.yahoo.com 
+
+
+From dab214 at yahoo.com  Mon Feb 27 16:41:32 2006
+From: dab214 at yahoo.com (dab)
+Date: Mon, 27 Feb 2006 07:41:32 -0800 (PST)
+Subject: [ydf-users] Request: YDForm::addElements()
+In-Reply-To: <4aef63030602270444x7bd159cdjb882a93d3906c09d@mail.gmail.com>
+Message-ID: <20060227154132.68775.qmail@web50203.mail.yahoo.com>
+
+hi pieter,
+yeah i saw that, you get an automatic email when
+updating the status of the request in berlios.
+thanks a lot!
+
+/dan
+
+--- Pieter Claerhout <pieter at yellowduck.be> wrote:
+
+> Added in build 1738.
+> 
+> pieter
+> 
+> On 2/24/06, dab <dab214 at yahoo.com> wrote:
+> >
+> > hi pieter,
+> > sorry, feuture request added in berlios.
+> >
+> > --- Pieter Claerhout <pieter at yellowduck.be> wrote:
+> >
+> > > Can you please log a feature request in berlios?
+> > >
+> > >
+> http://developer.berlios.de/feature/?group_id=3988
+> > >
+> > > Thanks,
+> > >
+> > >
+> > > pieter
+> > >
+> > > On 2/24/06, dab <dab214 at yahoo.com> wrote:
+> > > >
+> > > > any one else who would like to have the
+> following
+> > > > function added:
+> > > >
+> > > > $form->addElements ( $array );
+> > > >
+> > > > instead of doing:
+> > > > $form->addElement ( 'text', 'username');
+> > > > $form->addElement ( 'text', 'password');
+> > > >
+> > > >
+> > > >
+> > > >
+> __________________________________________________
+> > > > Do You Yahoo!?
+> > > > Tired of spam?  Yahoo! Mail has the best spam
+> > > protection around
+> > > > http://mail.yahoo.com
+> > > >
+> _______________________________________________
+> > > > YDFramework-users mailing list
+> > > > YDFramework-users at lists.berlios.de
+> > > >
+> > >
+> >
+>
+http://lists.berlios.de/mailman/listinfo/ydframework-users
+> > > >
+> > >
+> > >
+> > >
+> > > --
+> > > pieter claerhout . pieter at yellowduck.be .
+> > > http://www.yellowduck.be/
+> > >
+> >
+> >
+> > __________________________________________________
+> > Do You Yahoo!?
+> > Tired of spam?  Yahoo! Mail has the best spam
+> protection around
+> > http://mail.yahoo.com
+> > _______________________________________________
+> > YDFramework-users mailing list
+> > YDFramework-users at lists.berlios.de
+> >
+>
+http://lists.berlios.de/mailman/listinfo/ydframework-users
+> >
+> 
+> 
+> 
+> --
+> pieter claerhout . pieter at yellowduck.be .
+> http://www.yellowduck.be/
+> 
+
+
+__________________________________________________
+Do You Yahoo!?
+Tired of spam?  Yahoo! Mail has the best spam protection around 
+http://mail.yahoo.com 
+
+

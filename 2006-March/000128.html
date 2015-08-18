@@ -1,0 +1,232 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [ydf-users] query regarding database (YDDatabse)
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/ydframework-users/2006-March/index.html" >
+   <LINK REL="made" HREF="mailto:ydframework-users%40lists.berlios.de?Subject=Re%3A%20%5Bydf-users%5D%20query%20regarding%20database%20%28YDDatabse%29&In-Reply-To=%3C4aef63030603230045o88df9bby54b298756f76e3ae%40mail.gmail.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000126.html">
+   <LINK REL="Next"  HREF="000130.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[ydf-users] query regarding database (YDDatabse)</H1>
+    <B>Pieter Claerhout</B> 
+    <A HREF="mailto:ydframework-users%40lists.berlios.de?Subject=Re%3A%20%5Bydf-users%5D%20query%20regarding%20database%20%28YDDatabse%29&In-Reply-To=%3C4aef63030603230045o88df9bby54b298756f76e3ae%40mail.gmail.com%3E"
+       TITLE="[ydf-users] query regarding database (YDDatabse)">pieter at yellowduck.be
+       </A><BR>
+    <I>Thu Mar 23 09:45:21 CET 2006</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000126.html">[ydf-users] query regarding database (YDDatabse)
+</A></li>
+        <LI>Next message: <A HREF="000130.html">[ydf-users] Thank U and one suggestion
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#128">[ date ]</a>
+              <a href="thread.html#128">[ thread ]</a>
+              <a href="subject.html#128">[ subject ]</a>
+              <a href="author.html#128">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Hi Moses,
+
+the following code example shows you how to do it. This is the PHP file:
+
+
+&lt;?php
+
+    // Standard include
+    include_once( dirname( __FILE__ ) . '/../YDFramework2/YDF2_init.php' );
+
+    // Includes
+    YDInclude( 'YDForm.php' );
+    YDInclude( 'YDTemplate.php' );
+
+    // Class definition
+    class form_radiobutton extends YDRequest {
+
+        // Class constructor
+        function form_radiobutton() {
+            $this-&gt;YDRequest();
+        }
+
+        // Default action
+        function actionDefault() {
+
+            // Create the form
+            $form = new YDForm( 'form1' );
+
+            // Add the radiobutton
+            $form-&gt;addElement(
+                'radio', 'sex', 'Sex:', array(), array( 'male' =&gt; 'Male',
+'female' =&gt; 'Female' )
+            );
+
+            // Add the submit button
+            $form-&gt;addElement( 'submit', 'btnSubmit', 'submit' );
+
+            // Set the defaults
+            $form-&gt;setDefaults( array( 'sex' =&gt; 'male' ) );
+
+            // Add the template
+            $tpl = new YDTemplate();
+
+            // Add the form to the template
+            $tpl-&gt;assignForm ( 'form',$form );
+
+            // Display the template
+            $tpl-&gt;display();
+
+        }
+
+    }
+
+    // Process the request
+    YDInclude( 'YDF2_process.php' );
+
+?&gt;
+The template looks as follows:
+
+{$form.tag}
+    {$form.sex.html}
+    {$form.btnSubmit.html}
+{$form.endtag}
+
+When you add a radiobutton, the 4th parameter in the addElement function is
+an array with the values (the array keys) and the names of the values (the
+array values).
+
+You also shouldn't put the radiobutton element twice on the template as that
+will give strange results.
+
+Hope that makes it a little bit more clear.
+
+cheers,
+
+
+pieter
+
+On 3/23/06, <A HREF="https://lists.berlios.de/mailman/listinfo/ydframework-users">moses at softwaysolutions.com</A> &lt;<A HREF="https://lists.berlios.de/mailman/listinfo/ydframework-users">moses at softwaysolutions.com</A>&gt; wrote:
+&gt;<i>
+</I>&gt;<i>  Dear Sir
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i>     The following is my program to display two option buttons named MALE
+</I>&gt;<i> and FEMALE  and one submit button
+</I>&gt;<i>
+</I>&gt;<i>     the problem is I am getting two different output......
+</I>&gt;<i>
+</I>&gt;<i>     PHP File
+</I>&gt;<i>
+</I>&gt;<i>                      function actionDefault()
+</I>&gt;<i>                      {
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i> $this-&gt;form-&gt;addElement('radio','sex','');
+</I>&gt;<i>
+</I>&gt;<i> $this-&gt;form-&gt;addElement('submit','btnSubmit','');
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i> $this-&gt;form-&gt;setDefaults(array('sex'=&gt;'Male'));
+</I>&gt;<i>                                  $this-&gt;template-&gt;assignForm
+</I>&gt;<i> ('form',$this-&gt;form);
+</I>&gt;<i>                                  $this-&gt;template-&gt;display();
+</I>&gt;<i>                       }
+</I>&gt;<i>
+</I>&gt;<i>     TPL File
+</I>&gt;<i>
+</I>&gt;<i>                                {$form.sex.html}
+</I>&gt;<i>                                {$form.sex.html}
+</I>&gt;<i>                                {$form.btnSubmit.html}
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i>     First Time when i run the PHP File the following is the output
+</I>&gt;<i>
+</I>&gt;<i>                        *&lt;input value=&quot;Male&quot; type=&quot;radio&quot; name=&quot;form_sex&quot;
+</I>&gt;<i> /&gt;Male&lt;br&gt;
+</I>&gt;<i>                              &lt;input value=&quot;Male&quot; type=&quot;radio&quot;
+</I>&gt;<i> name=&quot;form_sex&quot; /&gt;Male&lt;br&gt; *
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i>            That is the Value *Male* is displayed near the option button
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i>    Now I am pressing the Submit button So Again it comes to the function
+</I>&gt;<i> actionDefault() and displayes the TPL
+</I>&gt;<i>
+</I>&gt;<i>    now the Result is
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i>                          *&lt;input value=&quot;Male&quot; type=&quot;radio&quot; name=&quot;form_sex&quot;
+</I>&gt;<i> /&gt;&lt;br&gt;
+</I>&gt;<i>                              &lt;input value=&quot;Male&quot; type=&quot;radio&quot;
+</I>&gt;<i> name=&quot;form_sex&quot; /&gt;&lt;br&gt; *
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i>           This time value *Male*  is not Displayed Why!!!!!!!!!!!!
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i>           Again I dont know how to differentiate the two option
+</I>&gt;<i> buttons....Where and how should I specify the name
+</I>&gt;<i> to the option button.
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i> regards
+</I>&gt;<i> moses
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i>
+</I>
+
+
+--
+pieter claerhout . <A HREF="https://lists.berlios.de/mailman/listinfo/ydframework-users">pieter at yellowduck.be</A> . <A HREF="http://www.yellowduck.be/">http://www.yellowduck.be/</A>
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: &lt;<A HREF="https://lists.berlios.de/pipermail/ydframework-users/attachments/20060323/c9e3e913/attachment.html">https://lists.berlios.de/pipermail/ydframework-users/attachments/20060323/c9e3e913/attachment.html</A>&gt;
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000126.html">[ydf-users] query regarding database (YDDatabse)
+</A></li>
+	<LI>Next message: <A HREF="000130.html">[ydf-users] Thank U and one suggestion
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#128">[ date ]</a>
+              <a href="thread.html#128">[ thread ]</a>
+              <a href="subject.html#128">[ subject ]</a>
+              <a href="author.html#128">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/ydframework-users">More information about the YDFramework-users
+mailing list</a><br>
+</body></html>

@@ -1,0 +1,119 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [ydf-users] Re: Query Regarding File Upload
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/ydframework-users/2006-March/index.html" >
+   <LINK REL="made" HREF="mailto:ydframework-users%40lists.berlios.de?Subject=Re%3A%20%5Bydf-users%5D%20Re%3A%20Query%20Regarding%20File%20Upload&In-Reply-To=%3C4aef63030603272308i79b608f5u93abe69f171873df%40mail.gmail.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000173.html">
+   <LINK REL="Next"  HREF="000175.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[ydf-users] Re: Query Regarding File Upload</H1>
+    <B>Pieter Claerhout</B> 
+    <A HREF="mailto:ydframework-users%40lists.berlios.de?Subject=Re%3A%20%5Bydf-users%5D%20Re%3A%20Query%20Regarding%20File%20Upload&In-Reply-To=%3C4aef63030603272308i79b608f5u93abe69f171873df%40mail.gmail.com%3E"
+       TITLE="[ydf-users] Re: Query Regarding File Upload">pieter at yellowduck.be
+       </A><BR>
+    <I>Tue Mar 28 09:08:45 CEST 2006</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000173.html">[ydf-users] Query Regarding File Upload
+</A></li>
+        <LI>Next message: <A HREF="000175.html">[ydf-users] Ajax
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#174">[ date ]</a>
+              <a href="thread.html#174">[ thread ]</a>
+              <a href="subject.html#174">[ subject ]</a>
+              <a href="author.html#174">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Fixed in build 1820.
+
+pieter
+
+On 3/28/06, <A HREF="https://lists.berlios.de/mailman/listinfo/ydframework-users">moses at softwaysolutions.com</A> &lt;<A HREF="https://lists.berlios.de/mailman/listinfo/ydframework-users">moses at softwaysolutions.com</A>&gt; wrote:
+&gt;<i>
+</I>&gt;<i>  Dear Sir
+</I>&gt;<i>
+</I>&gt;<i>              I want to upload a file so I used the following coading
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i>                   if ( $form-&gt;validate() )
+</I>&gt;<i>                  {
+</I>&gt;<i>                               if ( $file-&gt;isUploaded() )
+</I>&gt;<i>                               {
+</I>&gt;<i>                                   $temp_filename = $file-&gt;getBaseName();
+</I>&gt;<i>                                   $file-&gt;moveUpload( './tmp' );
+</I>&gt;<i>                                }
+</I>&gt;<i>                   }
+</I>&gt;<i>
+</I>&gt;<i>           but it gives the error in the line    $file-&gt;moveUpload( './tmp'
+</I>&gt;<i> );
+</I>&gt;<i>
+</I>&gt;<i>           the error is ....
+</I>&gt;<i>
+</I>&gt;<i>                       *Fatal error*: Cannot instantiate non-existent
+</I>&gt;<i> class: ydfsfile in *
+</I>&gt;<i> D:\web\Moses\YDFramework2\YDClasses\YDFormElements\YDFormElement_File.php*on line
+</I>&gt;<i> *117*
+</I>&gt;<i>
+</I>&gt;<i>          I found out that the reason for the error is that the
+</I>&gt;<i> YDFileSystem.php file is not included in the file YDFormElement_File.php
+</I>&gt;<i>
+</I>&gt;<i>         So I added the following line include_once( YD_DIR_HOME_CLS .
+</I>&gt;<i> '/YDFileSystem.php');  after the line no 30;
+</I>&gt;<i>
+</I>&gt;<i>         Now it is working properly......
+</I>&gt;<i>
+</I>&gt;<i>         Can I do so. Is itcorrect if it is wrong what should i do to
+</I>&gt;<i> rectify the error......
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i> regards
+</I>&gt;<i> moses
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i>
+</I>
+
+
+--
+pieter claerhout . <A HREF="https://lists.berlios.de/mailman/listinfo/ydframework-users">pieter at yellowduck.be</A> . <A HREF="http://www.yellowduck.be/">http://www.yellowduck.be/</A>
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: &lt;<A HREF="https://lists.berlios.de/pipermail/ydframework-users/attachments/20060328/e0b13ad4/attachment.html">https://lists.berlios.de/pipermail/ydframework-users/attachments/20060328/e0b13ad4/attachment.html</A>&gt;
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000173.html">[ydf-users] Query Regarding File Upload
+</A></li>
+	<LI>Next message: <A HREF="000175.html">[ydf-users] Ajax
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#174">[ date ]</a>
+              <a href="thread.html#174">[ thread ]</a>
+              <a href="subject.html#174">[ subject ]</a>
+              <a href="author.html#174">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/ydframework-users">More information about the YDFramework-users
+mailing list</a><br>
+</body></html>

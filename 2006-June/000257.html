@@ -1,0 +1,95 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [ydf-users] YDDatabaseObject
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/ydframework-users/2006-June/index.html" >
+   <LINK REL="made" HREF="mailto:ydframework-users%40lists.berlios.de?Subject=Re%3A%20%5Bydf-users%5D%20YDDatabaseObject&In-Reply-To=%3C12260be20606281623v1bbbbe2aj25ac32889843533%40mail.gmail.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000256.html">
+   <LINK REL="Next"  HREF="000258.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[ydf-users] YDDatabaseObject</H1>
+    <B>David Bittencourt</B> 
+    <A HREF="mailto:ydframework-users%40lists.berlios.de?Subject=Re%3A%20%5Bydf-users%5D%20YDDatabaseObject&In-Reply-To=%3C12260be20606281623v1bbbbe2aj25ac32889843533%40mail.gmail.com%3E"
+       TITLE="[ydf-users] YDDatabaseObject">muitocomplicado at gmail.com
+       </A><BR>
+    <I>Thu Jun 29 01:23:06 CEST 2006</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000256.html">[ydf-users] YDDatabaseObject
+</A></li>
+        <LI>Next message: <A HREF="000258.html">[ydf-users] How to use YDFormElement_Grid?
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#257">[ date ]</a>
+              <a href="thread.html#257">[ thread ]</a>
+              <a href="subject.html#257">[ subject ]</a>
+              <a href="author.html#257">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>A protected field is defined by registerProtected. The field value will
+remain the same for all instances.
+
+Keys are NOT protected fields. You can change the value and use it to do
+different queries.
+
+Try to use resetQuery together with resetValues. Maybe the content_id
+condition may be defined there from the last query.
+
+-db
+
+
+
+On 6/27/06, Francisco Azevedo &lt;<A HREF="https://lists.berlios.de/mailman/listinfo/ydframework-users">francisco at fusemail.com</A>&gt; wrote:
+&gt;<i>
+</I>&gt;<i> Hi David
+</I>&gt;<i>
+</I>&gt;<i> &gt; If content_id is a protected field the value will not be removed.
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt; If it is not, this shouldn't be happening.
+</I>&gt;<i> &gt;
+</I>&gt;<i>
+</I>&gt;<i> It's the key.. so it's protected by default, right? So, resetValues() is
+</I>&gt;<i> not affecting it..
+</I>&gt;<i>
+</I>&gt;<i> regards
+</I>&gt;<i> Francisco A
+</I>&gt;<i> _______________________________________________
+</I>&gt;<i> YDFramework-users mailing list
+</I>&gt;<i> <A HREF="https://lists.berlios.de/mailman/listinfo/ydframework-users">YDFramework-users at lists.berlios.de</A>
+</I>&gt;<i> <A HREF="http://lists.berlios.de/mailman/listinfo/ydframework-users">http://lists.berlios.de/mailman/listinfo/ydframework-users</A>
+</I>&gt;<i>
+</I>-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: &lt;<A HREF="https://lists.berlios.de/pipermail/ydframework-users/attachments/20060628/6b7dda9d/attachment.html">https://lists.berlios.de/pipermail/ydframework-users/attachments/20060628/6b7dda9d/attachment.html</A>&gt;
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000256.html">[ydf-users] YDDatabaseObject
+</A></li>
+	<LI>Next message: <A HREF="000258.html">[ydf-users] How to use YDFormElement_Grid?
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#257">[ date ]</a>
+              <a href="thread.html#257">[ thread ]</a>
+              <a href="subject.html#257">[ subject ]</a>
+              <a href="author.html#257">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/ydframework-users">More information about the YDFramework-users
+mailing list</a><br>
+</body></html>

@@ -1,0 +1,90 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [ydf-users] YDDatabaseObject
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/ydframework-users/2006-May/index.html" >
+   <LINK REL="made" HREF="mailto:ydframework-users%40lists.berlios.de?Subject=Re%3A%20%5Bydf-users%5D%20YDDatabaseObject&In-Reply-To=%3C35300.71.39.100.121.1147276182.squirrel%40www.jocosoft.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000235.html">
+   <LINK REL="Next"  HREF="000240.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[ydf-users] YDDatabaseObject</H1>
+    <B>Peter</B> 
+    <A HREF="mailto:ydframework-users%40lists.berlios.de?Subject=Re%3A%20%5Bydf-users%5D%20YDDatabaseObject&In-Reply-To=%3C35300.71.39.100.121.1147276182.squirrel%40www.jocosoft.com%3E"
+       TITLE="[ydf-users] YDDatabaseObject">ydf at jocosoft.com
+       </A><BR>
+    <I>Wed May 10 17:49:42 CEST 2006</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000235.html">[ydf-users] Query Regarding Dynamic textbox
+</A></li>
+        <LI>Next message: <A HREF="000240.html">[ydf-users] YDDatabaseObject
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#236">[ date ]</a>
+              <a href="thread.html#236">[ thread ]</a>
+              <a href="subject.html#236">[ subject ]</a>
+              <a href="author.html#236">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Hi guys,
+
+I have a simple question. I'm either overlooking something, or I'm looking
+for something that's not there. What I want is a list of 5 randomly
+selected albums which have tracks in a given genre. So...
+
+$album = YDDatabaseObject::getInstance( 'album' );
+$album-&gt;load( 'track' );
+$album-&gt;track-&gt;genreid = $id;
+$album-&gt;order( 'RAND()' );
+$album-&gt;limit( 5 );
+$album-&gt;find( 'track' );
+$result = $album-&gt;getResults();
+
+Simple enough, except that it's possible that albums get listed more than
+once, which simply looks dumb. So, how do I add the DISTINCT option to it?
+
+I tried:
+
+$album-&gt;_query-&gt;options( array( 'DISTINCT' ) );
+
+Right before calling find(), but that didn't do the trick, and the
+YDDatabaseObject class has no options equivalent as far as I can tell...
+
+Any ideas?
+
+Thanks,
+Peter
+
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000235.html">[ydf-users] Query Regarding Dynamic textbox
+</A></li>
+	<LI>Next message: <A HREF="000240.html">[ydf-users] YDDatabaseObject
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#236">[ date ]</a>
+              <a href="thread.html#236">[ thread ]</a>
+              <a href="subject.html#236">[ subject ]</a>
+              <a href="author.html#236">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/ydframework-users">More information about the YDFramework-users
+mailing list</a><br>
+</body></html>

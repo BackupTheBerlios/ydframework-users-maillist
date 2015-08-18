@@ -1,0 +1,172 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [ydf-users] Qery Regarding Register Functions
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/ydframework-users/2006-June/index.html" >
+   <LINK REL="made" HREF="mailto:ydframework-users%40lists.berlios.de?Subject=Re%3A%20%5Bydf-users%5D%20Qery%20Regarding%20Register%20Functions&In-Reply-To=%3C306340e00606140126u4604fde6h2bf92940cb238a0e%40mail.gmail.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000241.html">
+   <LINK REL="Next"  HREF="000242.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[ydf-users] Qery Regarding Register Functions</H1>
+    <B>ydf poi</B> 
+    <A HREF="mailto:ydframework-users%40lists.berlios.de?Subject=Re%3A%20%5Bydf-users%5D%20Qery%20Regarding%20Register%20Functions&In-Reply-To=%3C306340e00606140126u4604fde6h2bf92940cb238a0e%40mail.gmail.com%3E"
+       TITLE="[ydf-users] Qery Regarding Register Functions">ydfpoi at gmail.com
+       </A><BR>
+    <I>Wed Jun 14 10:26:18 CEST 2006</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000241.html">[ydf-users] Qery Regarding Register Functions
+</A></li>
+        <LI>Next message: <A HREF="000242.html">[ydf-users] Qery Regarding Register Functions
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#243">[ date ]</a>
+              <a href="thread.html#243">[ thread ]</a>
+              <a href="subject.html#243">[ subject ]</a>
+              <a href="author.html#243">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Hi moses,
+
+1) You have to manage an YDTemplate object (because YDTemplate
+inherits from Smarty) as you did in your second solution.
+
+2) You have to command something like
+    $this-&gt;template-&gt;register_function(&quot;displayName&quot;, array(&amp; $this,
+&quot;displayName&quot;));
+because displayName is not a function but a method defined in the
+class of $this.
+Thus $this-&gt;displayName will be executed, not displayName (which
+doesn't exists).
+
+Note that, in order for displayName to have parameters, you have to specify
+    function displayName($params) { ... }
+where $params should be an array of all parameters.
+
+3) you can look at a real example in examples/weblog/manage/stats.php
+from YDF Weblog application. (In build 1780 it is located at lines 16
+and 26.)
+
+Kind regards
+
+2006/6/14, <A HREF="https://lists.berlios.de/mailman/listinfo/ydframework-users">moses at softwaysolutions.com</A> &lt;<A HREF="https://lists.berlios.de/mailman/listinfo/ydframework-users">moses at softwaysolutions.com</A>&gt;:
+&gt;<i>
+</I>&gt;<i> Hi Everybody
+</I>&gt;<i>
+</I>&gt;<i>     How to register functions within YDTemplate.
+</I>&gt;<i>
+</I>&gt;<i> Regarding Smarty we will be doing the following.
+</I>&gt;<i>
+</I>&gt;<i> (.php)
+</I>&gt;<i>
+</I>&gt;<i>     $smarty-&gt;register_function(&quot;displayName&quot;, &quot;displayName&quot;);
+</I>&gt;<i>     function displayName()
+</I>&gt;<i>     {
+</I>&gt;<i>            echo &quot;My Name is Moses&quot;;
+</I>&gt;<i>     }
+</I>&gt;<i> (.tpl)
+</I>&gt;<i>
+</I>&gt;<i>    {displayName}
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i>    How can I implement this in YDTemplate.
+</I>&gt;<i>
+</I>&gt;<i>    I tried the following
+</I>&gt;<i> (.php)
+</I>&gt;<i>    function actionDefault()
+</I>&gt;<i>    {
+</I>&gt;<i>         $smarty = new Smarty;
+</I>&gt;<i>         $smarty-&gt;register_function(&quot;displayName&quot;, &quot;displayName&quot;);
+</I>&gt;<i>         $this-&gt;template-&gt;display();
+</I>&gt;<i>    }
+</I>&gt;<i>    function displayName()
+</I>&gt;<i>    {
+</I>&gt;<i>            echo &quot;My Name is Moses&quot;;
+</I>&gt;<i>    }
+</I>&gt;<i>
+</I>&gt;<i> (.tpl)
+</I>&gt;<i>
+</I>&gt;<i>   {displayName}
+</I>&gt;<i>
+</I>&gt;<i>    Get the Following Error
+</I>&gt;<i>
+</I>&gt;<i>         Warning: Smarty error: [in datagridSmarty.tpl line 1]: syntax
+</I>&gt;<i> error: custom function 'displayName' is not implemented
+</I>&gt;<i> (Smarty_Compiler.class.php, line 795) in
+</I>&gt;<i> D:\web\Moses\test\pear\DataGrid\YDFramework2\3rdparty\smarty\libs\Smarty.class.php
+</I>&gt;<i> on line 1095
+</I>&gt;<i>
+</I>&gt;<i> Second I triend tried the following
+</I>&gt;<i>
+</I>&gt;<i>      (.php)
+</I>&gt;<i>    function actionDefault()
+</I>&gt;<i>    {
+</I>&gt;<i>
+</I>&gt;<i>         $this-&gt;template-&gt;register_function(&quot;displayName&quot;,
+</I>&gt;<i> &quot;displayName&quot;);
+</I>&gt;<i>         $this-&gt;template-&gt;display()
+</I>&gt;<i>    }
+</I>&gt;<i>    function displayName()
+</I>&gt;<i>    {
+</I>&gt;<i>            echo &quot;My Name is Moses&quot;;
+</I>&gt;<i>    }
+</I>&gt;<i>
+</I>&gt;<i> (.tpl)
+</I>&gt;<i>
+</I>&gt;<i>   {displayName}
+</I>&gt;<i>
+</I>&gt;<i>   But I didnt get any Result
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i> How to slove the problem
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i> regards
+</I>&gt;<i> moses
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i> _______________________________________________
+</I>&gt;<i> YDFramework-users mailing list
+</I>&gt;<i> <A HREF="https://lists.berlios.de/mailman/listinfo/ydframework-users">YDFramework-users at lists.berlios.de</A>
+</I>&gt;<i> <A HREF="http://lists.berlios.de/mailman/listinfo/ydframework-users">http://lists.berlios.de/mailman/listinfo/ydframework-users</A>
+</I>&gt;<i>
+</I>
+
+-- 
+po&#239;
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000241.html">[ydf-users] Qery Regarding Register Functions
+</A></li>
+	<LI>Next message: <A HREF="000242.html">[ydf-users] Qery Regarding Register Functions
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#243">[ date ]</a>
+              <a href="thread.html#243">[ thread ]</a>
+              <a href="subject.html#243">[ subject ]</a>
+              <a href="author.html#243">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/ydframework-users">More information about the YDFramework-users
+mailing list</a><br>
+</body></html>

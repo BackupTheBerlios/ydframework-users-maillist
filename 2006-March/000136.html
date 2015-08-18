@@ -1,0 +1,309 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [ydf-users] what happened to the forum?
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/ydframework-users/2006-March/index.html" >
+   <LINK REL="made" HREF="mailto:ydframework-users%40lists.berlios.de?Subject=Re%3A%20%5Bydf-users%5D%20what%20happened%20to%20the%20forum%3F&In-Reply-To=%3C4aef63030603230444r563301c3s8d4247f748628a17%40mail.gmail.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000134.html">
+   <LINK REL="Next"  HREF="000141.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[ydf-users] what happened to the forum?</H1>
+    <B>Pieter Claerhout</B> 
+    <A HREF="mailto:ydframework-users%40lists.berlios.de?Subject=Re%3A%20%5Bydf-users%5D%20what%20happened%20to%20the%20forum%3F&In-Reply-To=%3C4aef63030603230444r563301c3s8d4247f748628a17%40mail.gmail.com%3E"
+       TITLE="[ydf-users] what happened to the forum?">pieter at yellowduck.be
+       </A><BR>
+    <I>Thu Mar 23 13:44:05 CET 2006</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000134.html">[ydf-users] what happened to the forum?
+</A></li>
+        <LI>Next message: <A HREF="000141.html">[ydf-users] what happened to the forum?
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#136">[ date ]</a>
+              <a href="thread.html#136">[ thread ]</a>
+              <a href="subject.html#136">[ subject ]</a>
+              <a href="author.html#136">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>I opted to replace the forum with a mailing list which is way easier to
+handle.
+
+pieter
+
+On 3/23/06, dab &lt;<A HREF="https://lists.berlios.de/mailman/listinfo/ydframework-users">dab214 at yahoo.com</A>&gt; wrote:
+&gt;<i>
+</I>&gt;<i> hi all,
+</I>&gt;<i> when will the forum come back up?
+</I>&gt;<i> we kind of need a forum if we want this project to
+</I>&gt;<i> keep growing with users. imo.
+</I>&gt;<i>
+</I>&gt;<i> /dan
+</I>&gt;<i>
+</I>&gt;<i> --- <A HREF="https://lists.berlios.de/mailman/listinfo/ydframework-users">moses at softwaysolutions.com</A> wrote:
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i> ---------------------------------
+</I>&gt;<i>
+</I>&gt;<i> Dear Sir
+</I>&gt;<i>
+</I>&gt;<i>       Thank you very much.
+</I>&gt;<i>
+</I>&gt;<i>       I have solved my problem.
+</I>&gt;<i>
+</I>&gt;<i>       One suggestion.
+</I>&gt;<i>
+</I>&gt;<i>                 Please add more details in the
+</I>&gt;<i> helpfile so that it will be helpful tobeginers like me
+</I>&gt;<i> to learn more about YDFrame work and
+</I>&gt;<i>        again and again i may notdistrub you.
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i> regards
+</I>&gt;<i> moses
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i> -------- Original Message --------
+</I>&gt;<i> Subject: Re:[ydf-users] query regarding database
+</I>&gt;<i> (YDDatabse)
+</I>&gt;<i> From: &quot;PieterClaerhout&quot; &lt;<A HREF="https://lists.berlios.de/mailman/listinfo/ydframework-users">pieter at yellowduck.be</A>&gt;
+</I>&gt;<i> Date: Thu, March 23, 20061:45 am
+</I>&gt;<i> To:
+</I>&gt;<i> &quot;<A HREF="https://lists.berlios.de/mailman/listinfo/ydframework-users">moses at softwaysolutions.com</A>&quot;&lt;<A HREF="https://lists.berlios.de/mailman/listinfo/ydframework-users">moses at softwaysolutions.com</A>&gt;,
+</I>&gt;<i> <A HREF="https://lists.berlios.de/mailman/listinfo/ydframework-users">ydframework-users at berlios.de</A>
+</I>&gt;<i>
+</I>&gt;<i> Hi Moses,
+</I>&gt;<i>
+</I>&gt;<i> the following code example shows you how to do it.
+</I>&gt;<i> This is the PHPfile:
+</I>&gt;<i>
+</I>&gt;<i> &lt;?php
+</I>&gt;<i>    // Standard include
+</I>&gt;<i>   include_once( dirname( __FILE__ ) .
+</I>&gt;<i> '/../YDFramework2/YDF2_init.php');
+</I>&gt;<i>    // Includes
+</I>&gt;<i>    YDInclude('YDForm.php' );
+</I>&gt;<i>    YDInclude( 'YDTemplate.php');
+</I>&gt;<i>    // Class definition
+</I>&gt;<i>    classform_radiobutton extends YDRequest {
+</I>&gt;<i>        // Classconstructor
+</I>&gt;<i>        functionform_radiobutton(){
+</I>&gt;<i>           $this-&gt;YDRequest();
+</I>&gt;<i>       }
+</I>&gt;<i>        // Defaultaction
+</I>&gt;<i>        functionactionDefault() {
+</I>&gt;<i>            //Create theform
+</I>&gt;<i>           $form = new YDForm( 'form1' );
+</I>&gt;<i>            //Add theradiobutton
+</I>&gt;<i>           $form-&gt;addElement(
+</I>&gt;<i>               'radio', 'sex', 'Sex:', array(), array(
+</I>&gt;<i> 'male' =&gt; 'Male', 'female'=&gt; 'Female')
+</I>&gt;<i>           );
+</I>&gt;<i>            //Add the submitbutton
+</I>&gt;<i>           $form-&gt;addElement( 'submit', 'btnSubmit',
+</I>&gt;<i> 'submit' );
+</I>&gt;<i>            //Set thedefaults
+</I>&gt;<i>           $form-&gt;setDefaults( array( 'sex' =&gt; 'male'
+</I>&gt;<i> ) );
+</I>&gt;<i>            //Add thetemplate
+</I>&gt;<i>           $tpl = new YDTemplate();
+</I>&gt;<i>            //Add the form to thetemplate
+</I>&gt;<i>           $tpl-&gt;assignForm ( 'form',$form );
+</I>&gt;<i>            //Display thetemplate
+</I>&gt;<i>           $tpl-&gt;display();
+</I>&gt;<i>        }
+</I>&gt;<i>    }
+</I>&gt;<i>    // Process the request
+</I>&gt;<i>   YDInclude( 'YDF2_process.php' );
+</I>&gt;<i> ?&gt;
+</I>&gt;<i> The template looks as follows:
+</I>&gt;<i>
+</I>&gt;<i> {$form.tag}
+</I>&gt;<i>   {$form.sex.html}
+</I>&gt;<i>   {$form.btnSubmit.html}
+</I>&gt;<i> {$form.endtag}
+</I>&gt;<i>
+</I>&gt;<i> When you add aradiobutton, the 4th parameter in the
+</I>&gt;<i> addElement function is an arraywith the values (the
+</I>&gt;<i> array keys) and the names of the values (the
+</I>&gt;<i> arrayvalues).
+</I>&gt;<i>
+</I>&gt;<i> You also shouldn't put the radiobutton element twice
+</I>&gt;<i> on thetemplate as that will give strange results.
+</I>&gt;<i>
+</I>&gt;<i> Hope that makes it a little bit more clear.
+</I>&gt;<i>
+</I>&gt;<i> cheers,
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i> pieter
+</I>&gt;<i>
+</I>&gt;<i> On 3/23/06,
+</I>&gt;<i> <A HREF="https://lists.berlios.de/mailman/listinfo/ydframework-users">moses at softwaysolutions.com</A>&lt;<A HREF="https://lists.berlios.de/mailman/listinfo/ydframework-users">moses at softwaysolutions.com</A>&gt;
+</I>&gt;<i> wrote: Dear Sir
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i>    The following is my program to display twooption
+</I>&gt;<i> buttons named MALE and FEMALE  and one submit button
+</I>&gt;<i>
+</I>&gt;<i>    the problem is I am getting two
+</I>&gt;<i> differentoutput......
+</I>&gt;<i>
+</I>&gt;<i>    PHP File
+</I>&gt;<i>
+</I>&gt;<i>                     functionactionDefault()
+</I>&gt;<i>                    {
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i> $this-&gt;form-&gt;addElement('radio','sex','');
+</I>&gt;<i>
+</I>&gt;<i> $this-&gt;form-&gt;addElement('submit','btnSubmit','');
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i> $this-&gt;form-&gt;setDefaults(array('sex'=&gt;'Male'));
+</I>&gt;<i>
+</I>&gt;<i> $this-&gt;template-&gt;assignForm('form',$this-&gt;form);
+</I>&gt;<i>
+</I>&gt;<i> $this-&gt;template-&gt;display();
+</I>&gt;<i>                     }
+</I>&gt;<i>
+</I>&gt;<i>    TPL File
+</I>&gt;<i>
+</I>&gt;<i>                              {$form.sex.html}
+</I>&gt;<i>                               {$form.sex.html}
+</I>&gt;<i>                               {$form.btnSubmit.html}
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i>    First Time when i run the PHP File the followingis
+</I>&gt;<i> the output
+</I>&gt;<i>
+</I>&gt;<i>                       &lt;input value=&quot;Male&quot;
+</I>&gt;<i> type=&quot;radio&quot;name=&quot;form_sex&quot;/&gt;Male&lt;br&gt;
+</I>&gt;<i>                             &lt;inputvalue=&quot;Male&quot;
+</I>&gt;<i> type=&quot;radio&quot; name=&quot;form_sex&quot; /&gt;Male&lt;br&gt;
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i>           Thatis the Value Male is displayed near the
+</I>&gt;<i> optionbutton
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i>   Now I am pressing the Submit button So Again it
+</I>&gt;<i> comesto the function actionDefault() and displayes the
+</I>&gt;<i> TPL
+</I>&gt;<i>
+</I>&gt;<i>   now the Result is
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i>                         &lt;input value=&quot;Male&quot;
+</I>&gt;<i> type=&quot;radio&quot;name=&quot;form_sex&quot;/&gt;&lt;br&gt;
+</I>&gt;<i>                             &lt;inputvalue=&quot;Male&quot;
+</I>&gt;<i> type=&quot;radio&quot; name=&quot;form_sex&quot; /&gt;&lt;br&gt;
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i>          Thistime value Male  is not
+</I>&gt;<i> DisplayedWhy!!!!!!!!!!!!
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i>          Again I dontknow how to differentiate the
+</I>&gt;<i> two option buttons....Where and how shouldI specify
+</I>&gt;<i> the name
+</I>&gt;<i> to the option button.
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i> regards
+</I>&gt;<i> moses
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i> --
+</I>&gt;<i> pieter claerhout . <A HREF="https://lists.berlios.de/mailman/listinfo/ydframework-users">pieter at yellowduck.be</A> .
+</I>&gt;<i>
+</I>&gt;<i> <A HREF="http://www.yellowduck.be/_______________________________________________YDFramework-users">http://www.yellowduck.be/_______________________________________________YDFramework-users</A>
+</I>&gt;<i> mailing
+</I>&gt;<i> <A HREF="https://lists.berlios.de/mailman/listinfo/ydframework-users">listYDFramework-users at lists.berlios</A>
+</I>&gt;<i> .<A HREF="dehttp://lists.berlios.de/mailman/listinfo/ydframework-users">dehttp://lists.berlios.de/mailman/listinfo/ydframework-users</A>
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i> __________________________________________________
+</I>&gt;<i> Do You Yahoo!?
+</I>&gt;<i> Tired of spam?  Yahoo! Mail has the best spam protection around
+</I>&gt;<i> <A HREF="http://mail.yahoo.com">http://mail.yahoo.com</A>
+</I>&gt;<i> _______________________________________________
+</I>&gt;<i> YDFramework-users mailing list
+</I>&gt;<i> <A HREF="https://lists.berlios.de/mailman/listinfo/ydframework-users">YDFramework-users at lists.berlios.de</A>
+</I>&gt;<i> <A HREF="http://lists.berlios.de/mailman/listinfo/ydframework-users">http://lists.berlios.de/mailman/listinfo/ydframework-users</A>
+</I>&gt;<i>
+</I>
+
+
+--
+pieter claerhout . <A HREF="https://lists.berlios.de/mailman/listinfo/ydframework-users">pieter at yellowduck.be</A> . <A HREF="http://www.yellowduck.be/">http://www.yellowduck.be/</A>
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: &lt;<A HREF="https://lists.berlios.de/pipermail/ydframework-users/attachments/20060323/cfe23303/attachment.html">https://lists.berlios.de/pipermail/ydframework-users/attachments/20060323/cfe23303/attachment.html</A>&gt;
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000134.html">[ydf-users] what happened to the forum?
+</A></li>
+	<LI>Next message: <A HREF="000141.html">[ydf-users] what happened to the forum?
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#136">[ date ]</a>
+              <a href="thread.html#136">[ thread ]</a>
+              <a href="subject.html#136">[ subject ]</a>
+              <a href="author.html#136">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/ydframework-users">More information about the YDFramework-users
+mailing list</a><br>
+</body></html>

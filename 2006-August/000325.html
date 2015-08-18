@@ -1,0 +1,188 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [ydf-users] unexpected behaviour of $image-&gt;saveThumbnail
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/ydframework-users/2006-August/index.html" >
+   <LINK REL="made" HREF="mailto:ydframework-users%40lists.berlios.de?Subject=Re%3A%20%5Bydf-users%5D%20unexpected%20behaviour%20of%20%24image-%3EsaveThumbnail&In-Reply-To=%3CB4E11938-28BA-4AB2-A115-C23EA9C485A2%40gmail.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000324.html">
+   <LINK REL="Next"  HREF="000326.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[ydf-users] unexpected behaviour of $image-&gt;saveThumbnail</H1>
+    <B>Gonzillaaa</B> 
+    <A HREF="mailto:ydframework-users%40lists.berlios.de?Subject=Re%3A%20%5Bydf-users%5D%20unexpected%20behaviour%20of%20%24image-%3EsaveThumbnail&In-Reply-To=%3CB4E11938-28BA-4AB2-A115-C23EA9C485A2%40gmail.com%3E"
+       TITLE="[ydf-users] unexpected behaviour of $image-&gt;saveThumbnail">gonzillaaa at gmail.com
+       </A><BR>
+    <I>Thu Aug 17 13:59:45 CEST 2006</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000324.html">[ydf-users] unexpected behaviour of $image-&gt;saveThumbnail
+</A></li>
+        <LI>Next message: <A HREF="000326.html">[ydf-users] unexpected behaviour of $image-&gt;saveThumbnail
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#325">[ date ]</a>
+              <a href="thread.html#325">[ thread ]</a>
+              <a href="subject.html#325">[ subject ]</a>
+              <a href="author.html#325">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Hi Pieter uploading the image to show it to you I have realised the  
+problem lies in how the camera takes the shots and the finder (in  
+osx) displays them.
+
+I have two cameras and tested this with both (both canon btw). It  
+seems all shots are stored horizontally but there must be something  
+on the exif data that says that the shot has been taken vertically so  
+finder and other photo management programs display it vertically.  
+When viewing the image with a browser for instance or uploading it  
+with php the image remains horizontal. Now I'm not sure if this is  
+something in particular of my cameras or general to all of them. Have  
+you had this before?
+
+If I open the images with photoshop btw they appear vertical I save  
+them without any editing and now they reman vertical to all effects...
+
+
+is there a straight forward way to rotate the image with php?
+
+btw here is a sample image with the problem in question: <A HREF="http://">http://</A> 
+artificialtourism.com/IMG_4337.JPG
+
+and this the code for uploading and resizing I'm using:
+
+function saveMainView($file, $file_path) {
+	$path = MEDIA_PATH . $file_path . '/';
+	$date_name = date(&quot;dmy&quot;) . &quot;_&quot; . date(&quot;His&quot;);
+	if (!$file_path) {
+		die('$file_path is not set');
+	}
+	if (!$file) {
+		die('no file specified');
+	}
+	if ($file-&gt;isUploaded()) {
+		/** check whether path exists or not
+		 * if not make the directory */
+		if (!file_exists($path)) {
+			mkdir($path);
+		}
+		if (!file_exists($path . 'thumbnails/')) {
+			mkdir($path . 'thumbnails/');
+		}
+		if (!file_exists($path . 'large/')) {
+			mkdir($path . 'large/');
+		}
+		/** ================================================================
+		 * strip character from filename &amp; get the new filename */
+		$filename = YDStringUtil :: stripSpecialCharacters($file- 
+ &gt;getBaseName());
+		$file-&gt;moveUpload($path, $filename);
+		/** Check if it's an image (filetype) */
+		$fileObj = new YDFSFile($path . $filename);
+		if (!$fileObj-&gt;isImage()) {
+			@ unlink($path . $filename);
+			die('Image file not recognised');
+		}
+		/** ================================================================
+		 * create image object to rename etc */
+		$image = new YDFSImage($path . $filename);
+		$ext = strtolower($image-&gt;getExtension());
+		$image-&gt;rename($path . $date_name . '.' . $ext);
+		/** ================================================================
+		 * change permissions on the directories &amp; file */
+		@ chmod($path, 0777);
+		@ chmod($path . 'thumbnails/', 0777);
+		@ chmod($path . 'large/', 0777);
+		@ chmod($path . $image-&gt;getBaseName(), 0777);
+		/** ================================================================
+		 * resize */
+		$image-&gt;saveThumbnail(450, 600, $path . 'large/' . $image- 
+ &gt;getBaseName(), true);
+		$image-&gt;saveThumbnail(265, 335, $path . $image-&gt;getBaseName(), true);
+		/** ================================================================
+		 * create thumbnail */
+		$image-&gt;saveThumbnail(100, 100, $path . 'thumbnails/' . $image- 
+ &gt;getBaseName());
+	}
+	/** @return filename */
+	return $image-&gt;getBaseName();
+}
+
+many thanks,
+
+On 17 Aug 2006, at 12:26, Pieter Claerhout wrote:
+
+&gt;<i> Normally, it shouldn't rotate the images. Can you send me a sample  
+</I>&gt;<i> image/script that shows this?
+</I>&gt;<i>
+</I>&gt;<i> pieter
+</I>&gt;<i>
+</I>&gt;<i> On 8/17/06, Gonzillaaa &lt;<A HREF="https://lists.berlios.de/mailman/listinfo/ydframework-users">gonzillaaa at gmail.com</A>&gt; wrote: Hello al I  
+</I>&gt;<i> have a really weird thing happening, I am uploading a
+</I>&gt;<i> bunch of images directly from a  digital camera and resizing them
+</I>&gt;<i> using saveThumbnail like:
+</I>&gt;<i>
+</I>&gt;<i> $image-&gt;saveThumbnail(265, 335, $path . $image-&gt;getBaseName(), true);
+</I>&gt;<i> $image-&gt;saveThumbnail(450, 600, $path . 'large/' . $image-&gt;getBaseName
+</I>&gt;<i> (), true);
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i> the problem I'm getting is that the images uploaded are vertical and
+</I>&gt;<i> in the resizing process they get rotated and turn 90 degrees on their
+</I>&gt;<i> side, not matter if I crop them or not...
+</I>&gt;<i>
+</I>&gt;<i> Have you seen this behaviour before? would it be possible to have a
+</I>&gt;<i> resize &amp; rotate methods on YDFSImage?
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i> Many thanks,
+</I>&gt;<i>
+</I>&gt;<i> G.
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i> _______________________________________________
+</I>&gt;<i> YDFramework-users mailing list
+</I>&gt;<i> <A HREF="https://lists.berlios.de/mailman/listinfo/ydframework-users">YDFramework-users at lists.berlios.de</A>
+</I>&gt;<i> <A HREF="https://lists.berlios.de/mailman/listinfo/ydframework-users">https://lists.berlios.de/mailman/listinfo/ydframework-users</A>
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i> -- 
+</I>&gt;<i> pieter claerhout . <A HREF="https://lists.berlios.de/mailman/listinfo/ydframework-users">pieter at yellowduck.be</A> . <A HREF="http://www.yellowduck.be/">http://www.yellowduck.be/</A>
+</I>&gt;<i> _______________________________________________
+</I>&gt;<i> YDFramework-users mailing list
+</I>&gt;<i> <A HREF="https://lists.berlios.de/mailman/listinfo/ydframework-users">YDFramework-users at lists.berlios.de</A>
+</I>&gt;<i> <A HREF="https://lists.berlios.de/mailman/listinfo/ydframework-users">https://lists.berlios.de/mailman/listinfo/ydframework-users</A>
+</I>
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000324.html">[ydf-users] unexpected behaviour of $image-&gt;saveThumbnail
+</A></li>
+	<LI>Next message: <A HREF="000326.html">[ydf-users] unexpected behaviour of $image-&gt;saveThumbnail
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#325">[ date ]</a>
+              <a href="thread.html#325">[ thread ]</a>
+              <a href="subject.html#325">[ subject ]</a>
+              <a href="author.html#325">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/ydframework-users">More information about the YDFramework-users
+mailing list</a><br>
+</body></html>

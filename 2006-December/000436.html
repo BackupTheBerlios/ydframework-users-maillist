@@ -1,0 +1,95 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [ydf-users] Password field value needs to be cleared out
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/ydframework-users/2006-December/index.html" >
+   <LINK REL="made" HREF="mailto:ydframework-users%40lists.berlios.de?Subject=Re%3A%20%5Bydf-users%5D%20Password%20field%20value%20needs%20to%20be%20cleared%20out&In-Reply-To=%3C93778d790612061538x349dae0h3f15b25c97d04901%40mail.gmail.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000435.html">
+   <LINK REL="Next"  HREF="000439.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[ydf-users] Password field value needs to be cleared out</H1>
+    <B>aga toytoy</B> 
+    <A HREF="mailto:ydframework-users%40lists.berlios.de?Subject=Re%3A%20%5Bydf-users%5D%20Password%20field%20value%20needs%20to%20be%20cleared%20out&In-Reply-To=%3C93778d790612061538x349dae0h3f15b25c97d04901%40mail.gmail.com%3E"
+       TITLE="[ydf-users] Password field value needs to be cleared out">paultoytoy at gmail.com
+       </A><BR>
+    <I>Thu Dec  7 00:38:01 CET 2006</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000435.html">[ydf-users] mod_rewrite and recordsets
+</A></li>
+        <LI>Next message: <A HREF="000439.html">[ydf-users] Password field value needs to be cleared out
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#436">[ date ]</a>
+              <a href="thread.html#436">[ thread ]</a>
+              <a href="subject.html#436">[ subject ]</a>
+              <a href="author.html#436">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Hi guyz!
+
+I just discover this on my code:
+
+                $form-&gt;addElement( 'password','password','New
+Password',$attributes_1 );
+                $form-&gt;addElement( 'password','rpassword','Confirm
+password',$attributes_1 );
+                 ....
+
+                $form-&gt;addRule( 'password',  'required','Password
+field is required in this form!');
+                $form-&gt;addRule( 'rpassword', 'required','Confirm
+Password field is required in this form!');
+
+When those two fields' values won't matched after hitting submit
+button, definitely it will post an error message. But what I don't
+like is that, let's say for example,
+
+            &lt;input style=&quot;width: 200px&quot; id=&quot;registration_password&quot;
+type=&quot;password&quot; name=&quot;registration_password&quot; value=&quot;admin&quot; /&gt;
+            &lt;input style=&quot;width: 200px&quot; id=&quot;registration_rpassword&quot;
+type=&quot;password&quot; name=&quot;registration_rpassword&quot; value=&quot;aamin&quot; /&gt;
+
+you see that the value=&quot;aamin&quot;  and value=&quot;aamin&quot; is there. What I
+expect to happen is after hitting submit button, values for passwod
+field must be cleared out. I guess, its a bad idea if we let our
+password remain visible to somebody. Just concern of security risk.
+Can we make it to autmomatically clear this thing after hitting submit
+button?
+
+Cheers!
+
+toytoy
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000435.html">[ydf-users] mod_rewrite and recordsets
+</A></li>
+	<LI>Next message: <A HREF="000439.html">[ydf-users] Password field value needs to be cleared out
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#436">[ date ]</a>
+              <a href="thread.html#436">[ thread ]</a>
+              <a href="subject.html#436">[ subject ]</a>
+              <a href="author.html#436">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/ydframework-users">More information about the YDFramework-users
+mailing list</a><br>
+</body></html>

@@ -1,0 +1,359 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [ydf-users] Re: [Feature #2020] line breaks in SQL debug code
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/ydframework-users/2006-March/index.html" >
+   <LINK REL="made" HREF="mailto:ydframework-users%40lists.berlios.de?Subject=Re%3A%20%5Bydf-users%5D%20Re%3A%20%5BFeature%20%232020%5D%20line%20breaks%20in%20SQL%20debug%20code&In-Reply-To=%3C20060324144310.75970.qmail%40web50210.mail.yahoo.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000163.html">
+   <LINK REL="Next"  HREF="000165.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[ydf-users] Re: [Feature #2020] line breaks in SQL debug code</H1>
+    <B>dab</B> 
+    <A HREF="mailto:ydframework-users%40lists.berlios.de?Subject=Re%3A%20%5Bydf-users%5D%20Re%3A%20%5BFeature%20%232020%5D%20line%20breaks%20in%20SQL%20debug%20code&In-Reply-To=%3C20060324144310.75970.qmail%40web50210.mail.yahoo.com%3E"
+       TITLE="[ydf-users] Re: [Feature #2020] line breaks in SQL debug code">dab214 at yahoo.com
+       </A><BR>
+    <I>Fri Mar 24 15:43:10 CET 2006</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000163.html">[ydf-users] Re: [Feature #2020] line breaks in SQL debug code
+</A></li>
+        <LI>Next message: <A HREF="000165.html">[ydf-users] Re: [Feature #2020] line breaks in SQL debug code
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#164">[ date ]</a>
+              <a href="thread.html#164">[ thread ]</a>
+              <a href="subject.html#164">[ subject ]</a>
+              <a href="author.html#164">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>sorry for being this confusing.
+yes it does work for YD_DEBUG=2 too. but only at the
+bottom of the page (where i never look).
+there's a list above the page too (YD_DEBUG=2) and
+that list doesn't produce any line breaks.
+
+YD_DEBUG=1 top result:
+
+&lt;!-- [ YD_DEBUG ] SELECT `dep`.`id` AS `id`,
+`dep`.`name` AS `name` FROM `dep` INNER JOIN
+`access_dep` ON ( `dep`.`id` = `access_dep`.`dep_id` )
+LEFT JOIN `access` ON ( `access_dep`.`access_id` =
+`access`.`id` ) WHERE access.class =  'promotion' AND
+access.action = '' ORDER BY `dep`.`name`--&gt;
+
+&lt;!-- [ YD_DEBUG ] SELECT SQL_CALC_FOUND_ROWS
+`bets`.`id` AS `id`, `bets`.`date_created` AS
+`date_created`, `users`.`username` AS `username`,
+`event`.`name` AS `name`, `event_cat`.`name` AS `name`
+FROM `bets` LEFT JOIN `users` ON ( `bets`.`user_id` =
+`users`.`id` ) LEFT JOIN `event` ON (
+`bets`.`event_id` = `event`.`id` ) LEFT JOIN
+`event_cat` ON ( event.event_cat_id = event_cat.id )
+ORDER BY `bets`.`date_created` DESC LIMIT 0, 25--&gt;
+
+
+YD_DEBUG=1 bottom result:
+
+EXECUTED SQL QUERIES (3 queries)
+
+	1:
+[d:\htdocs\sportingbet\YDFramework2\addons\YDDatabaseObject\YDDatabaseObject.php:1417]
+SELECT `dep`.`id` AS `id`, `dep`.`name` AS `name`
+	1:
+[d:\htdocs\sportingbet\YDFramework2\addons\YDDatabaseObject\YDDatabaseObject.php:1417]
+FROM `dep`
+	1:
+[d:\htdocs\sportingbet\YDFramework2\addons\YDDatabaseObject\YDDatabaseObject.php:1417]
+INNER JOIN `access_dep` ON ( `dep`.`id` =
+`access_dep`.`dep_id` )
+	1:
+[d:\htdocs\sportingbet\YDFramework2\addons\YDDatabaseObject\YDDatabaseObject.php:1417]
+LEFT JOIN `access` ON ( `access_dep`.`access_id` =
+`access`.`id` )
+	1:
+[d:\htdocs\sportingbet\YDFramework2\addons\YDDatabaseObject\YDDatabaseObject.php:1417]
+WHERE access.class =  'promotion' AND access.action =
+''
+	1:
+[d:\htdocs\sportingbet\YDFramework2\addons\YDDatabaseObject\YDDatabaseObject.php:1417]
+ORDER BY `dep`.`name`
+
+	2:
+[d:\htdocs\sportingbet\YDFramework2\addons\YDDatabaseObject\YDDatabaseObject.php:1417]
+SELECT SQL_CALC_FOUND_ROWS `bets`.`id` AS `id`,
+`bets`.`date_created` AS `date_created`,
+`users`.`username` AS `username`, `event`.`name` AS
+`name`, `event_cat`.`name` AS `name`
+	2:
+[d:\htdocs\sportingbet\YDFramework2\addons\YDDatabaseObject\YDDatabaseObject.php:1417]
+FROM `bets`
+	2:
+[d:\htdocs\sportingbet\YDFramework2\addons\YDDatabaseObject\YDDatabaseObject.php:1417]
+LEFT JOIN `users` ON ( `bets`.`user_id` = `users`.`id`
+)
+	2:
+[d:\htdocs\sportingbet\YDFramework2\addons\YDDatabaseObject\YDDatabaseObject.php:1417]
+LEFT JOIN `event` ON ( `bets`.`event_id` =
+`event`.`id` )
+	2:
+[d:\htdocs\sportingbet\YDFramework2\addons\YDDatabaseObject\YDDatabaseObject.php:1417]
+LEFT JOIN `event_cat` ON ( event.event_cat_id =
+event_cat.id )
+	2:
+[d:\htdocs\sportingbet\YDFramework2\addons\YDDatabaseObject\YDDatabaseObject.php:1417]
+ORDER BY `bets`.`date_created` DESC
+	2:
+[d:\htdocs\sportingbet\YDFramework2\addons\YDDatabaseObject\YDDatabaseObject.php:1417]
+LIMIT 0, 25
+
+	3:	[D:\htdocs\sportingbet\admin\Core.php:592] SELECT
+FOUND_ROWS() as total
+
+
+
+
+
+--- Pieter Claerhout &lt;<A HREF="https://lists.berlios.de/mailman/listinfo/ydframework-users">pieter at yellowduck.be</A>&gt; wrote:
+
+&gt;<i> It should, as it just wraps the output of YD_DEBUG=1
+</I>&gt;<i> in a pre tag.
+</I>&gt;<i> 
+</I>&gt;<i> pieter
+</I>&gt;<i> 
+</I>&gt;<i> On 3/24/06, dab &lt;<A HREF="https://lists.berlios.de/mailman/listinfo/ydframework-users">dab214 at yahoo.com</A>&gt; wrote:
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt; hi pieter,
+</I>&gt;<i> &gt; sorry! it worked in last email. You must have got
+</I>&gt;<i> it
+</I>&gt;<i> &gt; to work after I pasted the debug code in the
+</I>&gt;<i> email.
+</I>&gt;<i> &gt; YD_DEBUG=2 still doesn't produce any line breks
+</I>&gt;<i> &gt; though, but YD_DEBUG=1 does.
+</I>&gt;<i> &gt; you think you can add that too? i'm so sorry for
+</I>&gt;<i> not
+</I>&gt;<i> &gt; double checking that :|
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt; /dan
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt; --- Pieter Claerhout &lt;<A HREF="https://lists.berlios.de/mailman/listinfo/ydframework-users">pieter at yellowduck.be</A>&gt; wrote:
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt; &gt; Can you confirm that:
+</I>&gt;<i> &gt; &gt;
+</I>&gt;<i> &gt; &gt; YDF2_process.php lines 177-186 are:
+</I>&gt;<i> &gt; &gt;
+</I>&gt;<i> &gt; &gt;                 // Add the queries if any
+</I>&gt;<i> &gt; &gt;                 if ( sizeof(
+</I>&gt;<i> &gt; &gt; $GLOBALS['YD_SQL_QUERY'] ) &gt; 0 ) {
+</I>&gt;<i> &gt; &gt;                     $debug .= 'EXECUTED SQL
+</I>&gt;<i> QUERIES
+</I>&gt;<i> &gt; &gt; (' . sizeof(
+</I>&gt;<i> &gt; &gt; $GLOBALS['YD_SQL_QUERY'] ) . ' queries)' .
+</I>&gt;<i> YD_CRLF .
+</I>&gt;<i> &gt; &gt; YD_CRLF;
+</I>&gt;<i> &gt; &gt;                     foreach (
+</I>&gt;<i> &gt; &gt; $GLOBALS['YD_SQL_QUERY'] as $key=&gt;$query ) {
+</I>&gt;<i> &gt; &gt;                         foreach ( explode(
+</I>&gt;<i> YD_CRLF,
+</I>&gt;<i> &gt; &gt; trim( $query ) ) as
+</I>&gt;<i> &gt; &gt; $line ) {
+</I>&gt;<i> &gt; &gt;                             $debug .= &quot;\t&quot; . (
+</I>&gt;<i> &gt; &gt; $key+1 ) . ':' . &quot;\t&quot; . trim(
+</I>&gt;<i> &gt; &gt; $line ) . YD_CRLF;
+</I>&gt;<i> &gt; &gt;                         }
+</I>&gt;<i> &gt; &gt;                         $debug .= YD_CRLF;
+</I>&gt;<i> &gt; &gt;                     }
+</I>&gt;<i> &gt; &gt;                 }
+</I>&gt;<i> &gt; &gt;
+</I>&gt;<i> &gt; &gt; YDDatabase.php lines 1180 - 1210 are:
+</I>&gt;<i> &gt; &gt;
+</I>&gt;<i> &gt; &gt;
+</I>&gt;<i> &gt; &gt;         function _logSql( $sql ) {
+</I>&gt;<i> &gt; &gt;
+</I>&gt;<i> &gt; &gt;             // Split the SQL in different lines
+</I>&gt;<i> &gt; &gt;             $sql = str_ireplace( 'SELECT',
+</I>&gt;<i> 'SELECT',
+</I>&gt;<i> &gt; &gt; $sql );
+</I>&gt;<i> &gt; &gt;             $sql = str_ireplace( 'UPDATE',
+</I>&gt;<i> 'UPDATE',
+</I>&gt;<i> &gt; &gt; $sql );
+</I>&gt;<i> &gt; &gt;             $sql = str_ireplace( 'DELETE',
+</I>&gt;<i> 'DELETE',
+</I>&gt;<i> &gt; &gt; $sql );
+</I>&gt;<i> &gt; &gt;             $sql = str_ireplace( 'INSERT',
+</I>&gt;<i> 'INSERT',
+</I>&gt;<i> &gt; &gt; $sql );
+</I>&gt;<i> &gt; &gt;             $sql = str_ireplace( 'FROM', YD_CRLF
+</I>&gt;<i> .
+</I>&gt;<i> &gt; &gt; 'FROM', $sql );
+</I>&gt;<i> &gt; &gt;             $sql = str_ireplace( 'INTO', YD_CRLF
+</I>&gt;<i> .
+</I>&gt;<i> &gt; &gt; 'INTO', $sql );
+</I>&gt;<i> &gt; &gt;             $sql = str_ireplace( 'VALUES',
+</I>&gt;<i> YD_CRLF .
+</I>&gt;<i> &gt; &gt; 'VALUES', $sql );
+</I>&gt;<i> &gt; &gt;             $sql = str_ireplace( 'LEFT JOIN',
+</I>&gt;<i> &gt; &gt; YD_CRLF . 'LEFT JOIN', $sql );
+</I>&gt;<i> &gt; &gt;             $sql = str_ireplace( 'RIGHT JOIN',
+</I>&gt;<i> &gt; &gt; YD_CRLF . 'RIGHT JOIN', $sql
+</I>&gt;<i> &gt; &gt; );
+</I>&gt;<i> &gt; &gt;             $sql = str_ireplace( 'INNER JOIN',
+</I>&gt;<i> &gt; &gt; YD_CRLF . 'INNER JOIN', $sql
+</I>&gt;<i> &gt; &gt; );
+</I>&gt;<i> &gt; &gt;             $sql = str_ireplace( 'WHERE',
+</I>&gt;<i> YD_CRLF .
+</I>&gt;<i> &gt; &gt; 'WHERE', $sql );
+</I>&gt;<i> &gt; &gt;             $sql = str_ireplace( 'ORDER BY',
+</I>&gt;<i> YD_CRLF
+</I>&gt;<i> &gt; &gt; . 'ORDER BY', $sql );
+</I>&gt;<i> &gt; &gt;             $sql = str_ireplace( 'GROUP BY',
+</I>&gt;<i> YD_CRLF
+</I>&gt;<i> &gt; &gt; . 'GROUP BY', $sql );
+</I>&gt;<i> &gt; &gt;             $sql = str_ireplace( 'LIMIT',
+</I>&gt;<i> YD_CRLF .
+</I>&gt;<i> &gt; &gt; 'LIMIT', $sql );
+</I>&gt;<i> &gt; &gt;
+</I>&gt;<i> &gt; &gt;             // Get the backtrace
+</I>&gt;<i> &gt; &gt;             $trace = debug_backtrace();
+</I>&gt;<i> &gt; &gt;
+</I>&gt;<i> &gt; &gt;             // Format the SQL
+</I>&gt;<i> &gt; &gt;             $sql_final = '';
+</I>&gt;<i> &gt; &gt;             foreach ( explode( YD_CRLF, $sql )
+</I>&gt;<i> as
+</I>&gt;<i> &gt; &gt; $line ) {
+</I>&gt;<i> &gt; &gt;                 $sql_final .= '[' .
+</I>&gt;<i> &gt; &gt; $trace[2]['file'] . ':' .
+</I>&gt;<i> &gt; &gt; $trace[2]['line'] . '] ' . $line . YD_CRLF;
+</I>&gt;<i> &gt; &gt;             }
+</I>&gt;<i> &gt; &gt;
+</I>&gt;<i> &gt; &gt;             // Add it to the query log
+</I>&gt;<i> &gt; &gt;             array_push(
+</I>&gt;<i> $GLOBALS['YD_SQL_QUERY'],
+</I>&gt;<i> &gt; &gt; $sql_final );
+</I>&gt;<i> &gt; &gt;
+</I>&gt;<i> &gt; &gt;         }
+</I>&gt;<i> &gt; &gt; And that YDF2_core.php lines 416-429 read:
+</I>&gt;<i> &gt; &gt;
+</I>&gt;<i> &gt; &gt;
+</I>&gt;<i> &gt; &gt;     // Add if not exists yet
+</I>&gt;<i> &gt; &gt;     if (!function_exists('str_ireplace')) {
+</I>&gt;<i> &gt; &gt;
+</I>&gt;<i> &gt; &gt;         /**
+</I>&gt;<i> &gt; &gt;          *  Function to do a case insensitve
+</I>&gt;<i> &gt; &gt; str_replace
+</I>&gt;<i> &gt; &gt;          *
+</I>&gt;<i> &gt; &gt;          *  @param  $search     The string to
+</I>&gt;<i> search
+</I>&gt;<i> &gt; &gt; for.
+</I>&gt;<i> &gt; &gt;          *  @param  $replace    The replacement
+</I>&gt;<i> &gt; &gt; string.
+</I>&gt;<i> &gt; &gt;          *  @param  $subject    The string to
+</I>&gt;<i> &gt; &gt; replace in
+</I>&gt;<i> &gt; &gt;          *  @param  $count      (optional) The
+</I>&gt;<i> &gt; &gt; maximum number of
+</I>&gt;<i> &gt; &gt; replacements. Default us all.
+</I>&gt;<i> &gt; &gt;          *
+</I>&gt;<i> &gt; &gt;          *  @returns    The updated string.
+</I>&gt;<i> &gt; &gt;          */
+</I>&gt;<i> &gt; &gt;         function str_ireplace( $search,
+</I>&gt;<i> $replace,
+</I>&gt;<i> &gt; &gt; $subject, $count = null )
+</I>&gt;<i> &gt; &gt; {
+</I>&gt;<i> &gt; &gt;
+</I>&gt;<i> &gt; &gt; If not, you have the wrong source files. If yes,
+</I>&gt;<i> &gt; &gt; then it should work fine. I
+</I>&gt;<i> &gt; &gt; tested it myself and it works fine on PHP4 and
+</I>&gt;<i> 5.
+</I>&gt;<i> &gt; &gt;
+</I>&gt;<i> &gt; &gt; cheers,
+</I>&gt;<i> &gt; &gt;
+</I>&gt;<i> &gt; &gt; pieter
+</I>&gt;<i> &gt; &gt; On 3/23/06, dab &lt;<A HREF="https://lists.berlios.de/mailman/listinfo/ydframework-users">dab214 at yahoo.com</A>&gt; wrote:
+</I>&gt;<i> &gt; &gt; &gt;
+</I>&gt;<i> &gt; &gt; &gt; hi pieter,
+</I>&gt;<i> &gt; &gt; &gt; first i did an SVN Update on the YMDFramework2
+</I>&gt;<i> &gt; &gt; folder,
+</I>&gt;<i> &gt; &gt; &gt; then i did it on YDDatabase.php and
+</I>&gt;<i> YDProcess.php
+</I>&gt;<i> &gt; &gt; &gt; specifically and still the same output.
+</I>&gt;<i> &gt; &gt; &gt;
+</I>&gt;<i> &gt; &gt; &gt; i had some problems with ajax too (the
+</I>&gt;<i> examples
+</I>&gt;<i> &gt; &gt; are
+</I>&gt;<i> &gt; &gt; &gt; giving me an error). i even downloaded the
+</I>&gt;<i> whole
+</I>&gt;<i> &gt; &gt; &gt; repository again (clean) and still had the
+</I>&gt;<i> same
+</I>&gt;<i> &gt; &gt; &gt; problem. maybe it's releted, maybe not.
+</I>&gt;<i> &gt; &gt; &gt; anyways, thanks again for taking your time to
+</I>&gt;<i> help
+</I>&gt;<i> &gt; &gt; me
+</I>&gt;<i> &gt; &gt; &gt; with this.
+</I>&gt;<i> &gt; &gt; &gt;
+</I>&gt;<i> &gt; &gt; &gt; /dan
+</I>&gt;<i> &gt; &gt; &gt;
+</I>&gt;<i> &gt; &gt; &gt;
+</I>&gt;<i> &gt; &gt; &gt; --- Pieter Claerhout &lt;<A HREF="https://lists.berlios.de/mailman/listinfo/ydframework-users">pieter at yellowduck.be</A>&gt;
+</I>&gt;<i> wrote:
+</I>&gt;<i> &gt; &gt; &gt;
+</I>&gt;<i> &gt; &gt; &gt; &gt; Can you doublecheck you are using the latest
+</I>&gt;<i> &gt; &gt; version
+</I>&gt;<i> &gt; &gt; &gt; &gt; of YDDatabase.php and
+</I>&gt;<i> &gt; &gt; &gt; &gt; YDProcess.php?
+</I>&gt;<i> &gt; &gt; &gt; &gt;
+</I>&gt;<i> &gt; &gt; &gt; &gt; pieter
+</I>&gt;<i> &gt; &gt; &gt; &gt;
+</I>&gt;<i> &gt; &gt; &gt; &gt; On 3/23/06, dab &lt;<A HREF="https://lists.berlios.de/mailman/listinfo/ydframework-users">dab214 at yahoo.com</A>&gt; wrote:
+</I>&gt;<i> &gt; &gt; &gt; &gt; &gt;
+</I>&gt;<i> &gt; &gt; &gt; &gt; &gt; hi pieter,
+</I>&gt;<i> &gt; &gt; &gt; &gt; &gt; here's the html output after the &lt;/html&gt;
+</I>&gt;<i> tag:
+</I>&gt;<i> &gt; &gt; &gt; &gt; &gt;
+</I>&gt;<i> &gt; &gt; &gt; &gt; &gt; &lt;!-- [ YD_DEBUG ]
+</I>&gt;<i> &gt; &gt; &gt; &gt; &gt;
+</I>&gt;<i> &gt; &gt; &gt; &gt; &gt; PROCESSING TIME:
+</I>&gt;<i> &gt; &gt; &gt; &gt; &gt;
+</I>&gt;<i> &gt; &gt; &gt; &gt; &gt;        Elapsed   Diff    Marker
+</I>&gt;<i> &gt; &gt; &gt; &gt; &gt;        0 ms      0 ms    ** Start
+</I>&gt;<i> &gt; &gt; &gt; &gt; &gt;        107 ms    107 ms          ** Finish
+</I>&gt;<i> &gt; &gt; &gt; &gt; &gt;
+</I>&gt;<i> 
+</I>=== message truncated ===
+
+
+__________________________________________________
+Do You Yahoo!?
+Tired of spam?  Yahoo! Mail has the best spam protection around 
+<A HREF="http://mail.yahoo.com">http://mail.yahoo.com</A> 
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000163.html">[ydf-users] Re: [Feature #2020] line breaks in SQL debug code
+</A></li>
+	<LI>Next message: <A HREF="000165.html">[ydf-users] Re: [Feature #2020] line breaks in SQL debug code
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#164">[ date ]</a>
+              <a href="thread.html#164">[ thread ]</a>
+              <a href="subject.html#164">[ subject ]</a>
+              <a href="author.html#164">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/ydframework-users">More information about the YDFramework-users
+mailing list</a><br>
+</body></html>

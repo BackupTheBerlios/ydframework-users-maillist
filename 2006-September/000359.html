@@ -1,0 +1,92 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [ydf-users] YDDatabaseObject reseting
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/ydframework-users/2006-September/index.html" >
+   <LINK REL="made" HREF="mailto:ydframework-users%40lists.berlios.de?Subject=Re%3A%20%5Bydf-users%5D%20YDDatabaseObject%20reseting&In-Reply-To=%3C44FB2670.6090006%40fusemail.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000358.html">
+   <LINK REL="Next"  HREF="000360.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[ydf-users] YDDatabaseObject reseting</H1>
+    <B>Francisco Azevedo</B> 
+    <A HREF="mailto:ydframework-users%40lists.berlios.de?Subject=Re%3A%20%5Bydf-users%5D%20YDDatabaseObject%20reseting&In-Reply-To=%3C44FB2670.6090006%40fusemail.com%3E"
+       TITLE="[ydf-users] YDDatabaseObject reseting">francisco at fusemail.com
+       </A><BR>
+    <I>Sun Sep  3 21:01:04 CEST 2006</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000358.html">[ydf-users] YDDatabaseObject reseting
+</A></li>
+        <LI>Next message: <A HREF="000360.html">[ydf-users] YDDatabaseObject reseting
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#359">[ date ]</a>
+              <a href="thread.html#359">[ thread ]</a>
+              <a href="subject.html#359">[ subject ]</a>
+              <a href="author.html#359">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Hi David
+
+&gt;<i> I was thinking more about this and the way reset() is working today is 
+</I>&gt;<i> not that good.
+</I>&gt;<i> 
+</I>&gt;<i> reset() should &quot;reset&quot; the object to it's initial state, or close to it. 
+</I>&gt;<i> So it should reset the fields, selects and also reset relations vars 
+</I>&gt;<i> (not doing this now).
+</I>&gt;<i> 
+</I>&gt;<i> I commited my changes to the svn repository and the main differences are:
+</I>&gt;<i> 
+</I>&gt;<i> - added resetRelations that reset all relations
+</I>&gt;<i> - added parameter to reset( $all=false ) that resets everything in the 
+</I>&gt;<i> object including relations and other custom variables when true.
+</I>&gt;<i> - modified resetValues to reset selects values too
+</I>
+I'm using resetAll() in all methods. All i want to do is, as you said, 
+clean the YDDatabaseObject to make other query types and to assign other 
+values from the beginning.
+
+The problem is that when extending YDDatabaseObject, resetAll() deletes 
+not only its own varibles but my class variables too.. and i can't find 
+a reason for that.
+
+
+Is resetAll() now deleting their fields (deleting variables that are a 
+registered fields), relations ?
+
+
+regards
+Francisco A
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000358.html">[ydf-users] YDDatabaseObject reseting
+</A></li>
+	<LI>Next message: <A HREF="000360.html">[ydf-users] YDDatabaseObject reseting
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#359">[ date ]</a>
+              <a href="thread.html#359">[ thread ]</a>
+              <a href="subject.html#359">[ subject ]</a>
+              <a href="author.html#359">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/ydframework-users">More information about the YDFramework-users
+mailing list</a><br>
+</body></html>

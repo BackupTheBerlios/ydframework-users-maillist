@@ -1,0 +1,99 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [ydf-users] YDDatabaseObject reseting
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/ydframework-users/2006-September/index.html" >
+   <LINK REL="made" HREF="mailto:ydframework-users%40lists.berlios.de?Subject=Re%3A%20%5Bydf-users%5D%20YDDatabaseObject%20reseting&In-Reply-To=%3C44F86748.5040703%40fusemail.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   
+   <LINK REL="Next"  HREF="000350.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[ydf-users] YDDatabaseObject reseting</H1>
+    <B>Francisco Azevedo</B> 
+    <A HREF="mailto:ydframework-users%40lists.berlios.de?Subject=Re%3A%20%5Bydf-users%5D%20YDDatabaseObject%20reseting&In-Reply-To=%3C44F86748.5040703%40fusemail.com%3E"
+       TITLE="[ydf-users] YDDatabaseObject reseting">francisco at fusemail.com
+       </A><BR>
+    <I>Fri Sep  1 19:00:56 CEST 2006</I>
+    <P><UL>
+        
+        <LI>Next message: <A HREF="000350.html">[ydf-users] YDDatabaseObject reseting
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#349">[ date ]</a>
+              <a href="thread.html#349">[ thread ]</a>
+              <a href="subject.html#349">[ subject ]</a>
+              <a href="author.html#349">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Hi db
+
+When reseting ( with reset() or resetAll() ) i get variables reseted and 
+that's is ok. the problem is that it resets _my_ variables too (an not 
+only the ones used in the YDDatabaseObject).
+
+Maybe YDDatabaseobject should reset only variables that are fields?
+
+This way this simple code could work (as expected):
+
+class C extends YDDatabaseobject;
+
+	function C(){
+
+		...
+		$this-&gt;setField( 'xpto' );
+	}
+
+
+	function X(){
+
+		$this-&gt;form = new YDForm( 'f' );
+
+		$this-&gt;resetAll();
+
+		//...
+		
+		$this-&gt;form-&gt;setDefaults( ... );
+	}
+}
+
+As you can see, with the previous code and with the current 
+YDDatabaseObject this don't work because $resetAll() of YDDatabaseobject 
+deletes the form variable and it shouldn't.
+
+What you think to make reset deleting only its fields?
+
+
+regards
+Francisco A
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	
+	<LI>Next message: <A HREF="000350.html">[ydf-users] YDDatabaseObject reseting
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#349">[ date ]</a>
+              <a href="thread.html#349">[ thread ]</a>
+              <a href="subject.html#349">[ subject ]</a>
+              <a href="author.html#349">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/ydframework-users">More information about the YDFramework-users
+mailing list</a><br>
+</body></html>

@@ -1,0 +1,198 @@
+From paultoytoy at gmail.com  Wed Sep 12 20:45:24 2007
+From: paultoytoy at gmail.com (aga toytoy)
+Date: Thu, 13 Sep 2007 02:45:24 +0800
+Subject: [ydf-users] Bug On YDFormElement_captcha
+Message-ID: <93778d790709121145y5b7956f8r85a90435117545fb@mail.gmail.com>
+
+Hi {$YD_GUYS},
+
+I found this buggy under
+YDFramework2/YDClasses/YDFormElements/YDFormElement_Captcha.php
+at line 56. It goes this code :
+
+$this->_url = YDRequest::getCurrentUrl( true ) . '?do=ShowCaptcha&id='
+. md5( microtime() );
+
+where captcha works on a non-prefixed www URL (sample:
+mysite.com/formcaptcha.php). When I try to view it having a prefix www
+(sample: www.mysite.com/formcaptcha.php) with the form having captcha,
+it always execute the addRule method while the characters inputted are
+clearly correct.
+
+So I replace that line of code to this:
+        $this->_url = YD_SELF_SCRIPT . '?do=ShowCaptcha&id=' . md5(
+microtime() );
+and it works fine.
+
+
+From francisco at fusemail.com  Thu Sep 13 01:11:29 2007
+From: francisco at fusemail.com (Francisco Azevedo)
+Date: Thu, 13 Sep 2007 00:11:29 +0100
+Subject: [ydf-users] Bug On YDFormElement_captcha
+In-Reply-To: <93778d790709121145y5b7956f8r85a90435117545fb@mail.gmail.com>
+References: <93778d790709121145y5b7956f8r85a90435117545fb@mail.gmail.com>
+Message-ID: <46E87221.1000107@fusemail.com>
+
+Hi aga toytoy
+
+> I found this buggy under
+> YDFramework2/YDClasses/YDFormElements/YDFormElement_Captcha.php
+> at line 56. It goes this code :
+> 
+> $this->_url = YDRequest::getCurrentUrl( true ) . '?do=ShowCaptcha&id='
+> . md5( microtime() );
+> 
+> where captcha works on a non-prefixed www URL (sample:
+> mysite.com/formcaptcha.php). When I try to view it having a prefix www
+> (sample: www.mysite.com/formcaptcha.php) with the form having captcha,
+> it always execute the addRule method while the characters inputted are
+> clearly correct.
+
+I have no problem with or without url prefixes.. are you sure you don't 
+have a strange code between the captcha call and downloading?
+
+
+> 
+> So I replace that line of code to this:
+>         $this->_url = YD_SELF_SCRIPT . '?do=ShowCaptcha&id=' . md5(
+> microtime() );
+> and it works fine.
+
+
+
+From paultoytoy at gmail.com  Fri Sep 14 13:19:30 2007
+From: paultoytoy at gmail.com (aga toytoy)
+Date: Fri, 14 Sep 2007 19:19:30 +0800
+Subject: [ydf-users] Bug On YDFormElement_captcha
+Message-ID: <93778d790709140419p7f2df06an7cc4d9e7f3546a5c@mail.gmail.com>
+
+Hi Francisco,
+
+I have no strange code with it, but I just over-ride the values from
+this $this->_img->SetCharSet(), thus showing my snippet below.
+
+
+
+	function actionShowCaptcha() { #Reserved action that creates the image
+		$captcha = new YDCaptcha();
+		$captcha->useColour(true);
+		$captcha->SetBackgroundImages('images/capcha_bg.jpg');
+		$captcha->SetHeight(26);
+		$captcha->SetWidth(80);
+        // Let's override the char set
+        $captcha->_img->SetCharSet(
+'a-h,j-k,m-n,p-r,2-4,6-9,t-z,A-H,J-K,M-N,P-R,T-Z,2-4,6-9');
+		$captcha->setNumChars(3);
+		return $captcha->Create();
+     }
+
+Does it take any problem on there? What do you think?
+
+Paul Aga toytoy
+
+
+On 9/13/07, ydframework-users-request at lists.berlios.de
+<ydframework-users-request at lists.berlios.de> wrote:
+> Send YDFramework-users mailing list submissions to
+>         ydframework-users at lists.berlios.de
+>
+> To subscribe or unsubscribe via the World Wide Web, visit
+>         https://lists.berlios.de/mailman/listinfo/ydframework-users
+> or, via email, send a message with subject or body 'help' to
+>         ydframework-users-request at lists.berlios.de
+>
+> You can reach the person managing the list at
+>         ydframework-users-owner at lists.berlios.de
+>
+> When replying, please edit your Subject line so it is more specific
+> than "Re: Contents of YDFramework-users digest..."
+>
+>
+> Today's Topics:
+>
+>    1. Bug On YDFormElement_captcha (aga toytoy)
+>    2. Re: Bug On YDFormElement_captcha (Francisco Azevedo)
+>
+>
+> ----------------------------------------------------------------------
+>
+> Message: 1
+> Date: Thu, 13 Sep 2007 02:45:24 +0800
+> From: "aga toytoy" <paultoytoy at gmail.com>
+> Subject: [ydf-users] Bug On YDFormElement_captcha
+> To: ydframework-users at lists.berlios.de
+> Message-ID:
+>         <93778d790709121145y5b7956f8r85a90435117545fb at mail.gmail.com>
+> Content-Type: text/plain; charset=UTF-8
+>
+> Hi {$YD_GUYS},
+>
+> I found this buggy under
+> YDFramework2/YDClasses/YDFormElements/YDFormElement_Captcha.php
+> at line 56. It goes this code :
+>
+> $this->_url = YDRequest::getCurrentUrl( true ) . '?do=ShowCaptcha&id='
+> . md5( microtime() );
+>
+> where captcha works on a non-prefixed www URL (sample:
+> mysite.com/formcaptcha.php). When I try to view it having a prefix www
+> (sample: www.mysite.com/formcaptcha.php) with the form having captcha,
+> it always execute the addRule method while the characters inputted are
+> clearly correct.
+>
+> So I replace that line of code to this:
+>         $this->_url = YD_SELF_SCRIPT . '?do=ShowCaptcha&id=' . md5(
+> microtime() );
+> and it works fine.
+>
+>
+> ------------------------------
+>
+> Message: 2
+> Date: Thu, 13 Sep 2007 00:11:29 +0100
+> From: Francisco Azevedo <francisco at fusemail.com>
+> Subject: Re: [ydf-users] Bug On YDFormElement_captcha
+> To: ydframework-users at lists.berlios.de
+> Message-ID: <46E87221.1000107 at fusemail.com>
+> Content-Type: text/plain; charset=ISO-8859-1; format=flowed
+>
+> Hi aga toytoy
+>
+> > I found this buggy under
+> > YDFramework2/YDClasses/YDFormElements/YDFormElement_Captcha.php
+> > at line 56. It goes this code :
+> >
+> > $this->_url = YDRequest::getCurrentUrl( true ) . '?do=ShowCaptcha&id='
+> > . md5( microtime() );
+> >
+> > where captcha works on a non-prefixed www URL (sample:
+> > mysite.com/formcaptcha.php). When I try to view it having a prefix www
+> > (sample: www.mysite.com/formcaptcha.php) with the form having captcha,
+> > it always execute the addRule method while the characters inputted are
+> > clearly correct.
+>
+> I have no problem with or without url prefixes.. are you sure you don't
+> have a strange code between the captcha call and downloading?
+>
+>
+> >
+> > So I replace that line of code to this:
+> >         $this->_url = YD_SELF_SCRIPT . '?do=ShowCaptcha&id=' . md5(
+> > microtime() );
+> > and it works fine.
+>
+>
+>
+> ------------------------------
+>
+> _______________________________________________
+> YDFramework-users mailing list
+> YDFramework-users at lists.berlios.de
+> https://lists.berlios.de/mailman/listinfo/ydframework-users
+>
+>
+> End of YDFramework-users Digest, Vol 12, Issue 1
+> ************************************************
+>
+
+

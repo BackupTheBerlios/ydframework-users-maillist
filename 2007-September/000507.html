@@ -1,0 +1,187 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [ydf-users] Bug On YDFormElement_captcha
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/ydframework-users/2007-September/index.html" >
+   <LINK REL="made" HREF="mailto:ydframework-users%40lists.berlios.de?Subject=Re%3A%20%5Bydf-users%5D%20Bug%20On%20YDFormElement_captcha&In-Reply-To=%3C93778d790709140419p7f2df06an7cc4d9e7f3546a5c%40mail.gmail.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000506.html">
+   
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[ydf-users] Bug On YDFormElement_captcha</H1>
+    <B>aga toytoy</B> 
+    <A HREF="mailto:ydframework-users%40lists.berlios.de?Subject=Re%3A%20%5Bydf-users%5D%20Bug%20On%20YDFormElement_captcha&In-Reply-To=%3C93778d790709140419p7f2df06an7cc4d9e7f3546a5c%40mail.gmail.com%3E"
+       TITLE="[ydf-users] Bug On YDFormElement_captcha">paultoytoy at gmail.com
+       </A><BR>
+    <I>Fri Sep 14 13:19:30 CEST 2007</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000506.html">[ydf-users] Bug On YDFormElement_captcha
+</A></li>
+        
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#507">[ date ]</a>
+              <a href="thread.html#507">[ thread ]</a>
+              <a href="subject.html#507">[ subject ]</a>
+              <a href="author.html#507">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Hi Francisco,
+
+I have no strange code with it, but I just over-ride the values from
+this $this-&gt;_img-&gt;SetCharSet(), thus showing my snippet below.
+
+
+
+	function actionShowCaptcha() { #Reserved action that creates the image
+		$captcha = new YDCaptcha();
+		$captcha-&gt;useColour(true);
+		$captcha-&gt;SetBackgroundImages('images/capcha_bg.jpg');
+		$captcha-&gt;SetHeight(26);
+		$captcha-&gt;SetWidth(80);
+        // Let's override the char set
+        $captcha-&gt;_img-&gt;SetCharSet(
+'a-h,j-k,m-n,p-r,2-4,6-9,t-z,A-H,J-K,M-N,P-R,T-Z,2-4,6-9');
+		$captcha-&gt;setNumChars(3);
+		return $captcha-&gt;Create();
+     }
+
+Does it take any problem on there? What do you think?
+
+Paul Aga toytoy
+
+
+On 9/13/07, <A HREF="https://lists.berlios.de/mailman/listinfo/ydframework-users">ydframework-users-request at lists.berlios.de</A>
+&lt;<A HREF="https://lists.berlios.de/mailman/listinfo/ydframework-users">ydframework-users-request at lists.berlios.de</A>&gt; wrote:
+&gt;<i> Send YDFramework-users mailing list submissions to
+</I>&gt;<i>         <A HREF="https://lists.berlios.de/mailman/listinfo/ydframework-users">ydframework-users at lists.berlios.de</A>
+</I>&gt;<i>
+</I>&gt;<i> To subscribe or unsubscribe via the World Wide Web, visit
+</I>&gt;<i>         <A HREF="https://lists.berlios.de/mailman/listinfo/ydframework-users">https://lists.berlios.de/mailman/listinfo/ydframework-users</A>
+</I>&gt;<i> or, via email, send a message with subject or body 'help' to
+</I>&gt;<i>         <A HREF="https://lists.berlios.de/mailman/listinfo/ydframework-users">ydframework-users-request at lists.berlios.de</A>
+</I>&gt;<i>
+</I>&gt;<i> You can reach the person managing the list at
+</I>&gt;<i>         <A HREF="https://lists.berlios.de/mailman/listinfo/ydframework-users">ydframework-users-owner at lists.berlios.de</A>
+</I>&gt;<i>
+</I>&gt;<i> When replying, please edit your Subject line so it is more specific
+</I>&gt;<i> than &quot;Re: Contents of YDFramework-users digest...&quot;
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i> Today's Topics:
+</I>&gt;<i>
+</I>&gt;<i>    1. Bug On YDFormElement_captcha (aga toytoy)
+</I>&gt;<i>    2. Re: Bug On YDFormElement_captcha (Francisco Azevedo)
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i> ----------------------------------------------------------------------
+</I>&gt;<i>
+</I>&gt;<i> Message: 1
+</I>&gt;<i> Date: Thu, 13 Sep 2007 02:45:24 +0800
+</I>&gt;<i> From: &quot;aga toytoy&quot; &lt;<A HREF="https://lists.berlios.de/mailman/listinfo/ydframework-users">paultoytoy at gmail.com</A>&gt;
+</I>&gt;<i> Subject: [ydf-users] Bug On YDFormElement_captcha
+</I>&gt;<i> To: <A HREF="https://lists.berlios.de/mailman/listinfo/ydframework-users">ydframework-users at lists.berlios.de</A>
+</I>&gt;<i> Message-ID:
+</I>&gt;<i>         &lt;<A HREF="https://lists.berlios.de/mailman/listinfo/ydframework-users">93778d790709121145y5b7956f8r85a90435117545fb at mail.gmail.com</A>&gt;
+</I>&gt;<i> Content-Type: text/plain; charset=UTF-8
+</I>&gt;<i>
+</I>&gt;<i> Hi {$YD_GUYS},
+</I>&gt;<i>
+</I>&gt;<i> I found this buggy under
+</I>&gt;<i> YDFramework2/YDClasses/YDFormElements/YDFormElement_Captcha.php
+</I>&gt;<i> at line 56. It goes this code :
+</I>&gt;<i>
+</I>&gt;<i> $this-&gt;_url = YDRequest::getCurrentUrl( true ) . '?do=ShowCaptcha&amp;id='
+</I>&gt;<i> . md5( microtime() );
+</I>&gt;<i>
+</I>&gt;<i> where captcha works on a non-prefixed www URL (sample:
+</I>&gt;<i> mysite.com/formcaptcha.php). When I try to view it having a prefix www
+</I>&gt;<i> (sample: www.mysite.com/formcaptcha.php) with the form having captcha,
+</I>&gt;<i> it always execute the addRule method while the characters inputted are
+</I>&gt;<i> clearly correct.
+</I>&gt;<i>
+</I>&gt;<i> So I replace that line of code to this:
+</I>&gt;<i>         $this-&gt;_url = YD_SELF_SCRIPT . '?do=ShowCaptcha&amp;id=' . md5(
+</I>&gt;<i> microtime() );
+</I>&gt;<i> and it works fine.
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i> ------------------------------
+</I>&gt;<i>
+</I>&gt;<i> Message: 2
+</I>&gt;<i> Date: Thu, 13 Sep 2007 00:11:29 +0100
+</I>&gt;<i> From: Francisco Azevedo &lt;<A HREF="https://lists.berlios.de/mailman/listinfo/ydframework-users">francisco at fusemail.com</A>&gt;
+</I>&gt;<i> Subject: Re: [ydf-users] Bug On YDFormElement_captcha
+</I>&gt;<i> To: <A HREF="https://lists.berlios.de/mailman/listinfo/ydframework-users">ydframework-users at lists.berlios.de</A>
+</I>&gt;<i> Message-ID: &lt;<A HREF="https://lists.berlios.de/mailman/listinfo/ydframework-users">46E87221.1000107 at fusemail.com</A>&gt;
+</I>&gt;<i> Content-Type: text/plain; charset=ISO-8859-1; format=flowed
+</I>&gt;<i>
+</I>&gt;<i> Hi aga toytoy
+</I>&gt;<i>
+</I>&gt;<i> &gt; I found this buggy under
+</I>&gt;<i> &gt; YDFramework2/YDClasses/YDFormElements/YDFormElement_Captcha.php
+</I>&gt;<i> &gt; at line 56. It goes this code :
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt; $this-&gt;_url = YDRequest::getCurrentUrl( true ) . '?do=ShowCaptcha&amp;id='
+</I>&gt;<i> &gt; . md5( microtime() );
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt; where captcha works on a non-prefixed www URL (sample:
+</I>&gt;<i> &gt; mysite.com/formcaptcha.php). When I try to view it having a prefix www
+</I>&gt;<i> &gt; (sample: www.mysite.com/formcaptcha.php) with the form having captcha,
+</I>&gt;<i> &gt; it always execute the addRule method while the characters inputted are
+</I>&gt;<i> &gt; clearly correct.
+</I>&gt;<i>
+</I>&gt;<i> I have no problem with or without url prefixes.. are you sure you don't
+</I>&gt;<i> have a strange code between the captcha call and downloading?
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt; So I replace that line of code to this:
+</I>&gt;<i> &gt;         $this-&gt;_url = YD_SELF_SCRIPT . '?do=ShowCaptcha&amp;id=' . md5(
+</I>&gt;<i> &gt; microtime() );
+</I>&gt;<i> &gt; and it works fine.
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i> ------------------------------
+</I>&gt;<i>
+</I>&gt;<i> _______________________________________________
+</I>&gt;<i> YDFramework-users mailing list
+</I>&gt;<i> <A HREF="https://lists.berlios.de/mailman/listinfo/ydframework-users">YDFramework-users at lists.berlios.de</A>
+</I>&gt;<i> <A HREF="https://lists.berlios.de/mailman/listinfo/ydframework-users">https://lists.berlios.de/mailman/listinfo/ydframework-users</A>
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i> End of YDFramework-users Digest, Vol 12, Issue 1
+</I>&gt;<i> ************************************************
+</I>&gt;<i>
+</I>
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000506.html">[ydf-users] Bug On YDFormElement_captcha
+</A></li>
+	
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#507">[ date ]</a>
+              <a href="thread.html#507">[ thread ]</a>
+              <a href="subject.html#507">[ subject ]</a>
+              <a href="author.html#507">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/ydframework-users">More information about the YDFramework-users
+mailing list</a><br>
+</body></html>

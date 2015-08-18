@@ -1,0 +1,96 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [ydf-users] YDDatabaseObject numeric arrays
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/ydframework-users/2006-March/index.html" >
+   <LINK REL="made" HREF="mailto:ydframework-users%40lists.berlios.de?Subject=Re%3A%20%5Bydf-users%5D%20YDDatabaseObject%20numeric%20arrays&In-Reply-To=%3C20060307185423.40329.qmail%40web50202.mail.yahoo.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000086.html">
+   <LINK REL="Next"  HREF="000088.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[ydf-users] YDDatabaseObject numeric arrays</H1>
+    <B>dab</B> 
+    <A HREF="mailto:ydframework-users%40lists.berlios.de?Subject=Re%3A%20%5Bydf-users%5D%20YDDatabaseObject%20numeric%20arrays&In-Reply-To=%3C20060307185423.40329.qmail%40web50202.mail.yahoo.com%3E"
+       TITLE="[ydf-users] YDDatabaseObject numeric arrays">dab214 at yahoo.com
+       </A><BR>
+    <I>Tue Mar  7 19:54:23 CET 2006</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000086.html">[ydf-users] YDFormElement::YDFormElement_Autocompleter
+</A></li>
+        <LI>Next message: <A HREF="000088.html">[ydf-users] YDDatabaseObject numeric arrays
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#87">[ date ]</a>
+              <a href="thread.html#87">[ thread ]</a>
+              <a href="subject.html#87">[ subject ]</a>
+              <a href="author.html#87">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>hi all,
+i remember there was a forum thread about this before.
+can't get below code to fetch a numeric array.
+it works fine in YDDatabase but not in
+YDDatabaseObject. Sorry in advance if this has been
+covered somewhere else :/
+
+
+YDConfig::set( 'YD_DB_FETCHTYPE', YD_DB_FETCH_NUM );
+$user = YDDatabaseObject::getInstance('users');
+$user-&gt;select ( 'username' );
+$user-&gt;find();
+$db = $user-&gt;getResults();
+
+result:
+Array
+(
+    [0] =&gt; Array
+        (
+            [username] =&gt; dab
+        )
+
+    [1] =&gt; Array
+        (
+            [username] =&gt; asdf
+        )
+
+)
+
+
+
+__________________________________________________
+Do You Yahoo!?
+Tired of spam?  Yahoo! Mail has the best spam protection around 
+<A HREF="http://mail.yahoo.com">http://mail.yahoo.com</A> 
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000086.html">[ydf-users] YDFormElement::YDFormElement_Autocompleter
+</A></li>
+	<LI>Next message: <A HREF="000088.html">[ydf-users] YDDatabaseObject numeric arrays
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#87">[ date ]</a>
+              <a href="thread.html#87">[ thread ]</a>
+              <a href="subject.html#87">[ subject ]</a>
+              <a href="author.html#87">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/ydframework-users">More information about the YDFramework-users
+mailing list</a><br>
+</body></html>

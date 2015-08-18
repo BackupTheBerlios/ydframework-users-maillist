@@ -1,0 +1,96 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [ydf-users] YDDatabaseObject - changing aliases on columns (AS)
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/ydframework-users/2006-February/index.html" >
+   <LINK REL="made" HREF="mailto:ydframework-users%40lists.berlios.de?Subject=Re%3A%20%5Bydf-users%5D%20YDDatabaseObject%20-%20changing%20aliases%20on%20columns%20%28AS%29&In-Reply-To=%3C12260be20602210357j5636108ftec11b44f874492a7%40mail.gmail.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000033.html">
+   <LINK REL="Next"  HREF="000035.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[ydf-users] YDDatabaseObject - changing aliases on columns (AS)</H1>
+    <B>David Bittencourt</B> 
+    <A HREF="mailto:ydframework-users%40lists.berlios.de?Subject=Re%3A%20%5Bydf-users%5D%20YDDatabaseObject%20-%20changing%20aliases%20on%20columns%20%28AS%29&In-Reply-To=%3C12260be20602210357j5636108ftec11b44f874492a7%40mail.gmail.com%3E"
+       TITLE="[ydf-users] YDDatabaseObject - changing aliases on columns (AS)">muitocomplicado at gmail.com
+       </A><BR>
+    <I>Tue Feb 21 12:57:32 CET 2006</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000033.html">[ydf-users] YDDatabaseObject - changing aliases on columns (AS)
+</A></li>
+        <LI>Next message: <A HREF="000035.html">[ydf-users] YDDatabaseObject - changing aliases on columns (AS)
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#34">[ date ]</a>
+              <a href="thread.html#34">[ thread ]</a>
+              <a href="subject.html#34">[ subject ]</a>
+              <a href="author.html#34">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>When registering a field, the name of the field is the alias. You can define
+the real column with setColumn:
+
+$field =&amp; $this-&gt;registerField( 'user_name' );
+$field-&gt;setColumn( 'username' ); // the real table column
+
+-db
+
+On 2/20/06, dab &lt;<A HREF="https://lists.berlios.de/mailman/listinfo/ydframework-users">dab214 at yahoo.com</A>&gt; wrote:
+&gt;<i>
+</I>&gt;<i> Hi,
+</I>&gt;<i> I noticed that the alias in the select statement
+</I>&gt;<i> (SELECT username AS user_name) is being set in
+</I>&gt;<i> YDDatabaseQuery::getSelect() but i can't seem to
+</I>&gt;<i> figure out how i would change this from my code using
+</I>&gt;<i> YDDatabaseObject.
+</I>&gt;<i> Is there another way than doing it by a
+</I>&gt;<i> registerSelect?
+</I>&gt;<i>
+</I>&gt;<i> thanks.
+</I>&gt;<i>
+</I>&gt;<i> /dan
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i> __________________________________________________
+</I>&gt;<i> Do You Yahoo!?
+</I>&gt;<i> Tired of spam?  Yahoo! Mail has the best spam protection around
+</I>&gt;<i> <A HREF="http://mail.yahoo.com">http://mail.yahoo.com</A>
+</I>&gt;<i> _______________________________________________
+</I>&gt;<i> YDFramework-users mailing list
+</I>&gt;<i> <A HREF="https://lists.berlios.de/mailman/listinfo/ydframework-users">YDFramework-users at lists.berlios.de</A>
+</I>&gt;<i> <A HREF="http://lists.berlios.de/mailman/listinfo/ydframework-users">http://lists.berlios.de/mailman/listinfo/ydframework-users</A>
+</I>&gt;<i>
+</I>-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: &lt;<A HREF="https://lists.berlios.de/pipermail/ydframework-users/attachments/20060221/dfad41da/attachment.html">https://lists.berlios.de/pipermail/ydframework-users/attachments/20060221/dfad41da/attachment.html</A>&gt;
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000033.html">[ydf-users] YDDatabaseObject - changing aliases on columns (AS)
+</A></li>
+	<LI>Next message: <A HREF="000035.html">[ydf-users] YDDatabaseObject - changing aliases on columns (AS)
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#34">[ date ]</a>
+              <a href="thread.html#34">[ thread ]</a>
+              <a href="subject.html#34">[ subject ]</a>
+              <a href="author.html#34">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/ydframework-users">More information about the YDFramework-users
+mailing list</a><br>
+</body></html>

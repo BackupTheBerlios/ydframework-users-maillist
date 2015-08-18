@@ -1,0 +1,96 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [ydf-users] YDAJax::addEvent( &quot;*&quot;,	... ) and adding events in a response
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/ydframework-users/2006-September/index.html" >
+   <LINK REL="made" HREF="mailto:ydframework-users%40lists.berlios.de?Subject=Re%3A%20%5Bydf-users%5D%20YDAJax%3A%3AaddEvent%28%20%22%2A%22%2C%0A%09...%20%29%20and%20adding%20events%20in%20a%20response&In-Reply-To=%3C20060922081030.22445.qmail%40web54007.mail.yahoo.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000388.html">
+   <LINK REL="Next"  HREF="000391.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[ydf-users] YDAJax::addEvent( &quot;*&quot;,	... ) and adding events in a response</H1>
+    <B>maximus meridius</B> 
+    <A HREF="mailto:ydframework-users%40lists.berlios.de?Subject=Re%3A%20%5Bydf-users%5D%20YDAJax%3A%3AaddEvent%28%20%22%2A%22%2C%0A%09...%20%29%20and%20adding%20events%20in%20a%20response&In-Reply-To=%3C20060922081030.22445.qmail%40web54007.mail.yahoo.com%3E"
+       TITLE="[ydf-users] YDAJax::addEvent( &quot;*&quot;,	... ) and adding events in a response">maximus_meridius79 at yahoo.com
+       </A><BR>
+    <I>Fri Sep 22 10:10:30 CEST 2006</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000388.html">[ydf-users] conditional ajax request
+</A></li>
+        <LI>Next message: <A HREF="000391.html">[ydf-users] Query Regarding getRecordsAsSet
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#390">[ date ]</a>
+              <a href="thread.html#390">[ thread ]</a>
+              <a href="subject.html#390">[ subject ]</a>
+              <a href="author.html#390">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>  Hi Francisco,
+
+First of all, I've seen your app and it looks really great ;-) . Itdemonstrates the real power of YDFramework and YDAjax.
+
+Francisco Azevedo wrote:
+  
+I hope that you have understood.. if not.. just wait to see the example and then (with the generated code in the client) you will understand.  
+I managed to get a simple piece of code working last night but itdidn't process any arguments. Your example gives me some idea of what ineed to do with respect to using func_get_args().
+      
+I am also trying to find out how to generate a form in a response and whether addEvent can be used in the response. My reason for wanting to create a form in a response is that I am trying to work out a technique for creating modal forms that popup within the existing page and behave like modal dialog boxes.I could pre-create the modal forms in the request and hide them but I think this could have security implications ...    
+    
+I have an application built 100% with your idea ;) and i can tell you that it works very well. All forms (and correspondent events for it) are generated on the response side ;)Well.. the security must be checked on the server side. If you are trying to use * on addEvent you should check the function name and arguments syntax, if they really exists.. etc.. but you can control that.
+
+Every time I have tried to use addEvent in a response the resultingjavascript that was added was __ydfarray() (or something similar). Thisis when I try to use the syntax:
+
+     $this-&gt;ajax-&gt;addEvent( 'my_modal_button', array( &amp;$this, 'processmodal' ), 'my_modal' )
+
+in the response. To get this to work I have had to modifyYDAjax::computeFunction so that in a response it calls&quot;registerFunction&quot; and had to change the PHP generating the js code forresponses so that $serverFunction[1] is used instead of $serverFunction.
+
+Please tell me if my interpretation of how to do this is totallyincorrect. I'd also appreciate it if you could explain how to correctlycreate a form in a response and add events to it.
+
+Thanks,
+
+Graeme
+
+
+
+
+
+ __________________________________________________
+Do You Yahoo!?
+Tired of spam?  Yahoo! Mail has the best spam protection around 
+<A HREF="http://mail.yahoo.com">http://mail.yahoo.com</A> 
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: &lt;<A HREF="https://lists.berlios.de/pipermail/ydframework-users/attachments/20060922/16738078/attachment.html">https://lists.berlios.de/pipermail/ydframework-users/attachments/20060922/16738078/attachment.html</A>&gt;
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000388.html">[ydf-users] conditional ajax request
+</A></li>
+	<LI>Next message: <A HREF="000391.html">[ydf-users] Query Regarding getRecordsAsSet
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#390">[ date ]</a>
+              <a href="thread.html#390">[ thread ]</a>
+              <a href="subject.html#390">[ subject ]</a>
+              <a href="author.html#390">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/ydframework-users">More information about the YDFramework-users
+mailing list</a><br>
+</body></html>

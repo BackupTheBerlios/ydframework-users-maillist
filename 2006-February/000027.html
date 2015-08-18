@@ -1,0 +1,103 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [ydf-users] YDDatabaseObject issue
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/ydframework-users/2006-February/index.html" >
+   <LINK REL="made" HREF="mailto:ydframework-users%40lists.berlios.de?Subject=Re%3A%20%5Bydf-users%5D%20YDDatabaseObject%20issue&In-Reply-To=%3C43EFC44E.1040707%40jocosoft.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000026.html">
+   <LINK REL="Next"  HREF="000028.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[ydf-users] YDDatabaseObject issue</H1>
+    <B>Peter</B> 
+    <A HREF="mailto:ydframework-users%40lists.berlios.de?Subject=Re%3A%20%5Bydf-users%5D%20YDDatabaseObject%20issue&In-Reply-To=%3C43EFC44E.1040707%40jocosoft.com%3E"
+       TITLE="[ydf-users] YDDatabaseObject issue">peter at jocosoft.com
+       </A><BR>
+    <I>Mon Feb 13 00:27:10 CET 2006</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000026.html">[ydf-users] YDDatabaseObject issue
+</A></li>
+        <LI>Next message: <A HREF="000028.html">[ydf-users] YDDatabaseObject issue
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#27">[ date ]</a>
+              <a href="thread.html#27">[ thread ]</a>
+              <a href="subject.html#27">[ subject ]</a>
+              <a href="author.html#27">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>&gt;&gt;<i> No, neither am I, and that's part of the problem I'm sure :)  What 
+</I>&gt;&gt;<i> I've come up with is
+</I>&gt;&gt;<i> SELECT artist.name, count(album.id) AS numalbums FROM artist LEFT 
+</I>&gt;&gt;<i> JOIN album ON album.artistid=artist.id GROUP BY artist.id
+</I>&gt;&gt;<i>
+</I>&gt;&gt;<i> and that works! We've come a step closer. Now the only problem is to 
+</I>&gt;&gt;<i> translate this to YDDatabaseObject as it will complain that 
+</I>&gt;&gt;<i> count(album.id) is not a registered field
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i> And its correct.. &quot;count(album.id)&quot; is not a field but an expression.
+</I>&gt;<i> Afaik, YDDatabaseObject has registerSelect() to add custom expressions
+</I>&gt;<i> to a select.
+</I>&gt;<i> Something like:
+</I>&gt;<i>
+</I>&gt;<i> $this-&gt;registerSelect( 'numalbums', 'count( X )');
+</I>
+Oh, is that how you use registerselect.... I've actually been staring at 
+that method, wondering what it was for. (and sorry, the avalable 
+documentation is not very helpful)
+This actually totally makes sense though! I'm sure this is going to work!
+
+&gt;<i>
+</I>&gt;<i> .. where X is the album.id.. you can try hardcode it.. or using a
+</I>&gt;<i> previous defined variable:
+</I>&gt;<i>
+</I>&gt;<i> $var = &amp; $this-&gt;registerField( 'xpto' );
+</I>&gt;<i>
+</I>&gt;<i> $this-&gt;registerSelect( 'numalbums', 'count( '. $var-&gt;getColumn() .' )');
+</I>&gt;<i>
+</I>&gt;<i> The problem here is that your X is a field of _other_ table and i don't
+</I>&gt;<i> know if it's possible to use an variable of other table... maybe db can
+</I>&gt;<i> help here.
+</I>
+That would be a lot nicer indeed. And the current class already &quot;knows 
+about&quot; the other table through a relation that is defined, so maybe we 
+may be able to use that to our advantage here...
+
+Thanks a bunch Francisco! You heped me well on my way here.
+
+Peter
+
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000026.html">[ydf-users] YDDatabaseObject issue
+</A></li>
+	<LI>Next message: <A HREF="000028.html">[ydf-users] YDDatabaseObject issue
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#27">[ date ]</a>
+              <a href="thread.html#27">[ thread ]</a>
+              <a href="subject.html#27">[ subject ]</a>
+              <a href="author.html#27">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/ydframework-users">More information about the YDFramework-users
+mailing list</a><br>
+</body></html>

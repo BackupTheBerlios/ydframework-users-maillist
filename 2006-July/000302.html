@@ -1,0 +1,87 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [ydf-users] Query Regarding Variable scope
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/ydframework-users/2006-July/index.html" >
+   <LINK REL="made" HREF="mailto:ydframework-users%40lists.berlios.de?Subject=Re%3A%20%5Bydf-users%5D%20Query%20Regarding%20Variable%20scope&In-Reply-To=%3C44CDB896.9000903%40fusemail.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000301.html">
+   
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[ydf-users] Query Regarding Variable scope</H1>
+    <B>Francisco Azevedo</B> 
+    <A HREF="mailto:ydframework-users%40lists.berlios.de?Subject=Re%3A%20%5Bydf-users%5D%20Query%20Regarding%20Variable%20scope&In-Reply-To=%3C44CDB896.9000903%40fusemail.com%3E"
+       TITLE="[ydf-users] Query Regarding Variable scope">francisco at fusemail.com
+       </A><BR>
+    <I>Mon Jul 31 10:00:22 CEST 2006</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000301.html">[ydf-users] Query Regarding Variable scope
+</A></li>
+        
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#302">[ date ]</a>
+              <a href="thread.html#302">[ thread ]</a>
+              <a href="subject.html#302">[ subject ]</a>
+              <a href="author.html#302">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Hi Moses
+
+&gt;<i> *          *Thanks for ur reply, still my doubt is not cleared. 
+</I>&gt;<i>           
+</I>&gt;<i>           In a function if we declare a variable as $this it becoms 
+</I>&gt;<i> global so that we can access it from any functions.
+</I>&gt;<i>  
+</I>&gt;<i> *           *But in the addFormRule function() Though  I decalre a 
+</I>&gt;<i> variable as $this I could not access the variable outside the function.
+</I>&gt;<i>  
+</I>&gt;<i>            Is there any restriction that the  addFormRule function() 
+</I>&gt;<i> will only return either true nor
+</I>&gt;<i> array( $errorMessage ) and we cannot access its variables.
+</I>&gt;<i> 
+</I>
+Afaik no.. but it seems you are not trying to access variables inside 
+the class because it seems you are cloning the object.
+Can you try:
+
+$this-&gt;form-&gt;addFormRule(array( &amp; $this,'validateTimings'));
+
+instead of:
+
+$this-&gt;form-&gt;addFormRule(array($this,'validateTimings'));
+
+
+regards
+Francisco A
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000301.html">[ydf-users] Query Regarding Variable scope
+</A></li>
+	
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#302">[ date ]</a>
+              <a href="thread.html#302">[ thread ]</a>
+              <a href="subject.html#302">[ subject ]</a>
+              <a href="author.html#302">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/ydframework-users">More information about the YDFramework-users
+mailing list</a><br>
+</body></html>

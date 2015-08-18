@@ -1,0 +1,141 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [ydf-users] Query Regarding Dynamic Text Box
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/ydframework-users/2006-April/index.html" >
+   <LINK REL="made" HREF="mailto:ydframework-users%40lists.berlios.de?Subject=Re%3A%20%5Bydf-users%5D%20Query%20Regarding%20Dynamic%20Text%20Box&In-Reply-To=%3C4aef63030604200758q4b628aa2yd960d07196c705d3%40mail.gmail.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000225.html">
+   <LINK REL="Next"  HREF="000213.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[ydf-users] Query Regarding Dynamic Text Box</H1>
+    <B>Pieter Claerhout</B> 
+    <A HREF="mailto:ydframework-users%40lists.berlios.de?Subject=Re%3A%20%5Bydf-users%5D%20Query%20Regarding%20Dynamic%20Text%20Box&In-Reply-To=%3C4aef63030604200758q4b628aa2yd960d07196c705d3%40mail.gmail.com%3E"
+       TITLE="[ydf-users] Query Regarding Dynamic Text Box">pieter at yellowduck.be
+       </A><BR>
+    <I>Thu Apr 20 16:58:36 CEST 2006</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000225.html">[ydf-users] YDForm::toHtml
+</A></li>
+        <LI>Next message: <A HREF="000213.html">[ydf-users] Query Regarding Dynamic Text Box (again)
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#211">[ date ]</a>
+              <a href="thread.html#211">[ thread ]</a>
+              <a href="subject.html#211">[ subject ]</a>
+              <a href="author.html#211">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>So, if I understand it correctly, you want each record to show up in a
+different form field, right?
+
+If yes, then there are some things you need to change in the logic:
+
+1. Get all the records from the database
+
+2. Create a new form object
+
+3. Create a new element for each record in the database, giving each one of
+them a unique name
+
+4. Assign the form to the template
+
+5. Loop over the elements in the template to make them visible.
+
+Regards,
+
+
+pieter
+
+On 4/20/06, <A HREF="https://lists.berlios.de/mailman/listinfo/ydframework-users">moses at softwaysolutions.com</A> &lt;<A HREF="https://lists.berlios.de/mailman/listinfo/ydframework-users">moses at softwaysolutions.com</A>&gt; wrote:
+&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i> Dear Sir
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i>                How to create dynamic text boxes......
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i> I tried the following
+</I>&gt;<i>
+</I>&gt;<i> (.php)
+</I>&gt;<i>
+</I>&gt;<i>                       $this-&gt;form-&gt;addElement('text','txtName','');
+</I>&gt;<i>                       $records =
+</I>&gt;<i> $this-&gt;mySql-&gt;getAllRecords('department','');  ( &quot;Contains all the records
+</I>&gt;<i> from databse&quot; )
+</I>&gt;<i>                       $this-&gt;template-&gt;assign('records',$records);
+</I>&gt;<i>
+</I>&gt;<i>                       $this-&gt;form-&gt;setDefaults(array(&quot;txtName&quot;=&gt;'{$record.department_name}')); -&gt;
+</I>&gt;<i> ( i understand this coding is wrong but i dont know the other way)
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i> (.tpl)  (it works but i dont want to use these type of coding)
+</I>&gt;<i>
+</I>&gt;<i>                      {foreach from = $records item = record  }
+</I>&gt;<i>                                   {$record.department_name} &lt;input
+</I>&gt;<i> type=&quot;text&quot; value=&quot;{$record.department_name}&quot;&gt;
+</I>&gt;<i>                       {/foreach}
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i>  (.tpl)  (I want this type of coding. but does not works  )
+</I>&gt;<i>
+</I>&gt;<i>                      {foreach from = $records item = record  }
+</I>&gt;<i>                                   {$record.department_name}
+</I>&gt;<i> {$form.txtName.html}
+</I>&gt;<i>                       {/foreach}
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i> regards
+</I>&gt;<i> moses
+</I>&gt;<i>
+</I>&gt;<i> _______________________________________________ YDFramework-users mailing
+</I>&gt;<i> list <A HREF="https://lists.berlios.de/mailman/listinfo/ydframework-users">YDFramework-users at lists.berlios.de</A>
+</I>&gt;<i> <A HREF="http://lists.berlios.de/mailman/listinfo/ydframework-users">http://lists.berlios.de/mailman/listinfo/ydframework-users</A>
+</I>&gt;<i>
+</I>
+
+
+--
+pieter claerhout . <A HREF="https://lists.berlios.de/mailman/listinfo/ydframework-users">pieter at yellowduck.be</A> . <A HREF="http://www.yellowduck.be/">http://www.yellowduck.be/</A>
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: &lt;<A HREF="https://lists.berlios.de/pipermail/ydframework-users/attachments/20060420/c638caed/attachment.html">https://lists.berlios.de/pipermail/ydframework-users/attachments/20060420/c638caed/attachment.html</A>&gt;
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000225.html">[ydf-users] YDForm::toHtml
+</A></li>
+	<LI>Next message: <A HREF="000213.html">[ydf-users] Query Regarding Dynamic Text Box (again)
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#211">[ date ]</a>
+              <a href="thread.html#211">[ thread ]</a>
+              <a href="subject.html#211">[ subject ]</a>
+              <a href="author.html#211">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/ydframework-users">More information about the YDFramework-users
+mailing list</a><br>
+</body></html>

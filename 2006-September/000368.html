@@ -1,0 +1,97 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [ydf-users] YDDatabaseObject - another feature
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/ydframework-users/2006-September/index.html" >
+   <LINK REL="made" HREF="mailto:ydframework-users%40lists.berlios.de?Subject=Re%3A%20%5Bydf-users%5D%20YDDatabaseObject%20-%20another%20feature&In-Reply-To=%3C450031B1.7060901%40fusemail.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000366.html">
+   <LINK REL="Next"  HREF="000369.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[ydf-users] YDDatabaseObject - another feature</H1>
+    <B>Francisco Azevedo</B> 
+    <A HREF="mailto:ydframework-users%40lists.berlios.de?Subject=Re%3A%20%5Bydf-users%5D%20YDDatabaseObject%20-%20another%20feature&In-Reply-To=%3C450031B1.7060901%40fusemail.com%3E"
+       TITLE="[ydf-users] YDDatabaseObject - another feature">francisco at fusemail.com
+       </A><BR>
+    <I>Thu Sep  7 16:50:25 CEST 2006</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000366.html">[ydf-users] YDDatabaseObject - another feature
+</A></li>
+        <LI>Next message: <A HREF="000369.html">[ydf-users] YDDatabaseObject - another feature
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#368">[ date ]</a>
+              <a href="thread.html#368">[ thread ]</a>
+              <a href="subject.html#368">[ subject ]</a>
+              <a href="author.html#368">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Hi David
+
+
+&gt;<i> You can retrieve the SQL query that would be used without executing it 
+</I>&gt;<i> by setting the YDConfig variable YD_DBOBJECT_EXECUTE to false. Example:
+</I>&gt;<i> 
+</I>&gt;<i> YDConfig::set( 'YD_DBOBJECT_EXECUTE', false );
+</I>&gt;<i> 
+</I>&gt;<i> $obj-&gt;id = 1;
+</I>&gt;<i> $sql = $obj-&gt;delete();
+</I>&gt;<i> 
+</I>&gt;<i> YDConfig::set( 'YD_DBOBJECT_EXECUTE', true ); // get it back to normal use
+</I>&gt;<i> 
+</I>&gt;<i> Now $sql will have something like:
+</I>&gt;<i> 
+</I>&gt;<i> DELETE FROM table WHERE id = 1
+</I>&gt;<i> 
+</I>&gt;<i> Is this what you want?
+</I>
+Yes.. but it would be very useful to integrate them in the YDDatabaseObject.
+
+Do you mind to add those? eg:
+
+
+function deleteSQL(){
+
+	$exe = YDConfig::get( 'YD_DBOBJECT_EXECUTE' );
+	       YDConfig::set( 'YD_DBOBJECT_EXECUTE', false );
+	$res = $this-&gt;delete();
+	       YDConfig::set( 'YD_DBOBJECT_EXECUTE', $exe );
+	return $res;
+}
+
+
+regards
+Francisco A
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000366.html">[ydf-users] YDDatabaseObject - another feature
+</A></li>
+	<LI>Next message: <A HREF="000369.html">[ydf-users] YDDatabaseObject - another feature
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#368">[ date ]</a>
+              <a href="thread.html#368">[ thread ]</a>
+              <a href="subject.html#368">[ subject ]</a>
+              <a href="author.html#368">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/ydframework-users">More information about the YDFramework-users
+mailing list</a><br>
+</body></html>

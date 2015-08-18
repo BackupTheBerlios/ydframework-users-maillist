@@ -1,0 +1,164 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [ydf-users] Content Management Framework proposal
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/ydframework-users/2006-February/index.html" >
+   <LINK REL="made" HREF="mailto:ydframework-users%40lists.berlios.de?Subject=Re%3A%20%5Bydf-users%5D%20Content%20Management%20Framework%20proposal&In-Reply-To=%3C43FEFC14.9090209%40fusemail.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000053.html">
+   <LINK REL="Next"  HREF="000050.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[ydf-users] Content Management Framework proposal</H1>
+    <B>Francisco Azevedo</B> 
+    <A HREF="mailto:ydframework-users%40lists.berlios.de?Subject=Re%3A%20%5Bydf-users%5D%20Content%20Management%20Framework%20proposal&In-Reply-To=%3C43FEFC14.9090209%40fusemail.com%3E"
+       TITLE="[ydf-users] Content Management Framework proposal">francisco at fusemail.com
+       </A><BR>
+    <I>Fri Feb 24 13:29:08 CET 2006</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000053.html">[ydf-users] Content Management Framework proposal
+</A></li>
+        <LI>Next message: <A HREF="000050.html">[ydf-users] Anyone has some CRUD functionality available?
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#56">[ date ]</a>
+              <a href="thread.html#56">[ thread ]</a>
+              <a href="subject.html#56">[ subject ]</a>
+              <a href="author.html#56">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>&gt;<i> I've already logged the neccessary feature requests for improved error 
+</I>&gt;<i> handling and translations.
+</I>&gt;<i>  
+</I>&gt;<i> For the errors, I plan to make a custom error handler that, depending on 
+</I>&gt;<i> how you configure it, will do the following:
+</I>&gt;<i> - If already defined, it will use that one (by means of a standard name)
+</I>&gt;<i> - If not defined yet:
+</I>&gt;<i>   - PHP4: will use trigger_error
+</I>&gt;<i>   - PHP5: will throw an exception
+</I>
+Sorry but, are you talking about YDError internals? Or we will need to 
+know if we are in a php4 or php5 environment?
+
+&gt;<i> This way, we maintain backwards compatibility, while, if possible, 
+</I>&gt;<i> taking advantage of the new features of PHP5. Since most people are 
+</I>&gt;<i> still using PHP4 rather than PHP5 (unless you can prove me otherwise), 
+</I>&gt;<i> this is the best we can do I guess.
+</I>
+Yes, this send us to a previous discussed topic about &quot;php5 only or not?&quot;.
+
+&gt;<i> For the locale stuff, if we backport the translation stuff available in 
+</I>&gt;<i> the weblog application, would that be sufficient you think? If not, can 
+</I>&gt;<i> you enlighten me a little bit on what you would like to see added/changed?
+</I>
+Yes. Like db said, maybe integrate it with YDLocale could be better. 
+Some remarks about that translation function are:
+- make it the more fast (optimized) as possible as it will be called 
+dozens of times..
+- make it possible to handle custom arguments for dynamic values.
+Another detail is maybe we should include the language file inside 
+YDLocale::set(), this way YDLocale::t() will not try to include it every 
+time...
+
+&gt;<i> For the switch, eventually, we will need to do the switch anyway if we 
+</I>&gt;<i> want to take full advantage of the new PHP 5 features.
+</I>
+That's a problem. I think we need to wait a little more. Php5 is not yet 
+very used (i think).
+
+&gt;<i> For sure, all the nodes will extend a base class that has all the 
+</I>&gt;<i> goodies such as security, public/private methods and so on. The way I 
+</I>&gt;<i> see it right now is to implement it a bit similar to the way YDRequest 
+</I>&gt;<i> is implemented.
+</I>
+Sounds good :)
+
+&gt;<i> I remember that for YDAcl, we had some stuff on the forum, right? If we 
+</I>&gt;<i> can get this in a database independent way, I guess that's what we can 
+</I>&gt;<i> use, no?
+</I>
+Sure.. YDAcl is really important. We could have some mechanism (in the 
+abstract node class) that checks the db (on private methods) for correct 
+authentication.. or maybe even a more smart way where it could check db 
+just one time if it knows that we have private methods defined.
+Why this class we can define on private methods the minimun level for 
+that method (based on acl).. then, the abstract class would 
+automagically test db authentication for user/pass/level.. just some ideas.
+
+&gt;<i> For the schema updates, I don't think there will be a problem. With some 
+</I>&gt;<i> tricks such as serialized objects, we can very easily overcome this. By 
+</I>&gt;<i> just updating the object definitions, the rest will already happen 
+</I>&gt;<i> automatically without having to change anything to the database.
+</I>&gt;<i>  
+</I>&gt;<i> Cheers,
+</I>&gt;<i>  
+</I>&gt;<i>  
+</I>&gt;<i> pieter
+</I>&gt;<i>  
+</I>&gt;<i> On 2/23/06, *Francisco Azevedo* &lt;<A HREF="https://lists.berlios.de/mailman/listinfo/ydframework-users">francisco at fusemail.com</A> 
+</I>&gt;<i> &lt;mailto:<A HREF="https://lists.berlios.de/mailman/listinfo/ydframework-users">francisco at fusemail.com</A>&gt;&gt; wrote:
+</I>&gt;<i> 
+</I>&gt;<i> 
+</I>&gt;<i>      &gt; I wanted to share an idea with you about what I call a &quot;Content
+</I>&gt;<i>      &gt; Management Framework&quot;, which I might be adding to the framework.
+</I>&gt;<i>      &gt;
+</I>&gt;<i>      &gt; Essentially, I would like to add a system that makes it easy to
+</I>&gt;<i>     create a
+</I>&gt;<i>      &gt; CMS based on the Yellow Duck Framework by avoiding to have to do the
+</I>&gt;<i>      &gt; same work over and over again.
+</I>&gt;<i> 
+</I>&gt;<i>     This idea sounds good, especially because, as you know, i'm a little
+</I>&gt;<i>     involved is those caind of applications.
+</I>&gt;<i> 
+</I>&gt;<i>      &gt; Any suggestions, additions, comments, remarks?
+</I>&gt;<i> 
+</I>&gt;<i>     My opinion is that the core (ydf) should have some important features
+</I>&gt;<i>     before starting the (ydCMf), eg YDError. This is, imho, extremely
+</I>&gt;<i>     important in a application and if not done now, it will be integrated
+</I>&gt;<i>     later in CMf and that's bad. We will have 2x the job because we will
+</I>&gt;<i>     port the framework _and_ the CMframework. Other feature is the Locale.
+</I>&gt;<i> 
+</I>&gt;<i>     I think that all nodes should extend an abstract class that, eg, checks
+</I>&gt;<i>     autentication and/or has an mecanism where we can define public methods
+</I>&gt;<i>     (that can be invoked in the template side) and private methods that
+</I>&gt;<i>     will
+</I>&gt;<i>     only work if the class detects that the user is authenticated.
+</I>&gt;<i>     To be perfect, this means that we could have some mecanism (ACL)
+</I>&gt;<i>     integrated in that master class.
+</I>&gt;<i> 
+</I>&gt;<i>     So, the idea about a tree of components and some automatic store and
+</I>&gt;<i>     retrieve sounds excellent but i think we must care about YDError,
+</I>&gt;<i>     YDLocale, YDACL? and then start integration those and start creating
+</I>&gt;<i>     nodes.. just my 0.02
+</I>
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000053.html">[ydf-users] Content Management Framework proposal
+</A></li>
+	<LI>Next message: <A HREF="000050.html">[ydf-users] Anyone has some CRUD functionality available?
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#56">[ date ]</a>
+              <a href="thread.html#56">[ thread ]</a>
+              <a href="subject.html#56">[ subject ]</a>
+              <a href="author.html#56">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/ydframework-users">More information about the YDFramework-users
+mailing list</a><br>
+</body></html>

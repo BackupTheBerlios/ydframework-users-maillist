@@ -1,0 +1,216 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [ydf-users] Ajax
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/ydframework-users/2006-March/index.html" >
+   <LINK REL="made" HREF="mailto:ydframework-users%40lists.berlios.de?Subject=Re%3A%20%5Bydf-users%5D%20Ajax&In-Reply-To=%3C829084a60603290145w141e9b06td2f75a4cb767e0dc%40mail.gmail.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000176.html">
+   <LINK REL="Next"  HREF="000177.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[ydf-users] Ajax</H1>
+    <B>ph-m</B> 
+    <A HREF="mailto:ydframework-users%40lists.berlios.de?Subject=Re%3A%20%5Bydf-users%5D%20Ajax&In-Reply-To=%3C829084a60603290145w141e9b06td2f75a4cb767e0dc%40mail.gmail.com%3E"
+       TITLE="[ydf-users] Ajax">phmassa at gmail.com
+       </A><BR>
+    <I>Wed Mar 29 11:45:25 CEST 2006</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000176.html">[ydf-users] Ajax
+</A></li>
+        <LI>Next message: <A HREF="000177.html">[ydf-users] 2 ideas for checkboxgroup form element
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#179">[ date ]</a>
+              <a href="thread.html#179">[ thread ]</a>
+              <a href="subject.html#179">[ subject ]</a>
+              <a href="author.html#179">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>thanks for idea, but I try your solution, and it doesn't work too, I
+show in FireFox with Web Developper, Id and Class Details and instead
+have .adminRowL I've got .\&quot;adminRowL\&quot;
+
+another idea :)
+
+++
+ph-m
+
+2006/3/28, Francisco Azevedo &lt;<A HREF="https://lists.berlios.de/mailman/listinfo/ydframework-users">francisco at fusemail.com</A>&gt;:
+&gt;<i> hi ph-m
+</I>&gt;<i>
+</I>&gt;<i> You cannot apply styles because you are adding html and applying slashes
+</I>&gt;<i> to it.. and you shouldn't.
+</I>&gt;<i>
+</I>&gt;<i> When adding results, if that results are html strings, you must add the
+</I>&gt;<i> original html.
+</I>&gt;<i>
+</I>&gt;<i> In your example you must *not* do:
+</I>&gt;<i>
+</I>&gt;<i>   $retour = &quot;&lt;table cellspacing=\&quot;0\&quot;
+</I>&gt;<i>   cellpadding=\&quot;0\&quot; border=\&quot;0\&quot;&gt;&lt;tr&gt;&lt;th class=\&quot;adminRowL\&quot;
+</I>&gt;<i>   width=\&quot;40%\&quot;&gt;Nom&lt;/th&gt;&lt;th class=\&quot;adminRowL\&quot;
+</I>&gt;<i>   width=\&quot;40%\&quot;&gt;Pr&#233;nom&lt;/th&gt;&lt;th class=\&quot;adminRowL\&quot;
+</I>&gt;<i>   width=\&quot;20%\&quot;&gt;T&#233;l&#233;phone&lt;/th&gt;&lt;/tr&gt;&quot;;
+</I>&gt;<i>                       foreach ($res as $row )
+</I>&gt;<i>                               $retour .= &quot;&lt;tr
+</I>&gt;<i>   onMouseOver=\&quot;YDRowMouseOver(this);\&quot;
+</I>&gt;<i>   onMouseOut=\&quot;YDRowMouseOut(this);\&quot;&gt;&lt;td class=\&quot;adminRowL\&quot;&gt;&quot;.
+</I>&gt;<i>   $row['ag_nom'] . &quot;&lt;/td&gt;&lt;td class=\&quot;adminRowL\&quot;&gt;&quot; . $row['ag_prenom'] .
+</I>&gt;<i>   &quot;&lt;/td&gt;&lt;td class=\&quot;adminRowL\&quot;&gt;&quot; . $row['ag_tel']  .&quot;&lt;/td&gt;&lt;/tr&gt;&quot;;
+</I>&gt;<i>                       $retour .= &quot;&lt;/table&gt;&quot;;
+</I>&gt;<i>                   } else
+</I>&gt;<i>                       $retour .= &quot;&lt;table cellspacing=\&quot;0\&quot;
+</I>&gt;<i>   cellpadding=\&quot;0\&quot; border=\&quot;0\&quot;&gt;&lt;tr&gt;&lt;td&gt;pas de
+</I>&gt;<i>   r&#233;ponse&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&quot;;
+</I>&gt;<i>
+</I>&gt;<i> but you *should* do:
+</I>&gt;<i>
+</I>&gt;<i>   $retour = '&lt;table cellspacing=&quot;0&quot;
+</I>&gt;<i>   cellpadding=&quot;0&quot; border=&quot;0&quot;&gt;&lt;tr&gt;&lt;th class=&quot;adminRowL&quot;
+</I>&gt;<i>   width=&quot;40%&quot;&gt;Nom&lt;/th&gt;&lt;th class=&quot;adminRowL&quot;
+</I>&gt;<i>   width=&quot;40%&quot;&gt;Pr&#233;nom&lt;/th&gt;&lt;th class=&quot;adminRowL&quot;
+</I>&gt;<i>   width=&quot;20%&quot;&gt;T&#233;l&#233;phone&lt;/th&gt;&lt;/tr&gt;';
+</I>&gt;<i>                       foreach ($res as $row )
+</I>&gt;<i>                               $retour .= '&lt;tr
+</I>&gt;<i>   onMouseOver=&quot;YDRowMouseOver(this);&quot;
+</I>&gt;<i>   onMouseOut=&quot;YDRowMouseOut(this);&quot;&gt;&lt;td class=&quot;adminRowL&quot;&gt;'.
+</I>&gt;<i>   $row['ag_nom'] . '&lt;/td&gt;&lt;td class=&quot;adminRowL&quot;&gt;' . $row['ag_prenom'] .
+</I>&gt;<i>   '&lt;/td&gt;&lt;td class=&quot;adminRowL&quot;&gt;' . $row['ag_tel']  .'&lt;/td&gt;&lt;/tr&gt;';
+</I>&gt;<i>                       $retour .= '&lt;/table&gt;';
+</I>&gt;<i>                   } else
+</I>&gt;<i>                       $retour .= '&lt;table cellspacing=&quot;0&quot;
+</I>&gt;<i>   cellpadding=&quot;0&quot; border=&quot;0&quot;&gt;&lt;tr&gt;&lt;td&gt;pas de
+</I>&gt;<i>   r&#233;ponse&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;';
+</I>&gt;<i>
+</I>&gt;<i> Please try again using the original html string.
+</I>&gt;<i>
+</I>&gt;<i> Francisco A
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i> &gt; hi,
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt; Since last releases, with ajax, I've lost styles, this is my code :
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt;               function index() {
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt;                       $this-&gt;YDRequest();
+</I>&gt;<i> &gt;                       $this-&gt;tpl = new YDTemplate();
+</I>&gt;<i> &gt;             $this-&gt;timer = new YDTimer();
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt;               }
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt;               // Default action
+</I>&gt;<i> &gt;               function actionDefault() {
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt;             $myform = new YDForm('myform');
+</I>&gt;<i> &gt;                       $myform-&gt;addElement( 'text', 'arg1', 'Nom :', array( 'maxlength' =&gt; 15 ) );
+</I>&gt;<i> &gt;                       $myform-&gt;addElement( 'button', 'mybutton', 'Interroger' );
+</I>&gt;<i> &gt;                       $myform-&gt;addElement( 'span', 'myspanresult', '&nbsp;' );
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt;             $myform-&gt;addFilter( 'arg1', 'trim' );
+</I>&gt;<i> &gt;             $myform-&gt;addRule( 'arg1', 'required', 'requis' );
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt;                       // create ajax object
+</I>&gt;<i> &gt;                       $this-&gt;ajax = new YDAjax( $this-&gt;tpl );
+</I>&gt;<i> &gt;             $this-&gt;ajax-&gt;addForm( $myform );
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt;             // create custom effects for waiting message
+</I>&gt;<i> &gt;             $onStart = new YDAjaxEffect('', 'opacity', 'hide()', 0 );
+</I>&gt;<i> &gt;             $onShow  = new YDAjaxEffect('', 'opacity', 'custom(0,1)', 0 );
+</I>&gt;<i> &gt;             $onHide  = new YDAjaxEffect('', 'opacity', &quot;toggle()&quot; );
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt;             // use waiting message with custom effects
+</I>&gt;<i> &gt;             $this-&gt;ajax-&gt;useWaitingMessage( &quot;&lt;h2&gt;&nbsp;Recherche en
+</I>&gt;<i> &gt; cours ... &nbsp;&lt;\/h2&gt;&quot;, array(), $onStart, $onShow, $onHide );
+</I>&gt;<i> &gt;             //$this-&gt;ajax-&gt;useWaitingMessage( );
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt;             $this-&gt;ajax-&gt;addEvent( 'mybutton', array( &amp; $this,
+</I>&gt;<i> &gt; 'compute' ), array('arg1') );
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt;                       $this-&gt;ajax-&gt;processEvents();
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt;                       // assign form and display template
+</I>&gt;<i> &gt;                       $this-&gt;tpl-&gt;assign( 'app_titre', 'Annuaire' );
+</I>&gt;<i> &gt;                       $this-&gt;tpl-&gt;assign( 'app_nom', 'Annuaire Local' );
+</I>&gt;<i> &gt;                       $this-&gt;tpl-&gt;assignForm( 'form',  $myform );
+</I>&gt;<i> &gt;             $this-&gt;tpl-&gt;assign( 'timer', $this-&gt;timer-&gt;getElapsed() );
+</I>&gt;<i> &gt;                       $this-&gt;tpl-&gt;display();
+</I>&gt;<i> &gt;               }
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt;               // compute call invoked by ajax client
+</I>&gt;<i> &gt;               function compute( $x ){
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt;             $retour = &quot;&quot;;
+</I>&gt;<i> &gt;             if($x!=&quot;&quot;) {
+</I>&gt;<i> &gt;                 $strSQL = &quot;SELECT ag_nom, ag_prenom, ag_tel FROM
+</I>&gt;<i> &gt; agents WHERE ag_nom LIKE '&quot; . $x . &quot;%'&quot;;
+</I>&gt;<i> &gt;                 $db = YDDatabase::getInstance( 'mysql',
+</I>&gt;<i> &gt; YDConfig::get('db_name'), YDConfig::get('db_user'),
+</I>&gt;<i> &gt; YDConfig::get('db_pass'), YDConfig::get('db_host') );
+</I>&gt;<i> &gt;                 $retour = &quot;&quot;;
+</I>&gt;<i> &gt;                 $res = $db-&gt;getRecords( $strSQL );
+</I>&gt;<i> &gt;                 if($res) {
+</I>&gt;<i> &gt;                     $retour = &quot;&lt;table cellspacing=\&quot;0\&quot;
+</I>&gt;<i> &gt; cellpadding=\&quot;0\&quot; border=\&quot;0\&quot;&gt;&lt;tr&gt;&lt;th class=\&quot;adminRowL\&quot;
+</I>&gt;<i> &gt; width=\&quot;40%\&quot;&gt;Nom&lt;/th&gt;&lt;th class=\&quot;adminRowL\&quot;
+</I>&gt;<i> &gt; width=\&quot;40%\&quot;&gt;Pr&#233;nom&lt;/th&gt;&lt;th class=\&quot;adminRowL\&quot;
+</I>&gt;<i> &gt; width=\&quot;20%\&quot;&gt;T&#233;l&#233;phone&lt;/th&gt;&lt;/tr&gt;&quot;;
+</I>&gt;<i> &gt;                     foreach ($res as $row )
+</I>&gt;<i> &gt;                             $retour .= &quot;&lt;tr
+</I>&gt;<i> &gt; onMouseOver=\&quot;YDRowMouseOver(this);\&quot;
+</I>&gt;<i> &gt; onMouseOut=\&quot;YDRowMouseOut(this);\&quot;&gt;&lt;td class=\&quot;adminRowL\&quot;&gt;&quot;.
+</I>&gt;<i> &gt; $row['ag_nom'] . &quot;&lt;/td&gt;&lt;td class=\&quot;adminRowL\&quot;&gt;&quot; . $row['ag_prenom'] .
+</I>&gt;<i> &gt; &quot;&lt;/td&gt;&lt;td class=\&quot;adminRowL\&quot;&gt;&quot; . $row['ag_tel']  .&quot;&lt;/td&gt;&lt;/tr&gt;&quot;;
+</I>&gt;<i> &gt;                     $retour .= &quot;&lt;/table&gt;&quot;;
+</I>&gt;<i> &gt;                 } else
+</I>&gt;<i> &gt;                     $retour .= &quot;&lt;table cellspacing=\&quot;0\&quot;
+</I>&gt;<i> &gt; cellpadding=\&quot;0\&quot; border=\&quot;0\&quot;&gt;&lt;tr&gt;&lt;td&gt;pas de
+</I>&gt;<i> &gt; r&#233;ponse&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&quot;;
+</I>&gt;<i> &gt;             }
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt;             // assign result to span
+</I>&gt;<i> &gt;                       $this-&gt;ajax-&gt;addResult( 'myspanresult', $retour );
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt;                       // return response to client browser
+</I>&gt;<i> &gt;                       return $this-&gt;ajax-&gt;processResults();
+</I>&gt;<i> &gt;               }
+</I>&gt;<i>
+</I>&gt;<i> _______________________________________________
+</I>&gt;<i> YDFramework-users mailing list
+</I>&gt;<i> <A HREF="https://lists.berlios.de/mailman/listinfo/ydframework-users">YDFramework-users at lists.berlios.de</A>
+</I>&gt;<i> <A HREF="http://lists.berlios.de/mailman/listinfo/ydframework-users">http://lists.berlios.de/mailman/listinfo/ydframework-users</A>
+</I>&gt;<i>
+</I>
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000176.html">[ydf-users] Ajax
+</A></li>
+	<LI>Next message: <A HREF="000177.html">[ydf-users] 2 ideas for checkboxgroup form element
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#179">[ date ]</a>
+              <a href="thread.html#179">[ thread ]</a>
+              <a href="subject.html#179">[ subject ]</a>
+              <a href="author.html#179">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/ydframework-users">More information about the YDFramework-users
+mailing list</a><br>
+</body></html>

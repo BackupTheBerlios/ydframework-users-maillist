@@ -1,0 +1,97 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [ydf-users] YDDataBaseObject and YDTemplate
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/ydframework-users/2006-September/index.html" >
+   <LINK REL="made" HREF="mailto:ydframework-users%40lists.berlios.de?Subject=Re%3A%20%5Bydf-users%5D%20YDDataBaseObject%20and%20YDTemplate&In-Reply-To=%3C20060902112940.24723.qmail%40web54007.mail.yahoo.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000354.html">
+   <LINK REL="Next"  HREF="000353.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[ydf-users] YDDataBaseObject and YDTemplate</H1>
+    <B>maximus meridius</B> 
+    <A HREF="mailto:ydframework-users%40lists.berlios.de?Subject=Re%3A%20%5Bydf-users%5D%20YDDataBaseObject%20and%20YDTemplate&In-Reply-To=%3C20060902112940.24723.qmail%40web54007.mail.yahoo.com%3E"
+       TITLE="[ydf-users] YDDataBaseObject and YDTemplate">maximus_meridius79 at yahoo.com
+       </A><BR>
+    <I>Sat Sep  2 13:29:40 CEST 2006</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000354.html">[ydf-users] Query Regarding YDFSImage
+</A></li>
+        <LI>Next message: <A HREF="000353.html">[ydf-users] YDDataBaseObject and YDTemplate
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#352">[ date ]</a>
+              <a href="thread.html#352">[ thread ]</a>
+              <a href="subject.html#352">[ subject ]</a>
+              <a href="author.html#352">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Hi,
+
+I am seeing some strange behaviour when results from a
+YDDatabaseObject 
+are assigned to the template.
+
+This is my code:
+
+    $this-&gt;page-&gt;fetch();
+                       
+    $page_data = $this-&gt;page-&gt;getValuesAsAssocArray();
+                      
+    // add the data to the template
+    $this-&gt;tpl-&gt;assign( 'page',      $page_data );
+    $this-&gt;tpl-&gt;assign( 'page_data', $page_data );
+
+Now you would expect that the template variables
+'page' and 'page_data' 
+would be set with the same data.
+
+In this case the data in the 'page' template variable
+(an associative 
+array) has only two of the elements set and all of the
+other fields are 
+missing.
+
+Regards,
+
+Graeme
+
+
+
+__________________________________________________
+Do You Yahoo!?
+Tired of spam?  Yahoo! Mail has the best spam protection around 
+<A HREF="http://mail.yahoo.com">http://mail.yahoo.com</A> 
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000354.html">[ydf-users] Query Regarding YDFSImage
+</A></li>
+	<LI>Next message: <A HREF="000353.html">[ydf-users] YDDataBaseObject and YDTemplate
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#352">[ date ]</a>
+              <a href="thread.html#352">[ thread ]</a>
+              <a href="subject.html#352">[ subject ]</a>
+              <a href="author.html#352">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/ydframework-users">More information about the YDFramework-users
+mailing list</a><br>
+</body></html>

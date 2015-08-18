@@ -1,0 +1,84 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [ydf-users] YDFramework-users Digest, Vol 5, Issue 11
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/ydframework-users/2006-November/index.html" >
+   <LINK REL="made" HREF="mailto:ydframework-users%40lists.berlios.de?Subject=Re%3A%20%5Bydf-users%5D%20YDFramework-users%20Digest%2C%20Vol%205%2C%20Issue%2011&In-Reply-To=%3C456DBF16.50301%40fusemail.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000432.html">
+   
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[ydf-users] YDFramework-users Digest, Vol 5, Issue 11</H1>
+    <B>Francisco Azevedo</B> 
+    <A HREF="mailto:ydframework-users%40lists.berlios.de?Subject=Re%3A%20%5Bydf-users%5D%20YDFramework-users%20Digest%2C%20Vol%205%2C%20Issue%2011&In-Reply-To=%3C456DBF16.50301%40fusemail.com%3E"
+       TITLE="[ydf-users] YDFramework-users Digest, Vol 5, Issue 11">francisco at fusemail.com
+       </A><BR>
+    <I>Wed Nov 29 18:10:46 CET 2006</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000432.html">[ydf-users] YDFramework-users Digest, Vol 5, Issue 11
+</A></li>
+        
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#433">[ date ]</a>
+              <a href="thread.html#433">[ thread ]</a>
+              <a href="subject.html#433">[ subject ]</a>
+              <a href="author.html#433">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Hi
+
+&gt;<i> Just a clarification, why does this able to access and change the
+</I>&gt;<i> variable from YDFormElement_Hidden with this code:
+</I>&gt;<i> 
+</I>&gt;<i>          $element = &amp; $form-&gt;addElement( 'hidden', 'list_date',
+</I>&gt;<i> 'Listing Date' );
+</I>&gt;<i>          $element-&gt;_placeLabel = 'before';
+</I>&gt;<i> 
+</I>&gt;<i> Do you have any idea why?
+</I>
+
+As i said, _placeLabel defines where to render the label when exporting. 
+When you use {$form.list_date...} in the template you are using an 
+_exported_ value.
+On other convertions (eg: form to array), the export converter will look 
+to the _placeLabel definition and if value is:
+	- &quot;none&quot; will _not_ use labels
+	- &quot;before&quot; will place label _before_ the element html
+	- &quot;after&quot; will place label _after_ the element html
+
+If you use $form-&gt;display() in your code you can see the difference.
+
+
+Francisco A
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000432.html">[ydf-users] YDFramework-users Digest, Vol 5, Issue 11
+</A></li>
+	
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#433">[ date ]</a>
+              <a href="thread.html#433">[ thread ]</a>
+              <a href="subject.html#433">[ subject ]</a>
+              <a href="author.html#433">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/ydframework-users">More information about the YDFramework-users
+mailing list</a><br>
+</body></html>

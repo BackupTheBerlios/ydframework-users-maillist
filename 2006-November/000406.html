@@ -1,0 +1,242 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [ydf-users] YDTemplate, smarty and caching
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/ydframework-users/2006-November/index.html" >
+   <LINK REL="made" HREF="mailto:ydframework-users%40lists.berlios.de?Subject=Re%3A%20%5Bydf-users%5D%20YDTemplate%2C%20smarty%20and%20caching&In-Reply-To=%3C20061106210748.38671.qmail%40web50215.mail.yahoo.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000405.html">
+   <LINK REL="Next"  HREF="000407.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[ydf-users] YDTemplate, smarty and caching</H1>
+    <B>dab</B> 
+    <A HREF="mailto:ydframework-users%40lists.berlios.de?Subject=Re%3A%20%5Bydf-users%5D%20YDTemplate%2C%20smarty%20and%20caching&In-Reply-To=%3C20061106210748.38671.qmail%40web50215.mail.yahoo.com%3E"
+       TITLE="[ydf-users] YDTemplate, smarty and caching">dab214 at yahoo.com
+       </A><BR>
+    <I>Mon Nov  6 22:07:48 CET 2006</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000405.html">[ydf-users] YDTemplate, smarty and caching
+</A></li>
+        <LI>Next message: <A HREF="000407.html">[ydf-users] (no subject)
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#406">[ date ]</a>
+              <a href="thread.html#406">[ thread ]</a>
+              <a href="subject.html#406">[ subject ]</a>
+              <a href="author.html#406">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>thanks pieter for clearing up that mystery for me and
+thanks for the tips on the other caching ability.
+
+
+--- Pieter Claerhout &lt;<A HREF="https://lists.berlios.de/mailman/listinfo/ydframework-users">pieter at yellowduck.be</A>&gt; wrote:
+
+&gt;<i> Yes, I know why.
+</I>&gt;<i> 
+</I>&gt;<i> I you don't specify a compile ID, the framework will
+</I>&gt;<i> generate one which is
+</I>&gt;<i> basically the crc32 of the full path to the
+</I>&gt;<i> template. The reason why the
+</I>&gt;<i> framework does it that way is to allow you to save
+</I>&gt;<i> all compiled templates in
+</I>&gt;<i> one folder instead of having to create one temp
+</I>&gt;<i> folder for each folder
+</I>&gt;<i> containing templates.
+</I>&gt;<i> 
+</I>&gt;<i> If you want to use caching, adding a cache ID
+</I>&gt;<i> (second argument) should do
+</I>&gt;<i> the trick.
+</I>&gt;<i> 
+</I>&gt;<i> cheers,
+</I>&gt;<i> 
+</I>&gt;<i> 
+</I>&gt;<i> pieter
+</I>&gt;<i> 
+</I>&gt;<i> PS: if you are looking for a very straightforward
+</I>&gt;<i> way of caching, have a
+</I>&gt;<i> look at the weblog application. It does do caching,
+</I>&gt;<i> but without using any of
+</I>&gt;<i> the features of smarty.
+</I>&gt;<i> 
+</I>&gt;<i> 
+</I>&gt;<i> 2006/11/6, dab &lt;<A HREF="https://lists.berlios.de/mailman/listinfo/ydframework-users">dab214 at yahoo.com</A>&gt;:
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt; hi again,
+</I>&gt;<i> &gt; for some reason it works when i add a compile id
+</I>&gt;<i> like:
+</I>&gt;<i> &gt; $this-&gt;template-&gt;display('test.tpl', 1, 1);
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt; but only then :(
+</I>&gt;<i> &gt; anyone has any idea why?
+</I>&gt;<i> &gt; thanks again..
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt;
+</I>&gt;<i>
+</I>__________________________________________________________________________________________
+&gt;<i> &gt; Check out the New Yahoo! Mail - Fire up a more
+</I>&gt;<i> powerful email and get
+</I>&gt;<i> &gt; things done faster.
+</I>&gt;<i> &gt; (<A HREF="http://advision.webevents.yahoo.com/mailbeta">http://advision.webevents.yahoo.com/mailbeta</A>)
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt; ---------- Doorgestuurd bericht ----------
+</I>&gt;<i> &gt; From: dab &lt;<A HREF="https://lists.berlios.de/mailman/listinfo/ydframework-users">dab214 at yahoo.com</A>&gt;
+</I>&gt;<i> &gt; To: <A HREF="https://lists.berlios.de/mailman/listinfo/ydframework-users">ydframework-users at lists.berlios.de</A>
+</I>&gt;<i> &gt; Date: Sun, 5 Nov 2006 15:01:04 -0800 (PST)
+</I>&gt;<i> &gt; Subject: [ydf-users] YDTemplate, smarty and
+</I>&gt;<i> caching
+</I>&gt;<i> &gt; hi all,
+</I>&gt;<i> &gt; i've been using YDTemplate without any problems up
+</I>&gt;<i> &gt; till now :(
+</I>&gt;<i> &gt; For some reason YDTemplate seems to add some
+</I>&gt;<i> digits in
+</I>&gt;<i> &gt; the cache filename:
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt; it creates this file:
+</I>&gt;<i> &gt;
+</I>&gt;<i>
+</I>d:\work\YDFramework2/temp/cache/\2459960022^%%6D^6D7^6D7C5625%%test.tpl
+&gt;<i> &gt;
+</I>&gt;<i> &gt; but it looks for this one:
+</I>&gt;<i> &gt;
+</I>&gt;<i>
+</I>d:\work\YDFramework2/temp/cache/\%%6D^6D7^6D7C5625%%test.tpl
+&gt;<i> &gt;
+</I>&gt;<i> &gt; Therefore the is_cached() returns nothing.
+</I>&gt;<i> &gt; It seems to add a number like this: &quot;2459960022^&quot;
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt; Do anyone know why it does this?
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt; My ydf test code:
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt; class test extends YDRequest {
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt;    function test() {
+</I>&gt;<i> &gt;        $this-&gt;YDRequest();
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt;        // Indicate we require login
+</I>&gt;<i> &gt;        $this-&gt;setRequiresAuthentication( false );
+</I>&gt;<i> &gt;    }
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt;    function actionDefault() {
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt;       $this-&gt;template = new YDTemplate();
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt;                $this-&gt;template-&gt;caching = true;
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt;                if ( !
+</I>&gt;<i> $this-&gt;template-&gt;is_cached('test.tpl')) {
+</I>&gt;<i> &gt;                        echo &quot;not cached!&quot;;
+</I>&gt;<i> &gt;                }
+</I>&gt;<i> &gt;               
+</I>&gt;<i> $this-&gt;template-&gt;display('test.tpl');
+</I>&gt;<i> &gt;    }
+</I>&gt;<i> &gt; }
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt; and when using this standard smarty code it works
+</I>&gt;<i> as
+</I>&gt;<i> &gt; it should:
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt; $smarty-&gt;caching = true;
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt; if ( ! $smarty-&gt;is_cached('test.tpl')) {
+</I>&gt;<i> &gt;        echo &quot;not cached!&quot;;
+</I>&gt;<i> &gt; }
+</I>&gt;<i> &gt; $smarty-&gt;display($tpl_path.'test.tpl');
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt; Any help is much apreciated. I've been pulling my
+</I>&gt;<i> hair
+</I>&gt;<i> &gt; with this one all night :(
+</I>&gt;<i> &gt; thanks!
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt;
+</I>&gt;<i>
+</I>____________________________________________________________________________________
+&gt;<i> &gt; Low, Low, Low Rates! Check out Yahoo! Messenger's
+</I>&gt;<i> cheap PC-to-Phone call
+</I>&gt;<i> &gt; rates
+</I>&gt;<i> &gt; (<A HREF="http://voice.yahoo.com">http://voice.yahoo.com</A>)
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt; _______________________________________________
+</I>&gt;<i> &gt; YDFramework-users mailing list
+</I>&gt;<i> &gt; <A HREF="https://lists.berlios.de/mailman/listinfo/ydframework-users">YDFramework-users at lists.berlios.de</A>
+</I>&gt;<i> &gt;
+</I>&gt;<i>
+</I><A HREF="https://lists.berlios.de/mailman/listinfo/ydframework-users">https://lists.berlios.de/mailman/listinfo/ydframework-users</A>
+&gt;<i> &gt;
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt; _______________________________________________
+</I>&gt;<i> &gt; YDFramework-users mailing list
+</I>&gt;<i> &gt; <A HREF="https://lists.berlios.de/mailman/listinfo/ydframework-users">YDFramework-users at lists.berlios.de</A>
+</I>&gt;<i> &gt;
+</I>&gt;<i>
+</I><A HREF="https://lists.berlios.de/mailman/listinfo/ydframework-users">https://lists.berlios.de/mailman/listinfo/ydframework-users</A>
+&gt;<i> &gt;
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt;
+</I>&gt;<i> 
+</I>&gt;<i> 
+</I>&gt;<i> -- 
+</I>&gt;<i> pieter claerhout . <A HREF="https://lists.berlios.de/mailman/listinfo/ydframework-users">pieter at yellowduck.be</A> .
+</I>&gt;<i> <A HREF="http://www.yellowduck.be/">http://www.yellowduck.be/</A>
+</I>&gt;<i> &gt; _______________________________________________
+</I>&gt;<i> YDFramework-users mailing list
+</I>&gt;<i> <A HREF="https://lists.berlios.de/mailman/listinfo/ydframework-users">YDFramework-users at lists.berlios.de</A>
+</I>&gt;<i>
+</I><A HREF="https://lists.berlios.de/mailman/listinfo/ydframework-users">https://lists.berlios.de/mailman/listinfo/ydframework-users</A>
+&gt;<i> 
+</I>
+
+__________________________________________________
+Do You Yahoo!?
+Tired of spam?  Yahoo! Mail has the best spam protection around 
+<A HREF="http://mail.yahoo.com">http://mail.yahoo.com</A> 
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000405.html">[ydf-users] YDTemplate, smarty and caching
+</A></li>
+	<LI>Next message: <A HREF="000407.html">[ydf-users] (no subject)
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#406">[ date ]</a>
+              <a href="thread.html#406">[ thread ]</a>
+              <a href="subject.html#406">[ subject ]</a>
+              <a href="author.html#406">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/ydframework-users">More information about the YDFramework-users
+mailing list</a><br>
+</body></html>

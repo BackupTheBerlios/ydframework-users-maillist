@@ -1,0 +1,3092 @@
+From araviski at free.fr  Sun Jul  2 13:36:44 2006
+From: araviski at free.fr (Erwan)
+Date: Sun, 02 Jul 2006 13:36:44 +0200
+Subject: [ydf-users] YDDatabaseObject - What's the right way to do ?
+Message-ID: <44A7AFCC.60408@free.fr>
+
+Hi all,
+Here is something I'd like to do with the YDDatabaseObject but I cannot
+find the right way to do.
+In the YDDO examples provided with the framework, there's always
+multiple rows associated to one object. I mean, a user can have multiple
+phone numbers and can be associated with multiple groups. I know that in
+this case the phone number row is associated to one and only one user,
+but how should I consider a row that can be associated to "one" other
+row, many times. I mean for example an object which can be in one place
+and associated with one state, of which labels and other valuable
+information would be in other tables ? I hope it'll be more
+understandable with the detailled example, if not let me know :
+
+Objects table :
+idobject-name-idstate-idplace
+1-one hammer-1-2
+2-Swiss knive-1-1
+3-one other hammer-2-2
+
+States table :
+idstate-label-and other valuable attributes...
+---------------------
+1-new-...
+2-in good condition-...
+3-word-...
+
+Places table :
+idplace- label-and other valuable attributes...
+---------------------
+1-kitchen-...
+2-cellar-...
+
+I'd like to be able to write something like :
+$object->id = 1;
+$object->find('state', 'place');
+ in order to retrieve :
+$object->id = 1
+$object->label->one hammer
+$object->state_id =1
+$object->state_label =new
+$object->place_id = 2
+$object->place_label = cellar
+
+I thought first I could reuse the phone relationship example, with an
+INNER join association, but I don't succeed and it breaks my head since
+two days. The best I'have made is to retrieve the object with a
+$object->find('state', 'place'), but the inner joins are not made on the
+proper key.
+I can handle it with a multiple relationship and an intermediate table
+of mapping like the user_group provided example, with a single
+association row, but before using this way I'd like to know if I miss
+something.
+Any pieces of information would be appreciated,
+Many thanks,
+
+Erwan.
+
+
+
+From francisco at fusemail.com  Sun Jul  2 19:21:11 2006
+From: francisco at fusemail.com (Francisco Azevedo)
+Date: Sun, 02 Jul 2006 18:21:11 +0100
+Subject: [ydf-users] How to use YDFormElement_Grid?
+In-Reply-To: <20060630170510.11675.qmail@web53814.mail.yahoo.com>
+References: <20060630170510.11675.qmail@web53814.mail.yahoo.com>
+Message-ID: <44A80087.2020908@fusemail.com>
+
+Hi Graeme
+
+> I just noticed the grid element. I can't find an
+> example that uses it. 
+
+That grid is an experiment. I started creating it to a project but i 
+have stopped.
+The idea was just to create a table with headers that have ajax calls 
+for sorting and some spans for pagination.
+
+> Can someone describe how this is used or ideally
+> provide an example? Can 
+> the grid element be used within a form that is
+> ajax-based?
+
+That was a feature i wanted too.. but it's not trivial. The grid is a 
+basically a form, and i wanted to be able to extend that form with some 
+elements (eg, to be able to filter).
+
+But as i said .. it's only experimental.
+
+regards
+Francisco A
+
+
+From francisco at fusemail.com  Sun Jul  2 19:43:41 2006
+From: francisco at fusemail.com (Francisco Azevedo)
+Date: Sun, 02 Jul 2006 18:43:41 +0100
+Subject: [ydf-users] YDDatabaseObject
+In-Reply-To: <12260be20606281623v1bbbbe2aj25ac32889843533@mail.gmail.com>
+References: <44A0FAB6.5060100@fusemail.com>	 <12260be20606271409v776d3b3eva5c2766c17d79afc@mail.gmail.com>	 <44A1B0AD.2040205@fusemail.com> <12260be20606281623v1bbbbe2aj25ac32889843533@mail.gmail.com>
+Message-ID: <44A805CD.5090906@fusemail.com>
+
+Hi David,
+
+> A protected field is defined by registerProtected. The field value will 
+> remain the same for all instances.
+> 
+> Keys are NOT protected fields. You can change the value and use it to do 
+> different queries.
+> 
+> Try to use resetQuery together with resetValues. Maybe the content_id 
+> condition may be defined there from the last query.
+
+resetQuery() didn't work.. but resetAll() worked. :)
+
+Thanks anyway.
+
+Francisco A
+
+
+From muitocomplicado at gmail.com  Mon Jul  3 02:04:38 2006
+From: muitocomplicado at gmail.com (David Bittencourt)
+Date: Sun, 2 Jul 2006 21:04:38 -0300
+Subject: [ydf-users] YDDatabaseObject - What's the right way to do ?
+In-Reply-To: <44A7AFCC.60408@free.fr>
+References: <44A7AFCC.60408@free.fr>
+Message-ID: <12260be20607021704g2fe01356u6f9b792a03a2ec30@mail.gmail.com>
+
+What you are doing looks right. Be sure to register the relation correctly.
+
+    class object extends YDDatabaseObject {
+        function object() {
+            $this->YDDatabaseObject();
+
+            $this->registerKey( 'id' );
+            $this->registerField( 'name' );
+            $this->registerField( 'idstate' );
+            $this->registerField( 'idplace' );
+
+            $rel = & $this->registerRelation( 'state', false, 'state' );
+            $rel->setForeignJoin( 'INNER' );
+            $rel->setLocalKey( 'idstate' ); // it's not the primary key of
+object
+            $rel->setForeignKey( 'id' );
+
+            $rel = & $this->registerRelation( 'place', false, 'place' );
+            $rel->setForeignJoin( 'INNER' );
+            $rel->setLocalKey( 'idplace' ); // it's not the primary key of
+object
+            $rel->setForeignKey( 'id' );
+        }
+    }
+
+So if you have:
+
+$obj = YDDatabaseObject::getInstance( 'object' );
+$obj->id = 1;
+$obj->find( 'state', 'place' );
+
+After this you will have:
+
+$obj->id = 1;
+$obj->name = 'one hammer';
+$obj->idstate = 1;
+$obj->idplace = 2;
+$obj->state->id = 1;
+$obj->state->label = 'new';
+$obj->place->id = 2;
+$obj->place->label = 'cellar';
+
+If you use getValues to retrieve an array you'll have:
+
+array(
+  'id' => 1,
+  'name' => 'one hammer';
+  'idstate' => 1,
+  'idplace' => 2,
+  'state_id' => 1,
+  'state_label' => 'new',
+  'place_id' => 2,
+  'place_label' => 'cellar'
+);
+
+Check the user guide for more help:
+http://ydframework.berlios.de/doc/yddatabaseobject.html
+
+Cheers,
+
+David - db
+
+On 7/2/06, Erwan <araviski at free.fr> wrote:
+>
+> Hi all,
+> Here is something I'd like to do with the YDDatabaseObject but I cannot
+> find the right way to do.
+> In the YDDO examples provided with the framework, there's always
+> multiple rows associated to one object. I mean, a user can have multiple
+> phone numbers and can be associated with multiple groups. I know that in
+> this case the phone number row is associated to one and only one user,
+> but how should I consider a row that can be associated to "one" other
+> row, many times. I mean for example an object which can be in one place
+> and associated with one state, of which labels and other valuable
+> information would be in other tables ? I hope it'll be more
+> understandable with the detailled example, if not let me know :
+>
+> Objects table :
+> idobject-name-idstate-idplace
+> 1-one hammer-1-2
+> 2-Swiss knive-1-1
+> 3-one other hammer-2-2
+>
+> States table :
+> idstate-label-and other valuable attributes...
+> ---------------------
+> 1-new-...
+> 2-in good condition-...
+> 3-word-...
+>
+> Places table :
+> idplace- label-and other valuable attributes...
+> ---------------------
+> 1-kitchen-...
+> 2-cellar-...
+>
+> I'd like to be able to write something like :
+> $object->id = 1;
+> $object->find('state', 'place');
+> in order to retrieve :
+> $object->id = 1
+> $object->label->one hammer
+> $object->state_id =1
+> $object->state_label =new
+> $object->place_id = 2
+> $object->place_label = cellar
+>
+> I thought first I could reuse the phone relationship example, with an
+> INNER join association, but I don't succeed and it breaks my head since
+> two days. The best I'have made is to retrieve the object with a
+> $object->find('state', 'place'), but the inner joins are not made on the
+> proper key.
+> I can handle it with a multiple relationship and an intermediate table
+> of mapping like the user_group provided example, with a single
+> association row, but before using this way I'd like to know if I miss
+> something.
+> Any pieces of information would be appreciated,
+> Many thanks,
+>
+> Erwan.
+>
+> _______________________________________________
+> YDFramework-users mailing list
+> YDFramework-users at lists.berlios.de
+> http://lists.berlios.de/mailman/listinfo/ydframework-users
+>
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <https://lists.berlios.de/pipermail/ydframework-users/attachments/20060702/c1d1c892/attachment.html>
+
+From maximus_meridius79 at yahoo.com  Mon Jul  3 13:21:52 2006
+From: maximus_meridius79 at yahoo.com (maximus meridius)
+Date: Mon, 3 Jul 2006 04:21:52 -0700 (PDT)
+Subject: [ydf-users] How to use YDFormElement_Grid?
+Message-ID: <20060703112152.70823.qmail@web53815.mail.yahoo.com>
+
+Hi Francisco,
+
+Thanks for the clarification. I'm glad I only spent a
+few minutes trying 
+it out.
+
+I'll see if I can manually setup recordset
+manipulation in my forms. 
+Basically I wanted a table with buttons in each row
+that I could use to 
+move rows up and down through a table. YDAjax is not
+too difficult to 
+use once you get the hang of it.
+
+Thanks,
+
+Graeme
+
+Francisco Azevedo wrote:
+> Hi Graeme
+>
+>> I just noticed the grid element. I can't find an
+>> example that uses it. 
+>
+> That grid is an experiment. I started creating it to
+a project but i 
+> have stopped.
+> The idea was just to create a table with headers
+that have ajax calls 
+> for sorting and some spans for pagination.
+>
+>> Can someone describe how this is used or ideally
+>> provide an example? Can the grid element be used
+within a form that is
+>> ajax-based?
+>
+> That was a feature i wanted too.. but it's not
+trivial. The grid is a 
+> basically a form, and i wanted to be able to extend
+that form with 
+> some elements (eg, to be able to filter).
+>
+> But as i said .. it's only experimental.
+>
+> regards
+> Francisco A
+> _______________________________________________
+> YDFramework-users mailing list
+> YDFramework-users at lists.berlios.de
+>
+http://lists.berlios.de/mailman/listinfo/ydframework-users
+>
+>
+
+
+__________________________________________________
+Do You Yahoo!?
+Tired of spam?  Yahoo! Mail has the best spam protection around 
+http://mail.yahoo.com 
+
+
+From francisco at fusemail.com  Mon Jul  3 13:37:19 2006
+From: francisco at fusemail.com (Francisco Azevedo)
+Date: Mon, 03 Jul 2006 12:37:19 +0100
+Subject: [ydf-users] How to use YDFormElement_Grid?
+In-Reply-To: <20060703112152.70823.qmail@web53815.mail.yahoo.com>
+References: <20060703112152.70823.qmail@web53815.mail.yahoo.com>
+Message-ID: <44A9016F.6090305@fusemail.com>
+
+Hi Graeme
+
+> Thanks for the clarification. I'm glad I only spent a
+> few minutes trying 
+> it out.
+> 
+> I'll see if I can manually setup recordset
+> manipulation in my forms. 
+> Basically I wanted a table with buttons in each row
+> that I could use to 
+> move rows up and down through a table. YDAjax is not
+> too difficult to 
+> use once you get the hang of it.
+
+I'll try to create an example of how to use the ajax "grid". Maybe your 
+suggestion could be a good example.. the only problem i see is how to 
+create those buttons, maybe hardcoding them (html) in the cell.
+
+regards
+Francisco A
+
+
+From moses at softwaysolutions.com  Tue Jul  4 07:05:13 2006
+From: moses at softwaysolutions.com (moses at softwaysolutions.com)
+Date: Mon, 03 Jul 2006 22:05:13 -0700
+Subject: [ydf-users] Query Regarding Submit button
+Message-ID: <20060703220513.fe477b357a56c857c15a39baa2ae95d5.237b29cea4.wbe@email.secureserver.net>
+
+Hello Sir
+
+         
+     In my page I have a form and within that I have two submit buttons
+named add,edit
+
+     
+$this->form->addElement('submit','add','Add',array("class"=>"button"));
+     
+$this->form->addElement('submit','edit','Edit',array("class"=>"button"));
+     
+    and I have two functions named
+
+    function actionAdd
+    {
+            -- The Code --
+    
+    }  
+ 
+   function actionEdit
+   {
+
+       -- The Code for Edit --
+   } 
+
+
+   So when I click add submit button the function actionAdd() should be
+executed and when I click Edit the function actionEdit() should be
+executed.
+
+    
+    What should I do...
+
+regards 
+moses
+
+    
+  
+
+
+
+
+From moses at softwaysolutions.com  Tue Jul  4 08:56:29 2006
+From: moses at softwaysolutions.com (moses at softwaysolutions.com)
+Date: Mon, 03 Jul 2006 23:56:29 -0700
+Subject: [ydf-users] How to set Properties for a element  after it has been created
+Message-ID: <20060703235629.fe477b357a56c857c15a39baa2ae95d5.8d5af717c3.wbe@email.secureserver.net>
+
+Hello Sir
+
+   How to set Properties for a element  after it has  been created
+  
+    I add an text element to a form like this
+
+          $this->form->addElement('text','timeInHrs','Time In','');
+
+    After completing the processing I should disable the text 
+
+    So in actionComplete
+
+    Can I use the following coding
+
+          $this->form->addElement('text','timeInHrs','Time
+In',array("disabled"=>"disabled"));
+
+    If so I have an doubt 
+   
+     In the same page if it possible to add two elements is it
+correct!!!!!
+
+
+    Is there any other way.
+
+regards
+moses  
+         
+
+
+        
+
+
+
+From muitocomplicado at gmail.com  Tue Jul  4 09:03:11 2006
+From: muitocomplicado at gmail.com (David Bittencourt)
+Date: Tue, 4 Jul 2006 04:03:11 -0300
+Subject: [ydf-users] How to set Properties for a element after it has been created
+In-Reply-To: <20060703235629.fe477b357a56c857c15a39baa2ae95d5.8d5af717c3.wbe@email.secureserver.net>
+References: <20060703235629.fe477b357a56c857c15a39baa2ae95d5.8d5af717c3.wbe@email.secureserver.net>
+Message-ID: <12260be20607040003p6395dfd3yc4f279a753663965@mail.gmail.com>
+
+Use YDForm::getElement to get a reference to the element object and change
+the $_attributes var.
+
+$elm =& $this->form->getElement( 'timeInHrs' );
+$elm->_attributes['disabled'] = 'disabled';
+
+-db
+
+On 7/4/06, moses at softwaysolutions.com <moses at softwaysolutions.com> wrote:
+>
+>
+> Hello Sir
+>
+>    How to set Properties for a element  after it has  been created
+>
+>     I add an text element to a form like this
+>
+>           $this->form->addElement('text','timeInHrs','Time In','');
+>
+>     After completing the processing I should disable the text
+>
+>     So in actionComplete
+>
+>     Can I use the following coding
+>
+>           $this->form->addElement('text','timeInHrs','Time
+> In',array("disabled"=>"disabled"));
+>
+>     If so I have an doubt
+>
+>      In the same page if it possible to add two elements is it
+> correct!!!!!
+>
+>
+>     Is there any other way.
+>
+> regards
+> moses
+>
+>
+>
+>
+>
+> _______________________________________________
+> YDFramework-users mailing list
+> YDFramework-users at lists.berlios.de
+> http://lists.berlios.de/mailman/listinfo/ydframework-users
+>
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <https://lists.berlios.de/pipermail/ydframework-users/attachments/20060704/bb0b63af/attachment.html>
+
+From muitocomplicado at gmail.com  Tue Jul  4 09:09:10 2006
+From: muitocomplicado at gmail.com (David Bittencourt)
+Date: Tue, 4 Jul 2006 04:09:10 -0300
+Subject: [ydf-users] Query Regarding Submit button
+In-Reply-To: <20060703220513.fe477b357a56c857c15a39baa2ae95d5.237b29cea4.wbe@email.secureserver.net>
+References: <20060703220513.fe477b357a56c857c15a39baa2ae95d5.237b29cea4.wbe@email.secureserver.net>
+Message-ID: <12260be20607040009k2129edb3ke0b5673e18fd1ff4@mail.gmail.com>
+
+Well... this kind of behavior is not that simple because a form can have
+only one action and that action can't be changed with javascript (I think).
+
+I don't know a nice solution for it, but perhaps you could add a text field
+called 'action' with style="display:none". Then with javascript when the
+user presses the Add button, you fill the 'action' field with "add" and for
+the Edit button, fill with "edit". In your php script you can now redirect
+the request to the desired action.
+
+Just a suggestion, someone knows a better way?
+
+-db
+
+On 7/4/06, moses at softwaysolutions.com <moses at softwaysolutions.com> wrote:
+>
+>
+> Hello Sir
+>
+>
+>      In my page I have a form and within that I have two submit buttons
+> named add,edit
+>
+>
+> $this->form->addElement('submit','add','Add',array("class"=>"button"));
+>
+> $this->form->addElement('submit','edit','Edit',array("class"=>"button"));
+>
+>     and I have two functions named
+>
+>     function actionAdd
+>     {
+>             -- The Code --
+>
+>     }
+>
+>    function actionEdit
+>    {
+>
+>        -- The Code for Edit --
+>    }
+>
+>
+>    So when I click add submit button the function actionAdd() should be
+> executed and when I click Edit the function actionEdit() should be
+> executed.
+>
+>
+>     What should I do...
+>
+> regards
+> moses
+>
+>
+>
+>
+>
+> _______________________________________________
+> YDFramework-users mailing list
+> YDFramework-users at lists.berlios.de
+> http://lists.berlios.de/mailman/listinfo/ydframework-users
+>
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <https://lists.berlios.de/pipermail/ydframework-users/attachments/20060704/8882bb5f/attachment.html>
+
+From ydfpoi at gmail.com  Tue Jul  4 10:04:31 2006
+From: ydfpoi at gmail.com (ydf poi)
+Date: Tue, 4 Jul 2006 10:04:31 +0200
+Subject: [ydf-users] Query Regarding Submit button
+In-Reply-To: <12260be20607040009k2129edb3ke0b5673e18fd1ff4@mail.gmail.com>
+References: <20060703220513.fe477b357a56c857c15a39baa2ae95d5.237b29cea4.wbe@email.secureserver.net>
+	 <12260be20607040009k2129edb3ke0b5673e18fd1ff4@mail.gmail.com>
+Message-ID: <306340e00607040104t74c52950k8a2e471b526268fb@mail.gmail.com>
+
+Hi
+
+I think javascript enables you to do what you want.
+
+You can create a HTML document like this one:
+<header>
+    ...
+    <script type="text/javascript" src="foo.js"></script>
+</header>
+<body>
+    ...
+    <form id="myForm" action="" ...>
+        ...
+        <input id="addButton" type="button" value="Add" />
+        <input id="editButton" type="button" value="Edit" />
+        ...
+    </form>
+    ...
+</body>
+
+Then the foo.js file has to contain something like:
+    window.onload = init();
+
+    var addButton = null;
+    var editButton = null;
+    var myForm = null;
+
+    function init() {
+        myForm = document.getElementById('myForm');
+
+        addButton = document.getElementById('addButton');
+        addButton.onclick = function() {
+            myForm.action = 'http://yourpage.html?do=add'; // or only
+'?do=add' here
+            myForm.submit();
+        }
+
+        editButton = document.getElementById('editButton');
+        editButton.onclick = function() {
+            myForm.action = 'http://yourpage.html?do=edit'; // or only
+'?do=edit' here
+            myForm.submit();
+        }
+    }
+
+Well, I have not tested this code but I think it should work.
+Kind regards
+
+2006/7/4, David Bittencourt <muitocomplicado at gmail.com>:
+> Well... this kind of behavior is not that simple because a form can have
+> only one action and that action can't be changed with javascript (I think).
+>
+> I don't know a nice solution for it, but perhaps you could add a text field
+> called 'action' with style="display:none". Then with javascript when the
+> user presses the Add button, you fill the 'action' field with "add" and for
+> the Edit button, fill with "edit". In your php script you can now redirect
+> the request to the desired action.
+>
+> Just a suggestion, someone knows a better way?
+>
+> -db
+>
+>
+> On 7/4/06, moses at softwaysolutions.com <moses at softwaysolutions.com> wrote:
+> >
+> > Hello Sir
+> >
+> >
+> >      In my page I have a form and within that I have two submit buttons
+> > named add,edit
+> >
+> >
+> >
+> $this->form->addElement('submit','add','Add',array("class"=>"button"));
+> >
+> >
+> $this->form->addElement('submit','edit','Edit',array("class"=>"button"));
+> >
+> >     and I have two functions named
+> >
+> >     function actionAdd
+> >     {
+> >             -- The Code --
+> >
+> >     }
+> >
+> >    function actionEdit
+> >    {
+> >
+> >        -- The Code for Edit --
+> >    }
+> >
+> >
+> >    So when I click add submit button the function actionAdd() should be
+> > executed and when I click Edit the function actionEdit() should be
+> > executed.
+> >
+> >
+> >     What should I do...
+> >
+> > regards
+> > moses
+> >
+> >
+> >
+> >
+> >
+> > _______________________________________________
+> > YDFramework-users mailing list
+> > YDFramework-users at lists.berlios.de
+> >
+> http://lists.berlios.de/mailman/listinfo/ydframework-users
+> >
+>
+>
+
+
+-- 
+po?
+
+
+From moses at softwaysolutions.com  Tue Jul  4 11:43:40 2006
+From: moses at softwaysolutions.com (moses at softwaysolutions.com)
+Date: Tue, 04 Jul 2006 02:43:40 -0700
+Subject: [ydf-users] Query Regarding Submit button
+Message-ID: <20060704024340.fe477b357a56c857c15a39baa2ae95d5.c25b889ff5.wbe@email.secureserver.net>
+
+Hello Sir
+ 
+      Thank U for your reply. 
+   
+      I didnt tried with javascript but I used the following coding
+
+      if($_POST['form_add'])
+      {
+          $this->forward('add');
+      }  
+ 
+       if($_POST['form_edit'])
+      {
+          $this->forward('edit');
+      } 
+    
+      One more question.   
+      Now while creating a form we where specifing the action to the
+form
+      Is there any way to specify the action to be performed by the form
+should given in the submit button. so that we can have any no of submit
+buttons and actions.
+
+regards
+moses
+
+
+
+> -------- Original Message --------
+> Subject: Re: [ydf-users] Query Regarding Submit button
+> From: "ydf poi" <ydfpoi at gmail.com>
+> Date: Tue, July 04, 2006 1:04 am
+> To: ydframework-users at berlios.de
+> 
+> Hi
+> 
+> I think javascript enables you to do what you want.
+> 
+> You can create a HTML document like this one:
+> <header>
+>     ...
+>     <script type="text/javascript" src="foo.js"></script>
+> </header>
+> <body>
+>     ...
+>     <form id="myForm" action="" ...>
+>         ...
+>         <input id="addButton" type="button" value="Add" />
+>         <input id="editButton" type="button" value="Edit" />
+>         ...
+>     </form>
+>     ...
+> </body>
+> 
+> Then the foo.js file has to contain something like:
+>     window.onload = init();
+> 
+>     var addButton = null;
+>     var editButton = null;
+>     var myForm = null;
+> 
+>     function init() {
+>         myForm = document.getElementById('myForm');
+> 
+>         addButton = document.getElementById('addButton');
+>         addButton.onclick = function() {
+>             myForm.action = 'http://yourpage.html?do=add'; // or only
+> '?do=add' here
+>             myForm.submit();
+>         }
+> 
+>         editButton = document.getElementById('editButton');
+>         editButton.onclick = function() {
+>             myForm.action = 'http://yourpage.html?do=edit'; // or only
+> '?do=edit' here
+>             myForm.submit();
+>         }
+>     }
+> 
+> Well, I have not tested this code but I think it should work.
+> Kind regards
+> 
+> 2006/7/4, David Bittencourt <muitocomplicado at gmail.com>:
+> > Well... this kind of behavior is not that simple because a form can have
+> > only one action and that action can't be changed with javascript (I think).
+> >
+> > I don't know a nice solution for it, but perhaps you could add a text field
+> > called 'action' with style="display:none". Then with javascript when the
+> > user presses the Add button, you fill the 'action' field with "add" and for
+> > the Edit button, fill with "edit". In your php script you can now redirect
+> > the request to the desired action.
+> >
+> > Just a suggestion, someone knows a better way?
+> >
+> > -db
+> >
+> >
+> > On 7/4/06, moses at softwaysolutions.com <moses at softwaysolutions.com> wrote:
+> > >
+> > > Hello Sir
+> > >
+> > >
+> > >      In my page I have a form and within that I have two submit buttons
+> > > named add,edit
+> > >
+> > >
+> > >
+> > $this->form->addElement('submit','add','Add',array("class"=>"button"));
+> > >
+> > >
+> > $this->form->addElement('submit','edit','Edit',array("class"=>"button"));
+> > >
+> > >     and I have two functions named
+> > >
+> > >     function actionAdd
+> > >     {
+> > >             -- The Code --
+> > >
+> > >     }
+> > >
+> > >    function actionEdit
+> > >    {
+> > >
+> > >        -- The Code for Edit --
+> > >    }
+> > >
+> > >
+> > >    So when I click add submit button the function actionAdd() should be
+> > > executed and when I click Edit the function actionEdit() should be
+> > > executed.
+> > >
+> > >
+> > >     What should I do...
+> > >
+> > > regards
+> > > moses
+> > >
+> > >
+> > >
+> > >
+> > >
+> > > _______________________________________________
+> > > YDFramework-users mailing list
+> > > YDFramework-users at lists.berlios.de
+> > >
+> > http://lists.berlios.de/mailman/listinfo/ydframework-users
+> > >
+> >
+> >
+> 
+> 
+> -- 
+> po?
+> _______________________________________________
+> YDFramework-users mailing list
+> YDFramework-users at lists.berlios.de
+> http://lists.berlios.de/mailman/listinfo/ydframework-users
+
+
+
+From pieter at yellowduck.be  Tue Jul  4 11:56:12 2006
+From: pieter at yellowduck.be (Pieter Claerhout)
+Date: Tue, 4 Jul 2006 11:56:12 +0200
+Subject: [ydf-users] Query Regarding Submit button
+In-Reply-To: <20060704024340.fe477b357a56c857c15a39baa2ae95d5.c25b889ff5.wbe@email.secureserver.net>
+References: <20060704024340.fe477b357a56c857c15a39baa2ae95d5.c25b889ff5.wbe@email.secureserver.net>
+Message-ID: <4aef63030607040256g5502d1e3v3674adc57364dc6f@mail.gmail.com>
+
+In a lot of cases, there is no need for two separate actions for
+insert/edit. What I generally tend to do, is to include the primary key as a
+hidden field in the form. If there is no primary key, an insert needs to
+happen, otherwise, an edit needs to happen.
+
+pieter
+
+On 7/4/06, moses at softwaysolutions.com <moses at softwaysolutions.com> wrote:
+>
+>
+> Hello Sir
+>
+>      Thank U for your reply.
+>
+>      I didnt tried with javascript but I used the following coding
+>
+>      if($_POST['form_add'])
+>      {
+>          $this->forward('add');
+>      }
+>
+>       if($_POST['form_edit'])
+>      {
+>          $this->forward('edit');
+>      }
+>
+>      One more question.
+>      Now while creating a form we where specifing the action to the
+> form
+>      Is there any way to specify the action to be performed by the form
+> should given in the submit button. so that we can have any no of submit
+> buttons and actions.
+>
+> regards
+> moses
+>
+>
+>
+> > -------- Original Message --------
+> > Subject: Re: [ydf-users] Query Regarding Submit button
+> > From: "ydf poi" <ydfpoi at gmail.com>
+> > Date: Tue, July 04, 2006 1:04 am
+> > To: ydframework-users at berlios.de
+> >
+> > Hi
+> >
+> > I think javascript enables you to do what you want.
+> >
+> > You can create a HTML document like this one:
+> > <header>
+> >     ...
+> >     <script type="text/javascript" src="foo.js"></script>
+> > </header>
+> > <body>
+> >     ...
+> >     <form id="myForm" action="" ...>
+> >         ...
+> >         <input id="addButton" type="button" value="Add" />
+> >         <input id="editButton" type="button" value="Edit" />
+> >         ...
+> >     </form>
+> >     ...
+> > </body>
+> >
+> > Then the foo.js file has to contain something like:
+> >     window.onload = init();
+> >
+> >     var addButton = null;
+> >     var editButton = null;
+> >     var myForm = null;
+> >
+> >     function init() {
+> >         myForm = document.getElementById('myForm');
+> >
+> >         addButton = document.getElementById('addButton');
+> >         addButton.onclick = function() {
+> >             myForm.action = 'http://yourpage.html?do=add'; // or only
+> > '?do=add' here
+> >             myForm.submit();
+> >         }
+> >
+> >         editButton = document.getElementById('editButton');
+> >         editButton.onclick = function() {
+> >             myForm.action = 'http://yourpage.html?do=edit'; // or only
+> > '?do=edit' here
+> >             myForm.submit();
+> >         }
+> >     }
+> >
+> > Well, I have not tested this code but I think it should work.
+> > Kind regards
+> >
+> > 2006/7/4, David Bittencourt <muitocomplicado at gmail.com>:
+> > > Well... this kind of behavior is not that simple because a form can
+> have
+> > > only one action and that action can't be changed with javascript (I
+> think).
+> > >
+> > > I don't know a nice solution for it, but perhaps you could add a text
+> field
+> > > called 'action' with style="display:none". Then with javascript when
+> the
+> > > user presses the Add button, you fill the 'action' field with "add"
+> and for
+> > > the Edit button, fill with "edit". In your php script you can now
+> redirect
+> > > the request to the desired action.
+> > >
+> > > Just a suggestion, someone knows a better way?
+> > >
+> > > -db
+> > >
+> > >
+> > > On 7/4/06, moses at softwaysolutions.com <moses at softwaysolutions.com>
+> wrote:
+> > > >
+> > > > Hello Sir
+> > > >
+> > > >
+> > > >      In my page I have a form and within that I have two submit
+> buttons
+> > > > named add,edit
+> > > >
+> > > >
+> > > >
+> > >
+> $this->form->addElement('submit','add','Add',array("class"=>"button"));
+> > > >
+> > > >
+> > >
+> $this->form->addElement('submit','edit','Edit',array("class"=>"button"));
+> > > >
+> > > >     and I have two functions named
+> > > >
+> > > >     function actionAdd
+> > > >     {
+> > > >             -- The Code --
+> > > >
+> > > >     }
+> > > >
+> > > >    function actionEdit
+> > > >    {
+> > > >
+> > > >        -- The Code for Edit --
+> > > >    }
+> > > >
+> > > >
+> > > >    So when I click add submit button the function actionAdd() should
+> be
+> > > > executed and when I click Edit the function actionEdit() should be
+> > > > executed.
+> > > >
+> > > >
+> > > >     What should I do...
+> > > >
+> > > > regards
+> > > > moses
+> > > >
+> > > >
+> > > >
+> > > >
+> > > >
+> > > > _______________________________________________
+> > > > YDFramework-users mailing list
+> > > > YDFramework-users at lists.berlios.de
+> > > >
+> > > http://lists.berlios.de/mailman/listinfo/ydframework-users
+> > > >
+> > >
+> > >
+> >
+> >
+> > --
+> > po?
+> > _______________________________________________
+> > YDFramework-users mailing list
+> > YDFramework-users at lists.berlios.de
+> > http://lists.berlios.de/mailman/listinfo/ydframework-users
+>
+> _______________________________________________
+> YDFramework-users mailing list
+> YDFramework-users at lists.berlios.de
+> http://lists.berlios.de/mailman/listinfo/ydframework-users
+>
+
+
+
+-- 
+pieter claerhout . pieter at yellowduck.be . http://www.yellowduck.be/
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <https://lists.berlios.de/pipermail/ydframework-users/attachments/20060704/80801d00/attachment.html>
+
+From moses at softwaysolutions.com  Tue Jul  4 12:22:00 2006
+From: moses at softwaysolutions.com (moses at softwaysolutions.com)
+Date: Tue, 04 Jul 2006 03:22:00 -0700
+Subject: [ydf-users] One Minor issue with header
+Message-ID: <20060704032159.fe477b357a56c857c15a39baa2ae95d5.a380d2dc3e.wbe@email.secureserver.net>
+
+Hello Sir
+
+    On submiting the form the   action is page.php?do=submit 
+  
+   and in the function 
+
+   function actionSubmit()    
+   {
+         1)I insert the values to the database 
+         2)$this->forward('default');  
+
+   }
+
+   Every Thing works fine but
+
+   Now I refreshes the form again the value is being again inserted to
+the database 
+
+   To avoid this I recode it   
+
+  function actionSubmit()    
+   {
+         1)I insert the values to the database 
+         2)header("Location: page.php");
+
+   }  
+
+   Now Works Fine
+
+   Is there any other way Insteed of using header 
+   $this->forward('--Some thing else --');
+
+
+regards
+moses 
+
+  
+         
+
+
+
+From muitocomplicado at gmail.com  Tue Jul  4 13:34:53 2006
+From: muitocomplicado at gmail.com (David Bittencourt)
+Date: Tue, 4 Jul 2006 08:34:53 -0300
+Subject: [ydf-users] One Minor issue with header
+In-Reply-To: <20060704032159.fe477b357a56c857c15a39baa2ae95d5.a380d2dc3e.wbe@email.secureserver.net>
+References: <20060704032159.fe477b357a56c857c15a39baa2ae95d5.a380d2dc3e.wbe@email.secureserver.net>
+Message-ID: <12260be20607040434k41dec237i3e27ad6cc7e76c1@mail.gmail.com>
+
+Use $this->redirect( 'page.php' );
+
+-db
+
+On 7/4/06, moses at softwaysolutions.com <moses at softwaysolutions.com> wrote:
+>
+>
+> Hello Sir
+>
+>     On submiting the form the   action is page.php?do=submit
+>
+>    and in the function
+>
+>    function actionSubmit()
+>    {
+>          1)I insert the values to the database
+>          2)$this->forward('default');
+>
+>    }
+>
+>    Every Thing works fine but
+>
+>    Now I refreshes the form again the value is being again inserted to
+> the database
+>
+>    To avoid this I recode it
+>
+>   function actionSubmit()
+>    {
+>          1)I insert the values to the database
+>          2)header("Location: page.php");
+>
+>    }
+>
+>    Now Works Fine
+>
+>    Is there any other way Insteed of using header
+>    $this->forward('--Some thing else --');
+>
+>
+> regards
+> moses
+>
+>
+>
+>
+> _______________________________________________
+> YDFramework-users mailing list
+> YDFramework-users at lists.berlios.de
+> http://lists.berlios.de/mailman/listinfo/ydframework-users
+>
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <https://lists.berlios.de/pipermail/ydframework-users/attachments/20060704/3f4b25e8/attachment.html>
+
+From moses at softwaysolutions.com  Tue Jul  4 14:26:53 2006
+From: moses at softwaysolutions.com (moses at softwaysolutions.com)
+Date: Tue, 04 Jul 2006 05:26:53 -0700
+Subject: [ydf-users] How to Remove an attribute  from  an element after it has been created
+Message-ID: <20060704052653.fe477b357a56c857c15a39baa2ae95d5.00c02fca27.wbe@email.secureserver.net>
+
+Hello Sir
+
+    Thank you for ur reply
+
+    The following code add one  attribute to the element timeInHrs 
+  
+    $elm =& $this->form->getElement( 'timeInHrs' );
+    $elm->_attributes['disabled'] = 'disabled';
+
+         
+     As per my situation I need to disable a element then enable then
+disable and goes on
+     If I code like this 
+
+     $elm->_attributes['disabled'] = ''; 
+     $elm->_attributes['enabled'] = 'enabled'
+
+     there is no use  
+    
+     Can u please tell me how to  remove an particular attribute from an
+element  
+
+regards
+moses       
+
+
+
+
+
+> -------- Original Message --------
+> Subject: Re: [ydf-users] How to set Properties for a element after it
+> has been created
+> From: "David Bittencourt" <muitocomplicado at gmail.com>
+> Date: Tue, July 04, 2006 12:03 am
+> To: ydframework-users at berlios.de
+> 
+> Use YDForm::getElement to get a reference to the element object and change the $_attributes var.
+> 
+> $elm =& $this->form->getElement( 'timeInHrs' );
+> $elm->_attributes['disabled'] = 'disabled';
+> 
+> -db 
+> 
+> 
+> On 7/4/06, moses at softwaysolutions.com <moses at softwaysolutions.com > wrote:
+> Hello Sir
+> 
+>    How to set Properties for a element  after it has  been created 
+> 
+>     I add an text element to a form like this
+> 
+>           $this->form->addElement('text','timeInHrs','Time In','');
+> 
+>     After completing the processing I should disable the text
+> 
+>     So in actionComplete 
+> 
+>     Can I use the following coding
+> 
+>           $this->form->addElement('text','timeInHrs','Time
+> In',array("disabled"=>"disabled"));
+> 
+>     If so I have an doubt
+> 
+>      In the same page if it possible to add two elements is it 
+> correct!!!!!
+> 
+> 
+>     Is there any other way.
+> 
+> regards
+> moses
+> 
+> 
+> 
+> 
+> 
+> _______________________________________________
+> YDFramework-users mailing list
+>  YDFramework-users at lists.berlios.de
+> http://lists.berlios.de/mailman/listinfo/ydframework-users
+> 
+>  
+
+
+
+From muitocomplicado at gmail.com  Tue Jul  4 23:48:13 2006
+From: muitocomplicado at gmail.com (David Bittencourt)
+Date: Tue, 4 Jul 2006 18:48:13 -0300
+Subject: [ydf-users] How to Remove an attribute from an element after it has been created
+In-Reply-To: <20060704052653.fe477b357a56c857c15a39baa2ae95d5.00c02fca27.wbe@email.secureserver.net>
+References: <20060704052653.fe477b357a56c857c15a39baa2ae95d5.00c02fca27.wbe@email.secureserver.net>
+Message-ID: <12260be20607041448t4221d389u72c42c9c133df1d5@mail.gmail.com>
+
+unset( $elm->_attributes['disabled'] );
+
+-db
+
+On 7/4/06, moses at softwaysolutions.com <moses at softwaysolutions.com> wrote:
+>
+>
+> Hello Sir
+>
+>     Thank you for ur reply
+>
+>     The following code add one  attribute to the element timeInHrs
+>
+>     $elm =& $this->form->getElement( 'timeInHrs' );
+>     $elm->_attributes['disabled'] = 'disabled';
+>
+>
+>      As per my situation I need to disable a element then enable then
+> disable and goes on
+>      If I code like this
+>
+>      $elm->_attributes['disabled'] = '';
+>      $elm->_attributes['enabled'] = 'enabled'
+>
+>      there is no use
+>
+>      Can u please tell me how to  remove an particular attribute from an
+> element
+>
+> regards
+> moses
+>
+>
+>
+>
+>
+> > -------- Original Message --------
+> > Subject: Re: [ydf-users] How to set Properties for a element after it
+> > has been created
+> > From: "David Bittencourt" <muitocomplicado at gmail.com>
+> > Date: Tue, July 04, 2006 12:03 am
+> > To: ydframework-users at berlios.de
+> >
+> > Use YDForm::getElement to get a reference to the element object and
+> change the $_attributes var.
+> >
+> > $elm =& $this->form->getElement( 'timeInHrs' );
+> > $elm->_attributes['disabled'] = 'disabled';
+> >
+> > -db
+> >
+> >
+> > On 7/4/06, moses at softwaysolutions.com <moses at softwaysolutions.com >
+> wrote:
+> > Hello Sir
+> >
+> >    How to set Properties for a element  after it has  been created
+> >
+> >     I add an text element to a form like this
+> >
+> >           $this->form->addElement('text','timeInHrs','Time In','');
+> >
+> >     After completing the processing I should disable the text
+> >
+> >     So in actionComplete
+> >
+> >     Can I use the following coding
+> >
+> >           $this->form->addElement('text','timeInHrs','Time
+> > In',array("disabled"=>"disabled"));
+> >
+> >     If so I have an doubt
+> >
+> >      In the same page if it possible to add two elements is it
+> > correct!!!!!
+> >
+> >
+> >     Is there any other way.
+> >
+> > regards
+> > moses
+> >
+> >
+> >
+> >
+> >
+> > _______________________________________________
+> > YDFramework-users mailing list
+> >  YDFramework-users at lists.berlios.de
+> > http://lists.berlios.de/mailman/listinfo/ydframework-users
+> >
+> >
+>
+> _______________________________________________
+> YDFramework-users mailing list
+> YDFramework-users at lists.berlios.de
+> http://lists.berlios.de/mailman/listinfo/ydframework-users
+>
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <https://lists.berlios.de/pipermail/ydframework-users/attachments/20060704/8e035c32/attachment.html>
+
+From francisco at fusemail.com  Thu Jul  6 11:46:51 2006
+From: francisco at fusemail.com (Francisco Azevedo)
+Date: Thu, 06 Jul 2006 10:46:51 +0100
+Subject: [ydf-users] How to Remove an attribute  from  an element after
+ it has been created
+In-Reply-To: <20060704052653.fe477b357a56c857c15a39baa2ae95d5.00c02fca27.wbe@email.secureserver.net>
+References: <20060704052653.fe477b357a56c857c15a39baa2ae95d5.00c02fca27.wbe@email.secureserver.net>
+Message-ID: <44ACDC0B.5060700@fusemail.com>
+
+Hi moses
+
+
+>     The following code add one  attribute to the element timeInHrs 
+>   
+>     $elm =& $this->form->getElement( 'timeInHrs' );
+>     $elm->_attributes['disabled'] = 'disabled';
+> 
+>          
+>      As per my situation I need to disable a element then enable then
+> disable and goes on
+>      If I code like this 
+> 
+>      $elm->_attributes['disabled'] = ''; 
+>      $elm->_attributes['enabled'] = 'enabled'
+> 
+>      there is no use  
+>     
+>      Can u please tell me how to  remove an particular attribute from an
+> element  
+
+You have YDFormElement::delAttribute() for that too:
+
+
+   $elm =& $this->form->getElement( 'timeInHrs' );
+   $elm->delAttribute( 'disabled' );
+
+
+regards
+Francisco A
+
+
+From moses at softwaysolutions.com  Fri Jul  7 14:11:11 2006
+From: moses at softwaysolutions.com (moses at softwaysolutions.com)
+Date: Fri, 07 Jul 2006 05:11:11 -0700
+Subject: [ydf-users] Difference in versions
+Message-ID: <20060707051111.fe477b357a56c857c15a39baa2ae95d5.6b743d9bf9.wbe@email.secureserver.net>
+
+
+Hello Sir
+
+       I get two diffetrent outputs with different versions 
+     
+       The following is the code to creat a text 
+
+       $this->form->addElement('text','txtFirstName','First
+Name',array("class"=>"textbox"));
+
+       The outputs are          
+
+       For Version := Yellow Duck Framework 2.0 (build RC1) 
+
+       the output is <div id = edit > <label
+for="form_txtFirstName">First Name</label>  <input class="textbox"
+type="text" name="form_txtFirstName" value="">   </div>
+
+
+       For Version := Yellow Duck Framework 2.0 (build 2.0.0-final) 
+
+       the output is <div id = edit > First Name  <input class="textbox"
+id="form_txtFirstName" type="text" name="form_txtFirstName" value="" /> 
+ </div>
+
+
+       ie In the latest version there is no <label> tag for label 
+Why... is there any reason for it
+
+       What my problem is
+
+       I am using css for label like this
+ 
+       #edit .label
+       {
+          color:red;
+      }    
+
+       But in  the latest versions since there is no label tag I could
+not get the Css Effect 
+
+       Is there any alternatives or I should use only the older
+versions.
+
+
+regards
+moses  
+
+      
+   
+
+
+
+From araviski at free.fr  Sun Jul  9 14:24:32 2006
+From: araviski at free.fr (Erwan)
+Date: Sun, 09 Jul 2006 14:24:32 +0200
+Subject: [ydf-users] YDDatabaseObject - What's the right way to do ?
+In-Reply-To: <12260be20607021704g2fe01356u6f9b792a03a2ec30@mail.gmail.com>
+References: <44A7AFCC.60408@free.fr> <12260be20607021704g2fe01356u6f9b792a03a2ec30@mail.gmail.com>
+Message-ID: <44B0F580.8080002@free.fr>
+
+My bad, I didn't noticed there were both setCrossLocalKey and setLocalKey.
+Thank you very much for your help it works with wonder !!
+
+Erwan.
+
+David Bittencourt a ?crit :
+> What you are doing looks right. Be sure to register the relation
+> correctly.
+>
+>     class object extends YDDatabaseObject {
+>         function object() {
+>             $this->YDDatabaseObject();
+>            
+>             $this->registerKey( 'id' );
+>             $this->registerField( 'name' );
+>             $this->registerField( 'idstate' );
+>             $this->registerField( 'idplace' );
+>            
+>             $rel = & $this->registerRelation( 'state', false, 'state' );
+>             $rel->setForeignJoin( 'INNER' );
+>             $rel->setLocalKey( 'idstate' ); // it's not the primary
+> key of object
+>             $rel->setForeignKey( 'id' );
+>            
+>             $rel = & $this->registerRelation( 'place', false, 'place' );
+>             $rel->setForeignJoin( 'INNER' );
+>             $rel->setLocalKey( 'idplace' ); // it's not the primary
+> key of object
+>             $rel->setForeignKey( 'id' );
+>         }
+>     }
+>
+> So if you have:
+>
+> $obj = YDDatabaseObject::getInstance( 'object' );
+> $obj->id = 1;
+> $obj->find( 'state', 'place' );
+>
+> After this you will have:
+>
+> $obj->id = 1;
+> $obj->name = 'one hammer';
+> $obj->idstate = 1;
+> $obj->idplace = 2;
+> $obj->state->id = 1;
+> $obj->state->label = 'new';
+> $obj->place->id = 2;
+> $obj->place->label = 'cellar';
+>
+> If you use getValues to retrieve an array you'll have:
+>
+> array(
+>   'id' => 1,
+>   'name' => 'one hammer';
+>   'idstate' => 1,
+>   'idplace' => 2,
+>   'state_id' => 1,
+>   'state_label' => 'new',
+>   'place_id' => 2,
+>   'place_label' => 'cellar'
+> );
+>
+> Check the user guide for more help:
+> http://ydframework.berlios.de/doc/yddatabaseobject.html
+>
+> Cheers,
+>
+> David - db
+
+
+From moses at softwaysolutions.com  Sat Jul  8 09:39:03 2006
+From: moses at softwaysolutions.com (moses at softwaysolutions.com)
+Date: Sat, 08 Jul 2006 00:39:03 -0700
+Subject: [ydf-users] To get the name of the elements  that does not  satisify  the  Rule
+Message-ID: <20060708003903.fe477b357a56c857c15a39baa2ae95d5.0f9e1592f6.wbe@email.secureserver.net>
+
+Hello Sir
+
+       How to get the name of the elements that does not  satisify  the 
+Rules  after submitting.
+
+       In my form for two element I have given rules
+
+           $this->form->addRule('firstName','required','First Name is
+required');
+	   $this->form->addRule('lastName','required','Last Name is required');
+             
+      While submitting the form I entered the only the  first name 
+ 
+     So I get the error "Last Name is required"
+   
+     What I need is I also want to get the name of the element that does
+not satisify the rule ie   lastName 
+
+     $this->form->_errors will print the element and the rule
+  
+     But how to get the value of the element
+
+     If I give   $this->form->_errors[0]  Since it is not a numerical
+array  I got an error  
+     
+     Notice:  Undefined offset:  0 in D:\web\cuac\admin\admin.php on
+line 62
+
+regards
+moses
+      
+        
+
+
+
+From dab214 at yahoo.com  Sun Jul  9 15:34:05 2006
+From: dab214 at yahoo.com (dab)
+Date: Sun, 9 Jul 2006 06:34:05 -0700 (PDT)
+Subject: [ydf-users] hindering the post value to be selected on a select after   submit
+Message-ID: <20060709133405.85997.qmail@web50209.mail.yahoo.com>
+
+hi all,
+is there any way of making the select drop down not to
+add the selected attributes on the options after
+submitting the form?
+thanks.
+
+/dab
+
+__________________________________________________
+Do You Yahoo!?
+Tired of spam?  Yahoo! Mail has the best spam protection around 
+http://mail.yahoo.com 
+
+
+From moses at softwaysolutions.com  Mon Jul 10 12:20:32 2006
+From: moses at softwaysolutions.com (moses at softwaysolutions.com)
+Date: Mon, 10 Jul 2006 03:20:32 -0700
+Subject: [ydf-users] hindering the post value to be selected on a select after   submit
+Message-ID: <20060710032032.fe477b357a56c857c15a39baa2ae95d5.70dff34f0b.wbe@email.secureserver.net>
+
+Hi Dab
+
+   I hope this will help U
+
+   $arrName = array(""=>"-- Please Choose the
+Name--","Dab"=>"Dab","Moses"=>"Moses","Din"=>"Din");
+   $this->form->addElement('select','name','Choose Name','',$arrName);
+
+   function actionDefault()
+   {
+	 $data = $this->form->getValues();
+	 $this->elm =& $this->form->getElement('name');
+	 $val = $data['name'];
+	 unset($this->elm->_options["$val"]);
+   }
+
+regards
+moses
+
+
+> -------- Original Message --------
+> Subject: [ydf-users] hindering the post value to be selected on a
+> select after   submit
+> From: dab <dab214 at yahoo.com>
+> Date: Sun, July 09, 2006 6:34 am
+> To: ydframework-users at berlios.de
+> 
+> hi all,
+> is there any way of making the select drop down not to
+> add the selected attributes on the options after
+> submitting the form?
+> thanks.
+> 
+> /dab
+> 
+> __________________________________________________
+> Do You Yahoo!?
+> Tired of spam?  Yahoo! Mail has the best spam protection around 
+> http://mail.yahoo.com 
+> _______________________________________________
+> YDFramework-users mailing list
+> YDFramework-users at lists.berlios.de
+> http://lists.berlios.de/mailman/listinfo/ydframework-users
+
+
+
+From moses at softwaysolutions.com  Sat Jul  8 12:30:24 2006
+From: moses at softwaysolutions.com (moses at softwaysolutions.com)
+Date: Sat, 08 Jul 2006 03:30:24 -0700
+Subject: [ydf-users] Query regarding adding an attribute to a label
+Message-ID: <20060708033024.fe477b357a56c857c15a39baa2ae95d5.e77d57da03.wbe@email.secureserver.net>
+
+Hello Sir
+
+     How to add an attribute to a label tag.
+
+     In my form I have added an element with label
+
+     $this->form->addElement('text','firstName','First
+Name',array("class"=>"textbox"));
+     $this->form->addRule('firstName','required','First Name is
+required');
+
+     The html output is
+   
+     <label for="form_firstName">First Name</label> <input
+class="textbox" type="text" name="form_firstName" value="">       
+
+     Now I am submiting the form without entering the First Name So it
+displays the error  First Name is required
+
+     At this time what I need is 
+
+     I want to add an attributte class = "error" in the label element ie
+  <label for="form_firstName" class = "error">First Name</label>
+
+     I tried with the folowing coding
+
+     if ( sizeof( $this->form->_errors ) > 0 ) 
+     {
+        while(list($element)=each($this->form->_errors))
+        {
+	  $this->elmErr =& $this->form->getElement("$element");
+          $this->elmErr->_label = '<label class = "error"
+for="'.$this->form->_name.'_'.$element.'">'.$label.'</label>';
+        }
+     }
+
+
+    Here the out put becomes
+
+    <label for="form_firstName"><label for="form_firstName" class =
+"error">First Name</label></label>  
+
+
+    ie Two label element is being displayed
+
+    How to avoid this or How to solve the problem
+
+    Please Help
+
+
+regards
+moses   
+
+
+
+
+From dab214 at yahoo.com  Mon Jul 10 13:41:45 2006
+From: dab214 at yahoo.com (dab)
+Date: Mon, 10 Jul 2006 04:41:45 -0700 (PDT)
+Subject: [ydf-users] hindering the post value to be selected on a select after   submit
+In-Reply-To: <20060710032032.fe477b357a56c857c15a39baa2ae95d5.70dff34f0b.wbe@email.secureserver.net>
+Message-ID: <20060710114145.44116.qmail@web50205.mail.yahoo.com>
+
+hi moses,
+thanks for your help, all i actually had to do was:
+if ( $this->form->isSubmitted()) {
+    $element =&      
+$this->form->getElement('num_poll_alt');
+    unset($element->_value);
+}
+
+/dab
+
+--- moses at softwaysolutions.com wrote:
+
+> 
+> Hi Dab
+> 
+>    I hope this will help U
+> 
+>    $arrName = array(""=>"-- Please Choose the
+> Name--","Dab"=>"Dab","Moses"=>"Moses","Din"=>"Din");
+>    $this->form->addElement('select','name','Choose
+> Name','',$arrName);
+> 
+>    function actionDefault()
+>    {
+> 	 $data = $this->form->getValues();
+> 	 $this->elm =& $this->form->getElement('name');
+> 	 $val = $data['name'];
+> 	 unset($this->elm->_options["$val"]);
+>    }
+> 
+> regards
+> moses
+> 
+> 
+> > -------- Original Message --------
+> > Subject: [ydf-users] hindering the post value to
+> be selected on a
+> > select after   submit
+> > From: dab <dab214 at yahoo.com>
+> > Date: Sun, July 09, 2006 6:34 am
+> > To: ydframework-users at berlios.de
+> > 
+> > hi all,
+> > is there any way of making the select drop down
+> not to
+> > add the selected attributes on the options after
+> > submitting the form?
+> > thanks.
+> > 
+> > /dab
+> > 
+> > __________________________________________________
+> > Do You Yahoo!?
+> > Tired of spam?  Yahoo! Mail has the best spam
+> protection around 
+> > http://mail.yahoo.com 
+> > _______________________________________________
+> > YDFramework-users mailing list
+> > YDFramework-users at lists.berlios.de
+> >
+>
+http://lists.berlios.de/mailman/listinfo/ydframework-users
+> 
+> _______________________________________________
+> YDFramework-users mailing list
+> YDFramework-users at lists.berlios.de
+>
+http://lists.berlios.de/mailman/listinfo/ydframework-users
+> 
+
+
+__________________________________________________
+Do You Yahoo!?
+Tired of spam?  Yahoo! Mail has the best spam protection around 
+http://mail.yahoo.com 
+
+
+From moses at softwaysolutions.com  Mon Jul 10 14:44:18 2006
+From: moses at softwaysolutions.com (moses at softwaysolutions.com)
+Date: Mon, 10 Jul 2006 05:44:18 -0700
+Subject: [ydf-users] Difference in versions
+Message-ID: <20060710054418.fe477b357a56c857c15a39baa2ae95d5.84ef84180e.wbe@email.secureserver.net>
+
+Hello Sir
+
+      I get two diffetrent outputs with different versions
+   
+      The following is the code to creat a text
+
+      $this->form->addElement('text','txtFirstName','First
+Name',array("class"=>"textbox"));
+
+      The outputs are          
+
+      For Version := Yellow Duck Framework 2.0 (build RC1)
+
+      the output is <div id = edit > <label
+for="form_txtFirstName">First Name</label>  <input class="textbox"
+type="text" name="form_txtFirstName" value="">   </div>
+
+
+      For Version := Yellow Duck Framework 2.0 (build 2.0.0-final)
+
+      the output is <div id = edit > First Name  <input class="textbox"
+id="form_txtFirstName" type="text" name="form_txtFirstName" value="" />
+</div>
+
+
+      ie In the latest version there is no <label> tag for label
+Why... is there any reason for it
+
+      What my problem is
+
+      I am using css for label like this
+
+      #edit .label
+      {
+         color:red;
+     }    
+
+      But in  the latest versions since there is no label tag I could
+not get the Css Effect
+
+      Is there any alternatives or I should use only the older
+versions.
+
+
+regards
+moses
+
+
+
+From francisco at fusemail.com  Mon Jul 10 14:50:33 2006
+From: francisco at fusemail.com (Francisco Azevedo)
+Date: Mon, 10 Jul 2006 13:50:33 +0100
+Subject: [ydf-users] Difference in versions
+In-Reply-To: <20060710054418.fe477b357a56c857c15a39baa2ae95d5.84ef84180e.wbe@email.secureserver.net>
+References: <20060710054418.fe477b357a56c857c15a39baa2ae95d5.84ef84180e.wbe@email.secureserver.net>
+Message-ID: <44B24D19.6030607@fusemail.com>
+
+Hi moses
+
+>       I get two diffetrent outputs with different versions
+>    
+>       The following is the code to creat a text
+> 
+>       $this->form->addElement('text','txtFirstName','First
+> Name',array("class"=>"textbox"));
+> 
+>       The outputs are          
+> 
+>       For Version := Yellow Duck Framework 2.0 (build RC1)
+> 
+>       the output is <div id = edit > <label
+> for="form_txtFirstName">First Name</label>  <input class="textbox"
+> type="text" name="form_txtFirstName" value="">   </div>
+> 
+> 
+>       For Version := Yellow Duck Framework 2.0 (build 2.0.0-final)
+> 
+>       the output is <div id = edit > First Name  <input class="textbox"
+> id="form_txtFirstName" type="text" name="form_txtFirstName" value="" />
+> </div>
+> 
+> 
+>       ie In the latest version there is no <label> tag for label
+> Why... is there any reason for it
+
+You must explicitly define where you want the label. In your template 
+just define:
+
+{$formName.text.label}{$formName.text.html}
+
+this way your will get the label before the element itself.
+
+
+regards
+Francisco A
+
+
+From moses at softwaysolutions.com  Mon Jul 10 16:26:03 2006
+From: moses at softwaysolutions.com (moses at softwaysolutions.com)
+Date: Mon, 10 Jul 2006 07:26:03 -0700
+Subject: [ydf-users] Difference in versions
+Message-ID: <20060710072603.fe477b357a56c857c15a39baa2ae95d5.11c0e25d38.wbe@email.secureserver.net>
+
+Hello Sir
+
+    I have defined explicitly as u said
+   
+    {$formName.text.label}{$formName.text.html}
+
+     I am getting the Label output in my browser but the Html code
+differs 
+  
+     ie in the latest version the Html output is  only the Label Name 
+as a plain text 
+     where in version  Yellow Duck Framework 2.0 (build RC1) the html
+output  is Labelelement with label name
+     ie <label for = "form_name"> Label name </label> 
+
+
+regards
+moses
+     
+     
+
+
+> -------- Original Message --------
+> Subject: Re: [ydf-users] Difference in versions
+> From: Francisco Azevedo <francisco at fusemail.com>
+> Date: Mon, July 10, 2006 5:50 am
+> To: ydframework-users at berlios.de
+> 
+> Hi moses
+> 
+> >       I get two diffetrent outputs with different versions
+> >    
+> >       The following is the code to creat a text
+> > 
+> >       $this->form->addElement('text','txtFirstName','First
+> > Name',array("class"=>"textbox"));
+> > 
+> >       The outputs are          
+> > 
+> >       For Version := Yellow Duck Framework 2.0 (build RC1)
+> > 
+> >       the output is <div id = edit > <label
+> > for="form_txtFirstName">First Name</label>  <input class="textbox"
+> > type="text" name="form_txtFirstName" value="">   </div>
+> > 
+> > 
+> >       For Version := Yellow Duck Framework 2.0 (build 2.0.0-final)
+> > 
+> >       the output is <div id = edit > First Name  <input class="textbox"
+> > id="form_txtFirstName" type="text" name="form_txtFirstName" value="" />
+> > </div>
+> > 
+> > 
+> >       ie In the latest version there is no <label> tag for label
+> > Why... is there any reason for it
+> 
+> You must explicitly define where you want the label. In your template 
+> just define:
+> 
+> {$formName.text.label}{$formName.text.html}
+> 
+> this way your will get the label before the element itself.
+> 
+> 
+> regards
+> Francisco A
+> _______________________________________________
+> YDFramework-users mailing list
+> YDFramework-users at lists.berlios.de
+> http://lists.berlios.de/mailman/listinfo/ydframework-users
+
+
+
+From pieter at yellowduck.be  Mon Jul 10 16:39:00 2006
+From: pieter at yellowduck.be (Pieter Claerhout)
+Date: Mon, 10 Jul 2006 16:39:00 +0200
+Subject: [ydf-users] Difference in versions
+In-Reply-To: <20060710072603.fe477b357a56c857c15a39baa2ae95d5.11c0e25d38.wbe@email.secureserver.net>
+References: <20060710072603.fe477b357a56c857c15a39baa2ae95d5.11c0e25d38.wbe@email.secureserver.net>
+Message-ID: <4aef63030607100739p7688c387j91e782f3510b0d06@mail.gmail.com>
+
+Moses,
+
+try the following:
+
+ {$formName.text.label*_html*}{$formName.text.html}
+
+cheers,
+
+pieter
+
+On 7/10/06, moses at softwaysolutions.com <moses at softwaysolutions.com> wrote:
+>
+>
+> Hello Sir
+>
+>    I have defined explicitly as u said
+>
+>    {$formName.text.label}{$formName.text.html}
+>
+>     I am getting the Label output in my browser but the Html code
+> differs
+>
+>     ie in the latest version the Html output is  only the Label Name
+> as a plain text
+>     where in version  Yellow Duck Framework 2.0 (build RC1) the html
+> output  is Labelelement with label name
+>     ie <label for = "form_name"> Label name </label>
+>
+>
+> regards
+> moses
+>
+>
+>
+>
+> > -------- Original Message --------
+> > Subject: Re: [ydf-users] Difference in versions
+> > From: Francisco Azevedo <francisco at fusemail.com>
+> > Date: Mon, July 10, 2006 5:50 am
+> > To: ydframework-users at berlios.de
+> >
+> > Hi moses
+> >
+> > >       I get two diffetrent outputs with different versions
+> > >
+> > >       The following is the code to creat a text
+> > >
+> > >       $this->form->addElement('text','txtFirstName','First
+> > > Name',array("class"=>"textbox"));
+> > >
+> > >       The outputs are
+> > >
+> > >       For Version := Yellow Duck Framework 2.0 (build RC1)
+> > >
+> > >       the output is <div id = edit > <label
+> > > for="form_txtFirstName">First Name</label>  <input class="textbox"
+> > > type="text" name="form_txtFirstName" value="">   </div>
+> > >
+> > >
+> > >       For Version := Yellow Duck Framework 2.0 (build 2.0.0-final)
+> > >
+> > >       the output is <div id = edit > First Name  <input
+> class="textbox"
+> > > id="form_txtFirstName" type="text" name="form_txtFirstName" value=""
+> />
+> > > </div>
+> > >
+> > >
+> > >       ie In the latest version there is no <label> tag for label
+> > > Why... is there any reason for it
+> >
+> > You must explicitly define where you want the label. In your template
+> > just define:
+> >
+> > {$formName.text.label}{$formName.text.html}
+> >
+> > this way your will get the label before the element itself.
+> >
+> >
+> > regards
+> > Francisco A
+> > _______________________________________________
+> > YDFramework-users mailing list
+> > YDFramework-users at lists.berlios.de
+> > http://lists.berlios.de/mailman/listinfo/ydframework-users
+>
+> _______________________________________________
+> YDFramework-users mailing list
+> YDFramework-users at lists.berlios.de
+> http://lists.berlios.de/mailman/listinfo/ydframework-users
+>
+
+
+
+-- 
+pieter claerhout . pieter at yellowduck.be . http://www.yellowduck.be/
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <https://lists.berlios.de/pipermail/ydframework-users/attachments/20060710/a5aa3833/attachment.html>
+
+From moses at softwaysolutions.com  Mon Jul 10 17:08:41 2006
+From: moses at softwaysolutions.com (moses at softwaysolutions.com)
+Date: Mon, 10 Jul 2006 08:08:41 -0700
+Subject: [ydf-users] How to add an attribute to a label element.
+Message-ID: <20060710080841.fe477b357a56c857c15a39baa2ae95d5.afb8886923.wbe@email.secureserver.net>
+
+Hello Sir
+
+    How to add an attribute to a label element.
+
+    (.tpl)
+          {$form.name.label}
+
+     The Html is
+          <label for = "form_name"> Name </label>
+
+     Now I need to add an attribute class = "error" to the label
+
+    ie   <label for = "form_name" class = "error"> Name </label>
+
+
+    How to do so.
+
+regards
+moses   
+  
+
+For Detailed Reference
+
+
+
+ In my form I have added an element with label
+
+    $this->form->addElement('text','firstName','First
+Name');
+    $this->form->addRule('firstName','required','First Name is
+required');
+
+    The html output is
+ 
+    <label for="form_firstName">First Name</label> <input
+class="textbox" type="text" name="form_firstName" value="">      
+
+    Now I am submiting the form without entering the First Name So it
+displays the error  First Name is required
+
+    At this time what I need is
+
+    I want to add an attributte class = "error" in the label element ie
+ <label for="form_firstName" class = "error">First Name</label>
+
+    I tried with the folowing coding
+
+    if ( sizeof( $this->form->_errors ) > 0 )
+    {
+       while(list($element)=each($this->form->_errors))
+       {
+ $this->elmErr =& $this->form->getElement("$element");
+         $this->elmErr->_label = '<label class = "error"
+for="'.$this->form->_name.'_'.$element.'">'.$label.'</label>';
+       }
+    }
+
+
+   Here the out put becomes
+
+   <label for="form_firstName"><label for="form_firstName" class =
+"error">First Name</label></label>  
+
+
+   ie Two label element is being displayed
+
+   How to avoid this or How to solve the problem
+
+
+
+
+
+
+
+
+      
+
+
+
+From francisco at fusemail.com  Mon Jul 10 17:30:48 2006
+From: francisco at fusemail.com (Francisco Azevedo)
+Date: Mon, 10 Jul 2006 16:30:48 +0100
+Subject: [ydf-users] How to add an attribute to a label element.
+In-Reply-To: <20060710080841.fe477b357a56c857c15a39baa2ae95d5.afb8886923.wbe@email.secureserver.net>
+References: <20060710080841.fe477b357a56c857c15a39baa2ae95d5.afb8886923.wbe@email.secureserver.net>
+Message-ID: <44B272A8.4030601@fusemail.com>
+
+Hi moses
+
+
+>     How to add an attribute to a label element.
+
+
+Afaik, it's not possible. Maybe it's a good feature request. :)
+
+regards
+Francisco A
+
+
+From dab214 at yahoo.com  Mon Jul 10 20:57:56 2006
+From: dab214 at yahoo.com (dab)
+Date: Mon, 10 Jul 2006 11:57:56 -0700 (PDT)
+Subject: [ydf-users] How to add an attribute to a label element.
+In-Reply-To: <44B272A8.4030601@fusemail.com>
+Message-ID: <20060710185756.98772.qmail@web50207.mail.yahoo.com>
+
+maybe i'm wrong but isn't moses just trying to add an
+error msg to the form element? that is supported
+already no?
+
+--- Francisco Azevedo <francisco at fusemail.com> wrote:
+
+> Hi moses
+> 
+> 
+> >     How to add an attribute to a label element.
+> 
+> 
+> Afaik, it's not possible. Maybe it's a good feature
+> request. :)
+> 
+> regards
+> Francisco A
+> _______________________________________________
+> YDFramework-users mailing list
+> YDFramework-users at lists.berlios.de
+>
+http://lists.berlios.de/mailman/listinfo/ydframework-users
+> 
+
+
+__________________________________________________
+Do You Yahoo!?
+Tired of spam?  Yahoo! Mail has the best spam protection around 
+http://mail.yahoo.com 
+
+
+From moses at softwaysolutions.com  Wed Jul 12 15:52:41 2006
+From: moses at softwaysolutions.com (moses at softwaysolutions.com)
+Date: Wed, 12 Jul 2006 06:52:41 -0700
+Subject: [ydf-users] How to add an attribute to a label element.
+Message-ID: <20060712065241.fe477b357a56c857c15a39baa2ae95d5.440854db47.wbe@email.secureserver.net>
+
+Hello Sir
+
+  I am not  trying to add an error msg to the form element.
+  
+  I want to know is it possible to add an attribute to the html label
+element
+  (ie)
+
+  {$form.name.label}
+
+  the above code generates the following html output
+
+  <label for = "form_name">Name</label>
+
+  Now I want to add one attribute class = "test" to the label element
+         <label class = "test" for = "form_name">Name</label>
+
+ Is it possible.
+
+regards
+moses  
+  
+
+
+
+> -------- Original Message --------
+> Subject: Re: [ydf-users] How to add an attribute to a label element.
+> From: dab <dab214 at yahoo.com>
+> Date: Mon, July 10, 2006 11:57 am
+> To: ydframework-users at berlios.de
+> 
+> maybe i'm wrong but isn't moses just trying to add an
+> error msg to the form element? that is supported
+> already no?
+> 
+> --- Francisco Azevedo <francisco at fusemail.com> wrote:
+> 
+> > Hi moses
+> > 
+> > 
+> > >     How to add an attribute to a label element.
+> > 
+> > 
+> > Afaik, it's not possible. Maybe it's a good feature
+> > request. :)
+> > 
+> > regards
+> > Francisco A
+> > _______________________________________________
+> > YDFramework-users mailing list
+> > YDFramework-users at lists.berlios.de
+> >
+> http://lists.berlios.de/mailman/listinfo/ydframework-users
+> > 
+> 
+> 
+> __________________________________________________
+> Do You Yahoo!?
+> Tired of spam?  Yahoo! Mail has the best spam protection around 
+> http://mail.yahoo.com 
+> _______________________________________________
+> YDFramework-users mailing list
+> YDFramework-users at lists.berlios.de
+> http://lists.berlios.de/mailman/listinfo/ydframework-users
+
+
+
+From dab214 at yahoo.com  Wed Jul 12 16:06:55 2006
+From: dab214 at yahoo.com (dab)
+Date: Wed, 12 Jul 2006 07:06:55 -0700 (PDT)
+Subject: [ydf-users] How to add an attribute to a label element.
+In-Reply-To: <20060712065241.fe477b357a56c857c15a39baa2ae95d5.440854db47.wbe@email.secureserver.net>
+Message-ID: <20060712140655.17519.qmail@web50207.mail.yahoo.com>
+
+hi moses,
+i could be wrong (and i guess somebody will correct me
+if that's the case) but looking at the
+YDFormRenderer_html.php it doesn't seem to support
+that.
+You could hack it a bit though and create your own
+form renderer by doing:
+
+$form->registerRenderer('whatever','MyRenderer',
+'renderers/MyRenderer.php');	
+$this->template->assign( 'form',
+$form->render('whatever') );
+
+hope that helps.
+
+/dab
+
+
+--- moses at softwaysolutions.com wrote:
+
+> 
+> Hello Sir
+> 
+>   I am not  trying to add an error msg to the form
+> element.
+>   
+>   I want to know is it possible to add an attribute
+> to the html label
+> element
+>   (ie)
+> 
+>   {$form.name.label}
+> 
+>   the above code generates the following html output
+> 
+>   <label for = "form_name">Name</label>
+> 
+>   Now I want to add one attribute class = "test" to
+> the label element
+>          <label class = "test" for =
+> "form_name">Name</label>
+> 
+>  Is it possible.
+> 
+> regards
+> moses  
+>   
+> 
+> 
+> 
+> > -------- Original Message --------
+> > Subject: Re: [ydf-users] How to add an attribute
+> to a label element.
+> > From: dab <dab214 at yahoo.com>
+> > Date: Mon, July 10, 2006 11:57 am
+> > To: ydframework-users at berlios.de
+> > 
+> > maybe i'm wrong but isn't moses just trying to add
+> an
+> > error msg to the form element? that is supported
+> > already no?
+> > 
+> > --- Francisco Azevedo <francisco at fusemail.com>
+> wrote:
+> > 
+> > > Hi moses
+> > > 
+> > > 
+> > > >     How to add an attribute to a label
+> element.
+> > > 
+> > > 
+> > > Afaik, it's not possible. Maybe it's a good
+> feature
+> > > request. :)
+> > > 
+> > > regards
+> > > Francisco A
+> > > _______________________________________________
+> > > YDFramework-users mailing list
+> > > YDFramework-users at lists.berlios.de
+> > >
+> >
+>
+http://lists.berlios.de/mailman/listinfo/ydframework-users
+> > > 
+> > 
+> > 
+> > __________________________________________________
+> > Do You Yahoo!?
+> > Tired of spam?  Yahoo! Mail has the best spam
+> protection around 
+> > http://mail.yahoo.com 
+> > _______________________________________________
+> > YDFramework-users mailing list
+> > YDFramework-users at lists.berlios.de
+> >
+>
+http://lists.berlios.de/mailman/listinfo/ydframework-users
+> 
+> _______________________________________________
+> YDFramework-users mailing list
+> YDFramework-users at lists.berlios.de
+>
+http://lists.berlios.de/mailman/listinfo/ydframework-users
+> 
+
+
+__________________________________________________
+Do You Yahoo!?
+Tired of spam?  Yahoo! Mail has the best spam protection around 
+http://mail.yahoo.com 
+
+
+From moses at softwaysolutions.com  Wed Jul 12 16:35:47 2006
+From: moses at softwaysolutions.com (moses at softwaysolutions.com)
+Date: Wed, 12 Jul 2006 07:35:47 -0700
+Subject: [ydf-users] How to add an attribute to a label element.
+Message-ID: <20060712073547.fe477b357a56c857c15a39baa2ae95d5.769898cc85.wbe@email.secureserver.net>
+
+Hi dab
+
+   Thanks for ur help
+
+   I wil try with that 
+
+regards
+moses 
+
+
+> -------- Original Message --------
+> Subject: RE: [ydf-users] How to add an attribute to a label element.
+> From: dab <dab214 at yahoo.com>
+> Date: Wed, July 12, 2006 7:06 am
+> To: ydframework-users at berlios.de
+> 
+> hi moses,
+> i could be wrong (and i guess somebody will correct me
+> if that's the case) but looking at the
+> YDFormRenderer_html.php it doesn't seem to support
+> that.
+> You could hack it a bit though and create your own
+> form renderer by doing:
+> 
+> $form->registerRenderer('whatever','MyRenderer',
+> 'renderers/MyRenderer.php');	
+> $this->template->assign( 'form',
+> $form->render('whatever') );
+> 
+> hope that helps.
+> 
+> /dab
+> 
+> 
+> --- moses at softwaysolutions.com wrote:
+> 
+> > 
+> > Hello Sir
+> > 
+> >   I am not  trying to add an error msg to the form
+> > element.
+> >   
+> >   I want to know is it possible to add an attribute
+> > to the html label
+> > element
+> >   (ie)
+> > 
+> >   {$form.name.label}
+> > 
+> >   the above code generates the following html output
+> > 
+> >   <label for = "form_name">Name</label>
+> > 
+> >   Now I want to add one attribute class = "test" to
+> > the label element
+> >          <label class = "test" for =
+> > "form_name">Name</label>
+> > 
+> >  Is it possible.
+> > 
+> > regards
+> > moses  
+> >   
+> > 
+> > 
+> > 
+> > > -------- Original Message --------
+> > > Subject: Re: [ydf-users] How to add an attribute
+> > to a label element.
+> > > From: dab <dab214 at yahoo.com>
+> > > Date: Mon, July 10, 2006 11:57 am
+> > > To: ydframework-users at berlios.de
+> > > 
+> > > maybe i'm wrong but isn't moses just trying to add
+> > an
+> > > error msg to the form element? that is supported
+> > > already no?
+> > > 
+> > > --- Francisco Azevedo <francisco at fusemail.com>
+> > wrote:
+> > > 
+> > > > Hi moses
+> > > > 
+> > > > 
+> > > > >     How to add an attribute to a label
+> > element.
+> > > > 
+> > > > 
+> > > > Afaik, it's not possible. Maybe it's a good
+> > feature
+> > > > request. :)
+> > > > 
+> > > > regards
+> > > > Francisco A
+> > > > _______________________________________________
+> > > > YDFramework-users mailing list
+> > > > YDFramework-users at lists.berlios.de
+> > > >
+> > >
+> >
+> http://lists.berlios.de/mailman/listinfo/ydframework-users
+> > > > 
+> > > 
+> > > 
+> > > __________________________________________________
+> > > Do You Yahoo!?
+> > > Tired of spam?  Yahoo! Mail has the best spam
+> > protection around 
+> > > http://mail.yahoo.com 
+> > > _______________________________________________
+> > > YDFramework-users mailing list
+> > > YDFramework-users at lists.berlios.de
+> > >
+> >
+> http://lists.berlios.de/mailman/listinfo/ydframework-users
+> > 
+> > _______________________________________________
+> > YDFramework-users mailing list
+> > YDFramework-users at lists.berlios.de
+> >
+> http://lists.berlios.de/mailman/listinfo/ydframework-users
+> > 
+> 
+> 
+> __________________________________________________
+> Do You Yahoo!?
+> Tired of spam?  Yahoo! Mail has the best spam protection around 
+> http://mail.yahoo.com 
+> _______________________________________________
+> YDFramework-users mailing list
+> YDFramework-users at lists.berlios.de
+> http://lists.berlios.de/mailman/listinfo/ydframework-users
+
+
+
+From francisco at fusemail.com  Wed Jul 12 21:32:19 2006
+From: francisco at fusemail.com (Francisco Azevedo)
+Date: Wed, 12 Jul 2006 20:32:19 +0100
+Subject: [ydf-users] How to add an attribute to a label element.
+In-Reply-To: <20060712065241.fe477b357a56c857c15a39baa2ae95d5.440854db47.wbe@email.secureserver.net>
+References: <20060712065241.fe477b357a56c857c15a39baa2ae95d5.440854db47.wbe@email.secureserver.net>
+Message-ID: <44B54E43.3000908@fusemail.com>
+
+Hi moses
+
+
+>   I am not  trying to add an error msg to the form element.
+>   
+>   I want to know is it possible to add an attribute to the html label
+> element
+>   (ie)
+> 
+>   {$form.name.label}
+> 
+>   the above code generates the following html output
+> 
+>   <label for = "form_name">Name</label>
+> 
+>   Now I want to add one attribute class = "test" to the label element
+>          <label class = "test" for = "form_name">Name</label>
+> 
+
+
+Why don't you define the label _inside_ a span? Maybe something like:
+
+<span class="test"> {$form.name.label} </span>
+
+
+regards
+Francisco A
+
+
+From moses at softwaysolutions.com  Wed Jul 12 22:45:02 2006
+From: moses at softwaysolutions.com (moses at softwaysolutions.com)
+Date: Wed, 12 Jul 2006 13:45:02 -0700
+Subject: [ydf-users] How to add an attribute to a label element.
+Message-ID: <20060712134502.fe477b357a56c857c15a39baa2ae95d5.bf97ddf439.wbe@email.secureserver.net>
+
+Hi Francisco 
+
+    Thanks for ur reply
+     
+    Why don't you define the label _inside_ a span? Maybe something
+like: 
+    <span class="test"> {$form.name.label} </span>
+
+    Its a good idea but my situation is
+
+    In my form I have several label and the corresponding textbox 
+
+    While submitting the form if the user does not enter the value to
+the text box I should change only the color of the  corresponding 
+Label  of the textbox to red.
+
+    If I could add a class within the label dynamically I could solve
+the problem. 
+   
+ regards
+ moses
+   
+  I need to change the color of the label to red    
+
+> -------- Original Message --------
+> Subject: Re: [ydf-users] How to add an attribute to a label element.
+> From: Francisco Azevedo <francisco at fusemail.com>
+> Date: Wed, July 12, 2006 12:32 pm
+> To: ydframework-users at berlios.de
+> 
+> Hi moses
+> 
+> 
+> >   I am not  trying to add an error msg to the form element.
+> >   
+> >   I want to know is it possible to add an attribute to the html label
+> > element
+> >   (ie)
+> > 
+> >   {$form.name.label}
+> > 
+> >   the above code generates the following html output
+> > 
+> >   <label for = "form_name">Name</label>
+> > 
+> >   Now I want to add one attribute class = "test" to the label element
+> >          <label class = "test" for = "form_name">Name</label>
+> > 
+> 
+> 
+> Why don't you define the label _inside_ a span? Maybe something like:
+> 
+> <span class="test"> {$form.name.label} </span>
+> 
+> 
+> regards
+> Francisco A
+> _______________________________________________
+> YDFramework-users mailing list
+> YDFramework-users at lists.berlios.de
+> http://lists.berlios.de/mailman/listinfo/ydframework-users
+
+
+
+From francisco at fusemail.com  Wed Jul 12 23:10:11 2006
+From: francisco at fusemail.com (Francisco Azevedo)
+Date: Wed, 12 Jul 2006 22:10:11 +0100
+Subject: [ydf-users] How to add an attribute to a label element.
+In-Reply-To: <20060712134502.fe477b357a56c857c15a39baa2ae95d5.bf97ddf439.wbe@email.secureserver.net>
+References: <20060712134502.fe477b357a56c857c15a39baa2ae95d5.bf97ddf439.wbe@email.secureserver.net>
+Message-ID: <44B56533.1070601@fusemail.com>
+
+Hi moses
+
+
+>     Thanks for ur reply
+>      
+>     Why don't you define the label _inside_ a span? Maybe something
+> like: 
+>     <span class="test"> {$form.name.label} </span>
+> 
+>     Its a good idea but my situation is
+> 
+>     In my form I have several label and the corresponding textbox 
+> 
+>     While submitting the form if the user does not enter the value to
+> the text box I should change only the color of the  corresponding 
+> Label  of the textbox to red.
+> 
+>     If I could add a class within the label dynamically I could solve
+> the problem. 
+
+
+Sure.. with Yellow Duck Framework you can do it easily ;)
+
+
+Instead of:
+
+<span class="test"> {$form.name.label} </span>
+
+
+
+
+You just need:
+
+{if ($form.errors.name)} <span 
+style="color:#FF0000">{$form.name.label_html}</span>
+{else} {$form.name.label_html} {/if}
+
+
+
+regards
+Francisco A
+
+
+From moses at softwaysolutions.com  Thu Jul 13 19:46:01 2006
+From: moses at softwaysolutions.com (moses at softwaysolutions.com)
+Date: Thu, 13 Jul 2006 10:46:01 -0700
+Subject: [ydf-users] How to add an attribute to a label element. I got it
+Message-ID: <20060713104601.fe477b357a56c857c15a39baa2ae95d5.dca720107c.wbe@email.secureserver.net>
+
+
+Hi Francisco 
+
+   I got it
+
+   Thanks for ur help.
+
+regards
+moses
+
+
+> -------- Original Message --------
+> Subject: Re: [ydf-users] How to add an attribute to a label element.
+> From: Francisco Azevedo <francisco at fusemail.com>
+> Date: Wed, July 12, 2006 2:10 pm
+> To: ydframework-users at berlios.de
+> 
+> Hi moses
+> 
+> 
+> >     Thanks for ur reply
+> >      
+> >     Why don't you define the label _inside_ a span? Maybe something
+> > like: 
+> >     <span class="test"> {$form.name.label} </span>
+> > 
+> >     Its a good idea but my situation is
+> > 
+> >     In my form I have several label and the corresponding textbox 
+> > 
+> >     While submitting the form if the user does not enter the value to
+> > the text box I should change only the color of the  corresponding 
+> > Label  of the textbox to red.
+> > 
+> >     If I could add a class within the label dynamically I could solve
+> > the problem. 
+> 
+> 
+> Sure.. with Yellow Duck Framework you can do it easily ;)
+> 
+> 
+> Instead of:
+> 
+> <span class="test"> {$form.name.label} </span>
+> 
+> 
+> 
+> 
+> You just need:
+> 
+> {if ($form.errors.name)} <span 
+> style="color:#FF0000">{$form.name.label_html}</span>
+> {else} {$form.name.label_html} {/if}
+> 
+> 
+> 
+> regards
+> Francisco A
+> _______________________________________________
+> YDFramework-users mailing list
+> YDFramework-users at lists.berlios.de
+> http://lists.berlios.de/mailman/listinfo/ydframework-users
+
+
+
+From mosesdinakaran at gmail.com  Thu Jul 27 07:03:59 2006
+From: mosesdinakaran at gmail.com (Moses Dinakaran)
+Date: Thu, 27 Jul 2006 10:33:59 +0530
+Subject: [ydf-users] How to Hide an radio button
+Message-ID: <fbd383e30607262203la665cc0h27f52808a247c6aa@mail.gmail.com>
+
+Hi Everybody
+
+     I have created three radio buttons
+
+     $this->form->addElement('radio','reason','','',array
+("tea"=>"Tea","lunch"=>"Lunch","Other"=>"other"));
+
+    To hide this buttons dynamically I did the following:
+    $this->elm_reason =& $this->form->getElement('reason');
+    $this->elm_reason->_attributes["class"] ="hidden";
+
+   where the css contains
+  .hidden
+  {
+     visibility:hidden;
+  }
+
+   I works fine  the option buttons is not visible, but the problem is label
+for the option button is being displayed
+
+  (ie)  (Tea,Lunch,Other) is being displayed
+
+  How to avoid this.
+  Is there any other way to hide the elements
+
+  Note:
+          I am moses, previously I used the mail moses at softwaysolutions.com.
+Since I coulnd not use that Id further  here after I will be posting
+messages with the following mail mosesdinakaran at gmail.com
+
+ Thanks&Regards
+ moses
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <https://lists.berlios.de/pipermail/ydframework-users/attachments/20060727/de74b37f/attachment.html>
+
+From mosesdinakaran at gmail.com  Sat Jul 29 12:49:38 2006
+From: mosesdinakaran at gmail.com (Moses Dinakaran)
+Date: Sat, 29 Jul 2006 16:19:38 +0530
+Subject: [ydf-users] Query Regarding Variable scope
+Message-ID: <fbd383e30607290349r782e6b95s71e7cd35c60d120f@mail.gmail.com>
+
+Hi all
+
+       Is it possible to return values from a forms addRule function()
+
+  (ie)
+   I have Created a function to check the values of the form after it has
+been submitted.
+
+           $this->form->addFormRule(array($this,'validateTimings'));
+
+   in that function i have a variable called name
+
+  function validateTimings($fields)
+{
+
+      $this->name = "Moses";
+      return true;
+ }
+
+  I
+
+ function actionDefault()
+{
+
+      if($this->form->validate())
+     {
+        echo "Name:=".$this->name;
+
+     }
+}
+
+  When I try to print the variable I get the error Undefined Variable
+
+
+   How to solve the problem
+
+regards
+moses
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <https://lists.berlios.de/pipermail/ydframework-users/attachments/20060729/702d67a2/attachment.html>
+
+From francisco at fusemail.com  Sat Jul 29 19:32:51 2006
+From: francisco at fusemail.com (Francisco Azevedo)
+Date: Sat, 29 Jul 2006 18:32:51 +0100
+Subject: [ydf-users] Query Regarding Variable scope
+In-Reply-To: <fbd383e30607290349r782e6b95s71e7cd35c60d120f@mail.gmail.com>
+References: <fbd383e30607290349r782e6b95s71e7cd35c60d120f@mail.gmail.com>
+Message-ID: <44CB9BC3.6090307@fusemail.com>
+
+Moses Dinakaran wrote:
+>  
+> Hi all
+>  
+>        Is it possible to return values from a forms addRule function()
+>    
+>   (ie)
+>    I have Created a function to check the values of the form after it 
+> has been submitted.
+>   
+>            $this->form->addFormRule(array($this,'validateTimings'));
+>  
+>    in that function i have a variable called name
+>  
+>   function validateTimings($fields)
+> {
+>         
+>       $this->name = "Moses";
+>       return true; 
+>  }
+>  
+>   I
+>  
+>  function actionDefault()
+> {
+>      
+>       if($this->form->validate())
+>      {
+>         echo "Name:=".$this->name;
+>     
+>      }
+> }  
+>  
+>   When I try to print the variable I get the error Undefined Variable
+>  
+>    
+>    How to solve the problem 
+
+
+Afaik, addFormRule must return:
+- boolean true, if rule is passed
+- array( $errorMessage ), if rule do not pass
+
+
+regards
+Francisco A
+
+
+From mosesdinakaran at gmail.com  Mon Jul 31 06:26:31 2006
+From: mosesdinakaran at gmail.com (Moses Dinakaran)
+Date: Mon, 31 Jul 2006 09:56:31 +0530
+Subject: [ydf-users] Query Regarding Variable scope
+In-Reply-To: <44CB9BC3.6090307@fusemail.com>
+References: <fbd383e30607290349r782e6b95s71e7cd35c60d120f@mail.gmail.com>
+	<44CB9BC3.6090307@fusemail.com>
+Message-ID: <fbd383e30607302126i15894da7i6df8c20011e3d33@mail.gmail.com>
+
+*Hi Francisco*
+**
+*          *Thanks for ur reply, still my doubt is not cleared.
+
+          In a function if we declare a variable as $this it becoms global
+so that we can access it from any functions.
+
+*           *But in the addFormRule function() Though  I decalre a variable
+as $this I could not access the variable outside the function.
+
+           Is there any restriction that the  addFormRule function() will
+only return either true nor
+array( $errorMessage ) and we cannot access its variables.
+
+
+regards
+moses
+
+On 7/29/06, Francisco Azevedo <francisco at fusemail.com> wrote:
+>
+> Moses Dinakaran wrote:
+> >
+> > Hi all
+> >
+> >        Is it possible to return values from a forms addRule function()
+> >
+> >   (ie)
+> >    I have Created a function to check the values of the form after it
+> > has been submitted.
+> >
+> >            $this->form->addFormRule(array($this,'validateTimings'));
+> >
+> >    in that function i have a variable called name
+> >
+> >   function validateTimings($fields)
+> > {
+> >
+> >       $this->name = "Moses";
+> >       return true;
+> >  }
+> >
+> >   I
+> >
+> >  function actionDefault()
+> > {
+> >
+> >       if($this->form->validate())
+> >      {
+> >         echo "Name:=".$this->name;
+> >
+> >      }
+> > }
+> >
+> >   When I try to print the variable I get the error Undefined Variable
+> >
+> >
+> >    How to solve the problem
+>
+>
+> Afaik, addFormRule must return:
+> - boolean true, if rule is passed
+> - array( $errorMessage ), if rule do not pass
+>
+>
+> regards
+> Francisco A
+> _______________________________________________
+> YDFramework-users mailing list
+> YDFramework-users at lists.berlios.de
+> http://bat.berlios.de/mailman/listinfo/ydframework-users
+>
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <https://lists.berlios.de/pipermail/ydframework-users/attachments/20060731/4e872a3d/attachment.html>
+
+From francisco at fusemail.com  Mon Jul 31 10:00:22 2006
+From: francisco at fusemail.com (Francisco Azevedo)
+Date: Mon, 31 Jul 2006 09:00:22 +0100
+Subject: [ydf-users] Query Regarding Variable scope
+In-Reply-To: <fbd383e30607302126i15894da7i6df8c20011e3d33@mail.gmail.com>
+References: <fbd383e30607290349r782e6b95s71e7cd35c60d120f@mail.gmail.com>	<44CB9BC3.6090307@fusemail.com>
+	<fbd383e30607302126i15894da7i6df8c20011e3d33@mail.gmail.com>
+Message-ID: <44CDB896.9000903@fusemail.com>
+
+Hi Moses
+
+> *          *Thanks for ur reply, still my doubt is not cleared. 
+>           
+>           In a function if we declare a variable as $this it becoms 
+> global so that we can access it from any functions.
+>  
+> *           *But in the addFormRule function() Though  I decalre a 
+> variable as $this I could not access the variable outside the function.
+>  
+>            Is there any restriction that the  addFormRule function() 
+> will only return either true nor
+> array( $errorMessage ) and we cannot access its variables.
+> 
+
+Afaik no.. but it seems you are not trying to access variables inside 
+the class because it seems you are cloning the object.
+Can you try:
+
+$this->form->addFormRule(array( & $this,'validateTimings'));
+
+instead of:
+
+$this->form->addFormRule(array($this,'validateTimings'));
+
+
+regards
+Francisco A
+
+

@@ -1,0 +1,123 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [ydf-users] SQL Question
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/ydframework-users/2006-February/index.html" >
+   <LINK REL="made" HREF="mailto:ydframework-users%40lists.berlios.de?Subject=Re%3A%20%5Bydf-users%5D%20SQL%20Question&In-Reply-To=%3C306340e00602220305w412b7525x%40mail.gmail.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000041.html">
+   <LINK REL="Next"  HREF="000046.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[ydf-users] SQL Question</H1>
+    <B>ydf poi</B> 
+    <A HREF="mailto:ydframework-users%40lists.berlios.de?Subject=Re%3A%20%5Bydf-users%5D%20SQL%20Question&In-Reply-To=%3C306340e00602220305w412b7525x%40mail.gmail.com%3E"
+       TITLE="[ydf-users] SQL Question">ydfpoi at gmail.com
+       </A><BR>
+    <I>Wed Feb 22 12:05:09 CET 2006</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000041.html">[ydf-users] SQL Question
+</A></li>
+        <LI>Next message: <A HREF="000046.html">[ydf-users] SQL Question
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#44">[ date ]</a>
+              <a href="thread.html#44">[ thread ]</a>
+              <a href="subject.html#44">[ subject ]</a>
+              <a href="author.html#44">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Hi Peter,
+
+I am far from a SQL guru and i don't know MS-SQL (only MySQL a little)
+so read the following with most care.
+However i guess that MS-SQL syntax is not different from MySQL for our concern.
+
+If i understand your question well, i would state the following MySQL command:
+
+SELECT item, pallet, location, user, MAX(movedate) AS movedate
+FROM `yourtable`
+GROUP BY item
+
+Hope this will help...
+
+Kind regards
+
+2006/2/22, Peter &lt;<A HREF="https://lists.berlios.de/mailman/listinfo/ydframework-users">ydf at jocosoft.com</A>&gt;:
+&gt;<i> This has nothing to do with YDF as such, but since I'm using YDF for
+</I>&gt;<i> this project, and I know there are some bright minds reading these
+</I>&gt;<i> lists, I'll give it a shot...
+</I>&gt;<i>
+</I>&gt;<i> I am building this inventory system for the company I work for, and I'm
+</I>&gt;<i> running into a wall. Hopefully one of you SQL gurus can help me out.
+</I>&gt;<i> This thing is (unfortunately) running on MS-SQL, so I can't use any of
+</I>&gt;<i> the YDF classes, but I do have views, stored procedures, triggers and
+</I>&gt;<i> what not. (if that would be needed)
+</I>&gt;<i>
+</I>&gt;<i> I have this table with the folowing fields:
+</I>&gt;<i> item, pallet, location, user, movedate
+</I>&gt;<i>
+</I>&gt;<i> It will hold the location of each item and/or pallet (an item can be
+</I>&gt;<i> moved by itself, or as part of a pallet), who put it there, and when.
+</I>&gt;<i>
+</I>&gt;<i> The tricky part is that there are no key fields. They are indexed for
+</I>&gt;<i> speed, but nothing is unique. The reason is that stuff moves around a
+</I>&gt;<i> lot, so an item can be moved several times a day, on and off a pallet,
+</I>&gt;<i> etc, etc... So this table holds the history of every move, ever
+</I>&gt;<i> performed on every item and pallet in the building. (Needless to say,
+</I>&gt;<i> it's gonna be a big one)
+</I>&gt;<i>
+</I>&gt;<i> What I want is a subset of this table, with only the last entry for each
+</I>&gt;<i> item and pallet (not the history). Thus showing me every item and
+</I>&gt;<i> pallet, with it's *current* location, who put it there, and when.
+</I>&gt;<i>
+</I>&gt;<i> Easier said than done, as I've been struggling with this all day, but
+</I>&gt;<i> can't get my head around it. I have to say, I'm not the best with SQL,
+</I>&gt;<i> just know the basics.
+</I>&gt;<i>
+</I>&gt;<i> If anyone can give me an idea of how to build a query for this, I owe
+</I>&gt;<i> you my first born (well, almost)
+</I>&gt;<i>
+</I>&gt;<i> Any help would be appriciated!
+</I>&gt;<i>
+</I>&gt;<i> _______________________________________________
+</I>&gt;<i> YDFramework-users mailing list
+</I>&gt;<i> <A HREF="https://lists.berlios.de/mailman/listinfo/ydframework-users">YDFramework-users at lists.berlios.de</A>
+</I>&gt;<i> <A HREF="http://lists.berlios.de/mailman/listinfo/ydframework-users">http://lists.berlios.de/mailman/listinfo/ydframework-users</A>
+</I>&gt;<i>
+</I>
+
+--
+po&#239;
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000041.html">[ydf-users] SQL Question
+</A></li>
+	<LI>Next message: <A HREF="000046.html">[ydf-users] SQL Question
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#44">[ date ]</a>
+              <a href="thread.html#44">[ thread ]</a>
+              <a href="subject.html#44">[ subject ]</a>
+              <a href="author.html#44">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/ydframework-users">More information about the YDFramework-users
+mailing list</a><br>
+</body></html>

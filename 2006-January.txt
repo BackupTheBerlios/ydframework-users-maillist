@@ -1,0 +1,237 @@
+From francisco at fusemail.com  Fri Jan 13 17:50:49 2006
+From: francisco at fusemail.com (Francisco Azevedo)
+Date: Fri, 13 Jan 2006 16:50:49 +0000
+Subject: [ydf-users] YDAjax autocompleter
+In-Reply-To: <20060313131537.59665.qmail@web50212.mail.yahoo.com>
+References: <20060313131537.59665.qmail@web50212.mail.yahoo.com>
+Message-ID: <43C7DA69.3070904@fusemail.com>
+
+dab
+
+If you want functions you cannot add events to form elements. You must 
+create the js function.
+
+Second, you have 3 types of arguments that you can pass on addEvent:
+- form element names
+- static string/int/float values
+- dynamic js arguments from the function
+
+Remember that dynamic arguments can only be used on events added as 
+functions.
+
+So, if you want to make _one_ js function that sends in the ajax call 1 
+dynamic js variable you must add an event like:
+
+$this->ajax->addEvent( 'customJSFunction(x)', array( & $this, 
+'phpFunction' ), 'var x' );
+
+'var x' is a terminology for js variables defined in the function name.
+Take a look to the YDAjax example "Without a YDForm".
+
+
+> i want to pass two variables so i can have 1 ajax
+> function for all elements instead of having 1 ajax
+> function for each element.
+> but i did an update yesterday and now nothing seems to
+> work. none of the example works and autocompleter.php
+> gives me:
+> Fatal error: Call to a member function getElement() on
+> a non-object in
+> D:\htdocs\YDFramework2\addons\YDAjax\YDAjax.php on
+> line 750
+> 
+> maybe there has been a change of syntax and the
+> manual/code examples are not updated?
+
+The syntax is the same. I'm not getting any problems using the latest 
+build (1778) in php4/5.
+
+Francisco A
+
+
+> --- Francisco Azevedo <francisco at fusemail.com> wrote:
+> 
+>> dab, what do you want to do?
+>>
+>>
+>>> Well the $text variable i don't pass and it's
+>> there. I
+>>> can't do:
+>>> function getAjaxElement ( $affiliate, $firstname )
+>> {
+>>> i need the $text var as:
+>>> function getAjaxElement ( $text ) {
+>>>
+>>> and your code didn't work, tried it :(
+>>>
+>>> i thought that there might have been changes made
+>> to
+>>> the code so i updated it and now it doesn't work
+>> at
+>>> all :|
+>>> even the example autocompleter.php gives me this
+>>> error:
+>>> Fatal error: Call to a member function
+>> getElement() on
+>>> a non-object in
+>>> D:\htdocs\YDFramework2\addons\YDAjax\YDAjax.php on
+>>> line 750
+>>>
+>>>
+>>> /dan
+>>>
+>>> --- Francisco Azevedo <francisco at fusemail.com>
+>> wrote:
+>>>> Hi dab
+>>>>
+>>>> The solution for your problem is exactly what i
+>> said
+>>>> on my last email.
+>>>> Please not that:
+>>>>
+>>>> 1 - You should define all arguments in a array
+>> (when
+>>>> adding a 
+>>>> autocompleter to a form)
+>>>>
+>>>> 2 - You should define the same quantity of
+>> arguments
+>>>> in the server function.
+>>>>
+>>>> 3 - You should NOT use any of the
+>>>> YDFormElement_Autocompleter methods
+>>>>
+>>>> So..
+>>>>
+>>>> 1:
+>>>> $this->form->addElement( 'autocompleter',
+>>>> 'firstname', 'First Name:', 
+>>>> $this->attributes, array( &$this,
+>> 'getAjaxElement',
+>>>> array( 'affiliate', 
+>>>> 'firstname' ) ) );
+>>>>
+>>>> 2:
+>>>> function getAjaxElement ( $affiliate, $firstname
+>> ) {
+>>>>       ...
+>>>> }
+>>>>
+>>>>
+>>>> Francisco A
+>>>>
+>>>>
+>>>>> thanks for your reply. i can't get it to work
+>>>> though
+>>>>> =(
+>>>>>
+>>>>> you mean i have to do this?
+>>>>> $this->form->addElement ( 'autocompleter',
+>>>>> 'firstname', 'First Name:', $this->attributes,
+>>>> array(
+>>>>> &$this, 'getAjaxElement', 'affiliate',
+>> 'firstname'
+>>>> )
+>>>>> );
+>>>>>
+>>>>> function getAjaxElement ( $text, $field, $table
+>> )
+>>>> {
+>>>>>     ...     
+>>>>> }
+>>>>>
+>>>>>
+>>>>> YDFormElement_Autocompleter::getAjaxArguments()
+>>>>> returns $this->_options[2]. So if the the third
+>>>> value
+>>>>> in the options array is:
+>>>>> array ( 'tablename', 'fieldname' )
+>>>>>
+>>>>> and in getAjaxElement() you do:
+>>>>> function getAjaxElement ( $text ) {
+>>>>>     $info = $this->getAjaxArguments();
+>>>>>     $table = $info[0];
+>>>>>     $field = $info[1];
+>>>>>     ...
+>>>>> }
+>>>>>
+>>>>> why doesn't that work? i need to pass arguments
+>> =)
+>>>>> thanks.
+>>>>>
+>>>>> /dab
+>>>>>
+>>>>>
+>>>>>
+>>>>> --- Francisco Azevedo <francisco at fusemail.com>
+>>>> wrote:
+>>>>>> dab wrote:
+>>>>>>
+>>>>>>> hi all,
+>>>>>>> i use the autocomplete function on quite a lot
+>> of
+>>>>>>> fields so it would be better if i could pass
+>> the
+>>>>>> table
+>>>>>>
+>>>>>>> and field name to the ajax method so i don't
+>> have
+>>>>>> to
+>>>>>>
+>>>>>>> write one extra method for each element.
+>>>>>>> by looking at the YDFormElement_Autocompleter
+>>>>>> below
+>>>>>>
+>>>>>>> code should work, but it doesn't :(
+>>>>>>>
+>>>>>>> $this->form->addElement ( 'autocompleter',
+>>>>>>> 'firstname', 'First Name:', $this->attributes,
+>>>>>> array(
+>>>>>>
+>>>>>>> &$this, 'getAjaxElement', array ( 'affiliate',
+>>>>>>> 'firstname' ) ) );
+>>>>>>>
+>>>>>>> function getAjaxElement ( $text ) {
+>>>>>>>    $info = $this->getAjaxArguments();
+>>>>>>>    $table = $info[0];
+>>>>>>>    $field = $info[1];
+>>>>>>>    $user = YDDatabaseObject::getInstance (
+>>>> $table
+>>>>>> );
+>>>>>>
+>>>>>>>    $user->select ( 'id', $field );
+>>>>>>>    $user->find();
+>>>>>>>    $db = $user->getResultsAsAssocArray( 'id',
+>>>>>> $field
+>>>>>>
+>>>>>>> );
+>>>>>>> 	$result = array();
+>>>>>>> 	foreach( $db as $key => $el )
+>>>>>>> 		if (eregi("^". $text ."+", $el)) $result[] =
+>>>>>> $el;
+>>>>>>
+>>>>>>> 		
+>>>>>>> 	$this->ajax->addCompleterResult( $result ); 
+>>>>>>> 	return $this->ajax->processResults();        
+>>   
+>>>>>>> }
+>>>>>>>
+>>>>>> Hi dab.
+>>>>>>
+>>>>>> My first look at your code is telling me that
+>> you
+>>>>>> are defining an 
+>>>>>> autocompleter with 'getAjaxElement' and 2
+>>>>>> arguments.. but on your 
+>>>>>> 'getAjaxElement' you only set 1 argument
+>> ($text).
+>>>>>> You should try:
+>>>>>>
+>>>>>> function getAjaxElement ( $affiliate,
+>> $firstname )
+>>>> {
+>>>>>>    ...
+>>>>>> }
+>>>>>>
+
+

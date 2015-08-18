@@ -1,0 +1,92 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [ydf-users] Ajax Error
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/ydframework-users/2006-March/index.html" >
+   <LINK REL="made" HREF="mailto:ydframework-users%40lists.berlios.de?Subject=Re%3A%20%5Bydf-users%5D%20Ajax%20Error&In-Reply-To=%3C44062F53.9090904%40fusemail.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000078.html">
+   <LINK REL="Next"  HREF="000080.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[ydf-users] Ajax Error</H1>
+    <B>Francisco Azevedo</B> 
+    <A HREF="mailto:ydframework-users%40lists.berlios.de?Subject=Re%3A%20%5Bydf-users%5D%20Ajax%20Error&In-Reply-To=%3C44062F53.9090904%40fusemail.com%3E"
+       TITLE="[ydf-users] Ajax Error">francisco at fusemail.com
+       </A><BR>
+    <I>Thu Mar  2 00:33:39 CET 2006</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000078.html">[ydf-users] Ajax Error
+</A></li>
+        <LI>Next message: <A HREF="000080.html">[ydf-users] Ajax Error
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#79">[ date ]</a>
+              <a href="thread.html#79">[ thread ]</a>
+              <a href="subject.html#79">[ subject ]</a>
+              <a href="author.html#79">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Hi ph-m
+
+&gt;<i> it's seems it's in YDAjax.php script, cause when I test Ajax examples
+</I>&gt;<i> with last release 1755, all fail.
+</I>&gt;<i> 
+</I>&gt;<i> I try at home and I got this in my apache log error :
+</I>&gt;<i> 
+</I>&gt;<i> [Wed Mar 01 18:58:28 2006] [error] PHP Parse error:  parse error,
+</I>&gt;<i> unexpected '=', expecting ')' in
+</I>&gt;<i> e:\\wamp\\htdocs\\www\\ydf2\\YDFramework2\\addons\\YDAjax\\YDAjax.php
+</I>&gt;<i> on line 68
+</I>
+Yes, the problem is in YDAjax (well.. is more a php4 problem to me). On 
+php5 (my development version) everything went fine.
+
+I had changed that because the form element is not really required. 
+Sometimes we don't need a form.. but we want to use YDAjax. So we need a 
+default value (null) for a form.
+Another problem is when we have more than one YDForm. Currently we don't 
+have a way to add YDForms to YDAjax.. we can just use one. So, we have 2 
+problems here.
+
+Your problem can be solved easily (because you are not using YDAjax 
+without the form)...
+But i'm planing to delete this parameter and YDAjax will have only the 
+$template variable. Then, a new method will be added to YDAjax to add 
+form elements. This way, we can have zero, one or more YDForms in 
+YDAjax. This latest feature is planned but it's not trivial to implement 
+because there are lots of form elements searches inside YDAjax.
+
+Francisco
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000078.html">[ydf-users] Ajax Error
+</A></li>
+	<LI>Next message: <A HREF="000080.html">[ydf-users] Ajax Error
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#79">[ date ]</a>
+              <a href="thread.html#79">[ thread ]</a>
+              <a href="subject.html#79">[ subject ]</a>
+              <a href="author.html#79">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/ydframework-users">More information about the YDFramework-users
+mailing list</a><br>
+</body></html>

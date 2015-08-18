@@ -1,0 +1,116 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [ydf-users] Cancel button
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/ydframework-users/2007-July/index.html" >
+   <LINK REL="made" HREF="mailto:ydframework-users%40lists.berlios.de?Subject=Re%3A%20%5Bydf-users%5D%20Cancel%20button&In-Reply-To=%3C46953A3F.6050203%40fusemail.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000496.html">
+   <LINK REL="Next"  HREF="000498.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[ydf-users] Cancel button</H1>
+    <B>Francisco Azevedo</B> 
+    <A HREF="mailto:ydframework-users%40lists.berlios.de?Subject=Re%3A%20%5Bydf-users%5D%20Cancel%20button&In-Reply-To=%3C46953A3F.6050203%40fusemail.com%3E"
+       TITLE="[ydf-users] Cancel button">francisco at fusemail.com
+       </A><BR>
+    <I>Wed Jul 11 22:14:55 CEST 2007</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000496.html">[ydf-users] Cancel button
+</A></li>
+        <LI>Next message: <A HREF="000498.html">[ydf-users] Cancel button
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#497">[ date ]</a>
+              <a href="thread.html#497">[ thread ]</a>
+              <a href="subject.html#497">[ subject ]</a>
+              <a href="author.html#497">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Roland Berger wrote:
+&gt;&gt;&gt;&gt;&gt;<i> What is the best/right way to implement a cancel button
+</I>&gt;&gt;&gt;&gt;&gt;<i> next to a submit button?
+</I>&gt;&gt;&gt;&gt;<i> What do you mean by a &quot;cancel&quot; button?
+</I>&gt;&gt;&gt;<i> Like e.g. on
+</I>&gt;&gt;&gt;<i> <A HREF="http://www.shozu.com/portal/login.do">http://www.shozu.com/portal/login.do</A>
+</I>&gt;&gt;&gt;<i>
+</I>&gt;&gt;&gt;<i> From my understanding 'Cancel' belongs to the same form, but must
+</I>&gt;&gt;&gt;<i> have no rules set...
+</I>&gt;&gt;<i> I really don't undestand why this &quot;cancel&quot; exists. Cancel what?
+</I>&gt;<i> 
+</I>&gt;<i> Whatever. My question wasn't specific on that point.
+</I>&gt;<i> Does YD provide two submits with two different rule
+</I>&gt;<i> sets on one form?
+</I>
+
+No. It's not possible to create 2 rule sets for 1 form object.
+But you can create 1 form and apply some rule sets inside an action. All 
+you need is to be able to change the action url in the client side 
+(maybe with some custom js in each button?).
+
+I can see something like:
+
+class xpto{
+	
+	function xpto(){
+		$this-&gt;form = new YDForm(....);
+	}
+
+	function actionA(){
+		$this-&gt;form-&gt;addRule(...);
+	}
+
+	function actionB(){
+		$this-&gt;form-&gt;addRule(...);
+	}
+
+	function actionDefault(){
+		$elA = $this-&gt;form-&gt;getElement( 'buttonA' );
+		$elA-&gt;setAttribute( 'onclick', '_some_html_id = URL ?do=A ...' )
+		$elB = $this-&gt;form-&gt;getElement( 'buttonA' );
+		$elB-&gt;setAttribute( 'onclick', '_some_html_id = URL ?do=B ...' )
+
+		$this-&gt;form-&gt;display();
+	}
+	
+}
+
+
+Something like this :)
+
+
+regards
+Francisco A
+
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000496.html">[ydf-users] Cancel button
+</A></li>
+	<LI>Next message: <A HREF="000498.html">[ydf-users] Cancel button
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#497">[ date ]</a>
+              <a href="thread.html#497">[ thread ]</a>
+              <a href="subject.html#497">[ subject ]</a>
+              <a href="author.html#497">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/ydframework-users">More information about the YDFramework-users
+mailing list</a><br>
+</body></html>

@@ -1,0 +1,167 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [ydf-users] Problems with getRecordsAsSet
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/ydframework-users/2006-August/index.html" >
+   <LINK REL="made" HREF="mailto:ydframework-users%40lists.berlios.de?Subject=Re%3A%20%5Bydf-users%5D%20Problems%20with%20getRecordsAsSet&In-Reply-To=%3C20060825091326.2b7eeeb4c62f4bb8603cfb01b826e9ec.97f7d5ef2e.wbe%40email.secureserver.net%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000343.html">
+   <LINK REL="Next"  HREF="000345.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[ydf-users] Problems with getRecordsAsSet</H1>
+    <B>moses at hysistechnologies.com</B> 
+    <A HREF="mailto:ydframework-users%40lists.berlios.de?Subject=Re%3A%20%5Bydf-users%5D%20Problems%20with%20getRecordsAsSet&In-Reply-To=%3C20060825091326.2b7eeeb4c62f4bb8603cfb01b826e9ec.97f7d5ef2e.wbe%40email.secureserver.net%3E"
+       TITLE="[ydf-users] Problems with getRecordsAsSet">moses at hysistechnologies.com
+       </A><BR>
+    <I>Fri Aug 25 18:13:26 CEST 2006</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000343.html">[ydf-users] How to remove form rule and elements rule .
+</A></li>
+        <LI>Next message: <A HREF="000345.html">[ydf-users] YDError extension
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#344">[ date ]</a>
+              <a href="thread.html#344">[ thread ]</a>
+              <a href="subject.html#344">[ subject ]</a>
+              <a href="author.html#344">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>
+
+Hello sir
+
+    What will be the solution to it.
+
+    Will the getSortUrl(),getNextUrl(),getPreviousUrl() can be used
+without using getRecordsAsSet().
+
+    Any other way for paging. 
+
+regards
+moses
+
+    
+
+
+&gt;<i> -------- Original Message --------
+</I>&gt;<i> Subject: Re: [ydf-users] Problems with getRecordsAsSet
+</I>&gt;<i> From: &quot;Pieter Claerhout&quot; &lt;<A HREF="https://lists.berlios.de/mailman/listinfo/ydframework-users">pieter at yellowduck.be</A>&gt;
+</I>&gt;<i> Date: Fri, August 25, 2006 2:51 am
+</I>&gt;<i> To: <A HREF="https://lists.berlios.de/mailman/listinfo/ydframework-users">ydframework-users at lists.berlios.de</A>
+</I>&gt;<i> 
+</I>&gt;<i> 
+</I>&gt;<i> HI Moses, 
+</I>&gt;<i>   
+</I>&gt;<i> the sorting in YDRecordSet is not using the sorting algorithms from the database but is relying on the sorting functions from PHP (which might be different). 
+</I>&gt;<i>   
+</I>&gt;<i> cheers, 
+</I>&gt;<i>   
+</I>&gt;<i>   
+</I>&gt;<i> pieter
+</I>&gt;<i>   
+</I>&gt;<i> On 8/14/06, Moses Dinakaran &lt;<A HREF="https://lists.berlios.de/mailman/listinfo/ydframework-users">mosesdinakaran at gmail.com</A>&gt; wrote:  
+</I>&gt;<i>  
+</I>&gt;<i> Hi Everybody 
+</I>&gt;<i>   
+</I>&gt;<i>       I have a problem with ordering the records based upon the sortfld and sortdir using getRecordsAsSet 
+</I>&gt;<i>     
+</I>&gt;<i>      the following is the code 
+</I>&gt;<i>      
+</I>&gt;<i>      $recordSet = $this-&gt;db-&gt;getRecordsAsSet(&quot;$this-&gt;query&quot;,$this-&gt;page,$this-&gt;size);  
+</I>&gt;<i>   
+</I>&gt;<i>     .tpl 
+</I>&gt;<i>   
+</I>&gt;<i>       {$recordSet-&gt;getSortUrl('app_first_name')} 
+</I>&gt;<i>   
+</I>&gt;<i>     The problem is If the sortfld datatype  is string (Not for all string datatype only for some particular field  )order is not displayed properly.On the other hand  If the sortfld datatype  is numeric it works fine.  
+</I>&gt;<i>   
+</I>&gt;<i>     Again if I  run the same query in the phpMyAdmin which gives me the correct result. 
+</I>&gt;<i>   
+</I>&gt;<i>     Any Suggestions Please. 
+</I>&gt;<i>   
+</I>&gt;<i>   
+</I>&gt;<i> My Query 
+</I>&gt;<i>   
+</I>&gt;<i> select p.pre_approval_id,p.cu_id,date_format(p.created_date,'%m-%d-%Y') as date,     p.created_date ,p.loan_officer_id,p.app_first_name,p.app_last_name,p.amount , 
+</I>&gt;<i> p.loan_type_id,date_format(p.expires_date,'%m-%d-%Y') as date_expires,p.expires_date,  
+</I>&gt;<i> p.pre_approval_status as status, CONCAT(p.app_first_name, ' ', p.app_last_name ) as app_name , 
+</I>&gt;<i> cum.cu_name ,lo.first_name,lt.name as loan_name from tbl_preapprovals as p  
+</I>&gt;<i> left join tbl_credit_union_master as cum on p.cu_id=cum.cu_id 
+</I>&gt;<i> left join tbl_loan_user as lo on p.loan_officer_id = lo.loan_user_id  
+</I>&gt;<i> left join tbl_loan_type_master as lt on p.loan_type_id = lt.loan_type_id  
+</I>&gt;<i> where 1=1 order by p.app_first_name DESC 
+</I>&gt;<i>     
+</I>&gt;<i>   
+</I>&gt;<i> .tpl 
+</I>&gt;<i>   
+</I>&gt;<i>   
+</I>&gt;<i> $recordSet-&gt;getSortUrl('p.pre_approval_id')} --&gt;Works Fine
+</I>&gt;<i> {$recordSet-&gt;getSortUrl('cum.cu_name')}--&gt;Works Fine
+</I>&gt;<i> {$recordSet-&gt;getSortUrl('p.created_date')}--&gt;Works Fine
+</I>&gt;<i> {$recordSet-&gt;getSortUrl(' lo.first_name')}--&gt;Works Fine
+</I>&gt;<i> {$recordSet-&gt;getSortUrl('p.app_first_name')}--&gt;Gives the problem
+</I>&gt;<i> {$recordSet-&gt;getSortUrl('amount')}--&gt;Works Fine
+</I>&gt;<i> {$recordSet-&gt;getSortUrl(' lt.name')}--&gt;Works Fine
+</I>&gt;<i> 
+</I>&gt;<i> 
+</I>&gt;<i>   
+</I>&gt;<i>   
+</I>&gt;<i>   
+</I>&gt;<i>   
+</I>&gt;<i>   
+</I>&gt;<i>   
+</I>&gt;<i> regards 
+</I>&gt;<i>  
+</I>&gt;<i> moses  
+</I>&gt;<i>        
+</I>&gt;<i> _______________________________________________
+</I>&gt;<i> YDFramework-users mailing list
+</I>&gt;<i>  <A HREF="https://lists.berlios.de/mailman/listinfo/ydframework-users">YDFramework-users at lists.berlios.de</A>
+</I>&gt;<i> <A HREF="http://bat.berlios.de/mailman/listinfo/ydframework-users">http://bat.berlios.de/mailman/listinfo/ydframework-users</A> 
+</I>&gt;<i> 
+</I>&gt;<i> 
+</I>&gt;<i> 
+</I>&gt;<i> 
+</I>&gt;<i> 
+</I>&gt;<i> -- 
+</I>&gt;<i> pieter claerhout . <A HREF="https://lists.berlios.de/mailman/listinfo/ydframework-users">pieter at yellowduck.be</A> . <A HREF="http://www.yellowduck.be/">http://www.yellowduck.be/</A> 
+</I>&gt;<i> ---------------------------------------------------------------------
+</I>&gt;<i> _______________________________________________
+</I>&gt;<i> YDFramework-users mailing list
+</I>&gt;<i> <A HREF="https://lists.berlios.de/mailman/listinfo/ydframework-users">YDFramework-users at lists.berlios.de</A>
+</I>&gt;<i> <A HREF="https://lists.berlios.de/mailman/listinfo/ydframework-users">https://lists.berlios.de/mailman/listinfo/ydframework-users</A>
+</I>&gt;<i> 
+</I>
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000343.html">[ydf-users] How to remove form rule and elements rule .
+</A></li>
+	<LI>Next message: <A HREF="000345.html">[ydf-users] YDError extension
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#344">[ date ]</a>
+              <a href="thread.html#344">[ thread ]</a>
+              <a href="subject.html#344">[ subject ]</a>
+              <a href="author.html#344">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/ydframework-users">More information about the YDFramework-users
+mailing list</a><br>
+</body></html>

@@ -1,0 +1,110 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [ydf-users] YDCM Error handling
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/ydframework-users/2006-August/index.html" >
+   <LINK REL="made" HREF="mailto:ydframework-users%40lists.berlios.de?Subject=Re%3A%20%5Bydf-users%5D%20YDCM%20Error%20handling&In-Reply-To=%3C44EB8238.4010804%40fusemail.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000334.html">
+   <LINK REL="Next"  HREF="000338.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[ydf-users] YDCM Error handling</H1>
+    <B>Francisco Azevedo</B> 
+    <A HREF="mailto:ydframework-users%40lists.berlios.de?Subject=Re%3A%20%5Bydf-users%5D%20YDCM%20Error%20handling&In-Reply-To=%3C44EB8238.4010804%40fusemail.com%3E"
+       TITLE="[ydf-users] YDCM Error handling">francisco at fusemail.com
+       </A><BR>
+    <I>Wed Aug 23 00:16:24 CEST 2006</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000334.html">[ydf-users] multiple ajax forms
+</A></li>
+        <LI>Next message: <A HREF="000338.html">[ydf-users] How to remove form rule and elements rule .
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#337">[ date ]</a>
+              <a href="thread.html#337">[ thread ]</a>
+              <a href="subject.html#337">[ subject ]</a>
+              <a href="author.html#337">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Hi
+
+&gt;<i> I agree that this would indeed be the best way of working. We have the 
+</I>&gt;<i> YDError class already, so we better start using it.
+</I>
+
+I have added a new class YDResult (defined in YDCMComponent.php) for 
+results.
+
+Currently, in almost any method we set things like true/false or even 
+some integer (that are codes) as returning values.
+
+I propose to start using a standard way of returning values. YDError is 
+excellent to returning errors, so i have created YDResult that extends 
+YDError with a new method for results that are not errors (i called OK).
+
+So, i propose that:
+
+- a result is _always_ a YDReturn object (except for method that don't 
+result nothing, eg: sets() )
+
+- this YDReturn result is a 'ok' type or an error
+
+
+Not only we get a more powerful way of handling results (and not results 
+that are errors only) but this can give very good features.
+
+A very good features is that, because any result has a message, we can 
+incorporate returning (translated) messages inside any YDCM or other 
+class, then the developer that is using YDCM stuff needs only to use 
+that message (it's already created)! Eg, imagine the YDCMUser class and 
+a method to create a user.. if the result is a YDResult we only need to 
+get the message like:
+
+$res = $ydcmuser-&gt;add( ... );
+
+print $res-&gt;message;
+
+
+this will print something like 'User was added' (if ok) or 'User cannot 
+be created because...'  .. and note that these messages are already 
+created inside YDCMUser!
+
+
+Any comments about this idea?
+
+
+regards
+Francisco A
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000334.html">[ydf-users] multiple ajax forms
+</A></li>
+	<LI>Next message: <A HREF="000338.html">[ydf-users] How to remove form rule and elements rule .
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#337">[ date ]</a>
+              <a href="thread.html#337">[ thread ]</a>
+              <a href="subject.html#337">[ subject ]</a>
+              <a href="author.html#337">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/ydframework-users">More information about the YDFramework-users
+mailing list</a><br>
+</body></html>

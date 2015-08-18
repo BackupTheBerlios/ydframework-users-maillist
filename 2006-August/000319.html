@@ -1,0 +1,111 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [ydf-users] $form-&gt;addElement('image') syntax
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/ydframework-users/2006-August/index.html" >
+   <LINK REL="made" HREF="mailto:ydframework-users%40lists.berlios.de?Subject=Re%3A%20%5Bydf-users%5D%20%24form-%3EaddElement%28%27image%27%29%20syntax&In-Reply-To=%3C9E262D14-4487-40EE-A287-73047040F362%40gmail.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000318.html">
+   <LINK REL="Next"  HREF="000320.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[ydf-users] $form-&gt;addElement('image') syntax</H1>
+    <B>Gonzillaaa</B> 
+    <A HREF="mailto:ydframework-users%40lists.berlios.de?Subject=Re%3A%20%5Bydf-users%5D%20%24form-%3EaddElement%28%27image%27%29%20syntax&In-Reply-To=%3C9E262D14-4487-40EE-A287-73047040F362%40gmail.com%3E"
+       TITLE="[ydf-users] $form-&gt;addElement('image') syntax">gonzillaaa at gmail.com
+       </A><BR>
+    <I>Sun Aug 13 11:48:44 CEST 2006</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000318.html">[ydf-users] $form-&gt;addElement('image') syntax
+</A></li>
+        <LI>Next message: <A HREF="000320.html">[ydf-users] Any chance of getting an example for YDCMComponent
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#319">[ date ]</a>
+              <a href="thread.html#319">[ thread ]</a>
+              <a href="subject.html#319">[ subject ]</a>
+              <a href="author.html#319">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Hi Moses thanks for the reply. I did work it out last night, it was a  
+pretty silly question :) this did it for me:
+
+$form-&gt;addElement('image', 'add', 'order.gif', array('alt'=&gt;'Add to  
+order'), array());
+then {$form.add.html}
+
+Thanks,
+
+G.
+
+On 13 Aug 2006, at 09:18, Moses Dinakaran wrote:
+
+&gt;<i>
+</I>&gt;<i> Hi  Gonzillaaa
+</I>&gt;<i>
+</I>&gt;<i>     hopes the following code will help u
+</I>&gt;<i>
+</I>&gt;<i>       $form-&gt;addElement( 'image', 'img1', '', array(),
+</I>&gt;<i> '/images/xml.gif' );
+</I>&gt;<i> .tpl
+</I>&gt;<i>
+</I>&gt;<i>    {$form.img1.html}
+</I>&gt;<i>
+</I>&gt;<i> regards
+</I>&gt;<i> moses
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i> On 8/12/06, Gonzillaaa &lt;<A HREF="https://lists.berlios.de/mailman/listinfo/ydframework-users">gonzillaaa at gmail.com</A>&gt; wrote: hello does  
+</I>&gt;<i> anybody have an example of $form-&gt;addElement('image')
+</I>&gt;<i> somewhere? I don't seem to be passing the parameters right, in
+</I>&gt;<i> particular I'm not sure how to pass the image/path in question. How
+</I>&gt;<i> would that be rendered on a template would it still be by
+</I>&gt;<i> {$form._cmdSubmit.html} or would it have to be {$form.image.html}
+</I>&gt;<i>
+</I>&gt;<i> many thanks,
+</I>&gt;<i>
+</I>&gt;<i> G.
+</I>&gt;<i> _______________________________________________
+</I>&gt;<i> YDFramework-users mailing list
+</I>&gt;<i> <A HREF="https://lists.berlios.de/mailman/listinfo/ydframework-users">YDFramework-users at lists.berlios.de</A>
+</I>&gt;<i> <A HREF="http://bat.berlios.de/mailman/listinfo/ydframework-users">http://bat.berlios.de/mailman/listinfo/ydframework-users</A>
+</I>&gt;<i>
+</I>&gt;<i> _______________________________________________
+</I>&gt;<i> YDFramework-users mailing list
+</I>&gt;<i> <A HREF="https://lists.berlios.de/mailman/listinfo/ydframework-users">YDFramework-users at lists.berlios.de</A>
+</I>&gt;<i> <A HREF="http://bat.berlios.de/mailman/listinfo/ydframework-users">http://bat.berlios.de/mailman/listinfo/ydframework-users</A>
+</I>
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000318.html">[ydf-users] $form-&gt;addElement('image') syntax
+</A></li>
+	<LI>Next message: <A HREF="000320.html">[ydf-users] Any chance of getting an example for YDCMComponent
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#319">[ date ]</a>
+              <a href="thread.html#319">[ thread ]</a>
+              <a href="subject.html#319">[ subject ]</a>
+              <a href="author.html#319">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/ydframework-users">More information about the YDFramework-users
+mailing list</a><br>
+</body></html>

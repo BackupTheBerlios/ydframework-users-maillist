@@ -1,0 +1,2426 @@
+From francisco at fusemail.com  Fri Sep  1 19:00:56 2006
+From: francisco at fusemail.com (Francisco Azevedo)
+Date: Fri, 01 Sep 2006 18:00:56 +0100
+Subject: [ydf-users] YDDatabaseObject reseting
+Message-ID: <44F86748.5040703@fusemail.com>
+
+Hi db
+
+When reseting ( with reset() or resetAll() ) i get variables reseted and 
+that's is ok. the problem is that it resets _my_ variables too (an not 
+only the ones used in the YDDatabaseObject).
+
+Maybe YDDatabaseobject should reset only variables that are fields?
+
+This way this simple code could work (as expected):
+
+class C extends YDDatabaseobject;
+
+	function C(){
+
+		...
+		$this->setField( 'xpto' );
+	}
+
+
+	function X(){
+
+		$this->form = new YDForm( 'f' );
+
+		$this->resetAll();
+
+		//...
+		
+		$this->form->setDefaults( ... );
+	}
+}
+
+As you can see, with the previous code and with the current 
+YDDatabaseObject this don't work because $resetAll() of YDDatabaseobject 
+deletes the form variable and it shouldn't.
+
+What you think to make reset deleting only its fields?
+
+
+regards
+Francisco A
+
+
+From francisco at fusemail.com  Fri Sep  1 19:06:58 2006
+From: francisco at fusemail.com (Francisco Azevedo)
+Date: Fri, 01 Sep 2006 18:06:58 +0100
+Subject: [ydf-users] YDDatabaseObject reseting
+In-Reply-To: <44F86748.5040703@fusemail.com>
+References: <44F86748.5040703@fusemail.com>
+Message-ID: <44F868B2.9090007@fusemail.com>
+
+Hi db
+
+After looking to YDDatabaseObject implementation i see that it ignores 
+variables staring with underscore.. :)
+
+I'm changing all variables now..
+
+Anyway, what you think about checking if variable is a field before delete?
+
+
+regards
+Francisco A
+
+
+From moses at hysistechnologies.com  Sat Sep  2 08:21:45 2006
+From: moses at hysistechnologies.com (moses at hysistechnologies.com)
+Date: Fri, 01 Sep 2006 23:21:45 -0700
+Subject: [ydf-users] Query Regarding YDFSImage
+Message-ID: <20060901232145.2b7eeeb4c62f4bb8603cfb01b826e9ec.7a5fceac10.wbe@email.secureserver.net>
+
+
+
+Hi Everybody
+
+  The following code terminates the execution 
+
+  $linkableGraphic = new
+YDFSImage("http://p8.hostingprod.com/@cuac.net/cu_dealer_head/36.jpg");
+ 
+  but if i specify the same path in the url of the img tag I could view
+that image       
+  
+ 
+  any suggestions please....
+
+regards
+moses
+    
+
+
+
+From maximus_meridius79 at yahoo.com  Sat Sep  2 13:29:40 2006
+From: maximus_meridius79 at yahoo.com (maximus meridius)
+Date: Sat, 2 Sep 2006 04:29:40 -0700 (PDT)
+Subject: [ydf-users] YDDataBaseObject and YDTemplate
+Message-ID: <20060902112940.24723.qmail@web54007.mail.yahoo.com>
+
+Hi,
+
+I am seeing some strange behaviour when results from a
+YDDatabaseObject 
+are assigned to the template.
+
+This is my code:
+
+    $this->page->fetch();
+                       
+    $page_data = $this->page->getValuesAsAssocArray();
+                      
+    // add the data to the template
+    $this->tpl->assign( 'page',      $page_data );
+    $this->tpl->assign( 'page_data', $page_data );
+
+Now you would expect that the template variables
+'page' and 'page_data' 
+would be set with the same data.
+
+In this case the data in the 'page' template variable
+(an associative 
+array) has only two of the elements set and all of the
+other fields are 
+missing.
+
+Regards,
+
+Graeme
+
+
+
+__________________________________________________
+Do You Yahoo!?
+Tired of spam?  Yahoo! Mail has the best spam protection around 
+http://mail.yahoo.com 
+
+
+From maximus_meridius79 at yahoo.com  Sat Sep  2 13:36:28 2006
+From: maximus_meridius79 at yahoo.com (maximus meridius)
+Date: Sat, 2 Sep 2006 04:36:28 -0700 (PDT)
+Subject: [ydf-users] YDDataBaseObject and YDTemplate
+Message-ID: <20060902113628.58003.qmail@web54002.mail.yahoo.com>
+
+
+Hi,
+
+<stupidity>
+False alarm ... this was due to a bug in my code.
+</stupidity>
+
+Regards,
+
+Graeme
+
+
+__________________________________________________
+Do You Yahoo!?
+Tired of spam?  Yahoo! Mail has the best spam protection around 
+http://mail.yahoo.com 
+
+
+From francisco at fusemail.com  Sat Sep  2 17:20:44 2006
+From: francisco at fusemail.com (Francisco Azevedo)
+Date: Sat, 02 Sep 2006 16:20:44 +0100
+Subject: [ydf-users] Query Regarding YDFSImage
+In-Reply-To: <20060901232145.2b7eeeb4c62f4bb8603cfb01b826e9ec.7a5fceac10.wbe@email.secureserver.net>
+References: <20060901232145.2b7eeeb4c62f4bb8603cfb01b826e9ec.7a5fceac10.wbe@email.secureserver.net>
+Message-ID: <44F9A14C.7040204@fusemail.com>
+
+Hi moses
+
+>   The following code terminates the execution 
+> 
+>   $linkableGraphic = new
+> YDFSImage("http://p8.hostingprod.com/@cuac.net/cu_dealer_head/36.jpg");
+>  
+>   but if i specify the same path in the url of the img tag I could view
+> that image       
+>   
+>  
+>   any suggestions please....
+
+As you can see in YDF user guide ( 
+http://ydframework.berlios.de/doc/ydfilesystem_using_images.html ), 
+YDFSImage class only handles _local_ image files (and not web URLs).
+
+Maybe you should use YDHttpClient or YDUrl. See ( 
+http://ydframework.berlios.de/doc/ydurl.html ).
+
+
+regards
+Francisco A
+
+
+From paultoytoy at gmail.com  Sun Sep  3 03:45:56 2006
+From: paultoytoy at gmail.com (Paul Aga toytoy)
+Date: Sun, 3 Sep 2006 09:45:56 +0800
+Subject: [ydf-users]  YDF2_init.php works now on cgi versions of php
+Message-ID: <93778d790609021845v4ee9aff9yfbdd59d3f13ace5b@mail.gmail.com>
+
+Hi guys,
+
+YDF2_init.php works now with cgi versions on php just some additions
+of code to get work
+
+ // Server constants
+    @define( 'YD_SERVER_API', php_sapi_name() );
+
+    // File and URL constants
+    @define( 'YD_SELF_SCRIPT', $_SERVER['PHP_SELF'] );
+    if ( ! isset( $_SERVER['SCRIPT_FILENAME'] ) || substr(
+YD_SERVER_API, 0, 3 ) == 'cgi' ) {
+        $_SERVER['SCRIPT_FILENAME'] = $_SERVER['PATH_TRANSLATED'];
+    }
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <https://lists.berlios.de/pipermail/ydframework-users/attachments/20060903/cbd09827/attachment.html>
+
+From pieter at yellowduck.be  Sun Sep  3 10:04:41 2006
+From: pieter at yellowduck.be (Pieter Claerhout)
+Date: Sun, 3 Sep 2006 10:04:41 +0200
+Subject: [ydf-users] YDF2_init.php works now on cgi versions of php
+In-Reply-To: <93778d790609021845v4ee9aff9yfbdd59d3f13ace5b@mail.gmail.com>
+References: <93778d790609021845v4ee9aff9yfbdd59d3f13ace5b@mail.gmail.com>
+Message-ID: <4aef63030609030104t21b8e68s8962b7a8b05a04c9@mail.gmail.com>
+
+This change has been optimized and is now available in the latest build
+(build 2065) of the framework.
+
+pieter
+
+On 9/3/06, Paul Aga toytoy <paultoytoy at gmail.com> wrote:
+>
+> Hi guys,
+>
+> YDF2_init.php works now with cgi versions on php just some additions of code to get work
+>
+>  // Server constants
+>     @define( 'YD_SERVER_API', php_sapi_name() );
+>
+>     // File and URL constants
+>     @define( 'YD_SELF_SCRIPT', $_SERVER['PHP_SELF'] );
+>     if ( ! isset( $_SERVER['SCRIPT_FILENAME'] ) || substr( YD_SERVER_API, 0, 3 ) == 'cgi' ) {
+>         $_SERVER['SCRIPT_FILENAME'] = $_SERVER['PATH_TRANSLATED'];
+>     }
+>
+>
+> _______________________________________________
+> YDFramework-users mailing list
+> YDFramework-users at lists.berlios.de
+> https://lists.berlios.de/mailman/listinfo/ydframework-users
+>
+>
+>
+
+
+-- 
+pieter claerhout . pieter at yellowduck.be . http://www.yellowduck.be/
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <https://lists.berlios.de/pipermail/ydframework-users/attachments/20060903/408e0b96/attachment.html>
+
+From muitocomplicado at gmail.com  Sun Sep  3 12:56:35 2006
+From: muitocomplicado at gmail.com (David Bittencourt)
+Date: Sun, 3 Sep 2006 07:56:35 -0300
+Subject: [ydf-users] YDDatabaseObject reseting
+In-Reply-To: <44F868B2.9090007@fusemail.com>
+References: <44F86748.5040703@fusemail.com> <44F868B2.9090007@fusemail.com>
+Message-ID: <12260be20609030356q6e2ea923uf4868c4dfd1d8a34@mail.gmail.com>
+
+The function resetValues() can reset only the fields of the object.
+
+You are suggesting that reset() should use resetValues() instead of
+resetObject() - that clears the object completely?
+
+I don't know... Maybe we could add a paremeter to reset(
+[$only_fields=false] ). What do you think?
+
+If $only_fields == true than use resetValues() and the other calls
+(resetQuery, resetResults, etc). If $only_fields == false (default) do the
+same thing that it's doing now.
+
+-db
+
+On 9/1/06, Francisco Azevedo <francisco at fusemail.com> wrote:
+>
+> Hi db
+>
+> After looking to YDDatabaseObject implementation i see that it ignores
+> variables staring with underscore.. :)
+>
+> I'm changing all variables now..
+>
+> Anyway, what you think about checking if variable is a field before
+> delete?
+>
+>
+> regards
+> Francisco A
+> _______________________________________________
+> YDFramework-users mailing list
+> YDFramework-users at lists.berlios.de
+> https://lists.berlios.de/mailman/listinfo/ydframework-users
+>
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <https://lists.berlios.de/pipermail/ydframework-users/attachments/20060903/7f665d1f/attachment.html>
+
+From muitocomplicado at gmail.com  Sun Sep  3 14:01:34 2006
+From: muitocomplicado at gmail.com (David Bittencourt)
+Date: Sun, 3 Sep 2006 09:01:34 -0300
+Subject: [ydf-users] YDDatabaseObject reseting
+In-Reply-To: <12260be20609030356q6e2ea923uf4868c4dfd1d8a34@mail.gmail.com>
+References: <44F86748.5040703@fusemail.com> <44F868B2.9090007@fusemail.com>
+	<12260be20609030356q6e2ea923uf4868c4dfd1d8a34@mail.gmail.com>
+Message-ID: <12260be20609030501u6180024bs34ae98209a66fcfa@mail.gmail.com>
+
+I was thinking more about this and the way reset() is working today is not
+that good.
+
+reset() should "reset" the object to it's initial state, or close to it. So
+it should reset the fields, selects and also reset relations vars (not doing
+this now).
+
+I commited my changes to the svn repository and the main differences are:
+
+- added resetRelations that reset all relations
+- added parameter to reset( $all=false ) that resets everything in the
+object including relations and other custom variables when true.
+- modified resetValues to reset selects values too
+
+-db
+
+
+On 9/3/06, David Bittencourt <muitocomplicado at gmail.com> wrote:
+>
+> The function resetValues() can reset only the fields of the object.
+>
+> You are suggesting that reset() should use resetValues() instead of
+> resetObject() - that clears the object completely?
+>
+> I don't know... Maybe we could add a paremeter to reset(
+> [$only_fields=false] ). What do you think?
+>
+> If $only_fields == true than use resetValues() and the other calls
+> (resetQuery, resetResults, etc). If $only_fields == false (default) do the
+> same thing that it's doing now.
+>
+> -db
+>
+>
+> On 9/1/06, Francisco Azevedo <francisco at fusemail.com> wrote:
+> >
+> > Hi db
+> >
+> > After looking to YDDatabaseObject implementation i see that it ignores
+> > variables staring with underscore.. :)
+> >
+> > I'm changing all variables now..
+> >
+> > Anyway, what you think about checking if variable is a field before
+> > delete?
+> >
+> >
+> > regards
+> > Francisco A
+> > _______________________________________________
+> > YDFramework-users mailing list
+> > YDFramework-users at lists.berlios.de
+> > https://lists.berlios.de/mailman/listinfo/ydframework-users
+> >
+>
+>
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <https://lists.berlios.de/pipermail/ydframework-users/attachments/20060903/72da4b23/attachment.html>
+
+From francisco at fusemail.com  Sun Sep  3 21:01:04 2006
+From: francisco at fusemail.com (Francisco Azevedo)
+Date: Sun, 03 Sep 2006 20:01:04 +0100
+Subject: [ydf-users] YDDatabaseObject reseting
+In-Reply-To: <12260be20609030501u6180024bs34ae98209a66fcfa@mail.gmail.com>
+References: <44F86748.5040703@fusemail.com>
+	<44F868B2.9090007@fusemail.com>	<12260be20609030356q6e2ea923uf4868c4dfd1d8a34@mail.gmail.com>
+	<12260be20609030501u6180024bs34ae98209a66fcfa@mail.gmail.com>
+Message-ID: <44FB2670.6090006@fusemail.com>
+
+Hi David
+
+> I was thinking more about this and the way reset() is working today is 
+> not that good.
+> 
+> reset() should "reset" the object to it's initial state, or close to it. 
+> So it should reset the fields, selects and also reset relations vars 
+> (not doing this now).
+> 
+> I commited my changes to the svn repository and the main differences are:
+> 
+> - added resetRelations that reset all relations
+> - added parameter to reset( $all=false ) that resets everything in the 
+> object including relations and other custom variables when true.
+> - modified resetValues to reset selects values too
+
+I'm using resetAll() in all methods. All i want to do is, as you said, 
+clean the YDDatabaseObject to make other query types and to assign other 
+values from the beginning.
+
+The problem is that when extending YDDatabaseObject, resetAll() deletes 
+not only its own varibles but my class variables too.. and i can't find 
+a reason for that.
+
+
+Is resetAll() now deleting their fields (deleting variables that are a 
+registered fields), relations ?
+
+
+regards
+Francisco A
+
+
+From muitocomplicado at gmail.com  Mon Sep  4 05:43:22 2006
+From: muitocomplicado at gmail.com (David Bittencourt)
+Date: Mon, 4 Sep 2006 00:43:22 -0300
+Subject: [ydf-users] YDDatabaseObject reseting
+In-Reply-To: <44FB2670.6090006@fusemail.com>
+References: <44F86748.5040703@fusemail.com> <44F868B2.9090007@fusemail.com>
+	<12260be20609030356q6e2ea923uf4868c4dfd1d8a34@mail.gmail.com>
+	<12260be20609030501u6180024bs34ae98209a66fcfa@mail.gmail.com>
+	<44FB2670.6090006@fusemail.com>
+Message-ID: <12260be20609032043k625fa39dkfe1d5bbf404c0c0e@mail.gmail.com>
+
+Commited another version of YDDatabaseObject that will behave as you wish.
+
+reset() don't have a parameter and will reset only registered field values,
+select values, query values and results.
+resetAll() will execute a reset() in the object and also a resetRelations()
+that will reset all relation objects.
+
+If you want to completely clear an object you can use resetObject().
+
+-db
+
+On 9/3/06, Francisco Azevedo <francisco at fusemail.com> wrote:
+>
+> Hi David
+>
+> > I was thinking more about this and the way reset() is working today is
+> > not that good.
+> >
+> > reset() should "reset" the object to it's initial state, or close to it.
+> > So it should reset the fields, selects and also reset relations vars
+> > (not doing this now).
+> >
+> > I commited my changes to the svn repository and the main differences
+> are:
+> >
+> > - added resetRelations that reset all relations
+> > - added parameter to reset( $all=false ) that resets everything in the
+> > object including relations and other custom variables when true.
+> > - modified resetValues to reset selects values too
+>
+> I'm using resetAll() in all methods. All i want to do is, as you said,
+> clean the YDDatabaseObject to make other query types and to assign other
+> values from the beginning.
+>
+> The problem is that when extending YDDatabaseObject, resetAll() deletes
+> not only its own varibles but my class variables too.. and i can't find
+> a reason for that.
+>
+>
+> Is resetAll() now deleting their fields (deleting variables that are a
+> registered fields), relations ?
+>
+>
+> regards
+> Francisco A
+> _______________________________________________
+> YDFramework-users mailing list
+> YDFramework-users at lists.berlios.de
+> https://lists.berlios.de/mailman/listinfo/ydframework-users
+>
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <https://lists.berlios.de/pipermail/ydframework-users/attachments/20060904/fd85e543/attachment.html>
+
+From moses at hysistechnologies.com  Tue Sep  5 08:38:48 2006
+From: moses at hysistechnologies.com (moses at hysistechnologies.com)
+Date: Mon, 04 Sep 2006 23:38:48 -0700
+Subject: [ydf-users] query --- problem with sending html mail
+Message-ID: <20060904233848.2b7eeeb4c62f4bb8603cfb01b826e9ec.7b0316fda7.wbe@email.secureserver.net>
+
+
+Hi Everybody
+
+    I have some problem with sending html mail.
+
+    The following is the code I used to send mail.
+    
+    $eml = new YDEmail();
+    $eml->setFrom( 'moses at hysistechnologies.com', "Moses" );
+    $eml->addTo( "moses at hysistechnologies.com");
+    $eml->setSubject( 'Hello ' );
+    $eml->setHtmlBody( $body );
+    $eml->send();
+
+    but the mail is not send.
+
+    So I tried with the normal php mail function.
+
+    mail($to,$subject,$body) --> works fine
+
+    but  
+   
+   mail($to,$subject,$body,$headers) --> does not work works . To my
+knowledge what I understood is that the problem is because of adding
+headers.
+
+   But I am not sure is it its because of adding headers or any other
+server settings.
+
+  I have given the details below (ie)  echo  in   class.phpmailer.php   
+   @mail($to, $this->EncodeHeader($this->Subject), $body, $header);  
+
+---------$to---------------
+
+moses at hysistechnologies.com 
+
+---------$body---------------
+
+ Hai How ar u
+
+---------$this->EncodeHeader($this->Subject)---------------
+
+(Hello )
+
+---------$header---------------
+
+Date: Tue, 5 Sep 2006 06:21:04 +0000
+Return-Path: moses at hysistechnologies.com
+From: Moses 
+Message-ID: <6925aa180780f2e8c076f9026f85e798 at p8.hostingprod.com>
+X-Priority: 3
+X-Mailer: PHPMailer [version 1.73]
+X-Mailer: Yellow Duck Framework 2.0 (build 2.0.0-final)
+MIME-Version: 1.0
+Content-Transfer-Encoding: 8bit
+Content-Type: text/html; charset="iso-8859-1"
+
+ 
+ Can anyone please help.....
+
+
+
+regards
+moses
+
+
+
+
+From francisco at fusemail.com  Tue Sep  5 19:19:19 2006
+From: francisco at fusemail.com (Francisco Azevedo)
+Date: Tue, 05 Sep 2006 18:19:19 +0100
+Subject: [ydf-users] YDDatabaseObject reseting
+In-Reply-To: <12260be20609032043k625fa39dkfe1d5bbf404c0c0e@mail.gmail.com>
+References: <44F86748.5040703@fusemail.com>
+	<44F868B2.9090007@fusemail.com>	<12260be20609030356q6e2ea923uf4868c4dfd1d8a34@mail.gmail.com>	<12260be20609030501u6180024bs34ae98209a66fcfa@mail.gmail.com>	<44FB2670.6090006@fusemail.com>
+	<12260be20609032043k625fa39dkfe1d5bbf404c0c0e@mail.gmail.com>
+Message-ID: <44FDB197.5070906@fusemail.com>
+
+Hi David
+
+> Commited another version of YDDatabaseObject that will behave as you wish.
+> 
+> reset() don't have a parameter and will reset only registered field 
+> values, select values, query values and results.
+> resetAll() will execute a reset() in the object and also a 
+> resetRelations() that will reset all relation objects.
+> 
+> If you want to completely clear an object you can use resetObject().
+
+
+That's great! Thanks! Now it works very well :)
+
+
+regards
+Francisco A
+
+
+From francisco at fusemail.com  Tue Sep  5 19:35:09 2006
+From: francisco at fusemail.com (Francisco Azevedo)
+Date: Tue, 05 Sep 2006 18:35:09 +0100
+Subject: [ydf-users] YDDatabaseObject - another feature
+Message-ID: <44FDB54D.3020700@fusemail.com>
+
+Hi David
+
+When using YDDatabaseObject i create ( only in my mind ) a new feature 
+that i think it's very useful and can make the development with 
+YDDatabaseObject easier and with a _huge_ performance improvement.
+
+See this simple example..
+I have 4 different class objects (that are YDDatabaseObject extensions) 
+in a array:
+
+array( $classA, $classB, $classC, $classD );
+
+
+. and each one has a method that do some DELETE stuff:
+
+
+class A{
+	...
+	function deleteRow(){
+		$this->resetAll();
+		$this->id = X;
+		$this->delete();
+	}
+}
+
+
+.. now, if i want to delete _all_ objects i must do:
+
+foreach( $array as $obj )
+	$obj->deleteRow();
+
+
+This is ok.. works but it's not performant. In this simple scenario i 
+will make 4 db calls.
+
+
+Now, how to solve this in better way: with a new YDDabataseObject called 
+YDDabataseObject::deleteSQL() that "returns the SQL string that would by 
+  used by YDDabataseObject::delete()".
+
+Then i would only need to:
+
+class A{
+	...
+	function deleteRow(){
+		$this->resetAll();
+		$this->id = X;
+		return $this->deleteSQL();
+	}
+}
+
+
+and..
+
+foreach( $array as $obj )
+	$sql .= $obj->deleteRow();
+
+$db->execute( $sql );
+
+
+This could be an _huge_ performance boost because i would only need 1 db 
+call for all objects. Imagine if i have 100 objects, instead of 100 db 
+calls (as i need now) i would only need 1. This is something like a 
+transactional call and is the best way of doing it. Maybe someday we 
+could make execute transactional too and then this will be perfect.
+
+
+What do you think about it?
+
+
+regards
+Francisco A
+
+
+From wim at fleischhauer.net  Tue Sep  5 22:33:45 2006
+From: wim at fleischhauer.net (wim fleischhauer)
+Date: Tue, 05 Sep 2006 22:33:45 +0200
+Subject: [ydf-users] including ydframework in own projects
+Message-ID: <44FDDF29.6010805@fleischhauer.net>
+
+Hi,
+
+can I include ydframework in my own (GPL) project and distribute with the
+project?
+
+If yes, is there a specific version/build to bundle? Is there a new version/
+release behind the corner?
+
+thanks in advance!
+                   -wim-
+
+
+From francisco at fusemail.com  Wed Sep  6 00:00:49 2006
+From: francisco at fusemail.com (Francisco Azevedo)
+Date: Tue, 05 Sep 2006 23:00:49 +0100
+Subject: [ydf-users] including ydframework in own projects
+In-Reply-To: <44FDDF29.6010805@fleischhauer.net>
+References: <44FDDF29.6010805@fleischhauer.net>
+Message-ID: <44FDF391.1080703@fusemail.com>
+
+Hi wim
+
+Afaik, "Lesser GPL" (read: LGPL, the YDF licence) "permits use of the 
+library in proprietary programs; using the ordinary GPL " (read: GPL) 
+"for a library makes it available only for free programs"
+
+> can I include ydframework in my own (GPL) project and distribute with the
+> project?
+
+So, the answer is yes.. as long as you agree with LGPL terms. But maybe 
+Pieter can answer better.
+
+> If yes, is there a specific version/build to bundle? Is there a new version/
+> release behind the corner?
+
+If i was you, i would include the latest subversion version.
+
+
+regards
+Francisco A
+
+
+From muitocomplicado at gmail.com  Wed Sep  6 13:13:53 2006
+From: muitocomplicado at gmail.com (David Bittencourt)
+Date: Wed, 6 Sep 2006 08:13:53 -0300
+Subject: [ydf-users] YDDatabaseObject - another feature
+In-Reply-To: <44FDB54D.3020700@fusemail.com>
+References: <44FDB54D.3020700@fusemail.com>
+Message-ID: <12260be20609060413u4b4dfd05qebb0d34f9009b654@mail.gmail.com>
+
+You can retrieve the SQL query that would be used without executing it by
+setting the YDConfig variable YD_DBOBJECT_EXECUTE to false. Example:
+
+YDConfig::set( 'YD_DBOBJECT_EXECUTE', false );
+
+$obj->id = 1;
+$sql = $obj->delete();
+
+YDConfig::set( 'YD_DBOBJECT_EXECUTE', true ); // get it back to normal use
+
+Now $sql will have something like:
+
+DELETE FROM table WHERE id = 1
+
+Is this what you want?
+
+Notice that you can use this config variable YD_DBOBJECT_EXECUTE to retrieve
+the SQL queries from find(), update(), insert() and delete().
+
+-db
+
+On 9/5/06, Francisco Azevedo <francisco at fusemail.com> wrote:
+>
+> Hi David
+>
+> When using YDDatabaseObject i create ( only in my mind ) a new feature
+> that i think it's very useful and can make the development with
+> YDDatabaseObject easier and with a _huge_ performance improvement.
+>
+> See this simple example..
+> I have 4 different class objects (that are YDDatabaseObject extensions)
+> in a array:
+>
+> array( $classA, $classB, $classC, $classD );
+>
+>
+> . and each one has a method that do some DELETE stuff:
+>
+>
+> class A{
+>         ...
+>         function deleteRow(){
+>                 $this->resetAll();
+>                 $this->id = X;
+>                 $this->delete();
+>         }
+> }
+>
+>
+> .. now, if i want to delete _all_ objects i must do:
+>
+> foreach( $array as $obj )
+>         $obj->deleteRow();
+>
+>
+> This is ok.. works but it's not performant. In this simple scenario i
+> will make 4 db calls.
+>
+>
+> Now, how to solve this in better way: with a new YDDabataseObject called
+> YDDabataseObject::deleteSQL() that "returns the SQL string that would by
+>   used by YDDabataseObject::delete()".
+>
+> Then i would only need to:
+>
+> class A{
+>         ...
+>         function deleteRow(){
+>                 $this->resetAll();
+>                 $this->id = X;
+>                 return $this->deleteSQL();
+>         }
+> }
+>
+>
+> and..
+>
+> foreach( $array as $obj )
+>         $sql .= $obj->deleteRow();
+>
+> $db->execute( $sql );
+>
+>
+> This could be an _huge_ performance boost because i would only need 1 db
+> call for all objects. Imagine if i have 100 objects, instead of 100 db
+> calls (as i need now) i would only need 1. This is something like a
+> transactional call and is the best way of doing it. Maybe someday we
+> could make execute transactional too and then this will be perfect.
+>
+>
+> What do you think about it?
+>
+>
+> regards
+> Francisco A
+> _______________________________________________
+> YDFramework-users mailing list
+> YDFramework-users at lists.berlios.de
+> https://lists.berlios.de/mailman/listinfo/ydframework-users
+>
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <https://lists.berlios.de/pipermail/ydframework-users/attachments/20060906/49a9fd5d/attachment.html>
+
+From pieter at yellowduck.be  Thu Sep  7 12:23:44 2006
+From: pieter at yellowduck.be (Pieter Claerhout)
+Date: Thu, 7 Sep 2006 12:23:44 +0200
+Subject: [ydf-users] including ydframework in own projects
+In-Reply-To: <44FDF391.1080703@fusemail.com>
+References: <44FDDF29.6010805@fleischhauer.net> <44FDF391.1080703@fusemail.com>
+Message-ID: <4aef63030609070323r6c738a67nd85d29653121421a@mail.gmail.com>
+
+Yes, the Yellow Duck Framework can be included in your own projects. If you
+do so, it's best to include the latest subversion version. (I haven't had
+the time to make a new release yet.)
+
+cheers,
+
+pieter
+
+On 9/6/06, Francisco Azevedo <francisco at fusemail.com> wrote:
+>
+> Hi wim
+>
+> Afaik, "Lesser GPL" (read: LGPL, the YDF licence) "permits use of the
+> library in proprietary programs; using the ordinary GPL " (read: GPL)
+> "for a library makes it available only for free programs"
+>
+> > can I include ydframework in my own (GPL) project and distribute with
+> the
+> > project?
+>
+> So, the answer is yes.. as long as you agree with LGPL terms. But maybe
+> Pieter can answer better.
+>
+> > If yes, is there a specific version/build to bundle? Is there a new
+> version/
+> > release behind the corner?
+>
+> If i was you, i would include the latest subversion version.
+>
+>
+> regards
+> Francisco A
+> _______________________________________________
+> YDFramework-users mailing list
+> YDFramework-users at lists.berlios.de
+> https://lists.berlios.de/mailman/listinfo/ydframework-users
+>
+
+
+
+-- 
+pieter claerhout . pieter at yellowduck.be . http://www.yellowduck.be/
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <https://lists.berlios.de/pipermail/ydframework-users/attachments/20060907/59bf4c7b/attachment.html>
+
+From francisco at fusemail.com  Thu Sep  7 16:50:25 2006
+From: francisco at fusemail.com (Francisco Azevedo)
+Date: Thu, 07 Sep 2006 15:50:25 +0100
+Subject: [ydf-users] YDDatabaseObject - another feature
+In-Reply-To: <12260be20609060413u4b4dfd05qebb0d34f9009b654@mail.gmail.com>
+References: <44FDB54D.3020700@fusemail.com>
+	<12260be20609060413u4b4dfd05qebb0d34f9009b654@mail.gmail.com>
+Message-ID: <450031B1.7060901@fusemail.com>
+
+Hi David
+
+
+> You can retrieve the SQL query that would be used without executing it 
+> by setting the YDConfig variable YD_DBOBJECT_EXECUTE to false. Example:
+> 
+> YDConfig::set( 'YD_DBOBJECT_EXECUTE', false );
+> 
+> $obj->id = 1;
+> $sql = $obj->delete();
+> 
+> YDConfig::set( 'YD_DBOBJECT_EXECUTE', true ); // get it back to normal use
+> 
+> Now $sql will have something like:
+> 
+> DELETE FROM table WHERE id = 1
+> 
+> Is this what you want?
+
+Yes.. but it would be very useful to integrate them in the YDDatabaseObject.
+
+Do you mind to add those? eg:
+
+
+function deleteSQL(){
+
+	$exe = YDConfig::get( 'YD_DBOBJECT_EXECUTE' );
+	       YDConfig::set( 'YD_DBOBJECT_EXECUTE', false );
+	$res = $this->delete();
+	       YDConfig::set( 'YD_DBOBJECT_EXECUTE', $exe );
+	return $res;
+}
+
+
+regards
+Francisco A
+
+
+From muitocomplicado at gmail.com  Fri Sep  8 16:24:02 2006
+From: muitocomplicado at gmail.com (David Bittencourt)
+Date: Fri, 8 Sep 2006 11:24:02 -0300
+Subject: [ydf-users] YDDatabaseObject - another feature
+In-Reply-To: <450031B1.7060901@fusemail.com>
+References: <44FDB54D.3020700@fusemail.com>
+	<12260be20609060413u4b4dfd05qebb0d34f9009b654@mail.gmail.com>
+	<450031B1.7060901@fusemail.com>
+Message-ID: <12260be20609080724n64dc3c99y945ba5d6cb077df1@mail.gmail.com>
+
+Can you add it to YDDatabaseObject? Also include updateSQL, insertSQL and
+findSQL.
+
+-db
+
+On 9/7/06, Francisco Azevedo <francisco at fusemail.com> wrote:
+>
+> Hi David
+>
+>
+> > You can retrieve the SQL query that would be used without executing it
+> > by setting the YDConfig variable YD_DBOBJECT_EXECUTE to false. Example:
+> >
+> > YDConfig::set( 'YD_DBOBJECT_EXECUTE', false );
+> >
+> > $obj->id = 1;
+> > $sql = $obj->delete();
+> >
+> > YDConfig::set( 'YD_DBOBJECT_EXECUTE', true ); // get it back to normal
+> use
+> >
+> > Now $sql will have something like:
+> >
+> > DELETE FROM table WHERE id = 1
+> >
+> > Is this what you want?
+>
+> Yes.. but it would be very useful to integrate them in the
+> YDDatabaseObject.
+>
+> Do you mind to add those? eg:
+>
+>
+> function deleteSQL(){
+>
+>         $exe = YDConfig::get( 'YD_DBOBJECT_EXECUTE' );
+>                YDConfig::set( 'YD_DBOBJECT_EXECUTE', false );
+>         $res = $this->delete();
+>                YDConfig::set( 'YD_DBOBJECT_EXECUTE', $exe );
+>         return $res;
+> }
+>
+>
+> regards
+> Francisco A
+> _______________________________________________
+> YDFramework-users mailing list
+> YDFramework-users at lists.berlios.de
+> https://lists.berlios.de/mailman/listinfo/ydframework-users
+>
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <https://lists.berlios.de/pipermail/ydframework-users/attachments/20060908/62974108/attachment.html>
+
+From francisco at fusemail.com  Mon Sep 11 13:05:55 2006
+From: francisco at fusemail.com (Francisco Azevedo)
+Date: Mon, 11 Sep 2006 12:05:55 +0100
+Subject: [ydf-users] YDF2_process problems on php5
+Message-ID: <45054313.1040108@fusemail.com>
+
+I'm getting some troubles when using YDF in php5. On php4 i can see a 
+'PATH_TRANSLATED' is $_SERVER but i cannot see it on php5
+
+
+PHP4 $_SERVER:
+
+array (
+   'HTTP_ACCEPT' => '*/*',
+   'HTTP_ACCEPT_LANGUAGE' => 'pt',
+   'HTTP_ACCEPT_ENCODING' => 'gzip, deflate',
+   'HTTP_USER_AGENT' => 'Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 
+5.1; Q312461; SV1; .NET CLR 1.1.4322)',
+   'HTTP_HOST' => 'localhost',
+   'HTTP_CONNECTION' => 'Keep-Alive',
+   'HTTP_COOKIE' => '...',
+   'PATH' => 
+'C:\\WINDOWS\\system32;C:\\WINDOWS;C:\\WINDOWS\\System32\\Wbem;C:\\fop-0.20.5;C:\\Python24',
+   'SystemRoot' => 'C:\\WINDOWS',
+   'COMSPEC' => 'C:\\WINDOWS\\system32\\cmd.exe',
+   'PATHEXT' => '.COM;.EXE;.BAT;.CMD;.VBS;.VBE;.JS;.JSE;.WSF;.WSH',
+   'WINDIR' => 'C:\\WINDOWS',
+   'SERVER_SIGNATURE' => '<address>Apache/2.0.55 (Win32) PHP/4.4.2 
+Server at localhost Port 80</address>
+',
+   'SERVER_SOFTWARE' => 'Apache/2.0.55 (Win32) PHP/4.4.2',
+   'SERVER_NAME' => 'localhost',
+   'SERVER_ADDR' => '127.0.0.1',
+   'SERVER_PORT' => '80',
+   'REMOTE_ADDR' => '127.0.0.1',
+   'DOCUMENT_ROOT' => 'C:/wamp/www',
+   'SERVER_ADMIN' => '...',
+   'SCRIPT_FILENAME' => 'C:/wamp/www/main/ph/manager/index.php',
+   'REMOTE_PORT' => '1744',
+   'GATEWAY_INTERFACE' => 'CGI/1.1',
+   'SERVER_PROTOCOL' => 'HTTP/1.1',
+   'REQUEST_METHOD' => 'GET',
+   'QUERY_STRING' => '',
+   'REQUEST_URI' => '/main/ph/manager/',
+   'SCRIPT_NAME' => '/main/ph/manager/index.php',
+   'PHP_SELF' => '/main/ph/manager/index.php',
+   'PATH_TRANSLATED' => 'C:/wamp/www/main/ph/manager/index.php',
+   'argv' =>
+   array (
+   ),
+   'argc' => 0,
+)
+
+
+
+
+PHP5 $_SERVER:
+
+
+array (
+   'HTTP_ACCEPT' => '*/*',
+   'HTTP_ACCEPT_LANGUAGE' => 'pt',
+   'HTTP_ACCEPT_ENCODING' => 'gzip, deflate',
+   'HTTP_USER_AGENT' => 'Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 
+5.1; Q312461; SV1; .NET CLR 1.1.4322)',
+   'HTTP_HOST' => 'localhost',
+   'HTTP_CONNECTION' => 'Keep-Alive',
+   'HTTP_COOKIE' => '...',
+   'PATH' => 
+'C:\WINDOWS\system32;C:\WINDOWS;C:\WINDOWS\System32\Wbem;C:\fop-0.20.5;C:\Python24',
+   'SystemRoot' => 'C:\WINDOWS',
+   'COMSPEC' => 'C:\WINDOWS\system32\cmd.exe',
+   'PATHEXT' => '.COM;.EXE;.BAT;.CMD;.VBS;.VBE;.JS;.JSE;.WSF;.WSH',
+   'WINDIR' => 'C:\WINDOWS',
+   'SERVER_SIGNATURE' => '<address>Apache/2.0.55 (Win32) PHP/5.1.2 
+Server at localhost Port 80</address>
+',
+   'SERVER_SOFTWARE' => 'Apache/2.0.55 (Win32) PHP/5.1.2',
+   'SERVER_NAME' => 'localhost',
+   'SERVER_ADDR' => '127.0.0.1',
+   'SERVER_PORT' => '80',
+   'REMOTE_ADDR' => '127.0.0.1',
+   'DOCUMENT_ROOT' => 'C:/wamp/www',
+   'SERVER_ADMIN' => '...',
+   'SCRIPT_FILENAME' => 'C:/wamp/www/main/ph/manager/index.php',
+   'REMOTE_PORT' => '1752',
+   'GATEWAY_INTERFACE' => 'CGI/1.1',
+   'SERVER_PROTOCOL' => 'HTTP/1.1',
+   'REQUEST_METHOD' => 'GET',
+   'QUERY_STRING' => '',
+   'REQUEST_URI' => '/main/ph/manager/',
+   'SCRIPT_NAME' => '/main/ph/manager/index.php',
+   'PHP_SELF' => '/main/ph/manager/index.php',
+   'REQUEST_TIME' => 1157972571,
+   'argv' =>
+   array (
+   ),
+   'argc' => 0,
+)
+
+
+
+
+So, i get a error:
+
+Fatal error: Class '' not found in YDFramework2\YDF2_process.php on line 59
+
+
+
+Any ideas?
+
+
+regards
+Francisco A
+
+
+From pieter at yellowduck.be  Wed Sep 13 09:29:20 2006
+From: pieter at yellowduck.be (Pieter Claerhout)
+Date: Wed, 13 Sep 2006 09:29:20 +0200
+Subject: [ydf-users] YDF2_process problems on php5
+In-Reply-To: <45054313.1040108@fusemail.com>
+References: <45054313.1040108@fusemail.com>
+Message-ID: <4aef63030609130029h66e68f74o48c6367c43c5751b@mail.gmail.com>
+
+Seems really easy to fix. Will do that asap.
+
+pieter
+
+On 9/11/06, Francisco Azevedo <francisco at fusemail.com> wrote:
+>
+> I'm getting some troubles when using YDF in php5. On php4 i can see a
+> 'PATH_TRANSLATED' is $_SERVER but i cannot see it on php5
+>
+>
+> PHP4 $_SERVER:
+>
+> array (
+>   'HTTP_ACCEPT' => '*/*',
+>   'HTTP_ACCEPT_LANGUAGE' => 'pt',
+>   'HTTP_ACCEPT_ENCODING' => 'gzip, deflate',
+>   'HTTP_USER_AGENT' => 'Mozilla/4.0 (compatible; MSIE 6.0; Windows NT
+> 5.1; Q312461; SV1; .NET CLR 1.1.4322)',
+>   'HTTP_HOST' => 'localhost',
+>   'HTTP_CONNECTION' => 'Keep-Alive',
+>   'HTTP_COOKIE' => '...',
+>   'PATH' =>
+> 'C:\\WINDOWS\\system32;C:\\WINDOWS;C:\\WINDOWS\\System32\\Wbem;C:\\fop-
+> 0.20.5;C:\\Python24',
+>   'SystemRoot' => 'C:\\WINDOWS',
+>   'COMSPEC' => 'C:\\WINDOWS\\system32\\cmd.exe',
+>   'PATHEXT' => '.COM;.EXE;.BAT;.CMD;.VBS;.VBE;.JS;.JSE;.WSF;.WSH',
+>   'WINDIR' => 'C:\\WINDOWS',
+>   'SERVER_SIGNATURE' => '<address>Apache/2.0.55 (Win32) PHP/4.4.2
+> Server at localhost Port 80</address>
+> ',
+>   'SERVER_SOFTWARE' => 'Apache/2.0.55 (Win32) PHP/4.4.2',
+>   'SERVER_NAME' => 'localhost',
+>   'SERVER_ADDR' => '127.0.0.1',
+>   'SERVER_PORT' => '80',
+>   'REMOTE_ADDR' => '127.0.0.1',
+>   'DOCUMENT_ROOT' => 'C:/wamp/www',
+>   'SERVER_ADMIN' => '...',
+>   'SCRIPT_FILENAME' => 'C:/wamp/www/main/ph/manager/index.php',
+>   'REMOTE_PORT' => '1744',
+>   'GATEWAY_INTERFACE' => 'CGI/1.1',
+>   'SERVER_PROTOCOL' => 'HTTP/1.1',
+>   'REQUEST_METHOD' => 'GET',
+>   'QUERY_STRING' => '',
+>   'REQUEST_URI' => '/main/ph/manager/',
+>   'SCRIPT_NAME' => '/main/ph/manager/index.php',
+>   'PHP_SELF' => '/main/ph/manager/index.php',
+>   'PATH_TRANSLATED' => 'C:/wamp/www/main/ph/manager/index.php',
+>   'argv' =>
+>   array (
+>   ),
+>   'argc' => 0,
+> )
+>
+>
+>
+>
+> PHP5 $_SERVER:
+>
+>
+> array (
+>   'HTTP_ACCEPT' => '*/*',
+>   'HTTP_ACCEPT_LANGUAGE' => 'pt',
+>   'HTTP_ACCEPT_ENCODING' => 'gzip, deflate',
+>   'HTTP_USER_AGENT' => 'Mozilla/4.0 (compatible; MSIE 6.0; Windows NT
+> 5.1; Q312461; SV1; .NET CLR 1.1.4322)',
+>   'HTTP_HOST' => 'localhost',
+>   'HTTP_CONNECTION' => 'Keep-Alive',
+>   'HTTP_COOKIE' => '...',
+>   'PATH' =>
+> 'C:\WINDOWS\system32;C:\WINDOWS;C:\WINDOWS\System32\Wbem;C:\fop-0.20.5
+> ;C:\Python24',
+>   'SystemRoot' => 'C:\WINDOWS',
+>   'COMSPEC' => 'C:\WINDOWS\system32\cmd.exe',
+>   'PATHEXT' => '.COM;.EXE;.BAT;.CMD;.VBS;.VBE;.JS;.JSE;.WSF;.WSH',
+>   'WINDIR' => 'C:\WINDOWS',
+>   'SERVER_SIGNATURE' => '<address>Apache/2.0.55 (Win32) PHP/5.1.2
+> Server at localhost Port 80</address>
+> ',
+>   'SERVER_SOFTWARE' => 'Apache/2.0.55 (Win32) PHP/5.1.2',
+>   'SERVER_NAME' => 'localhost',
+>   'SERVER_ADDR' => '127.0.0.1',
+>   'SERVER_PORT' => '80',
+>   'REMOTE_ADDR' => '127.0.0.1',
+>   'DOCUMENT_ROOT' => 'C:/wamp/www',
+>   'SERVER_ADMIN' => '...',
+>   'SCRIPT_FILENAME' => 'C:/wamp/www/main/ph/manager/index.php',
+>   'REMOTE_PORT' => '1752',
+>   'GATEWAY_INTERFACE' => 'CGI/1.1',
+>   'SERVER_PROTOCOL' => 'HTTP/1.1',
+>   'REQUEST_METHOD' => 'GET',
+>   'QUERY_STRING' => '',
+>   'REQUEST_URI' => '/main/ph/manager/',
+>   'SCRIPT_NAME' => '/main/ph/manager/index.php',
+>   'PHP_SELF' => '/main/ph/manager/index.php',
+>   'REQUEST_TIME' => 1157972571,
+>   'argv' =>
+>   array (
+>   ),
+>   'argc' => 0,
+> )
+>
+>
+>
+>
+> So, i get a error:
+>
+> Fatal error: Class '' not found in YDFramework2\YDF2_process.php on line
+> 59
+>
+>
+>
+> Any ideas?
+>
+>
+> regards
+> Francisco A
+> _______________________________________________
+> YDFramework-users mailing list
+> YDFramework-users at lists.berlios.de
+> https://lists.berlios.de/mailman/listinfo/ydframework-users
+>
+
+
+
+-- 
+pieter claerhout . pieter at yellowduck.be . http://www.yellowduck.be/
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <https://lists.berlios.de/pipermail/ydframework-users/attachments/20060913/e71ea3eb/attachment.html>
+
+From pieter at yellowduck.be  Wed Sep 13 09:29:33 2006
+From: pieter at yellowduck.be (Pieter Claerhout)
+Date: Wed, 13 Sep 2006 09:29:33 +0200
+Subject: [ydf-users] YDF2_process problems on php5
+In-Reply-To: <4aef63030609130029h66e68f74o48c6367c43c5751b@mail.gmail.com>
+References: <45054313.1040108@fusemail.com>
+	<4aef63030609130029h66e68f74o48c6367c43c5751b@mail.gmail.com>
+Message-ID: <4aef63030609130029v7edb4e02o73b517e32a38af87@mail.gmail.com>
+
+Did you log it as a bug in berlios.de?
+
+pieter
+
+
+On 9/13/06, Pieter Claerhout <pieter at yellowduck.be> wrote:
+>
+>  Seems really easy to fix. Will do that asap.
+>
+> pieter
+>
+>  On 9/11/06, Francisco Azevedo <francisco at fusemail.com> wrote:
+> >
+> > I'm getting some troubles when using YDF in php5. On php4 i can see a
+> > 'PATH_TRANSLATED' is $_SERVER but i cannot see it on php5
+> >
+> >
+> > PHP4 $_SERVER:
+> >
+> > array (
+> >   'HTTP_ACCEPT' => '*/*',
+> >   'HTTP_ACCEPT_LANGUAGE' => 'pt',
+> >   'HTTP_ACCEPT_ENCODING' => 'gzip, deflate',
+> >   'HTTP_USER_AGENT' => 'Mozilla/4.0 (compatible; MSIE 6.0; Windows NT
+> > 5.1; Q312461; SV1; .NET CLR 1.1.4322)',
+> >   'HTTP_HOST' => 'localhost',
+> >   'HTTP_CONNECTION' => 'Keep-Alive',
+> >   'HTTP_COOKIE' => '...',
+> >   'PATH' =>
+> > 'C:\\WINDOWS\\system32;C:\\WINDOWS;C:\\WINDOWS\\System32\\Wbem;C:\\fop-
+> > 0.20.5;C:\\Python24',
+> >   'SystemRoot' => 'C:\\WINDOWS',
+> >   'COMSPEC' => 'C:\\WINDOWS\\system32\\cmd.exe',
+> >   'PATHEXT' => '.COM;.EXE;.BAT;.CMD;.VBS;.VBE;.JS;.JSE;.WSF;.WSH',
+> >   'WINDIR' => 'C:\\WINDOWS',
+> >   'SERVER_SIGNATURE' => '<address>Apache/2.0.55 (Win32) PHP/4.4.2
+> > Server at localhost Port 80</address>
+> > ',
+> >   'SERVER_SOFTWARE' => 'Apache/2.0.55 (Win32) PHP/4.4.2',
+> >   'SERVER_NAME' => 'localhost',
+> >   'SERVER_ADDR' => '127.0.0.1',
+> >   'SERVER_PORT' => '80',
+> >   'REMOTE_ADDR' => '127.0.0.1',
+> >   'DOCUMENT_ROOT' => 'C:/wamp/www',
+> >   'SERVER_ADMIN' => '...',
+> >   'SCRIPT_FILENAME' => 'C:/wamp/www/main/ph/manager/index.php',
+> >   'REMOTE_PORT' => '1744',
+> >   'GATEWAY_INTERFACE' => 'CGI/1.1',
+> >   'SERVER_PROTOCOL' => 'HTTP/1.1',
+> >   'REQUEST_METHOD' => 'GET',
+> >   'QUERY_STRING' => '',
+> >   'REQUEST_URI' => '/main/ph/manager/',
+> >   'SCRIPT_NAME' => '/main/ph/manager/index.php',
+> >   'PHP_SELF' => '/main/ph/manager/index.php',
+> >   'PATH_TRANSLATED' => 'C:/wamp/www/main/ph/manager/index.php',
+> >   'argv' =>
+> >   array (
+> >   ),
+> >   'argc' => 0,
+> > )
+> >
+> >
+> >
+> >
+> > PHP5 $_SERVER:
+> >
+> >
+> > array (
+> >   'HTTP_ACCEPT' => '*/*',
+> >   'HTTP_ACCEPT_LANGUAGE' => 'pt',
+> >   'HTTP_ACCEPT_ENCODING' => 'gzip, deflate',
+> >   'HTTP_USER_AGENT' => 'Mozilla/4.0 (compatible; MSIE 6.0; Windows NT
+> > 5.1; Q312461; SV1; .NET CLR 1.1.4322)',
+> >   'HTTP_HOST' => 'localhost',
+> >   'HTTP_CONNECTION' => 'Keep-Alive',
+> >   'HTTP_COOKIE' => '...',
+> >   'PATH' =>
+> > 'C:\WINDOWS\system32;C:\WINDOWS;C:\WINDOWS\System32\Wbem;C:\fop-0.20.5
+> > ;C:\Python24',
+> >   'SystemRoot' => 'C:\WINDOWS',
+> >   'COMSPEC' => 'C:\WINDOWS\system32\cmd.exe',
+> >   'PATHEXT' => '.COM;.EXE;.BAT;.CMD;.VBS;.VBE;.JS;.JSE;.WSF;.WSH',
+> >   'WINDIR' => 'C:\WINDOWS',
+> >   'SERVER_SIGNATURE' => '<address>Apache/2.0.55 (Win32) PHP/5.1.2
+> > Server at localhost Port 80</address>
+> > ',
+> >   'SERVER_SOFTWARE' => 'Apache/2.0.55 (Win32) PHP/5.1.2',
+> >   'SERVER_NAME' => 'localhost',
+> >   'SERVER_ADDR' => '127.0.0.1',
+> >   'SERVER_PORT' => '80',
+> >   'REMOTE_ADDR' => '127.0.0.1',
+> >   'DOCUMENT_ROOT' => 'C:/wamp/www',
+> >   'SERVER_ADMIN' => '...',
+> >   'SCRIPT_FILENAME' => 'C:/wamp/www/main/ph/manager/index.php',
+> >   'REMOTE_PORT' => '1752',
+> >   'GATEWAY_INTERFACE' => 'CGI/1.1',
+> >   'SERVER_PROTOCOL' => 'HTTP/1.1',
+> >   'REQUEST_METHOD' => 'GET',
+> >   'QUERY_STRING' => '',
+> >   'REQUEST_URI' => '/main/ph/manager/',
+> >   'SCRIPT_NAME' => '/main/ph/manager/index.php',
+> >   'PHP_SELF' => '/main/ph/manager/index.php',
+> >   'REQUEST_TIME' => 1157972571,
+> >   'argv' =>
+> >   array (
+> >   ),
+> >   'argc' => 0,
+> > )
+> >
+> >
+> >
+> >
+> > So, i get a error:
+> >
+> > Fatal error: Class '' not found in YDFramework2\YDF2_process.php on line
+> > 59
+> >
+> >
+> >
+> > Any ideas?
+> >
+> >
+> > regards
+> > Francisco A
+> > _______________________________________________
+> > YDFramework-users mailing list
+> > YDFramework-users at lists.berlios.de
+> > https://lists.berlios.de/mailman/listinfo/ydframework-users
+> >
+>
+>
+>
+> --
+> pieter claerhout . pieter at yellowduck.be . http://www.yellowduck.be/
+>
+
+
+
+-- 
+pieter claerhout . pieter at yellowduck.be . http://www.yellowduck.be/
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <https://lists.berlios.de/pipermail/ydframework-users/attachments/20060913/d8f8c55b/attachment.html>
+
+From pieter at yellowduck.be  Wed Sep 13 10:26:41 2006
+From: pieter at yellowduck.be (Pieter Claerhout)
+Date: Wed, 13 Sep 2006 10:26:41 +0200
+Subject: [ydf-users] YDF2_process problems on php5
+In-Reply-To: <4aef63030609130029v7edb4e02o73b517e32a38af87@mail.gmail.com>
+References: <45054313.1040108@fusemail.com>
+	<4aef63030609130029h66e68f74o48c6367c43c5751b@mail.gmail.com>
+	<4aef63030609130029v7edb4e02o73b517e32a38af87@mail.gmail.com>
+Message-ID: <4aef63030609130126j1be22d10h5be2e92087cdd6f7@mail.gmail.com>
+
+Fixed in build 2120.
+
+pieter
+
+On 9/13/06, Pieter Claerhout <pieter at yellowduck.be> wrote:
+>
+>  Did you log it as a bug in berlios.de?
+>
+> pieter
+>
+>
+>  On 9/13/06, Pieter Claerhout <pieter at yellowduck.be> wrote:
+> >
+> >  Seems really easy to fix. Will do that asap.
+> >
+> > pieter
+> >
+> >  On 9/11/06, Francisco Azevedo <francisco at fusemail.com > wrote:
+> > >
+> > > I'm getting some troubles when using YDF in php5. On php4 i can see a
+> > > 'PATH_TRANSLATED' is $_SERVER but i cannot see it on php5
+> > >
+> > >
+> > > PHP4 $_SERVER:
+> > >
+> > > array (
+> > >   'HTTP_ACCEPT' => '*/*',
+> > >   'HTTP_ACCEPT_LANGUAGE' => 'pt',
+> > >   'HTTP_ACCEPT_ENCODING' => 'gzip, deflate',
+> > >   'HTTP_USER_AGENT' => 'Mozilla/4.0 (compatible; MSIE 6.0; Windows NT
+> > > 5.1; Q312461; SV1; .NET CLR 1.1.4322)',
+> > >   'HTTP_HOST' => 'localhost',
+> > >   'HTTP_CONNECTION' => 'Keep-Alive',
+> > >   'HTTP_COOKIE' => '...',
+> > >   'PATH' =>
+> > > 'C:\\WINDOWS\\system32;C:\\WINDOWS;C:\\WINDOWS\\System32\\Wbem;C:\\fop-
+> > > 0.20.5;C:\\Python24',
+> > >   'SystemRoot' => 'C:\\WINDOWS',
+> > >   'COMSPEC' => 'C:\\WINDOWS\\system32\\cmd.exe',
+> > >   'PATHEXT' => '.COM;.EXE;.BAT;.CMD;.VBS;.VBE;.JS;.JSE;.WSF;.WSH',
+> > >   'WINDIR' => 'C:\\WINDOWS',
+> > >   'SERVER_SIGNATURE' => '<address>Apache/2.0.55 (Win32) PHP/4.4.2
+> > > Server at localhost Port 80</address>
+> > > ',
+> > >   'SERVER_SOFTWARE' => 'Apache/2.0.55 (Win32) PHP/4.4.2',
+> > >   'SERVER_NAME' => 'localhost',
+> > >   'SERVER_ADDR' => '127.0.0.1',
+> > >   'SERVER_PORT' => '80',
+> > >   'REMOTE_ADDR' => ' 127.0.0.1',
+> > >   'DOCUMENT_ROOT' => 'C:/wamp/www',
+> > >   'SERVER_ADMIN' => '...',
+> > >   'SCRIPT_FILENAME' => 'C:/wamp/www/main/ph/manager/index.php',
+> > >   'REMOTE_PORT' => '1744',
+> > >   'GATEWAY_INTERFACE' => 'CGI/1.1',
+> > >   'SERVER_PROTOCOL' => 'HTTP/1.1',
+> > >   'REQUEST_METHOD' => 'GET',
+> > >   'QUERY_STRING' => '',
+> > >   'REQUEST_URI' => '/main/ph/manager/',
+> > >   'SCRIPT_NAME' => '/main/ph/manager/index.php',
+> > >   'PHP_SELF' => '/main/ph/manager/index.php',
+> > >   'PATH_TRANSLATED' => 'C:/wamp/www/main/ph/manager/index.php',
+> > >   'argv' =>
+> > >   array (
+> > >   ),
+> > >   'argc' => 0,
+> > > )
+> > >
+> > >
+> > >
+> > >
+> > > PHP5 $_SERVER:
+> > >
+> > >
+> > > array (
+> > >   'HTTP_ACCEPT' => '*/*',
+> > >   'HTTP_ACCEPT_LANGUAGE' => 'pt',
+> > >   'HTTP_ACCEPT_ENCODING' => 'gzip, deflate',
+> > >   'HTTP_USER_AGENT' => 'Mozilla/4.0 (compatible; MSIE 6.0; Windows NT
+> > > 5.1; Q312461; SV1; .NET CLR 1.1.4322)',
+> > >   'HTTP_HOST' => 'localhost',
+> > >   'HTTP_CONNECTION' => 'Keep-Alive',
+> > >   'HTTP_COOKIE' => '...',
+> > >   'PATH' =>
+> > > 'C:\WINDOWS\system32;C:\WINDOWS;C:\WINDOWS\System32\Wbem;C:\fop-0.20.5
+> > > ;C:\Python24',
+> > >   'SystemRoot' => 'C:\WINDOWS',
+> > >   'COMSPEC' => 'C:\WINDOWS\system32\cmd.exe',
+> > >   'PATHEXT' => '.COM;.EXE;.BAT;.CMD;.VBS;.VBE;.JS;.JSE;.WSF;.WSH',
+> > >   'WINDIR' => 'C:\WINDOWS',
+> > >   'SERVER_SIGNATURE' => '<address>Apache/2.0.55 (Win32) PHP/5.1.2
+> > > Server at localhost Port 80</address>
+> > > ',
+> > >   'SERVER_SOFTWARE' => 'Apache/2.0.55 (Win32) PHP/5.1.2',
+> > >   'SERVER_NAME' => 'localhost',
+> > >   'SERVER_ADDR' => ' 127.0.0.1',
+> > >   'SERVER_PORT' => '80',
+> > >   'REMOTE_ADDR' => '127.0.0.1',
+> > >   'DOCUMENT_ROOT' => 'C:/wamp/www',
+> > >   'SERVER_ADMIN' => '...',
+> > >   'SCRIPT_FILENAME' => 'C:/wamp/www/main/ph/manager/index.php',
+> > >   'REMOTE_PORT' => '1752',
+> > >   'GATEWAY_INTERFACE' => 'CGI/1.1',
+> > >   'SERVER_PROTOCOL' => 'HTTP/1.1',
+> > >   'REQUEST_METHOD' => 'GET',
+> > >   'QUERY_STRING' => '',
+> > >   'REQUEST_URI' => '/main/ph/manager/',
+> > >   'SCRIPT_NAME' => '/main/ph/manager/index.php',
+> > >   'PHP_SELF' => '/main/ph/manager/index.php',
+> > >   'REQUEST_TIME' => 1157972571,
+> > >   'argv' =>
+> > >   array (
+> > >   ),
+> > >   'argc' => 0,
+> > > )
+> > >
+> > >
+> > >
+> > >
+> > > So, i get a error:
+> > >
+> > > Fatal error: Class '' not found in YDFramework2\YDF2_process.php on
+> > > line 59
+> > >
+> > >
+> > >
+> > > Any ideas?
+> > >
+> > >
+> > > regards
+> > > Francisco A
+> > > _______________________________________________
+> > > YDFramework-users mailing list
+> > > YDFramework-users at lists.berlios.de
+> > > https://lists.berlios.de/mailman/listinfo/ydframework-users
+> > >
+> >
+> >
+> >
+> > --
+> > pieter claerhout . pieter at yellowduck.be . http://www.yellowduck.be/
+> >
+>
+>
+>
+> --
+> pieter claerhout . pieter at yellowduck.be . http://www.yellowduck.be/
+>
+
+
+
+-- 
+pieter claerhout . pieter at yellowduck.be . http://www.yellowduck.be/
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <https://lists.berlios.de/pipermail/ydframework-users/attachments/20060913/7f0cd790/attachment.html>
+
+From maximus_meridius79 at yahoo.com  Wed Sep 13 12:54:44 2006
+From: maximus_meridius79 at yahoo.com (maximus meridius)
+Date: Wed, 13 Sep 2006 03:54:44 -0700 (PDT)
+Subject: [ydf-users] YDDatabaseTree.php / database_tree.php example
+Message-ID: <20060913105444.1634.qmail@web54007.mail.yahoo.com>
+
+    Hi,
+
+I'm experimenting with YDDatabseTree.php for the first time and itseems that the current implementation requires a field in the tablecalled 'position'.
+
+This seems to be incorrect or is inconsistent with the SQL for settingup the example in database_trees.php (there is no position field).
+
+After creating a database table containing the data in the example,this is the error in my server logs:
+
+PHP Fatal error:  [1054] Unknown column 'position' in 'field list' in../YDFramework2/YDClasses/YDDatabase.php on line 1531, referer:../examples/database_tree.php
+
+To get the example working, I added a position column to the mysqltable.
+
+Does the 'position' field need to be removed from the YDDatabaseTreeconstructor?
+
+Thanks,
+
+Graeme
+
+ 		
+---------------------------------
+How low will we go? Check out Yahoo! Messenger?s low  PC-to-Phone call rates.
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <https://lists.berlios.de/pipermail/ydframework-users/attachments/20060913/9d20d116/attachment.html>
+
+From pieter at yellowduck.be  Wed Sep 13 13:39:44 2006
+From: pieter at yellowduck.be (Pieter Claerhout)
+Date: Wed, 13 Sep 2006 13:39:44 +0200
+Subject: [ydf-users] YDDatabaseTree.php / database_tree.php example
+In-Reply-To: <20060913105444.1634.qmail@web54007.mail.yahoo.com>
+References: <20060913105444.1634.qmail@web54007.mail.yahoo.com>
+Message-ID: <4aef63030609130439k36b9094fyfc0b8d600213e01e@mail.gmail.com>
+
+Please log a bug report on berlios.de and I'll fix it asap.
+
+pieter
+
+On 9/13/06, maximus meridius <maximus_meridius79 at yahoo.com> wrote:
+>
+>  Hi,
+>
+> I'm experimenting with YDDatabseTree.php for the first time and it seems
+> that the current implementation requires a field in the table called
+> 'position'.
+>
+> This seems to be incorrect or is inconsistent with the SQL for setting up
+> the example in database_trees.php (there is no position field).
+>
+> After creating a database table containing the data in the example, this
+> is the error in my server logs:
+>
+> PHP Fatal error:  [1054] Unknown column 'position' in 'field list' in
+> ../YDFramework2/YDClasses/YDDatabase.php on line 1531, referer:
+> ../examples/database_tree.php
+>
+> To get the example working, I added a position column to the mysql table.
+>
+> Does the 'position' field need to be removed from the YDDatabaseTree
+> constructor?
+>
+> Thanks,
+>
+> Graeme
+>
+>
+> ------------------------------
+> How low will we go? Check out Yahoo! Messenger's low PC-to-Phone call
+> rates.
+> <http://us.rd.yahoo.com/mail_us/taglines/postman8/*http://us.rd.yahoo.com/evt=39663/*http://voice.yahoo.com>
+>
+>
+> _______________________________________________
+> YDFramework-users mailing list
+> YDFramework-users at lists.berlios.de
+> https://lists.berlios.de/mailman/listinfo/ydframework-users
+>
+>
+>
+
+
+-- 
+pieter claerhout . pieter at yellowduck.be . http://www.yellowduck.be/
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <https://lists.berlios.de/pipermail/ydframework-users/attachments/20060913/107a74ba/attachment.html>
+
+From maximus_meridius79 at yahoo.com  Wed Sep 13 15:38:13 2006
+From: maximus_meridius79 at yahoo.com (maximus meridius)
+Date: Wed, 13 Sep 2006 06:38:13 -0700 (PDT)
+Subject: [ydf-users] YDDatabaseTree.php / database_tree.php example
+Message-ID: <20060913133813.74561.qmail@web54007.mail.yahoo.com>
+
+  Hi Pieter,
+
+I have just submitted the bug report:
+https://developer.berlios.de/bugs/?func=detailbug&bug_id=8786&group_id=3988
+
+Regards,
+
+Graeme
+
+Pieter Claerhout wrote:  Please log a bug report on berlios.deand I'll fix it asap.
+   
+  pieter
+ 
+  On 9/13/06, maximus meridius <maximus_meridius79 at yahoo.com>wrote:          Hi,
+    
+I'm experimenting with YDDatabseTree.php for the first time and itseems that the current implementation requires a field in the tablecalled 'position'.    
+    
+This seems to be incorrect or is inconsistent with the SQL for settingup the example in database_trees.php (there is no position field).
+    
+After creating a database table containing the data in the example,this is the error in my server logs:    
+    
+PHP Fatal error:  [1054] Unknown column 'position' in 'field list' in../YDFramework2/YDClasses/YDDatabase.php on line 1531, referer:../examples/database_tree.php
+    
+To get the example working, I added a position column to the mysqltable.    
+    
+Does the 'position' field need to be removed from the YDDatabaseTreeconstructor?
+    
+Thanks,
+    
+Graeme
+ 
+    
+    
+    
+        
+
+    
+---------------------------------
+How low will we go? Check out Yahoo! Messenger's low PC-to-Phone call rates.     
+    
+_______________________________________________
+YDFramework-users mailing list
+    YDFramework-users at lists.berlios.de
+    https://lists.berlios.de/mailman/listinfo/ydframework-users    
+    
+    
+    
+  
+  
+  
+-- 
+pieter claerhout . pieter at yellowduck.be. http://www.yellowduck.be/  
+
+---------------------------------
+_______________________________________________YDFramework-users mailing listYDFramework-users at lists.berlios.dehttps://lists.berlios.de/mailman/listinfo/ydframework-users  
+
+--------------000108080108070600030207--
+ 		
+---------------------------------
+Get your email and more, right on the  new Yahoo.com 
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <https://lists.berlios.de/pipermail/ydframework-users/attachments/20060913/775d2d24/attachment.html>
+
+From francisco at fusemail.com  Wed Sep 13 18:32:25 2006
+From: francisco at fusemail.com (Francisco Azevedo)
+Date: Wed, 13 Sep 2006 17:32:25 +0100
+Subject: [ydf-users] YDDatabaseTree.php / database_tree.php example
+In-Reply-To: <20060913105444.1634.qmail@web54007.mail.yahoo.com>
+References: <20060913105444.1634.qmail@web54007.mail.yahoo.com>
+Message-ID: <45083299.2000304@fusemail.com>
+
+Hi maximus
+
+> I'm experimenting with YDDatabseTree.php for the first time and it seems 
+> that the current implementation requires a field in the table called 
+> 'position'.
+> 
+> This seems to be incorrect or is inconsistent with the SQL for setting 
+> up the example in database_trees.php (there is no position field).
+
+
+The 'position' field was created with the intention to add position 
+support (read: be able to order children of same parent).
+
+
+IMHO, the ideal is make 'position' a optional.. ( by another words, make 
+position support in YDDatabaseTree optional).
+
+
+regards
+Francisco A
+
+
+From pieter at yellowduck.be  Thu Sep 14 12:25:38 2006
+From: pieter at yellowduck.be (Pieter Claerhout)
+Date: Thu, 14 Sep 2006 12:25:38 +0200
+Subject: [ydf-users] YDDatabaseTree.php / database_tree.php example
+In-Reply-To: <45083299.2000304@fusemail.com>
+References: <20060913105444.1634.qmail@web54007.mail.yahoo.com>
+	<45083299.2000304@fusemail.com>
+Message-ID: <4aef63030609140325s1d12205csebcad1096dd95da8@mail.gmail.com>
+
+I don't want to make it optional as I will add full support for positions in
+a later stage. If we do so, we need to have a position field.
+
+I fixed the example in build 2135.
+
+pieter
+
+On 9/13/06, Francisco Azevedo <francisco at fusemail.com> wrote:
+>
+> Hi maximus
+>
+> > I'm experimenting with YDDatabseTree.php for the first time and it seems
+> > that the current implementation requires a field in the table called
+> > 'position'.
+> >
+> > This seems to be incorrect or is inconsistent with the SQL for setting
+> > up the example in database_trees.php (there is no position field).
+>
+>
+> The 'position' field was created with the intention to add position
+> support (read: be able to order children of same parent).
+>
+>
+> IMHO, the ideal is make 'position' a optional.. ( by another words, make
+> position support in YDDatabaseTree optional).
+>
+>
+> regards
+> Francisco A
+> _______________________________________________
+> YDFramework-users mailing list
+> YDFramework-users at lists.berlios.de
+> https://lists.berlios.de/mailman/listinfo/ydframework-users
+>
+
+
+
+-- 
+pieter claerhout . pieter at yellowduck.be . http://www.yellowduck.be/
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <https://lists.berlios.de/pipermail/ydframework-users/attachments/20060914/f44f5d9f/attachment.html>
+
+From francisco at fusemail.com  Thu Sep 14 15:31:58 2006
+From: francisco at fusemail.com (Francisco Azevedo)
+Date: Thu, 14 Sep 2006 14:31:58 +0100
+Subject: [ydf-users] YDDatabaseTree.php / database_tree.php example
+In-Reply-To: <4aef63030609140325s1d12205csebcad1096dd95da8@mail.gmail.com>
+References: <20060913105444.1634.qmail@web54007.mail.yahoo.com>	<45083299.2000304@fusemail.com>
+	<4aef63030609140325s1d12205csebcad1096dd95da8@mail.gmail.com>
+Message-ID: <450959CE.5060902@fusemail.com>
+
+Hi Pieter
+
+> I don't want to make it optional as I will add full support for 
+> positions in a later stage. If we do so, we need to have a position field.
+>  
+> I fixed the example in build 2135.
+
+
+Sounds a good idea.
+
+regards
+Francisco A
+
+
+From maximus_meridius79 at yahoo.com  Thu Sep 14 18:11:47 2006
+From: maximus_meridius79 at yahoo.com (maximus meridius)
+Date: Thu, 14 Sep 2006 09:11:47 -0700 (PDT)
+Subject: [ydf-users] YDDatabaseTree.php / database_tree.php example
+Message-ID: <20060914161147.40096.qmail@web54003.mail.yahoo.com>
+
+  Hi Pieter & Francisco,
+
+I guessed that the position field was for ordering children and can seethe benefits of doing so. A 'setChildPosition' method would be a niceway to move a child element to a specific position. You could also havemoveChildToFirst( $id ), moveChildToLast ( $id ), moveChildLeft( $id,$n ) and moveChildRight( $id, $n ). The last two would move the child Npositions (within the current parent).
+
+I am working on a modification to YDDatabaseTree that enables a filterto be set. The aim of the filter is to enable multiple trees (e.g. onetree per user) to reside in a single database table and for rebuild ofone tree not to affect another tree in the same table.
+
+This filter has the effect of adding criteria into all of the selectclauses and correspondingly to the insert / update clauses.
+
+Usage currently looks like this:
+
+            $this->_tree = new YDDatabaseTree2( $this->_db,'tree', 'id', 'parent_id', 'title' );
+
+            // add a custom field
+            $this->_tree->addFields( array( 'userid' ) );
+            
+            // add a default value for the custom field
+            $this->_tree->setAddDefaults( array( 'userid' =>$userid ) );
+            
+            // set the filter used for all tree operations
+            $this->_tree->setFilter( 'userid = ' . $userid );
+
+For a cleaner implementation I think I could combine setFilter andsetAddDefaults into one method. If the argument is an array of defaults/ criterias, then multiple columns could be used for filtering. If moreadvanced criteria operation is needed other than "=" then I think amethod that takes a callback function as an argument is a possiblesolution. 
+
+I'll see how this implementation goes in my application. As this changeis in the early stages I would appreciate suggestions for the filtermethods to provide.
+
+Regards,
+
+Graeme
+
+
+Francisco Azevedo wrote:  
+Hi Pieter  
+      
+I don't want to make it optional as I will add full support for positions in a later stage. If we do so, we need to have a position field. I fixed the example in build 2135.    
+    
+Sounds a good idea.regardsFrancisco A_______________________________________________YDFramework-users mailing listYDFramework-users at lists.berlios.dehttps://lists.berlios.de/mailman/listinfo/ydframework-users  
+
+
+ 		
+---------------------------------
+Do you Yahoo!?
+ Everyone is raving about the  all-new Yahoo! Mail.
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <https://lists.berlios.de/pipermail/ydframework-users/attachments/20060914/e0ee771b/attachment.html>
+
+From moses at hysistechnologies.com  Fri Sep 15 07:43:50 2006
+From: moses at hysistechnologies.com (moses at hysistechnologies.com)
+Date: Thu, 14 Sep 2006 22:43:50 -0700
+Subject: [ydf-users] Query Regarding getRecordsAsSet
+Message-ID: <20060914224350.2b7eeeb4c62f4bb8603cfb01b826e9ec.553d9c1306.wbe@email.secureserver.net>
+
+
+
+Hi Everybody
+
+     I have a problem with paging....
+
+     I am executing more than four queries one by one and at last I get
+the array of records which contains nearly 1000 records.
+   
+    So need to do paging for the resultant array.
+
+    But the argument for the getRecordsAsSet() is only one single 
+$query.
+
+    But my situation is like I cant get the resultant array with a
+single query I need the execute more than three queries.
+
+   For this situation how should I  use   getRecordsAsSet()  function.
+
+regards
+moses
+
+
+
+From francisco at fusemail.com  Fri Sep 15 10:48:14 2006
+From: francisco at fusemail.com (Francisco Azevedo)
+Date: Fri, 15 Sep 2006 09:48:14 +0100
+Subject: [ydf-users] YDDatabaseTree.php / database_tree.php example
+In-Reply-To: <20060914161147.40096.qmail@web54003.mail.yahoo.com>
+References: <20060914161147.40096.qmail@web54003.mail.yahoo.com>
+Message-ID: <450A68CE.80709@fusemail.com>
+
+Hi Graeme
+
+> I guessed that the position field was for ordering children and can see 
+> the benefits of doing so. A 'setChildPosition' method would be a nice 
+> way to move a child element to a specific position. You could also have 
+> moveChildToFirst( $id ), moveChildToLast ( $id ), moveChildLeft( $id, $n 
+> ) and moveChildRight( $id, $n ). The last two would move the child N 
+> positions (within the current parent).
+
+
+.. but you would do that with YDDatabaseTree::moveNode, i think.
+
+Currently, with moveNode( $id, $new_parent ) you can define the new 
+parent only.. with a new moveNode, eg, moveNode( $id, $new_parent, 
+$position ) then you have:
+
+moveChildToFirst( $id )  == moveNode( $id, null, 1 )
+
+moveChildToLast( $id )   == moveNode( $id, null, -1 )
+
+but i don't know about moveChildLeft/moveChildRight..
+
+A
++- B
+|
++- C
+|
++- D
+|  +- X
+|  +- Y
+|
++--E
+
+If moveChildLeft is applyed to X what would be the new parent? C? A?
+
+
+My opinion, is that moveNode is the best way because it's the most basic 
+and powerfull. With moveNode we define exactly what we want, eg:
+
+
+moveNode( X, A, 1 );   or    moveNode( X, C, 1 );
+
+moveNode( E, D, 2 );
+
+
+
+regards
+Francisco A
+
+
+From pieter at yellowduck.be  Fri Sep 15 13:58:48 2006
+From: pieter at yellowduck.be (Pieter Claerhout)
+Date: Fri, 15 Sep 2006 13:58:48 +0200
+Subject: [ydf-users] Query Regarding getRecordsAsSet
+In-Reply-To: <20060914224350.2b7eeeb4c62f4bb8603cfb01b826e9ec.553d9c1306.wbe@email.secureserver.net>
+References: <20060914224350.2b7eeeb4c62f4bb8603cfb01b826e9ec.553d9c1306.wbe@email.secureserver.net>
+Message-ID: <4aef63030609150458w4780aaffs27c48128d9a51759@mail.gmail.com>
+
+You can create a YDResultSet object from the array of 1000 records which
+does exactly what you are looking for.
+
+cheers,
+
+
+pieter
+
+On 9/15/06, moses at hysistechnologies.com <moses at hysistechnologies.com> wrote:
+>
+>
+>
+> Hi Everybody
+>
+>     I have a problem with paging....
+>
+>     I am executing more than four queries one by one and at last I get
+> the array of records which contains nearly 1000 records.
+>
+>    So need to do paging for the resultant array.
+>
+>    But the argument for the getRecordsAsSet() is only one single
+> $query.
+>
+>    But my situation is like I cant get the resultant array with a
+> single query I need the execute more than three queries.
+>
+>   For this situation how should I  use   getRecordsAsSet()  function.
+>
+> regards
+> moses
+>
+> _______________________________________________
+> YDFramework-users mailing list
+> YDFramework-users at lists.berlios.de
+> https://lists.berlios.de/mailman/listinfo/ydframework-users
+>
+
+
+
+-- 
+pieter claerhout . pieter at yellowduck.be . http://www.yellowduck.be/
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <https://lists.berlios.de/pipermail/ydframework-users/attachments/20060915/6566caf2/attachment.html>
+
+From maximus_meridius79 at yahoo.com  Thu Sep 21 10:00:11 2006
+From: maximus_meridius79 at yahoo.com (maximus meridius)
+Date: Thu, 21 Sep 2006 01:00:11 -0700 (PDT)
+Subject: [ydf-users] YDAJax::addEvent( "*",
+	... ) and adding events in a response
+Message-ID: <20060921080011.33838.qmail@web54004.mail.yahoo.com>
+
+  Hi,
+
+Can someone explain how the syntax addEvent( "*", ... ) is used toprovide YDAjax default event processing? There are no examples of thisso I can't see how to use it or why I would use it.
+
+I am also trying to find out how to generate a form in a response andwhether addEvent can be used in the response. My reason for wanting tocreate a form in a response is that I am trying to work out a techniquefor creating modal forms that popup within the existing page and behavelike modal dialog boxes.
+
+I could pre-create the modal forms in the request and hide them but Ithink this could have security implications ...
+
+Thanks,
+
+Graeme
+
+ 		
+---------------------------------
+Stay in the know. Pulse on the new Yahoo.com.  Check it out. 
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <https://lists.berlios.de/pipermail/ydframework-users/attachments/20060921/d0e5a5ab/attachment.html>
+
+From mb-list at adfinis.ch  Thu Sep 21 14:17:42 2006
+From: mb-list at adfinis.ch (Matthias Blaser)
+Date: Thu, 21 Sep 2006 14:17:42 +0200
+Subject: [ydf-users] conditional ajax request
+Message-ID: <200609211417.42724.mb-list@adfinis.ch>
+
+Hi,
+
+Is there a possibility to add a condition to an event _before_ the ajax 
+function will be called? Something like an effect, but before. 
+
+instead of (event after):
+
+onkeyup="__ydfsearchOnrp(__ydfgetonrp_search());document.getElementById(&quot;_main_onrp_search&quot;).focus();"
+
+something like this (event before);
+
+onkeyup="if(foo) { return false; }; __ydfsearchOnrp(__ydfgetonrp_search());"
+
+For example, I have a search field, but to not overload server I only want the 
+event to be executed when the length of the value is below 3 characters.
+
+Thanks,
+Matthias
+
+
+
+
+From maximus_meridius79 at yahoo.com  Thu Sep 21 14:53:50 2006
+From: maximus_meridius79 at yahoo.com (maximus meridius)
+Date: Thu, 21 Sep 2006 05:53:50 -0700 (PDT)
+Subject: [ydf-users] conditional ajax request
+Message-ID: <20060921125351.23580.qmail@web54004.mail.yahoo.com>
+
+  Hi,
+
+I just found that you can do this by assigning the event attribute whenthe form element is created. Such as in this example:
+
+            // add a button to the form
+            $this->form->addElement('button', 'mybutton','Process the Form', array( 'onclick' => 'var x= false; if(!x) { alert(1); return false; }' ) );
+
+            // add an event for 'mybutton'
+            $this->ajax->addEvent( 'mybutton', array( &$this, 'processform' ), 'myform' );            
+
+This has the effect of including javascript of the form:
+
+	onclick="var x = false; if(!x) { alert(1); return false; };__ydfprocessform(xajax.getFormValues('myform'));"
+This is basically what you are looking for. You can see how this worksif you look at the last 10 lines of the code for YDAjax::addEvent. Thismethod basically checks if there is some JS already assigned to theevent of the form element and adds its magic afterwards.
+
+Regards,
+
+Graeme
+
+
+Matthias Blaser wrote:  
+Hi,Is there a possibility to add a condition to an event _before_ the ajax function will be called? Something like an effect, but before. instead of (event after):onkeyup="__ydfsearchOnrp(__ydfgetonrp_search());document.getElementById(&quot;_main_onrp_search&quot;).focus();"something like this (event before);onkeyup="if(foo) { return false; }; __ydfsearchOnrp(__ydfgetonrp_search());"For example, I have a search field, but to not overload server I only want the event to be executed when the length of the value is below 3 characters.Thanks,Matthias_______________________________________________YDFramework-users mailing listYDFramework-users at lists.berlios.dehttps://lists.berlios.de/mailman/listinfo/ydframework-users  
+
+
+ 		
+---------------------------------
+Yahoo! Messenger with Voice. Make PC-to-Phone Calls to the US (and 30+ countries) for 2?/min or less.
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <https://lists.berlios.de/pipermail/ydframework-users/attachments/20060921/2e5a9036/attachment.html>
+
+From mb-list at adfinis.ch  Thu Sep 21 16:05:37 2006
+From: mb-list at adfinis.ch (Matthias Blaser)
+Date: Thu, 21 Sep 2006 16:05:37 +0200
+Subject: [ydf-users] conditional ajax request
+In-Reply-To: <20060921125351.23580.qmail@web54004.mail.yahoo.com>
+References: <20060921125351.23580.qmail@web54004.mail.yahoo.com>
+Message-ID: <200609211605.37710.mb-list@adfinis.ch>
+
+Hi,
+
+On Thursday 21 September 2006 14:53, maximus meridius wrote:
+> I just found that you can do this by assigning the event attribute whenthe
+> form element is created. Such as in this example:
+>
+>             // add a button to the form
+>             $this->form->addElement('button', 'mybutton','Process the
+> Form', array( 'onclick' => 'var x= false; if(!x) { alert(1); return false;
+> }' ) );
+
+Works great, thank u very much!
+
+Regards,
+Matthias
+
+
+From francisco at fusemail.com  Thu Sep 21 21:41:54 2006
+From: francisco at fusemail.com (Francisco Azevedo)
+Date: Thu, 21 Sep 2006 20:41:54 +0100
+Subject: [ydf-users] conditional ajax request
+In-Reply-To: <20060921125351.23580.qmail@web54004.mail.yahoo.com>
+References: <20060921125351.23580.qmail@web54004.mail.yahoo.com>
+Message-ID: <4512EB02.1070608@fusemail.com>
+
+Hi Graeme and Matthias
+
+> I just found that you can do this by assigning the event attribute when 
+> the form element is created. Such as in this example:
+> 
+>             // add a button to the form
+>             $this->form->addElement('button', 'mybutton', 'Process the 
+> Form', array( 'onclick' => 'var x = false; if(!x) { alert(1); return 
+> false; }' ) );
+> 
+>             // add an event for 'mybutton'
+>             $this->ajax->addEvent( 'mybutton', array( & $this, 
+> 'processform' ), 'myform' );           
+> 
+> This has the effect of including javascript of the form:
+> 
+> 	onclick="var x = false; if(!x) { alert(1); return false; };__ydfprocessform(xajax.getFormValues('myform'));"
+> 
+> This is basically what you are looking for. You can see how this works 
+> if you look at the last 10 lines of the code for YDAjax::addEvent. This 
+> method basically checks if there is some JS already assigned to the 
+> event of the form element and adds its magic afterwards.
+
+
+Yes, that's right.. and, btw, you can prepend events too, eg:
+
+
+$this->form->addElement('button', 'mybutton', 'Process the Form', array( 
+'onclick' => '...' ) );
+
+$this->ajax->addEvent( 'mybutton', array( & $this,'processform' ), 
+'myform', null, 'prepend' );
+
+
+regards
+Francisco A
+
+
+From francisco at fusemail.com  Thu Sep 21 21:53:43 2006
+From: francisco at fusemail.com (Francisco Azevedo)
+Date: Thu, 21 Sep 2006 20:53:43 +0100
+Subject: [ydf-users] YDAJax::addEvent( "*",
+ ... ) and adding events in a response
+In-Reply-To: <20060921080011.33838.qmail@web54004.mail.yahoo.com>
+References: <20060921080011.33838.qmail@web54004.mail.yahoo.com>
+Message-ID: <4512EDC7.2050701@fusemail.com>
+
+Hi Graeme
+
+> Can someone explain how the syntax addEvent( "*", ... ) is used to 
+> provide YDAjax default event processing? There are no examples of this 
+> so I can't see how to use it or why I would use it.
+
+I forgot to add an example about it.. sorry.. i will :)
+
+Look at this example:
+
+class C{
+
+	
+	function C(){...}
+
+	function actionDefault(){
+
+		// create an hardcoded js function
+		$this->ajax->addEvent( 'close()', array( &$this, 'doClose' ) );
+
+		// create a default event
+		$this->ajax->addEvent( '*',       array( &$this, 'dodefault' ) );
+	}
+
+
+	// this is the response of 'close()'
+	function doClose(){
+		...
+		$this->ajax->returnResults();
+	}
+
+
+	// this is the functon that is executed for _other_ events
+	function dodefault(){
+
+		// get Javascript function and arguments
+		list( $func_name, $func_args ) = func_get_args();
+
+		// so something
+		...
+
+
+		$this->ajax->returnResults();
+	}
+
+}
+
+
+
+I hope that you have understood.. if not.. just wait to see the example 
+and then (with the generated code in the client) you will understand.
+
+
+
+> I am also trying to find out how to generate a form in a response and 
+> whether addEvent can be used in the response. My reason for wanting to 
+> create a form in a response is that I am trying to work out a technique 
+> for creating modal forms that popup within the existing page and behave 
+> like modal dialog boxes.
+> 
+> I could pre-create the modal forms in the request and hide them but I 
+> think this could have security implications ...
+
+I have an application built 100% with your idea ;) and i can tell you 
+that it works very well. All forms (and correspondent events for it) are 
+generated on the response side ;)
+
+Well.. the security must be checked on the server side. If you are 
+trying to use * on addEvent you should check the function name and 
+arguments syntax, if they really exists.. etc.. but you can control that.
+
+
+regards
+Francisco A
+
+
+From maximus_meridius79 at yahoo.com  Fri Sep 22 10:10:30 2006
+From: maximus_meridius79 at yahoo.com (maximus meridius)
+Date: Fri, 22 Sep 2006 01:10:30 -0700 (PDT)
+Subject: [ydf-users] YDAJax::addEvent( "*",
+	... ) and adding events in a response
+Message-ID: <20060922081030.22445.qmail@web54007.mail.yahoo.com>
+
+  Hi Francisco,
+
+First of all, I've seen your app and it looks really great ;-) . Itdemonstrates the real power of YDFramework and YDAjax.
+
+Francisco Azevedo wrote:
+  
+I hope that you have understood.. if not.. just wait to see the example and then (with the generated code in the client) you will understand.  
+I managed to get a simple piece of code working last night but itdidn't process any arguments. Your example gives me some idea of what ineed to do with respect to using func_get_args().
+      
+I am also trying to find out how to generate a form in a response and whether addEvent can be used in the response. My reason for wanting to create a form in a response is that I am trying to work out a technique for creating modal forms that popup within the existing page and behave like modal dialog boxes.I could pre-create the modal forms in the request and hide them but I think this could have security implications ...    
+    
+I have an application built 100% with your idea ;) and i can tell you that it works very well. All forms (and correspondent events for it) are generated on the response side ;)Well.. the security must be checked on the server side. If you are trying to use * on addEvent you should check the function name and arguments syntax, if they really exists.. etc.. but you can control that.
+
+Every time I have tried to use addEvent in a response the resultingjavascript that was added was __ydfarray() (or something similar). Thisis when I try to use the syntax:
+
+     $this->ajax->addEvent( 'my_modal_button', array( &$this, 'processmodal' ), 'my_modal' )
+
+in the response. To get this to work I have had to modifyYDAjax::computeFunction so that in a response it calls"registerFunction" and had to change the PHP generating the js code forresponses so that $serverFunction[1] is used instead of $serverFunction.
+
+Please tell me if my interpretation of how to do this is totallyincorrect. I'd also appreciate it if you could explain how to correctlycreate a form in a response and add events to it.
+
+Thanks,
+
+Graeme
+
+
+
+
+
+ __________________________________________________
+Do You Yahoo!?
+Tired of spam?  Yahoo! Mail has the best spam protection around 
+http://mail.yahoo.com 
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <https://lists.berlios.de/pipermail/ydframework-users/attachments/20060922/16738078/attachment.html>
+
+From moses at hysistechnologies.com  Sat Sep 30 10:57:36 2006
+From: moses at hysistechnologies.com (moses at hysistechnologies.com)
+Date: Sat, 30 Sep 2006 01:57:36 -0700
+Subject: [ydf-users] Query Regarding getRecordsAsSet
+Message-ID: <20060930015736.2b7eeeb4c62f4bb8603cfb01b826e9ec.a3710d54ed.wbe@email.secureserver.net>
+
+
+
+ Hello,
+
+     Can an array be a parameter to getRecordsAsSet insteed of a sql
+query ?
+
+     $records =  The list of records as an array (ie generated from
+getRecords())
+
+     Now
+    
+     $recordSet =
+$this->db->getRecordsAsSet($records,$this->page,$this->size);
+
+     gives the following error
+   
+    Fatal error:  [1064] You have an error in your SQL syntax.  Check
+the manual that corresponds to your MySQL server version for the right
+syntax to use near 'Array' at line 1 in
+D:\phpwork\vortex\YDFramework2\YDClasses\YDDatabase.php on line 1364
+
+    but if I use the sql query insteed of $records it works fine. 
+
+
+regards
+moses     
+    
+
+
+
+From pieter at yellowduck.be  Sat Sep 30 14:23:18 2006
+From: pieter at yellowduck.be (Pieter Claerhout)
+Date: Sat, 30 Sep 2006 14:23:18 +0200
+Subject: [ydf-users] Query Regarding getRecordsAsSet
+In-Reply-To: <20060930015736.2b7eeeb4c62f4bb8603cfb01b826e9ec.a3710d54ed.wbe@email.secureserver.net>
+References: <20060930015736.2b7eeeb4c62f4bb8603cfb01b826e9ec.a3710d54ed.wbe@email.secureserver.net>
+Message-ID: <4aef63030609300523j189f4923rc81e3ef98059ffef@mail.gmail.com>
+
+No, the arguments of the getRecordsAsSet function cannot be an array. It's
+only purpose is to return the result as a recordset.
+
+If you are starting from an array, you need to instantiate the YDRecordSet
+class manually like this:
+
+$recordset = new YDRecordSet( $array );
+
+cheers,
+
+
+pieter
+
+2006/9/30, moses at hysistechnologies.com <moses at hysistechnologies.com>:
+>
+>
+>
+> Hello,
+>
+>     Can an array be a parameter to getRecordsAsSet insteed of a sql
+> query ?
+>
+>     $records =  The list of records as an array (ie generated from
+> getRecords())
+>
+>     Now
+>
+>     $recordSet =
+> $this->db->getRecordsAsSet($records,$this->page,$this->size);
+>
+>     gives the following error
+>
+>    Fatal error:  [1064] You have an error in your SQL syntax.  Check
+> the manual that corresponds to your MySQL server version for the right
+> syntax to use near 'Array' at line 1 in
+> D:\phpwork\vortex\YDFramework2\YDClasses\YDDatabase.php on line 1364
+>
+>    but if I use the sql query insteed of $records it works fine.
+>
+>
+> regards
+> moses
+>
+>
+> _______________________________________________
+> YDFramework-users mailing list
+> YDFramework-users at lists.berlios.de
+> https://lists.berlios.de/mailman/listinfo/ydframework-users
+>
+
+
+
+-- 
+pieter claerhout . pieter at yellowduck.be . http://www.yellowduck.be/
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <https://lists.berlios.de/pipermail/ydframework-users/attachments/20060930/c1ff5e81/attachment.html>
+

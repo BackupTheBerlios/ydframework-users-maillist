@@ -1,0 +1,78 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [ydf-users] Bug On YDFormElement_captcha
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/ydframework-users/2007-September/index.html" >
+   <LINK REL="made" HREF="mailto:ydframework-users%40lists.berlios.de?Subject=Re%3A%20%5Bydf-users%5D%20Bug%20On%20YDFormElement_captcha&In-Reply-To=%3C93778d790709121145y5b7956f8r85a90435117545fb%40mail.gmail.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   
+   <LINK REL="Next"  HREF="000506.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[ydf-users] Bug On YDFormElement_captcha</H1>
+    <B>aga toytoy</B> 
+    <A HREF="mailto:ydframework-users%40lists.berlios.de?Subject=Re%3A%20%5Bydf-users%5D%20Bug%20On%20YDFormElement_captcha&In-Reply-To=%3C93778d790709121145y5b7956f8r85a90435117545fb%40mail.gmail.com%3E"
+       TITLE="[ydf-users] Bug On YDFormElement_captcha">paultoytoy at gmail.com
+       </A><BR>
+    <I>Wed Sep 12 20:45:24 CEST 2007</I>
+    <P><UL>
+        
+        <LI>Next message: <A HREF="000506.html">[ydf-users] Bug On YDFormElement_captcha
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#505">[ date ]</a>
+              <a href="thread.html#505">[ thread ]</a>
+              <a href="subject.html#505">[ subject ]</a>
+              <a href="author.html#505">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Hi {$YD_GUYS},
+
+I found this buggy under
+YDFramework2/YDClasses/YDFormElements/YDFormElement_Captcha.php
+at line 56. It goes this code :
+
+$this-&gt;_url = YDRequest::getCurrentUrl( true ) . '?do=ShowCaptcha&amp;id='
+. md5( microtime() );
+
+where captcha works on a non-prefixed www URL (sample:
+mysite.com/formcaptcha.php). When I try to view it having a prefix www
+(sample: www.mysite.com/formcaptcha.php) with the form having captcha,
+it always execute the addRule method while the characters inputted are
+clearly correct.
+
+So I replace that line of code to this:
+        $this-&gt;_url = YD_SELF_SCRIPT . '?do=ShowCaptcha&amp;id=' . md5(
+microtime() );
+and it works fine.
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	
+	<LI>Next message: <A HREF="000506.html">[ydf-users] Bug On YDFormElement_captcha
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#505">[ date ]</a>
+              <a href="thread.html#505">[ thread ]</a>
+              <a href="subject.html#505">[ subject ]</a>
+              <a href="author.html#505">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/ydframework-users">More information about the YDFramework-users
+mailing list</a><br>
+</body></html>

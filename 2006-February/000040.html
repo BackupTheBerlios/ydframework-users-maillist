@@ -1,0 +1,216 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [ydf-users] YDDatabaseObject - changing aliases on columns (AS)
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/ydframework-users/2006-February/index.html" >
+   <LINK REL="made" HREF="mailto:ydframework-users%40lists.berlios.de?Subject=Re%3A%20%5Bydf-users%5D%20YDDatabaseObject%20-%20changing%20aliases%20on%20columns%20%28AS%29&In-Reply-To=%3C20060221203820.40547.qmail%40web50203.mail.yahoo.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000037.html">
+   <LINK REL="Next"  HREF="000041.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[ydf-users] YDDatabaseObject - changing aliases on columns (AS)</H1>
+    <B>dab</B> 
+    <A HREF="mailto:ydframework-users%40lists.berlios.de?Subject=Re%3A%20%5Bydf-users%5D%20YDDatabaseObject%20-%20changing%20aliases%20on%20columns%20%28AS%29&In-Reply-To=%3C20060221203820.40547.qmail%40web50203.mail.yahoo.com%3E"
+       TITLE="[ydf-users] YDDatabaseObject - changing aliases on columns (AS)">dab214 at yahoo.com
+       </A><BR>
+    <I>Tue Feb 21 21:38:20 CET 2006</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000037.html">[ydf-users] YDDatabaseObject - changing aliases on columns (AS)
+</A></li>
+        <LI>Next message: <A HREF="000041.html">[ydf-users] SQL Question
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#40">[ date ]</a>
+              <a href="thread.html#40">[ thread ]</a>
+              <a href="subject.html#40">[ subject ]</a>
+              <a href="author.html#40">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>hi db,
+yes registerSelect was what i was looking for. i was
+hoping for a simple fix but i'll just change my naming
+convention on columns instead.
+thanks for clarifying.
+
+/dan
+
+--- David Bittencourt &lt;<A HREF="https://lists.berlios.de/mailman/listinfo/ydframework-users">muitocomplicado at gmail.com</A>&gt;
+wrote:
+
+&gt;<i> &quot;below code would apply for all selects made on that
+</I>&gt;<i> table no?&quot;
+</I>&gt;<i> 
+</I>&gt;<i> Yes, that's true.
+</I>&gt;<i> 
+</I>&gt;<i> &quot;what if i just wanted to change the column name on
+</I>&gt;<i> one specific select?&quot;
+</I>&gt;<i> 
+</I>&gt;<i> You wanna change the column or the alias? We call
+</I>&gt;<i> &quot;column&quot; the exact name
+</I>&gt;<i> that is defined in the database table. The alias, in
+</I>&gt;<i> the case of fields, is
+</I>&gt;<i> the &quot;field&quot; name itself, the first argument in
+</I>&gt;<i> registerField and the name
+</I>&gt;<i> you will use to change that column.
+</I>&gt;<i> 
+</I>&gt;<i> To change the &quot;column&quot;:
+</I>&gt;<i> 
+</I>&gt;<i> $field =&amp; $this-&gt;getField( 'user_name' );
+</I>&gt;<i> $field-&gt;setColumn( 'my_user_name' );
+</I>&gt;<i> 
+</I>&gt;<i> You can't change the alias. The alias is the name of
+</I>&gt;<i> the field registered in
+</I>&gt;<i> the class. But you can register a select that
+</I>&gt;<i> returns the same field.
+</I>&gt;<i> 
+</I>&gt;<i> $field =&amp; $this-&gt;registerField( 'user_name' );
+</I>&gt;<i> $field-&gt;setColumn( 'username' );
+</I>&gt;<i> 
+</I>&gt;<i> $this-&gt;registerSelect( 'my_user_name',
+</I>&gt;<i> $this-&gt;getColumn( 'user_name', true )
+</I>&gt;<i> );
+</I>&gt;<i> 
+</I>&gt;<i> So when executing a find you will get the following
+</I>&gt;<i> array
+</I>&gt;<i> 
+</I>&gt;<i> array(
+</I>&gt;<i>   'user_name' =&gt; 'dab',
+</I>&gt;<i>   'my_user_name' =&gt; 'dab',
+</I>&gt;<i> )
+</I>&gt;<i> 
+</I>&gt;<i> With registerSelect you can also add full
+</I>&gt;<i> expressions using mysql functions
+</I>&gt;<i> too.
+</I>&gt;<i> 
+</I>&gt;<i> $this-&gt;registerSelect( 'fullname', &quot;CONCAT( &quot; .
+</I>&gt;<i> $this-&gt;getColumn(
+</I>&gt;<i> 'firstname', true ) . &quot;, ' ', &quot; . $this-&gt;getColumn(
+</I>&gt;<i> 'lastname', true ) . &quot;)&quot;
+</I>&gt;<i> );
+</I>&gt;<i> 
+</I>&gt;<i> array(
+</I>&gt;<i>   'firstname' =&gt; 'David',
+</I>&gt;<i>   'lastname' =&gt; 'Bittencourt',
+</I>&gt;<i>   'fullname' =&gt; 'David Bittencourt'
+</I>&gt;<i> )
+</I>&gt;<i> 
+</I>&gt;<i> -db
+</I>&gt;<i> 
+</I>&gt;<i> On 2/21/06, dab &lt;<A HREF="https://lists.berlios.de/mailman/listinfo/ydframework-users">dab214 at yahoo.com</A>&gt; wrote:
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt; hi db,
+</I>&gt;<i> &gt; thanks for your reply. below code would apply for
+</I>&gt;<i> all
+</I>&gt;<i> &gt; selects made on that table no? what if i just
+</I>&gt;<i> wanted
+</I>&gt;<i> &gt; to change the column name on one specific select?
+</I>&gt;<i> &gt; thanks.
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt; /dan
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt; --- David Bittencourt &lt;<A HREF="https://lists.berlios.de/mailman/listinfo/ydframework-users">muitocomplicado at gmail.com</A>&gt;
+</I>&gt;<i> &gt; wrote:
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt; &gt; When registering a field, the name of the field
+</I>&gt;<i> is
+</I>&gt;<i> &gt; &gt; the alias. You can define
+</I>&gt;<i> &gt; &gt; the real column with setColumn:
+</I>&gt;<i> &gt; &gt;
+</I>&gt;<i> &gt; &gt; $field =&amp; $this-&gt;registerField( 'user_name' );
+</I>&gt;<i> &gt; &gt; $field-&gt;setColumn( 'username' ); // the real
+</I>&gt;<i> table
+</I>&gt;<i> &gt; &gt; column
+</I>&gt;<i> &gt; &gt;
+</I>&gt;<i> &gt; &gt; -db
+</I>&gt;<i> &gt; &gt;
+</I>&gt;<i> &gt; &gt; On 2/20/06, dab &lt;<A HREF="https://lists.berlios.de/mailman/listinfo/ydframework-users">dab214 at yahoo.com</A>&gt; wrote:
+</I>&gt;<i> &gt; &gt; &gt;
+</I>&gt;<i> &gt; &gt; &gt; Hi,
+</I>&gt;<i> &gt; &gt; &gt; I noticed that the alias in the select
+</I>&gt;<i> statement
+</I>&gt;<i> &gt; &gt; &gt; (SELECT username AS user_name) is being set in
+</I>&gt;<i> &gt; &gt; &gt; YDDatabaseQuery::getSelect() but i can't seem
+</I>&gt;<i> to
+</I>&gt;<i> &gt; &gt; &gt; figure out how i would change this from my
+</I>&gt;<i> code
+</I>&gt;<i> &gt; &gt; using
+</I>&gt;<i> &gt; &gt; &gt; YDDatabaseObject.
+</I>&gt;<i> &gt; &gt; &gt; Is there another way than doing it by a
+</I>&gt;<i> &gt; &gt; &gt; registerSelect?
+</I>&gt;<i> &gt; &gt; &gt;
+</I>&gt;<i> &gt; &gt; &gt; thanks.
+</I>&gt;<i> &gt; &gt; &gt;
+</I>&gt;<i> &gt; &gt; &gt; /dan
+</I>&gt;<i> &gt; &gt; &gt;
+</I>&gt;<i> &gt; &gt; &gt;
+</I>&gt;<i> &gt; &gt; &gt;
+</I>&gt;<i> __________________________________________________
+</I>&gt;<i> &gt; &gt; &gt; Do You Yahoo!?
+</I>&gt;<i> &gt; &gt; &gt; Tired of spam?  Yahoo! Mail has the best spam
+</I>&gt;<i> &gt; &gt; protection around
+</I>&gt;<i> &gt; &gt; &gt; <A HREF="http://mail.yahoo.com">http://mail.yahoo.com</A>
+</I>&gt;<i> &gt; &gt; &gt;
+</I>&gt;<i> _______________________________________________
+</I>&gt;<i> &gt; &gt; &gt; YDFramework-users mailing list
+</I>&gt;<i> &gt; &gt; &gt; <A HREF="https://lists.berlios.de/mailman/listinfo/ydframework-users">YDFramework-users at lists.berlios.de</A>
+</I>&gt;<i> &gt; &gt; &gt;
+</I>&gt;<i> &gt; &gt;
+</I>&gt;<i> &gt;
+</I>&gt;<i>
+</I><A HREF="http://lists.berlios.de/mailman/listinfo/ydframework-users">http://lists.berlios.de/mailman/listinfo/ydframework-users</A>
+&gt;<i> &gt; &gt; &gt;
+</I>&gt;<i> &gt; &gt;
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt; __________________________________________________
+</I>&gt;<i> &gt; Do You Yahoo!?
+</I>&gt;<i> &gt; Tired of spam?  Yahoo! Mail has the best spam
+</I>&gt;<i> protection around
+</I>&gt;<i> &gt; <A HREF="http://mail.yahoo.com">http://mail.yahoo.com</A>
+</I>&gt;<i> &gt; _______________________________________________
+</I>&gt;<i> &gt; YDFramework-users mailing list
+</I>&gt;<i> &gt; <A HREF="https://lists.berlios.de/mailman/listinfo/ydframework-users">YDFramework-users at lists.berlios.de</A>
+</I>&gt;<i> &gt;
+</I>&gt;<i>
+</I><A HREF="http://lists.berlios.de/mailman/listinfo/ydframework-users">http://lists.berlios.de/mailman/listinfo/ydframework-users</A>
+&gt;<i> &gt;
+</I>&gt;<i> 
+</I>
+
+__________________________________________________
+Do You Yahoo!?
+Tired of spam?  Yahoo! Mail has the best spam protection around 
+<A HREF="http://mail.yahoo.com">http://mail.yahoo.com</A> 
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000037.html">[ydf-users] YDDatabaseObject - changing aliases on columns (AS)
+</A></li>
+	<LI>Next message: <A HREF="000041.html">[ydf-users] SQL Question
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#40">[ date ]</a>
+              <a href="thread.html#40">[ thread ]</a>
+              <a href="subject.html#40">[ subject ]</a>
+              <a href="author.html#40">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/ydframework-users">More information about the YDFramework-users
+mailing list</a><br>
+</body></html>

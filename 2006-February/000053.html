@@ -1,0 +1,148 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [ydf-users] Content Management Framework proposal
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/ydframework-users/2006-February/index.html" >
+   <LINK REL="made" HREF="mailto:ydframework-users%40lists.berlios.de?Subject=Re%3A%20%5Bydf-users%5D%20Content%20Management%20Framework%20proposal&In-Reply-To=%3C4aef63030602240118o2e353455i64e615b6fccf68d%40mail.gmail.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000052.html">
+   <LINK REL="Next"  HREF="000056.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[ydf-users] Content Management Framework proposal</H1>
+    <B>Pieter Claerhout</B> 
+    <A HREF="mailto:ydframework-users%40lists.berlios.de?Subject=Re%3A%20%5Bydf-users%5D%20Content%20Management%20Framework%20proposal&In-Reply-To=%3C4aef63030602240118o2e353455i64e615b6fccf68d%40mail.gmail.com%3E"
+       TITLE="[ydf-users] Content Management Framework proposal">pieter at yellowduck.be
+       </A><BR>
+    <I>Fri Feb 24 10:18:17 CET 2006</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000052.html">[ydf-users] Content Management Framework proposal
+</A></li>
+        <LI>Next message: <A HREF="000056.html">[ydf-users] Content Management Framework proposal
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#53">[ date ]</a>
+              <a href="thread.html#53">[ thread ]</a>
+              <a href="subject.html#53">[ subject ]</a>
+              <a href="author.html#53">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Francisco,
+
+I've already logged the neccessary feature requests for improved error
+handling and translations.
+
+For the errors, I plan to make a custom error handler that, depending on how
+you configure it, will do the following:
+- If already defined, it will use that one (by means of a standard name)
+- If not defined yet:
+  - PHP4: will use trigger_error
+  - PHP5: will throw an exception
+
+This way, we maintain backwards compatibility, while, if possible, taking
+advantage of the new features of PHP5. Since most people are still using
+PHP4 rather than PHP5 (unless you can prove me otherwise), this is the best
+we can do I guess.
+
+For the locale stuff, if we backport the translation stuff available in the
+weblog application, would that be sufficient you think? If not, can you
+enlighten me a little bit on what you would like to see added/changed?
+
+For the switch, eventually, we will need to do the switch anyway if we want
+to take full advantage of the new PHP 5 features.
+
+For sure, all the nodes will extend a base class that has all the goodies
+such as security, public/private methods and so on. The way I see it right
+now is to implement it a bit similar to the way YDRequest is implemented.
+
+I remember that for YDAcl, we had some stuff on the forum, right? If we can
+get this in a database independant way, I guess that's what we can use, no?
+
+For the schema updates, I don't think there will be a problem. With some
+tricks such as serialized objects, we can very easily overcome this. By just
+updating the object definitions, the rest will already happen automatically
+without having to change anything to the database.
+
+Cheers,
+
+
+pieter
+
+On 2/23/06, Francisco Azevedo &lt;<A HREF="https://lists.berlios.de/mailman/listinfo/ydframework-users">francisco at fusemail.com</A>&gt; wrote:
+&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i> &gt; I wanted to share an idea with you about what I call a &quot;Content
+</I>&gt;<i> &gt; Management Framework&quot;, which I might be adding to the framework.
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt; Essentially, I would like to add a system that makes it easy to create a
+</I>&gt;<i> &gt; CMS based on the Yellow Duck Framework by avoiding to have to do the
+</I>&gt;<i> &gt; same work over and over again.
+</I>&gt;<i>
+</I>&gt;<i> This idea sounds good, especially because, as you know, i'm a little
+</I>&gt;<i> involved is those caind of applications.
+</I>&gt;<i>
+</I>&gt;<i> &gt; Any suggestions, additions, comments, remarks?
+</I>&gt;<i>
+</I>&gt;<i> My opinion is that the core (ydf) should have some important features
+</I>&gt;<i> before starting the (ydCMf), eg YDError. This is, imho, extremely
+</I>&gt;<i> important in a application and if not done now, it will be integrated
+</I>&gt;<i> later in CMf and that's bad. We will have 2x the job because we will
+</I>&gt;<i> port the framework _and_ the CMframework. Other feature is the Locale.
+</I>&gt;<i>
+</I>&gt;<i> I think that all nodes should extend an abstract class that, eg, checks
+</I>&gt;<i> autentication and/or has an mecanism where we can define public methods
+</I>&gt;<i> (that can be invoked in the template side) and private methods that will
+</I>&gt;<i> only work if the class detects that the user is authenticated.
+</I>&gt;<i> To be perfect, this means that we could have some mecanism (ACL)
+</I>&gt;<i> integrated in that master class.
+</I>&gt;<i>
+</I>&gt;<i> So, the idea about a tree of components and some automatic store and
+</I>&gt;<i> retrieve sounds excellent but i think we must care about YDError,
+</I>&gt;<i> YDLocale, YDACL? and then start integration those and start creating
+</I>&gt;<i> nodes.. just my 0.02
+</I>&gt;<i>
+</I>&gt;<i> Francisco
+</I>&gt;<i> _______________________________________________
+</I>&gt;<i> YDFramework-users mailing list
+</I>&gt;<i> <A HREF="https://lists.berlios.de/mailman/listinfo/ydframework-users">YDFramework-users at lists.berlios.de</A>
+</I>&gt;<i> <A HREF="http://lists.berlios.de/mailman/listinfo/ydframework-users">http://lists.berlios.de/mailman/listinfo/ydframework-users</A>
+</I>&gt;<i>
+</I>
+
+
+--
+pieter claerhout . <A HREF="https://lists.berlios.de/mailman/listinfo/ydframework-users">pieter at yellowduck.be</A> . <A HREF="http://www.yellowduck.be/">http://www.yellowduck.be/</A>
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: &lt;<A HREF="https://lists.berlios.de/pipermail/ydframework-users/attachments/20060224/742e03c0/attachment.html">https://lists.berlios.de/pipermail/ydframework-users/attachments/20060224/742e03c0/attachment.html</A>&gt;
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000052.html">[ydf-users] Content Management Framework proposal
+</A></li>
+	<LI>Next message: <A HREF="000056.html">[ydf-users] Content Management Framework proposal
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#53">[ date ]</a>
+              <a href="thread.html#53">[ thread ]</a>
+              <a href="subject.html#53">[ subject ]</a>
+              <a href="author.html#53">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/ydframework-users">More information about the YDFramework-users
+mailing list</a><br>
+</body></html>

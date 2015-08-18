@@ -1,0 +1,105 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [ydf-users] hindering the post value to be selected on a select after   submit
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/ydframework-users/2006-July/index.html" >
+   <LINK REL="made" HREF="mailto:ydframework-users%40lists.berlios.de?Subject=Re%3A%20%5Bydf-users%5D%20hindering%20the%20post%20value%20to%20be%20selected%20on%20a%20select%20after%20%20%20submit&In-Reply-To=%3C20060710032032.fe477b357a56c857c15a39baa2ae95d5.70dff34f0b.wbe%40email.secureserver.net%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000280.html">
+   <LINK REL="Next"  HREF="000283.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[ydf-users] hindering the post value to be selected on a select after   submit</H1>
+    <B>moses at softwaysolutions.com</B> 
+    <A HREF="mailto:ydframework-users%40lists.berlios.de?Subject=Re%3A%20%5Bydf-users%5D%20hindering%20the%20post%20value%20to%20be%20selected%20on%20a%20select%20after%20%20%20submit&In-Reply-To=%3C20060710032032.fe477b357a56c857c15a39baa2ae95d5.70dff34f0b.wbe%40email.secureserver.net%3E"
+       TITLE="[ydf-users] hindering the post value to be selected on a select after   submit">moses at softwaysolutions.com
+       </A><BR>
+    <I>Mon Jul 10 12:20:32 CEST 2006</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000280.html">[ydf-users] hindering the post value to be selected on a select after   submit
+</A></li>
+        <LI>Next message: <A HREF="000283.html">[ydf-users] hindering the post value to be selected on a select after   submit
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#281">[ date ]</a>
+              <a href="thread.html#281">[ thread ]</a>
+              <a href="subject.html#281">[ subject ]</a>
+              <a href="author.html#281">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Hi Dab
+
+   I hope this will help U
+
+   $arrName = array(&quot;&quot;=&gt;&quot;-- Please Choose the
+Name--&quot;,&quot;Dab&quot;=&gt;&quot;Dab&quot;,&quot;Moses&quot;=&gt;&quot;Moses&quot;,&quot;Din&quot;=&gt;&quot;Din&quot;);
+   $this-&gt;form-&gt;addElement('select','name','Choose Name','',$arrName);
+
+   function actionDefault()
+   {
+	 $data = $this-&gt;form-&gt;getValues();
+	 $this-&gt;elm =&amp; $this-&gt;form-&gt;getElement('name');
+	 $val = $data['name'];
+	 unset($this-&gt;elm-&gt;_options[&quot;$val&quot;]);
+   }
+
+regards
+moses
+
+
+&gt;<i> -------- Original Message --------
+</I>&gt;<i> Subject: [ydf-users] hindering the post value to be selected on a
+</I>&gt;<i> select after   submit
+</I>&gt;<i> From: dab &lt;<A HREF="https://lists.berlios.de/mailman/listinfo/ydframework-users">dab214 at yahoo.com</A>&gt;
+</I>&gt;<i> Date: Sun, July 09, 2006 6:34 am
+</I>&gt;<i> To: <A HREF="https://lists.berlios.de/mailman/listinfo/ydframework-users">ydframework-users at berlios.de</A>
+</I>&gt;<i> 
+</I>&gt;<i> hi all,
+</I>&gt;<i> is there any way of making the select drop down not to
+</I>&gt;<i> add the selected attributes on the options after
+</I>&gt;<i> submitting the form?
+</I>&gt;<i> thanks.
+</I>&gt;<i> 
+</I>&gt;<i> /dab
+</I>&gt;<i> 
+</I>&gt;<i> __________________________________________________
+</I>&gt;<i> Do You Yahoo!?
+</I>&gt;<i> Tired of spam?  Yahoo! Mail has the best spam protection around 
+</I>&gt;<i> <A HREF="http://mail.yahoo.com">http://mail.yahoo.com</A> 
+</I>&gt;<i> _______________________________________________
+</I>&gt;<i> YDFramework-users mailing list
+</I>&gt;<i> <A HREF="https://lists.berlios.de/mailman/listinfo/ydframework-users">YDFramework-users at lists.berlios.de</A>
+</I>&gt;<i> <A HREF="http://lists.berlios.de/mailman/listinfo/ydframework-users">http://lists.berlios.de/mailman/listinfo/ydframework-users</A>
+</I>
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000280.html">[ydf-users] hindering the post value to be selected on a select after   submit
+</A></li>
+	<LI>Next message: <A HREF="000283.html">[ydf-users] hindering the post value to be selected on a select after   submit
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#281">[ date ]</a>
+              <a href="thread.html#281">[ thread ]</a>
+              <a href="subject.html#281">[ subject ]</a>
+              <a href="author.html#281">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/ydframework-users">More information about the YDFramework-users
+mailing list</a><br>
+</body></html>

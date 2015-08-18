@@ -1,0 +1,128 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [ydf-users] YDTemplate, smarty and caching
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/ydframework-users/2006-November/index.html" >
+   <LINK REL="made" HREF="mailto:ydframework-users%40lists.berlios.de?Subject=Re%3A%20%5Bydf-users%5D%20YDTemplate%2C%20smarty%20and%20caching&In-Reply-To=%3C20061105230104.74521.qmail%40web50209.mail.yahoo.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   
+   <LINK REL="Next"  HREF="000404.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[ydf-users] YDTemplate, smarty and caching</H1>
+    <B>dab</B> 
+    <A HREF="mailto:ydframework-users%40lists.berlios.de?Subject=Re%3A%20%5Bydf-users%5D%20YDTemplate%2C%20smarty%20and%20caching&In-Reply-To=%3C20061105230104.74521.qmail%40web50209.mail.yahoo.com%3E"
+       TITLE="[ydf-users] YDTemplate, smarty and caching">dab214 at yahoo.com
+       </A><BR>
+    <I>Mon Nov  6 00:01:04 CET 2006</I>
+    <P><UL>
+        
+        <LI>Next message: <A HREF="000404.html">[ydf-users] YDTemplate, smarty and caching
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#403">[ date ]</a>
+              <a href="thread.html#403">[ thread ]</a>
+              <a href="subject.html#403">[ subject ]</a>
+              <a href="author.html#403">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>hi all,
+i've been using YDTemplate without any problems up
+till now :(
+For some reason YDTemplate seems to add some digits in
+the cache filename:
+
+it creates this file:
+d:\work\YDFramework2/temp/cache/\2459960022^%%6D^6D7^6D7C5625%%test.tpl
+
+but it looks for this one:
+d:\work\YDFramework2/temp/cache/\%%6D^6D7^6D7C5625%%test.tpl
+
+Therefore the is_cached() returns nothing.
+It seems to add a number like this: &quot;2459960022^&quot;
+
+Do anyone know why it does this?
+
+
+My ydf test code:
+
+class test extends YDRequest {
+
+    function test() {
+        $this-&gt;YDRequest();
+
+        // Indicate we require login
+        $this-&gt;setRequiresAuthentication( false );
+    }
+
+    function actionDefault() {
+    	
+       $this-&gt;template = new YDTemplate();
+
+		$this-&gt;template-&gt;caching = true;
+		
+		if ( ! $this-&gt;template-&gt;is_cached('test.tpl')) {
+			echo &quot;not cached!&quot;;
+		}
+		$this-&gt;template-&gt;display('test.tpl');
+    }
+}
+
+
+and when using this standard smarty code it works as
+it should:
+
+
+$smarty-&gt;caching = true;
+
+if ( ! $smarty-&gt;is_cached('test.tpl')) {
+	echo &quot;not cached!&quot;;
+}
+$smarty-&gt;display($tpl_path.'test.tpl');
+
+
+Any help is much apreciated. I've been pulling my hair
+with this one all night :(
+thanks!
+
+
+
+
+
+
+ 
+____________________________________________________________________________________
+Low, Low, Low Rates! Check out Yahoo! Messenger's cheap PC-to-Phone call rates 
+(<A HREF="http://voice.yahoo.com">http://voice.yahoo.com</A>)
+
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	
+	<LI>Next message: <A HREF="000404.html">[ydf-users] YDTemplate, smarty and caching
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#403">[ date ]</a>
+              <a href="thread.html#403">[ thread ]</a>
+              <a href="subject.html#403">[ subject ]</a>
+              <a href="author.html#403">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/ydframework-users">More information about the YDFramework-users
+mailing list</a><br>
+</body></html>

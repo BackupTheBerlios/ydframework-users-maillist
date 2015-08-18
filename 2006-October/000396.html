@@ -1,0 +1,121 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [ydf-users] Query Regarding YD_ACTION
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/ydframework-users/2006-October/index.html" >
+   <LINK REL="made" HREF="mailto:ydframework-users%40lists.berlios.de?Subject=Re%3A%20%5Bydf-users%5D%20Query%20Regarding%20YD_ACTION&In-Reply-To=%3C20061010032406.2b7eeeb4c62f4bb8603cfb01b826e9ec.43d37fc14b.wbe%40email.secureserver.net%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000395.html">
+   <LINK REL="Next"  HREF="000399.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[ydf-users] Query Regarding YD_ACTION</H1>
+    <B>moses at hysistechnologies.com</B> 
+    <A HREF="mailto:ydframework-users%40lists.berlios.de?Subject=Re%3A%20%5Bydf-users%5D%20Query%20Regarding%20YD_ACTION&In-Reply-To=%3C20061010032406.2b7eeeb4c62f4bb8603cfb01b826e9ec.43d37fc14b.wbe%40email.secureserver.net%3E"
+       TITLE="[ydf-users] Query Regarding YD_ACTION">moses at hysistechnologies.com
+       </A><BR>
+    <I>Tue Oct 10 12:24:06 CEST 2006</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000395.html">[ydf-users] YDAJax::addEvent( &quot;*&quot;,	... ) and adding events in a response
+</A></li>
+        <LI>Next message: <A HREF="000399.html">[ydf-users] Query Regarding YD_ACTION
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#396">[ date ]</a>
+              <a href="thread.html#396">[ thread ]</a>
+              <a href="subject.html#396">[ subject ]</a>
+              <a href="author.html#396">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>
+Hello,
+
+    Can the template variable  {YD_ACTION}  be changed.
+
+    (ie)
+
+    Currently the script is on  actionEdit, On clicking the update
+button I am validating the form and updating the database and again I
+need to display a message called &quot;Sucesssfully Updated&quot; 
+so my tpl will be like this
+
+   .(tpl)
+
+    {if $YD_ACTION == 'edit'}
+        displayed all the values that need to be edited 
+            
+    {/if}
+
+     
+    {if $YD_ACTION == 'update'}
+   
+      Successfully updated Click here to continue.
+   
+    {/if}
+     
+  (.php)
+
+     function acionEdit()
+     {
+
+         if($this-&gt;form-&gt;validate())
+         {
+                  
+              executeUpdate();
+              $this-&gt;forward('update');
+              return;
+  
+         }
+     }
+      
+     function actionUpdate()
+     {
+
+         $this-&gt;template-&gt;display(); 
+     } 
+
+
+     Every Thing works fine 
+     My Question is insteed of [ $this-&gt;forward('update') ] can I set
+the value   to {YD_ACTION}  
+
+
+regards
+moses
+
+
+regards
+moses
+
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000395.html">[ydf-users] YDAJax::addEvent( &quot;*&quot;,	... ) and adding events in a response
+</A></li>
+	<LI>Next message: <A HREF="000399.html">[ydf-users] Query Regarding YD_ACTION
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#396">[ date ]</a>
+              <a href="thread.html#396">[ thread ]</a>
+              <a href="subject.html#396">[ subject ]</a>
+              <a href="author.html#396">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/ydframework-users">More information about the YDFramework-users
+mailing list</a><br>
+</body></html>
